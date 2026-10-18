@@ -558,6 +558,7 @@
       "endThumbAriaLabel": "4.3.0",
       "size": "4.3.0",
       "startThumbAriaLabel": "4.3.0",
+      "thumbGap": "4.3.0",
       "valueFormat": "4.3.0",
       "variant": "4.3.0"
     }
@@ -640,6 +641,7 @@
       "appendInnerIcon": "4.3.0",
       "prependInnerIcon": "4.3.0",
       "size": "4.3.0",
+      "thumbGap": "4.3.0",
       "valueFormat": "4.3.0",
       "variant": "4.3.0"
     },

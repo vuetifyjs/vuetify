@@ -191,12 +191,15 @@
 
   // Pill variant
   .v-slider--variant-pill
-    --v-slider-pill-gap: #{$slider-pill-gap}
-    --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
-    --v-slider-pill-thumb-gap: calc(var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
-    --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap))
+    // on the container, so the thumb-gap prop set inline there reaches the derived gaps
+    .v-slider__container
+      --v-slider-pill-gap: #{$slider-pill-gap}
+      --v-slider-pill-thumb-width: #{$slider-pill-thumb-width}
+      --v-slider-pill-thumb-gap: calc(var(--v-slider-pill-thumb-width) / 2 + var(--v-slider-pill-gap))
+      --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap))
 
     .v-slider-track
+      --v-slider-pill-stop-offset: clamp(0px, #{$slider-pill-stop-indicator-offset}, (var(--v-slider-track-size) - #{$slider-pill-stop-indicator-size}) / 2)
       border-radius: var(--v-slider-pill-track-radius)
 
     .v-slider-track__background,
@@ -230,15 +233,14 @@
       .v-slider-track__fill--stop
         @include slider-pill-end(top)
 
-    .v-slider-track__inactive--before,
-    .v-slider-track__inactive--after
-      &::before
-        content: ''
-        position: absolute
-        width: $slider-pill-stop-indicator-size
-        height: $slider-pill-stop-indicator-size
-        border-radius: $slider-pill-stop-indicator-border-radius
-        background: currentColor
+    .v-slider-track__stop
+      position: absolute
+
+      &--start
+        --v-slider-tick-position: calc(var(--v-slider-pill-stop-offset) + #{$slider-pill-stop-indicator-size} / 2)
+
+      &--stop
+        --v-slider-tick-position: calc(100% - var(--v-slider-pill-stop-offset) - #{$slider-pill-stop-indicator-size} / 2)
 
     &.v-input--horizontal
       .v-slider-track
@@ -257,18 +259,6 @@
         inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap))
         width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
 
-      .v-slider-track__inactive--before,
-      .v-slider-track__inactive--after
-        &::before
-          top: 50%
-          transform: translateY(-50%)
-
-      .v-slider-track__inactive--before::before
-        inset-inline-start: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
-
-      .v-slider-track__inactive--after::before
-        inset-inline-end: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
-
     &.v-input--vertical
       .v-slider-track
         width: var(--v-slider-track-size)
@@ -286,20 +276,9 @@
         top: 0
         height: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
 
-      .v-slider-track__inactive--before,
-      .v-slider-track__inactive--after
-        &::before
-          left: 50%
-          transform: translateX(-50%)
-
-      .v-slider-track__inactive--before::before
-        bottom: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
-
-      .v-slider-track__inactive--after::before
-        top: calc(#{$slider-pill-gap} - #{$slider-pill-stop-indicator-size} / 2)
-
-    .v-slider-track__tick
-      // Collapses to 0 when the tick is inside a thumb gap
+    .v-slider-track__tick,
+    .v-slider-track__stop
+      // Collapses to 0 when the dot is inside a thumb gap
       --v-slider-pill-tick-size: clamp(0px, 1000 * min(max(var(--v-slider-tick-position) - var(--v-slider-value-start), var(--v-slider-value-start) - var(--v-slider-tick-position)) - var(--v-slider-pill-start-gap), max(var(--v-slider-tick-position) - var(--v-slider-value-stop), var(--v-slider-value-stop) - var(--v-slider-tick-position)) - var(--v-slider-pill-stop-gap)), #{$slider-pill-stop-indicator-size})
       width: $slider-pill-stop-indicator-size
       height: $slider-pill-stop-indicator-size
@@ -313,7 +292,11 @@
         background-color: transparent
 
     &.v-input--horizontal
-      .v-slider-track__tick
+      .v-slider-track__stop
+        inset-inline-start: var(--v-slider-tick-position)
+
+      .v-slider-track__tick,
+      .v-slider-track__stop
         width: var(--v-slider-pill-tick-size)
         top: 50%
         margin-top: 0
@@ -323,7 +306,11 @@
           transform: translate(50%, -50%)
 
     &.v-input--vertical
-      .v-slider-track__tick
+      .v-slider-track__stop
+        bottom: var(--v-slider-tick-position)
+
+      .v-slider-track__tick,
+      .v-slider-track__stop
         height: var(--v-slider-pill-tick-size)
         inset-inline-start: 50%
         margin-inline-start: 0

@@ -8,6 +8,7 @@
     "size": "Sets the MD3 size of the **pill** variant: track, handle, corner radius and inner icon size.",
     "step": "If greater than 0, sets step interval for ticks.",
     "thumbColor": "Sets the thumb and thumb label color.",
+    "thumbGap": "Space between the handle and the track segments in the **pill** variant.",
     "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label. Use `'hover'` to show label when hovering over the thumb.",
     "thumbSize": "Controls the size of the thumb.",
     "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",

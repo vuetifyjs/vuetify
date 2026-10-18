@@ -195,6 +195,21 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
           ) : genBackground()}
           { fill }
 
+          { isPill.value && visualStart.value > 0 && (
+            <div
+              key="stop-start"
+              class={['v-slider-track__stop', 'v-slider-track__stop--start', tickColorClasses.value]}
+              style={ tickColorStyles.value }
+            />
+          )}
+          { isPill.value && visualStop.value < 100 && (
+            <div
+              key="stop-stop"
+              class={['v-slider-track__stop', 'v-slider-track__stop--stop', tickColorClasses.value]}
+              style={ tickColorStyles.value }
+            />
+          )}
+
           { showTicks.value && (
             <div
               class={[

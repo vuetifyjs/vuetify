@@ -110,6 +110,7 @@ export const makeSliderProps = propsFactory({
     default: undefined,
     validator: (v: any) => isBoolean(v) || v === 'always' || v === 'hover',
   },
+  thumbGap: [Number, String],
   thumbSize: [Number, String],
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,

@@ -197,6 +197,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 class="v-slider__container"
                 style={{
                   '--v-slider-track-size': convertToUnit(trackSize.value),
+                  '--v-slider-pill-gap': convertToUnit(props.thumbGap),
                   '--v-slider-inner-icon-position': convertToUnit(visualPosition.value, '%'),
                 }}
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }

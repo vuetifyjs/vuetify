@@ -210,7 +210,10 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
-                style={{ '--v-slider-track-size': convertToUnit(trackSize.value) }}
+                style={{
+                  '--v-slider-track-size': convertToUnit(trackSize.value),
+                  '--v-slider-pill-gap': convertToUnit(props.thumbGap),
+                }}
                 role="group"
                 aria-label={ inputAttrs['aria-label'] as string | undefined }
                 aria-labelledby={ (inputAttrs['aria-labelledby'] as string | undefined) ?? (hasLabelElement ? `${id.value}_label` : undefined) }
