@@ -199,6 +199,10 @@
       --v-slider-pill-active-thumb-gap: calc(#{$slider-pill-focused-thumb-width} / 2 + var(--v-slider-pill-gap))
 
     .v-slider-track
+      // A segment collapsed to nothing must not let the inactive track into the other edge's gap
+      --v-slider-pill-before-end: min(var(--v-slider-value-start) - var(--v-slider-pill-start-gap), var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
+      --v-slider-pill-after-start: max(var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap), var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
+      --v-slider-pill-after-start-offset: max(var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap), var(--v-slider-value-start-offset) + var(--v-slider-pill-start-gap))
       --v-slider-pill-stop-offset: clamp(0px, #{$slider-pill-stop-indicator-offset}, (var(--v-slider-track-size) - #{$slider-pill-stop-indicator-size}) / 2)
       border-radius: var(--v-slider-pill-track-radius)
 
@@ -253,11 +257,11 @@
 
       .v-slider-track__inactive--before
         inset-inline-start: 0
-        width: calc(var(--v-slider-value-start) - var(--v-slider-pill-start-gap))
+        width: var(--v-slider-pill-before-end)
 
       .v-slider-track__inactive--after
-        inset-inline-start: calc(var(--v-slider-value-stop) + var(--v-slider-pill-stop-gap))
-        width: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
+        inset-inline-start: var(--v-slider-pill-after-start)
+        width: calc(100% - var(--v-slider-pill-after-start))
 
     &.v-input--vertical
       .v-slider-track
@@ -269,12 +273,12 @@
           width: var(--v-slider-track-size)
 
       .v-slider-track__inactive--before
-        top: calc(100% - var(--v-slider-value-start) + var(--v-slider-pill-start-gap))
-        height: calc(var(--v-slider-value-start) - var(--v-slider-pill-start-gap))
+        top: calc(100% - var(--v-slider-pill-before-end))
+        height: var(--v-slider-pill-before-end)
 
       .v-slider-track__inactive--after
         top: 0
-        height: calc(100% - var(--v-slider-value-stop) - var(--v-slider-pill-stop-gap))
+        height: calc(100% - var(--v-slider-pill-after-start))
 
     .v-slider-track__tick,
     .v-slider-track__stop
@@ -330,10 +334,10 @@
           background-position-x: right
 
       .v-slider-track__inactive--after
-        background-position-x: calc(-1 * (var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap)))
+        background-position-x: calc(-1 * var(--v-slider-pill-after-start-offset))
 
         @include tools.rtl()
-          background-position-x: right calc(-1 * (var(--v-slider-value-stop-offset) + var(--v-slider-pill-stop-gap)))
+          background-position-x: right calc(-1 * var(--v-slider-pill-after-start-offset))
 
       .v-slider-track__fill
         background-position-x: calc(-1 * (var(--v-slider-value-start-offset) + var(--v-slider-pill-start-gap)))
