@@ -47,6 +47,7 @@ const aliases: IconAliases = {
   plus: 'i-carbon:add',
   minus: 'i-carbon:subtract',
   calendar: 'i-carbon:calendar',
+  clock: 'i-carbon:time',
   treeviewCollapse: 'i-carbon:chevron-down',
   treeviewExpand: 'i-carbon:chevron-right',
   tableGroupExpand: 'i-carbon:chevron-right',

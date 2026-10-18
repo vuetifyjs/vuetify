@@ -47,6 +47,7 @@ const aliases: IconAliases = {
   plus: 'i-ph:plus',
   minus: 'i-ph:minus',
   calendar: 'i-ph:calendar',
+  clock: 'i-ph:clock',
   treeviewCollapse: 'i-ph:caret-down',
   treeviewExpand: 'i-ph:caret-right',
   tableGroupExpand: 'i-ph:caret-right',

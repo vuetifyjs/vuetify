@@ -17,14 +17,6 @@ export function overtype (text: string, start: number, typed: string, rtl = fals
   if (rtl && moved && caret && !isDigit(caret) && isDigit(caret - 1)) caret--
 
   for (const char of typed) {
-    // the period is not a section, typing a or p flips it in place
-    const period = chars.length - 2
-    if (/[ap]/i.test(char) && /[ap]/i.test(chars[period] ?? '') && chars[period + 1]?.toLowerCase() === 'm') {
-      chars[period] = char.toUpperCase()
-      caret = chars.length
-      continue
-    }
-
     while (caret < chars.length && !isDigit(caret)) {
       caret++
     }
