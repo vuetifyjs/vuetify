@@ -639,6 +639,7 @@
     },
     "props": {
       "appendInnerIcon": "4.3.0",
+      "centered": "4.3.0",
       "prependInnerIcon": "4.3.0",
       "size": "4.3.0",
       "thumbGap": "4.3.0",

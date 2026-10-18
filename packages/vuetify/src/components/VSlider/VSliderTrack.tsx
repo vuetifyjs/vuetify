@@ -70,9 +70,9 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
     const visualStartThumb = toRef(() => isReversed.value ? props.stopThumb : props.startThumb)
     const visualStopThumb = toRef(() => isReversed.value ? props.startThumb : props.stopThumb)
 
-    function thumbGap (thumb?: SliderThumbState) {
-      if (!thumb) return '0px'
-      return thumb === 'active' ? 'var(--v-slider-pill-active-clearance)' : 'var(--v-slider-pill-idle-clearance)'
+    function getEdgeGap (thumb: SliderThumbState | undefined, position: number) {
+      if (thumb) return thumb === 'active' ? 'var(--v-slider-pill-active-clearance)' : 'var(--v-slider-pill-idle-clearance)'
+      return position > 0 && position < 100 ? 'var(--v-slider-pill-center-clearance)' : '0px'
     }
 
     const rootEl = ref<HTMLElement>()
@@ -153,8 +153,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
           class={[
             'v-slider-track__fill',
             {
-              'v-slider-track__fill--start': isPill.value && !visualStartThumb.value,
-              'v-slider-track__fill--end': isPill.value && !visualStopThumb.value,
+              'v-slider-track__fill--start': isPill.value && !visualStartThumb.value && visualStart.value === 0,
+              'v-slider-track__fill--end': isPill.value && !visualStopThumb.value && visualStop.value === 100,
             },
             trackFillColorClasses.value,
           ]}
@@ -180,8 +180,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
               '--v-slider-track-length': convertToUnit(length.value),
               '--v-slider-value-start-offset': convertToUnit(visualStart.value / 100 * length.value),
               '--v-slider-value-stop-offset': convertToUnit(visualStop.value / 100 * length.value),
-              '--v-slider-pill-start-gap': thumbGap(visualStartThumb.value),
-              '--v-slider-pill-stop-gap': thumbGap(visualStopThumb.value),
+              '--v-slider-pill-start-gap': getEdgeGap(visualStartThumb.value, visualStart.value),
+              '--v-slider-pill-stop-gap': getEdgeGap(visualStopThumb.value, visualStop.value),
             },
             roundedStyles.value,
             props.style,

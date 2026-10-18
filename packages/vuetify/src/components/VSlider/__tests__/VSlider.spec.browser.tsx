@@ -46,6 +46,18 @@ describe('VSlider', () => {
     expect(fill.width).toBeLessThan(track.width / 2)
   })
 
+  it.each(['default', 'pill'] as const)('should fill track from the center to the thumb when centered (%s)', async variant => {
+    render(() => <VSlider variant={ variant } modelValue={ 20 } centered />)
+
+    const track = screen.getByCSS('.v-slider-track').getBoundingClientRect()
+    const fill = screen.getByCSS('.v-slider-track__fill').getBoundingClientRect()
+    const center = track.left + track.width / 2
+
+    expect(fill.left).toBeGreaterThan(track.left + track.width * 0.15)
+    expect(fill.right).toBeLessThanOrEqual(center)
+    expect(fill.right).toBeGreaterThan(center - 8)
+  })
+
   it('should treat reverse bound to undefined as not reversed', async () => {
     render(() => <VSlider modelValue={ 20 } reverse={ undefined } />)
 
