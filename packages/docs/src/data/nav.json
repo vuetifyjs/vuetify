@@ -317,6 +317,10 @@
         "subfolder": "components"
       },
       {
+        "title": "time-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "videos",
         "subfolder": "components"
       }

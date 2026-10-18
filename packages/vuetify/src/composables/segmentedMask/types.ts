@@ -1,3 +1,9 @@
+export type HintToken = {
+  text: string
+  size: number
+  fill: boolean // spelled one character per digit, so typing can strike it off letter by letter
+}
+
 export type SegmentParts = Record<string, string>
 
 export type ValueSegment = {

@@ -167,6 +167,7 @@
   "components/textareas": ["VTextarea"],
   "components/theme-providers": ["VThemeProvider"],
   "components/time-pickers": ["VTimePicker"],
+  "components/time-inputs": ["VTimeInput", "VTimePicker"],
   "components/timelines": ["VTimeline", "VTimelineItem"],
   "components/toolbars": ["VToolbar", "VToolbarItems", "VToolbarTitle"],
   "components/tooltips": ["VTooltip"],

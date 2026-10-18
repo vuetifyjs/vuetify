@@ -1,4 +1,5 @@
 export type {
+  HintToken,
   MaskEdit,
   MaskEditResult,
   MaskResult,
@@ -14,8 +15,13 @@ export {
   toMaskSource,
 } from './segmentedMask'
 
-export { remainingHint } from './formatHint'
+export {
+  hintToken,
+  remainingHint,
+  remainingTokens,
+  rtlScript,
+} from './formatHint'
 
 export { createSegmentedEdit, overtype } from './edit'
 
-export { dateSegments } from './presets'
+export { dateSegments, timeSegments } from './presets'
