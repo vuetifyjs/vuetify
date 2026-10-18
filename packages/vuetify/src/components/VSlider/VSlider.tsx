@@ -39,6 +39,7 @@ export const makeVSliderProps = propsFactory({
   ...makeVInputProps(),
 
   appendInnerIcon: IconValue,
+  centered: Boolean,
   prependInnerIcon: IconValue,
   modelValue: {
     type: [Number, String],
@@ -125,6 +126,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const trackStop = computed(() => position(model.value))
     const visualPosition = toRef(() => isReversed.value ? 100 - trackStop.value : trackStop.value)
+    const trackOrigin = toRef(() => props.centered ? 50 : 0)
 
     const isPill = toRef(() => props.variant === 'pill')
     const hasPrependInner = toRef(() => isPill.value && !!(props.prependInnerIcon || slots['prepend-inner']))
@@ -145,7 +147,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
       const isPrepend = side === 'prepend'
       const segmentLength = (isPrepend ? visualPosition.value : 100 - visualPosition.value) / 100 * getLength(containerSize)
       const isFlipped = segmentLength < getLength(isPrepend ? prependInnerSize : appendInnerSize)
-      const isOverFill = isPrepend !== isReversed.value
+      const isOverFill = !props.centered && isPrepend !== isReversed.value
 
       return (
         <div
@@ -171,6 +173,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
       const inputProps = VInput.filterProps(props)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
+      const isThumbAtStart = trackStop.value < trackOrigin.value
+      const thumbState = getThumbState(isFocused.value)
 
       return (
         <VInput
@@ -236,9 +240,10 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
                 <VSliderTrack
                   ref={ trackContainerRef }
-                  start={ 0 }
-                  stop={ trackStop.value }
-                  stopThumb={ getThumbState(isFocused.value) }
+                  start={ Math.min(trackStop.value, trackOrigin.value) }
+                  stop={ Math.max(trackStop.value, trackOrigin.value) }
+                  startThumb={ isThumbAtStart ? thumbState : undefined }
+                  stopThumb={ isThumbAtStart ? undefined : thumbState }
                 >
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>

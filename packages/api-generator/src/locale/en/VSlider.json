@@ -2,6 +2,7 @@
   "description": "Form input used to select single number from the linear range. A simple alternative to a standard number input.",
   "props": {
     "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) inside the end of the track. Requires the **pill** variant.",
+    "centered": "Fills the track from its center to the thumb instead of from the start.",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) inside the start of the track. Requires the **pill** variant."
   },
   "slots": {
