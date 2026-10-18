@@ -114,13 +114,13 @@
       &--prepend
         inset-inline-start: 0
 
-        &.v-slider__inner-icon--popped
+        &.v-slider__inner-icon--flipped
           inset-inline-start: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
       &--append
         inset-inline-end: 0
 
-        &.v-slider__inner-icon--popped
+        &.v-slider__inner-icon--flipped
           inset-inline-end: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
     &.v-input--vertical .v-slider__inner-icon
@@ -132,11 +132,11 @@
       &--prepend
         bottom: 0
 
-        &.v-slider__inner-icon--popped
+        &.v-slider__inner-icon--flipped
           bottom: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
 
       &--append
         top: 0
 
-        &.v-slider__inner-icon--popped
+        &.v-slider__inner-icon--flipped
           top: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})

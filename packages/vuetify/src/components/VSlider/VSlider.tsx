@@ -141,10 +141,10 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
     const { textColorClasses: innerIconColorClasses, textColorStyles: innerIconColorStyles } = useTextColor(trackFillColor)
 
-    function genInnerIcon (side: 'prepend' | 'append') {
+    function innerIcon (side: 'prepend' | 'append') {
       const isPrepend = side === 'prepend'
-      const room = (isPrepend ? visualPosition.value : 100 - visualPosition.value) / 100 * getLength(containerSize)
-      const isPopped = room < getLength(isPrepend ? prependInnerSize : appendInnerSize)
+      const segmentLength = (isPrepend ? visualPosition.value : 100 - visualPosition.value) / 100 * getLength(containerSize)
+      const isFlipped = segmentLength < getLength(isPrepend ? prependInnerSize : appendInnerSize)
       const isOverFill = isPrepend !== isReversed.value
 
       return (
@@ -155,8 +155,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
             'v-slider__inner-icon',
             `v-slider__inner-icon--${side}`,
             {
-              'v-slider__inner-icon--popped': isPopped,
-              'v-slider__inner-icon--filled': isOverFill !== isPopped,
+              'v-slider__inner-icon--flipped': isFlipped,
+              'v-slider__inner-icon--filled': isOverFill !== isFlipped,
             },
             innerIconColorClasses.value,
           ]}
@@ -243,8 +243,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>
 
-                { hasPrependInner.value && genInnerIcon('prepend') }
-                { hasAppendInner.value && genInnerIcon('append') }
+                { hasPrependInner.value && innerIcon('prepend') }
+                { hasAppendInner.value && innerIcon('append') }
 
                 <VSliderThumb
                   ref={ thumbContainerRef }

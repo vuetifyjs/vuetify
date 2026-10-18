@@ -71,10 +71,10 @@ describe('VSlider', () => {
     render(() => <VSlider v-model={ model.value } variant="pill" prependInnerIcon="$minus" />)
 
     const icon = screen.getByCSS('.v-slider__inner-icon')
-    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--popped')
+    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--flipped')
 
     model.value = 2
-    await expect.element(icon).toHaveClass('v-slider__inner-icon--popped')
+    await expect.element(icon).toHaveClass('v-slider__inner-icon--flipped')
   })
 
   it('should allow user to drag thumb', async () => {
