@@ -1,6 +1,12 @@
 {
   "description": "Form input used to select single number from the linear range. A simple alternative to a standard number input.",
+  "props": {
+    "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) inside the end of the track. Requires the **pill** variant.",
+    "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) inside the start of the track. Requires the **pill** variant."
+  },
   "slots": {
+    "append-inner": "Slot for content inside the end of the track. Requires the **pill** variant.",
+    "prepend-inner": "Slot for content inside the start of the track. Requires the **pill** variant.",
     "thumb-label": "Slot for the thumb label.",
     "tick-label": "Slot for the tick label."
   },

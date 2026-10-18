@@ -10,6 +10,7 @@
     "readonly": "Bar stays focusable, but does not react to pointer or keyboard.",
     "step": "Seconds moved by the arrow keys. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both. Page Up and Page Down move by 10% of **max**.",
     "thumb": "Shows the thumb at the current position.",
+    "thumbGap": "Space between the handle and the track in the `pill` and `wavy` variants.",
     "thumbSize": "Size of the thumb.",
     "tooltip": "Shows the time under the pointer. Accepts an object with `location` (`top` or `bottom`) and `offset`.",
     "variant": "`pill` follows MD3 with a bar-shaped thumb. `wavy` additionally draws the played part as a wave."
