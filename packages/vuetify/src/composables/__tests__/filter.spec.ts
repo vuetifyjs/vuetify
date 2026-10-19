@@ -236,6 +236,7 @@ describe('filter', () => {
         { title: 'Hidden', aliases: ['Brisk'] },
         { title: 'United Kingdom', aliases: ['UK', 'Great Britain'] },
         { title: 'Brazil' },
+        { title: 'BR' },
         { type: 'subheader', title: 'Other' },
         { title: 'Tom Brown' },
         { title: 'Abra' },
@@ -245,6 +246,7 @@ describe('filter', () => {
       const { filteredItems } = useFilter(props, items, ref('br'))
 
       expect(filteredItems.value.map(item => item.title)).toEqual([
+        'BR',
         'Brazil',
         'Hidden',
         'United Kingdom',

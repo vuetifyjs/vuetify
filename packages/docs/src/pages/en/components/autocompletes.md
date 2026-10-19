@@ -75,7 +75,7 @@ When user is typing in the field to narrow the list of options, the input text i
 
 #### Filtered order
 
-By default, matching items keep their order from `items`. With `filtered-order="prefix"`, items with a value starting with the query come first, then those with a word starting with it, then the rest. Every key in `filter-keys` counts, including hidden ones such as aliases. Within a tier, a match in an earlier key wins, so list the displayed key first.
+By default, matching items keep their order from `items`. With `filtered-order="prefix"`, exact matches come first, then items with a value starting with the query, then those with a word starting with it, then the rest. Every key in `filter-keys` counts, including hidden ones such as aliases. Within a tier, a match in an earlier key wins, so list the displayed key first. Ordering relies on the built-in filtering and has no effect with `no-filter`.
 
 <ExamplesExample file="v-autocomplete/prop-filtered-order" />
 

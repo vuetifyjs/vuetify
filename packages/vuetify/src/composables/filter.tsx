@@ -196,8 +196,9 @@ export function filterItems (
 const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
 
 function prefixRank (value: string, ranges: FilterMatchArrayMultiple) {
-  if (ranges.some(([start]) => start === 0)) return 0
-  return ranges.some(([start]) => WORD_BOUNDARY.test(value[start - 1])) ? 1 : 2
+  if (ranges.some(([start, end]) => start === 0 && end === value.length)) return 0
+  if (ranges.some(([start]) => start === 0)) return 1
+  return ranges.some(([start]) => WORD_BOUNDARY.test(value[start - 1])) ? 2 : 3
 }
 
 function sortByPrefix (
@@ -219,7 +220,7 @@ function sortByPrefix (
         if (!ranges) return best
         const keyRank = prefixRank(String(isObject(item) ? getPropertyFromItem(transformed, key) : item), ranges)
         return keyRank < best[0] ? [keyRank, index] : best
-      }, [3, keys.length])
+      }, [4, keys.length])
 
       return { result, group, rank, keyIndex }
     })
