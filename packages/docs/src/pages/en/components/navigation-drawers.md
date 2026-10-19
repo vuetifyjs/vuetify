@@ -103,6 +103,8 @@ Navigation drawers can also be positioned on the opposite side of your applicati
 
 A temporary drawer sits above its application and uses a scrim (overlay) to darken the background. This drawer behavior is mimicked by default when on mobile. Clicking outside of the drawer will cause it to close.
 
+Use the shared `--v-scrim-blur`, `--v-scrim-color`, and `--v-scrim-opacity` CSS properties to customize its backdrop. See [scrim customization](/components/overlays/#scrim-customization) for global and theme configuration. During a swipe, both tint opacity and blur scale with the drawer's opening progress.
+
 <ExamplesExample file="v-navigation-drawer/prop-temporary" />
 
 ### Misc

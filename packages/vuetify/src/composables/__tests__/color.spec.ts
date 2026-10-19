@@ -2,10 +2,39 @@
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
-import { reactive } from 'vue'
+import { reactive, shallowRef } from 'vue'
 
 describe('color.ts', () => {
   describe('useBackgroundColor', () => {
+    it('should mix CSS colors without discarding their alpha', () => {
+      const { backgroundColorStyles } = useBackgroundColor('rgba(255, 0, 0, 0.5)', 0.4)
+
+      expect(backgroundColorStyles.value).toEqual({
+        '--v-background-opacity': 0.4,
+        backgroundColor: 'color-mix(in srgb, rgba(255, 0, 0, 0.5) calc(var(--v-background-opacity) * 100%), transparent)',
+      })
+    })
+
+    it('should react to color and opacity changes including zero and undefined', () => {
+      const color = shallowRef('primary')
+      const opacity = shallowRef<number | string | undefined>(0.4)
+      const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(color, () => opacity.value)
+
+      expect(backgroundColorClasses.value).toEqual(['bg-primary'])
+      expect(backgroundColorStyles.value).toEqual({ '--v-background-opacity': 0.4 })
+
+      opacity.value = 0
+      expect(backgroundColorStyles.value).toEqual({ '--v-background-opacity': 0 })
+
+      color.value = '#FF00FF'
+      opacity.value = 'var(--v-scrim-opacity)'
+      expect(backgroundColorStyles.value.backgroundColor).toContain('color-mix(in srgb, #FF00FF')
+      expect(backgroundColorStyles.value['--v-background-opacity']).toBe('var(--v-scrim-opacity)')
+
+      opacity.value = undefined
+      expect(backgroundColorStyles.value).toEqual({ backgroundColor: '#FF00FF' })
+    })
+
     it('should allow ref argument or return null', () => {
       const props = reactive({ color: 'primary' })
       const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
