@@ -33,6 +33,7 @@ import {
   isString,
   omit,
   propsFactory,
+  SUPPORTS_FIELD_SIZING,
   useRender,
 } from '@/util'
 
@@ -186,6 +187,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
+    // Set after mount so that server and client render the same sizer at first
+    const fieldSizing = shallowRef(false)
+    const minHeight = shallowRef<string>()
+    const maxHeight = shallowRef<string>()
+    const capped = shallowRef(false)
     const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
@@ -205,39 +211,74 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       if (!props.autoGrow) return
 
       nextTick(() => {
-        if (!sizerRef.value || !vFieldRef.value) return
+        const el = fieldSizing.value ? textareaRef.value : sizerRef.value
+        if (!el || !vFieldRef.value) return
 
-        const style = getComputedStyle(sizerRef.value)
+        const { padding, lineHeight } = getLineMetrics(el)
         const fieldStyle = getComputedStyle(vFieldRef.value.$el)
 
-        const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
-          parseFloat(style.getPropertyValue('--v-input-padding-top')) +
-          parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
-
-        const height = sizerRef.value.scrollHeight
-        const lineHeight = parseFloat(style.lineHeight)
-        const minHeight = Math.max(
+        const min = Math.max(
           parseFloat(props.rows) * lineHeight + padding,
           parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
         )
 
-        const maxHeight = props.maxHeight
+        const max = props.maxHeight
           ? parseFloat(props.maxHeight!)
           : parseFloat(props.maxRows!) * lineHeight + padding || Infinity
 
-        const newHeight = clamp(height ?? 0, minHeight, maxHeight)
+        if (fieldSizing.value) {
+          minHeight.value = convertToUnit(min)
+          maxHeight.value = Number.isFinite(max) ? convertToUnit(max) : undefined
+          capped.value = Number.isFinite(max) && measureWithoutScrollbar(el) > max
+          return
+        }
+
+        const height = el.scrollHeight
+        capped.value = height > max
+        const newHeight = clamp(height, min, max)
         rows.value = Math.floor((newHeight - padding) / lineHeight)
 
         controlHeight.value = convertToUnit(newHeight)
       })
     }
 
-    onMounted(calculateInputHeight)
+    function measureWithoutScrollbar (el: HTMLElement) {
+      const overflowY = el.style.overflowY
+      el.style.overflowY = 'hidden'
+      const height = el.scrollHeight
+      el.style.overflowY = overflowY
+      return height
+    }
+
+    function getLineMetrics (el: HTMLElement) {
+      const style = getComputedStyle(el)
+      const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
+        parseFloat(style.getPropertyValue('--v-input-padding-top')) +
+        parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
+
+      return { padding, lineHeight: parseFloat(style.lineHeight) }
+    }
+
+    function onFieldSizingResize () {
+      if (!textareaRef.value) return
+
+      const height = textareaRef.value.offsetHeight
+      const { padding, lineHeight } = getLineMetrics(textareaRef.value)
+      rows.value = Math.floor((height - padding) / lineHeight)
+
+      controlHeight.value = convertToUnit(height)
+    }
+
+    onMounted(() => {
+      fieldSizing.value = SUPPORTS_FIELD_SIZING
+      calculateInputHeight()
+    })
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
     watch(() => props.maxHeight, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
+    watch(capped, calculateInputHeight)
     watch(rows, val => {
       emit('update:rows', val)
     })
@@ -253,6 +294,14 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     })
     onBeforeUnmount(() => {
       observer?.disconnect()
+    })
+
+    watch([textareaRef, () => fieldSizing.value && props.autoGrow], ([el, enabled], _, onCleanup) => {
+      if (!el || !enabled) return
+
+      const fieldSizingObserver = new ResizeObserver(onFieldSizingResize)
+      fieldSizingObserver.observe(el)
+      onCleanup(() => fieldSizingObserver.disconnect())
     })
 
     useRender(() => {
@@ -280,6 +329,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
+              'v-textarea--capped': props.autoGrow && capped.value,
+              'v-textarea--field-sizing': props.autoGrow && fieldSizing.value,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
             },
@@ -287,7 +338,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           ]}
           style={[
             {
-              '--v-textarea-max-height': props.maxHeight ? convertToUnit(props.maxHeight) : undefined,
+              '--v-textarea-min-height': minHeight.value,
+              '--v-textarea-max-height': props.autoGrow && fieldSizing.value
+                ? maxHeight.value
+                : props.maxHeight ? convertToUnit(props.maxHeight) : undefined,
               '--v-textarea-scroll-bar-width': convertToUnit(scrollbarWidth.value),
             },
             props.style,
@@ -364,7 +418,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         { ...inputAttrs }
                       />
 
-                      { props.autoGrow && (
+                      { props.autoGrow && !fieldSizing.value && (
                         <textarea
                           class={[
                             fieldClass,
