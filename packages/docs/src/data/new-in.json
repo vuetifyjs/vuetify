@@ -25,6 +25,7 @@
       "autoSelectFirst": "3.3.0",
       "clearOnSelect": "3.5.0",
       "closeOnInputClick": "4.2.0",
+      "filteredOrder": "4.3.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",
@@ -41,6 +42,7 @@
     "examples": {
       "slot-menu-footer": "3.12.0",
       "misc-new-tab": "3.3.0",
+      "prop-filtered-order": "4.3.0",
       "prop-ignore-accents": "4.2.0"
     }
   },
@@ -182,6 +184,7 @@
       "autocomplete": "3.10.0",
       "clearOnSelect": "3.5.0",
       "closeOnInputClick": "4.2.0",
+      "filteredOrder": "4.3.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
       "menuElevation": "4.0.0",

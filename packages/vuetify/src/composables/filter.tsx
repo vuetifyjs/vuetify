@@ -32,12 +32,14 @@ export type FilterFunction = (value: string, query: string, item?: InternalItem)
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
+export type FilteredOrder = 'none' | 'prefix'
 
 export interface FilterProps {
   customFilter?: FilterFunction
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  filteredOrder?: FilteredOrder
   ignoreAccents?: IgnoreAccents
   noFilter?: boolean
 }
@@ -191,6 +193,48 @@ export function filterItems (
   return array
 }
 
+const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
+
+function prefixRank (value: unknown, ranges: FilterMatchArrayMultiple) {
+  let offset = 0
+  const spans = (Array.isArray(value) ? value : [value]).map(part => {
+    const start = offset
+    offset += String(part ?? '').length + 1
+    return [start, offset - 1] as const
+  })
+  if (ranges.some(([start, end]) => spans.some(span => span[0] === start && span[1] === end))) return 0
+  if (ranges.some(([start]) => spans.some(span => span[0] === start))) return 1
+  const text = String(value)
+  return ranges.some(([start]) => WORD_BOUNDARY.test(text[start - 1])) ? 2 : 3
+}
+
+function sortByPrefix (
+  results: FilterResult[],
+  items: Parameters<typeof filterItems>[0],
+  filterKeys?: FilterKeys,
+) {
+  let group = 0
+  return results
+    .map(result => {
+      if (result.type) return { result, group: ++group, rank: -1, keyIndex: 0 }
+
+      const [item, transformed = item] = wrapInArray(items[result.index]) as readonly [InternalItem, {}]
+      const keys = !isObject(item) ? ['title']
+        : filterKeys ? wrapInArray(filterKeys)
+        : Object.keys(transformed)
+      const [rank, keyIndex] = keys.reduce<[number, number]>((best, key, index) => {
+        const ranges = result.matches[key]
+        if (!ranges) return best
+        const keyRank = prefixRank(isObject(item) ? getPropertyFromItem(transformed, key) : item, ranges)
+        return keyRank < best[0] ? [keyRank, index] : best
+      }, [4, keys.length])
+
+      return { result, group, rank, keyIndex }
+    })
+    .sort((a, b) => a.group - b.group || a.rank - b.rank || a.keyIndex - b.keyIndex)
+    .map(({ result }) => result)
+}
+
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
@@ -215,7 +259,7 @@ export function useFilter <T extends InternalItem> (
       !isNumber(_query)
     ) ? '' : String(_query)
 
-    const results = filterItems(
+    let results = filterItems(
       transformedItems.value,
       strQuery,
       {
@@ -230,6 +274,10 @@ export function useFilter <T extends InternalItem> (
         noFilter: props.noFilter,
       },
     )
+
+    if (strQuery && props.filteredOrder === 'prefix') {
+      results = sortByPrefix(results, transformedItems.value, props.filterKeys)
+    }
 
     const originalItems = unref(items)
 
