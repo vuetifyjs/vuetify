@@ -166,7 +166,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     const {
       isHovering,
-      isFocused,
       onPointerenter,
       onPointerleave,
       onFocusin,
@@ -188,8 +187,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     function onAfterLeave () {
-      if (isHovering.value) onPointerleave()
-      isFocused.value = false
       emit('afterLeave')
     }
 

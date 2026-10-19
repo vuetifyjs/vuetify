@@ -2,6 +2,7 @@ import { VAlert } from '..'
 
 // Utilities
 import { render, screen, showcase, userEvent, wait } from '@test'
+import { shallowRef } from 'vue'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -81,6 +82,18 @@ describe('VAlert', () => {
 
       // resumes and dismisses once the pointer leaves
       await userEvent.unhover(alert)
+      await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
+    })
+
+    it('auto-dismisses after being closed while hovered and reopened', async () => {
+      const model = shallowRef(true)
+      render(() => <VAlert v-model={ model.value } text="reopen" timeout={ 300 } closable />)
+
+      await userEvent.click(await screen.findByCSS('.v-alert__close .v-btn'))
+      await expect.poll(() => document.querySelector('.v-alert')).toBeNull()
+
+      model.value = true
+      await expect.poll(() => document.querySelector('.v-alert')).not.toBeNull()
       await expect.poll(() => document.querySelector('.v-alert'), { timeout: 5000 }).toBeNull()
     })
 

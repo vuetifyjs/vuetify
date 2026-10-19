@@ -70,7 +70,14 @@ export function useAutoDismiss (
     if (!isHovering.value) startTimeout()
   }
 
-  watch(isActive, startTimeout)
+  watch(isActive, active => {
+    if (active) {
+      isHovering.value = false
+      isFocused.value = false
+    }
+    startTimeout()
+  })
+
   watch(timeout, startTimeout)
 
   onMounted(() => {
