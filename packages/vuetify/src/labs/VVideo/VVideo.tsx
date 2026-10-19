@@ -13,6 +13,7 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 // Composables
 import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useElevation } from '@/composables/elevation'
@@ -73,7 +74,7 @@ export const makeVVideoProps = propsFactory({
   },
   controlsHideDelay: {
     type: Number,
-    default: 4000,
+    default: 2000,
     validator: (value: number) => Number.isFinite(value) && value >= 0,
   },
   controlsProps: {
@@ -137,7 +138,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const isHydrated = useHydration()
     const controlsIdle = shallowRef(false)
-    const controlsFocused = shallowRef(false)
     const controlsPointer = shallowRef<number>()
     const controlsAutoHide = toRef(() => props.variant === 'player' && props.controlsVariant !== 'hidden' &&
       !(props.controlsProps?.detached ?? props.detached) &&
@@ -145,8 +145,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
     const controlsClasses = toRef(() => ({
       'v-video--controls-auto-hide': controlsAutoHide.value,
       'v-video--controls-idle': controlsAutoHide.value && controlsIdle.value,
-      'v-video--controls-interacting': controlsAutoHide.value && (controlsFocused.value || controlsPointer.value !== undefined),
+      'v-video--controls-interacting': controlsAutoHide.value && controlsPointer.value !== undefined,
     }))
+
+    provideDefaults({
+      VTooltip: {
+        disabled: toRef(() => (controlsAutoHide.value && controlsIdle.value) || undefined),
+      },
+    })
 
     let controlsTimer: ReturnType<typeof setTimeout> | undefined
     let controlsDocument: Document | undefined
@@ -162,13 +168,12 @@ export const VVideo = genericComponent<VVideoSlots>()({
       clearTimeout(controlsTimer)
       controlsTimer = undefined
       controlsIdle.value = false
-      controlsFocused.value = false
       releaseControlsPointer()
     }
 
     function canHideControls () {
       return isHydrated.value && controlsAutoHide.value && state.value === 'loaded' && playing.value &&
-        !waiting.value && !error.value && !controlsFocused.value && controlsPointer.value === undefined
+        !waiting.value && !error.value && controlsPointer.value === undefined
     }
 
     function onControlsActivity () {
@@ -178,7 +183,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       if (!controlsAutoHide.value) {
         releaseControlsPointer()
-        controlsFocused.value = false
       } else if (canHideControls()) {
         controlsTimer = setTimeout(() => {
           controlsTimer = undefined
@@ -191,7 +195,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (!controlsAutoHide.value || e.button !== 0 || !e.isPrimary) return
 
       releaseControlsPointer()
-      controlsFocused.value = false
       controlsPointer.value = e.pointerId
       controlsDocument = containerRef.value?.ownerDocument
       controlsDocument?.addEventListener('pointerup', onControlsPointerRelease, true)
@@ -203,22 +206,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
       if (e.pointerId !== controlsPointer.value) return
 
       releaseControlsPointer()
-      onControlsActivity()
-    }
-
-    function onControlsFocusIn (e: FocusEvent) {
-      controlsFocused.value = Boolean(controlsRef.value?.$el.contains(e.target as Node) &&
-        (e.target as Element).matches(':focus-visible'))
-      onControlsActivity()
-    }
-
-    function onControlsFocusOut (e: FocusEvent) {
-      if (!controlsRef.value?.$el.contains(e.relatedTarget as Node)) controlsFocused.value = false
-      onControlsActivity()
-    }
-
-    function onControlsKeydown (e: KeyboardEvent) {
-      if (controlsRef.value?.$el.contains(e.target as Node)) controlsFocused.value = true
       onControlsActivity()
     }
 
@@ -558,11 +545,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
             props.style,
           ]}
           onKeydown={ onKeydown }
-          onKeydownCapture={ onControlsKeydown }
+          onKeydownCapture={ onControlsActivity }
           onPointermoveCapture={ onControlsActivity }
           onPointerdownCapture={ onControlsPointerDown }
-          onFocusinCapture={ onControlsFocusIn }
-          onFocusoutCapture={ onControlsFocusOut }
+          onFocusinCapture={ onControlsActivity }
           onClick={ onClick }
         >
           <div

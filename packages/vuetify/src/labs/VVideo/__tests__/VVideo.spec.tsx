@@ -34,17 +34,17 @@ describe('VVideo controls inactivity', () => {
     vi.useRealTimers()
   })
 
-  it('should hide after four seconds and reset when moving the cursor over the player', async () => {
+  it('should hide after two seconds and reset when moving the cursor over the player', async () => {
     const wrapper = mountVideo()
     await wrapper.get('video').trigger('loadeddata')
-    await vi.advanceTimersByTimeAsync(3999)
+    await vi.advanceTimersByTimeAsync(1999)
     expect(wrapper.classes()).not.toContain('v-video--controls-idle')
     await vi.advanceTimersByTimeAsync(1)
     expect(wrapper.classes()).toContain('v-video--controls-idle')
 
     await wrapper.trigger('pointermove')
     expect(wrapper.classes()).not.toContain('v-video--controls-idle')
-    await vi.advanceTimersByTimeAsync(4000)
+    await vi.advanceTimersByTimeAsync(2000)
     expect(wrapper.classes()).toContain('v-video--controls-idle')
 
     await wrapper.setProps({ controlsHideDelay: 0 })
@@ -54,7 +54,7 @@ describe('VVideo controls inactivity', () => {
     expect(vi.getTimerCount()).toBe(0)
   })
 
-  it('should keep controls available during pointer and keyboard interaction', async () => {
+  it('should keep controls available while the pointer is held and reveal them on keyboard activity', async () => {
     const wrapper = mountVideo()
     await wrapper.get('video').trigger('loadeddata')
     wrapper.element.dispatchEvent(new PointerEvent('pointerdown', { button: 0, pointerId: 1, isPrimary: true }))
@@ -66,13 +66,12 @@ describe('VVideo controls inactivity', () => {
     document.dispatchEvent(new PointerEvent('pointerup', { pointerId: 1 }))
     await nextTick()
     expect(wrapper.classes()).not.toContain('v-video--controls-interacting')
-    await wrapper.get('button').trigger('keydown', { key: 'Tab' })
-    await vi.advanceTimersByTimeAsync(5000)
-    expect(wrapper.classes()).toContain('v-video--controls-interacting')
-    expect(wrapper.classes()).not.toContain('v-video--controls-idle')
+    await vi.advanceTimersByTimeAsync(2000)
+    expect(wrapper.classes()).toContain('v-video--controls-idle')
 
-    await wrapper.get('button').trigger('focusout', { relatedTarget: null })
-    await vi.advanceTimersByTimeAsync(4000)
+    await wrapper.get('button').trigger('keydown', { key: 'Tab' })
+    expect(wrapper.classes()).not.toContain('v-video--controls-idle')
+    await vi.advanceTimersByTimeAsync(2000)
     expect(wrapper.classes()).toContain('v-video--controls-idle')
     wrapper.unmount()
     expect(vi.getTimerCount()).toBe(0)

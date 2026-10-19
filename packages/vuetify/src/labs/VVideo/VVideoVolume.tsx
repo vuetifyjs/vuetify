@@ -86,7 +86,7 @@ export const VVideoVolume = genericComponent()({
             v-tooltip={[{
               text: props.label,
               location: 'top',
-              disabled: menu.value,
+              disabled: menu.value || undefined,
             }]}
             onClick={ props.onClick as any }
             { ...attrs }
