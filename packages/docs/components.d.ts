@@ -122,7 +122,6 @@ declare module 'vue' {
     HomeBlogs: typeof import('./src/components/home/Blogs.vue')['default']
     HomeCommonCard: typeof import('./src/components/home/Common/Card.vue')['default']
     HomeCommonGradient: typeof import('./src/components/home/Common/Gradient.vue')['default']
-    HomeCommonMarquee: typeof import('./src/components/home/Common/Marquee.vue')['default']
     HomeCommonTitle: typeof import('./src/components/home/Common/Title.vue')['default']
     HomeDiscord: typeof import('./src/components/home/Discord.vue')['default']
     HomeEcosystem: typeof import('./src/components/home/Ecosystem.vue')['default']

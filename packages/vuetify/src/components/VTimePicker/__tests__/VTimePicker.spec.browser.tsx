@@ -3,7 +3,7 @@ import { VTimePicker } from '../VTimePicker'
 
 // Utilities
 import { render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 describe('VTimePicker', () => {
   describe('variant input', () => {
@@ -74,6 +74,37 @@ describe('VTimePicker', () => {
       expect(model.value).toBe('01:59') // cycle minutes
       await userEvent.keyboard('{ArrowUp}')
       expect(model.value).toBe('01:00')
+    })
+
+    it('should step the field under the wheel only when scrollable', async () => {
+      const model = ref<string | null>('09:45')
+      const scrollable = ref<boolean | 'controls'>(true)
+      render(() => (
+        <VTimePicker
+          v-model={ model.value }
+          format="24hr"
+          scrollable={ scrollable.value }
+          variant="input"
+        />
+      ))
+
+      function wheel (deltaY: number) {
+        const [, minute] = screen.getAllByCSS('.v-time-picker-controls__time__field input')
+        minute.dispatchEvent(new WheelEvent('wheel', { deltaY, bubbles: true, cancelable: true }))
+      }
+
+      wheel(-100)
+      await expect.poll(() => model.value).toBe('09:45')
+
+      scrollable.value = 'controls'
+      await nextTick()
+      wheel(-100)
+      await expect.poll(() => model.value).toBe('09:46')
+      await nextTick()
+      wheel(100)
+      await nextTick()
+      wheel(100)
+      await expect.poll(() => model.value).toBe('09:44')
     })
 
     describe('allowed values', () => {

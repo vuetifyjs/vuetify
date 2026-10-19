@@ -22,11 +22,13 @@
     "readonly": "Makes the picker readonly (doesn't allow to select new date).",
     "showAdjacentMonths": "Toggles visibility of days from previous and next months.",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar.",
+    "wheel": "Navigate between months with the mouse wheel or trackpad. Responds to horizontal scrolling or Shift + wheel.",
     "width": "Width of the picker.",
     "modeIcon": "Icon displayed next to the current month and year, toggles year selection when clicked.",
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`."
   },
   "events": {
+    "[`${string}:day`]": "Any event on a day button. The second argument is the day value.",
     "update:month": "Emitted when the month changes.",
     "update:viewMode": "Emitted when the view mode changes.",
     "update:year": "Emitted when the year changes."

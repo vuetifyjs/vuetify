@@ -27,10 +27,14 @@
       flex-grow: 1
       padding: 12px 12px 0
 
-      .v-btn > .v-btn__append > .v-icon
-        transition-property: transform
-        transition-duration: 0.28s
-        transition-timing-function: settings.$standard-easing
+      .v-btn
+        --v-btn-height: #{$month-picker-btn-height}
+        padding-inline: $month-picker-btn-padding-inline
+
+        > .v-btn__append > .v-icon
+          transition-property: transform
+          transition-duration: 0.28s
+          transition-timing-function: settings.$standard-easing
 
     &--years
       .v-month-picker__controls .v-btn > .v-btn__append > .v-icon
@@ -80,6 +84,10 @@
       --range-selection-inset: 0px
 
     > .v-btn
+      --v-btn-height: #{$month-picker-btn-height}
+      --v-btn-size: #{$month-picker-btn-font-size}
+      --v-btn-icon-size: #{$month-picker-btn-icon-size}
+      padding-inline: $month-picker-btn-padding-inline
       width: 100%
 
     @include tools.layer('trumps')

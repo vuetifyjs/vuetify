@@ -20,16 +20,16 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, isFunction, omit, pickWithRest, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
-import type { VDatePickerMonthSlots } from './VDatePickerMonth'
+import type { DatePickerDay, VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { VPickerSlots } from '@/components/VPicker/VPicker'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots =
@@ -98,6 +98,7 @@ export const VDatePicker = genericComponent<new <
     : T,
 > (
   props: {
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, DatePickerDay]>
     modelValue?: TModel
     'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
@@ -118,7 +119,7 @@ export const VDatePicker = genericComponent<new <
     'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const adapter = useDate()
     const { t } = useLocale()
     const { rtlClasses } = useRtl()
@@ -505,6 +506,7 @@ export const VDatePicker = genericComponent<new <
                     <VDatePickerMonth
                       ref={ monthGridRef }
                       key="date-picker-month"
+                      { ...pickWithRest(attrs, [/^on.+:day$/])[0] }
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }

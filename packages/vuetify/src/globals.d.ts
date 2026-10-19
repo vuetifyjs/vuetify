@@ -12,11 +12,14 @@ import type {
   VNode,
 } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
+import type { TouchHoldState } from './directives/touch-hold'
 
 declare global {
   interface Element {
     _clickOutside?: Record<number, {
       onClick: EventListener
+      onAuxclick: EventListener
+      onContextmenu: EventListener
       onMousedown: EventListener
     } | undefined> & { lastMousedownWasOutside: boolean }
     _onResize?: Record<number, {
@@ -49,6 +52,7 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+    _touchHold?: Record<number, TouchHoldState | undefined>
     _transitionInitialStyles?: {
       position: string
       top: string

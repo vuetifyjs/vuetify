@@ -46,6 +46,10 @@ The recommended placement of elements inside of `v-icon-btn` is:
 | - | - |
 | 1. Container | The container element that holds the icon and text |
 
+::: info
+For Material Design 3 sizes, see [Material Design 3 button sizes](/features/md3-button-sizes/).
+:::
+
 ## Guide
 
 The `v-icon-btn` component is a lightweight reusable button that displays icons and text in various states.

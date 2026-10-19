@@ -79,6 +79,10 @@ The **size** property is used to control the size of the button and scales with 
 
 <ExamplesExample file="v-btn/prop-size" />
 
+::: info
+For Material Design 3 sizes, see [Material Design 3 button sizes](/features/md3-button-sizes/).
+:::
+
 #### Block
 
 Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.

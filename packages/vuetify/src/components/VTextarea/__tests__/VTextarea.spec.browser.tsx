@@ -71,6 +71,43 @@ describe('VTextarea', () => {
     expect(rows.value).toBe(2)
   })
 
+  it('should shrink when lines are removed', async () => {
+    await page.viewport(500, 500)
+    const model = ref('Lorem\nipsum\ndolor')
+
+    render(() => (
+      <Application>
+        <div>
+          <VTextarea autoGrow rows="1" v-model={ model.value } />
+        </div>
+      </Application>
+    ))
+
+    const el = screen.getByCSS('textarea[rows]')
+    await expect.poll(() => el.offsetHeight).toBe(104)
+
+    model.value = 'Lorem'
+    await expect.poll(() => el.offsetHeight).toBe(56)
+  })
+
+  it('should undo typed text in one step when auto-growing', async () => {
+    const model = ref('')
+    render(() => (
+      <Application>
+        <div>
+          <VTextarea autoGrow rows="1" v-model={ model.value } />
+        </div>
+      </Application>
+    ))
+
+    await userEvent.tab()
+    await userEvent.keyboard('Lorem ipsum dolor')
+    await expect.poll(() => model.value).toBe('Lorem ipsum dolor')
+
+    await userEvent.keyboard('{ControlOrMeta>}z{/ControlOrMeta}')
+    await expect.poll(() => model.value).toBe('')
+  })
+
   it('hides details when using hide-details="auto" and counter without focus', async () => {
     const { element, queryByCSS } = render(() => (
       <VTextarea hideDetails="auto" counter></VTextarea>

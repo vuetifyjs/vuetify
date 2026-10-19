@@ -10,7 +10,8 @@
     "showArrows": "Display the \"next\" and \"prev\" buttons.",
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "transitionDuration": "Overrides transition duration. Ignored with `prefers-reduced-motion: reduce`.",
-    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally."
+    "verticalArrows": "Displays the navigation arrows vertically instead of horizontally.",
+    "wheel": "Navigate between items with the mouse wheel or trackpad. Horizontal windows respond to horizontal scrolling or Shift + wheel."
   },
   "slots": {
     "next": "Slot displaying the arrow switching to the next item.",

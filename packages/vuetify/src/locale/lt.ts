@@ -134,6 +134,15 @@ export default {
       item: 'Įvertinimas {0} iš {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimumas',
+      end: 'Maksimumas',
+    },
+  },
+  splitBtn: {
+    menu: 'Daugiau parinkčių',
+  },
   loading: 'Kraunama...',
   infiniteScroll: {
     loadMore: 'Užkrauti daugiau',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Klaviatūros trumpinys: {0}',
     or: 'arba',
   },
-  video: {
+  media: {
     play: 'Groti',
     pause: 'Pauzė',
     seek: 'Ieškoti',
     volume: 'Garsumas',
-    showVolume: 'Rodyti garso valdymą',
     mute: 'Nutildyti',
     unmute: 'Įjungti garsą',
     enterFullscreen: 'Visas ekranas',

@@ -134,6 +134,15 @@ export default {
       item: '评分 {0} / {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小值',
+      end: '最大值',
+    },
+  },
+  splitBtn: {
+    menu: '更多选项',
+  },
   loading: '加载中...',
   infiniteScroll: {
     loadMore: '加载更多',
@@ -174,12 +183,11 @@ export default {
     shortcut: '键盘快捷键：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暂停',
     seek: '跳转',
     volume: '音量',
-    showVolume: '显示音量控制',
     mute: '静音',
     unmute: '取消静音',
     enterFullscreen: '全屏',

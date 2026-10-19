@@ -299,6 +299,10 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
   );
 ```
 
+### VBtn sizes
+
+Buttons and icon buttons can use Material Design 3 Expressive sizes through new SASS maps, see [Material Design 3 button sizes](/features/md3-button-sizes/).
+
 ### VBtn text-transform
 
 The default `text-transform` of _uppercase_ has been **removed**. To restore the previous behavior, set the `text-transform` prop to `uppercase`.

@@ -70,9 +70,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
     const { isRtl } = useRtl()
@@ -127,6 +130,21 @@ export const VMenu = genericComponent<OverlaySlots>()({
       }
     }, { immediate: true })
 
+    // arrows would otherwise reach the activator, where another menu may answer them
+    watch(isActive, val => {
+      if (val && props.contextMenu) focusContentEl()
+    }, { flush: 'post' })
+
+    // content stays hidden until the location strategy places it, and hidden elements reject focus
+    function focusContentEl (attempt = 1) {
+      const el = overlay.value?.contentEl
+      if (!el || !isActive.value || el.contains(getActiveElement())) return
+      el.focus({ preventScroll: true })
+      if (!el.contains(getActiveElement()) && attempt <= 10) {
+        requestAnimationFrame(() => focusContentEl(attempt + 1))
+      }
+    }
+
     function onKeydown (e: KeyboardEvent) {
       if (props.disabled) return
 
@@ -148,6 +166,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
       } else if (props.submenu && e.key === (isRtl.value ? 'ArrowRight' : 'ArrowLeft')) {
         isActive.value = false
         overlay.value?.activatorEl?.focus()
+      } else if (e.target === overlay.value?.contentEl && ['ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault()
+        setInitialFocus(e)
       }
     }
 
@@ -197,7 +218,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       } else if (
         props.submenu
           ? e.key === (isRtl.value ? 'ArrowLeft' : 'ArrowRight')
-          : props.openOnArrow && ['ArrowDown', 'ArrowUp'].includes(e.key)
+          : props.openOnArrow && !props.contextMenu && ['ArrowDown', 'ArrowUp'].includes(e.key)
       ) {
         isActive.value = true
         e.preventDefault()
@@ -249,8 +270,12 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           _submenu={ props.submenu }
           activatorProps={ activatorProps.value }
+          contentProps={ props.contextMenu ? mergeProps({ tabindex: -1 }, props.contentProps) : props.contentProps }
           location={ props.location ?? (props.submenu ? 'end' : 'bottom') }
           onKeydown={ onKeydown }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
+          onAfterLeave={ () => emit('afterLeave') }
           { ...scopeId }
         >
           {{

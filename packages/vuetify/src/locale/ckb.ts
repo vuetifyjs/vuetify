@@ -134,6 +134,15 @@ export default {
       item: 'هەڵسەنگاندن {0} لە {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'کەمترین',
+      end: 'زۆرترین',
+    },
+  },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
+  },
   loading: 'بارکردن...',
   infiniteScroll: {
     loadMore: 'زیاتر باربکە',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'کورتەبڕی تەختەکلیل: {0}',
     or: 'یان',
   },
-  video: {
+  media: {
     play: 'لێدان',
     pause: 'ڕاگرتن',
     seek: 'گەڕان',
     volume: 'دەنگ',
-    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
     mute: 'بێدەنگکردن',
     unmute: 'لە بێدەنگی دەرهێنان',
     enterFullscreen: 'پڕ بە شاشە',

@@ -153,6 +153,15 @@ describe('VSlideGroup', () => {
     expect(fullyVisibleItems()).toContain(7)
   })
 
+  it.each([false, true])('should snap within padding (rtl: %s)', async rtl => {
+    render(() => <style>{ '.v-slide-group__container { scroll-snap-type: none !important }' }</style>)
+    const group = renderGroup({ scrollSnap: 'start', padding: 20 }, rtl)
+    await ready()
+
+    group.value!.slide({ index: 7 })
+    await expect(settled()).resolves.toBe(rtl ? -420 : 420)
+  })
+
   it('should disable each affix at its end of the group', async () => {
     renderGroup()
     await ready()

@@ -78,13 +78,14 @@ The following is a list of available and up-and-coming components for use with L
 |------------------------------------------------------|------------------------------------------------------------|------------------------------------------------------------|
 | [v-pie](/components/pie-charts/)                     | A component to display data as interactive pie/donut chart | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
 | [v-video](/components/videos/)                       | A customizable wrapper for native video element            | [v3.9.3](/getting-started/release-notes/?version=v3.9.3)   |
-| [v-avatar-group](/components/avatar-groups/)         | A component to group and display multiple avatars          | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
-| [v-progress](/components/progress/)                  | A unified progress indicator component with a11y defaults  | [v4.0.3](/getting-started/release-notes/?version=v4.0.3)   |
 | [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
-| [v-highlight](/components/highlights/)               | Renders text with highlighted search matches               | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-audio](/components/audio-players/)                | A player for self-hosted audio with a seekable waveform    | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
+| [v-loading-indicator](/components/loading-indicators/) | An indeterminate loader that morphs between shapes          | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
+| [v-split-btn](/components/split-buttons/)            | A primary action with a menu of related actions            | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
+| [v-time-input](/components/time-inputs/)             | A text field with guided typing and a time picker          | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
