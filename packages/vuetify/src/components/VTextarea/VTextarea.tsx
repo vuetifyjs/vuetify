@@ -233,8 +233,9 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           return
         }
 
-        capped.value = el.scrollHeight > max
-        const newHeight = clamp(el.scrollHeight ?? 0, min, max)
+        const height = el.scrollHeight
+        capped.value = height > max
+        const newHeight = clamp(height, min, max)
         rows.value = Math.floor((newHeight - padding) / lineHeight)
 
         controlHeight.value = convertToUnit(newHeight)
@@ -258,7 +259,6 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
       return { padding, lineHeight: parseFloat(style.lineHeight) }
     }
 
-    // With field-sizing the textarea grows by itself, so rows and the field height follow its size
     function onFieldSizingResize () {
       if (!textareaRef.value) return
 
@@ -271,8 +271,8 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
 
     onMounted(() => {
       fieldSizing.value = SUPPORTS_FIELD_SIZING
+      calculateInputHeight()
     })
-    onMounted(calculateInputHeight)
     watch(model, calculateInputHeight)
     watch(() => props.rows, calculateInputHeight)
     watch(() => props.maxHeight, calculateInputHeight)
