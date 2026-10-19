@@ -191,6 +191,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     const fieldSizing = shallowRef(false)
     const minHeight = shallowRef<string>()
     const maxHeight = shallowRef<string>()
+    const capped = shallowRef(false)
     const rows = ref(Number(props.rows))
     const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     watchEffect(() => {
@@ -228,14 +229,24 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
         if (fieldSizing.value) {
           minHeight.value = convertToUnit(min)
           maxHeight.value = Number.isFinite(max) ? convertToUnit(max) : undefined
+          capped.value = Number.isFinite(max) && measureWithoutScrollbar(el) > max
           return
         }
 
+        capped.value = el.scrollHeight > max
         const newHeight = clamp(el.scrollHeight ?? 0, min, max)
         rows.value = Math.floor((newHeight - padding) / lineHeight)
 
         controlHeight.value = convertToUnit(newHeight)
       })
+    }
+
+    function measureWithoutScrollbar (el: HTMLElement) {
+      const overflowY = el.style.overflowY
+      el.style.overflowY = 'hidden'
+      const height = el.scrollHeight
+      el.style.overflowY = overflowY
+      return height
     }
 
     function getLineMetrics (el: HTMLElement) {
@@ -317,6 +328,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
+              'v-textarea--capped': props.autoGrow && capped.value,
               'v-textarea--field-sizing': props.autoGrow && fieldSizing.value,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
               'v-input--plain-underlined': isPlainOrUnderlined.value,
