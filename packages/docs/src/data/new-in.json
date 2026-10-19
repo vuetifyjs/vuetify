@@ -6,6 +6,13 @@
       "cycle": "3.9.0"
     }
   },
+  "VAlert": {
+    "props": {
+      "timeout": "4.3.0",
+      "timer": "4.3.0",
+      "transition": "4.3.0"
+    }
+  },
   "VAppBar": {
     "props": {
       "scrollBehavior": "3.2.0"
