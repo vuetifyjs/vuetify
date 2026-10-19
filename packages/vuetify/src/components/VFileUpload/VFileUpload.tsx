@@ -243,62 +243,62 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
             ...slots,
             default: () => {
               return (
-              <>
-                { slots.default ? (
-                  <>
-                    { slots.default() }
-                    <input
-                      ref={ inputRef }
-                      type="file"
-                      accept={ inputAccept }
-                      disabled={ props.disabled ?? undefined }
-                      multiple={ props.multiple }
-                      name={ props.name }
-                      style="display: none;"
-                      onChange={ onFileSelection }
-                      { ...inputAttrs }
-                    />
-                  </>
-                ) : (
-                  <VFileUploadDropzone
-                    ref={ vDropzoneRef }
-                    { ...dropzoneProps }
-                  >
-                    {{
-                      browse: slots.browse,
-                      icon: slots.icon,
-                      title: slots.title,
-                      divider: slots.divider,
-                      single: slots.single,
-                      item: slots.item,
-                      input: () => slots.input?.({ inputNode }) ?? inputNode,
-                      loader: () => (
-                        <LoaderSlot
-                          name="v-file-upload"
-                          active={ !!props.loading }
-                          color={ loadingColor.value }
-                          v-slots={{ default: slots.loader }}
-                        />
-                      ),
-                    }}
-                  </VFileUploadDropzone>
-                )}
+                <>
+                  { slots.default ? (
+                    <>
+                      { slots.default() }
+                      <input
+                        ref={ inputRef }
+                        type="file"
+                        accept={ inputAccept }
+                        disabled={ props.disabled ?? undefined }
+                        multiple={ props.multiple }
+                        name={ props.name }
+                        style="display: none;"
+                        onChange={ onFileSelection }
+                        { ...inputAttrs }
+                      />
+                    </>
+                  ) : (
+                    <VFileUploadDropzone
+                      ref={ vDropzoneRef }
+                      { ...dropzoneProps }
+                    >
+                      {{
+                        browse: slots.browse,
+                        icon: slots.icon,
+                        title: slots.title,
+                        divider: slots.divider,
+                        single: slots.single,
+                        item: slots.item,
+                        input: () => slots.input?.({ inputNode }) ?? inputNode,
+                        loader: () => (
+                          <LoaderSlot
+                            name="v-file-upload"
+                            active={ !!props.loading }
+                            color={ loadingColor.value }
+                            v-slots={{ default: slots.loader }}
+                          />
+                        ),
+                      }}
+                    </VFileUploadDropzone>
+                  )}
 
-                { !slots.default && !props.insetFileList && (
-                  <VDefaultsProvider
-                    defaults={{
-                      VFileUploadList: {
-                        clearable: props.clearable,
-                        showSize: props.showSize,
-                      },
-                    }}
-                  >
-                    <VFileUploadList>
-                      {{ item: slots.item }}
-                    </VFileUploadList>
-                  </VDefaultsProvider>
-                )}
-              </>
+                  { !slots.default && !props.insetFileList && (
+                    <VDefaultsProvider
+                      defaults={{
+                        VFileUploadList: {
+                          clearable: props.clearable,
+                          showSize: props.showSize,
+                        },
+                      }}
+                    >
+                      <VFileUploadList>
+                        {{ item: slots.item }}
+                      </VFileUploadList>
+                    </VDefaultsProvider>
+                  )}
+                </>
               )
             },
           }}

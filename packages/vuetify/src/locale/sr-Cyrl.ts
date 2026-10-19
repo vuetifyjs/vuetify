@@ -134,6 +134,15 @@ export default {
       item: 'Оцена {0} од {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Више опција',
+  },
   loading: 'Учитавање...',
   infiniteScroll: {
     loadMore: 'Учитај више',
@@ -179,7 +188,6 @@ export default {
     pause: 'Паузирај',
     seek: 'Тражи',
     volume: 'Јачина звука',
-    showVolume: 'Прикажи контролу јачине звука',
     mute: 'Искључи звук',
     unmute: 'Укључи звук',
     enterFullscreen: 'Цео екран',

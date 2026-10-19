@@ -29,6 +29,7 @@ export const makeVTimePickerControlsProps = propsFactory({
   second: [Number, String] as PropType<number | string | null>,
   period: String as PropType<Period>,
   readonly: Boolean,
+  scrollable: Boolean,
   useSeconds: Boolean,
   value: Number,
   viewMode: String as PropType<VTimePickerViewMode>,
@@ -127,17 +128,13 @@ export const VTimePickerControls = genericComponent()({
       transformMinutesOrSeconds.out,
     )
 
-    function onHourFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
-      e.preventDefault()
-      e.stopPropagation()
-
+    function stepHour (increment: boolean) {
       const isAm = props.period === 'am'
       const current = props.ampm
         ? convert12to24(Number(hour.value ?? 0), isAm ? 'am' : 'pm')
         : Number(hour.value ?? 0)
 
-      const next = findNextAllowed('hour', current, e.key === 'ArrowUp')
+      const next = findNextAllowed('hour', current, increment)
       const togglePeriod = (isAm && next >= 12) || (!isAm && next < 12)
 
       if (props.ampm && togglePeriod) {
@@ -148,24 +145,35 @@ export const VTimePickerControls = genericComponent()({
       }
     }
 
-    function onMinuteFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
-      e.preventDefault()
-      e.stopPropagation()
-
+    function stepMinute (increment: boolean) {
       const current = Number(minute.value ?? 0)
-      const next = findNextAllowed('minute', current, e.key === 'ArrowUp', currentHour.value)
+      const next = findNextAllowed('minute', current, increment, currentHour.value)
       minute.value = pad(next)
     }
 
-    function onSecondFieldKeydown (e: KeyboardEvent) {
-      if (!['ArrowUp', 'ArrowDown'].includes(e.key)) return
-      e.preventDefault()
-      e.stopPropagation()
-
+    function stepSecond (increment: boolean) {
       const current = Number(second.value ?? 0)
-      const next = findNextAllowed('second', current, e.key === 'ArrowUp', currentHour.value, currentMinute.value)
+      const next = findNextAllowed('second', current, increment, currentHour.value, currentMinute.value)
       second.value = pad(next)
+    }
+
+    function onArrowKey (step: (increment: boolean) => void) {
+      return (e: KeyboardEvent) => {
+        if (props.readonly || !['ArrowUp', 'ArrowDown'].includes(e.key)) return
+        e.preventDefault()
+        e.stopPropagation()
+
+        step(e.key === 'ArrowUp')
+      }
+    }
+
+    function onWheel (step: (increment: boolean) => void) {
+      return (e: WheelEvent) => {
+        if (!props.scrollable || props.readonly || props.disabled || !e.deltaY) return
+        e.preventDefault()
+
+        step(e.deltaY < 0)
+      }
     }
 
     function createInputInterceptor (
@@ -174,7 +182,7 @@ export const VTimePickerControls = genericComponent()({
       apply: (v: string) => void,
     ) {
       return (e: InputEvent) => {
-        if (!e.data) return
+        if (!e.data || props.readonly) return
         const inputElement = e.target as HTMLInputElement
         const { value: existingTxt, selectionStart, selectionEnd } = inputElement ?? {}
 
@@ -225,6 +233,7 @@ export const VTimePickerControls = genericComponent()({
     }
 
     function setPeriod (val: Period) {
+      if (props.readonly) return
       emit('update:period', val)
     }
 
@@ -273,12 +282,14 @@ export const VTimePickerControls = genericComponent()({
               active={ props.viewMode === 'hour' }
               color={ props.color }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               label={ t('$vuetify.timePicker.hour') }
               showHint={ props.inputHints }
               error={ isHourValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
               modelValue={ hour.value }
               onUpdate:modelValue={ v => hour.value = v }
-              onKeydown={ onHourFieldKeydown }
+              onKeydown={ onArrowKey(stepHour) }
+              onWheel={ onWheel(stepHour) }
               onBeforeinput={ hourInputFilter }
               onFocus={ () => emit('update:viewMode', 'hour') }
             />
@@ -290,12 +301,14 @@ export const VTimePickerControls = genericComponent()({
               active={ props.viewMode === 'minute' }
               color={ props.color }
               disabled={ props.disabled }
+              readonly={ props.readonly }
               label={ t('$vuetify.timePicker.minute') }
               showHint={ props.inputHints }
               error={ isMinuteValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
               modelValue={ minute.value }
               onUpdate:modelValue={ v => minute.value = v }
-              onKeydown={ onMinuteFieldKeydown }
+              onKeydown={ onArrowKey(stepMinute) }
+              onWheel={ onWheel(stepMinute) }
               onBeforeinput={ minuteInputFilter }
               onFocus={ () => emit('update:viewMode', 'minute') }
             />
@@ -312,12 +325,14 @@ export const VTimePickerControls = genericComponent()({
                   active={ props.viewMode === 'second' }
                   color={ props.color }
                   disabled={ props.disabled }
+                  readonly={ props.readonly }
                   label={ t('$vuetify.timePicker.second') }
                   showHint={ props.inputHints }
                   error={ isSecondValid.value ? undefined : t('$vuetify.timePicker.notAllowed') }
                   modelValue={ second.value }
                   onUpdate:modelValue={ v => second.value = v }
-                  onKeydown={ onSecondFieldKeydown }
+                  onKeydown={ onArrowKey(stepSecond) }
+                  onWheel={ onWheel(stepSecond) }
                   onBeforeinput={ secondInputFilter }
                   onFocus={ () => emit('update:viewMode', 'second') }
                 />

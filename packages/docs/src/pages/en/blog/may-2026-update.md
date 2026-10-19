@@ -57,7 +57,6 @@ May was our busiest framework month of the year so far, and nearly all of it poi
   * [Out of Labs](#out-of-labs)
   * [New Features](#new-features)
   * [Bug Fixes](#bug-fixes)
-  * [In Development](#in-development)
 * [Vuetify0 Progress Update](#vuetify0-progress)
 * [Product Updates](#product-updates)
 * [May 2026 Changelog](#may-2026-changelog)
@@ -378,7 +377,7 @@ The following section provides an overview of the changes made in May 2026 acros
 
 ---
 
-## What's Next { .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 June stabilizes what May opened. **Vuetify 4.1** moves toward its stable release, with a final round of VSwitch MD3 work, VExpansionPanel focus polish, and the SSR and focus-trap fixes that landed late in the month. **Vuetify0** reached [beta on June 2](/blog/announcing-vuetify0-beta/) with its API frozen — from here the focus is edge cases, documentation, and the road to v1.0 in July. And the **theme**, **locale**, and **date** v0 migrations in the framework now have a frozen target to build against.
 

@@ -134,6 +134,15 @@ export default {
       item: 'Beoordeling {0} van {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opties',
+  },
   loading: 'Bezig met laden...',
   infiniteScroll: {
     loadMore: 'Meer laden',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pauzeren',
     seek: 'Zoeken',
     volume: 'Volume',
-    showVolume: 'Volumeregeling weergeven',
     mute: 'Dempen',
     unmute: 'Dempen opheffen',
     enterFullscreen: 'Volledig scherm',

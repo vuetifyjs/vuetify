@@ -69,7 +69,7 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### Font Awesome
 
-[Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#install-font-awesome-5-icons)
+[Font Awesome](https://fontawesome.com/icons/) is also supported. Simply use the `fa-` prefixed icon name. Please note that you still need to include the Font Awesome icons in your project. For more information on how to install it, please navigate to the [installation page](/features/icon-fonts#font-awesome)
 
 ::: info
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)
@@ -79,7 +79,7 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### Material Design
 
-[Material Design](https://fonts.google.com/icons) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#install-material-icons)
+[Material Design](https://fonts.google.com/icons) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#material-icons)
 
 ::: info
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)
@@ -89,7 +89,7 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### MDI SVG
 
-You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. Read more about using them [here](/features/icon-fonts#material-design-icons-js-svg).
+You can manually import only the icons you use when using the [@mdi/js](https://www.npmjs.com/package/@mdi/js) package. Read more about using them [here](/features/icon-fonts#mdi-js-svg).
 
 ::: info
   Note that this example is using an icon set prefix, because the default icon set in the documentation is `mdi`. You can read more about using multiple icon sets [here](/features/icon-fonts/#multiple-icon-sets)

@@ -6,16 +6,17 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeSizeProps } from '@/composables/size'
+import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, nextTick, ref, shallowRef, useId } from 'vue'
+import { computed, nextTick, ref, shallowRef, toRef, useId } from 'vue'
 import { clamp, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -45,6 +46,8 @@ type VRatingSlots = {
   'item-label': VRatingItemLabelSlot
 }
 
+const iconScale = { default: 1 / 2, comfortable: 2 / 3, compact: 6 / 7 }
+
 export const makeVRatingProps = propsFactory({
   name: String,
   itemAriaLabel: {
@@ -65,6 +68,7 @@ export const makeVRatingProps = propsFactory({
   },
   halfIncrements: Boolean,
   hover: Boolean,
+  iconSize: [Number, String],
   length: {
     type: [Number, String],
     default: 5,
@@ -101,6 +105,16 @@ export const VRating = genericComponent<VRatingSlots>()({
   setup (props, { slots }) {
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
+    const { sizeStyles } = useSize(props)
+
+    provideDefaults({
+      VIcon: {
+        size: toRef(() => props.iconSize ?? (
+          sizeStyles.value && `calc(${sizeStyles.value.height} * ${iconScale[props.density ?? 'default']})`
+        )),
+      },
+    })
+
     const root = ref<HTMLElement>()
     const rating = useProxiedModel(props, 'modelValue')
     const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, Number(props.length)))

@@ -134,6 +134,15 @@ export default {
       item: 'דירוג {0} מתוך {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'מינימום',
+      end: 'מקסימום',
+    },
+  },
+  splitBtn: {
+    menu: 'אפשרויות נוספות',
+  },
   loading: 'טוען...',
   infiniteScroll: {
     loadMore: 'טען עוד',
@@ -179,7 +188,6 @@ export default {
     pause: 'השהה',
     seek: 'חפש',
     volume: 'עוצמת שמע',
-    showVolume: 'הצג בקרת עוצמת שמע',
     mute: 'השתק',
     unmute: 'בטל השתקה',
     enterFullscreen: 'מסך מלא',

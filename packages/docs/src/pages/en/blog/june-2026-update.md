@@ -53,13 +53,11 @@ Where May was a feature sprint, June was about making that work solid. **52 comm
   * [Key Improvements](#key-improvements)
 * [Spotlight: Vuetify 4.1 Goes Stable](#vuetify-4-1)
 * [Framework Updates](#framework-updates)
-  * [New Features](#new-features)
   * [Bug Fixes](#bug-fixes)
   * [In Development](#in-development)
 * [A side-effect of security focus](#security-focus)
 * [Vuetify0 Progress Update](#vuetify0-progress)
 * [Product Updates](#product-updates)
-* [June 2026 Changelog](#june-2026-changelog)
 * [What's Next](#whats-next)
   * [Looking Further Ahead](#looking-ahead)
 
@@ -80,7 +78,7 @@ We shipped **four framework releases**. [v4.0.9](/getting-started/release-notes/
 * **[VOverlay](/components/overlays/)** — a handful of location fixes after introducing edge snapping ([#22921](https://github.com/vuetifyjs/vuetify/pull/22921)), iOS keyboard attachment ([#22923](https://github.com/vuetifyjs/vuetify/pull/22923)), finished by restoring `calc()`/`min()`/`vw` support for sizing
 * **Forced-colors mode** — `VHeatmap` and `VHighlight` now render correctly for people relying on forced high-contrast override
 
-View the complete list of changes in the [Full Changelog](#june-2026-changelog).
+View the complete list of changes in the [Full Changelog](/getting-started/release-notes/).
 
 **Details:**
 
@@ -196,7 +194,7 @@ The [Nuxt Module](https://github.com/vuetifyjs/nuxt-module) continued its march 
 
 ---
 
-## What's Next { .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 July finishes the year's first arc. **Vuetify0** reaches **v1.0**, ending the beta and giving the framework a stable foundation to migrate onto. **Vuetify 4.1** continues its patch cadence, with the `rules` promotion and more overlay and treeview polish already queued. And with a v0 v1 in hand, the **theme**, **locale**, and **date** migrations move from planning to real work.
 

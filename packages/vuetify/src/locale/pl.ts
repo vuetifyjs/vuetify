@@ -134,6 +134,15 @@ export default {
       item: 'Ocena {0} na {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Więcej opcji',
+  },
   loading: 'Wczytywanie danych...',
   infiniteScroll: {
     loadMore: 'Wczytaj więcej',
@@ -179,7 +188,6 @@ export default {
     pause: 'Wstrzymaj',
     seek: 'Przewiń',
     volume: 'Głośność',
-    showVolume: 'Pokaż regulację głośności',
     mute: 'Wycisz',
     unmute: 'Wyłącz wyciszenie',
     enterFullscreen: 'Pełny ekran',

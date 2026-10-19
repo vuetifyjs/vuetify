@@ -77,3 +77,13 @@ describe('VCheckbox exposed focus', () => {
     expect(cmp.value.validate()).toBeInstanceOf(Promise)
   })
 })
+
+describe('VCheckbox description', () => {
+  it('should describe the input with the description first, then messages', async () => {
+    render(() => <VCheckbox description="Description" hint="Hint" label="Label" persistentHint />)
+    await waitIdle()
+
+    const ids = screen.getByRole('checkbox').getAttribute('aria-describedby')!.split(' ')
+    expect(ids.map(id => document.getElementById(id)?.textContent)).toEqual(['Description', 'Hint'])
+  })
+})

@@ -44,6 +44,7 @@ const aliases: IconAliases = {
   plus: 'mdi-plus',
   minus: 'mdi-minus',
   calendar: 'mdi-calendar',
+  clock: 'mdi-clock-outline',
   treeviewCollapse: 'mdi-menu-down',
   treeviewExpand: 'mdi-menu-right',
   tableGroupCollapse: 'mdi-chevron-down',

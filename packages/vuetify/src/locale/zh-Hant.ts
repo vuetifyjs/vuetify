@@ -134,6 +134,15 @@ export default {
       item: '評分 {0} / {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小值',
+      end: '最大值',
+    },
+  },
+  splitBtn: {
+    menu: '更多選項',
+  },
   loading: '載入中...',
   infiniteScroll: {
     loadMore: '載入更多',
@@ -179,7 +188,6 @@ export default {
     pause: '暫停',
     seek: '搜尋',
     volume: '音量',
-    showVolume: '顯示音量控制',
     mute: '靜音',
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',

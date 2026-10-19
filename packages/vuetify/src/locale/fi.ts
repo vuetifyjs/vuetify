@@ -134,6 +134,15 @@ export default {
       item: 'Luokitus {0}/{1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimi',
+      end: 'Maksimi',
+    },
+  },
+  splitBtn: {
+    menu: 'Lisää vaihtoehtoja',
+  },
   loading: 'Ladataan...',
   infiniteScroll: {
     loadMore: 'Lataa lisää',
@@ -179,7 +188,6 @@ export default {
     pause: 'Tauko',
     seek: 'Hae',
     volume: 'Äänenvoimakkuus',
-    showVolume: 'Näytä äänenvoimakkuuden säädin',
     mute: 'Mykistä',
     unmute: 'Poista mykistys',
     enterFullscreen: 'Koko näyttö',

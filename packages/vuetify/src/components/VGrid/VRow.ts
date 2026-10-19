@@ -4,6 +4,7 @@ import './VGrid.sass'
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
+import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -31,6 +32,10 @@ const propMap = {
   justify: ['justify', 'justifySm', 'justifyMd', 'justifyLg', 'justifyXl', 'justifyXxl'],
   alignContent: ['alignContent', 'alignContentSm', 'alignContentMd', 'alignContentLg', 'alignContentXl', 'alignContentXxl'],
 }
+
+const gapProps = ['gap', 'gapSm', 'gapMd', 'gapLg', 'gapXl', 'gapXxl'] as const
+
+type Gap = number | string | (string | number)[]
 
 const classMap = {
   align: 'align',
@@ -94,7 +99,12 @@ export const makeVRowProps = propsFactory({
   alignContentXxl: { type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>, default: null, validator: alignContentValidator },
 
   noGutters: Boolean,
-  gap: [Number, String, Array] as PropType<number | string | (string | number)[]>,
+  gap: [Number, String, Array] as PropType<Gap>,
+  gapSm: [Number, String, Array] as PropType<Gap>,
+  gapMd: [Number, String, Array] as PropType<Gap>,
+  gapLg: [Number, String, Array] as PropType<Gap>,
+  gapXl: [Number, String, Array] as PropType<Gap>,
+  gapXxl: [Number, String, Array] as PropType<Gap>,
   size: [Number, String],
   ...makeComponentProps(),
   ...makeDensityProps(),
@@ -137,30 +147,30 @@ export const VRow = genericComponent()({
       return classList
     })
 
-    const horizontalGap = computed(() => {
-      return (Array.isArray(props.gap))
-        ? convertToUnit(props.gap[0] || 0)
-        : convertToUnit(props.gap)
-    })
-
-    const verticalGap = computed(() => {
-      return (Array.isArray(props.gap))
-        ? convertToUnit(props.gap[1] || 0)
-        : horizontalGap.value
-    })
+    const gaps = computed(() => gapProps.flatMap((prop, i) => {
+      const value = props[prop]
+      if (value == null) return []
+      const infix = i ? `-${breakpoints[i - 1]}` : ''
+      const [x, y] = Array.isArray(value) ? [value[0] || 0, value[1] || 0] : [value, value]
+      return [{
+        class: `v-row--gap${infix}`,
+        style: {
+          [`--v-row-gap-x${infix}`]: convertToUnit(x),
+          [`--v-row-gap-y${infix}`]: convertToUnit(y),
+        },
+      }]
+    }))
 
     return () => h(props.tag, {
       class: [
         'v-row',
         classes.value,
+        gaps.value.map(gap => gap.class),
         props.class,
       ],
       style: [
-        {
-          '--v-col-gap-x': horizontalGap.value,
-          '--v-col-gap-y': verticalGap.value,
-          '--v-row-columns': props.size,
-        },
+        { '--v-row-columns': props.size },
+        gaps.value.map(gap => gap.style),
         props.style,
       ],
     }, slots.default?.())

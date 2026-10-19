@@ -50,6 +50,7 @@ export interface IconAliases {
   plus: IconValue
   minus: IconValue
   calendar: IconValue
+  clock: IconValue
   treeviewCollapse: IconValue
   treeviewExpand: IconValue
   eyeDropper: IconValue

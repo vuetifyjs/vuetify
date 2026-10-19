@@ -36,6 +36,59 @@ describe('VSlider', () => {
     expect(model.value).toBeDefined()
   })
 
+  it.each(['default', 'pill'] as const)('should fill track from the end when reversed (%s)', async variant => {
+    render(() => <VSlider variant={ variant } modelValue={ 30 } reverse />)
+
+    const track = screen.getByCSS('.v-slider-track').getBoundingClientRect()
+    const fill = screen.getByCSS('.v-slider-track__fill').getBoundingClientRect()
+
+    expect(fill.right).toBeCloseTo(track.right, 0)
+    expect(fill.width).toBeLessThan(track.width / 2)
+  })
+
+  it.each(['default', 'pill'] as const)('should fill track from the center to the thumb when centered (%s)', async variant => {
+    render(() => <VSlider variant={ variant } modelValue={ 20 } centered />)
+
+    const track = screen.getByCSS('.v-slider-track').getBoundingClientRect()
+    const fill = screen.getByCSS('.v-slider-track__fill').getBoundingClientRect()
+    const center = track.left + track.width / 2
+
+    expect(fill.left).toBeGreaterThan(track.left + track.width * 0.15)
+    expect(fill.right).toBeLessThanOrEqual(center)
+    expect(fill.right).toBeGreaterThan(center - 8)
+  })
+
+  it('should treat reverse bound to undefined as not reversed', async () => {
+    render(() => <VSlider modelValue={ 20 } reverse={ undefined } />)
+
+    expect(screen.getByCSS('.v-slider-thumb').style.getPropertyValue('--v-slider-thumb-position')).toBe('20%')
+  })
+
+  it('should show focus ring only after keyboard interaction', async () => {
+    render(() => <VSlider />)
+
+    await userEvent.click(screen.getByCSS('.v-slider-track'))
+    await expect.element(screen.getByCSS('.v-slider-thumb')).toHaveFocus()
+    expect(screen.getByCSS('.v-slider-thumb')).not.toHaveClass('v-slider-thumb--focus-visible')
+
+    await userEvent.keyboard('{ArrowRight}')
+    await expect.element(screen.getByCSS('.v-slider-thumb')).toHaveClass('v-slider-thumb--focus-visible')
+
+    await userEvent.click(screen.getByCSS('.v-slider-thumb'))
+    await expect.element(screen.getByCSS('.v-slider-thumb')).not.toHaveClass('v-slider-thumb--focus-visible')
+  })
+
+  it('should move inner icon past the thumb when the fill is too short', async () => {
+    const model = ref(50)
+    render(() => <VSlider v-model={ model.value } variant="pill" prependInnerIcon="$minus" />)
+
+    const icon = screen.getByCSS('.v-slider__inner-icon')
+    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--flipped')
+
+    model.value = 2
+    await expect.element(icon).toHaveClass('v-slider__inner-icon--flipped')
+  })
+
   it('should allow user to drag thumb', async () => {
     const model = ref()
     render(() => <VSlider v-model={ model.value } />)

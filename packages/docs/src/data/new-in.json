@@ -60,6 +60,11 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBottomSheet": {
+    "props": {
+      "contextMenu": "4.3.0"
+    }
+  },
   "VBreadcrumbsItem": {
     "props": {
       "width": "3.11.0",
@@ -81,13 +86,15 @@
   },
   "VBtnGroup": {
     "props": {
+      "connected": "4.3.0",
       "size": "4.2.0"
     }
   },
   "VCarousel": {
     "props": {
       "crossfade": "3.10.0",
-      "transitionDuration": "3.10.0"
+      "transitionDuration": "3.10.0",
+      "pauseOnHover": "4.3.0"
     },
     "examples": {
       "misc-vertical": "3.9.0",
@@ -104,6 +111,12 @@
     }
   },
   "VCheckbox": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -111,6 +124,12 @@
     }
   },
   "VCheckboxBtn": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -198,7 +217,8 @@
       "landscape": "3.11.0",
       "landscapeHeaderWidth": "3.11.0",
       "noAutoNavigation": "4.1.0",
-      "noMonthPicker": "3.11.0"
+      "noMonthPicker": "3.11.0",
+      "wheel": "4.3.0"
     },
     "slots": {
       "controls": "3.11.0"
@@ -312,6 +332,7 @@
   "VDialog": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -372,6 +393,11 @@
       "opacity": "3.8.0"
     }
   },
+  "VIconBtn": {
+    "props": {
+      "widthVariant": "4.3.0"
+    }
+  },
   "VImg": {
     "props": {
       "position": "3.4.0",
@@ -397,6 +423,9 @@
       "indent": "3.11.0",
       "itemsRegistration": "3.11.0",
       "prependGap": "3.11.0"
+    },
+    "exposed": {
+      "activeDescendant": "4.3.0"
     }
   },
   "VListItem": {
@@ -409,6 +438,7 @@
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
@@ -416,6 +446,7 @@
       "viewportMargin": "3.11.0"
     },
     "examples": {
+      "prop-context-menu": "4.3.0",
       "prop-submenu": "3.7.0"
     }
   },
@@ -456,6 +487,7 @@
   "VOverlay": {
     "props": {
       "captureFocus": "3.11.0",
+      "contextMenu": "4.3.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -466,11 +498,18 @@
       "hideTitle": "3.10.0"
     }
   },
+  "VProgress": {
+    "examples": {
+      "misc-loading-indicator": "4.3.0"
+    }
+  },
   "VProgressCircular": {
     "props": {
       "reveal": "3.12.0",
       "rounded": "3.11.0",
-      "transition": "4.2.0"
+      "shape": "4.3.0",
+      "transition": "4.2.0",
+      "variant": "4.3.0"
     },
     "examples": {
       "prop-reveal": "3.12.0",
@@ -483,6 +522,8 @@
       "chunkGap": "3.10.0",
       "chunkWidth": "3.10.0",
       "reveal": "4.2.0",
+      "shape": "4.3.0",
+      "stopIndicator": "4.3.0",
       "transition": "4.2.0",
       "variant": "4.1.0"
     },
@@ -492,6 +533,12 @@
     }
   },
   "VRadio": {
+    "props": {
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0",
@@ -508,8 +555,31 @@
       "isFocused": "4.3.0"
     }
   },
+  "VRangeSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
+    "props": {
+      "endThumbAriaLabel": "4.3.0",
+      "size": "4.3.0",
+      "startThumbAriaLabel": "4.3.0",
+      "thumbGap": "4.3.0",
+      "valueFormat": "4.3.0",
+      "variant": "4.3.0"
+    }
+  },
+  "VRating": {
+    "props": {
+      "iconSize": "4.3.0"
+    }
+  },
   "VRow": {
     "props": {
+      "gapSm": "4.3.0",
+      "gapMd": "4.3.0",
+      "gapLg": "4.3.0",
+      "gapXl": "4.3.0",
+      "gapXxl": "4.3.0",
       "size": "4.0.0"
     }
   },
@@ -539,7 +609,11 @@
   "VSelectionControl": {
     "props": {
       "indeterminate": "4.1.0",
-      "indeterminateIcon": "4.1.0"
+      "indeterminateIcon": "4.1.0",
+      "description": "4.3.0"
+    },
+    "slots": {
+      "description": "4.3.0"
     },
     "exposed": {
       "blur": "4.3.0",
@@ -561,9 +635,25 @@
     }
   },
   "VSlider": {
+    "examples": {
+      "prop-value-format": "4.3.0"
+    },
     "events": {
       "start": "3.2.0",
       "end": "3.2.0"
+    },
+    "props": {
+      "appendInnerIcon": "4.3.0",
+      "centered": "4.3.0",
+      "prependInnerIcon": "4.3.0",
+      "size": "4.3.0",
+      "thumbGap": "4.3.0",
+      "valueFormat": "4.3.0",
+      "variant": "4.3.0"
+    },
+    "slots": {
+      "append-inner": "4.3.0",
+      "prepend-inner": "4.3.0"
     }
   },
   "VSlideGroup": {
@@ -622,6 +712,11 @@
       "prop-transition": "4.0.0"
     }
   },
+  "VSpeedDial": {
+    "props": {
+      "contextMenu": "4.3.0"
+    }
+  },
   "VSparkline": {
     "props": {
       "animation": "4.1.0",
@@ -652,12 +747,14 @@
   "VSwitch": {
     "props": {
       "size": "4.1.0",
-      "thumbColor": "4.1.0"
+      "thumbColor": "4.1.0",
+      "description": "4.3.0"
     },
     "slots": {
       "thumb": "3.5.0",
       "track-false": "3.5.0",
-      "track-true": "3.5.0"
+      "track-true": "3.5.0",
+      "description": "4.3.0"
     },
     "exposed": {
       "blur": "4.3.0",

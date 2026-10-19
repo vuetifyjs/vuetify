@@ -2,7 +2,7 @@
 import './VCommandPalette.scss'
 
 // Components
-import { VCommandPaletteSymbol } from './shared'
+import { listItemKeys, VCommandPaletteSymbol } from './shared'
 import { VCommandPaletteItem } from './VCommandPaletteItem'
 import { VDialog } from '@/components/VDialog'
 import { makeVDialogProps } from '@/components/VDialog/VDialog'
@@ -19,9 +19,17 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onUnmounted, provide, ref, shallowRef, toRef, useId, watch, watchEffect } from 'vue'
 import { isActionItem } from './types'
-import { convertToUnit, genericComponent, getActiveElement, isFunction, omit, propsFactory, useRender } from '@/util'
+import {
+  convertToUnit,
+  genericComponent,
+  getActiveElement,
+  omit,
+  pick,
+  propsFactory,
+  useRender,
+} from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -66,7 +74,7 @@ export const makeVCommandPaletteProps = propsFactory({
     maxWidth: 500,
     origin: 'top center' as const,
     viewportMargin: 16,
-  }), ['modelValue']),
+  }), ['contextMenu', 'modelValue']),
 }, 'VCommandPalette')
 
 export type VCommandPaletteSlots = {
@@ -74,12 +82,12 @@ export type VCommandPaletteSlots = {
   default: never
   prepend: never
   append: never
-  input: never
+  input: { props: Record<string, unknown> }
   'input.append-inner': never
   'no-data': never
   'list.prepend': never
   'list.subheader': VListChildrenSlots<any>['subheader']
-  item: { item: VCommandPaletteItemType, index: number }
+  item: { item: VCommandPaletteItemType, index: number, props: Record<string, unknown> }
   'item.prepend': { item: VCommandPaletteItemType, index: number }
   'item.title': { item: VCommandPaletteItemType, index: number }
   'item.append': { item: VCommandPaletteItemType, index: number }
@@ -105,8 +113,10 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
     const { t } = useLocale()
     const isOpen = useProxiedModel(props, 'modelValue')
     const searchQuery = useProxiedModel(props, 'search') as Ref<string>
-    const searchInputRef = ref<VTextField>()
+    const inputContainerRef = ref<HTMLElement>()
     const dialogRef = ref<VDialog>()
+    const listRef = ref<VList>()
+    const listId = `v-command-palette-list-${useId()}`
     const previouslyFocusedElement = shallowRef<HTMLElement | null>(null)
 
     const internalItems = computed(() =>
@@ -257,9 +267,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
         // Use requestAnimationFrame to ensure DOM is fully rendered
         nextTick(() => {
           requestAnimationFrame(() => {
-            if (searchInputRef.value && isFunction(searchInputRef.value.focus)) {
-              searchInputRef.value.focus()
-            }
+            inputContainerRef.value?.querySelector<HTMLElement>('[autofocus]')?.focus()
           })
         })
       } else if (!newValue && oldValue) {
@@ -277,6 +285,16 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
 
     useRender(() => {
       const dialogProps = VDialog.filterProps(omit(props, ['modelValue', 'class', 'style']))
+      const hasResults = filteredItems.value.length > 0
+      const inputProps = {
+        role: 'combobox',
+        'aria-expanded': hasResults,
+        'aria-controls': hasResults ? listId : undefined,
+        'aria-autocomplete': 'list',
+        'aria-activedescendant': listRef.value?.activeDescendant,
+        autofocus: true,
+        onKeydown: handleSearchKeydown,
+      }
 
       return (
         <VDialog
@@ -298,35 +316,34 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
               >
                 { slots.prepend?.() }
 
-              <div class="v-command-palette__input-container">
-                { slots.input?.() ?? (
-                  <VTextField
-                    ref={ searchInputRef }
-                    v-model={ searchQuery.value }
-                    density={ props.density }
-                    placeholder={ t(props.placeholder) }
-                    prependInnerIcon={ props.inputIcon }
-                    autocomplete="off"
-                    autofocus
-                    singleLine
-                    hideDetails
-                    variant="solo"
-                    flat
-                    bgColor="transparent"
-                    onKeydown={ handleSearchKeydown }
-                    v-slots={{
-                      'append-inner': slots['input.append-inner'],
-                    }}
-                  />
-                )}
-              </div>
+                <div ref={ inputContainerRef } class="v-command-palette__input-container">
+                  { slots.input?.({ props: inputProps }) ?? (
+                    <VTextField
+                      v-model={ searchQuery.value }
+                      density={ props.density }
+                      placeholder={ t(props.placeholder) }
+                      prependInnerIcon={ props.inputIcon }
+                      autocomplete="off"
+                      singleLine
+                      hideDetails
+                      variant="solo"
+                      flat
+                      bgColor="transparent"
+                      { ...inputProps }
+                      v-slots={{
+                        'append-inner': slots['input.append-inner'],
+                      }}
+                    />
+                  )}
+                </div>
 
                 <div class="v-command-palette__content">
                   { slots['list.prepend']?.() }
 
-                  { filteredItems.value.length > 0 ? (
+                  { hasResults ? (
                     <VList
                       key="list"
+                      ref={ listRef }
                       class="v-command-palette__list v-list--navigable"
                       density={ props.density }
                       items={ itemsForList.value }
@@ -334,32 +351,47 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       itemProps
                       activatable
                       { ...props.listProps }
+                      id={ listId }
                       navigationStrategy="track"
                       navigationIndex={ navigation.selectedIndex.value }
                       onUpdate:navigationIndex={ navigation.setSelectedIndex }
                       v-slots={{
                         subheader: slots['list.subheader'],
-                        item: ({ props: itemProps }: { props: any }) => (
-                          slots.item?.({ item: itemProps, index: itemProps.index }) ?? (
+                        item: ({ props: itemProps }: { props: any }) => {
+                          const item = filteredItems.value[itemProps.index]
+
+                          function execute (event: MouseEvent | KeyboardEvent) {
+                            navigation.execute(itemProps.index, event)
+                          }
+
+                          return slots.item?.({
+                            item,
+                            index: itemProps.index,
+                            props: {
+                              ...pick(itemProps, listItemKeys),
+                              index: itemProps.index,
+                              onClick: execute,
+                            },
+                          }) ?? (
                             <VCommandPaletteItem
                               key={ `item-${itemProps.index}` }
                               item={ itemProps }
                               index={ itemProps.index }
-                              onExecute={ (event: MouseEvent | KeyboardEvent) => navigation.execute(itemProps.index, event) }
+                              onExecute={ execute }
                               v-slots={{
                                 prepend: slots['item.prepend']
-                                  ? () => slots['item.prepend']?.({ item: itemProps, index: itemProps.index })
+                                  ? () => slots['item.prepend']?.({ item, index: itemProps.index })
                                   : undefined,
                                 title: slots['item.title']
-                                  ? () => slots['item.title']?.({ item: itemProps, index: itemProps.index })
+                                  ? () => slots['item.title']?.({ item, index: itemProps.index })
                                   : undefined,
                                 append: slots['item.append']
-                                  ? () => slots['item.append']?.({ item: itemProps, index: itemProps.index })
+                                  ? () => slots['item.append']?.({ item, index: itemProps.index })
                                   : undefined,
                               }}
                             />
                           )
-                        ),
+                        },
                       }}
                     />
                   ) : (

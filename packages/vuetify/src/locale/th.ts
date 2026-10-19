@@ -134,6 +134,15 @@ export default {
       item: 'คะแนน {0} จาก {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'ต่ำสุด',
+      end: 'สูงสุด',
+    },
+  },
+  splitBtn: {
+    menu: 'ตัวเลือกเพิ่มเติม',
+  },
   loading: 'กำลังโหลด...',
   infiniteScroll: {
     loadMore: 'โหลดเพิ่มเติม',
@@ -179,7 +188,6 @@ export default {
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',
     volume: 'ระดับเสียง',
-    showVolume: 'แสดงตัวควบคุมระดับเสียง',
     mute: 'ปิดเสียง',
     unmute: 'เปิดเสียง',
     enterFullscreen: 'เต็มหน้าจอ',

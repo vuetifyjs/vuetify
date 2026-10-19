@@ -13,11 +13,13 @@ $date-picker-header-height: 70px !default;
 
 $date-picker-month-btn-height: 24px !default;
 $date-picker-month-btn-size: 0.875rem !default;
+$date-picker-month-day-btn-size: 36px !default;
 $date-picker-month-column-gap: 4px !default;
 $date-picker-month-cell-padding: math.div($date-picker-month-column-gap, 2) !default;
 $date-picker-month-day-size: 40px !default;
 $date-picker-month-font-size: 0.875rem !default;
 $date-picker-month-padding: 0 12px 8px !default;
+$date-picker-month-weeks-min-width: calc(2ch + #{2 * $date-picker-month-cell-padding}) !default;
 
 $date-picker-months-grid-gap: 0px 24px !default;
 $date-picker-months-height: 288px !default;

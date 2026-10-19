@@ -23,3 +23,16 @@ export function dateSegments (order: string, separator: string, fixYear?: (year:
     value[key],
   ])
 }
+
+export function timeSegments ({ hour12, useSeconds }: { hour12?: boolean, useSeconds?: boolean } = {}): Segment[] {
+  const hour: ValueSegment = hour12
+    ? { type: 'value', key: 'h', size: 2, min: 1, max: 12 }
+    : { type: 'value', key: 'h', size: 2, max: 23 }
+
+  return [
+    hour,
+    { type: 'separator', value: ':' },
+    { type: 'value', key: 'm', size: 2, max: 59 },
+    ...useSeconds ? [{ type: 'separator', value: ':' } as const, { type: 'value', key: 's', size: 2, max: 59 } as const] : [],
+  ]
+}

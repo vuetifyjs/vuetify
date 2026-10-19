@@ -124,7 +124,6 @@
             if (search.name && !item.name.toLowerCase().includes(search.name.toLowerCase())) {
               return false
             }
-            // eslint-disable-next-line sonarjs/prefer-single-boolean-return
             if (search.calories && !(item.calories >= Number(search.calories))) {
               return false
             }
@@ -276,7 +275,6 @@
               return false
             }
 
-            // eslint-disable-next-line sonarjs/prefer-single-boolean-return
             if (search.calories && !(item.calories >= Number(search.calories))) {
               return false
             }

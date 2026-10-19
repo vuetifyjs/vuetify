@@ -403,7 +403,7 @@ All four component features below shipped in **v3.13.0**; the v4 equivalents are
 
 ---
 
-## What's Next { .mt-4 }
+## What's Next { #whats-next .mt-4 }
 
 August turns back to features. The [v4.2.0 milestone](https://github.com/vuetifyjs/vuetify/milestone/90) is dated **September 1st** — the MD3 button alignment, VSlider's `pill` variant, VTimePicker keyboard controls, and VMaskInput's dynamic masks are all queued against it. Expect the v4.1 patch line to keep running underneath it.
 

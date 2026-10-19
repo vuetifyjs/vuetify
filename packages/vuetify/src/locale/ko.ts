@@ -134,6 +134,15 @@ export default {
       item: '{1} 중 {0} 점',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '최소',
+      end: '최대',
+    },
+  },
+  splitBtn: {
+    menu: '추가 옵션',
+  },
   loading: '불러오는 중...',
   infiniteScroll: {
     loadMore: '더 불러오기',
@@ -179,7 +188,6 @@ export default {
     pause: '일시정지',
     seek: '탐색',
     volume: '볼륨',
-    showVolume: '볼륨 조절 표시',
     mute: '음소거',
     unmute: '음소거 해제',
     enterFullscreen: '전체 화면',

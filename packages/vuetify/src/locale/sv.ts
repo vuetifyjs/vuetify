@@ -134,6 +134,15 @@ export default {
       item: 'Betyg {0} av {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Fler alternativ',
+  },
   loading: 'Laddar...',
   infiniteScroll: {
     loadMore: 'Ladda fler',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pausa',
     seek: 'Sök',
     volume: 'Volym',
-    showVolume: 'Visa volymkontroll',
     mute: 'Stäng av ljud',
     unmute: 'Slå på ljud',
     enterFullscreen: 'Helskärm',

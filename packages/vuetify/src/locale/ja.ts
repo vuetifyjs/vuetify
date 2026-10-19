@@ -134,6 +134,15 @@ export default {
       item: '評価 {1} のうち {0}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小',
+      end: '最大',
+    },
+  },
+  splitBtn: {
+    menu: 'その他のオプション',
+  },
   loading: 'ロード中...',
   infiniteScroll: {
     loadMore: 'さらに読み込む',
@@ -179,7 +188,6 @@ export default {
     pause: '一時停止',
     seek: 'シーク',
     volume: '音量',
-    showVolume: '音量コントロールを表示',
     mute: 'ミュート',
     unmute: 'ミュート解除',
     enterFullscreen: '全画面表示',

@@ -134,6 +134,15 @@ export default {
       item: 'Hinnang {0} {1}st',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Miinimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Rohkem valikuid',
+  },
   loading: 'Laadimine...',
   infiniteScroll: {
     loadMore: 'Laadi rohkem',
@@ -179,7 +188,6 @@ export default {
     pause: 'Peata',
     seek: 'Otsi',
     volume: 'Helitugevus',
-    showVolume: 'Näita helitugevuse regulaatorit',
     mute: 'Vaigista',
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',

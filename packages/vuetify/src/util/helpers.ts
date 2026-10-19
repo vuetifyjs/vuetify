@@ -367,12 +367,12 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N
 export function wrapInArray<T> (
   v: T | null | undefined
 ): T extends readonly any[]
-    ? IfAny<T, T[], T>
-    : NonNullable<T>[] {
+  ? IfAny<T, T[], T>
+  : NonNullable<T>[] {
   return isNullOrUndefined(v)
     ? [] as any
     : Array.isArray(v)
@@ -401,6 +401,16 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
 
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
+}
+
+export type ValueFormat = string | ((ctx: { value: number, max: number, percent: number }) => string)
+
+export function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
+  if (isFunction(format)) return format({ value, max, percent })
+  return format
+    .replaceAll('[value]', String(value))
+    .replaceAll('[max]', String(max))
+    .replaceAll('[percent]', String(Math.round(percent)))
 }
 
 export function getDecimals (value: number) {

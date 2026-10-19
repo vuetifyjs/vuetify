@@ -569,6 +569,6 @@ safelist: [
 
 ::: warning
 
-Vuetify's original `bg-*` utilities automatically set a contrasting foreground color via `--v-theme-on-*`. Replacing them with UnoCSS utilities removes this safeguard — you are responsible for choosing legible text colors. See [Limitations](/features/css-utilities/#limitations).
+Vuetify's original `bg-*` utilities automatically set a contrasting foreground color via `--v-theme-on-*`. Replacing them with UnoCSS utilities removes this safeguard — you are responsible for choosing legible text colors. See [Limitations](/features/css-utilities/overview/#limitations).
 
 :::

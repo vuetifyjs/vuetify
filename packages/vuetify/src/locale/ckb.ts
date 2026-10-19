@@ -134,6 +134,15 @@ export default {
       item: 'هەڵسەنگاندن {0} لە {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'کەمترین',
+      end: 'زۆرترین',
+    },
+  },
+  splitBtn: {
+    menu: 'بژاردەی زیاتر',
+  },
   loading: 'بارکردن...',
   infiniteScroll: {
     loadMore: 'زیاتر باربکە',
@@ -179,7 +188,6 @@ export default {
     pause: 'ڕاگرتن',
     seek: 'گەڕان',
     volume: 'دەنگ',
-    showVolume: 'پیشاندانی کۆنترۆڵی دەنگ',
     mute: 'بێدەنگکردن',
     unmute: 'لە بێدەنگی دەرهێنان',
     enterFullscreen: 'پڕ بە شاشە',

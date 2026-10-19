@@ -19,3 +19,7 @@
     &__next,
     &__last
       margin: $pagination-item-margin
+
+    @each $name, $height in $pagination-btn-sizes
+      .v-btn--size-#{$name}
+        --v-btn-height: #{$height}

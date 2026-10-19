@@ -134,6 +134,15 @@ export default {
       item: 'Hodnocení {0} z {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Další možnosti',
+  },
   loading: 'Načítám...',
   infiniteScroll: {
     loadMore: 'Načíst více',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pozastavit',
     seek: 'Vyhledat',
     volume: 'Hlasitost',
-    showVolume: 'Zobrazit ovládání hlasitosti',
     mute: 'Ztlumit',
     unmute: 'Zrušit ztlumení',
     enterFullscreen: 'Celá obrazovka',

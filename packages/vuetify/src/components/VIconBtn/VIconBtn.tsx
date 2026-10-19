@@ -13,13 +13,14 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeIconSizeProps, useIconSizes } from '@/composables/iconSizes'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { predefinedSizes } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { toDisplayString } from 'vue'
-import { convertToUnit, genericComponent, isBoolean, propsFactory, useRender } from '@/util'
+import { convertToUnit, deprecate, genericComponent, includes, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,6 +33,7 @@ export type VIconBtnSlots = {
 }
 
 export type VIconBtnSizes = 'x-small' | 'small' | 'default' | 'large' | 'x-large'
+export type VIconBtnWidthVariant = 'default' | 'narrow' | 'wide'
 
 export const makeVIconBtnProps = propsFactory({
   active: {
@@ -59,25 +61,20 @@ export const makeVIconBtnProps = propsFactory({
     type: [Number, String] as PropType<VIconBtnSizes | number | string>,
     default: 'default',
   },
-  sizes: {
-    type: Array as PropType<[VIconBtnSizes, number][]>,
-    default: () => ([
-      ['x-small', 16],
-      ['small', 24],
-      ['default', 40],
-      ['large', 48],
-      ['x-large', 56],
-    ]),
-  },
+  sizes: Array as PropType<[VIconBtnSizes, number][]>,
   text: {
     type: [String, Number, Boolean],
     default: undefined,
+  },
+  widthVariant: {
+    type: String as PropType<VIconBtnWidthVariant>,
+    default: 'default',
   },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeElevationProps(),
-  ...makeIconSizeProps(),
+  ...makeIconSizeProps({ iconSizes: undefined }),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
@@ -118,6 +115,10 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       })(),
     }))
 
+    if (props.sizes) {
+      deprecate('sizes', '$icon-btn-named-sizes')
+    }
+
     const btnSizeMap = new Map(props.sizes)
 
     function onClick () {
@@ -135,13 +136,17 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
       const icon = isActive.value ? props.activeIcon ?? props.icon : props.icon
 
       const _btnSize = props.size as VIconBtnSizes
-      const hasNamedSize = btnSizeMap.has(_btnSize)
-      const btnSize = hasNamedSize ? btnSizeMap.get(_btnSize) : _btnSize
+      const isNamedSize = includes(predefinedSizes, _btnSize)
+      const btnSize = isNamedSize ? btnSizeMap.get(_btnSize) : _btnSize
       const btnHeight = props.height ?? btnSize
       const btnWidth = props.width ?? btnSize
-      const { iconSize } = useIconSizes(props, () => new Map(props.iconSizes).get(_btnSize))
+      const { iconSize } = useIconSizes(props, () => props.iconSizes
+        ? new Map(props.iconSizes).get(_btnSize)
+        : isNamedSize ? _btnSize : undefined
+      )
 
       const iconProps = {
+        class: 'v-icon-btn__icon',
         icon,
         size: iconSize.value,
         color: props.iconColor,
@@ -158,6 +163,7 @@ export const VIconBtn = genericComponent<VIconBtnSlots>()({
               'v-icon-btn--disabled': props.disabled,
               'v-icon-btn--loading': props.loading,
               'v-icon-btn--readonly': props.readonly,
+              [`v-icon-btn--width-${props.widthVariant}`]: props.widthVariant !== 'default',
               [`v-icon-btn--${props.size}`]: true,
             },
             themeClasses.value,

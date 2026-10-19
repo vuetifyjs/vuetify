@@ -1,3 +1,4 @@
+@use 'sass:list';
 @use 'sass:math';
 @use 'sass:map';
 @use 'sass:meta';
@@ -22,6 +23,93 @@
       padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
     }
   }
+}
+
+@mixin button-named-sizes () {
+  $required-keys: height, typography, padding-inline, icon-size, border-radius, border-radius-pressed;
+  $keys: list.join($required-keys, (min-width, icon-gap));
+  $typography-keys: size, weight, line-height, letter-spacing, font-family;
+
+  @each $name in map.keys($button-named-sizes) {
+    @if not map.has-key(settings.$size-scales, $name) {
+      @error '$button-named-sizes: unknown size `#{$name}`, use one of: #{map.keys(settings.$size-scales)}';
+    }
+  }
+
+  @each $name in map.keys(settings.$size-scales) {
+    $tokens: map.get($button-named-sizes, $name);
+    @if not $tokens {
+      @error '$button-named-sizes: missing size `#{$name}`';
+    }
+    @each $key in $required-keys {
+      @if not map.has-key($tokens, $key) {
+        @error '$button-named-sizes: missing key `#{$key}` in `#{$name}`';
+      }
+    }
+    @each $key, $value in $tokens {
+      @if not list.index($keys, $key) {
+        @error '$button-named-sizes: unsupported key `#{$key}` in `#{$name}`, use one of: #{$keys}';
+      }
+    }
+
+    $typography: map.get($tokens, 'typography');
+    @if meta.type-of($typography) == 'string' {
+      @if not map.has-key(settings.$typography, $typography) {
+        @error '$button-named-sizes: unknown typography `#{$typography}` in `#{$name}`, use a key of $typography';
+      }
+      $typography: map.get(settings.$typography, $typography);
+    }
+    @if not map.has-key($typography, 'size') {
+      @error '$button-named-sizes: missing key `typography.size` in `#{$name}`';
+    }
+    @each $key, $value in $typography {
+      @if not list.index($typography-keys, $key) {
+        @error '$button-named-sizes: unsupported key `typography.#{$key}` in `#{$name}`, use one of: #{$typography-keys}';
+      }
+    }
+
+    .v-btn--size-#{$name} {
+      --v-btn-size: #{map.get($typography, 'size')};
+
+      @each $key, $value in map.remove($tokens, 'typography') {
+        --v-btn-#{$key}: #{$value};
+      }
+
+      font-family: map.get($typography, 'font-family');
+      font-weight: map.get($typography, 'weight');
+      letter-spacing: map.get($typography, 'letter-spacing');
+      line-height: map.get($typography, 'line-height');
+    }
+
+    $icon-size: map.get($icon-btn-named-sizes, $name, 'icon-size');
+    @if $icon-size {
+      .v-btn--icon.v-btn--size-#{$name} {
+        --v-btn-icon-size: #{$icon-size};
+      }
+    }
+  }
+
+  .v-btn {
+    border-radius: var(--v-btn-border-radius);
+    font-size: var(--v-btn-size);
+    min-width: var(--v-btn-min-width, 0);
+    padding: 0 var(--v-btn-padding-inline);
+
+    &:active {
+      border-radius: var(--v-btn-border-radius-pressed);
+    }
+
+    .v-icon--size-default {
+      font-size: var(--v-btn-icon-size);
+    }
+  }
+}
+
+@function button-icon-densities () {
+  @if $button-named-sizes == () {
+    @return $button-icon-density;
+  }
+  @return $button-density;
 }
 
 @mixin button-density ($properties, $densities) {

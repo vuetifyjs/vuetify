@@ -134,6 +134,15 @@ export default {
       item: 'Оцінка {0} з {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Мінімум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Більше параметрів',
+  },
   loading: 'Завантаження...',
   infiniteScroll: {
     loadMore: 'Завантажити більше',
@@ -179,7 +188,6 @@ export default {
     pause: 'Пауза',
     seek: 'Позиція відтворення',
     volume: 'Гучність',
-    showVolume: 'Показати регулятор гучності',
     mute: 'Вимкнути звук',
     unmute: 'Увімкнути звук',
     enterFullscreen: 'На весь екран',

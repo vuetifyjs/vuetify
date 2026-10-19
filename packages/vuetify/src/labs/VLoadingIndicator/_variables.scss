@@ -1,0 +1,20 @@
+$loading-indicator-container-opacity: var(--v-activated-opacity) !default;
+$loading-indicator-forced-colors-stroke-width: 2px !default;
+
+$loading-indicator-size: 48px !default;
+$loading-indicator-sizes: (
+  'x-small': -2,
+  'small': -1,
+  'default': 0,
+  'large': 2,
+  'x-large': 4
+) !default;
+
+$loading-indicator-shape-size: 62.5% !default;
+$loading-indicator-shape-sizes: (
+  'x-small': 24px,
+  'small': 32px,
+  'default': 38px,
+  'large': 40px,
+  'x-large': 50px
+) !default;

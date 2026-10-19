@@ -134,6 +134,15 @@ export default {
       item: 'Anmeldelse {0} av {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Flere alternativer',
+  },
   loading: 'Laster...',
   infiniteScroll: {
     loadMore: 'Last flere',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pause',
     seek: 'Søk',
     volume: 'Volum',
-    showVolume: 'Vis volumkontroll',
     mute: ' Demp',
     unmute: 'Slå på lyd',
     enterFullscreen: 'Fullskjerm',

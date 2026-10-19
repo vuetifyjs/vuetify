@@ -12,6 +12,9 @@ $btn-group-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)
 $btn-group-height: 48px !default;
 $btn-group-elevation: 0 !default;
 $btn-group-tile-border-radius: 0 !default;
+$btn-group-connected-gap: 2px !default;
+$btn-group-expand-ratio: .05 !default;
+$btn-group-named-sizes: () !default;
 
 // Lists
 $btn-group-border: (

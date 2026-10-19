@@ -343,6 +343,7 @@ const allowedRefs = [
   'CalendarDaySlotScope',
   'CalendarEventParsed',
   'CalendarEventVisual',
+  'VVideoAction',
 ]
 
 // Types that displayed without their generic arguments

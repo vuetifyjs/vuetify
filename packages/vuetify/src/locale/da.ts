@@ -134,6 +134,15 @@ export default {
       item: 'Bedømmelse {0} af {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Flere muligheder',
+  },
   loading: 'Indlæser...',
   infiniteScroll: {
     loadMore: 'Indlæs mere',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pause',
     seek: 'Søg',
     volume: 'Lydstyrke',
-    showVolume: 'Vis lydstyrkekontrol',
     mute: 'Slå lyd fra',
     unmute: 'Slå lyd til',
     enterFullscreen: 'Fuld skærm',

@@ -5,14 +5,18 @@
     "noKeyboard": "**FOR INTERNAL USE ONLY** Ignore keyboard events.",
     "reverse": "Reverses the slider direction.",
     "showTicks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
+    "size": "Sets the MD3 size of the **pill** variant: track, handle, corner radius and inner icon size.",
     "step": "If greater than 0, sets step interval for ticks.",
     "thumbColor": "Sets the thumb and thumb label color.",
+    "thumbGap": "Space between the handle and the track segments in the **pill** variant.",
     "thumbLabel": "Show thumb label. If `true` it shows label when using slider. If set to `'always'` it always shows label. Use `'hover'` to show label when hovering over the thumb.",
-    "thumbSize": "Controls the size of the thumb label.",
+    "thumbSize": "Controls the size of the thumb.",
     "ticks": "Show track ticks. If `true` it shows ticks when using slider. If set to `'always'` it always shows ticks.",
     "tickSize": "Controls the size of **ticks**",
     "trackColor": "Sets the track's color",
     "trackFillColor": "Sets the track's fill color",
-    "trackSize": "Sets the track's size (height)."
+    "trackSize": "Sets the track's size (height). In the **pill** variant it overrides only the track; the rest still follows **size**.",
+    "valueFormat": "Formatter for the thumb label and `aria-valuetext`. Use `[value]`, `[max]` and `[percent]` as placeholders in strings, or pass a function that receives `{ value, max, percent }` and returns a string.",
+    "variant": "`pill` follows MD3 with a thick track, a bar-shaped thumb and gaps on both sides of it."
   }
 }

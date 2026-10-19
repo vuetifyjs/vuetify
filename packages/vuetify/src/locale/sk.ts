@@ -134,6 +134,15 @@ export default {
       item: 'Hodnotenie {0} z {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Ďalšie možnosti',
+  },
   loading: 'Načítavam...',
   infiniteScroll: {
     loadMore: 'Načítať viac',
@@ -179,7 +188,6 @@ export default {
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',
     volume: 'Hlasitosť',
-    showVolume: 'Zobraziť ovládanie hlasitosti',
     mute: 'Stlmiť',
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',
