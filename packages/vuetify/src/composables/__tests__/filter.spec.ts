@@ -233,7 +233,8 @@ describe('filter', () => {
     it('should order by prefix tier, then filter key order, within groups', () => {
       const items = ref(transformItems(itemProps, [
         { title: 'Gibraltar' },
-        { title: 'Hidden', aliases: ['Brisk'] },
+        { title: 'Big Brother' },
+        { title: 'Hidden', aliases: ['Secret', 'Brisk'] },
         { title: 'United Kingdom', aliases: ['UK', 'Great Britain'] },
         { title: 'Brazil' },
         { title: 'BR' },
@@ -249,6 +250,7 @@ describe('filter', () => {
         'BR',
         'Brazil',
         'Hidden',
+        'Big Brother',
         'United Kingdom',
         'Gibraltar',
         'Other',

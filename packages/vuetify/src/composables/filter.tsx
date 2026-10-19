@@ -195,10 +195,17 @@ export function filterItems (
 
 const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
 
-function prefixRank (value: string, ranges: FilterMatchArrayMultiple) {
-  if (ranges.some(([start, end]) => start === 0 && end === value.length)) return 0
-  if (ranges.some(([start]) => start === 0)) return 1
-  return ranges.some(([start]) => WORD_BOUNDARY.test(value[start - 1])) ? 2 : 3
+function prefixRank (value: unknown, ranges: FilterMatchArrayMultiple) {
+  let offset = 0
+  const spans = (Array.isArray(value) ? value : [value]).map(part => {
+    const start = offset
+    offset += String(part ?? '').length + 1
+    return [start, offset - 1] as const
+  })
+  if (ranges.some(([start, end]) => spans.some(span => span[0] === start && span[1] === end))) return 0
+  if (ranges.some(([start]) => spans.some(span => span[0] === start))) return 1
+  const text = String(value)
+  return ranges.some(([start]) => WORD_BOUNDARY.test(text[start - 1])) ? 2 : 3
 }
 
 function sortByPrefix (
@@ -218,7 +225,7 @@ function sortByPrefix (
       const [rank, keyIndex] = keys.reduce<[number, number]>((best, key, index) => {
         const ranges = result.matches[key]
         if (!ranges) return best
-        const keyRank = prefixRank(String(isObject(item) ? getPropertyFromItem(transformed, key) : item), ranges)
+        const keyRank = prefixRank(isObject(item) ? getPropertyFromItem(transformed, key) : item, ranges)
         return keyRank < best[0] ? [keyRank, index] : best
       }, [4, keys.length])
 
