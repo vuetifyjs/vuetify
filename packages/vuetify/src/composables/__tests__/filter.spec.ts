@@ -229,5 +229,29 @@ describe('filter', () => {
 
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
     })
+
+    it('should order by prefix tier across filter keys within groups', () => {
+      const items = ref(transformItems(itemProps, [
+        { title: 'Gibraltar' },
+        { title: 'United Kingdom', aliases: ['UK', 'Great Britain'] },
+        { title: 'Brazil' },
+        { type: 'subheader', title: 'Other' },
+        { title: 'Tom Brown' },
+        { title: 'Abra' },
+        { title: 'Smith-Brooks' },
+      ]))
+      const props = { filterKeys: ['title', 'raw.aliases'], filteredOrder: 'prefix' as const }
+      const { filteredItems } = useFilter(props, items, ref('br'))
+
+      expect(filteredItems.value.map(item => item.title)).toEqual([
+        'Brazil',
+        'United Kingdom',
+        'Gibraltar',
+        'Other',
+        'Tom Brown',
+        'Smith-Brooks',
+        'Abra',
+      ])
+    })
   })
 })

@@ -32,12 +32,14 @@ export type FilterFunction = (value: string, query: string, item?: InternalItem)
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
+export type FilteredOrder = 'none' | 'prefix'
 
 export interface FilterProps {
   customFilter?: FilterFunction
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  filteredOrder?: FilteredOrder
   ignoreAccents?: IgnoreAccents
   noFilter?: boolean
 }
@@ -191,6 +193,33 @@ export function filterItems (
   return array
 }
 
+const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
+
+function prefixRank (value: string, ranges?: FilterMatchArrayMultiple) {
+  if (!ranges) return 3
+  if (ranges.some(([start]) => start === 0)) return 0
+  return ranges.some(([start]) => WORD_BOUNDARY.test(value[start - 1])) ? 1 : 2
+}
+
+function sortByPrefix (results: FilterResult[], items: Parameters<typeof filterItems>[0]) {
+  let group = 0
+  return results
+    .map(result => {
+      const [item, transformed = item] = wrapInArray(items[result.index]) as readonly [InternalItem, {}]
+      const ranks = Object.entries(result.matches).map(([key, ranges]) => prefixRank(
+        String(isObject(item) ? getPropertyFromItem(transformed, key) : item),
+        ranges,
+      ))
+      return {
+        result,
+        group: result.type ? ++group : group,
+        rank: result.type ? -1 : Math.min(3, ...ranks),
+      }
+    })
+    .sort((a, b) => a.group - b.group || a.rank - b.rank)
+    .map(({ result }) => result)
+}
+
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
@@ -215,7 +244,7 @@ export function useFilter <T extends InternalItem> (
       !isNumber(_query)
     ) ? '' : String(_query)
 
-    const results = filterItems(
+    let results = filterItems(
       transformedItems.value,
       strQuery,
       {
@@ -230,6 +259,10 @@ export function useFilter <T extends InternalItem> (
         noFilter: props.noFilter,
       },
     )
+
+    if (strQuery && props.filteredOrder === 'prefix') {
+      results = sortByPrefix(results, transformedItems.value)
+    }
 
     const originalItems = unref(items)
 

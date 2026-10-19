@@ -73,6 +73,12 @@ When user is typing in the field to narrow the list of options, the input text i
 
 <ExamplesExample file="v-autocomplete/prop-filter-keys" />
 
+#### Filtered order
+
+By default, matching items keep their order from `items`. With `filtered-order="prefix"`, items with a value starting with the query come first, then those with a word starting with it, then the rest. Every key in `filter-keys` counts, including hidden ones such as aliases.
+
+<ExamplesExample file="v-autocomplete/prop-filtered-order" />
+
 #### Ignore accents (i18n)
 
 The **ignore-accents** prop lets a plain query match names written using native language characters.
