@@ -144,7 +144,7 @@ The **timeout** prop closes the alert after the given number of milliseconds. Th
 
 <ExamplesExample file="v-alert/prop-timeout" />
 
-To draw your own indicator, the **close** slot exposes `timerProgress`, the remaining time from 100 to 0.
+To draw your own indicator, the **close** slot exposes `timerProgress`, the remaining time in percent, from 100 down to 0.
 
 ## Additional Examples
 
