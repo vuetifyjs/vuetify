@@ -14,6 +14,7 @@
     "noFullscreen": "Disable fullscreen and hide the default fullscreen button.",
     "rounded": "Applies a border radius to the video container and the controls. Accepts array of two values to customize elements separately.",
     "startAt": "Moves progress to the specified time (in seconds) once the media file is loaded.",
+    "controlsHideDelay": "Hides the playback controls after this many milliseconds of inactivity, even while the cursor remains over the player. Moving the cursor over the player reveals the controls. Set to `0` to disable inactivity-based hiding without changing the existing hover behavior.",
     "controlsProps": "Pass props through to the `v-video-controls` component. Accepts an object with anything from [v-video-controls](/api/v-video-controls/#props) props, camelCase keys are recommended.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "Variant passed to the VVideoControls component."
