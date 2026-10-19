@@ -230,9 +230,10 @@ describe('filter', () => {
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
     })
 
-    it('should order by prefix tier across filter keys within groups', () => {
+    it('should order by prefix tier, then filter key order, within groups', () => {
       const items = ref(transformItems(itemProps, [
         { title: 'Gibraltar' },
+        { title: 'Hidden', aliases: ['Brisk'] },
         { title: 'United Kingdom', aliases: ['UK', 'Great Britain'] },
         { title: 'Brazil' },
         { type: 'subheader', title: 'Other' },
@@ -245,6 +246,7 @@ describe('filter', () => {
 
       expect(filteredItems.value.map(item => item.title)).toEqual([
         'Brazil',
+        'Hidden',
         'United Kingdom',
         'Gibraltar',
         'Other',
