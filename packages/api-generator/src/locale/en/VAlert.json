@@ -14,6 +14,8 @@
     "modelValue": "Controls whether the component is visible or hidden.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
     "tile": "Removes the component's border-radius.",
+    "timeout": "Time (in milliseconds) after which the alert dismisses itself. Use `-1` to keep it open. The countdown starts once the alert is in the viewport and restarts after hover or focus.",
+    "timer": "Displays a countdown for **timeout**: a bar at the `top` or `bottom` edge, or a ring around the close button with `close`.",
     "type": "Create a specialized alert that uses a contextual color and has a pre-defined icon.",
     "width": "Sets the width for the component."
   },

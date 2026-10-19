@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Alerts
   title: Alert component
@@ -136,6 +137,14 @@ The close icon automatically applies a default `aria-label` and is configurable 
 ::: info
   For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
 :::
+
+#### Timeout
+
+The **timeout** prop closes the alert after the given number of milliseconds. The countdown starts once the alert scrolls into view. Hovering or focusing the alert stops it, and it starts over afterwards. Use **timer** to show the remaining time as a bar along the `top` or `bottom` edge, or as a ring around the close button with `close`.
+
+<ExamplesExample file="v-alert/prop-timeout" />
+
+To draw your own indicator, the **close** slot exposes `timerProgress`, the remaining time from 100 to 0.
 
 ## Additional Examples
 
