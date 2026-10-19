@@ -278,6 +278,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     watch(() => props.maxHeight, calculateInputHeight)
     watch(() => props.maxRows, calculateInputHeight)
     watch(() => props.density, calculateInputHeight)
+    watch(capped, calculateInputHeight)
     watch(rows, val => {
       emit('update:rows', val)
     })
