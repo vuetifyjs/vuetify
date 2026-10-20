@@ -11,7 +11,7 @@ related:
 
 # Transitions
 
-Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Most components can have their transition altered through the **transition** prop.
+Smooth animations help make a UI feel great. Using Vue's transition system and re-usable functional components, you can easily control the motion of your application. Many components (like VMenu, VCarousel, VSnackbar, etc.) can have their transition altered through the **transition** prop.
 
 <PageFeatures />
 
@@ -150,6 +150,6 @@ The **createCssTransition** function will return a component that you can use in
 
 ### As a prop
 
-Many of Vuetify’s components contain a **transition** prop. You can send the name of your custom transition to the transition prop.
+The components listed in [Transition prop](#transition-prop) accept a **transition** prop. You can send the name of your custom transition to the transition prop.
 
 <ExamplesExample file="transitions/create-css-transition-prop" />
