@@ -1,0 +1,29 @@
+@use '../../styles/tools'
+
+@include tools.layer('components')
+  .v-time-input input
+    direction: ltr
+
+  // the mask reads its direction off the nearest locale provider, a descendant selector would miss it
+  .v-time-input--rtl
+    input
+      padding-inline-end: var(--v-time-input-hint-width)
+      text-align: right
+
+    .v-time-input__format-hint
+      justify-content: flex-end
+
+  .v-time-input__format-hint
+    align-items: center
+    direction: ltr
+    display: flex
+    inset: 0
+    opacity: var(--v-disabled-opacity)
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    user-select: none
+    white-space: pre
+
+    > span
+      opacity: 0

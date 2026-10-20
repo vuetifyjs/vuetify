@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
@@ -98,8 +98,10 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderTouchstart,
       position,
       trackContainerRef,
+      trackSize,
       disabled,
       readonly,
+      getThumbState,
     } = useSlider({
       props,
       steps,
@@ -171,6 +173,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--focused': isFocused.value,
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': disabled.value,
+              [`v-slider--variant-${props.variant}`]: props.variant !== 'default',
+              [`v-slider--size-${props.size}`]: props.variant === 'pill',
             },
             rtlClasses.value,
             props.class,
@@ -202,6 +206,10 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
+                style={{
+                  '--v-slider-track-size': convertToUnit(trackSize.value),
+                  '--v-slider-thumb-gap': convertToUnit(props.thumbGap),
+                }}
                 role="group"
                 aria-label={ inputAttrs['aria-label'] as string | undefined }
                 aria-labelledby={ (inputAttrs['aria-labelledby'] as string | undefined) ?? (hasLabelElement ? `${id.value}_label` : undefined) }
@@ -230,6 +238,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                   ref={ trackContainerRef }
                   start={ trackStart.value }
                   stop={ trackStop.value }
+                  startThumb={ getThumbState(activeThumbRef.value === startThumbRef.value?.$el) }
+                  stopThumb={ getThumbState(activeThumbRef.value === stopThumbRef.value?.$el) }
                 >
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>

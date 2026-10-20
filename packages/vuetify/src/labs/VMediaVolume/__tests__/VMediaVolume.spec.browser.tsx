@@ -93,7 +93,7 @@ describe('VMediaVolume', () => {
     render(() => <VMediaVolume v-model={ volume.value } inline sliderProps={{ width: 220, maxWidth: 220, thumbSize: 20, step: 1 }} />)
 
     const thumb = () => screen.getByCSS('.v-slider-thumb').getBoundingClientRect()
-    const container = screen.getByCSS('.v-slider__container').getBoundingClientRect()
+    const container = screen.getByCSS('.v-media-volume__slider .v-input__control').getBoundingClientRect()
     expect(thumb().right).toBeCloseTo(container.right, 0)
 
     volume.value = 0

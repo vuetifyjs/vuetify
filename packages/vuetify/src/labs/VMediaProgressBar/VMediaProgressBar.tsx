@@ -83,6 +83,7 @@ export const makeVMediaProgressBarProps = propsFactory({
   disabled: Boolean,
   readonly: Boolean,
   thumb: Boolean,
+  thumbGap: [Number, String],
   thumbSize: [Number, String],
   tooltip: {
     type: [Boolean, Object] as PropType<boolean | {
@@ -362,6 +363,7 @@ export const VMediaProgressBar = genericComponent<VMediaProgressBarSlots>()({
               '--v-media-progress-bar-buffer': `${percent(props.buffer)}%`,
               '--v-media-progress-bar-height': convertToUnit(props.height),
               '--v-media-progress-bar-chapter-gap': convertToUnit(props.chapterGap),
+              '--v-media-progress-bar-thumb-gap': convertToUnit(props.thumbGap),
               '--v-media-progress-bar-thumb-size': convertToUnit(props.thumbSize),
               '--v-media-progress-bar-tooltip-offset': convertToUnit(tooltip.offset),
             },

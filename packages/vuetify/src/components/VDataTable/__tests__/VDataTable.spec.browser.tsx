@@ -235,6 +235,29 @@ describe('VDataTable', () => {
     expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
   })
 
+  it('should select all only filtered items with select-strategy="filtered"', async () => {
+    const selected = ref<string[]>(['Donut'])
+    render(() => (
+      <VDataTable
+        v-model={ selected.value }
+        headers={ DESSERT_HEADERS }
+        items={ DESSERT_ITEMS }
+        itemValue="name"
+        itemsPerPage={ 2 }
+        search="c"
+        selectStrategy="filtered"
+        showSelect
+      />
+    ))
+
+    await userEvent.click(screen.getByCSS('thead .v-selection-control input'))
+    expect(selected.value).toEqual(['Donut', 'Ice cream sandwich', 'Eclair', 'Cupcake', 'Honeycomb'])
+    expect(screen.getByCSS('thead .v-selection-control input')).toBeChecked()
+
+    await userEvent.click(screen.getByCSS('thead .v-selection-control input'))
+    expect(selected.value).toEqual(['Donut'])
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/23123
   it('should keep column cells in place when toggling show-select', async () => {
     const showSelect = ref(false)

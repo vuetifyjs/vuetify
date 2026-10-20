@@ -59,6 +59,7 @@ import {
 import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilteredOrder } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
@@ -80,6 +81,11 @@ export const makeVAutocompleteProps = propsFactory({
   clearOnSelect: Boolean,
   search: String,
   closeOnInputClick: Boolean,
+
+  filteredOrder: {
+    type: String as PropType<FilteredOrder>,
+    default: 'none',
+  },
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),

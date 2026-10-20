@@ -22,6 +22,7 @@
 
   // Elements
   .v-slider__container
+    --v-slider-track-size: #{$slider-track-size}
     position: relative
     min-height: inherit
     width: 100%
@@ -69,3 +70,74 @@
 
   .v-slider__label
     margin-inline-end: $slider-label-margin-end
+
+  // Pill variant
+  @each $name, $tokens in $slider-pill-sizes
+    .v-slider--variant-pill.v-slider--size-#{$name} .v-slider__container
+      --v-slider-track-size: #{map.get($tokens, track-size)}
+      --v-slider-pill-handle-height: #{map.get($tokens, handle-height)}
+      --v-slider-pill-track-radius: #{map.get($tokens, track-radius)}
+      --v-slider-pill-icon-size: #{map.get($tokens, icon-size)}
+
+  // Declared where they are read, so --v-slider-thumb-gap can come from any ancestor
+  .v-slider--variant-pill
+    .v-slider-track,
+    .v-slider__inner-icon
+      --v-slider-pill-idle-clearance: calc(#{$slider-pill-thumb-width} / 2 + var(--v-slider-thumb-gap, #{$slider-pill-thumb-gap}))
+      --v-slider-pill-active-clearance: calc(#{$slider-pill-active-thumb-width} / 2 + var(--v-slider-thumb-gap, #{$slider-pill-thumb-gap}))
+      --v-slider-pill-center-clearance: calc(var(--v-slider-thumb-gap, #{$slider-pill-thumb-gap}) / 2)
+
+  .v-slider--has-prepend-inner.v-slider--variant-pill .v-slider-track__stop--start,
+  .v-slider--has-append-inner.v-slider--variant-pill .v-slider-track__stop--end
+    display: none
+
+  .v-slider--has-prepend-inner,
+  .v-slider--has-append-inner
+    .v-slider__inner-icon
+      position: absolute
+      display: flex
+      align-items: center
+      justify-content: center
+      pointer-events: none
+
+      > .v-icon
+        font-size: var(--v-slider-pill-icon-size)
+
+      &--filled > *
+        color: $slider-pill-inner-icon-filled-color
+
+    &.v-input--horizontal .v-slider__inner-icon
+      inset-block: 0
+      margin-block: auto
+      width: calc(var(--v-slider-pill-icon-size) + #{$slider-pill-inner-icon-inset} * 2)
+      height: var(--v-slider-pill-icon-size)
+
+      &--prepend
+        inset-inline-start: 0
+
+        &.v-slider__inner-icon--flipped
+          inset-inline-start: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
+
+      &--append
+        inset-inline-end: 0
+
+        &.v-slider__inner-icon--flipped
+          inset-inline-end: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
+
+    &.v-input--vertical .v-slider__inner-icon
+      inset-inline: 0
+      margin-inline: auto
+      width: var(--v-slider-pill-icon-size)
+      height: calc(var(--v-slider-pill-icon-size) + #{$slider-pill-inner-icon-inset} * 2)
+
+      &--prepend
+        bottom: 0
+
+        &.v-slider__inner-icon--flipped
+          bottom: calc(var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})
+
+      &--append
+        top: 0
+
+        &.v-slider__inner-icon--flipped
+          top: calc(100% - var(--v-slider-inner-icon-position) + var(--v-slider-pill-idle-clearance) - #{$slider-pill-inner-icon-inset})

@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: File upload
   description: The file upload component is a drag and drop area for uploading files.

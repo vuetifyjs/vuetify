@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Material 3 button sizes
   title: Material Design 3 button sizes

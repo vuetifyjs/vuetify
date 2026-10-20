@@ -19,9 +19,13 @@ function bootstrap (args?: object) {
   } as any
 
   let clickHandler: any
+  let auxclickHandler: any
+  let contextmenuHandler: any
   let mousedownHandler: any
   vi.spyOn(window.document, 'addEventListener').mockImplementation((eventName, eventHandler, options) => {
     if (eventName === 'click') clickHandler = eventHandler
+    if (eventName === 'auxclick') auxclickHandler = eventHandler
+    if (eventName === 'contextmenu') contextmenuHandler = eventHandler
     if (eventName === 'mousedown') mousedownHandler = eventHandler
   })
   vi.spyOn(window.document, 'removeEventListener')
@@ -34,6 +38,8 @@ function bootstrap (args?: object) {
     el: el as HTMLElement,
     el2: el2 as HTMLElement,
     clickHandler,
+    auxclickHandler,
+    contextmenuHandler,
     mousedownHandler,
   }
 }
@@ -55,6 +61,22 @@ describe('v-click-outside', () => {
     clickHandler(event)
     await wait()
     expect(callback).toHaveBeenCalledWith(event)
+  })
+
+  it('should call the callback once on right and middle click', async () => {
+    const { auxclickHandler, contextmenuHandler, mousedownHandler, callback } = bootstrap()
+    const target = document.createElement('div')
+
+    mousedownHandler({ target, button: 2 })
+    contextmenuHandler({ target, button: 2 })
+    auxclickHandler({ target, button: 2 })
+    await wait()
+    expect(callback).toHaveBeenCalledTimes(1)
+
+    mousedownHandler({ target, button: 1 })
+    auxclickHandler({ target, button: 1 })
+    await wait()
+    expect(callback).toHaveBeenCalledTimes(2)
   })
 
   it('should not call the callback when closeConditional returns false', async () => {

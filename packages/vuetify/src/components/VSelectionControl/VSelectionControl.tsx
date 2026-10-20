@@ -52,12 +52,14 @@ export type VSelectionControlSlots = {
     backgroundColorStyles: Ref<CSSProperties>
   }
   label: { label: string | undefined, props: Record<string, unknown> }
+  description: never
   input: SelectionControlSlot
 }
 
 export const makeVSelectionControlProps = propsFactory({
   indeterminate: Boolean,
   label: String,
+  description: String,
   baseColor: String,
   trueValue: null,
   falseValue: null,
@@ -233,6 +235,7 @@ export const VSelectionControl = genericComponent<new <T>(
           // but the internal checked state of the input is still updated,
           // so here its value is restored
           input.value.checked = model.value
+          input.value.indeterminate = props.indeterminate
         }
 
         return
@@ -251,6 +254,8 @@ export const VSelectionControl = genericComponent<new <T>(
           props: { for: id.value },
         })
         : props.label
+      const hasDescription = !!(props.description || slots.description)
+      const descriptionId = `${id.value}-description`
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const inputNode = (
@@ -267,9 +272,18 @@ export const VSelectionControl = genericComponent<new <T>(
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
-          aria-checked={ props.type === 'checkbox' ? model.value : undefined }
+          indeterminate={ props.indeterminate }
           { ...inputAttrs }
+          aria-describedby={
+            [hasDescription && descriptionId, inputAttrs['aria-describedby']].filter(Boolean).join(' ') || undefined
+          }
         />
+      )
+
+      const labelNode = label && (
+        <VLabel for={ id.value } onClick={ onClickLabel }>
+          { label }
+        </VLabel>
       )
 
       return (
@@ -284,6 +298,7 @@ export const VSelectionControl = genericComponent<new <T>(
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
               'v-selection-control--inline': props.inline,
+              'v-selection-control--has-description': hasDescription,
             },
             densityClasses.value,
             props.class,
@@ -336,10 +351,14 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } onClick={ onClickLabel }>
-              { label }
-            </VLabel>
+          { !hasDescription ? labelNode : (
+            <div class="v-selection-control__content">
+              { labelNode }
+
+              <div id={ descriptionId } class="v-selection-control__description">
+                { slots.description?.() ?? props.description }
+              </div>
+            </div>
           )}
         </div>
       )

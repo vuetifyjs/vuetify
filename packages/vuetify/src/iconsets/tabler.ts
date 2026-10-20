@@ -45,6 +45,7 @@ const aliases: IconAliases = {
   plus: 'i-tabler:plus',
   minus: 'i-tabler:minus',
   calendar: 'i-tabler:calendar',
+  clock: 'i-tabler:clock',
   treeviewCollapse: 'i-tabler:chevron-down',
   treeviewExpand: 'i-tabler:chevron-right',
   tableGroupExpand: 'i-tabler:chevron-right',

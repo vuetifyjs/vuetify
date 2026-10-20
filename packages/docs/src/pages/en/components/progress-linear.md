@@ -14,7 +14,7 @@ features:
   github: /components/VProgressLinear/
   label: 'C: VProgressLinear'
   report: true
-  spec: https://m2.material.io/components/progress-indicators
+  spec: https://m3.material.io/components/progress-indicators
 ---
 
 # Progress linear

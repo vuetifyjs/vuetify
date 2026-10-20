@@ -15,11 +15,14 @@
     display: flex
     flex-direction: column
     font-size: $date-picker-month-font-size
+    font-variant-numeric: tabular-nums
+    min-width: $date-picker-month-weeks-min-width
 
   .v-date-picker-month__weekday
     font-size: $date-picker-month-font-size
 
   .v-date-picker-month__days
+    touch-action: pan-y pinch-zoom
     width: 100%
 
   .v-date-picker-month__days-row

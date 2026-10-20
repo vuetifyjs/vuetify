@@ -91,6 +91,7 @@ export {
   mdiCheckBold,
   mdiCheckboxBlankOutline,
   mdiCheckboxMarked,
+  mdiCheckboxBlankCircleOutline,
   mdiCheckboxMarkedCircle,
   mdiCheckCircle,
   mdiApplicationBracketsOutline,

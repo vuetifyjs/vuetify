@@ -13,7 +13,7 @@ features:
   label: 'C: VTabs'
   report: true
   github: /components/VTabs/
-  spec: https://m2.material.io/components/tabs
+  spec: https://m3.material.io/components/tabs
 ---
 
 # Tabs

@@ -266,7 +266,8 @@
       "ripple",
       "scroll",
       "tooltip",
-      "touch"
+      "touch",
+      "touch-hold"
     ]
   },
   {
@@ -313,6 +314,10 @@
       },
       {
         "title": "split-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-inputs",
         "subfolder": "components"
       },
       {

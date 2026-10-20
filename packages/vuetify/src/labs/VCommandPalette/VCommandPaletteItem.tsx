@@ -3,7 +3,8 @@ import { VHotkey } from '@/components/VHotkey'
 import { VListItem } from '@/components/VList'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { listItemKeys } from './shared'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -35,14 +36,8 @@ export const VCommandPaletteItem = genericComponent<VCommandPaletteItemSlots>()(
   setup (props, { slots }) {
     useRender(() => (
       <VListItem
+        { ...pick(props.item, listItemKeys) }
         index={ props.index }
-        value={ props.item.value }
-        title={ props.item.title }
-        subtitle={ props.item.subtitle }
-        prependIcon={ props.item.prependIcon }
-        prependAvatar={ props.item.prependAvatar }
-        appendIcon={ props.item.appendIcon }
-        appendAvatar={ props.item.appendAvatar }
         onClick={ props.onExecute }
         v-slots={{
           prepend: slots.prepend,

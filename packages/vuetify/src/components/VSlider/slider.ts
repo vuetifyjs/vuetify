@@ -19,6 +19,10 @@ export type Tick = {
   label?: string
 }
 
+export type SliderVariant = 'default' | 'pill'
+export type SliderThumbState = 'idle' | 'active'
+export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+
 type SliderProvide = {
   activeThumbRef: Ref<HTMLElement | undefined>
   color: Ref<string | undefined>
@@ -29,6 +33,7 @@ type SliderProvide = {
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
+  focusVisible: Ref<boolean>
   noKeyboard: Ref<boolean>
   numTicks: Ref<number>
   onSliderMousedown: (e: MouseEvent) => void
@@ -42,16 +47,18 @@ type SliderProvide = {
   showTicks: Ref<boolean | 'always'>
   startOffset: Ref<number>
   step: Ref<number>
-  thumbSize: Ref<number>
+  thumbSize: Ref<number | string | undefined>
   thumbColor: Ref<string | undefined>
   thumbLabelColor: Ref<string | undefined>
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
-  trackSize: Ref<number>
+  trackSize: Ref<number | string | undefined>
   ticks: Ref<readonly number[] | Record<string, string> | undefined>
   getValueText: (value: number) => string | undefined
+  getThumbState: (isFocused: boolean) => SliderThumbState
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
+  variant: Ref<SliderVariant>
   vertical: Ref<boolean>
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
@@ -104,10 +111,8 @@ export const makeSliderProps = propsFactory({
     default: undefined,
     validator: (v: any) => isBoolean(v) || v === 'always' || v === 'hover',
   },
-  thumbSize: {
-    type: [Number, String],
-    default: 20,
-  },
+  thumbGap: [Number, String],
+  thumbSize: [Number, String],
   showTicks: {
     type: [Boolean, String] as PropType<boolean | 'always'>,
     default: false,
@@ -123,10 +128,7 @@ export const makeSliderProps = propsFactory({
   color: String,
   trackColor: String,
   trackFillColor: String,
-  trackSize: {
-    type: [Number, String],
-    default: 4,
-  },
+  trackSize: [Number, String],
   direction: {
     type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
@@ -134,6 +136,16 @@ export const makeSliderProps = propsFactory({
   },
   reverse: Boolean,
   noKeyboard: Boolean,
+  size: {
+    type: String as PropType<SliderSize>,
+    default: 'x-small',
+    validator: (v: any) => ['x-small', 'small', 'medium', 'large', 'x-large'].includes(v),
+  },
+  variant: {
+    type: String as PropType<SliderVariant>,
+    default: 'default',
+    validator: (v: any) => ['default', 'pill'].includes(v),
+  },
   valueFormat: [String, Function] as PropType<ValueFormat>,
 
   ...makeRoundedProps(),
@@ -194,15 +206,15 @@ export const useSlider = ({
 }) => {
   const form = useForm(props)
   const { isRtl } = useRtl()
-  const isReversed = toRef(() => props.reverse)
+  const isReversed = toRef(() => !!props.reverse)
   const vertical = computed(() => props.direction === 'vertical')
   const indexFromEnd = computed(() => vertical.value !== isReversed.value)
 
   const { min, max, step, decimals, roundValue } = steps
 
-  const thumbSize = computed(() => parseInt(props.thumbSize, 10))
+  const thumbSize = toRef(() => props.thumbSize)
   const tickSize = computed(() => parseInt(props.tickSize, 10))
-  const trackSize = computed(() => parseInt(props.trackSize, 10))
+  const trackSize = toRef(() => props.trackSize)
   const numTicks = computed(() => (max.value - min.value) / step.value)
 
   const thumbColor = computed(() => props.error || form.isDisabled.value ? undefined : props.thumbColor ?? props.color)
@@ -211,6 +223,11 @@ export const useSlider = ({
   const trackFillColor = computed(() => props.error || form.isDisabled.value ? undefined : props.trackFillColor ?? props.color)
 
   const mousePressed = shallowRef(false)
+  const focusVisible = shallowRef(false)
+
+  function getThumbState (isFocused: boolean): SliderThumbState {
+    return isFocused && (mousePressed.value || focusVisible.value) ? 'active' : 'idle'
+  }
 
   const startOffset = shallowRef(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
@@ -257,6 +274,7 @@ export const useSlider = ({
     if (!activeThumbRef.value) return
 
     mousePressed.value = true
+    focusVisible.value = false
 
     if (activeThumbRef.value.contains(e.target as Node)) {
       startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
@@ -365,7 +383,9 @@ export const useSlider = ({
     disabled: form.isDisabled,
     direction: toRef(() => props.direction),
     elevation: toRef(() => props.elevation),
+    focusVisible,
     getValueText,
+    getThumbState,
     hasLabels,
     isReversed,
     indexFromEnd,
@@ -395,6 +415,7 @@ export const useSlider = ({
     trackContainerRef,
     trackFillColor,
     trackSize,
+    variant: toRef(() => props.variant),
     vertical,
   }
 

@@ -4,6 +4,7 @@
 
 $inner-radius: 2px
 $stop-size: 4px
+$handle-gap: var(--v-media-progress-bar-thumb-gap, #{$media-progress-bar-handle-gap})
 
 // registered so seeking can transition it
 @property --v-media-progress-bar-ratio
@@ -126,7 +127,7 @@ $stop-size: 4px
       --v-media-progress-bar-handle: 0px
       // without a handle the gap closes at both ends, so a full or empty bar has no notch;
       // halving keeps a sliver of fill visible right from the start
-      --v-media-progress-bar-gap: min(#{$media-progress-bar-handle-gap} / 2, var(--v-media-progress-bar-center) / 2, (100cqw - var(--v-media-progress-bar-center)) / 2)
+      --v-media-progress-bar-gap: min(#{$handle-gap} / 2, var(--v-media-progress-bar-center) / 2, (100cqw - var(--v-media-progress-bar-center)) / 2)
       // handle center in track coordinates, same travel as the thumb transform
       --v-media-progress-bar-center: calc(var(--v-media-progress-bar-handle) / 2 + (100cqw - var(--v-media-progress-bar-handle)) * var(--v-media-progress-bar-ratio) / 100)
       --v-media-progress-bar-before: calc(var(--v-media-progress-bar-center) - var(--v-media-progress-bar-handle) / 2 - var(--v-media-progress-bar-gap))
@@ -135,7 +136,7 @@ $stop-size: 4px
 
       &:not(.v-media-progress-bar--disabled):has(> .v-media-progress-bar__rail)
         --v-media-progress-bar-handle: #{$media-progress-bar-handle-width}
-        --v-media-progress-bar-gap: #{$media-progress-bar-handle-gap}
+        --v-media-progress-bar-gap: #{$handle-gap}
 
         &.v-media-progress-bar--dragging,
         &:focus-visible
@@ -146,7 +147,7 @@ $stop-size: 4px
 
       // buffer sits over the background so opacities add up; a mask gap at the buffer end splits them
       .v-media-progress-bar__background
-        --v-media-progress-bar-buffer-gap: clamp(0px, var(--v-media-progress-bar-buffer) - var(--v-media-progress-bar-after), #{$media-progress-bar-handle-gap})
+        --v-media-progress-bar-buffer-gap: clamp(0px, var(--v-media-progress-bar-buffer) - var(--v-media-progress-bar-after), #{$handle-gap})
         clip-path: inset(0 0 0 var(--v-media-progress-bar-after) round $inner-radius)
         mask-image: linear-gradient(90deg, #000 var(--v-media-progress-bar-buffer), transparent var(--v-media-progress-bar-buffer) calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)), #000 calc(var(--v-media-progress-bar-buffer) + var(--v-media-progress-bar-buffer-gap)))
 

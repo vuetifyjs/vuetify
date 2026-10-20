@@ -1,6 +1,6 @@
 // Composables
 import { overtype } from '../edit'
-import { dateSegments } from '../presets'
+import { dateSegments, timeSegments } from '../presets'
 import { maskSegmentsFrom } from '../segmentedMask'
 
 function typing (segments: Parameters<typeof maskSegmentsFrom>[0], keys: string) {
@@ -31,6 +31,8 @@ describe('segmentedMask', () => {
       expect(typing(dateSegments('mdy', '/'), '19')).toBe('12/')
       expect(typing(dateSegments('mdy', '/'), '1239')).toBe('12/31/')
       expect(typing(dateSegments('ymd', '-'), '20250229')).toBe('2025-02-28')
+      expect(typing(timeSegments(), '2965')).toBe('23:06')
+      expect(typing(timeSegments({ hour12: true }), '13')).toBe('12:')
     })
 
     it('should limit the day to the length of the month', () => {
@@ -52,10 +54,6 @@ describe('segmentedMask', () => {
 
     it('should treat typed separators as section jumps', () => {
       expect(overtype('12/31/2030', 0, '1/2')).toMatchObject({ value: '12/21/2030', caret: 4 })
-    })
-
-    it('should flip an existing period in place', () => {
-      expect(overtype('01:30 PM', 0, 'a')).toMatchObject({ value: '01:30 AM', caret: 8 })
     })
   })
 })

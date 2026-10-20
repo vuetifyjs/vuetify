@@ -94,12 +94,13 @@ Use the **item.data-table-select** slot alongside `v-checkbox-btn` to customize 
 
 ### Select strategies
 
-Data-tables support three different select strategies.
+Data-tables support four different select strategies.
 
 |Strategy|Description|
 |-|-|
 |`'single'`|Only a single row can be selected. The select all checkbox in the header is not shown|
 |`'page'`|Multiple rows can be selected. Clicking on the select all checkbox in the header selects all (selectable) rows on the current page|
+|`'filtered'`|Multiple rows can be selected. Clicking on the select all checkbox in the header selects all (selectable) rows matching the current search, across all pages. Selected rows hidden by the search are left untouched|
 |`'all'`|Multiple rows can be selected. Clicking on the select all checkbox in the header selects all (selectable) rows in the entire data set|
 
 <ExamplesExample file="v-data-table/prop-select-strategy" />

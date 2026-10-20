@@ -35,13 +35,7 @@ export function useCommandPaletteNavigation (
   const selectedIndex = ref(0)
   const selectedItemKey = shallowRef<string | undefined>(undefined)
 
-  watch(() => options.filteredItems.value, (newItems, oldItems) => {
-    if (newItems.length === 0) {
-      selectedIndex.value = -1
-      selectedItemKey.value = undefined
-      return
-    }
-
+  watch(() => options.filteredItems.value, newItems => {
     if (selectedItemKey.value !== undefined) {
       const newIndex = newItems.findIndex(item =>
         isActionItem(item) && getItemKey(item) === selectedItemKey.value
@@ -52,15 +46,7 @@ export function useCommandPaletteNavigation (
       }
     }
 
-    const firstSelectableIndex = findFirstSelectableIndex(newItems)
-    if (firstSelectableIndex !== -1) {
-      selectedIndex.value = firstSelectableIndex
-      selectedItemKey.value = getItemKey(newItems[firstSelectableIndex])
-      return
-    }
-
-    selectedIndex.value = 0
-    selectedItemKey.value = undefined
+    reset()
   }, { immediate: true })
 
   function getSelectedItem (): VCommandPaletteItem | undefined {
@@ -83,22 +69,10 @@ export function useCommandPaletteNavigation (
 
   function reset () {
     const items = options.filteredItems.value
-
-    if (items.length === 0) {
-      selectedIndex.value = -1
-      selectedItemKey.value = undefined
-      return
-    }
-
     const firstSelectableIndex = findFirstSelectableIndex(items)
-    if (firstSelectableIndex !== -1) {
-      selectedIndex.value = firstSelectableIndex
-      selectedItemKey.value = getItemKey(items[firstSelectableIndex])
-      return
-    }
 
-    selectedIndex.value = 0
-    selectedItemKey.value = undefined
+    selectedIndex.value = firstSelectableIndex
+    selectedItemKey.value = firstSelectableIndex === -1 ? undefined : getItemKey(items[firstSelectableIndex])
   }
 
   function setSelectedIndex (index: number) {
