@@ -62,7 +62,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
           style={ props.style }
           type="checkbox"
           onUpdate:modelValue={ onChange }
-          aria-checked={ indeterminate.value ? 'mixed' : undefined }
+          indeterminate={ indeterminate.value }
           v-slots={ slots }
         />
       )

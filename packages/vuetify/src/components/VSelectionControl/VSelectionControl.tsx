@@ -235,6 +235,7 @@ export const VSelectionControl = genericComponent<new <T>(
           // but the internal checked state of the input is still updated,
           // so here its value is restored
           input.value.checked = model.value
+          input.value.indeterminate = props.indeterminate
         }
 
         return
@@ -271,7 +272,7 @@ export const VSelectionControl = genericComponent<new <T>(
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
-          aria-checked={ props.type === 'checkbox' ? model.value : undefined }
+          indeterminate={ props.indeterminate }
           { ...inputAttrs }
           aria-describedby={
             [hasDescription && descriptionId, inputAttrs['aria-describedby']].filter(Boolean).join(' ') || undefined
