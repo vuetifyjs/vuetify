@@ -23,9 +23,9 @@
       @include chip-density('height', $chip-density)
 
     @include tools.border($chip-border...)
+    @include tools.variant($chip-variants...)
     @include tools.states('.v-chip__overlay')
     @include tools.rounded($chip-border-radius)
-    @include tools.variant($chip-variants...)
 
     &--border
       border-width: $chip-border-thin-width
@@ -81,8 +81,6 @@
 
   .v-chip__overlay
     background-color: currentColor
-    pointer-events: none
-    opacity: 0
     transition: opacity .2s ease-in-out
     @include tools.absolute()
 
