@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Basics
   title: Data table component
