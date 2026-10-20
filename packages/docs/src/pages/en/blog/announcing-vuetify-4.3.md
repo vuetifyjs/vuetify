@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: Announcing Vuetify v4.3
-  description: Vuetify v4.3 "Paladin" is here, with more control over data tables and forms, new labs components, right-click menus, opt-in Material Design Expressive styles and a more stable layout for SSR.
+  description: Vuetify v4.3 "Paladin" brings data table and form controls, new labs components, right-click menus, opt-in MD Expressive styles and a steadier SSR layout.
   keywords: Vuetify v4.3, Vuetify Paladin, VDataTable, VAutocomplete, VMenu, contextmenu, Material Design Expressive, VBtn, VSlider, VTabs, VSlideGroup, SSR, v-touch-hold, Vuetify0
 ---
 
