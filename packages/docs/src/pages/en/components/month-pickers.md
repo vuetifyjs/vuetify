@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Month pickers
   description: The month picker component allows users to select a specific month and year.

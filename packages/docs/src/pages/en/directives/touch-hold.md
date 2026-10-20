@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Touch hold
   title: Touch hold directive

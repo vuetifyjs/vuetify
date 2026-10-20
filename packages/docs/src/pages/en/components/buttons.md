@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -13,7 +14,7 @@ features:
   github: /components/VBtn/
   label: 'C: VBtn'
   report: true
-  spec: https://m2.material.io/components/buttons
+  spec: https://m3.material.io/components/buttons
 ---
 
 # Buttons

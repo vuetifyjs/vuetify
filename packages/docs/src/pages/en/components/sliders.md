@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Sliders
   title: Slider component
@@ -12,7 +13,7 @@ features:
   label: 'C: VSlider'
   report: true
   github: /components/VSlider/
-  spec: https://m2.material.io/components/sliders
+  spec: https://m3.material.io/components/sliders
 ---
 
 # Sliders

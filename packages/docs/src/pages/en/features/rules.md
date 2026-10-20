@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Validation rules
   title: Validation rules composable

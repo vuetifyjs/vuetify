@@ -14,7 +14,7 @@ features:
   label: 'C: VAutocomplete'
   report: true
   github: /components/VAutocomplete/
-  spec: https://m2.material.io/components/text-fields
+  spec: https://m3.material.io/components/text-fields
 ---
 
 # Autocompletes

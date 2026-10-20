@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Date range pickers
   description: The date range picker component lets users select a start and end date across two adjacent months.

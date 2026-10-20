@@ -8,6 +8,10 @@ related:
   - /components/navigation-drawers/
   - /components/slide-groups/
   - /components/windows/
+features:
+  label: 'D: touch'
+  report: true
+  github: /directives/touch/
 ---
 
 # Touch directive

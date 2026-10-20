@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Click outside
   title: Click outside directive
@@ -8,6 +9,10 @@ related:
   - /components/dialogs/
   - /components/navigation-drawers/
   - /directives/intersect/
+features:
+  label: 'D: click-outside'
+  report: true
+  github: /directives/click-outside/
 ---
 
 # Click outside

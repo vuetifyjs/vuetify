@@ -8,6 +8,11 @@ related:
   - /components/buttons/
   - /components/date-pickers/
   - /components/text-fields/
+features:
+  github: /components/VTimePicker/
+  label: 'C: VTimePicker'
+  report: true
+  spec: https://m3.material.io/components/time-pickers
 ---
 
 # Time pickers

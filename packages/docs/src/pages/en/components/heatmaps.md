@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Heatmaps
   title: Heatmap component
