@@ -2,8 +2,9 @@
 import { VSparklineTooltip } from './VSparklineTooltip'
 
 // Utilities
-import { computed, Fragment, nextTick, ref, shallowRef, useId, watch } from 'vue'
+import { computed, Fragment, inject, nextTick, ref, shallowRef, toRef, useId, watch } from 'vue'
 import { makeLineProps } from './util/line'
+import { indexAt, VSparklineGroupSymbol } from '@/labs/VSparklineGroup/sparklineGroup'
 import { genericComponent, getPropertyFromItem, isBoolean, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 import { easingPatterns, useTransition } from '@/util/easing'
 
@@ -42,6 +43,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
 
   setup (props, { slots, attrs, emit }) {
     const uid = useId()
+    const group = inject(VSparklineGroupSymbol, null)
     const id = computed(() => props.id || `barline-${uid}`)
     const autoDrawDuration = computed(() => Number(props.autoDrawDuration) || 500)
     const hasDrawn = ref(false)
@@ -203,6 +205,15 @@ export const VBarline = genericComponent<VBarlineSlots>()({
     const svgRef = shallowRef<SVGSVGElement | null>(null)
     const currentIndex = shallowRef<number | null>(null)
     const tooltipVisible = shallowRef(false)
+    const isInteractive = toRef(() => group ? group.interactive.value : props.interactive)
+    const listens = toRef(() => props.interactive && !group)
+
+    if (group) {
+      watch(() => group.fraction.value === null ? null : indexAt('bar', bars.value.length, group.fraction.value), index => {
+        currentIndex.value = index
+        emit('update:currentIndex', index)
+      })
+    }
 
     const targetX = shallowRef(0)
     const targetY = shallowRef(0)
@@ -316,12 +327,12 @@ export const VBarline = genericComponent<VBarlineSlots>()({
           <svg
             ref={ svgRef }
             display="block"
-            tabindex={ props.interactive ? 0 : undefined }
-            onMousemove={ props.interactive ? onSvgMousemove : undefined }
-            onMouseleave={ props.interactive ? onSvgMouseleave : undefined }
-            onFocus={ props.interactive ? onSvgFocus : undefined }
-            onBlur={ props.interactive ? onSvgBlur : undefined }
-            onKeydown={ props.interactive ? onSvgKeydown : undefined }
+            tabindex={ listens.value ? 0 : undefined }
+            onMousemove={ listens.value ? onSvgMousemove : undefined }
+            onMouseleave={ listens.value ? onSvgMouseleave : undefined }
+            onFocus={ listens.value ? onSvgFocus : undefined }
+            onBlur={ listens.value ? onSvgBlur : undefined }
+            onKeydown={ listens.value ? onSvgKeydown : undefined }
             { ...attrs }
           >
             <defs>
@@ -380,7 +391,7 @@ export const VBarline = genericComponent<VBarlineSlots>()({
               </g>
             )}
 
-            { props.interactive && currentIndex.value !== null && (
+            { isInteractive.value && currentIndex.value !== null && (
               <rect
                 key="highlight"
                 x={ animatedX.value - offsetX.value }
