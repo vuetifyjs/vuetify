@@ -6,11 +6,13 @@
       </tr>
 
       <tr>
-        <AppMarkup
-          :code="item.formatted"
-          :rounded="false"
-          language="ts"
-        />
+        <td class="pa-0">
+          <AppMarkup
+            :code="item.formatted"
+            :rounded="false"
+            language="ts"
+          />
+        </td>
       </tr>
     </template>
   </ApiApiTable>
