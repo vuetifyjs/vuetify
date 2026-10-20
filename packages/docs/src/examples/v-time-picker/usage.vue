@@ -14,11 +14,11 @@
 <script setup>
   const name = 'v-time-picker'
   const model = ref('default')
-  const options = []
+  const options = ['input']
 
   const props = computed(() => {
     return {
-      //
+      variant: model.value === 'input' ? 'input' : undefined,
     }
   })
 
