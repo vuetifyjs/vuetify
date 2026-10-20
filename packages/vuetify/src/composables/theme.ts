@@ -363,6 +363,7 @@ function getOrCreateStyleElement (id: string, cspNonce?: string) {
 // Composables
 export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = parseThemeOptions(options)
+  const defaultThemes: Record<string, ThemeDefinition | undefined> = genDefaults().themes
   const _name = shallowRef(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
   const systemName = shallowRef('light')
@@ -385,9 +386,18 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
       const merged = mergeDeep(defaultTheme, original) as InternalThemeDefinition
 
+      const variations: Record<string, string> = genVariations(merged.colors, parsedOptions.variations)
+      // A theme's own colors take precedence, but the built-in variations should still be generated
+      for (const key of Object.keys(variations)) {
+        const color = original.colors?.[key]
+        if (color != null && color !== defaultThemes[name]?.colors?.[key]) {
+          delete variations[key]
+        }
+      }
+
       const colors = {
         ...merged.colors,
-        ...genVariations(merged.colors, parsedOptions.variations),
+        ...variations,
       }
 
       acc[name] = {

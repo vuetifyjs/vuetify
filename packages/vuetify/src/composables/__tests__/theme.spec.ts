@@ -147,6 +147,60 @@ describe('createTheme', () => {
     expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
   })
 
+  it('should keep variations that a theme defines itself', async () => {
+    const theme = createTheme({
+      themes: {
+        light: {
+          colors: { 'primary-darken-1': '#00FF00' },
+        },
+        custom: {
+          dark: false,
+          colors: { primary: '#00456C', 'primary-darken-1': '#FF0000' },
+        },
+      },
+      variations: {
+        colors: ['primary'],
+        lighten: 1,
+        darken: 2,
+      },
+    })
+
+    theme.install(app)
+
+    expect(theme.computedThemes.value.light.colors['primary-darken-1']).toBe('#00FF00')
+    expect(theme.computedThemes.value.custom.colors['primary-darken-1']).toBe('#FF0000')
+    expect(theme.computedThemes.value.custom.colors).toHaveProperty('primary-darken-2')
+    expect(theme.computedThemes.value.custom.colors).toHaveProperty('primary-lighten-1')
+  })
+
+  it('should replace built-in variations with generated ones', async () => {
+    const defaults = createTheme({ variations: false })
+    const theme = createTheme({
+      themes: {
+        light: {
+          colors: { primary: '#00456C' },
+        },
+        custom: {
+          dark: false,
+          colors: { primary: '#00456C' },
+        },
+      },
+      variations: {
+        colors: ['primary'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
+
+    theme.install(app)
+
+    const builtIn = defaults.computedThemes.value.light.colors['primary-darken-1']
+    expect(theme.computedThemes.value.light.colors['primary-darken-1']).not.toBe(builtIn)
+    expect(theme.computedThemes.value.custom.colors['primary-darken-1']).not.toBe(builtIn)
+    expect(theme.computedThemes.value.custom.colors['primary-darken-1'])
+      .toBe(theme.computedThemes.value.light.colors['primary-darken-1'])
+  })
+
   it('should carry generated variations into a nested provideTheme current', () => {
     const theme = createTheme({
       defaultTheme: 'light',
