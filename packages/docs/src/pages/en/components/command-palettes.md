@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Command Palettes
   title: Command Palette component

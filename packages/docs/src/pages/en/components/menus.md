@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Menus
   title: Menu component

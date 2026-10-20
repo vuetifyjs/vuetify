@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Theme
   description: Setup your application's theme and supplemental colors in a flash.

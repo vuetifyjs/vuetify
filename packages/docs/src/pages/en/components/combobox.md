@@ -14,7 +14,7 @@ features:
   label: 'C: VCombobox'
   report: true
   github: /components/VCombobox/
-  spec: https://m2.material.io/components/text-fields
+  spec: https://m3.material.io/components/text-fields
 ---
 
 # Combobox

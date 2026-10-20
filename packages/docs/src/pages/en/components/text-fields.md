@@ -12,7 +12,7 @@ features:
   label: 'C: VTextField'
   report: true
   github: /components/VTextField/
-  spec: https://m2.material.io/components/text-fields
+  spec: https://m3.material.io/components/text-fields
 ---
 
 # Text fields

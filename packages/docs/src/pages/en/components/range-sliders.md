@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Range sliders
   title: Range Slider component
@@ -12,7 +13,7 @@ features:
   label: 'C: VRangeSlider'
   report: true
   github: /components/VRangeSlider/
-  spec: https://m2.material.io/components/sliders
+  spec: https://m3.material.io/components/sliders
 ---
 
 # Range Sliders

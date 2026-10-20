@@ -12,7 +12,7 @@ features:
   github: /components/VGrid/
   label: 'C: VGrid'
   report: true
-  spec: https://m2.material.io/design/layout/responsive-layout-grid
+  spec: https://m3.material.io/foundations/layout/grids-spacing
 ---
 
 # Grid system

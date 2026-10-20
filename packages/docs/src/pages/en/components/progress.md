@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress
   title: Progress component
@@ -21,7 +22,7 @@ The `v-progress` component is a unified wrapper for linear and circular progress
 
 ::: warning
 
-This feature was introduced in [v4.0.3](/getting-started/release-notes/?version=v4.0.3). For versions before [v4.3.0](/getting-started/release-notes/?version=v4.3.0) it requires import from `vuetify/labs/VProgress` (labs).
+This feature was introduced in [v4.0.3](/getting-started/release-notes/?version=v4.0.3). Released from labs in [v4.3.0](/getting-started/release-notes/?version=v4.3.0).<br>Versions until **v4.2.6** may require import from `vuetify/labs/VProgress` (labs).
 
 :::
 
