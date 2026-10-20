@@ -258,7 +258,7 @@ export default createVuetify({
 
 ## Split buttons
 
-`$split-btn-named-sizes` sets the paddings and inner corners of [v-split-btn](/components/split-buttons/). It requires `$button-named-sizes` and `$btn-group-named-sizes`. Like groups, split buttons need the **size** prop, add `VSplitBtn: { size: 'default' }` to the global defaults.
+`$split-btn-named-sizes` sets the padding and inner corners of [v-split-btn](/components/split-buttons/). It requires `$button-named-sizes` and `$btn-group-named-sizes`.
 
 | Key                     |                                               |
 |-------------------------|-----------------------------------------------|
