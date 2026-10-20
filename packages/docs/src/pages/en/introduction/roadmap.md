@@ -34,12 +34,12 @@ The following is a list of all planned components for the year 2026.
 
 | Name                                                            | Entering Labs | Production Release |
 |-----------------------------------------------------------------|---------------|--------------------|
-| [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
+| [v-mask-input](/components/mask-inputs/)                        | *             | Q4 2026            |
 | [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
 | [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
-| v-date-time-picker                                              | Q3 2026       | Q4 2026            |
-| v-password-input                                                | Q3 2026       | Q4 2026            |
+| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | *             | Q4 2026            |
+| v-date-time-picker                                              | Q4 2026       | Q4 2026            |
+| v-password-input                                                | Q4 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
@@ -47,15 +47,15 @@ The following is a list of all planned components for the year 2026.
 
 | Name                                                  | Entering Labs | Production Release |
 |-------------------------------------------------------|---------------|--------------------|
-| [v-command-palette](/components/command-palettes)     | *             | Q3 2026            |
-| [v-pie](/components/pie-charts)                       | *             | Q3 2026            |
+| [v-command-palette](/components/command-palettes)     | *             | Q4 2026            |
+| [v-pie](/components/pie-charts)                       | *             | Q4 2026            |
 | [v-video](/components/videos)                         | *             | Q4 2026            |
 | [v-heatmap](/components/heatmaps)                     | *             | Q4 2026            |
 | [v-split-btn](/components/split-buttons)              | *             | Q4 2026            |
 | [v-audio](/components/audio-players)                  | *             | Q4 2026            |
 | [v-infinite-carousel](/components/infinite-carousels) | *             | Q4 2026            |
 | [v-loading-indicator](/components/loading-indicators) | *             | Q4 2026            |
-| v-drag (directive)                                    | Q3 2026       | Q4 2026            |
+| v-drag (directive)                                    | Q4 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
@@ -65,9 +65,9 @@ The following are the already released **minor** and **major** version updates. 
 
 ### v4.3 (Paladin)
 
-<!-- - **Released:** October 2026 -->
-<!-- - **Target Release:** Q4 2026 -->
-<!-- - **Notes:** [v4.3 Release](/getting-started/release-notes/?version=v4.3.0) -->
+- **Released:** October 2026
+- **Target Release:** Q4 2026
+- **Notes:** [v4.3 Release](/getting-started/release-notes/?version=v4.3.0)
 - **Overview:**
   - VNavigationDrawer - `modal` prop and `v-model:expanded`
   - VBtn/VIconBtn/VBtnGroup - opt-in MD3 sizing and radius animation
