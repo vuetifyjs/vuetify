@@ -1,17 +1,6 @@
 {
   "description": "Groups checkboxes with a shared model, label, and validation.",
   "props": {
-    "indeterminateIcon": "The icon used when a checkbox is in the indeterminate state.",
-    "inline": "Displays the checkboxes in a row.",
-    "label": "Text displayed above the checkbox group.",
-    "modelValue": "Selected values from the child `v-checkbox` components.",
-    "rules": "Validation rules evaluated against the group's model value."
-  },
-  "events": {
-    "update:modelValue": "Emitted when the selected values change."
-  },
-  "slots": {
-    "default": "Place `v-checkbox` components here. Each checkbox's **value** is used in the group model.",
-    "label": "Content of the group label."
+    "inline": "Displays the checkboxes in a row."
   }
 }
