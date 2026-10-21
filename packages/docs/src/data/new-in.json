@@ -892,5 +892,10 @@
       "transitionDuration": "3.10.0",
       "wheel": "4.3.0"
     }
+  },
+  "VBottomNavigation": {
+    "props": {
+      "zIndex": "4.3.0"
+    }
   }
 }

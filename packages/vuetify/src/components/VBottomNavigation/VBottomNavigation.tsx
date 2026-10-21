@@ -43,6 +43,9 @@ export const makeVBottomNavigationProps = propsFactory({
     type: Boolean,
     default: true,
   },
+  zIndex: {
+    type: [Number, String],
+  },
 
   ...makeBorderProps(),
   ...makeComponentProps(),
@@ -140,6 +143,7 @@ export const VBottomNavigation = genericComponent<new <T>(
             ssrBootStyles.value,
             roundedStyles.value,
             props.style,
+            props.zIndex != null ? { zIndex: props.zIndex } : undefined,
           ]}
         >
           { slots.default && (
