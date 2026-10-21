@@ -32,6 +32,13 @@ describe('filter', () => {
       expect(defaultFilter(text, query)).toStrictEqual(expected)
     })
 
+    it('matches array elements separately', () => {
+      // @ts-expect-error
+      expect(defaultFilter(['United States', 'America'], ',a')).toBe(-1)
+      // @ts-expect-error
+      expect(defaultFilter(['UK', 'Great Britain'], 'br')).toStrictEqual([[9, 11]])
+    })
+
     it('does not fold accents by default', () => {
       expect(defaultFilter('café', 'cafe')).toBe(-1)
     })

@@ -57,16 +57,29 @@ type FilterResult = {
 }
 
 // Composables
+function getSpans (value: unknown) {
+  let offset = 0
+  return (Array.isArray(value) ? value : [value]).map(part => {
+    const text = String(part ?? '')
+    const start = offset
+    offset += text.length + 1
+    return { text, start, end: start + text.length }
+  })
+}
+
 export function createDefaultFilter (ignoreAccents?: IgnoreAccents): FilterFunction {
+  const options = { ignoreCase: true, ignoreAccents, matchAll: true }
+
   return (value, query) => {
     if (isNullOrUndefined(value) || isNullOrUndefined(query)) return -1
     if (!query.length) return 0
 
-    const ranges = findMatchRanges(value.toString(), query.toString(), {
-      ignoreCase: true,
-      ignoreAccents,
-      matchAll: true,
-    })
+    const search = query.toString()
+    const ranges = Array.isArray(value)
+      ? getSpans(value).flatMap(({ text, start }) => (
+        findMatchRanges(text, search, options).map(([from, to]) => [from + start, to + start] as const)
+      ))
+      : findMatchRanges(value.toString(), search, options)
 
     return ranges.length ? ranges : -1
   }
@@ -196,14 +209,9 @@ export function filterItems (
 const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
 
 function prefixRank (value: unknown, ranges: FilterMatchArrayMultiple) {
-  let offset = 0
-  const spans = (Array.isArray(value) ? value : [value]).map(part => {
-    const start = offset
-    offset += String(part ?? '').length + 1
-    return [start, offset - 1] as const
-  })
-  if (ranges.some(([start, end]) => spans.some(span => span[0] === start && span[1] === end))) return 0
-  if (ranges.some(([start]) => spans.some(span => span[0] === start))) return 1
+  const spans = getSpans(value)
+  if (ranges.some(([start, end]) => spans.some(span => span.start === start && span.end === end))) return 0
+  if (ranges.some(([start]) => spans.some(span => span.start === start))) return 1
   const text = String(value)
   return ranges.some(([start]) => WORD_BOUNDARY.test(text[start - 1])) ? 2 : 3
 }
