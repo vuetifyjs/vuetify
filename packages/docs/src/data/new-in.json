@@ -145,6 +145,25 @@
       "isFocused": "4.3.0"
     }
   },
+  "VCheckboxGroup": {
+    "props": {
+      "inline": "4.4.0",
+      "label": "4.4.0",
+      "modelValue": "4.4.0",
+      "rules": "4.4.0"
+    },
+    "slots": {
+      "default": "4.4.0",
+      "label": "4.4.0"
+    },
+    "events": {
+      "update:modelValue": "4.4.0"
+    },
+    "examples": {
+      "prop-inline": "4.4.0",
+      "prop-rules": "4.4.0"
+    }
+  },
   "VChip": {
     "props": {
       "baseColor": "3.8.0"

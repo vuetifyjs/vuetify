@@ -1,0 +1,8 @@
+@use '../../components/VRadioGroup/variables' as radio-group;
+@use '../../components/VSelectionControl/variables' as selection-control;
+
+$checkbox-group-label-margin-inline-start: radio-group.$radio-group-label-margin-inline-start !default;
+$checkbox-group-label-selection-group-margin-top: radio-group.$radio-group-label-selection-group-margin-top !default;
+$checkbox-group-label-selection-group-padding-inline: radio-group.$radio-group-label-selection-group-padding-inline !default;
+$checkbox-group-density: selection-control.$selection-control-density !default;
+$checkbox-group-control-height: selection-control.$selection-control-size !default;

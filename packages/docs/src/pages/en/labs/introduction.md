@@ -86,6 +86,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-loading-indicator](/components/loading-indicators/) | An indeterminate loader that morphs between shapes          | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
 | [v-split-btn](/components/split-buttons/)            | A primary action with a menu of related actions            | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
 | [v-time-input](/components/time-inputs/)             | A text field with guided typing and a time picker          | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
+| [v-checkbox-group](/components/checkbox-groups/)     | Checkboxes with a shared model, label, and validation      | [v4.4.0](/getting-started/release-notes/?version=v4.4.0)   |
 
 ::: warning
 Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
