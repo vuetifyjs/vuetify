@@ -109,14 +109,13 @@ const router = createRouter({
   async scrollBehavior (to, from, savedPosition) {
     if (appStore.scrolling) return
 
-    let main = IN_BROWSER && document.querySelector('main')
+    const initial = !IN_BROWSER || !document.querySelector('main')
     // For default & hash navigation
     let wait = 0
 
-    if (!main) {
+    if (initial) {
       // For initial page load
       wait = 1500
-      main = document.querySelector('main')
     } else if (to.path !== from.path && to.hash) {
       // For cross page navigation
       wait = 500
@@ -125,10 +124,11 @@ const router = createRouter({
     await (new Promise(resolve => setTimeout(resolve, wait)))
 
     if (to.hash) {
+      const main = document.querySelector('main')
       return {
         el: to.hash,
-        behavior: main && !PREFERS_REDUCED_MOTION() ? 'smooth' : undefined,
-        top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+        behavior: !initial && !PREFERS_REDUCED_MOTION() ? 'smooth' : undefined,
+        top: (main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0) + 40,
       }
     } else if (savedPosition) return savedPosition
     else return { top: 0 }
