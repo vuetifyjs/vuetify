@@ -71,6 +71,8 @@ Use **inline** to display the checkboxes in a row.
 
 ### Validation
 
-The group's **rules** receive the selected values array. Use a group rule to validate the selection as a whole, such as requiring at least one option. Validation messages appear below the group, and the component can be used inside [v-form](/components/forms/).
+The group's **rules** receive the selected values array. Use group rules to validate the selection count. Validation messages appear below the group, and the component can be used inside [v-form](/components/forms/).
+
+This example requires 1 to 3 of the 6 topics to be selected. Selecting a fourth topic updates the model and displays a validation error.
 
 <ExamplesExample file="v-checkbox-group/prop-rules" />
