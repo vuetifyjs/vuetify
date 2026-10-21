@@ -1,6 +1,7 @@
 {
   "description": "Groups checkboxes with a shared model, label, and validation.",
   "props": {
+    "indeterminateIcon": "The icon used when a checkbox is in the indeterminate state.",
     "inline": "Displays the checkboxes in a row.",
     "label": "Text displayed above the checkbox group.",
     "modelValue": "Selected values from the child `v-checkbox` components.",
