@@ -155,4 +155,20 @@ describe('VRadioGroup', () => {
     await userEvent.click(radios[1])
     expect(onUpdate).toHaveBeenCalledTimes(2)
   })
+
+  it('should submit the selection to a form outside of the group', () => {
+    render(() => (
+      <>
+        <form id="outside" />
+        <VRadioGroup form="outside" name="car" modelValue="b">
+          <VRadio label="A" value="a" />
+          <VRadio label="B" value="b" />
+        </VRadioGroup>
+      </>
+    ))
+
+    const form = document.getElementById('outside') as HTMLFormElement
+
+    expect([...new FormData(form)]).toEqual([['car', 'b']])
+  })
 })
