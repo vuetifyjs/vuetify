@@ -121,7 +121,10 @@ const router = createRouter({
       wait = 500
     }
 
+    const startY = window.scrollY
     await (new Promise(resolve => setTimeout(resolve, wait)))
+
+    if (Math.abs(window.scrollY - startY) >= 400) return false
 
     if (to.hash) {
       const main = document.querySelector('main')
