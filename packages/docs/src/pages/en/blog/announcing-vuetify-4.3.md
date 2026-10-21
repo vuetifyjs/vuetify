@@ -137,7 +137,7 @@ export default createVuetify({
 ```
 
 ::: info
-The `md3` blueprint will make `VSlider` use the pill variant by default starting in (upcoming) **v4.3.1**.
+The `md3` blueprint will make `VSlider` use the pill variant by default in an upcoming patch.
 :::
 
 ### Button sizes
