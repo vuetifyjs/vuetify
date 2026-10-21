@@ -11,7 +11,7 @@ related:
   - /components/forms/
 features:
   github: /labs/VCheckboxGroup/
-  label: 'C: VCheckbox'
+  label: 'C: VCheckboxGroup'
   report: true
 ---
 
