@@ -3,7 +3,7 @@ layout: blog
 meta:
   title: Announcing Vuetify v4.3
   description: Vuetify v4.3 "Paladin" brings data table and form controls, new labs components, right-click menus, opt-in MD Expressive styles and a steadier SSR layout.
-  keywords: Vuetify v4.3, Vuetify Paladin, VDataTable, VAutocomplete, VMenu, contextmenu, Material Design Expressive, VBtn, VSlider, VTabs, VSlideGroup, SSR, v-touch-hold, Vuetify0
+  keywords: Vuetify v4.3, Vuetify Paladin, VDataTable, VAutocomplete, VMenu, context-menu, Material Design Expressive, VBtn, VSlider, VTabs, VSlideGroup, SSR, v-touch-hold, Vuetify0
 ---
 
 # Announcing Vuetify v4.3
@@ -14,7 +14,7 @@ meta:
 
 <PromotedEntry />
 
-<!-- TODO: banner image -->
+![Hero image for Vuetify v4.3](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/hero.png "Vuetify v4.3 Paladin hero image"){ height=112 }
 
 ---
 
@@ -30,7 +30,7 @@ This post covers the highlights. For everything else, see [the full changelog](h
 
 - [Data tables & forms](#data-tables-forms)
 - [Labs preview](#labs-preview)
-- [VMenu contextmenu](#vmenu-contextmenu)
+- [VMenu context-menu](#vmenu-context-menu)
 - [7 components aligned with Material Design Expressive](#7-components-aligned-with-material-design-expressive)
   - [Button sizes](#button-sizes)
   - [Progress](#progress)
@@ -74,6 +74,8 @@ Checkboxes, radios and switches can show a description through the new **descrip
 
 **Details:** [3e734be](https://github.com/vuetifyjs/vuetify/commit/3e734be3d6e9141237f1b57dd32a1010f5a4f7b8), closes [#21773](https://github.com/vuetifyjs/vuetify/issues/21773)
 
+![Image of v-checkbox and v-switch with descriptions](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/selection-control-descriptions.png "Selection control descriptions"){ height=150 }
+
 ### Smaller form updates
 
 - `VDateInput` shows a localized format hint ([PR#23173](https://github.com/vuetifyjs/vuetify/pull/23173))
@@ -82,6 +84,12 @@ Checkboxes, radios and switches can show a description through the new **descrip
 ## Labs preview
 
 These are new in labs. You can try them today, but the API may still change before they move to core, so pin your version if you use them in production.
+
+![Image of v-split-btn](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/labs-split-btn.png "v-split-btn component"){ height=250 }
+
+![Image of v-time-input](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/labs-time-input.png "v-time-input component"){ height=120 }
+
+![Image of v-loading-indicator](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/labs-loading-indicator.png "v-loading-indicator component"){ height=120 }
 
 - `VAudio` ([Docs](/components/audio-players/), [PR#23227](https://github.com/vuetifyjs/vuetify/pull/23227))
 - `VSplitBtn` ([Docs](/components/split-buttons/), [PR#23267](https://github.com/vuetifyjs/vuetify/pull/23267))
@@ -92,13 +100,15 @@ These are new in labs. You can try them today, but the API may still change befo
 
 Try them out and let us know what you think on [Discord](https://community.vuetifyjs.com/).
 
-## VMenu contextmenu
+## VMenu context-menu
 
-[v-menu](https://vuetifyjs.com/components/menus/) can now open on right click with the new **contextmenu** prop.
+[v-menu](https://vuetifyjs.com/components/menus/) can now open on right click with the new **context-menu** prop.
+
+![Image of v-menu opened with right click](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify-4.3/menu-contextmenu.png "v-menu context menu"){ height=300 }
 
 ```html
 <template>
-  <v-menu contextmenu>
+  <v-menu context-menu>
     <template #activator="{ props }">
       <v-card v-bind="props" text="Right click me" />
     </template>
