@@ -110,9 +110,9 @@ export function useSelectionControl (
 
       if (group) {
         group.modelValue.value = newVal
-      } else {
-        modelValue.value = newVal
       }
+
+      modelValue.value = newVal
     },
   })
   const isActive = computed(() => model.value || props.indeterminate)

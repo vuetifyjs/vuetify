@@ -65,6 +65,127 @@ describe('VCheckboxGroup', () => {
     expect(second).toBeChecked()
   })
 
+  it('should emit one model update from the group and the selected checkbox', async () => {
+    const model = shallowRef<string[]>([])
+    const onGroup = vi.fn()
+    const onFirst = vi.fn()
+    const onSecond = vi.fn()
+
+    render(() => (
+      <VCheckboxGroup v-model={ model.value } onUpdate:modelValue={ onGroup }>
+        <VCheckbox label="A" value="a" onUpdate:modelValue={ onFirst } />
+        <VCheckbox label="B" value="b" onUpdate:modelValue={ onSecond } />
+      </VCheckboxGroup>
+    ))
+
+    await userEvent.click(screen.getByRole('checkbox', { name: 'A' }))
+
+    expect(model.value).toEqual(['a'])
+    expect(onGroup).toHaveBeenCalledExactlyOnceWith(['a'])
+    expect(onFirst).toHaveBeenCalledExactlyOnceWith(['a'])
+    expect(onSecond).not.toHaveBeenCalled()
+  })
+
+  it('should clear an uncontrolled indeterminate state when selected', async () => {
+    const model = shallowRef<string[]>([])
+
+    render(() => (
+      <VCheckboxGroup v-model={ model.value }>
+        <VCheckbox label="A" value="a" indeterminate />
+      </VCheckboxGroup>
+    ))
+
+    const input = screen.getByRole('checkbox', { name: 'A' })
+    const control = input.closest('.v-selection-control')
+
+    expect(control).toHaveClass('v-selection-control--indeterminate')
+
+    await userEvent.click(input)
+
+    expect(model.value).toEqual(['a'])
+    expect(input).toBeChecked()
+    expect(control).not.toHaveClass('v-selection-control--indeterminate')
+  })
+
+  it('should update a controlled indeterminate state when selected', async () => {
+    const indeterminate = shallowRef(true)
+    const onIndeterminate = vi.fn()
+
+    render(() => (
+      <VCheckboxGroup>
+        <VCheckbox
+          v-model:indeterminate={ indeterminate.value }
+          label="A"
+          value="a"
+          onUpdate:indeterminate={ onIndeterminate }
+        />
+      </VCheckboxGroup>
+    ))
+
+    const input = screen.getByRole('checkbox', { name: 'A' })
+    const control = input.closest('.v-selection-control')
+
+    expect(control).toHaveClass('v-selection-control--indeterminate')
+
+    await userEvent.click(input)
+
+    expect(indeterminate.value).toBe(false)
+    expect(onIndeterminate).toHaveBeenCalledExactlyOnceWith(false)
+    expect(input).toBeChecked()
+    expect(control).not.toHaveClass('v-selection-control--indeterminate')
+  })
+
+  it('should keep the indeterminate state while readonly', async () => {
+    const indeterminate = shallowRef(true)
+    const onIndeterminate = vi.fn()
+
+    render(() => (
+      <VCheckboxGroup readonly>
+        <VCheckbox
+          v-model:indeterminate={ indeterminate.value }
+          label="A"
+          value="a"
+          onUpdate:indeterminate={ onIndeterminate }
+        />
+      </VCheckboxGroup>
+    ))
+
+    const input = screen.getByRole('checkbox', { name: 'A' })
+
+    await userEvent.click(input)
+
+    expect(indeterminate.value).toBe(true)
+    expect(onIndeterminate).not.toHaveBeenCalled()
+    expect(input).toBePartiallyChecked()
+    expect(input.closest('.v-selection-control')).toHaveClass('v-selection-control--indeterminate')
+  })
+
+  it('should keep the indeterminate state while disabled', () => {
+    const indeterminate = shallowRef(true)
+    const onIndeterminate = vi.fn()
+
+    render(() => (
+      <VCheckboxGroup disabled>
+        <VCheckbox
+          v-model:indeterminate={ indeterminate.value }
+          label="A"
+          value="a"
+          onUpdate:indeterminate={ onIndeterminate }
+        />
+      </VCheckboxGroup>
+    ))
+
+    const input = screen.getByRole('checkbox', { name: 'A' }) as HTMLInputElement
+
+    expect(input).toBeDisabled()
+    input.click()
+
+    expect(indeterminate.value).toBe(true)
+    expect(onIndeterminate).not.toHaveBeenCalled()
+    expect(input).toBePartiallyChecked()
+    expect(input.closest('.v-selection-control')).toHaveClass('v-selection-control--indeterminate')
+  })
+
   it('should select one value and clear it when multiple is false', async () => {
     const model = shallowRef<string | boolean>('a')
 
