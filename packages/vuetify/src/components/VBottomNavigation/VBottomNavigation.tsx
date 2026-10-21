@@ -21,7 +21,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, isPercentage, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, isNullOrUndefined, isPercentage, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
@@ -142,8 +142,8 @@ export const VBottomNavigation = genericComponent<new <T>(
             },
             ssrBootStyles.value,
             roundedStyles.value,
+            !isNullOrUndefined(props.zIndex) && { zIndex: props.zIndex },
             props.style,
-            props.zIndex != null ? { zIndex: props.zIndex } : undefined,
           ]}
         >
           { slots.default && (

@@ -4,7 +4,7 @@ import { VLayout } from '@/components/VLayout'
 
 // Utilities
 import { render, screen } from '@test'
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 
 describe('VBottomNavigation', () => {
   it('allows custom height', async () => {
@@ -49,16 +49,26 @@ describe('VBottomNavigation', () => {
   })
 
   it('allows overriding the layout-calculated z-index', async () => {
-    const zIndex = ref<number>()
+    const zIndex = shallowRef<number>()
     render(() => (
       <VLayout>
         <VBottomNavigation zIndex={ zIndex.value } />
       </VLayout>
     ))
     const navigation = screen.getByCSS('.v-bottom-navigation')
-    const defaultZIndex = (navigation as HTMLElement).style.zIndex
-    expect(defaultZIndex).not.toBe('2500')
+    await expect.element(navigation).toHaveStyle({ zIndex: '1004' })
     zIndex.value = 2500
     await expect.element(navigation).toHaveStyle({ zIndex: '2500' })
+    zIndex.value = undefined
+    await expect.element(navigation).toHaveStyle({ zIndex: '1004' })
+  })
+
+  it('lets style take precedence over zIndex', async () => {
+    render(() => (
+      <VLayout>
+        <VBottomNavigation zIndex={ 2500 } style={{ zIndex: 3000 }} />
+      </VLayout>
+    ))
+    await expect.element(screen.getByCSS('.v-bottom-navigation')).toHaveStyle({ zIndex: '3000' })
   })
 })

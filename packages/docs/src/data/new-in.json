@@ -69,6 +69,11 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBottomNavigation": {
+    "props": {
+      "zIndex": "4.4.0"
+    }
+  },
   "VBottomSheet": {
     "props": {
       "contextMenu": "4.3.0"
@@ -891,11 +896,6 @@
       "crossfade": "3.10.0",
       "transitionDuration": "3.10.0",
       "wheel": "4.3.0"
-    }
-  },
-  "VBottomNavigation": {
-    "props": {
-      "zIndex": "4.3.0"
     }
   }
 }
