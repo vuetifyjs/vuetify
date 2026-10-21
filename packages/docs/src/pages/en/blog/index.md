@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify v4.3
+
+🖊️ John Leider • 📅 October 20th, 2026
+
+Vuetify v4.3 "Paladin" adds more control over filtering and selection in data tables and forms, a batch of new labs components, right-click menus for VMenu, and opt-in Material Design Expressive styles for 7 components. It also includes new options for carousels and slide groups, and a more stable layout for SSR apps. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify-4.3/) { .text-end }
+
 ## September 2026 Update
 
 🖊️ Jacek Czarniecki • 📅 October 7th, 2026
