@@ -272,6 +272,7 @@ export const VSelectionControl = genericComponent<new <T>(
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
+          form={ props.form }
           indeterminate={ props.indeterminate }
           { ...inputAttrs }
           aria-describedby={

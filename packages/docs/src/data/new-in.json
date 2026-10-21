@@ -121,7 +121,8 @@
   },
   "VCheckbox": {
     "props": {
-      "description": "4.3.0"
+      "description": "4.3.0",
+      "form": "4.4.0"
     },
     "slots": {
       "description": "4.3.0"
@@ -134,7 +135,8 @@
   },
   "VCheckboxBtn": {
     "props": {
-      "description": "4.3.0"
+      "description": "4.3.0",
+      "form": "4.4.0"
     },
     "slots": {
       "description": "4.3.0"
@@ -544,7 +546,8 @@
   },
   "VRadio": {
     "props": {
-      "description": "4.3.0"
+      "description": "4.3.0",
+      "form": "4.4.0"
     },
     "slots": {
       "description": "4.3.0"
@@ -556,6 +559,9 @@
     }
   },
   "VRadioGroup": {
+    "props": {
+      "form": "4.4.0"
+    },
     "events": {
       "update:focused": "4.3.0"
     },
@@ -620,7 +626,8 @@
     "props": {
       "indeterminate": "4.1.0",
       "indeterminateIcon": "4.1.0",
-      "description": "4.3.0"
+      "description": "4.3.0",
+      "form": "4.4.0"
     },
     "slots": {
       "description": "4.3.0"
@@ -631,6 +638,9 @@
     }
   },
   "VSelectionControlGroup": {
+    "props": {
+      "form": "4.4.0"
+    },
     "exposed": {
       "blur": "4.3.0",
       "focus": "4.3.0"
@@ -758,7 +768,8 @@
     "props": {
       "size": "4.1.0",
       "thumbColor": "4.1.0",
-      "description": "4.3.0"
+      "description": "4.3.0",
+      "form": "4.4.0"
     },
     "slots": {
       "thumb": "3.5.0",
