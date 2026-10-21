@@ -12,7 +12,12 @@
     "showAdjacentMonths": "Show adjacent months.",
     "showWeek": "Show the week number.",
     "transition": "The transition used when changing months into the future",
-    "reverseTransition": "The transition used when changing months into the past"
+    "reverseTransition": "The transition used when changing months into the past",
+    "wheel": "Navigate between months with the mouse wheel or trackpad. Responds to horizontal scrolling or Shift + wheel.",
+    "events": "Array of dates or object defining events or colors or function returning boolean/color/array of colors.",
+    "eventColor": "Sets the color for event dots. It can be string (all events will have the same color) or `object` where attribute is the event date and value is boolean/color/array of colors for specified date or `function` taking date as a parameter and returning boolean/color/array of colors for that date.",
+    "noAutoNavigation": "Prevents the displayed month from automatically following the selected value.",
+    "previewValue": "Hovered date while picking the end of a range, used to preview the range."
   },
   "events": {
     "update:month": "Emitted when the month changes.",

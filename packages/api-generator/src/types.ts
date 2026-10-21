@@ -273,6 +273,8 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
     return false
   }
 
+  if (filePath?.includes('/@vuetify/v0/')) return false
+
   return filePath?.includes('/node_modules/')
 }
 
