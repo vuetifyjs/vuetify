@@ -37,7 +37,7 @@ import {
 import { wrapInArray } from '@/utils/helpers'
 
 // Globals
-import { IN_BROWSER } from '@/utils/globals'
+import { IN_BROWSER, PREFERS_REDUCED_MOTION } from '@/utils/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -127,7 +127,7 @@ const router = createRouter({
     if (to.hash) {
       return {
         el: to.hash,
-        behavior: main ? 'smooth' : undefined,
+        behavior: main && !PREFERS_REDUCED_MOTION() ? 'smooth' : undefined,
         top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
       }
     } else if (savedPosition) return savedPosition
