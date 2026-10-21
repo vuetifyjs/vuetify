@@ -12,7 +12,11 @@
     "reverseTransition": "The transition used when changing year into the past",
     "title": "Specify a title text for the component.",
     "transition": "The transition used when changing year into the future",
-    "yearsColumns": "Number of columns to use when displaying years in year selection view."
+    "yearsColumns": "Number of columns to use when displaying years in year selection view.",
+    "readonly": "Puts the picker in a readonly state.",
+    "nextIcon": "Sets the icon for the next year button.",
+    "prevIcon": "Sets the icon for the previous year button.",
+    "modeIcon": "Icon displayed next to the year, toggles year selection when clicked."
   },
   "slots": {
     "header": "Slot for customizing the header area of the picker.",

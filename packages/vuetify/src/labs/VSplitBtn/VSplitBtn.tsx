@@ -40,7 +40,7 @@ export const makeVSplitBtnProps = propsFactory({
   prependIcon: IconValue,
   text: [String, Number],
 
-  ...omit(makeVBtnGroupProps(), ['connected', 'direction']),
+  ...omit(makeVBtnGroupProps({ size: 'default' }), ['connected', 'direction']),
 }, 'VSplitBtn')
 
 export const VSplitBtn = genericComponent<VSplitBtnSlots>()({

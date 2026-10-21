@@ -5,7 +5,9 @@
     "collapseIcon": "Icon to display when the expandable row is expanded.",
     "expandIcon": "Icon to display when the expandable row is collapsed.",
     "index": "Row index.",
-    "item": "Data (key, index and column values) of the displayed item."
+    "item": "Data (key, index and column values) of the displayed item.",
+    "getMatches": "Returns search matches per column, used to highlight matched text.",
+    "selectRowLabel": "Accessible label for the row selection checkbox. Accepts locale keys."
   },
   "events": {
     "contextmenu": "The event emitted when the user clicks the context menu button.",
