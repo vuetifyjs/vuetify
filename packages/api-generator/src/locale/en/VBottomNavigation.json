@@ -3,7 +3,8 @@
   "props": {
     "height": "Sets the height for the component. A percentage value is relative to the layout and ignores `density`.",
     "grow": "Force all [v-btn](/components/buttons) children to take up all available horizontal space.",
-    "mode": "Changes the orientation and active state styling of the component."
+    "mode": "Changes the orientation and active state styling of the component.",
+    "zIndex": "Overrides the [z-index](https://developer.mozilla.org/en-US/docs/Web/CSS/z-index) that is automatically calculated by the layout system, useful for layering it above or below other overlay components."
   },
   "events": {
     "update:active": "Event that is emitted when the active state changes."

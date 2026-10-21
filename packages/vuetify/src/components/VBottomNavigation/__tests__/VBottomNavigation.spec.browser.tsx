@@ -47,4 +47,18 @@ describe('VBottomNavigation', () => {
     active.value = false
     await expect.element(navigation).not.toHaveClass('v-bottom-navigation--active')
   })
+
+  it('allows overriding the layout-calculated z-index', async () => {
+    const zIndex = ref<number>()
+    render(() => (
+      <VLayout>
+        <VBottomNavigation zIndex={ zIndex.value } />
+      </VLayout>
+    ))
+    const navigation = screen.getByCSS('.v-bottom-navigation')
+    const defaultZIndex = (navigation as HTMLElement).style.zIndex
+    expect(defaultZIndex).not.toBe('2500')
+    zIndex.value = 2500
+    await expect.element(navigation).toHaveStyle({ zIndex: '2500' })
+  })
 })
