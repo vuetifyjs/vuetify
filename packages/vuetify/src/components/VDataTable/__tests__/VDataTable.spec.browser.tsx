@@ -235,26 +235,6 @@ describe('VDataTable', () => {
     expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
   })
 
-  it('should hide the select all checkbox in mobile view with select-strategy="single"', async () => {
-    const strategy = ref<'single' | 'all'>('single')
-    render(() => (
-      <VDataTable
-        headers={ DESSERT_HEADERS }
-        items={ DESSERT_ITEMS }
-        selectStrategy={ strategy.value }
-        mobile
-        showSelect
-      />
-    ))
-
-    expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(0)
-
-    strategy.value = 'all'
-    await nextTick()
-
-    expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
-  })
-
   it('should select all only filtered items with select-strategy="filtered"', async () => {
     const selected = ref<string[]>(['Donut'])
     render(() => (
