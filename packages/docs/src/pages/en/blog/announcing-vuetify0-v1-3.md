@@ -21,7 +21,7 @@ meta:
 
 Vuetify0 1.3.0 is out. The documentation is the part of this project I am most proud of, so if you open two pages before the changelog, make them [Kanban](https://0.vuetifyjs.com/components/data/kanban) and [Menu](https://0.vuetifyjs.com/components/disclosure/menu).
 
-<!-- TODO: banner image. Newer posts use a CDN hero (see september-2026-update). No asset exists for this release. -->
+![Hero image for the Vuetify0 1.3 release](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/announcing-vuetify0-v1-3-hero.png "Vuetify0 1.3 hero image"){ height=112 }
 
 🖊️ John Leider • 📅 October 20th, 2026
 
@@ -45,6 +45,8 @@ Vuetify0 1.3.0 is out. The documentation is the part of this project I am most p
 
 [Kanban](https://0.vuetifyjs.com/components/data/kanban) is the compound over `createKanban` ([#1012](https://github.com/vuetifyjs/0/pull/1012)). The pieces are `Kanban.Root`, `Kanban.Column`, `Kanban.List`, `Kanban.Item`, `Kanban.Instructions`, and `Kanban.LiveRegion`: boards of movable items in columns.
 
+![A Kanban board with Todo, Doing, and Done columns built from Vuetify0's headless Kanban compound](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/kanban.png "Kanban"){ width=100% }
+
 Each column binds its item array with `v-model`. A drop writes the new order back, and Root emits `move` once with `{ value, from, to, fromIndex, toIndex }`.
 
 Pointer drag works. So does the keyboard. Space or Enter picks an item up. Arrow keys, Home, and End move a previewed drop target. That preview follows RTL, and it skips a column that is `disabled` or whose `accept` refuses the item. Space or Enter drops. Escape cancels and does not touch the board.
@@ -61,17 +63,25 @@ A click, a right-click, or a pointer switch opens with no item highlighted. Arro
 
 A follow-up fix ([#1056](https://github.com/vuetifyjs/0/pull/1056)): repeating a typeahead letter still accepts the next character. Repeating a letter moves to the next match. A different letter before the pause searches from that one letter. The same fix runs a click listener on a menu item before the item's own action, including when the item is disabled.
 
+![An open Vuetify0 Menu where typing "p" moves the highlight to the Paste item](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/menu.png "Menu typeahead"){ width=100% }
+
 ## Tour, Otp, and Virtualizer
 
 Three more compounds shipped in this release.
 
 **[Tour](https://0.vuetifyjs.com/components/disclosure/tour)** ([#178](https://github.com/vuetifyjs/0/pull/178)). `createTour` is a headless step sequencer: activator targeting, a form-gated next, and enter, leave, and completed handlers. The Tour compound adds highlight, anchored content, and keyboard chrome. `createTourPlugin` provides one app-level tour. The app owns the catalog and loads one tour at a time.
 
+![A Vuetify0 Tour on step 1 of 3, highlighting a search field with Skip, Back, and Next controls](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/tour.png "Tour"){ width=100% }
+
 **[Otp](https://0.vuetifyjs.com/components/forms/otp)** ([#787](https://github.com/vuetifyjs/0/pull/787), thanks [@sridhar-3009](https://github.com/sridhar-3009)). `Otp.Root`, `Otp.Item`, and `Otp.HiddenInput` over `createOtp`. Root bridges `v-model`, exposes `role="group"` with a locale-driven default accessible name, and renders a hidden input when `name` is set. Each item is one character (`autocomplete="one-time-code"`). It advances on input, moves back on Backspace of an empty box, supports arrow keys, and spreads pasted or autofilled text across the boxes. `@complete` fires when the code fills. Reject-and-retry lives on `createOtp`'s `onComplete`. Root slots an `items` array derived from `length`, same pattern as Rating, so the boxes are iterated once.
 
 A patch on top of that ([#1011](https://github.com/vuetifyjs/0/pull/1011)): a code the browser inserts in one edit (SMS autofill, a password manager) fills every box. Dropping text onto a filled box replaces from that box instead of shifting the digits already there.
 
+![A six-box Vuetify0 Otp input with four digits entered](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/otp.png "Otp"){ width=100% }
+
 **[Virtualizer](https://0.vuetifyjs.com/components/data/virtualizer)** ([#788](https://github.com/vuetifyjs/0/pull/788), also [@sridhar-3009](https://github.com/sridhar-3009)). `Virtualizer.Root`, `Virtualizer.Item`, and `Virtualizer.Spacer` over `createVirtual`. Root renders a keyboard-focusable scroll container and slots the visible window, plus `overscan`. Put a `Spacer` before the rows and a `Spacer` with `edge="end"` after them. Set `as` (for example `li` inside a `ul`) when a `div` cannot sit there. Each item measures its own border box, so variable-height rows with padding or borders need no manual `resize()` call. `@top` and `@bottom`, with `top-threshold` and `bottom-threshold`, drive infinite scroll. `scrollTo(index, options)` and `reset()` come from the default slot or a template ref on Root, which also exposes the container `element`.
+
+![A Vuetify0 Virtualizer list of 10,000 rows where only the visible window is mounted](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/virtualizer.png "Virtualizer"){ width=100% }
 
 Virtualizer does not impose a role. Pass `role` on Root and Item, and `aria-posinset` / `aria-setsize` on Item, to match the content. For a grid, `aria-rowcount` on Root and `aria-rowindex` on Item. When a focused row scrolls out of the window, focus moves to the scroll container. `renderless` is not supported. Use `createVirtual` directly when you need full control of the markup.
 
