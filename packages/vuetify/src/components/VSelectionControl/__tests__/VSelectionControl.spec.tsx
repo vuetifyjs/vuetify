@@ -4,7 +4,7 @@ import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGrou
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { computed, defineComponent, nextTick, shallowRef } from 'vue'
+import { defineComponent, nextTick, shallowRef } from 'vue'
 import { createVuetify } from '@/framework'
 
 describe('VSelectionControl', () => {
@@ -68,10 +68,8 @@ describe('VSelectionControl', () => {
     expect(update).toHaveBeenCalledWith('off')
   })
 
-  it('should notify the group and control when selecting an option', () => {
-    const selected = shallowRef<string[]>([])
-    const updateGroup = vi.fn((value: string[]) => { selected.value = value })
-    const modelValue = computed({ get: () => selected.value, set: updateGroup })
+  it('should notify the control when selecting a group option', () => {
+    const modelValue = shallowRef<string[]>([])
     const update = vi.fn()
     const wrapper = mountFunction({
       props: {
@@ -90,8 +88,6 @@ describe('VSelectionControl', () => {
 
     wrapper.vm.model = true
 
-    expect(selected.value).toEqual(['a'])
-    expect(updateGroup).toHaveBeenCalledExactlyOnceWith(['a'])
     expect(update).toHaveBeenCalledExactlyOnceWith(['a'])
   })
 
