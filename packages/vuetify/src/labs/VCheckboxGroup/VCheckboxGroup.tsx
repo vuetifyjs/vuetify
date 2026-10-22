@@ -2,24 +2,32 @@
 import './VCheckboxGroup.sass'
 
 // Components
+import { VCheckboxGroupSymbol } from '@/components/VCheckbox/VCheckbox'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { VSelectionControl } from '@/components/VSelectionControl'
-import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import {
+  makeSelectionControlGroupProps,
+  VSelectionControlGroup,
+  VSelectionControlGroupSymbol,
+} from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
-import { provideDefaults } from '@/composables/defaults'
+import { injectNestedDefaults } from '@/composables/defaults'
 import { useFocus } from '@/composables/focus'
-import { FormKey } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { inject, provide, shallowRef, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, noop, omit, propsFactory, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, injectSelf, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VNode } from 'vue'
+import type { VCheckbox } from '@/components/VCheckbox/VCheckbox'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionGroupContext } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import type { GenericProps } from '@/util'
 
 export type VCheckboxGroupSlots = Omit<VInputSlots, 'default'> & {
@@ -29,29 +37,6 @@ export type VCheckboxGroupSlots = Omit<VInputSlots, 'default'> & {
     props: Record<string, any>
   }
 }
-
-const VCheckboxGroupItems = genericComponent(false)<{}, {}, {}>({
-  name: 'VCheckboxGroupItems',
-
-  props: {},
-
-  setup (_, { slots }) {
-    provideDefaults({ VCheckbox: { hideDetails: true } })
-
-    const form = inject(FormKey, null)
-
-    if (form) {
-      provide(FormKey, {
-        ...form,
-        register: noop,
-        unregister: noop,
-        update: noop,
-      })
-    }
-
-    return () => slots.default?.()
-  },
-})
 
 export const makeVCheckboxGroupProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),
@@ -86,6 +71,16 @@ export const VCheckboxGroup = genericComponent<new <T>(
     const { isFocused, focus, blur } = useFocus(props)
     const inputRef = shallowRef<VInput>()
     const controlGroupRef = shallowRef<VSelectionControlGroup>()
+
+    const checkboxDefaults = injectNestedDefaults<VCheckbox['$props']>('VCheckbox')
+    const selectionGroup = shallowRef<VSelectionGroupContext>()
+    const parentGroups = inject(VCheckboxGroupSymbol, [])
+
+    provide(VCheckboxGroupSymbol, [...parentGroups, selectionGroup])
+
+    function onControlGroupBeforeMount (vnode: VNode) {
+      selectionGroup.value = injectSelf(VSelectionControlGroupSymbol, vnode.component!)
+    }
 
     function onFocusout (e: FocusEvent) {
       if (!(e.currentTarget as HTMLElement)?.contains(e.relatedTarget as Node)) {
@@ -130,7 +125,7 @@ export const VCheckboxGroup = genericComponent<new <T>(
                   </VLabel>
                 )}
 
-                <VCheckboxGroupItems>
+                <VDefaultsProvider defaults={{ VCheckbox: { hideDetails: checkboxDefaults.value?.hideDetails ?? true } }}>
                   <VSelectionControlGroup
                     ref={ controlGroupRef }
                     { ...controlProps }
@@ -144,9 +139,10 @@ export const VCheckboxGroup = genericComponent<new <T>(
                     error={ isValid.value === false }
                     { ...controlAttrs }
                     v-model={ model.value }
+                    onVnodeBeforeMount={ onControlGroupBeforeMount }
                     v-slots={ slots }
                   />
-                </VCheckboxGroupItems>
+                </VDefaultsProvider>
               </>
             ),
           }}

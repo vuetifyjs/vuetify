@@ -1,10 +1,9 @@
 // Components
 import { makeVSelectionControlProps, useSelectionControl, VSelectionControl } from '../VSelectionControl'
-import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Utilities
 import { mount } from '@vue/test-utils'
-import { defineComponent, nextTick, shallowRef } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 import { createVuetify } from '@/framework'
 
 describe('VSelectionControl', () => {
@@ -66,29 +65,6 @@ describe('VSelectionControl', () => {
     await nextTick()
     expect(update).toHaveBeenCalledTimes(1)
     expect(update).toHaveBeenCalledWith('off')
-  })
-
-  it('should notify the control when selecting a group option', () => {
-    const modelValue = shallowRef<string[]>([])
-    const update = vi.fn()
-    const wrapper = mountFunction({
-      props: {
-        modelValue: [],
-        multiple: true,
-        value: 'a',
-        'onUpdate:modelValue': update,
-      },
-      global: {
-        plugins: [vuetify],
-        provide: {
-          [VSelectionControlGroupSymbol as symbol]: { modelValue },
-        },
-      },
-    })
-
-    wrapper.vm.model = true
-
-    expect(update).toHaveBeenCalledExactlyOnceWith(['a'])
   })
 
   it('should apply focus classes when readonly and focused', async () => {

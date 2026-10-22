@@ -44,7 +44,9 @@ export default createVuetify({
 
 ## Usage
 
-Bind an array to the group's **v-model** and give each child `v-checkbox` a **value**. Checking or unchecking an option updates that array.
+Place `v-checkbox` items in the group's default slot. Bind an array to the group's **v-model** and give each child a **value**. Checking or unchecking an option updates that array.
+
+Independent **v-model** bindings on child checkboxes are not supported.
 
 <ExamplesUsage name="v-checkbox-group" />
 
@@ -62,6 +64,8 @@ Bind an array to the group's **v-model** and give each child `v-checkbox` a **va
 ## Guide
 
 Set **color**, **density**, **disabled**, or **readonly** on the group to apply them to its checkboxes. Use **label** to describe the set of options; each checkbox keeps its own label.
+
+Child checkboxes hide their details, including hints and error messages, by default. Set **hide-details** to `false` on a child checkbox to show its details.
 
 ### Inline
 

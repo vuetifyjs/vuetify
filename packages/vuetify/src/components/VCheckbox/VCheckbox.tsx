@@ -4,22 +4,28 @@ import './VCheckbox.sass'
 // Components
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Composables
 import { useFocus } from '@/composables/focus'
+import { FormKey } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { shallowRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
+import { inject, provide, shallowRef, useId } from 'vue'
+import { filterInputAttrs, genericComponent, noop, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { InjectionKey, Ref } from 'vue'
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionGroupContext } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import type { GenericProps } from '@/util'
 
 export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
+
+export const VCheckboxGroupSymbol: InjectionKey<readonly Ref<VSelectionGroupContext | undefined>[]> = Symbol.for('vuetify:v-checkbox-group')
 
 export const makeVCheckboxProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),
@@ -45,6 +51,18 @@ export const VCheckbox = genericComponent<new <T>(
   },
 
   setup (props, { attrs, slots }) {
+    const form = inject(FormKey, null)
+    const groups = inject(VCheckboxGroupSymbol, [])
+    const selectionGroup = inject(VSelectionControlGroupSymbol, null)
+    if (form && selectionGroup && groups.some(group => group.value === selectionGroup)) {
+      provide(FormKey, {
+        ...form,
+        register: noop,
+        unregister: noop,
+        update: noop,
+      })
+    }
+
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
     const inputRef = shallowRef<VInput>()
