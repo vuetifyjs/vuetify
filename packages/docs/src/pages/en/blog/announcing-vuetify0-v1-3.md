@@ -61,7 +61,7 @@ The pending target is `data-target` on the column and the list, and `data-drop="
 
 A click, a right-click, or a pointer switch opens with no item highlighted. Arrow keys and pointer hover move the highlight. Light-dismiss of a submenu closes that layer and leaves the parent menu open.
 
-A follow-up fix ([#1056](https://github.com/vuetifyjs/0/pull/1056)): repeating a typeahead letter still accepts the next character. Repeating a letter moves to the next match. A different letter before the pause searches from that one letter. The same fix runs a click listener on a menu item before the item's own action, including when the item is disabled.
+A follow-up fix ([#1056](https://github.com/vuetifyjs/0/pull/1056)): repeating a typeahead letter still accepts the next character. Letters typed within the pause build a prefix, and a different letter extends it. A repeated letter moves to the next match instead. After the pause, the next letter starts a new search. The same fix runs a click listener on a menu item before the item's own action, including when the item is disabled.
 
 ![An open Vuetify0 Menu where typing "p" moves the highlight to the Paste item](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/menu.png "Menu typeahead"){ width=100% }
 
@@ -75,7 +75,7 @@ Three more compounds shipped in this release.
 
 **[Otp](https://0.vuetifyjs.com/components/forms/otp)** ([#787](https://github.com/vuetifyjs/0/pull/787), thanks [@sridhar-3009](https://github.com/sridhar-3009)). `Otp.Root`, `Otp.Item`, and `Otp.HiddenInput` over `createOtp`. Root bridges `v-model`, exposes `role="group"` with a locale-driven default accessible name, and renders a hidden input when `name` is set. Each item is one character (`autocomplete="one-time-code"`). It advances on input, moves back on Backspace of an empty box, supports arrow keys, and spreads pasted or autofilled text across the boxes. `@complete` fires when the code fills. Reject-and-retry lives on `createOtp`'s `onComplete`. Root slots an `items` array derived from `length`, same pattern as Rating, so the boxes are iterated once.
 
-A patch on top of that ([#1011](https://github.com/vuetifyjs/0/pull/1011)): a code the browser inserts in one edit (SMS autofill, a password manager) fills every box. Dropping text onto a filled box replaces from that box instead of shifting the digits already there.
+A patch on top of that ([#1011](https://github.com/vuetifyjs/0/pull/1011)): a code the browser inserts in one edit (SMS autofill, a password manager) fills every box. Dropping text onto a filled box writes from that box and clears every box after the pasted text. Pasting 99 into the third box of 11111 leaves 1199.
 
 ![A six-box Vuetify0 Otp input with four digits entered](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/otp.png "Otp"){ width=100% }
 
@@ -107,7 +107,7 @@ The keydown listener is on `document` in the capture phase, so a later Tab still
 
 **Pagination** ([#1040](https://github.com/vuetifyjs/0/pull/1040)). Page buttons can have different widths. The row shrinks when the rendered buttons overflow and grows back when the container widens, or when the current page is shorter. `createOverflow` accepts `probe: true` when the count that fits is not mounted yet. Render `capacity`, measure that row, and call `settle()`.
 
-**Select.** `Select.Activator` accepts `ariaLabelledby` and renders it as `aria-labelledby` ([#1055](https://github.com/vuetifyjs/0/pull/1055)). Pass the id of an existing label when the control's text is the selected value. If `label` and `ariaLabelledby` are both set, `aria-labelledby` is used and `aria-label` is omitted. Printable characters match option text ([#1058](https://github.com/vuetifyjs/0/pull/1058)). Characters typed within one second accumulate, and a repeated letter cycles. A single select updates the value and leaves the list open or closed as it was. The matcher is `useTypeahead`.
+**Select.** `Select.Activator` accepts `ariaLabelledby` and renders it as `aria-labelledby` ([#1055](https://github.com/vuetifyjs/0/pull/1055)). Pass the id of an existing label when the control's text is the selected value. If `label` and `ariaLabelledby` are both set, `aria-labelledby` is used and `aria-label` is omitted. Printable characters match option text ([#1058](https://github.com/vuetifyjs/0/pull/1058)). Characters typed within one second accumulate, and a repeated letter cycles. A single select updates the value and leaves the list open or closed as it was, once the options are mounted (`eager`, or any list that has already opened). The first character before that opens the list. The matcher is `useTypeahead`.
 
 **Forms** ([#935](https://github.com/vuetifyjs/0/pull/935)). `Checkbox.Root`, `Radio.Root`, `Switch.Root`, `Toggle.Root`, and `Button.Root` expose the rendered host via `AtomExpose.element`, so a template ref can call `.focus()`. `Radio.Group`, `Checkbox.Group`, `Switch.Group`, `Toggle.Group`, and `Button.Group` expose `focus(options?: FocusOptions)`, which focuses the selected item, or the first if none is selected.
 
