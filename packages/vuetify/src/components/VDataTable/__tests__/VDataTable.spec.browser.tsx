@@ -235,7 +235,6 @@ describe('VDataTable', () => {
     expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/23303
   it('should hide the select all checkbox in mobile view with select-strategy="single"', async () => {
     const strategy = ref<'single' | 'all'>('single')
     render(() => (
