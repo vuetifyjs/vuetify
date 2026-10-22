@@ -27,7 +27,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { toRef } from 'vue'
@@ -200,8 +200,6 @@ export const VAlert = genericComponent<VAlertSlots>()({
               role="alert"
               { ...events }
             >
-              { genOverlays(false, 'v-alert') }
-
               { hasTimer && props.timer !== 'close' && (
                 <VProgressLinear
                   key="timer"
