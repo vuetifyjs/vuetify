@@ -142,6 +142,14 @@
 
   const items = [
     {
+      title: 'Announcing Vuetify v4.3',
+      shortDescription: 'Vuetify v4.3 "Paladin" adds more control over filtering and selection in data tables and forms, a batch of new labs components, right-click menus for VMenu, and opt-in Material Design Expressive styles for 7 components. It also includes new options for carousels and slide groups, and a more stable layout for SSR apps.',
+      date: 'October 20, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify-4.3'),
+    },
+    {
       title: 'Announcing Vuetify0 1.3.0',
       shortDescription: 'Vuetify0 1.3.0 is out. Kanban and Menu are the pages to open first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead...',
       date: 'October 20, 2026',

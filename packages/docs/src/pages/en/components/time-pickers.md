@@ -47,36 +47,6 @@ You can specify allowed times using arrays, objects, and functions. You can also
 
 <ExamplesExample file="v-time-picker/prop-allowed-times" />
 
-#### Colors
-
-Time picker colors can be set using the `color` prop.
-
-<ExamplesExample file="v-time-picker/prop-color" />
-
-#### Disabled
-
-You can't interact with disabled picker.
-
-<ExamplesExample file="v-time-picker/prop-disabled" />
-
-#### Format
-
-A time picker can be switched to 24hr format. Note that the `format` prop defines only the way the picker is displayed, picker's value (model) is always in 24hr format.
-
-<ExamplesExample file="v-time-picker/prop-format" />
-
-#### No header
-
-You can remove picker's header.
-
-<ExamplesExample file="v-time-picker/prop-hide-header" />
-
-#### Range
-
-This is an example of joining pickers together using `min` and `max` prop.
-
-<ExamplesExample file="v-time-picker/prop-range" />
-
 #### Scrollable
 
 You can edit time picker's value using mouse wheel.

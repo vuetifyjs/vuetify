@@ -12,6 +12,7 @@ declare global {
   const IS_DEBUG: typeof import('./src/utils/globals')['IS_DEBUG']
   const IS_PROD: typeof import('./src/utils/globals')['IS_PROD']
   const IS_SERVER: typeof import('./src/utils/globals')['IS_SERVER']
+  const PREFERS_REDUCED_MOTION: typeof import('./src/utils/globals')['PREFERS_REDUCED_MOTION']
   const PropType: typeof import('vue')['PropType']
   const acceptHMRUpdate: typeof import('pinia')['acceptHMRUpdate']
   const anyLanguagePattern: typeof import('./src/utils/routes')['anyLanguagePattern']
@@ -207,6 +208,7 @@ declare module 'vue' {
     readonly IS_DEBUG: UnwrapRef<typeof import('./src/utils/globals')['IS_DEBUG']>
     readonly IS_PROD: UnwrapRef<typeof import('./src/utils/globals')['IS_PROD']>
     readonly IS_SERVER: UnwrapRef<typeof import('./src/utils/globals')['IS_SERVER']>
+    readonly PREFERS_REDUCED_MOTION: UnwrapRef<typeof import('./src/utils/globals')['PREFERS_REDUCED_MOTION']>
     readonly acceptHMRUpdate: UnwrapRef<typeof import('pinia')['acceptHMRUpdate']>
     readonly anyLanguagePattern: UnwrapRef<typeof import('./src/utils/routes')['anyLanguagePattern']>
     readonly cacheManifestEntries: UnwrapRef<typeof import('./src/utils/pwa')['cacheManifestEntries']>

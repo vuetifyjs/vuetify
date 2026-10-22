@@ -2,12 +2,11 @@
 import { APCAcontrast } from './color/APCA'
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
-import { isObject } from '@/util'
+import { isNullOrUndefined, isNumber, isObject, isString } from './v0'
 import * as CIELAB from '@/util/color/transformCIELAB'
 import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
-import { isNullOrUndefined, isNumber, isString } from './v0'
 import type { Colors } from '@/composables/theme'
 
 export type XYZ = [number, number, number]

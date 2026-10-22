@@ -237,6 +237,7 @@ export {
   mdiGoogleNearby,
   mdiHandBackRight,
   mdiHandBackRightOutline,
+  mdiHandPointingLeft,
   mdiHandshakeOutline,
   mdiHeadQuestionOutline,
   mdiHeart,
