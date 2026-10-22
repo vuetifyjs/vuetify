@@ -4,7 +4,6 @@
     :rules="rules"
     hint="Select 1 to 3 topics."
     label="Topics"
-    validate-on="input"
     persistent-hint
   >
     <v-checkbox label="Product updates" value="product"></v-checkbox>

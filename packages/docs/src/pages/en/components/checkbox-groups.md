@@ -23,7 +23,7 @@ The `v-checkbox-group` component manages the selected values of its child checkb
 
 ::: warning
 
-This feature requires [v4.4.0](/getting-started/release-notes/?version=v4.4.0)
+This feature requires [v4.3.1](/getting-started/release-notes/?version=v4.3.1)
 
 :::
 
@@ -71,7 +71,7 @@ Use **inline** to display the checkboxes in a row.
 
 ### Validation
 
-The group's **rules** receive the selected values array. Use group rules to validate the selection count. Validation messages appear below the group, and the component can be used inside [v-form](/components/forms/).
+The group's **rules** receive its model value. Use group rules to validate the selection count. Resetting the group or its form sets the model to `null`, so rules should handle that value. Validation messages appear below the group, and the component can be used inside [v-form](/components/forms/).
 
 This example requires 1 to 3 of the 6 topics to be selected. Selecting a fourth topic updates the model and displays a validation error.
 
