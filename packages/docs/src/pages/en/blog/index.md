@@ -26,6 +26,14 @@ Vuetify v4.3 "Paladin" adds more control over filtering and selection in data ta
 
 [Read More](/blog/announcing-vuetify-4.3/) { .text-end }
 
+## Announcing Vuetify0 1.3.0
+
+🖊️ John Leider • 📅 October 20th, 2026
+
+Vuetify0 1.3.0 is out. Kanban and Menu are the two pages to open in the docs first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1-3/) { .text-end }
+
 ## September 2026 Update
 
 🖊️ Jacek Czarniecki • 📅 October 7th, 2026

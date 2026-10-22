@@ -150,6 +150,14 @@
       to: rpath('/blog/announcing-vuetify-4.3'),
     },
     {
+      title: 'Announcing Vuetify0 1.3.0',
+      shortDescription: 'Vuetify0 1.3.0 is out. Kanban and Menu are the pages to open first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead...',
+      date: 'October 20, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify0-v1-3'),
+    },
+    {
       title: 'September 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/september-hero.png',
       shortDescription: 'Vuetify 4.2 got three patches while dev filled up for 4.3: VInfiniteCarousel, MD3 tab sliders, modal rail drawers and localized VDateInput hints. Vuetify\'s RTL, locale and observer composables now run on @vuetify/v0, and moving display onto it surfaced two fixes in Vuetify0 1.2.3. Also: why component CSS can load before the layer order, and how to fix it...',
