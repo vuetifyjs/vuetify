@@ -176,6 +176,7 @@ export const VSelectionControlGroup = genericComponent<new <T>(
         name,
         falseIcon: toRef(() => props.falseIcon),
         trueIcon: toRef(() => props.trueIcon),
+        indeterminateIcon: toRef(() => props.indeterminateIcon),
         readonly: toRef(() => props.readonly),
         ripple: toRef(() => props.ripple),
         type: toRef(() => props.type),

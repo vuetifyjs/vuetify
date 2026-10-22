@@ -15,7 +15,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, shallowRef, useId } from 'vue'
+import { inject, provide, shallowRef, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, noop, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -81,8 +81,7 @@ export const VCheckboxGroup = genericComponent<new <T>(
 
   setup (props, { attrs, slots }) {
     const uid = useId()
-    const id = computed(() => props.id || `checkbox-group-${uid}`)
-    const labelId = computed(() => `${id.value}-label`)
+    const id = toRef(() => props.id || `checkbox-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
     const { isFocused, focus, blur } = useFocus(props)
     const inputRef = shallowRef<VInput>()
@@ -126,7 +125,7 @@ export const VCheckboxGroup = genericComponent<new <T>(
             default: ({ messagesId, isDisabled, isReadonly, isValid }) => (
               <>
                 { label && (
-                  <VLabel id={ labelId.value }>
+                  <VLabel id={ id.value }>
                     { label }
                   </VLabel>
                 )}
@@ -138,8 +137,7 @@ export const VCheckboxGroup = genericComponent<new <T>(
                     id={ id.value }
                     role="group"
                     aria-describedby={ messagesId.value }
-                    aria-labelledby={ label ? labelId.value : undefined }
-                    aria-invalid={ isValid.value === false ? 'true' : undefined }
+                    aria-labelledby={ label ? id.value : undefined }
                     defaultsTarget="VCheckbox"
                     disabled={ isDisabled.value }
                     readonly={ isReadonly.value }

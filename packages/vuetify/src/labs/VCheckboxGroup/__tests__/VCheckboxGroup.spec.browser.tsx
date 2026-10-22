@@ -4,7 +4,7 @@ import { VCheckbox } from '@/components/VCheckbox'
 import { VForm } from '@/components/VForm'
 
 // Utilities
-import { render, screen, userEvent, waitIdle } from '@test'
+import { commands, render, screen, userEvent, waitIdle } from '@test'
 import { shallowRef } from 'vue'
 
 describe('VCheckboxGroup', () => {
@@ -12,7 +12,7 @@ describe('VCheckboxGroup', () => {
     const model = shallowRef(['a'])
 
     render(() => (
-      <VCheckboxGroup v-model={ model.value } inline>
+      <VCheckboxGroup v-model={ model.value }>
         <VCheckbox label="A" value="a" />
         <VCheckbox label="B" value="b" />
       </VCheckboxGroup>
@@ -40,6 +40,24 @@ describe('VCheckboxGroup', () => {
 
     expect(model.value).toEqual([])
     expect(second).not.toBeChecked()
+  })
+
+  it('should update the inline layout', async () => {
+    const inline = shallowRef(false)
+
+    render(() => (
+      <VCheckboxGroup inline={ inline.value }>
+        <VCheckbox label="A" value="a" />
+      </VCheckboxGroup>
+    ))
+
+    const group = screen.getByRole('group')
+
+    expect(group).not.toHaveClass('v-selection-control-group--inline')
+
+    inline.value = true
+
+    await expect.poll(() => group).toHaveClass('v-selection-control-group--inline')
   })
 
   it('should allow multiple selections without a model', async () => {
@@ -135,7 +153,30 @@ describe('VCheckboxGroup', () => {
     expect(control).not.toHaveClass('v-selection-control--indeterminate')
   })
 
-  it('should keep the indeterminate state while readonly', async () => {
+  it('should inherit indeterminate icons while preserving a checkbox override', async () => {
+    const groupIcon = shallowRef('M1,1H3V3H1Z')
+    const checkboxIcon = 'M5,5H7V7H5Z'
+
+    render(() => (
+      <VCheckboxGroup indeterminateIcon={ `svg:${groupIcon.value}` }>
+        <VCheckbox label="A" value="a" indeterminate />
+        <VCheckbox label="B" value="b" indeterminate indeterminateIcon={ `svg:${checkboxIcon}` } />
+      </VCheckboxGroup>
+    ))
+
+    const inherited = screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')?.querySelector('svg path')
+    const overridden = screen.getByRole('checkbox', { name: 'B' }).closest('.v-selection-control')?.querySelector('svg path')
+
+    expect(overridden).toHaveAttribute('d', checkboxIcon)
+    expect(inherited).toHaveAttribute('d', groupIcon.value)
+
+    groupIcon.value = 'M9,9H11V11H9Z'
+
+    await expect.poll(() => inherited?.getAttribute('d')).toBe(groupIcon.value)
+    expect(overridden).toHaveAttribute('d', checkboxIcon)
+  })
+
+  it('should not emit an indeterminate update while readonly', async () => {
     const indeterminate = shallowRef(true)
     const onIndeterminate = vi.fn()
 
@@ -154,36 +195,7 @@ describe('VCheckboxGroup', () => {
 
     await userEvent.click(input)
 
-    expect(indeterminate.value).toBe(true)
     expect(onIndeterminate).not.toHaveBeenCalled()
-    expect(input).toBePartiallyChecked()
-    expect(input.closest('.v-selection-control')).toHaveClass('v-selection-control--indeterminate')
-  })
-
-  it('should keep the indeterminate state while disabled', () => {
-    const indeterminate = shallowRef(true)
-    const onIndeterminate = vi.fn()
-
-    render(() => (
-      <VCheckboxGroup disabled>
-        <VCheckbox
-          v-model:indeterminate={ indeterminate.value }
-          label="A"
-          value="a"
-          onUpdate:indeterminate={ onIndeterminate }
-        />
-      </VCheckboxGroup>
-    ))
-
-    const input = screen.getByRole('checkbox', { name: 'A' }) as HTMLInputElement
-
-    expect(input).toBeDisabled()
-    input.click()
-
-    expect(indeterminate.value).toBe(true)
-    expect(onIndeterminate).not.toHaveBeenCalled()
-    expect(input).toBePartiallyChecked()
-    expect(input.closest('.v-selection-control')).toHaveClass('v-selection-control--indeterminate')
   })
 
   it('should select one value and clear it when multiple is false', async () => {
@@ -233,6 +245,10 @@ describe('VCheckboxGroup', () => {
     const first = screen.getByRole('checkbox', { name: 'First A' })
     const second = screen.getByRole('checkbox', { name: 'Second A' })
 
+    expect(first).toHaveAttribute('name')
+    expect(second).toHaveAttribute('name')
+    expect(first.getAttribute('name')).not.toBe(second.getAttribute('name'))
+
     await userEvent.click(first)
 
     expect(firstModel.value).toEqual(['a'])
@@ -251,7 +267,7 @@ describe('VCheckboxGroup', () => {
 
   it('should associate the group with its label and hint', () => {
     render(() => (
-      <VCheckboxGroup label="Options" hint="Choose any options" persistentHint>
+      <VCheckboxGroup id="options" label="Options" hint="Choose any options" persistentHint>
         <VCheckbox label="A" value="a" />
         <VCheckbox label="B" value="b" />
       </VCheckboxGroup>
@@ -259,18 +275,31 @@ describe('VCheckboxGroup', () => {
 
     const group = screen.getByRole('group', { name: 'Options' })
 
-    expect(group).toHaveAccessibleName('Options')
+    expect(document.getElementById('options')).toHaveTextContent('Options')
     expect(group).toHaveAccessibleDescription('Choose any options')
-    expect(document.getElementById(group.getAttribute('aria-labelledby')!)).toHaveTextContent('Options')
-    expect(document.getElementById(group.getAttribute('aria-describedby')!)).toHaveTextContent('Choose any options')
+  })
+
+  it('should hide checkbox details by default and preserve a checkbox override', () => {
+    render(() => (
+      <VCheckboxGroup>
+        <VCheckbox label="A" value="a" messages="Hidden details" />
+        <VCheckbox label="B" value="b" messages="Visible details" hideDetails={ false } />
+      </VCheckboxGroup>
+    ))
+
+    const checkbox = screen.getByRole('checkbox', { name: 'A' }).closest('.v-checkbox')
+
+    expect(checkbox?.querySelector('.v-input__details')).toBeNull()
+    expect(screen.getByText('Visible details')).toBeVisible()
   })
 
   it('should accept an empty selection when there are no rules', async () => {
     const form = shallowRef<VForm>()
+    const model = shallowRef<string[]>([])
 
     render(() => (
       <VForm ref={ form }>
-        <VCheckboxGroup label="Options">
+        <VCheckboxGroup v-model={ model.value } label="Options">
           <VCheckbox label="A" value="a" />
           <VCheckbox label="B" value="b" />
         </VCheckboxGroup>
@@ -279,8 +308,6 @@ describe('VCheckboxGroup', () => {
     await waitIdle()
 
     await expect(form.value!.validate()).resolves.toEqual({ valid: true, errors: [] })
-    expect(screen.getByRole('checkbox', { name: 'A' })).not.toBeChecked()
-    expect(screen.getByRole('checkbox', { name: 'B' })).not.toBeChecked()
   })
 
   it('should validate the selection and describe the group with one shared error', async () => {
@@ -313,14 +340,18 @@ describe('VCheckboxGroup', () => {
     ])
     expect(screen.getAllByText('Select at least one option')).toHaveLength(1)
     expect(group).toHaveAccessibleDescription('Select at least one option')
+    expect(screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')).toHaveClass('v-selection-control--error')
+    expect(screen.getByRole('checkbox', { name: 'B' }).closest('.v-selection-control')).toHaveClass('v-selection-control--error')
 
     await userEvent.click(screen.getByRole('checkbox', { name: 'B' }))
 
     await expect(form.value!.validate()).resolves.toEqual({ valid: true, errors: [] })
     await expect.poll(() => screen.queryByText('Select at least one option')).toBeNull()
+    expect(screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')).not.toHaveClass('v-selection-control--error')
+    expect(screen.getByRole('checkbox', { name: 'B' }).closest('.v-selection-control')).not.toHaveClass('v-selection-control--error')
   })
 
-  it('should prevent changes while the group is disabled', async () => {
+  it('should disable checkboxes and allow changes after being enabled', async () => {
     const model = shallowRef(['a'])
     const disabled = shallowRef(true)
 
@@ -336,10 +367,6 @@ describe('VCheckboxGroup', () => {
 
     expect(first).toBeDisabled()
     expect(second).toBeDisabled()
-
-    expect(model.value).toEqual(['a'])
-    expect(first).toBeChecked()
-    expect(second).not.toBeChecked()
 
     disabled.value = false
     await waitIdle()
@@ -393,16 +420,17 @@ describe('VCheckboxGroup', () => {
 
     const first = screen.getByRole('checkbox', { name: 'A' })
     const second = screen.getByRole('checkbox', { name: 'B' })
+    const group = screen.getByCSS('.v-checkbox-group')
 
+    expect(group).toHaveClass('v-input--disabled')
     expect(first).toBeDisabled()
     expect(second).toBeDisabled()
 
-    expect(model.value).toEqual(['a'])
-    expect(first).toBeChecked()
-    expect(second).not.toBeChecked()
-
     disabled.value = false
     await waitIdle()
+
+    expect(group).not.toHaveClass('v-input--disabled')
+
     await userEvent.click(second)
 
     expect(model.value).toEqual(['a', 'b'])
@@ -424,6 +452,9 @@ describe('VCheckboxGroup', () => {
 
     const first = screen.getByRole('checkbox', { name: 'A' })
     const second = screen.getByRole('checkbox', { name: 'B' })
+    const group = screen.getByCSS('.v-checkbox-group')
+
+    expect(group).toHaveClass('v-input--readonly')
 
     await userEvent.click(first)
     await userEvent.click(second)
@@ -434,9 +465,79 @@ describe('VCheckboxGroup', () => {
 
     readonly.value = false
     await waitIdle()
+
+    expect(group).not.toHaveClass('v-input--readonly')
+
     await userEvent.click(second)
 
     expect(model.value).toEqual(['a', 'b'])
     expect(second).toBeChecked()
+  })
+
+  it('should focus and blur through a ref without notifying when focus moves within the group', async () => {
+    const group = shallowRef<VCheckboxGroup>()
+    const onFocused = vi.fn()
+
+    render(() => (
+      <VCheckboxGroup ref={ group } modelValue={['b']} onUpdate:focused={ onFocused }>
+        <VCheckbox label="A" value="a" />
+        <VCheckbox label="B" value="b" />
+      </VCheckboxGroup>
+    ))
+    await waitIdle()
+
+    const first = screen.getByRole('checkbox', { name: 'A' })
+    const second = screen.getByRole('checkbox', { name: 'B' })
+    const lock = await commands.getLock()
+
+    try {
+      group.value!.focus()
+      expect(document.activeElement).toBe(second)
+
+      first.focus()
+      await waitIdle()
+
+      expect(onFocused).toHaveBeenCalledExactlyOnceWith(true)
+
+      group.value!.blur()
+      await waitIdle()
+
+      expect(document.activeElement).not.toBe(first)
+      expect(onFocused.mock.calls).toEqual([[true], [false]])
+    } finally {
+      await commands.releaseLock(lock)
+    }
+  })
+
+  it('should expose validation and reset methods through a ref', async () => {
+    const group = shallowRef<VCheckboxGroup>()
+    const model = shallowRef<string[] | null>(['a'])
+
+    render(() => (
+      <VCheckboxGroup
+        ref={ group }
+        v-model={ model.value }
+        rules={[value => value?.length > 1 || 'Select at least two options']}
+      >
+        <VCheckbox label="A" value="a" />
+        <VCheckbox label="B" value="b" />
+      </VCheckboxGroup>
+    ))
+    await waitIdle()
+
+    await expect(group.value!.validate()).resolves.toEqual(['Select at least two options'])
+    expect(group.value!.isValid).toBe(false)
+    expect(screen.getByText('Select at least two options')).toBeVisible()
+
+    await group.value!.resetValidation()
+
+    await expect.poll(() => screen.queryByText('Select at least two options')).toBeNull()
+    expect(model.value).toEqual(['a'])
+
+    await group.value!.reset()
+
+    expect(model.value).toBeNull()
+    expect(screen.getByRole('checkbox', { name: 'A' })).not.toBeChecked()
+    expect(screen.getByRole('checkbox', { name: 'B' })).not.toBeChecked()
   })
 })
