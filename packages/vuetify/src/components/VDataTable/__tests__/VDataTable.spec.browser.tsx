@@ -257,6 +257,22 @@ describe('VDataTable', () => {
     expect(striped).toEqual([true, true, false, false, true, true, false, false])
   })
 
+  it('should stripe every other row when there are no expansion rows', () => {
+    render(() => (
+      <VDataTable
+        items={ DESSERT_ITEMS }
+        headers={ DESSERT_HEADERS }
+        itemsPerPage={ 4 }
+        striped="odd"
+      />
+    ))
+
+    const striped = screen.getAllByCSS('tbody > tr')
+      .map(row => getComputedStyle(row).backgroundImage !== 'none')
+
+    expect(striped).toEqual([true, false, true, false])
+  })
+
   it('should keep rows from the expanded-row slot out of the stripe count', () => {
     const child = {
       type: 'item' as const,
