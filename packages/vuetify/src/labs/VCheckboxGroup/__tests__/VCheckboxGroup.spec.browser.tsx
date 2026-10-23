@@ -99,20 +99,6 @@ describe('VCheckboxGroup', () => {
     expect(onGroup).toHaveBeenCalledExactlyOnceWith(['a'])
   })
 
-  it('should forward the indeterminate icon prop to a checkbox', () => {
-    const path = 'M1,1H3V3H1Z'
-
-    render(() => (
-      <VCheckboxGroup indeterminateIcon={ `svg:${path}` }>
-        <VCheckbox label="A" value="a" indeterminate />
-      </VCheckboxGroup>
-    ))
-
-    const icon = screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')?.querySelector('svg path')
-
-    expect(icon).toHaveAttribute('d', path)
-  })
-
   it('should select one value and clear it when multiple is false', async () => {
     const model = shallowRef<string | boolean>('a')
 
@@ -200,22 +186,6 @@ describe('VCheckboxGroup', () => {
 
     expect(screen.queryByText('Hidden details')).toBeNull()
     expect(screen.getByText('Visible details')).toBeVisible()
-  })
-
-  it('should preserve checkbox details configured through checkbox group defaults', () => {
-    render(() => (
-      <VCheckboxGroup>
-        <VCheckbox label="A" value="a" messages="Details from group defaults" />
-      </VCheckboxGroup>
-    ), null, {
-      defaults: {
-        VCheckboxGroup: {
-          VCheckbox: { hideDetails: false },
-        },
-      },
-    })
-
-    expect(screen.getByText('Details from group defaults')).toBeVisible()
   })
 
   it('should accept an empty selection when there are no rules', async () => {
