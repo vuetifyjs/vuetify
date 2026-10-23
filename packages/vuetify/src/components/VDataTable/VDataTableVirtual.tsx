@@ -355,7 +355,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                       onUpdate:height={ height => setExpandedHeight(index, 0, height) }
                                     >
                                       { ({ itemRef }) => (
-                                        <tr class="v-data-table__tr--expanded v-data-table__tr--expansion" ref={ itemRef }>
+                                        <tr class="v-data-table__tr--expanded" ref={ itemRef }>
                                           <td colspan={ columns.value.length }>
                                             { props.expandTransition
                                               ? (

@@ -371,6 +371,11 @@ describe('VDataTable', () => {
       .map(row => getComputedStyle(row).backgroundImage !== 'none')
 
     expect(striped).toEqual([true, false, false, false, true, false])
+
+    const padding = screen.getAllByCSS('tbody > tr:nth-child(-n+3) > td:first-child')
+      .map(cell => getComputedStyle(cell).paddingLeft)
+
+    expect(padding.every(value => value !== '0px')).toBe(true)
   })
 
   describe('sort', () => {

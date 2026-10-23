@@ -41,7 +41,7 @@ export function expansionNodes (nodes?: VNodeArrayChildren): VNode[] {
     : !isVNode(node) ? []
     : node.type === Fragment ? expansionNodes(node.children as VNodeArrayChildren)
     : typeof node.type === 'symbol' ? []
-    : [cloneVNode(node, { class: 'v-data-table__tr--expansion' })]
+    : [cloneVNode(node, { class: 'v-data-table__tr v-data-table__tr--expanded' })]
   )
 }
 
@@ -215,7 +215,7 @@ export const VDataTableRows = genericComponent<new <T>(
                 { slots['expanded-row']
                   ? isExpanded(item) && expansionNodes(slots['expanded-row'](slotProps))
                   : slots.expanded && (
-                    <tr class="v-data-table__tr--expanded v-data-table__tr--expansion">
+                    <tr class="v-data-table__tr--expanded">
                       <td colspan={ columns.value.length }>
                         { props.expandTransition
                           ? (
