@@ -94,7 +94,7 @@ export default {
     clear: 'Tühjenda {0}',
     prependAction: '{0} eelnev toiming',
     appendAction: '{0} lisatud toiming',
-    otp: 'Palun sisesta OTP sümbol {0}',
+    otp: 'Sisestage kinnituskood',
   },
   fileInput: {
     counter: '{0} faili',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Hinnang {0} {1}st',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Miinimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Rohkem valikuid',
   },
   loading: 'Laadimine...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Klaviatuuri otsetee: {0}',
     or: 'või',
   },
-  video: {
+  media: {
     play: 'Esita',
     pause: 'Peata',
     seek: 'Otsi',
     volume: 'Helitugevus',
-    showVolume: 'Näita helitugevuse regulaatorit',
     mute: 'Vaigista',
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',

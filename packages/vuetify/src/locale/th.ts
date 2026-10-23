@@ -94,7 +94,7 @@ export default {
     clear: 'ล้าง {0}',
     prependAction: 'การกระทำก่อนหน้า {0}',
     appendAction: 'การกระทำเพิ่มเติม {0}',
-    otp: 'กรุณากรอกตัวอักษร OTP ตัวที่ {0}',
+    otp: 'กรอกรหัสยืนยัน',
   },
   fileInput: {
     counter: '{0} ไฟล์',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'คะแนน {0} จาก {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'ต่ำสุด',
+      end: 'สูงสุด',
+    },
+  },
+  splitBtn: {
+    menu: 'ตัวเลือกเพิ่มเติม',
   },
   loading: 'กำลังโหลด...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'ทางลัดแป้นพิมพ์: {0}',
     or: 'หรือ',
   },
-  video: {
+  media: {
     play: 'เล่น',
     pause: 'หยุดชั่วคราว',
     seek: 'ค้นหา',
     volume: 'ระดับเสียง',
-    showVolume: 'แสดงตัวควบคุมระดับเสียง',
     mute: 'ปิดเสียง',
     unmute: 'เปิดเสียง',
     enterFullscreen: 'เต็มหน้าจอ',

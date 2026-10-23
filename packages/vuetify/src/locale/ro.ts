@@ -1,8 +1,8 @@
 export default {
   badge: 'Insignă',
-  open: 'Open',
+  open: 'Deschideți',
   close: 'Închideți',
-  dismiss: 'Dismiss',
+  dismiss: 'Închideți',
   confirmEdit: {
     ok: 'OK',
     cancel: 'Anulează',
@@ -84,7 +84,7 @@ export default {
   },
   calendar: {
     moreEvents: 'încă {0}',
-    today: 'Today',
+    today: 'Astăzi',
   },
   heatmap: {
     less: 'Mai puțin',
@@ -94,7 +94,7 @@ export default {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',
     appendAction: '{0} acțiune de inserare la sfârșit',
-    otp: 'Introduceți caracterul OTP {0}',
+    otp: 'Introduceți codul de verificare',
   },
   fileInput: {
     counter: '{0} fișiere',
@@ -110,8 +110,8 @@ export default {
     pm: 'PM',
     title: 'Selectați ora',
     hour: 'Oră',
-    minute: 'Minute',
-    second: 'Secunde',
+    minute: 'Minut',
+    second: 'Secundă',
     notAllowed: 'Valoarea nu este permisă',
   },
   pagination: {
@@ -134,6 +134,15 @@ export default {
       item: 'Evaluare {0} din {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minim',
+      end: 'Maxim',
+    },
+  },
+  splitBtn: {
+    menu: 'Mai multe opțiuni',
+  },
   loading: 'Se încarcă...',
   infiniteScroll: {
     loadMore: 'Încarcă mai multe',
@@ -148,7 +157,7 @@ export default {
     maxLength: 'Trebuie să introduceți maximum {0} caractere',
     minLength: 'Trebuie să introduceți minimum {0} caractere',
     strictLength: 'Lungimea câmpului introdus este invalidă',
-    exclude: 'Caracterele {0} nu sunt permise',
+    exclude: 'Caracterul {0} nu este permis',
     notEmpty: 'Vă rugăm să alegeți cel puțin o valoare',
     pattern: 'Format invalid',
   },
@@ -171,15 +180,14 @@ export default {
     backspace: 'Backspace',
     space: 'Spațiu',
     plus: 'plus',
-    shortcut: 'Comandă rapidă tastatură: {0}',
+    shortcut: 'Comandă rapidă de la tastatură: {0}',
     or: 'sau',
   },
-  video: {
+  media: {
     play: 'Redare',
     pause: 'Pauză',
     seek: 'Căutare',
     volume: 'Volum',
-    showVolume: 'Afișare control volum',
     mute: 'Fără sunet',
     unmute: 'Cu sunet',
     enterFullscreen: 'Ecran complet',

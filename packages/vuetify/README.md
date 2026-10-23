@@ -279,7 +279,7 @@ Detailed changes for each release are documented in the [release notes](https://
 
 ### 💁‍♂️ Contributing
 
-Developers interested in contributing should read the [Code of Conduct](./CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing/).
+Developers interested in contributing should read the [Code of Conduct](https://github.com/vuetifyjs/vuetify/blob/master/CODE_OF_CONDUCT.md) and the [Contribution Guide](https://vuetifyjs.com/getting-started/contributing/).
 
 > Please do **not** ask general questions in an issue. Issues are only to report bugs, suggest
   enhancements, or request new features. For general questions and discussions, ask in the [community chat](https://discord.gg/vuetify).

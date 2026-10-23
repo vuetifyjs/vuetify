@@ -1,6 +1,7 @@
 // Components
 import { VDataTable } from '../VDataTable'
 import { VDataTableRow } from '../VDataTableRow'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Utilities
 import { render, screen, showcase, userEvent } from '@test'
@@ -113,6 +114,24 @@ describe('VDataTable', () => {
     expect(updatePage).toHaveBeenNthCalledWith(2, 1)
   })
 
+  it('should let nested VSelect defaults override variant of sort and items-per-page selects', async () => {
+    render(() => (
+      <VDefaultsProvider defaults={{
+        VDataTableHeaders: { VSelect: { variant: 'solo' } },
+        VDataTableFooter: { VSelect: { variant: 'solo' } },
+      }}
+      >
+        <VDataTable headers={ DESSERT_HEADERS } items={ DESSERT_ITEMS } mobile />
+      </VDefaultsProvider>
+    ))
+
+    const fields = screen.getAllByCSS('.v-select .v-field')
+    expect(fields).toHaveLength(2)
+    for (const field of fields) {
+      expect(field).toHaveClass('v-field--variant-solo')
+    }
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/16999
   it('should search in nested keys', async () => {
     const nestedItems = [
@@ -215,6 +234,50 @@ describe('VDataTable', () => {
     await nextTick()
 
     expect(screen.queryAllByCSS('thead .v-selection-control')).toHaveLength(1)
+  })
+
+  it('should select all only filtered items with select-strategy="filtered"', async () => {
+    const selected = ref<string[]>(['Donut'])
+    render(() => (
+      <VDataTable
+        v-model={ selected.value }
+        headers={ DESSERT_HEADERS }
+        items={ DESSERT_ITEMS }
+        itemValue="name"
+        itemsPerPage={ 2 }
+        search="c"
+        selectStrategy="filtered"
+        showSelect
+      />
+    ))
+
+    await userEvent.click(screen.getByCSS('thead .v-selection-control input'))
+    expect(selected.value).toEqual(['Donut', 'Ice cream sandwich', 'Eclair', 'Cupcake', 'Honeycomb'])
+    expect(screen.getByCSS('thead .v-selection-control input')).toBeChecked()
+
+    await userEvent.click(screen.getByCSS('thead .v-selection-control input'))
+    expect(selected.value).toEqual(['Donut'])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/23123
+  it('should keep column cells in place when toggling show-select', async () => {
+    const showSelect = ref(false)
+    render(() => (
+      <VDataTable
+        headers={ DESSERT_HEADERS }
+        items={ DESSERT_ITEMS }
+        showSelect={ showSelect.value }
+      />
+    ))
+
+    const header = screen.getByCSS('thead tr th:first-child')
+    const cell = screen.getByCSS('tbody tr:first-child td:first-child')
+
+    showSelect.value = true
+    await nextTick()
+
+    expect(screen.getByCSS('thead tr th:nth-child(2)')).toBe(header)
+    expect(screen.getByCSS('tbody tr:first-child td:nth-child(2)')).toBe(cell)
   })
 
   it('with body.append should show correct item count after group is expanded', async () => {

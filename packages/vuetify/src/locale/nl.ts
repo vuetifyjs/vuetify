@@ -94,7 +94,7 @@ export default {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
     appendAction: '{0} bijgevoegde actie',
-    otp: 'Voer OTP-teken {0} in',
+    otp: 'Voer verificatiecode in',
   },
   fileInput: {
     counter: '{0} bestanden',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Beoordeling {0} van {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opties',
   },
   loading: 'Bezig met laden...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Toetsenbordsnelkoppeling: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Afspelen',
     pause: 'Pauzeren',
     seek: 'Zoeken',
     volume: 'Volume',
-    showVolume: 'Volumeregeling weergeven',
     mute: 'Dempen',
     unmute: 'Dempen opheffen',
     enterFullscreen: 'Volledig scherm',

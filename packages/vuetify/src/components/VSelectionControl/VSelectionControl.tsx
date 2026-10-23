@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import vRipple from '@/directives/ripple'
 
 // Utilities
-import { computed, inject, nextTick, ref, shallowRef, toRef, useId } from 'vue'
+import { computed, inject, nextTick, shallowRef, toRef, useId } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -52,12 +52,14 @@ export type VSelectionControlSlots = {
     backgroundColorStyles: Ref<CSSProperties>
   }
   label: { label: string | undefined, props: Record<string, unknown> }
+  description: never
   input: SelectionControlSlot
 }
 
 export const makeVSelectionControlProps = propsFactory({
   indeterminate: Boolean,
   label: String,
+  description: String,
   baseColor: String,
   trueValue: null,
   falseValue: null,
@@ -177,12 +179,30 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
+
     const uid = useId()
     const isFocused = shallowRef(false)
     const isFocusVisible = shallowRef(false)
-    const input = ref<HTMLInputElement>()
+    const input = shallowRef<HTMLInputElement>()
     const id = toRef(() => props.id || `input-${uid}`)
     const isInteractive = toRef(() => !props.disabled && !props.readonly)
+
+    function focus (options?: FocusOptions) {
+      input.value?.focus(options)
+      if (options?.focusVisible !== undefined && input.value?.matches(':focus')) {
+        isFocusVisible.value = options.focusVisible
+      }
+    }
+
+    function blur () {
+      input.value?.blur()
+    }
+
+    group?.register({
+      el: () => input.value,
+      focus,
+      isChecked: () => model.value,
+    })
 
     group?.onForceUpdate(() => {
       if (input.value) {
@@ -215,6 +235,7 @@ export const VSelectionControl = genericComponent<new <T>(
           // but the internal checked state of the input is still updated,
           // so here its value is restored
           input.value.checked = model.value
+          input.value.indeterminate = props.indeterminate
         }
 
         return
@@ -233,6 +254,8 @@ export const VSelectionControl = genericComponent<new <T>(
           props: { for: id.value },
         })
         : props.label
+      const hasDescription = !!(props.description || slots.description)
+      const descriptionId = `${id.value}-description`
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const inputNode = (
@@ -249,9 +272,18 @@ export const VSelectionControl = genericComponent<new <T>(
           type={ props.type }
           value={ trueValue.value }
           name={ props.name }
-          aria-checked={ props.type === 'checkbox' ? model.value : undefined }
+          indeterminate={ props.indeterminate }
           { ...inputAttrs }
+          aria-describedby={
+            [hasDescription && descriptionId, inputAttrs['aria-describedby']].filter(Boolean).join(' ') || undefined
+          }
         />
+      )
+
+      const labelNode = label && (
+        <VLabel for={ id.value } onClick={ onClickLabel }>
+          { label }
+        </VLabel>
       )
 
       return (
@@ -266,6 +298,7 @@ export const VSelectionControl = genericComponent<new <T>(
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
               'v-selection-control--inline': props.inline,
+              'v-selection-control--has-description': hasDescription,
             },
             densityClasses.value,
             props.class,
@@ -318,16 +351,22 @@ export const VSelectionControl = genericComponent<new <T>(
             </div>
           </div>
 
-          { label && (
-            <VLabel for={ id.value } onClick={ onClickLabel }>
-              { label }
-            </VLabel>
+          { !hasDescription ? labelNode : (
+            <div class="v-selection-control__content">
+              { labelNode }
+
+              <div id={ descriptionId } class="v-selection-control__description">
+                { slots.description?.() ?? props.description }
+              </div>
+            </div>
           )}
         </div>
       )
     })
 
     return {
+      blur,
+      focus,
       isFocused,
       input,
     }

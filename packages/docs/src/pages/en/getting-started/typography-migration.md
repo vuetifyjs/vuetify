@@ -52,7 +52,7 @@ If you want to keep text sizes as close as possible to the previous MD2 sizes, u
 - **Large headings (h1-h3)**: MD3 display variants are significantly smaller than MD2 headings. Consider customizing these sizes if maintaining visual hierarchy is critical.
 - **Title variants (new in MD3)**: The `text-title-*` variants provide better semantic alternatives for medium-sized headings and subtitles with appropriate font weights (400-500). Use these instead of body variants when you need emphasized text.
 - **text-overline**: The `text-label-small` or `text-label-medium` classes don't include `text-transform: uppercase` by default. Use `text-uppercase` utility class or customize the variant.
-- **Font weight differences**: Some MD3 variants have different font weights. Check the [full comparison table](#key-differences) below for details.
+- **Font weight differences**: Some MD3 variants have different font weights. Check the [mapping table](#conservative-migration-mapping) above for details.
 :::
 
 ## Migration Steps
@@ -312,7 +312,6 @@ $flat-typography: ();
   $empty-state-title-font-weight: map.get($typography, 'h6', 'weight'),
   $empty-state-title-line-height: map.get($typography, 'h6', 'line-height'),
   $fab-font-size: map.get($typography, 'button', 'size'),
-  $fab-font-weight: map.get($typography, 'button', 'weight'),
   $input-font-size: map.get($typography, 'body-1', 'size'),
   $input-font-weight: map.get($typography, 'body-1', 'weight'),
   $list-item-nav-subtitle-font-weight: map.get($typography, 'body-2', 'weight'),
@@ -336,7 +335,6 @@ $flat-typography: ();
   $system-bar-text-transform: map.get($typography, 'caption', 'text-transform'),
   $table-header-font-size: map.get($typography, 'caption', 'size'),
   $table-font-size: map.get($typography, 'body-2', 'size'),
-  $table-row-font-size: map.get($typography, 'subtitle-2', 'size'),
   $icon-btn-font-size: map.get($typography, 'button', 'size'),
   $icon-btn-font-weight: map.get($typography, 'button', 'weight'),
 );

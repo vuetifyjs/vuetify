@@ -40,22 +40,29 @@ jobs:
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 0
-      - run: |
+      - name: Check for recent commits
+        id: check-commits
+        run: |
           last=$(git show -s --format=%ct HEAD)
           now=$(date +%s)
           diff=$(($now - $last))
           if [ $diff -gt 86400 ]; then
               echo "Last commit was more than 24 hours ago, skipping release"
-              exit 1
+              echo "should-release=false" >> $GITHUB_OUTPUT
+          else
+              echo "should-release=true" >> $GITHUB_OUTPUT
           fi
       - run: echo "RELEASE_ID=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        if: steps.check-commits.outputs.should-release == 'true'
       - uses: ./.github/actions/nightly-release
+        if: steps.check-commits.outputs.should-release == 'true'
         with:
           checkout-repo: ${{ github.repository }}
           checkout-ref: ${{ matrix.branch }}
           release-id: ${{ matrix.branch }}.${{ env.RELEASE_ID }}
           npm-tag: ${{ matrix.tag }}
       - uses: actions/checkout@v6
+        if: steps.check-commits.outputs.should-release == 'true'
 
   nightly-pr:
     runs-on: ubuntu-24.04
@@ -107,17 +114,24 @@ jobs:
         with:
           ref: master
           fetch-depth: 0
-      - run: |
+      - name: Check for recent commits
+        id: check-commits
+        run: |
           last=$(git show -s --format=%ct HEAD)
           now=$(date +%s)
           diff=$(($now - $last))
           if [ $diff -gt 86400 ]; then
               echo "Last commit was more than 24 hours ago, skipping tests"
-              exit 1
+              echo "should-test=false" >> $GITHUB_OUTPUT
+          else
+              echo "should-test=true" >> $GITHUB_OUTPUT
           fi
       - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
+        if: steps.check-commits.outputs.should-test == 'true'
       - run: pnpm exec playwright install chromium
+        if: steps.check-commits.outputs.should-test == 'true'
       - run: pnpm vizzly run "pnpm test:browser"
+        if: steps.check-commits.outputs.should-test == 'true'
         working-directory: ./packages/vuetify
         env:
           VIZZLY_TOKEN: ${{ secrets.VIZZLY_TOKEN }}

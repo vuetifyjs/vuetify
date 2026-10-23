@@ -94,7 +94,7 @@ export default {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',
     appendAction: '{0} aksi diakhir',
-    otp: 'Masukkan karakter OTP {0}',
+    otp: 'Masukkan kode verifikasi',
   },
   fileInput: {
     counter: '{0} berkas',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Penilaian {0} dari {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Opsi lainnya',
   },
   loading: 'Memuat...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Pintasan keyboard: {0}',
     or: 'atau',
   },
-  video: {
+  media: {
     play: 'Putar',
     pause: 'Jeda',
     seek: 'Cari',
     volume: 'Volume',
-    showVolume: 'Tampilkan kontrol volume',
     mute: 'Bisukan',
     unmute: 'Bunyikan',
     enterFullscreen: 'Layar penuh',

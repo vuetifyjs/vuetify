@@ -8,7 +8,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import { toRef } from 'vue'
 import { formatTextTemplate } from './utils'
-import { genericComponent, pick, propsFactory } from '@/util'
+import { genericComponent, isFunction, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -45,13 +45,13 @@ export const VPieTooltip = genericComponent<VPieTooltipSlots>()({
 
   setup (props, { slots }) {
     const tooltipTitleFormatFunction = toRef(() => (segment: PieItem) => {
-      return typeof props.titleFormat === 'function'
+      return isFunction(props.titleFormat)
         ? props.titleFormat(segment)
         : formatTextTemplate(props.titleFormat, segment)
     })
 
     const tooltipSubtitleFormatFunction = toRef(() => (segment: PieItem) => {
-      return typeof props.subtitleFormat === 'function'
+      return isFunction(props.subtitleFormat)
         ? props.subtitleFormat(segment)
         : formatTextTemplate(props.subtitleFormat, segment)
     })

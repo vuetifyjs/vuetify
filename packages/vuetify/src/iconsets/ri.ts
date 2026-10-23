@@ -47,6 +47,7 @@ const aliases: IconAliases = {
   plus: 'i-ri:add-line',
   minus: 'i-ri:subtract-line',
   calendar: 'i-ri:calendar-line',
+  clock: 'i-ri:time-line',
   treeviewCollapse: 'i-ri:arrow-down-s-line',
   treeviewExpand: 'i-ri:arrow-right-s-line',
   tableGroupExpand: 'i-ri:arrow-right-s-line',

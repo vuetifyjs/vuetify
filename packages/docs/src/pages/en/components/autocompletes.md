@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Autocompletes
   title: Autocomplete component
@@ -13,7 +14,7 @@ features:
   label: 'C: VAutocomplete'
   report: true
   github: /components/VAutocomplete/
-  spec: https://m2.material.io/components/text-fields
+  spec: https://m3.material.io/components/text-fields
 ---
 
 # Autocompletes
@@ -71,6 +72,18 @@ The `custom-filter` prop can be used to filter each individual item with custom 
 When user is typing in the field to narrow the list of options, the input text is matched against the `title`. With `filter-keys` you can specify which properties should be used instead. Properties of original objects passed to `items` need to be accessed via the `raw.*` path, as `filter-keys` index the root level of `InternalItem`.
 
 <ExamplesExample file="v-autocomplete/prop-filter-keys" />
+
+#### Filtered order
+
+By default, matching items keep their order from `items`. With `filtered-order="prefix"`, exact matches come first, then items with a value starting with the query, then those with a word starting with it, then the rest. Every key in `filter-keys` counts, including hidden ones such as aliases. Within a tier, a match in an earlier key wins, so list the displayed key first. Ordering relies on the built-in filtering and has no effect with `no-filter`.
+
+<ExamplesExample file="v-autocomplete/prop-filtered-order" />
+
+#### Ignore accents (i18n)
+
+The **ignore-accents** prop lets a plain query match names written using native language characters.
+
+<ExamplesExample file="v-autocomplete/prop-ignore-accents" />
 
 #### Subheaders and dividers
 

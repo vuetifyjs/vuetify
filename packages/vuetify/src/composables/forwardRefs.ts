@@ -1,3 +1,6 @@
+// Utilities
+import { isFunction, isSymbol } from '@/util'
+
 // Types
 import type { ComponentOptionsBase, ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
 import type { NonEmptyArray, UnionToIntersection } from '@/util'
@@ -49,12 +52,12 @@ export function forwardRefs<
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
+      if (isSymbol(key) || key.startsWith('$') || key.startsWith('__')) return
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
           const val = Reflect.get(ref.value, key)
-          return typeof val === 'function'
+          return isFunction(val)
             ? val.bind(ref.value)
             : val
         }
@@ -66,7 +69,7 @@ export function forwardRefs<
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
+      if (isSymbol(key) || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -81,7 +84,7 @@ export function forwardRefs<
       }
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return false
+      if (isSymbol(key) || key.startsWith('$') || key.startsWith('__')) return false
 
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
@@ -96,7 +99,7 @@ export function forwardRefs<
       if (descriptor) return descriptor
 
       // Skip internal properties
-      if (typeof key === 'symbol' || key.startsWith('$') || key.startsWith('__')) return
+      if (isSymbol(key) || key.startsWith('$') || key.startsWith('__')) return
 
       // Check each ref's own properties
       for (const ref of refs) {

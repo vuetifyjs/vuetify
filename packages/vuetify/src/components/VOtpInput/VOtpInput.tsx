@@ -15,14 +15,14 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { effectScope, provide, ref, toRef, watch, watchEffect } from 'vue'
-import { filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { effectScope, provide, ref, toRef, watch } from 'vue'
+import { filterInputAttrs, genericComponent, isBoolean, pick, propsFactory, useRender } from '@/util'
 
 // Shared
 import { VOtpInputSymbol } from './shared'
@@ -151,7 +151,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
         // Slot count, not `input.maxLength` (code units).
         maxLength: length.value,
       })
-      if (!result) return
+      if (!result || otp.isComposing.value) return
       if (input.selectionStart !== result.start || input.selectionEnd !== result.end) {
         input.setSelectionRange(result.start, result.end, result.direction)
       }
@@ -183,6 +183,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     function onCompositionend (e: CompositionEvent) {
       otp.endComposition()
       onInput(e)
+      onSelectionChange()
     }
 
     function onFocus () {
@@ -297,13 +298,10 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
     useToggleScope(() => props.autofocus, () => {
       const intersectScope = effectScope()
       intersectScope.run(() => {
-        const { intersectionRef, isIntersecting } = useIntersectionObserver()
-        watchEffect(() => {
-          intersectionRef.value = inputRef.value
-        })
+        const { isIntersecting } = useElementIntersection(inputRef)
         watch(isIntersecting, v => {
           if (!v) return
-          intersectionRef.value?.focus()
+          inputRef.value?.focus()
           intersectScope.stop()
         })
       })
@@ -409,7 +407,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
             >
               { slots.loader?.() ?? (
                 <VProgressCircular
-                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                  color={ isBoolean(props.loading) ? undefined : props.loading }
                   indeterminate
                   size="24"
                   width="2"

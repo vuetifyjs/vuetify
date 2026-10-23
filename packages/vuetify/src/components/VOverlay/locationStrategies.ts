@@ -18,6 +18,9 @@ import {
   getScrollParents,
   IN_BROWSER,
   isFixedPosition,
+  isFunction,
+  isNumber,
+  isString,
   nullifyTransforms,
   parseAnchor,
   propsFactory,
@@ -63,7 +66,7 @@ export const makeLocationStrategyProps = propsFactory({
   locationStrategy: {
     type: [String, Function] as PropType<StrategyProps['locationStrategy']>,
     default: 'static',
-    validator: (val: any) => typeof val === 'function' || val in locationStrategies,
+    validator: (val: any) => isFunction(val) || val in locationStrategies,
   },
   location: String as PropType<StrategyProps['location']>,
   origin: {
@@ -102,7 +105,7 @@ export function useLocationStrategies (
       visualViewport?.addEventListener('resize', onVisualResize, { passive: true })
       visualViewport?.addEventListener('scroll', onVisualScroll, { passive: true })
 
-      if (typeof props.locationStrategy === 'function') {
+      if (isFunction(props.locationStrategy)) {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
@@ -195,15 +198,19 @@ function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // el.style.removeProperty('max-width')
   // el.style.removeProperty('max-height')
 
-  /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
-  if (isRtl) {
-    contentBox.x += parseFloat(el.style.right || 0)
-  } else {
-    contentBox.x -= parseFloat(el.style.left || 0)
+  const computed = getComputedStyle(el)
+  function offset (side: 'left' | 'right' | 'top') {
+    return el.style[side] ? parseFloat(computed[side]) || 0 : 0
   }
-  contentBox.y -= parseFloat(el.style.top || 0)
+
+  if (isRtl) {
+    contentBox.x += offset('right')
+  } else {
+    contentBox.x -= offset('left')
+  }
+  contentBox.y -= offset('top')
 
   // el.style.maxWidth = initialMaxWidth
   // el.style.maxHeight = initialMaxHeight
@@ -254,7 +261,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
         const container = (data.contentEl.value?.parentElement ?? document.documentElement) as HTMLElement
 
-        if (typeof raw === 'number' || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
+        if (isNumber(raw) || /^-?[\d.]+(?:px)?$/.test(raw.trim())) {
           return parseFloat(raw as string)
         }
         if (raw.endsWith('%')) {
@@ -271,12 +278,12 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (Array.isArray(props.offset)) {
       return props.offset
     }
-    if (typeof props.offset === 'string') {
+    if (isString(props.offset)) {
       const offset = props.offset.split(' ').map(parseFloat)
       if (offset.length < 2) offset.push(0)
       return offset
     }
-    return typeof props.offset === 'number' ? [props.offset, 0] : [0, 0]
+    return isNumber(props.offset) ? [props.offset, 0] : [0, 0]
   })
 
   let observe = false
@@ -328,7 +335,6 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     observer.disconnect()
   })
 
-  // eslint-disable-next-line max-statements
   function updateLocation () {
     observe = false
     requestAnimationFrame(() => observe = true)
@@ -353,7 +359,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
-      if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
+      if (!(data.contentEl.value.style.top && data.contentEl.value.style[data.isRtl.value ? 'right' : 'left'])) {
         contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
         contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }

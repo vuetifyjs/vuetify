@@ -94,7 +94,7 @@ export default {
     clear: 'Vymazat {0}',
     prependAction: '{0} předřazená akce',
     appendAction: '{0} připojená akce',
-    otp: 'Vložte OTP znak {0}',
+    otp: 'Zadejte verifikační kód',
   },
   fileInput: {
     counter: '{0} souborů',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Hodnocení {0} z {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Další možnosti',
   },
   loading: 'Načítám...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Klávesová zkratka: {0}',
     or: 'nebo',
   },
-  video: {
+  media: {
     play: 'Přehrát',
     pause: 'Pozastavit',
     seek: 'Vyhledat',
     volume: 'Hlasitost',
-    showVolume: 'Zobrazit ovládání hlasitosti',
     mute: 'Ztlumit',
     unmute: 'Zrušit ztlumení',
     enterFullscreen: 'Celá obrazovka',

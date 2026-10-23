@@ -1,0 +1,8 @@
+{
+  "description": "An indeterminate loading indicator that morphs between shapes while rotating.",
+  "props": {
+    "contained": "Places the shape inside a circular tonal container.",
+    "shapeSize": "Sets the size of the morphing shape. A number is treated as pixels; a percentage is relative to the indicator size.",
+    "size": "Sets the width and height of the indicator. Accepts a number in pixels or a named size."
+  }
+}

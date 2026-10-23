@@ -94,7 +94,7 @@ export default {
     clear: 'Καθαρισμός {0}',
     prependAction: '{0} προσαρτημένη ενέργεια',
     appendAction: '{0} επισυναπτόμενη ενέργεια',
-    otp: 'Παρακαλώ εισαγάγετε χαρακτήρα OTP {0}',
+    otp: 'Εισαγάγετε τον κωδικό επαλήθευσης',
   },
   fileInput: {
     counter: '{0} αρχεία',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Βαθμολογία {0} από {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Ελάχιστο',
+      end: 'Μέγιστο',
+    },
+  },
+  splitBtn: {
+    menu: 'Περισσότερες επιλογές',
   },
   loading: 'Φόρτωση...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Συντόμευση πληκτρολογίου: {0}',
     or: 'ή',
   },
-  video: {
+  media: {
     play: 'Αναπαραγωγή',
     pause: 'Παύση',
     seek: 'Αναζήτηση',
     volume: 'Ένταση',
-    showVolume: 'Εμφάνιση ελέγχου έντασης',
     mute: 'Σίγαση',
     unmute: 'Κατάργηση σίγασης',
     enterFullscreen: 'Πλήρης οθόνη',

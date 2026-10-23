@@ -40,6 +40,7 @@ export const makeVTooltipProps = propsFactory({
     transition: null,
   }), [
     'absolute',
+    'contextMenu',
     'retainFocus',
     'captureFocus',
     'disableInitialFocus',
@@ -53,9 +54,12 @@ export const VTooltip = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -127,6 +131,9 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           role="tooltip"
           activatorProps={ activatorProps.value }
           _disableGlobalStack
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
+          onAfterLeave={ () => emit('afterLeave') }
           { ...scopeId }
         >
           {{

@@ -12,7 +12,7 @@ features:
   github: /components/VGrid/
   label: 'C: VGrid'
   report: true
-  spec: https://m2.material.io/design/layout/responsive-layout-grid
+  spec: https://m3.material.io/foundations/layout/grids-spacing
 ---
 
 # Grid system
@@ -56,7 +56,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ### v-row
 
-`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be modified using the **density** prop - use **comfortable** for reduced gutters or **compact** to remove them completely. This is the 2.x replacement for `v-layout` in 1.x.
+`v-row` is a wrapper component for `v-col`. It utilizes flex properties to control the layout and flow of its inner columns. It uses a standard gutter of **24px**. This can be modified using the **density** prop - use **comfortable** for **16px** gutter or **compact** to for **8px**.
 
 ### v-spacer
 

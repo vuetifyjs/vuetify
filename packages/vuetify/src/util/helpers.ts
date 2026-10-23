@@ -3,17 +3,16 @@ import {
   camelize,
   capitalize,
   Comment,
+  computed,
   Fragment,
   isProxy,
   isReactive,
   isRef,
   isVNode,
-  reactive,
   shallowRef,
   toRaw,
   toRef,
   unref,
-  watchEffect,
 } from 'vue'
 import { consoleError } from '@/util/console'
 import { IN_BROWSER } from '@/util/globals'
@@ -31,28 +30,29 @@ import type {
   VNodeArrayChildren,
   VNodeChild,
 } from 'vue'
+import { isBoolean, isFunction, isNull, isNullOrUndefined, isNumber, isString, isUndefined } from './v0'
 
-export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
+export function getNestedValue (obj: any, path: readonly (string | number)[], fallback?: any): any {
   const last = path.length - 1
 
-  if (last < 0) return obj === undefined ? fallback : obj
+  if (last < 0) return isUndefined(obj) ? fallback : obj
 
   for (let i = 0; i < last; i++) {
-    if (obj == null) {
+    if (isNullOrUndefined(obj)) {
       return fallback
     }
     obj = obj[path[i]]
   }
 
-  if (obj == null) return fallback
+  if (isNullOrUndefined(obj)) return fallback
 
   return obj[path[last]] === undefined ? fallback : obj[path[last]]
 }
 
 export function getObjectValueByPath (obj: any, path?: string | null, fallback?: any): any {
   // credit: http://stackoverflow.com/questions/6491463/accessing-nested-javascript-objects-with-string-key#comment55278413_6491621
-  if (obj == null || !path || typeof path !== 'string') return fallback
-  if (obj[path] !== undefined) return obj[path]
+  if (isNullOrUndefined(obj) || !path || !isString(path)) return fallback
+  if (!isUndefined(obj[path])) return obj[path]
   path = path.replace(/\[(\w+)\]/g, '.$1') // convert indexes to properties
   path = path.replace(/^\./, '') // strip a leading dot
   return getNestedValue(obj, path.split('.'), fallback)
@@ -69,31 +69,27 @@ export function getPropertyFromItem (
   property: SelectItemKey,
   fallback?: any
 ): any {
-  if (property === true) return item === undefined ? fallback : item
+  if (property === true) return isUndefined(item) ? fallback : item
 
-  if (property == null || typeof property === 'boolean') return fallback
+  if (isNullOrUndefined(property) || isBoolean(property)) return fallback
 
   if (item !== Object(item)) {
-    if (typeof property !== 'function') return fallback
+    if (!isFunction(property)) return fallback
 
     const value = property(item, fallback)
 
     return typeof value === 'undefined' ? fallback : value
   }
 
-  if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
+  if (isString(property)) return getObjectValueByPath(item, property, fallback)
 
   if (Array.isArray(property)) return getNestedValue(item, property, fallback)
 
-  if (typeof property !== 'function') return fallback
+  if (!isFunction(property)) return fallback
 
   const value = property(item, fallback)
 
   return typeof value === 'undefined' ? fallback : value
-}
-
-export function createRange (length: number, start = 0): number[] {
-  return Array.from({ length }, (v, k) => start + k)
 }
 
 export function getZIndex (el?: Element | null): number {
@@ -105,10 +101,20 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
+export function isPercentage (value: unknown): value is string {
+  return isString(value) && value.endsWith('%')
+}
+
+export function resolveSize (value: number | string | undefined, spanSize = 0): number {
+  return isPercentage(value)
+    ? parseFloat(value) / 100 * spanSize
+    : parseFloat(String(value)) || 0
+}
+
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
-  if (str == null || str === '') {
+  if (isNullOrUndefined(str) || str === '') {
     return undefined
   }
   const num = Number(str)
@@ -121,15 +127,11 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
   }
 }
 
-export function isObject (obj: any): obj is Record<string, any> {
-  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
-}
-
 export function isPlainObject (obj: any): obj is Record<string, any> {
   let proto
-  return obj !== null && typeof obj === 'object' && (
+  return !!obj && typeof obj === 'object' && (
     (proto = Object.getPrototypeOf(obj)) === Object.prototype ||
-    proto === null
+    !proto
   )
 }
 
@@ -365,22 +367,22 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N
 export function wrapInArray<T> (
   v: T | null | undefined
 ): T extends readonly any[]
-    ? IfAny<T, T[], T>
-    : NonNullable<T>[] {
-  return v == null
+  ? IfAny<T, T[], T>
+  : NonNullable<T>[] {
+  return isNullOrUndefined(v)
     ? [] as any
     : Array.isArray(v)
       ? v as any : [v] as any
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
-  return value != null &&
-    search != null &&
-    typeof value !== 'boolean' &&
+  return !isNullOrUndefined(value) &&
+    !isNullOrUndefined(search) &&
+    !isBoolean(value) &&
     value.toString().toLocaleLowerCase().indexOf(search.toLocaleLowerCase()) !== -1
 }
 
@@ -399,6 +401,16 @@ export function debounce (fn: Function, delay: MaybeRef<number>) {
 
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
+}
+
+export type ValueFormat = string | ((ctx: { value: number, max: number, percent: number }) => string)
+
+export function formatValue (format: ValueFormat, value: number, max: number, percent: number): string {
+  if (isFunction(format)) return format({ value, max, percent })
+  return format
+    .replaceAll('[value]', String(value))
+    .replaceAll('[max]', String(max))
+    .replaceAll('[percent]', String(Math.round(percent)))
 }
 
 export function getDecimals (value: number) {
@@ -581,16 +593,10 @@ type ToReadonlyRefs<T> = { [K in keyof T]: Readonly<ToRef<T[K]>> }
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToReadonlyRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = reactive({}) as T
-  watchEffect(() => {
-    const base = getter()
-    for (const key in base) {
-      refs[key] = base[key]
-    }
-  }, { flush: 'sync' })
+  const base = computed(getter)
   const obj = {} as ToReadonlyRefs<T>
-  for (const key in refs) {
-    obj[key] = toRef(() => refs[key]) as any
+  for (const key in base.value) {
+    obj[key] = toRef(() => base.value[key]) as any
   }
   return obj
 }
@@ -618,7 +624,7 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | EventProp<T>
     for (const h of handler) {
       h(...args)
     }
-  } else if (typeof handler === 'function') {
+  } else if (isFunction(handler)) {
     handler(...args)
   }
 }
@@ -668,13 +674,17 @@ export function getNextElement (elements: HTMLElement[], location?: 'next' | 'pr
   let _el
   let idx = elements.indexOf(getActiveElement() as HTMLElement)
   if (idx < 0) {
-    idx = elements.findIndex(el => el.getAttribute('aria-selected') === 'true')
+    const focusTarget = location === 'prev' ? elements.at(-1) : elements[0]
+    const focusTargetRole = focusTarget?.getAttribute('role') ?? ''
+    if (['option', 'listbox'].includes(focusTargetRole)) {
+      idx = elements.findIndex(el => el.getAttribute('role') === 'option' && el.getAttribute('aria-selected') === 'true')
+    }
   }
   const inc = location === 'next' ? 1 : -1
   do {
     idx += inc
     _el = elements[idx]
-  } while ((!_el || _el.offsetParent == null || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
+  } while ((!_el || !_el.offsetParent || !(condition?.(_el) ?? true)) && idx < elements.length && idx >= 0)
   return _el
 }
 
@@ -685,7 +695,7 @@ export function focusChild (
 ) {
   const focusable = focusableChildren(el)
 
-  if (location == null) {
+  if (isNullOrUndefined(location)) {
     const active = getActiveElement()
     if (el === active || !el.contains(active)) {
       focusable[0]?.focus(options)
@@ -694,17 +704,17 @@ export function focusChild (
     focusable[0]?.focus(options)
   } else if (location === 'last') {
     focusable.at(-1)?.focus(options)
-  } else if (typeof location === 'number') {
+  } else if (isNumber(location)) {
     focusable[location]?.focus(options)
   } else {
     const _el = getNextElement(focusable, location)
-    if (_el) _el.focus()
+    if (_el) _el.focus(options)
     else focusChild(el, location === 'next' ? 'first' : 'last', options)
   }
 }
 
 export function isEmpty (val: any): boolean {
-  return val === null || val === undefined || (typeof val === 'string' && val.trim() === '')
+  return isNull(val) || isUndefined(val) || (isString(val) && val.trim() === '')
 }
 
 export function noop () {}
@@ -723,6 +733,12 @@ export function matchesSelector (el: Element | undefined, selector: string): boo
   } catch (err) {
     return null
   }
+}
+
+export function isAutofill (e: Event) {
+  return !e.isTrusted ||
+    !!matchesSelector(e.target as Element, ':autofill') ||
+    !!matchesSelector(e.target as Element, ':-webkit-autofill')
 }
 
 export function ensureValidVNode (vnodes: VNodeArrayChildren): VNodeArrayChildren | null {
@@ -788,7 +804,7 @@ export function checkPrintable (e: KeyboardEvent) {
 
 export type Primitive = string | number | boolean | symbol | bigint
 export function isPrimitive (value: unknown): value is Primitive {
-  return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint'
+  return isString(value) || isNumber(value) || isBoolean(value) || typeof value === 'bigint'
 }
 
 export function escapeForRegex (sign: string) {
@@ -815,7 +831,7 @@ export function extractNumber (text: string, decimalDigitsLimit: number | null, 
   }
 
   const decimalPart = new RegExp(`${escapeForRegex(decimalSeparator)}\\d`)
-  if (decimalDigitsLimit !== null && decimalPart.test(cleanText)) {
+  if (isNumber(decimalDigitsLimit) && decimalPart.test(cleanText)) {
     const parts = cleanText.split(decimalSeparator)
     return [
       parts[0],
@@ -837,7 +853,7 @@ export function camelizeProps<T extends Record<string, unknown>> (props: T | nul
 export function onlyDefinedProps (props: Record<string, any>) {
   const booleanAttributes = ['checked', 'disabled']
   return Object.fromEntries(Object.entries(props)
-    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : v !== undefined))
+    .filter(([key, v]) => booleanAttributes.includes(key) ? !!v : !isUndefined(v)))
 }
 
 export type NonEmptyArray<T> = [T, ...T[]]

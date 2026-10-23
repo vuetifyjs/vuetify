@@ -1,6 +1,9 @@
 // Styles
 import './VOverlay.sass'
 
+// Components
+import { VMenuSymbol } from '@/components/VMenu/shared'
+
 // Composables
 import { getStaticLocationClasses, makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
@@ -27,8 +30,10 @@ import vClickOutside from '@/directives/click-outside'
 // Utilities
 import {
   computed,
+  inject,
   mergeProps,
   onBeforeUnmount,
+  provide,
   ref,
   Teleport,
   Transition,
@@ -44,6 +49,7 @@ import {
   getCurrentInstance,
   getScrollParent,
   IN_BROWSER,
+  isString,
   omit,
   propsFactory,
   standardEasing,
@@ -129,6 +135,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
   props: {
     _disableGlobalStack: Boolean,
+    _submenu: Boolean,
 
     ...omit(makeVOverlayProps(), ['disableInitialFocus']),
   },
@@ -157,16 +164,18 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave: _onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(() => {
-      return typeof props.scrim === 'string' ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : null
     })
     const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
     const {
       activatorEl, activatorRef,
       target, targetEl, targetRef,
       activatorEvents,
+      onAfterLeave: _onActivatorAfterLeave,
       contentEvents,
       scrimEvents,
-    } = useActivator(props, { isActive, isTop: localTop, contentEl })
+      openedByHover,
+    } = useActivator(props, { isActive, isTop: localTop, contentEl, isSubmenu: props._submenu })
     const { teleportTarget } = useTeleport(() => {
       const target = props.attach || props.contained
       if (target) return target
@@ -202,11 +211,22 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       updateLocation,
     })
 
+    // self-reference or the closest ancestor
+    const menu = inject(VMenuSymbol, null)
+
+    // Non-menu overlays (dialog, tooltip, …) sit under a host menu in the component tree even
+    // when teleported. Scrub the inject chain so closeParents stops at that boundary.
+    if (vm.parent?.type?.name !== 'VMenu') {
+      provide(VMenuSymbol, null)
+    }
+
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
 
       if (!props.persistent) isActive.value = false
       else animateClick()
+
+      if (!props.scrim) menu?.closeParents(e)
     }
 
     function closeConditional (e: Event) {
@@ -272,7 +292,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
         const activeEl = getActiveElement()
         const el = activatorEl.value
         openedWithActivatorFocus = !!el && (activeEl === el || el.contains(activeEl))
+        if (contentEl.value) contentEl.value.inert = false
+        // eager reuses contentEl, so the mousedown that opened us would linger until the next one
+        if (contentEl.value?._clickOutside) {
+          contentEl.value._clickOutside.lastMousedownWasOutside = false
+        }
       } else {
+        if (contentEl.value) contentEl.value.inert = true
         returnFocusToActivator()
       }
     }, { flush: 'post' })
@@ -352,6 +378,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
     function onAfterLeave () {
       _onAfterLeave()
+      _onActivatorAfterLeave()
       emit('afterLeave')
     }
 
@@ -419,7 +446,8 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                     include: () => {
                       if (!isActive.value) return []
                       return [
-                        activatorEl.value,
+                        // a context menu has no click toggle, so clicking its activator counts as outside
+                        props.contextMenu && !props.openOnClick ? undefined : activatorEl.value,
                         // Submenu clicks count as "inside"; clicks in ancestor overlays (e.g. a host dialog) don't.
                         ...Array.from(document.querySelectorAll('.v-overlay__content'))
                           .filter(ownsFocus) as HTMLElement[],
@@ -456,6 +484,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       globalTop,
       localTop,
       updateLocation,
+      openedByHover,
     }
   },
 })

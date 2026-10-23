@@ -205,7 +205,7 @@ export const VTimePickerClock = genericComponent()({
       e.preventDefault()
 
       window.addEventListener('mousemove', onDragMove)
-      window.addEventListener('touchmove', onDragMove)
+      window.addEventListener('touchmove', onDragMove, { passive: false })
       window.addEventListener('mouseup', onMouseUp)
       window.addEventListener('touchend', onMouseUp)
       valueOnMouseDown.value = null

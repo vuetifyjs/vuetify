@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Color inputs
   title: Color input component

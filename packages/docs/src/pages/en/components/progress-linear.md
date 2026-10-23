@@ -14,7 +14,7 @@ features:
   github: /components/VProgressLinear/
   label: 'C: VProgressLinear'
   report: true
-  spec: https://m2.material.io/components/progress-indicators
+  spec: https://m3.material.io/components/progress-indicators
 ---
 
 # Progress linear
@@ -98,6 +98,12 @@ The **stream** property works with **buffer-value** to convey to the user that t
 This applies a striped background over the value portion of the `v-progress-linear`. This prop has no effect when using **indeterminate**.
 
 <ExamplesExample file="v-progress-linear/prop-striped" />
+
+#### Transition
+
+The **transition** prop controls how long the bar takes to animate to a new value. Pass `{ duration }` in milliseconds or as a CSS duration string, or `false` to remove the transition.
+
+<ExamplesExample file="v-progress-linear/prop-transition" />
 
 ### Slots
 

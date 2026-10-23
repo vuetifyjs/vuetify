@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Long-term support
   description: Vuetify provides long-term support to the previous major release for 12 months for critical bugs and security vulnerabilities

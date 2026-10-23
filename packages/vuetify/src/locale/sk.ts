@@ -94,7 +94,7 @@ export default {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',
     appendAction: 'Akcia za {0}',
-    otp: 'Prosím zadajte OTP znak {0}',
+    otp: 'Zadajte verifikačný kód',
   },
   fileInput: {
     counter: '{0} súborov',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Hodnotenie {0} z {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Ďalšie možnosti',
   },
   loading: 'Načítavam...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Klávesová skratka: {0}',
     or: 'alebo',
   },
-  video: {
+  media: {
     play: 'Prehrať',
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',
     volume: 'Hlasitosť',
-    showVolume: 'Zobraziť ovládanie hlasitosti',
     mute: 'Stlmiť',
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',

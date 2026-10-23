@@ -2,12 +2,40 @@
 import { VDatePicker } from '..'
 
 // Utilities
-import { render, screen, userEvent, waitIdle } from '@test'
+import { render, screen, userEvent, wait, waitIdle } from '@test'
 import { within } from '@testing-library/vue'
 import { commands } from 'vitest/browser'
 import { nextTick, ref } from 'vue'
 
 describe('VDatePicker', () => {
+  function dispatchTouchEvent (target: Element, type: 'touchstart' | 'touchmove' | 'touchend', x: number, y: number) {
+    const touchPoint = new Touch({
+      identifier: 1,
+      target,
+      clientX: x,
+      clientY: y,
+      pageX: x,
+      pageY: y,
+      screenX: x,
+      screenY: y,
+      radiusX: 1,
+      radiusY: 1,
+      rotationAngle: 0,
+      force: 1,
+    })
+    const isEnd = type === 'touchend'
+    const touches = isEnd ? [] : [touchPoint]
+    const changedTouches = [touchPoint]
+
+    target.dispatchEvent(new TouchEvent(type, {
+      bubbles: true,
+      cancelable: true,
+      touches,
+      targetTouches: touches,
+      changedTouches,
+    }))
+  }
+
   it('selects a range of dates', async () => {
     const model = ref<unknown[]>([])
     render(() => (
@@ -90,6 +118,24 @@ describe('VDatePicker', () => {
     await commands.clearAbortTimeout()
   })
 
+  it('prev/next month buttons wrap the year', async () => {
+    const month = ref(11)
+    const year = ref(2025)
+    render(() => (
+      <VDatePicker v-model:month={ month.value } v-model:year={ year.value } />
+    ))
+
+    await userEvent.click(screen.getByTestId('next-month'))
+    expect(month.value).toBe(0)
+    expect(year.value).toBe(2026)
+    await expect.poll(() => document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
+
+    await userEvent.click(screen.getByTestId('prev-month'))
+    expect(month.value).toBe(11)
+    expect(year.value).toBe(2025)
+    await expect.poll(() => document.querySelector('[data-v-date="2025-12-15"]')).not.toBeNull()
+  })
+
   it('no-auto-navigation should keep the displayed month after model change', async () => {
     const onUpdateMonth = vi.fn()
     const onUpdateYear = vi.fn()
@@ -117,5 +163,59 @@ describe('VDatePicker', () => {
     // January grid is still rendered.
     expect(document.querySelector('[data-v-date="2026-01-15"]')).not.toBeNull()
     expect(document.querySelector('[data-v-date="2026-02-20"]')).toBeNull()
+  })
+
+  it('navigates months with horizontal wheel only when wheel is set', async () => {
+    render(() => (
+      <VDatePicker modelValue="2026-01-15" max="2026-02-20" wheel />
+    ))
+
+    const days = () => document.querySelector('.v-date-picker-month__days')!
+    const wheel = (init: WheelEventInit) => {
+      const event = new WheelEvent('wheel', { bubbles: true, cancelable: true, ...init })
+      days().dispatchEvent(event)
+      return event
+    }
+
+    expect(wheel({ deltaY: 100 }).defaultPrevented).toBe(false)
+    await nextTick()
+    expect(document.querySelector('[data-v-date="2026-01-20"]')).not.toBeNull()
+
+    expect(wheel({ deltaY: 100, shiftKey: true }).defaultPrevented).toBe(true)
+    // inertia from the same gesture is swallowed
+    wheel({ deltaX: 100 })
+    await nextTick()
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).not.toBeNull()
+
+    // polling would fire events and keep renewing the lock
+    await wait(200)
+    expect(wheel({ deltaX: 100 }).defaultPrevented).toBe(false)
+    expect(document.querySelector('[data-v-date="2026-02-20"]')).not.toBeNull()
+  })
+
+  it('navigates to next month on swipe gesture', async () => {
+    render(() => (
+      <VDatePicker modelValue="2026-01-15" />
+    ))
+
+    const days = document.querySelector('.v-date-picker-month__days')
+    expect(days).not.toBeNull()
+
+    dispatchTouchEvent(days!, 'touchstart', 120, 120)
+    dispatchTouchEvent(days!, 'touchend', 40, 120)
+    await nextTick()
+
+    expect(document.querySelector('[data-v-date="2026-02-15"]')).not.toBeNull()
+  })
+
+  it('previews the hovered end of a range', async () => {
+    render(() => (
+      <VDatePicker multiple="range" modelValue={[new Date(2025, 3, 8)]} />
+    ))
+
+    const $days = await screen.findAllByCSS('.v-date-picker-month__day-btn')
+    await userEvent.hover($days[15])
+
+    expect(document.querySelectorAll('.v-date-picker-month__range-bg--preview').length).toBeGreaterThan(0)
   })
 })

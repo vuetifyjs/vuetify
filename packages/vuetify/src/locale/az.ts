@@ -94,7 +94,7 @@ export default {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',
     appendAction: '{0} sonrakı əməliyyat',
-    otp: 'OTP daxil et {0}',
+    otp: 'Təsdiq kodunu daxil edin',
   },
   fileInput: {
     counter: '{0} fayl',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Reytinq {0}/{1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Daha çox seçim',
   },
   loading: 'Yüklənir...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Klaviatura qısayolu: {0}',
     or: 'və ya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Pauza',
     seek: 'Axtar',
     volume: 'Səs',
-    showVolume: 'Səs səviyyəsini göstər',
     mute: 'Səsi kəs',
     unmute: 'Səsi aç',
     enterFullscreen: 'Tam ekran',

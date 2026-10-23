@@ -42,6 +42,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
 
   emits: {
     'update:modelValue': (value: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
     afterEnter: () => true,
     afterLeave: () => true,
   },
@@ -70,7 +71,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
     watch(isActive, async val => {
       if (!val) {
         await nextTick()
-        overlay.value!.activatorEl?.focus({ preventScroll: true })
+        overlay.value?.activatorEl?.focus({ preventScroll: true })
       }
     })
 
@@ -114,6 +115,7 @@ export const VDialog = genericComponent<OverlaySlots>()({
           role="dialog"
           onAfterEnter={ onAfterEnter }
           onAfterLeave={ onAfterLeave }
+          onClick:outside={ e => emit('click:outside', e) }
           { ...scopeId }
         >
           {{

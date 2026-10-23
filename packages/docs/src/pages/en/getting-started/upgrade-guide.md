@@ -18,31 +18,7 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Quick Start with Vuetify MCP
 
-The fastest way to check your project for breaking changes is with [Vuetify MCP](https://github.com/vuetifyjs/mcp/). To get started, run the following in your terminal:
-
-```bash
-# Claude Code
-claude mcp add --transport http vuetify-mcp https://mcp.vuetifyjs.com/mcp
-
-# Configure for hosted remote server
-npx -y @vuetify/mcp config --remote
-
-# Or configure for local installation
-npx -y @vuetify/mcp config
-```
-
-Once the MCP server is set up and loaded you will gain access to new tools such as:
-
-- `get_upgrade_guide`: Get a list of all breaking changes in the upgrade guide.
-- `get_v4_breaking_changes`: Get a list of all breaking changes in Vuetify 4.
-
-Now, prompt your agent with the following:
-
-```text
-Using the vuetify-mcp server, scan this project for Vuetify 3 to 4 breaking changes. List each issue found with the file, line number, and recommended fix.
-```
-
-This will automatically analyze your codebase and provide a tailored list of changes you need to make.
+The fastest way to check your project for breaking changes is with Vuetify MCP. See [Upgrading to Vuetify 4](/en/getting-started/mcp/#upgrading-to-vuetify-4) on the MCP page for setup and the upgrade tools.
 
 If you have any questions about the upgrade process, come visit us at [community.vuetifyjs.com](https://community.vuetifyjs.com/).
 
@@ -157,22 +133,11 @@ If you were already using `$layers: true` in Vuetify 3, there are now five top-l
 
 If you had any usages of `@layer vuetify.*` in your styles they should be replaced with your own layer name with an appropriate declaration order.
 
-#### Layer order declaration must come first
-
-The layer order `@layer` statement must be imported **before any layered CSS is parsed** — including Vuetify's own styles. The browser assigns layer priority the first time a layer name appears, so if Vuetify's styles load first, the browser will establish the order from those, not from your declaration.
-
-Import your layer order statement at the very top of your app entrypoint:
-
-```js { resource="src/main.ts" }
-// @layer declaration comes first
-import './styles/layers.css'
-import 'vuetify/styles'
-import { createApp } from 'vue'
-```
+#### Custom layer order
 
 If you intend to migrate large application, it is recommended to define and adopt your own layers, so that developers can drop `!important` and gain more control over the stylesheets.
 
-```css { resource="src/styles/layers.css" }
+```css { resource="public/layers.css" }
 @layer vuetify-core;
 @layer vuetify-components;
 @layer vuetify-overrides;
@@ -187,9 +152,15 @@ If you intend to migrate large application, it is recommended to define and adop
 @layer vuetify-final;
 ```
 
+Link it from `index.html` instead of importing it, as described in [CSS Layers](/styles/layers/#custom-layer-order):
+
+```html { resource="index.html" }
+<link rel="stylesheet" href="/layers.css">
+```
+
 ::: warning
 
-If this import is missing or appears after Vuetify styles, reset styles or earlier-declared layers may unexpectedly override component styles. Symptoms vary per app depending on build output order, making it difficult to diagnose. This is often caused by Vite v8.x and/or `vue-router` v5.x.
+If `layers.css` is missing or bundled, your layers may end up ordered after `vuetify-final` or between the wrong Vuetify layers. Symptoms vary per app depending on build output order, making them difficult to diagnose.
 
 **Note**: using `@vuetify/cli` with `init` command to generate a working project for comparison is usually the fastest way to effectively troubleshoot the problems.
 
@@ -303,6 +274,10 @@ The **$button-stacked-icon-margin** Sass variable has been removed and replaced 
 +   $button-stacked-gap,
   );
 ```
+
+### VBtn sizes
+
+Buttons and icon buttons can use Material Design 3 Expressive sizes through new SASS maps, see [Material Design 3 button sizes](/features/md3-button-sizes/).
 
 ### VBtn text-transform
 
@@ -627,7 +602,6 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
   $avatar-margin-end: 8px;
   $avatar-margin-start: 8px;
 
-  $icon-left-margin-left: 8px;
   $icon-margin-end: 8px;
   $icon-margin-start: 8px;
 
@@ -639,6 +613,10 @@ Sass variable `$grid-gutters` was removed. If your existing project had some cus
 #### Restoring the legacy grid behavior
 
 If you need to maintain the previous grid behavior (negative margins and column padding), see the [Grid Legacy Mode](/getting-started/grid-legacy-mode) guide.
+
+#### Removed unused Sass variables
+
+A number of other Sass variables that had no effect on rendered output were also removed in v4. If you're migrating a project with custom Sass overrides, see [Unused Sass variables](/getting-started/unused-sass-variables/) for the full list, including ones that stopped working as far back as v3.
 
 ## Tooling
 

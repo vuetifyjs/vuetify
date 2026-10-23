@@ -309,7 +309,7 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                             const { props: rowProps, ...itemSlot } = itemSlotProps
                             const index = itemSlotProps.internalItem.virtualIndex ?? itemSlotProps.internalItem.index
                             const itemExpanded = isExpanded(itemSlotProps.internalItem)
-                            const expandedRows = props.showExpand && itemExpanded && slots['expanded-row']
+                            const expandedRows = itemExpanded && slots['expanded-row']
                               ? expansionNodes(slots['expanded-row'](itemSlot))
                               : []
 
@@ -338,43 +338,42 @@ export const VDataTableVirtual = genericComponent<new <T extends readonly any[],
                                   )}
                                 </VVirtualScrollItem>
 
-                                { props.showExpand && (
-                                  slots['expanded-row']
-                                    ? expandedRows.map((node, row) => (
-                                      <VVirtualScrollItem
-                                        key={ `${index}-expanded-${row}` }
-                                        renderless
-                                        onUpdate:height={ height => setExpandedHeight(index, row, height) }
-                                      >
-                                        { ({ itemRef }) => cloneVNode(node, { ref: itemRef }, true) }
-                                      </VVirtualScrollItem>
-                                    ))
-                                    : slots.expanded && (
-                                      <VVirtualScrollItem
-                                        key={ `${index}-expanded` }
-                                        renderless
-                                        onUpdate:height={ height => setExpandedHeight(index, 0, height) }
-                                      >
-                                        { ({ itemRef }) => (
-                                          <tr class="v-data-table__tr--expanded v-data-table__tr--expansion" ref={ itemRef }>
-                                            <td colspan={ columns.value.length }>
-                                              { props.expandTransition
-                                                ? (
-                                                  <MaybeTransition transition={ props.expandTransition }>
-                                                    { itemExpanded
-                                                      ? <div>{ slots.expanded!(itemSlot) }</div>
-                                                      : null }
-                                                  </MaybeTransition>
-                                                )
-                                                // bypass <Transition> to avoid flash when expand-strategy=single
-                                                : itemExpanded && <div>{ slots.expanded!(itemSlot) }</div>
-                                              }
-                                            </td>
-                                          </tr>
-                                        )}
-                                      </VVirtualScrollItem>
-                                    )
-                                )}
+                                { slots['expanded-row']
+                                  ? expandedRows.map((node, row) => (
+                                    <VVirtualScrollItem
+                                      key={ `${index}-expanded-${row}` }
+                                      renderless
+                                      onUpdate:height={ height => setExpandedHeight(index, row, height) }
+                                    >
+                                      { ({ itemRef }) => cloneVNode(node, { ref: itemRef }, true) }
+                                    </VVirtualScrollItem>
+                                  ))
+                                  : slots.expanded && (
+                                    <VVirtualScrollItem
+                                      key={ `${index}-expanded` }
+                                      renderless
+                                      onUpdate:height={ height => setExpandedHeight(index, 0, height) }
+                                    >
+                                      { ({ itemRef }) => (
+                                        <tr class="v-data-table__tr--expanded v-data-table__tr--expansion" ref={ itemRef }>
+                                          <td colspan={ columns.value.length }>
+                                            { props.expandTransition
+                                              ? (
+                                                <MaybeTransition transition={ props.expandTransition }>
+                                                  { itemExpanded
+                                                    ? <div>{ slots.expanded!(itemSlot) }</div>
+                                                    : null }
+                                                </MaybeTransition>
+                                              )
+                                              // bypass <Transition> to avoid flash when expand-strategy=single
+                                              : itemExpanded && <div>{ slots.expanded!(itemSlot) }</div>
+                                            }
+                                          </td>
+                                        </tr>
+                                      )}
+                                    </VVirtualScrollItem>
+                                  )
+                                }
                               </>
                             )
                           },

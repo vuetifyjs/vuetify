@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Range sliders
   title: Range Slider component
@@ -12,7 +13,7 @@ features:
   label: 'C: VRangeSlider'
   report: true
   github: /components/VRangeSlider/
-  spec: https://m2.material.io/components/sliders
+  spec: https://m3.material.io/components/sliders
 ---
 
 # Range Sliders
@@ -64,6 +65,12 @@ You can set **min** and **max** values of sliders.
 `v-range-slider` can have steps other than 1. This can be helpful for some applications where you need to adjust values with more or less accuracy.
 
 <ExamplesExample file="v-range-slider/prop-step" />
+
+#### Value format
+
+The **value-format** prop formats the thumb labels and the value read by screen readers. Use **start-thumb-aria-label** and **end-thumb-aria-label** to name each thumb unless default "Minimum/Maximum" labels feel fine for the use case. **label** or `aria-label` names the slider as a whole.
+
+<ExamplesExample file="v-range-slider/prop-value-format" />
 
 #### Vertical sliders
 

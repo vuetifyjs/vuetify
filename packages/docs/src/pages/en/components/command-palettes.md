@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Command Palettes
   title: Command Palette component
@@ -83,6 +84,18 @@ By default, selecting an actionable item closes the palette. Use **close-on-sele
 
 The command palette provides several slots for customizing the display of items and other elements.
 
+#### Input
+
+Use the **#input** slot to replace the search field. Bind the slot's **props** to your input for keyboard navigation and screen reader support, and connect it to **v-model:search** so typing filters the items.
+
+<ExamplesExample file="v-command-palette/slot-input" />
+
+#### Item
+
+Use the **#item** slot to render each item yourself. It receives the original **item**, its **index**, and **props** to bind to a `v-list-item`, which keep the keyboard highlight, click handling and screen reader announcements.
+
+<ExamplesExample file="v-command-palette/slot-item" />
+
 #### Item prepend
 
 Use the **#item.prepend** slot to customize the prepend area of each item. This slot receives the current **item** and **index** as slot props.
@@ -115,9 +128,11 @@ The command palette supports full keyboard navigation:
 
 The `v-command-palette` component follows accessibility best practices:
 
-- Uses semantic ARIA roles (`listbox` for the list, `option` for items)
+- Uses semantic ARIA roles: the search input is a `combobox` that controls a `listbox` of `option` items
 - Provides descriptive labels for screen readers
-- Implements `aria-activedescendant` for proper focus announcement
+- Sets `aria-activedescendant` on the search input, so screen readers announce the highlighted command while focus stays in the input
 - Maintains focus within the dialog while open
 - Returns focus to the previously focused element on close
 - Supports full keyboard navigation without mouse interaction
+
+When replacing the search field through the **#input** slot, bind the slot's **props** to your input so it keeps the keyboard handling and these attributes. The same applies to the **#item** slot: bind its **props** to a `v-list-item`.

@@ -451,6 +451,30 @@ describe('VOtpInput', () => {
     expect(getActiveSlotIndex()).toBe(5)
   })
 
+  it('advances while a latin word stays in composition', async () => {
+    render(() => (<VOtpInput type="text" />))
+    const input = getInput()
+
+    await focusInput()
+    input.dispatchEvent(new CompositionEvent('compositionstart', { data: '' }))
+    for (const word of ['a', 'ab', 'abc', 'abcd']) {
+      input.dispatchEvent(new CompositionEvent('compositionupdate', { data: word }))
+      input.value = word
+      input.setSelectionRange(word.length, word.length)
+      input.dispatchEvent(new InputEvent('input', { data: word, inputType: 'insertCompositionText', isComposing: true }))
+      input.dispatchEvent(new Event('selectionchange'))
+      await waitAnimationFrame()
+
+      expect(input.selectionStart).toBe(word.length)
+      expect(getActiveSlotIndex()).toBe(word.length)
+    }
+    input.dispatchEvent(new CompositionEvent('compositionend', { data: 'abcd' }))
+    await waitAnimationFrame()
+
+    expect(input.value).toBe('abcd')
+    expect(getActiveSlotIndex()).toBe(4)
+  })
+
   it('selects correct slot when clicking a filled slot', async () => {
     render(() => (<VOtpInput />))
     const input = getInput()

@@ -23,10 +23,8 @@ describe('VTooltip', () => {
     await expect.poll(() => screen.queryByCSS('.v-tooltip .v-overlay__content')).toBeVisible()
 
     await userEvent.unhover(item)
-    await wait(100)
-
-    expect(screen.queryByCSS('.v-tooltip .v-overlay__content')).not.toBeVisible()
-    expect(document.activeElement).not.toBe(item)
+    await expect.poll(() => screen.queryByCSS('.v-tooltip .v-overlay__content')).not.toBeVisible()
+    await expect.poll(() => document.activeElement).not.toBe(item)
   })
 
   it('should not focus the activator after closing on mouseleave while another menu is open', async () => {

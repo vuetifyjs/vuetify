@@ -169,6 +169,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     const role = computed(() => list ? (isLink.value ? 'link' : isSelectable.value ? 'option' : 'listitem') : undefined)
     const ariaSelected = computed(() => {
       if (!isSelectable.value) return undefined
+      if (list?.navigationStrategy.value === 'track' && !root.selectable.value) return isTracked.value
       return root.activatable.value ? isActivated.value
         : root.selectable.value ? isSelected.value
         : isActive.value
@@ -257,6 +258,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
       const target = e.target as HTMLElement
 
       if (['INPUT', 'TEXTAREA'].includes(target.tagName)) return
+
+      // Treeview items own their Enter/Space handling
+      if ((e.currentTarget as HTMLElement | null)?.getAttribute('role') === 'treeitem') return
 
       if (e.key === 'Enter' || (e.key === ' ' && !list?.filterable)) {
         e.preventDefault()

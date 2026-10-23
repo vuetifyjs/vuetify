@@ -3,6 +3,8 @@
 
 @include tools.layer('components')
   .v-pagination
+    min-width: 0
+
     &__list
       margin: 0
       padding: 0
@@ -17,3 +19,7 @@
     &__next,
     &__last
       margin: $pagination-item-margin
+
+    @each $name, $height in $pagination-btn-sizes
+      .v-btn--size-#{$name}
+        --v-btn-height: #{$height}

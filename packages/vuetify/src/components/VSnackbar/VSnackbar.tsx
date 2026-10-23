@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -110,6 +110,7 @@ export const makeVSnackbarProps = propsFactory({
     locationStrategy: null,
     transition: 'v-snackbar-transition',
   }), [
+    'contextMenu',
     'persistent',
     'noClickAnimation',
     'offset',
@@ -131,9 +132,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   emits: {
     'update:modelValue': (v: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
@@ -229,6 +233,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     function onAfterLeave () {
       if (isHovering.value) onPointerleave()
       isFocused.value = false
+      emit('afterLeave')
     }
 
     const locationClasses = computed(() => {
@@ -263,7 +268,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const transition = computed(() => {
-      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+      if (!isString(props.transition) || !props.transition.endsWith('-auto')) {
         return props.transition
       }
 
@@ -317,6 +322,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...overlayProps }
           transition={ transition.value }
           v-model={ isActive.value }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
           contentProps={ mergeProps({
             class: [
               'v-snackbar__wrapper',

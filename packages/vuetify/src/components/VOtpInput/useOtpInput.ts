@@ -359,7 +359,7 @@ export function useOtpInput (options: OtpInputOptions): OtpInputContext {
   // Force the rendered selection to always cover at least one slot, so a slot
   // stays "active" when a caret would otherwise be between two.
   function syncSelection (raw: OtpSelectionInput): OtpSelection | null {
-    if (isComposing.value) return selection.value
+    if (composition.value) return selection.value
 
     const { value: inputValue, selectionStart, selectionEnd, selectionDirection, maxLength } = raw
 

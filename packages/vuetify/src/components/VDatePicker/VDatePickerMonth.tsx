@@ -10,18 +10,35 @@ import { makeCalendarProps, useCalendar } from '@/composables/calendar'
 import { useBackgroundColor } from '@/composables/color'
 import { useDate } from '@/composables/date/date'
 import { useGridSelection } from '@/composables/gridSelection'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRangePicker } from '@/composables/rangePicker'
 import { MaybeTransition } from '@/composables/transition'
 
+// Directives
+import vTouch from '@/directives/touch'
+
 // Utilities
-import { computed, nextTick, shallowRef, toRef, useId, watch } from 'vue'
-import { chunkArray, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { computed, mergeProps, nextTick, onScopeDispose, shallowRef, toRef, useId, watch } from 'vue'
+import {
+  chunkArray,
+  genericComponent,
+  getPrefixedEventHandlers,
+  IN_BROWSER,
+  isFunction,
+  isObject,
+  isString,
+  omit,
+  pick,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarWeekdays } from '@/composables/calendar'
+import type { CalendarDay, CalendarWeekdays } from '@/composables/calendar'
+import type { TouchValue } from '@/directives/touch'
 import type { GenericProps } from '@/util'
 
 export type DatePickerEventColorValue = boolean | string | string[]
@@ -31,6 +48,8 @@ Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventCo
 
 export type DatePickerEvents = string[] |
 ((date: string) => DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
+
+export type DatePickerDay = Pick<CalendarDay, 'date' | 'isoDate' | 'isAdjacent' | 'isToday'>
 
 export type VDatePickerMonthSlots = {
   day: {
@@ -48,6 +67,7 @@ export const makeVDatePickerMonthProps = propsFactory({
   multiple: [Boolean, Number, String] as PropType<boolean | 'range' | number | (string & {})>,
   showWeek: Boolean,
   readonly: Boolean,
+  wheel: Boolean,
   transition: {
     type: String,
     default: 'picker-transition',
@@ -78,6 +98,8 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDatePickerMonth',
 
+  directives: { vTouch },
+
   props: makeVDatePickerMonthProps(),
 
   emits: {
@@ -88,9 +110,10 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
     'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const uid = useId()
     const { t } = useLocale()
+    const { isRtl } = useRtl()
 
     const { daysInMonth, model, weekNumbers, weekdayLabels } = useCalendar(props)
     const adapter = useDate()
@@ -275,6 +298,57 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
       }
     }
 
+    function getAdjacentMonth (direction: number) {
+      const firstDay = daysInMonth.value.find(day => !day.isAdjacent)?.date
+      if (!firstDay || props.disabled) return undefined
+
+      if (direction > 0) {
+        const nextMonthStart = adapter.addDays(adapter.endOfMonth(firstDay), 1)
+        return props.max != null && adapter.isAfter(nextMonthStart, adapter.date(props.max)) ? undefined : nextMonthStart
+      }
+
+      const prevMonthEnd = adapter.addDays(adapter.startOfMonth(firstDay), -1)
+      return props.min != null && adapter.isAfter(adapter.date(props.min), prevMonthEnd) ? undefined : prevMonthEnd
+    }
+
+    function navigateMonth (direction: number) {
+      const target = getAdjacentMonth(isRtl.value ? -direction : direction)
+      if (!target) return
+
+      emit('update:month', adapter.getMonth(target))
+      emit('update:year', adapter.getYear(target))
+    }
+
+    let wheelTimeout = -1
+
+    function onWheel (e: WheelEvent) {
+      if (!props.wheel || e.defaultPrevented) return
+
+      const scrollDelta = e.deltaX || (e.shiftKey ? e.deltaY : 0)
+      if (!scrollDelta) return
+
+      const isLocked = wheelTimeout >= 0
+      if (!isLocked && !getAdjacentMonth(isRtl.value ? -scrollDelta : scrollDelta)) return
+
+      e.preventDefault()
+      // trackpad inertia keeps firing events, so one gesture moves one month
+      window.clearTimeout(wheelTimeout)
+      wheelTimeout = window.setTimeout(() => {
+        wheelTimeout = -1
+      }, 150)
+
+      if (!isLocked) navigateMonth(scrollDelta)
+    }
+
+    onScopeDispose(() => {
+      if (IN_BROWSER) window.clearTimeout(wheelTimeout)
+    })
+
+    const touch: TouchValue = {
+      left: () => navigateMonth(1),
+      right: () => navigateMonth(-1),
+    }
+
     function focusGrid () {
       containerEl.value?.focus()
     }
@@ -305,13 +379,13 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         return []
       } else if (eventData !== true) {
         eventColors = wrapInArray(eventData)
-      } else if (typeof eventColor === 'string') {
+      } else if (isString(eventColor)) {
         eventColors = [eventColor]
-      } else if (typeof eventColor === 'function') {
+      } else if (isFunction(eventColor)) {
         eventColors = wrapInArray(eventColor(date))
       } else if (Array.isArray(eventColor)) {
         eventColors = eventColor
-      } else if (typeof eventColor === 'object' && eventColor !== null) {
+      } else if (isObject(eventColor)) {
         eventColors = wrapInArray(eventColor[date])
       }
 
@@ -320,7 +394,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
         ? ['surface-variant']
         : eventColors
           .filter(Boolean)
-          .map((color: string | boolean) => typeof color === 'string' ? color : 'surface-variant')
+          .map((color: string | boolean) => isString(color) ? color : 'surface-variant')
     }
 
     function genEvents (date: string): JSX.Element | null {
@@ -355,12 +429,17 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
           </div>
         )}
 
-        <MaybeTransition name={ transition.value }>
+        <MaybeTransition
+          name={ transition.value }
+          onBeforeLeave={ (el: Element) => { (el as HTMLElement).style.width = getComputedStyle(el).width } }
+        >
           <div
             key={ daysInMonth.value[0].date?.toString() }
             class="v-date-picker-month__days"
             role="grid"
             onMouseleave={ range.clearPreview }
+            onWheel={ onWheel }
+            v-touch={ touch }
             { ...containerProps.value }
           >
             { !props.hideWeekdays && (
@@ -388,9 +467,10 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                   const previewStart = range.isPreviewStart(item.date)
                   const previewEnd = range.isPreviewEnd(item.date)
                   const previewMiddle = range.isPreviewMiddle(item.date)
+                  const events = getPrefixedEventHandlers(attrs, ':day', () => pick(item, ['date', 'isoDate', 'isAdjacent', 'isToday']))
 
                   const slotProps = {
-                    props: {
+                    props: mergeProps({
                       class: 'v-date-picker-month__day-btn',
                       color: ((isSelected && !rangeMiddle) || item.isToday) ? props.color : undefined,
                       disabled,
@@ -408,7 +488,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
                       onMouseenter: () => range.setPreview(item.date),
                       onFocus: () => range.setPreview(item.date),
                       onBlur: range.clearPreview,
-                    },
+                    }, events) as VDatePickerMonthSlots['day']['props'],
                     item,
                     i,
                   } as const

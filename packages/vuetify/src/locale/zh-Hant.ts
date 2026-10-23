@@ -94,7 +94,7 @@ export default {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',
     appendAction: '{0} 附加操作',
-    otp: '請輸入第 {0} 個 OTP 字元',
+    otp: '請輸入驗證碼',
   },
   fileInput: {
     counter: '{0} 個檔案',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: '評分 {0} / {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: '最小值',
+      end: '最大值',
+    },
+  },
+  splitBtn: {
+    menu: '更多選項',
   },
   loading: '載入中...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: '鍵盤快捷鍵：{0}',
     or: '或',
   },
-  video: {
+  media: {
     play: '播放',
     pause: '暫停',
     seek: '搜尋',
     volume: '音量',
-    showVolume: '顯示音量控制',
     mute: '靜音',
     unmute: '取消靜音',
     enterFullscreen: '全螢幕',

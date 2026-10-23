@@ -6,7 +6,10 @@
     "rounded": "Rounds the ends of the progress arc for a softer appearance. When enabled, the progress stroke will have rounded caps instead of square ends.",
     "modelValue": "The percentage value for current progress.",
     "rotate": "Rotates the circle start point in degrees.",
+    "shape": "Sets the shape of the filled portion. **wavy** draws it as an animated wave and applies the **split** gap.",
     "size": "Sets the diameter of the circle in pixels.",
+    "transition": "Controls the animation to a new value. Pass `{ duration }` in milliseconds or as a CSS duration (e.g. `0.4s`), or `false` to remove it. Does not affect the `indeterminate` and `reveal` animations.",
+    "variant": "Applies a distinct style to the component. **split** visually divides the circle at the current value, separating the filled and unfilled portions with a gap.",
     "width": "Sets the stroke of the circle in pixels."
   }
 }

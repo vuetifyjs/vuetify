@@ -94,7 +94,7 @@ export default {
     clear: 'Očisti {0}',
     prependAction: '{0} prethodna radnja',
     appendAction: '{0} dodana radnja',
-    otp: 'Unesite OTP znak {0}',
+    otp: 'Unesite kod za potvrdu',
   },
   fileInput: {
     counter: 'Odabranih datoteka: {0}',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Ocjena {0} od {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Više opcija',
   },
   loading: 'Učitavanje...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tipkovnička prečica: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reproduciraj',
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Glasnoća',
-    showVolume: 'Prikaži kontrolu glasnoće',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Puni zaslon',

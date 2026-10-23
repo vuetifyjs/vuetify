@@ -19,6 +19,7 @@
     "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
+      "mcp",
       "frequently-asked-questions",
       "wireframes",
       "unit-testing",
@@ -55,6 +56,8 @@
       "hotkey",
       "icon-fonts",
       "internationalization",
+      "md3-button-sizes",
+      "rules",
       "scrolling",
       "sass-variables",
       "theme",
@@ -184,6 +187,7 @@
           "virtual-tables"
         ]
       },
+      "highlights",
       "hotkeys",
       "sparklines",
       "infinite-scroller",
@@ -210,6 +214,7 @@
       "banners",
       "empty-states",
       "hover",
+      "progress",
       "progress-circular",
       "progress-linear",
       "ratings",
@@ -221,6 +226,7 @@
       { "subheader": "images-and-icons" },
       "aspect-ratios",
       "avatars",
+      "avatar-groups",
       "icons",
       "images",
       "parallax",
@@ -261,7 +267,8 @@
       "ripple",
       "scroll",
       "tooltip",
-      "touch"
+      "touch",
+      "touch-hold"
     ]
   },
   {
@@ -271,7 +278,7 @@
     "items": [
       "introduction",
       {
-        "title": "avatar-groups",
+        "title": "audio-players",
         "subfolder": "components"
       },
       {
@@ -287,7 +294,11 @@
         "subfolder": "components"
       },
       {
-        "title": "highlights",
+        "title": "infinite-carousels",
+        "subfolder": "components"
+      },
+      {
+        "title": "loading-indicators",
         "subfolder": "components"
       },
       {
@@ -303,16 +314,16 @@
         "subfolder": "components"
       },
       {
-        "title": "progress",
+        "title": "split-buttons",
+        "subfolder": "components"
+      },
+      {
+        "title": "time-inputs",
         "subfolder": "components"
       },
       {
         "title": "videos",
         "subfolder": "components"
-      },
-      {
-        "title": "rules",
-        "subfolder": "features"
       }
     ]
   },

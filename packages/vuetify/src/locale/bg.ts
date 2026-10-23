@@ -94,7 +94,7 @@ export default {
     clear: 'Изчисти {0}',
     prependAction: '{0} предшестващо действие',
     appendAction: '{0} последващо действие',
-    otp: 'Моля, въведете OTP символ {0}',
+    otp: 'Въведете код за потвърждение',
   },
   fileInput: {
     counter: '{0} файла',
@@ -133,6 +133,15 @@ export default {
     ariaLabel: {
       item: 'Оценка {0} от {1}',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Още опции',
   },
   loading: 'Зареждане...',
   infiniteScroll: {
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Клавиатурна комбинация: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Пусни',
     pause: 'Пауза',
     seek: 'Търсене',
     volume: 'Сила на звука',
-    showVolume: 'Покажи контрола за силата на звука',
     mute: 'Без звук',
     unmute: 'Включи звука',
     enterFullscreen: 'Цял екран',

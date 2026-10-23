@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Menus
   title: Menu component
@@ -81,7 +82,7 @@ You can disable the menu. Disabled menus can't be opened.
 
 #### Location
 
-Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location).
+Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location-strategies).
 
 <ExamplesExample file="v-menu/prop-location" />
 
@@ -91,22 +92,17 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 <ExamplesExample file="v-menu/prop-open-on-hover" />
 
+#### Open on right-click
+
+The **context-menu** prop opens the menu on right-click (or long-press on touch devices) at the cursor position.
+
+<ExamplesExample file="v-menu/prop-context-menu" />
+
 #### Nested menus
 
 Menus with other menus inside them will not close until their children are closed. The **submenu** prop changes keyboard behaviour to open and close with left/right arrow keys instead of up/down.
 
 <ExamplesExample file="v-menu/prop-submenu" />
-
-#### Positioning Menus with Coordinates
-
-`v-menu` can be positioned relative to a DOM element or explicit `[x, y]` coordinates.
-
-* The most common use case is to pass an **event target element**. This allows the menu to anchor itself to the element that was clicked.
-* You can also use `[x, y]` screen coordinates, though this is less common and typically used for context menus.
-* `:offset` is used to shift the menu position relative to its anchor, not to define an absolute position.
-* Any DOM event with `clientX` and `clientY` can be used (e.g. `click`, `contextmenu`).
-
-<ExamplesExample file="v-menu/prop-positioningmenu" />
 
 ### Slots
 
@@ -139,6 +135,15 @@ A menu can be configured to be static when opened, allowing it to function as a 
 A single `v-menu` can be reused across multiple activators to create a gliding navigation bar. As the user hovers between buttons, the menu smoothly transitions to the new activator using a CSS transition on its position.
 
 <ExamplesExample file="v-menu/misc-gliding-nav" />
+
+#### Shared menu
+
+A single `v-menu` can be reused to serve multiple items, helping avoid performance issues when rendering long lists. You can set **activator** to the element that was clicked and open the menu programmatically.
+
+* Clear the activator in `@after-leave` so the menu does not stay bound to the last row.
+* **offset** shifts the menu relative to its activator, so it can appear as anchored to the center of the icon.
+
+<ExamplesExample file="v-menu/misc-shared" />
 
 #### In text fields
 

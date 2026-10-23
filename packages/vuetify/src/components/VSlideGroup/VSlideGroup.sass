@@ -59,3 +59,13 @@
     .v-slide-group__container
       overflow-x: hidden
       overflow-y: auto
+
+  .v-slide-group--snap
+    .v-slide-group__container
+      scroll-snap-type: x mandatory
+
+    .v-slide-group__content > *
+      scroll-snap-align: var(--v-slide-group-snap-align, start)
+
+    &.v-slide-group--vertical .v-slide-group__container
+      scroll-snap-type: y mandatory
