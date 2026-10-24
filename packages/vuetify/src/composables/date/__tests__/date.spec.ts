@@ -1,11 +1,20 @@
 // Utilities
+import DateFnsAdapter from '@date-io/date-fns'
+import DayjsAdapter from '@date-io/dayjs'
+import LuxonAdapter from '@date-io/luxon'
+import MomentAdapter from '@date-io/moment'
+import { enUS } from 'date-fns/locale'
 import { assertType } from 'vitest'
+import { shallowRef } from 'vue'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
+import { createDate } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
+import type { DateOptions } from '../date'
 import type { DateAdapter } from '../DateAdapter'
+import type { LocaleInstance } from '@/composables/locale'
 
 describe('date', () => {
   it('types', () => {
@@ -200,5 +209,34 @@ describe('StringDateAdapter', () => {
     const adapter2 = new StringDateAdapter({ locale: 'fr' })
     expect(adapter2.getWeek('2025-01-05')).toBe(1) // sunday
     expect(adapter2.getWeek('2025-01-06')).toBe(2) // monday
+  })
+})
+
+describe('createDate', () => {
+  it('should apply firstDayOfWeek and weekdayFormat for date-io adapters', () => {
+    const { instance } = createDate({ adapter: DateFnsAdapter, locale: { en: enUS } }, { current: shallowRef('en') } as LocaleInstance)
+    const march = new Date(2025, 2, 15)
+
+    expect(instance.toJsDate(instance.startOfWeek(march, 1)).getDay()).toBe(1)
+    expect(instance.getWeekArray(march, 1).map(week => instance.format(week[0], 'keyboardDate'))).toEqual([
+      '02/24/2025', '03/03/2025', '03/10/2025', '03/17/2025', '03/24/2025', '03/31/2025',
+    ])
+    expect(instance.getWeekdays(1, 'short')).toEqual(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+    expect(instance.getWeekdays(1)[0]).toBe(instance.getWeekdays()[1])
+  })
+
+  it.each([
+    ['date-fns', DateFnsAdapter, enUS],
+    ['dayjs', DayjsAdapter, 'en'],
+    ['luxon', LuxonAdapter, 'en-US'],
+    ['moment', MomentAdapter, 'en'],
+  ])('should apply firstDayOfWeek and firstDayOfYear to week numbers with %s', (_, adapter, en) => {
+    const { instance } = createDate({ adapter, locale: { en } } as DateOptions, { current: shallowRef('en') } as LocaleInstance)
+
+    expect(instance.getWeek(instance.date('2028-12-31'), 1)).toBe(53)
+    expect(instance.getWeek(instance.date('2029-01-01'), 1)).toBe(1)
+    expect(instance.getWeek(instance.date('2025-03-16'), 1, 4)).toBe(11)
+    expect(instance.getWeek(instance.date('2026-01-01'), 0, 6)).toBe(1)
+    expect(instance.getWeek(instance.date('2026-01-03'), 0, 3)).toBe(53)
   })
 })

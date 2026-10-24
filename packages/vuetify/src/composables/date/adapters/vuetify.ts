@@ -6,7 +6,7 @@ import type { DateAdapter } from '../DateAdapter'
 
 type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
-function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } | null {
+export function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } | null {
   // https://simplelocalize.io/data/locales/
   // then `new Intl.Locale(...).getWeekInfo()`
   const code = locale.slice(-2).toUpperCase()

@@ -12,6 +12,7 @@ import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
+import { withWeekFallback } from './adapters/week'
 
 export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
@@ -116,7 +117,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
     instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
-  return instance
+  return withWeekFallback(instance)
 }
 
 export function useDate (): DateInstance {
