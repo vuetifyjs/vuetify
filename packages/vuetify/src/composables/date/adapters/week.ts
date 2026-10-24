@@ -7,13 +7,14 @@ import { weekInfo } from './vuetify'
 // Types
 import type { DateInstance } from '../date'
 
-export function withWeekFallback (adapter: DateInstance): DateInstance {
+export function withWeekFallback (adapter: DateInstance, locales: Record<string, string>): DateInstance {
   function getWeekday (date: unknown) {
     return adapter.toJsDate(date).getDay()
   }
 
   function getLocale (): string | undefined {
-    return isString(adapter.locale) ? adapter.locale : adapter.locale?.code
+    const code: string | undefined = isString(adapter.locale) ? adapter.locale : adapter.locale?.code
+    return code && (locales[code] ?? new Intl.Locale(code).maximize().toString())
   }
 
   const ownFirstDay = getWeekday(adapter.startOfWeek(adapter.date()))

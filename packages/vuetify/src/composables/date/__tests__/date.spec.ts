@@ -3,7 +3,7 @@ import DateFnsAdapter from '@date-io/date-fns'
 import DayjsAdapter from '@date-io/dayjs'
 import LuxonAdapter from '@date-io/luxon'
 import MomentAdapter from '@date-io/moment'
-import { enUS } from 'date-fns/locale'
+import { cy, enUS, sv } from 'date-fns/locale'
 import { assertType } from 'vitest'
 import { shallowRef } from 'vue'
 import { StringDateAdapter } from '../adapters/string'
@@ -238,5 +238,14 @@ describe('createDate', () => {
     expect(instance.getWeek(instance.date('2025-03-16'), 1, 4)).toBe(11)
     expect(instance.getWeek(instance.date('2026-01-01'), 0, 6)).toBe(1)
     expect(instance.getWeek(instance.date('2026-01-03'), 0, 3)).toBe(53)
+  })
+
+  it.each([
+    ['mapped', sv],
+    ['maximized', cy],
+  ])('should resolve region of bare %s locale codes for week numbers', (_, locale) => {
+    const { instance } = createDate({ adapter: DateFnsAdapter, locale: { en: locale } }, { current: shallowRef('en') } as LocaleInstance)
+
+    expect(instance.getWeek(instance.date('2027-01-01'), 1)).toBe(53)
   })
 })
