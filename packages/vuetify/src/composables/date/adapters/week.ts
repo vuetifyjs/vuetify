@@ -35,7 +35,7 @@ export function withWeekFallback (adapter: DateInstance): DateInstance {
     const end = adapter.endOfMonth(date)
     const weeks = []
     let start = startOfWeek(adapter.startOfMonth(date), firstDayOfWeek)
-    while (!adapter.isAfter(start, end)) {
+    while (adapter.isBefore(start, end)) {
       const weekStart = start
       weeks.push(createRange(7).map(day => adapter.addDays(weekStart, day)))
       start = adapter.addDays(start, 7)
