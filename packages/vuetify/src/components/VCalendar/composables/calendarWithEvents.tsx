@@ -185,6 +185,7 @@ export function useCalendarWithEvents (props: CalendarWithEventsProps, slots: an
       props.eventEnd || '',
       eventTimedFunction.value(event),
       categoryMode.value ? eventCategoryFunction.value(event) : false,
+      base.toTimestampInput,
     ))
   })
 
