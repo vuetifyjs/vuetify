@@ -142,11 +142,16 @@ export const VDateInput = genericComponent<new <
 
     const emptyModelValue = () => props.multiple ? [] : null
 
+    function toJsDate (value: unknown) {
+      const date = adapter.date(value)
+      return date ? adapter.toJsDate(date) : null
+    }
+
     const model = useProxiedModel(
       props,
       'modelValue',
       emptyModelValue(),
-      val => Array.isArray(val) ? val.map(item => adapter.toJsDate(item)) : val ? adapter.toJsDate(val) : val,
+      val => Array.isArray(val) ? val.map(toJsDate) : val ? toJsDate(val) : val,
       val => Array.isArray(val) ? val.map(item => adapter.date(item)) : val ? adapter.date(val) : val
     )
 

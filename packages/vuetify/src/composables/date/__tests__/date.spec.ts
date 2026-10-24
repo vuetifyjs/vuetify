@@ -50,7 +50,7 @@ describe('VuetifyDateBridge (V0DateAdapter)', () => {
     expect(adapter1.getWeek(adapter1.parseISO('2023-01-01'))).toBe(1)
     expect(adapter1.getWeek(adapter1.parseISO('2023-01-07'))).toBe(1)
 
-    const adapter2 = createAdapter('pt') // first day = 7 | minimal days = 4
+    const adapter2 = createAdapter('pt-PT') // first day = 7 | minimal days = 4
 
     expect(adapter2.getWeek(adapter2.parseISO('2022-12-25'))).toBe(52)
     expect(adapter2.getWeek(adapter2.parseISO('2022-12-31'))).toBe(52)
@@ -139,7 +139,7 @@ describe('StringDateAdapter', () => {
     expect(adapter1.getWeek('2023-01-01')).toBe(1)
     expect(adapter1.getWeek('2023-01-07')).toBe(1)
 
-    const adapter2 = new StringDateAdapter({ locale: 'pt' }) // first day = 7 | minimal days = 4
+    const adapter2 = new StringDateAdapter({ locale: 'pt-PT' }) // first day = 7 | minimal days = 4
 
     expect(adapter2.getWeek('2022-12-25')).toBe(52)
     expect(adapter2.getWeek('2022-12-31')).toBe(52)

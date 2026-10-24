@@ -7,12 +7,16 @@ import { commands, render, screen, userEvent } from '@test'
 import { ref } from 'vue'
 import { ar, ja } from '@/locale'
 
-function pad (v: number) {
-  return String(v).padStart(2, '0')
+// Types
+import type { Temporal } from '@js-temporal/polyfill'
+
+function iso (date?: Temporal.PlainDateTime | null) {
+  return date ? date.toPlainDate().toString() : null
 }
 
-function iso (date?: Date | null) {
-  return date ? `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` : null
+function fromDisplay (value: string) {
+  const [month, day, year] = value.split('/')
+  return `${year}-${month}-${day}`
 }
 
 function keys (typing: string) {
@@ -96,7 +100,7 @@ describe('VDateInput', () => {
   })
 
   it('accepts keyboard input even if the picker is hidden', async () => {
-    const model = ref<Date | null>(null)
+    const model = ref<Temporal.PlainDateTime | null>(null)
     const { element } = render(() => <VDateInput v-model={ model.value } />)
 
     await userEvent.click(element)
@@ -119,7 +123,7 @@ describe('VDateInput', () => {
     await userEvent.clear(getByRole('textbox'))
     await userEvent.keyboard('{Enter}')
 
-    expect(emitted<Date[]>('update:modelValue')[0][0]).toBeNull()
+    expect(emitted<Temporal.PlainDateTime[]>('update:modelValue')[0][0]).toBeNull()
   })
 
   describe('range selection with visible actions', () => {
@@ -163,7 +167,7 @@ describe('VDateInput', () => {
       await userEvent.click(element)
       await userEvent.keyboard(`${typing}{Enter}`)
 
-      expect(iso(emitted<Date[]>('update:modelValue')?.[0]?.[0])).toBe(expected)
+      expect(iso(emitted<Temporal.PlainDateTime[]>('update:modelValue')?.[0]?.[0])).toBe(expected)
     })
 
     it.each(['invalid-date', '2024-01-00'])('should not commit %s', async typing => {
@@ -289,7 +293,7 @@ describe('VDateInput', () => {
     })
 
     it('should mask a pasted date', async () => {
-      const model = ref<Date | null>(null)
+      const model = ref<Temporal.PlainDateTime | null>(null)
       const { element } = render(() => <VDateInput v-model={ model.value } />)
 
       await userEvent.click(element)
@@ -356,7 +360,7 @@ describe('VDateInput', () => {
       { typing: '05/12/2025 05/14/2025', expected: '05/12/2025, 05/14/2025' },
       { typing: '5/12/25 5/14/25', expected: '05/12/2025, 05/14/25' },
     ])('should separate a list while typing $typing', async ({ typing, expected }) => {
-      const model = ref<Date[]>([])
+      const model = ref<Temporal.PlainDateTime[]>([])
       const { element } = render(() => <VDateInput v-model={ model.value } multiple />)
 
       await userEvent.click(element)
@@ -374,7 +378,7 @@ describe('VDateInput', () => {
       { typing: '05/12/2025 - 05/14/2025', expected: '05/12/2025 - 05/14/2025' },
       { typing: '5/12/25 - 5/14/25', expected: '05/12/2025 - 05/14/25' },
     ])('should insert separators of a range while typing $typing', async ({ typing, expected }) => {
-      const model = ref<Date[]>([])
+      const model = ref<Temporal.PlainDateTime[]>([])
       const { element } = render(() => <VDateInput v-model={ model.value } multiple="range" />)
 
       await userEvent.click(element)
@@ -539,7 +543,7 @@ describe('VDateInput', () => {
         { selection: [3, 5], typing: '6', expected: '03/06/1999' },
         { selection: [0, 0], paste: '08/05/2026', expected: '08/05/2026' },
       ])('should type $typing$paste at $selection', async ({ selection, typing, paste, expected }) => {
-        const { element } = render(() => <VDateInput modelValue="03/05/1999" />, null, {
+        const { element } = render(() => <VDateInput modelValue="1999-03-05" />, null, {
           locale: { locale: 'en', rtl: { en: true } },
         })
 
@@ -558,7 +562,7 @@ describe('VDateInput', () => {
         { paste: '91' },
         { paste: '9/1' },
       ])('should overwrite $typing$paste over a selection', async ({ typing, paste }) => {
-        const { element } = render(() => <VDateInput modelValue="07/20/2026" />, null, {
+        const { element } = render(() => <VDateInput modelValue="2026-07-20" />, null, {
           locale: { locale: 'en', rtl: { en: true } },
         })
 
@@ -606,7 +610,7 @@ describe('VDateInput', () => {
       })
 
       it('should fill a range starting with the date that reads first', async () => {
-        const model = ref<Date[]>([])
+        const model = ref<Temporal.PlainDateTime[]>([])
         const { element } = render(() => <VDateInput v-model={ model.value } multiple="range" />, null, {
           locale: { locale: 'en', rtl: { en: true } },
         })
@@ -642,7 +646,7 @@ describe('VDateInput', () => {
       })
 
       it('should fill a list in front of the dates already typed', async () => {
-        const model = ref<Date[]>([])
+        const model = ref<Temporal.PlainDateTime[]>([])
         const { element } = render(() => <VDateInput v-model={ model.value } multiple />, null, {
           locale: { locale: 'en', rtl: { en: true } },
         })
@@ -840,7 +844,7 @@ describe('VDateInput', () => {
     })
 
     it('should keep the sections after the one typed over with fewer digits', async () => {
-      const model = ref<Date[]>([])
+      const model = ref<Temporal.PlainDateTime[]>([])
       const { element } = render(() => <VDateInput v-model={ model.value } multiple />)
 
       await userEvent.click(element)
@@ -1011,7 +1015,7 @@ describe('VDateInput', () => {
     })
 
     it('should delete a whole date from a list', async () => {
-      const model = ref<Date[]>([])
+      const model = ref<Temporal.PlainDateTime[]>([])
       const { element } = render(() => <VDateInput v-model={ model.value } multiple />)
 
       await userEvent.click(element)
@@ -1049,7 +1053,7 @@ describe('VDateInput', () => {
       { from: '08/20/2026', selection: [1, 2], typing: '05', expected: '05/20/2026' },
       { from: '08/20/2026', selection: [1, 2], typing: '0→', expected: '01/20/2026' },
     ])('should type $typing over $selection of $from', async ({ from, selection, typing, expected }) => {
-      const { element } = render(() => <VDateInput modelValue={ from } />)
+      const { element } = render(() => <VDateInput modelValue={ fromDisplay(from) } />)
 
       await userEvent.click(element)
       const input = screen.getByCSS('input') as HTMLInputElement
@@ -1069,7 +1073,7 @@ describe('VDateInput', () => {
       { from: '12/25/2025', selection: [0, 0], typing: '1', expected: '12/25/2025' },
       { from: '12/25/2025', selection: [6, 6], typing: '9', expected: '12/25/9025' },
     ])('should start a section over when the overwritten digit does not fit', async ({ from, selection, typing, expected }) => {
-      const { element } = render(() => <VDateInput modelValue={ from } />)
+      const { element } = render(() => <VDateInput modelValue={ fromDisplay(from) } />)
 
       await userEvent.click(element)
       const input = screen.getByCSS('input') as HTMLInputElement
@@ -1081,7 +1085,7 @@ describe('VDateInput', () => {
     })
 
     it.each(['91', '9/1', '910'])('should paste %s over a selection', async paste => {
-      const { element } = render(() => <VDateInput modelValue="08/20/2026" />)
+      const { element } = render(() => <VDateInput modelValue="2026-08-20" />)
 
       await userEvent.click(element)
       const input = screen.getByCSS('input') as HTMLInputElement
@@ -1187,7 +1191,7 @@ describe('VDateInput', () => {
     })
 
     it('should keep a single typed date as a one day range', async () => {
-      const model = ref<Date[]>([])
+      const model = ref<Temporal.PlainDateTime[]>([])
       const { element } = render(() => <VDateInput v-model={ model.value } multiple="range" />)
 
       await userEvent.click(element)

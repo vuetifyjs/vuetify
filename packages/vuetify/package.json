@@ -164,6 +164,7 @@
     "@fortawesome/free-solid-svg-icons": "catalog:",
     "@fortawesome/vue-fontawesome": "catalog:",
     "@intlify/devtools-types": "catalog:",
+    "@js-temporal/polyfill": "catalog:",
     "@rollup/plugin-alias": "catalog:",
     "@rollup/plugin-babel": "catalog:",
     "@rollup/plugin-node-resolve": "catalog:",

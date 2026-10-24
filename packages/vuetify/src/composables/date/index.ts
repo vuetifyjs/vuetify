@@ -1,7 +1,6 @@
 export {
   createDate,
   useDate,
-  createDateRange,
   daysDiff,
   DateSymbol,
   DateAdapterSymbol, // deprecated compat

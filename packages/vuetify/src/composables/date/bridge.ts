@@ -113,19 +113,14 @@ function calculateWeekWithFirstDayOfYear<T> (
 export class VuetifyDateBridge<T> implements DateAdapter<T> {
   constructor (public readonly adapter: V0DateAdapter<T>) {}
 
+  get locale (): string {
+    return this.adapter.locale
+  }
+
   // ============================================
   // Translated methods — coerce string → number,
   // translate per-call firstDayOfWeek param to v0's adapter-level property
   // ============================================
-
-  private withFirstDayOfWeek<R> (firstDayOfWeek: number | undefined, fn: () => R): R {
-    if (isUndefined(firstDayOfWeek) || firstDayOfWeek === this.adapter.firstDayOfWeek) {
-      return fn()
-    }
-    const saved = this.adapter.firstDayOfWeek
-    this.adapter.firstDayOfWeek = firstDayOfWeek
-    try { return fn() } finally { this.adapter.firstDayOfWeek = saved }
-  }
 
   startOfWeek (date: T, firstDayOfWeek?: number | string): T {
     return this.withFirstDayOfWeek(toNumber(firstDayOfWeek), () => this.adapter.startOfWeek(date))
@@ -309,6 +304,15 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
 
   setMinutes (date: T, minutes: number): T {
     return this.adapter.setMinutes(date, minutes)
+  }
+
+  private withFirstDayOfWeek<R> (firstDayOfWeek: number | undefined, fn: () => R): R {
+    if (isUndefined(firstDayOfWeek) || firstDayOfWeek === this.adapter.firstDayOfWeek) {
+      return fn()
+    }
+    const saved = this.adapter.firstDayOfWeek
+    this.adapter.firstDayOfWeek = firstDayOfWeek
+    try { return fn() } finally { this.adapter.firstDayOfWeek = saved }
   }
 }
 

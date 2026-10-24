@@ -5,6 +5,9 @@ import { VDatePicker } from '../VDatePicker'
 import { render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
+// Types
+import type { Temporal } from '@js-temporal/polyfill'
+
 // January 2026, Sun-start:
 // Sun Mon Tue Wed Thu Fri Sat
 //                   1   2   3
@@ -46,7 +49,7 @@ describe('VDatePickerMonth — virtual focus', () => {
 
     // Enter selects the highlighted day (10)
     await userEvent.keyboard('{Enter}')
-    expect(new Date(model.value).getDate()).toBe(10)
+    expect(model.value.day).toBe(10)
 
     // Click 11 (Sun, first of row 3), ArrowLeft crosses back to 10 (Sat)
     await userEvent.click(await screen.findByText('11'))
@@ -55,7 +58,7 @@ describe('VDatePickerMonth — virtual focus', () => {
 
     // Space selects the highlighted day (10)
     await userEvent.keyboard(' ')
-    expect(new Date(model.value).getDate()).toBe(10)
+    expect(model.value.day).toBe(10)
   })
 
   it('starts navigation from the clicked day', async () => {
@@ -579,7 +582,7 @@ describe('VDatePickerMonth — multiple mode', () => {
     await userEvent.keyboard(' ')
     expect(model.value).toHaveLength(3)
 
-    const dates = (model.value as Date[]).map(d => new Date(d).getDate())
+    const dates = (model.value as Temporal.PlainDateTime[]).map(d => d.day)
     expect(dates).toContain(5)
     expect(dates).toContain(6)
     expect(dates).toContain(13)
@@ -655,10 +658,10 @@ describe('VDatePickerMonth — range mode', () => {
     await userEvent.keyboard('{Enter}')
     expect(model.value).toHaveLength(2)
 
-    const [start, end] = model.value as Date[]
-    expect(new Date(start).getDate()).toBe(29)
-    expect(new Date(start).getMonth()).toBe(0)
-    expect(new Date(end).getDate()).toBe(1)
-    expect(new Date(end).getMonth()).toBe(1)
+    const [start, end] = model.value as Temporal.PlainDateTime[]
+    expect(start.day).toBe(29)
+    expect(start.month).toBe(1)
+    expect(end.day).toBe(1)
+    expect(end.month).toBe(2)
   })
 })

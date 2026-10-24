@@ -13,6 +13,7 @@ export class StringDateAdapter implements DateAdapter<string> {
   get locale () { return this.base.locale }
   set locale (v: string) { this.base.locale = v }
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   get firstDayOfWeek () { return this.base.firstDayOfWeek }
   set firstDayOfWeek (v: number) { this.base.firstDayOfWeek = v }
 

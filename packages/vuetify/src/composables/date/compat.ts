@@ -17,10 +17,13 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
   private _firstDayOfWeek = 0
 
   constructor (private legacy: any) {
-    consoleWarn(
-      'Custom date adapters should implement @vuetify/v0\'s DateAdapter interface. ' +
-      'Param-based signatures are deprecated and will be removed in a future version.'
-    )
+    // date-io adapters set `lib` and are supported as they are
+    if (!legacy.lib) {
+      consoleWarn(
+        'Custom date adapters should implement @vuetify/v0\'s DateAdapter interface. ' +
+        'Param-based signatures are deprecated and will be removed in a future version.'
+      )
+    }
     if (legacy.locale != null) this._locale = legacy.locale
   }
 
@@ -29,40 +32,35 @@ export class LegacyDateAdapterCompat<T> implements DateAdapter<T> {
   }
 
   set locale (value: string) {
-    this._locale = value
-    if (this.legacy.locale != null) this.legacy.locale = value
+    this._locale = value // syncs the legacy adapter
   }
 
-  get firstDayOfWeek (): number {
-    return this._firstDayOfWeek
-  }
-
-  set firstDayOfWeek (value: number) {
-    this._firstDayOfWeek = value
-  }
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  get firstDayOfWeek () { return this._firstDayOfWeek }
+  set firstDayOfWeek (value: number) { this._firstDayOfWeek = value }
 
   // ============================================
-  // Week methods — passthrough (both APIs are param-based)
+  // Week methods — v0 keeps firstDayOfWeek as state, legacy adapters take it per call
   // ============================================
 
-  startOfWeek (date: T, firstDayOfWeek?: number): T {
-    return this.legacy.startOfWeek(date, firstDayOfWeek)
+  startOfWeek (date: T): T {
+    return this.legacy.startOfWeek(date, this.firstDayOfWeek)
   }
 
-  endOfWeek (date: T, firstDayOfWeek?: number): T {
-    return this.legacy.endOfWeek(date, firstDayOfWeek)
+  endOfWeek (date: T): T {
+    return this.legacy.endOfWeek(date)
   }
 
-  getWeekArray (date: T, firstDayOfWeek?: number): T[][] {
-    return this.legacy.getWeekArray(date, firstDayOfWeek)
+  getWeekArray (date: T): T[][] {
+    return this.legacy.getWeekArray(date, this.firstDayOfWeek)
   }
 
   getWeekdays (weekdayFormat?: 'long' | 'short' | 'narrow'): string[] {
     return this.legacy.getWeekdays(this.firstDayOfWeek, weekdayFormat)
   }
 
-  getWeek (date: T, firstDayOfWeek?: number, minimalDays?: number): number {
-    return this.legacy.getWeek(date, firstDayOfWeek, minimalDays)
+  getWeek (date: T): number {
+    return this.legacy.getWeek(date, this.firstDayOfWeek)
   }
 
   // ============================================

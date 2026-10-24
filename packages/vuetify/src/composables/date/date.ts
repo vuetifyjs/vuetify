@@ -30,7 +30,7 @@ export namespace DateModule {
 export interface DateOptions {
   adapter?: any
   formats?: Record<string, string>
-  locale?: Record<string, string>
+  locale?: Record<string, any>
 }
 
 export const DateSymbol: InjectionKey<VuetifyDateBridge<any>> = Symbol.for('vuetify:date-instance')
@@ -103,9 +103,9 @@ function isV0Adapter (adapter: any): adapter is V0BaseAdapter<any> {
   )
 }
 
-function resolveLocale (locale: LocaleInstance, localeMap: Record<string, string>): string {
-  const current = locale.current.value
-  return localeMap[current] ?? current
+// Map values can be adapter locale objects (e.g. date-fns `Locale`); v0 needs the code
+function toLocaleCode (value: any, fallback: string): string {
+  return isString(value) ? value : value?.code ?? fallback
 }
 
 export function createDate (options: DateOptions | undefined, locale: LocaleInstance) {
@@ -113,10 +113,18 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   const userLocaleMap = options?.locale ?? {}
 
   // Merge Vuetify's comprehensive locale map with any user overrides
-  const localeMap: Record<string, string> = { ...defaultLocaleMap, ...userLocaleMap }
+  const localeMap: Record<string, any> = { ...defaultLocaleMap, ...userLocaleMap }
+  const localeCodes = Object.fromEntries(
+    Object.entries(localeMap).map(([key, value]) => [key, toLocaleCode(value, key)])
+  )
+
+  function resolveLocale (value: string): string {
+    return localeCodes[value] ?? value
+  }
 
   // 1. Classify adapter and resolve to a v0-compatible DateAdapter
   let adapter: V0BaseAdapter<any>
+  let legacy: any
 
   if (isUndefined(userAdapter)) {
     // No adapter provided — use v0's Temporal-based default
@@ -127,29 +135,32 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   } else if (typeof userAdapter === 'function') {
     // Old Vuetify-style adapter class — instantiate then wrap
     // eslint-disable-next-line new-cap
-    const legacy = new userAdapter({
-      locale: resolveLocale(locale, localeMap),
+    legacy = withWeekFallback(new userAdapter({
+      locale: localeMap[locale.current.value] ?? locale.current.value,
       formats: options?.formats,
-    })
-    adapter = new LegacyDateAdapterCompat(withWeekFallback(legacy, localeMap))
+    }), localeCodes)
+    adapter = new LegacyDateAdapterCompat(legacy)
   } else {
     // Old Vuetify-style adapter instance — wrap
-    adapter = new LegacyDateAdapterCompat(withWeekFallback(userAdapter, localeMap))
+    legacy = withWeekFallback(userAdapter, localeCodes)
+    adapter = new LegacyDateAdapterCompat(legacy)
   }
 
   // 2. Create the v0 date context
   const context = createV0Date({
     adapter,
-    locales: localeMap,
-    locale: resolveLocale(locale, localeMap),
+    locales: localeCodes,
+    locale: resolveLocale(locale.current.value),
   })
 
   // 3. Watch Vuetify's locale for changes and sync to v0's adapter
   watch(locale.current, value => {
-    const resolved = localeMap[value] ?? value
+    const resolved = resolveLocale(value)
     if (context.adapter.locale !== resolved) {
       context.adapter.locale = resolved
     }
+    // the compat setter only knows the code; legacy adapters get the original value back
+    if (legacy) legacy.locale = localeMap[value] ?? value
   })
 
   // 4. Wrap in bridge for Vuetify's DateAdapter interface

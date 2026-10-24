@@ -98,8 +98,9 @@ export function useCalendarBase (props: CalendarBaseProps) {
   const { times, updateTimes } = useTimes(() => toTimestampInput(props.now))
 
   const formatLocale = toRef(() => {
-    const value = dateOptions?.locale[locale.current.value]
-    return isString(value) ? value : value?.code ?? locale.current.value
+    if (!props.locale) return adapter.locale
+    const value = dateOptions?.locale?.[props.locale]
+    return isString(value) ? value : value?.code ?? props.locale
   })
 
   const parsedStart = computed((): CalendarTimestamp => {
