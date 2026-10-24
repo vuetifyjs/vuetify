@@ -248,4 +248,12 @@ describe('createDate', () => {
 
     expect(instance.getWeek(instance.date('2027-01-01'), 1)).toBe(53)
   })
+
+  it('should use adapter time zone for weekdays and week numbers', () => {
+    const { instance } = createDate({ adapter: LuxonAdapter, locale: { en: 'en-US' } }, { current: shallowRef('en') } as LocaleInstance)
+    const inKiritimati = (iso: string) => (instance.date(iso) as { setZone: (zone: string) => unknown }).setZone('Pacific/Kiritimati')
+
+    expect(instance.toISO(instance.startOfWeek(inKiritimati('2026-10-26T00:00:00+14:00'), 1))).toMatch(/^2026-10-26/)
+    expect(instance.getWeek(inKiritimati('2029-01-01T00:00:00+14:00'), 1)).toBe(1)
+  })
 })

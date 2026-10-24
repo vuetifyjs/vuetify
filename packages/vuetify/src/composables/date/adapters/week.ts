@@ -8,8 +8,13 @@ import { weekInfo } from './vuetify'
 import type { DateInstance } from '../date'
 
 export function withWeekFallback (adapter: DateInstance, locales: Record<string, string>): DateInstance {
+  // TODO: replace with toPlainDate when adopting Temporal
+  function toUTCDate (date: unknown) {
+    return new Date(Date.UTC(adapter.getYear(date), adapter.getMonth(date), adapter.getDate(date)))
+  }
+
   function getWeekday (date: unknown) {
-    return adapter.toJsDate(date).getDay()
+    return toUTCDate(date).getUTCDay()
   }
 
   function getLocale (): string | undefined {
@@ -53,8 +58,8 @@ export function withWeekFallback (adapter: DateInstance, locales: Record<string,
       case 'short': return days.map(day => adapter.format(day, 'weekdayShort'))
       case 'narrow': {
         // date-io has no unified name for narrow format, so we need a fallback to Intl
-        const formatter = new Intl.DateTimeFormat(getLocale(), { weekday: 'narrow' })
-        return days.map(day => formatter.format(adapter.toJsDate(day)))
+        const formatter = new Intl.DateTimeFormat(getLocale(), { weekday: 'narrow', timeZone: 'UTC' })
+        return days.map(day => formatter.format(toUTCDate(day)))
       }
     }
 
@@ -71,9 +76,9 @@ export function withWeekFallback (adapter: DateInstance, locales: Record<string,
     const minWeekSize = isNullOrUndefined(firstDayOfYear)
       ? (locale && weekInfo(locale)?.firstWeekSize) || 1
       : 7 - (Number(firstDayOfYear) - getWeekday(start) + 7) % 7
-    const anchor = adapter.toJsDate(adapter.addDays(start, 7 - minWeekSize))
-    const year = anchor.getFullYear()
-    const dayOfYear = (Date.UTC(year, anchor.getMonth(), anchor.getDate()) - Date.UTC(year, 0, 1)) / 864e5
+    const anchor = toUTCDate(adapter.addDays(start, 7 - minWeekSize))
+    const year = anchor.getUTCFullYear()
+    const dayOfYear = (anchor.getTime() - Date.UTC(year, 0, 1)) / 864e5
     return Math.floor(dayOfYear / 7) + 1
   }
 
