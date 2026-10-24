@@ -1,5 +1,5 @@
 // Utilities
-import { createRange, isNullOrUndefined, isString } from '@/util'
+import { consoleWarn, createRange, isNullOrUndefined, isString } from '@/util'
 
 // Adapters
 import { weekInfo } from './vuetify'
@@ -31,7 +31,13 @@ export function withWeekFallback (adapter: DateInstance, locales: Record<string,
   function startOfWeek (date: unknown, firstDayOfWeek?: number | string) {
     if (isNullOrUndefined(firstDayOfWeek)) return adapter.startOfWeek(date)
 
-    const offset = (getWeekday(date) - Number(firstDayOfWeek) + 7) % 7
+    let first = Number(firstDayOfWeek) % 7
+    if (![0, 1, 2, 3, 4, 5, 6].includes(first)) {
+      consoleWarn('Invalid firstDayOfWeek, expected discrete number in range [0-6]')
+      first = 0
+    }
+
+    const offset = (getWeekday(date) - first + 7) % 7
     return adapter.addDays(adapter.startOfDay(date), -offset)
   }
 
