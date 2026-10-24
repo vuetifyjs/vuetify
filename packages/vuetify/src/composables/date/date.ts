@@ -38,7 +38,7 @@ export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify
 
 const defaultLocales: Record<string, string> = {
   af: 'af-ZA',
-  ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in ../adapters/vuetify.ts:25
+  ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in weekInfo
   bg: 'bg-BG',
   ca: 'ca-ES',
   ckb: 'ckb-IQ',
