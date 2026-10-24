@@ -23,7 +23,13 @@ Easily hook up date libraries that are used for components such as Date Picker a
 
 ## Usage
 
-The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.
+The date composable provides a shared architecture that is used by components such as date picker and calendar. The default adapter is `V0DateAdapter` from `@vuetify/v0`, built on [Temporal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Temporal): date components emit `Temporal.PlainDateTime` values, and strings are read as ISO 8601. It can be swapped out for another date library.
+
+The default adapter needs the Temporal polyfill:
+
+```bash
+pnpm add @js-temporal/polyfill
+```
 
 Within your application, import the **useDate** function and use it to access the date composable.
 
@@ -33,7 +39,7 @@ Within your application, import the **useDate** function and use it to access th
 
   const date = useDate()
 
-  console.log(date.getMonth(new Date('March 1, 2021'))) // 2
+  console.log(date.getMonth(date.date('2021-03-01'))) // 2
 </script>
 ```
 
@@ -134,7 +140,7 @@ date.format(adapter.date(), { weekday: 'narrow' })
 
 ## Adapter
 
-The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
+Any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io) can replace the default adapter. Date components then emit that library's date type, e.g. `Date` with date-fns.
 
 ::: info
 
@@ -335,61 +341,25 @@ export default createVuetify({
 
 ## Create your own
 
-To create your own date adapter, implement the **DateAdapter** interface:
+To create your own date adapter, extend `DateAdapter` from `@vuetify/v0` and implement its methods, see [useDate](https://0.vuetifyjs.com/composables/plugins/use-date). Pass the class or an instance as `adapter`.
 
-```ts
-import type { DateAdapter } from 'vuetify'
-
-export interface DateAdapter<TDate> {
-  date (value?: any): TDate | null
-  format (date: TDate, formatString: string): string
-  toJsTDate (value: TDate): TDate
-  parseISO (date: string): TDate
-  toISO (date: TDate): string
-
-  startOfDay (date: TDate): TDate
-  endOfDay (date: TDate): TDate
-  startOfMonth (date: TDate): TDate
-  endOfMonth (date: TDate): TDate
-  startOfYear (date: TDate): TDate
-  endOfYear (date: TDate): TDate
-
-  isBefore (date: TDate, comparing: TDate): boolean
-  isAfter (date: TDate, comparing: TDate): boolean
-  isEqual (date: TDate, comparing: TDate): boolean
-  isSameDay (date: TDate, comparing: TDate): boolean
-  isSameMonth (date: TDate, comparing: TDate): boolean
-  isValid (date: any): boolean
-  isWithinRange (date: TDate, range: [TDate, TDate]): boolean
-
-  addDays (date: TDate, amount: number): TDate
-  addMonths (date: TDate, amount: number): TDate
-
-  getYear (date: TDate): number
-  setYear (date: TDate, year: number): TDate
-  getDiff (date: TDate, comparing: TDate | string, unit?: string): number
-  getWeekArray (date: TDate): TDate[][]
-  getWeekdays (): string[]
-  getMonth (date: TDate): number
-  setMonth (date: TDate, month: number): TDate
-  getNextMonth (date: TDate): TDate
-}
-```
+Adapters written for Vuetify 4's interface, which take `firstDayOfWeek` as an argument of the week methods, still work but log a deprecation warning.
 
 ## Inheritance
 
-You can also extend and override build-in DateAdapter using class inheritance:
+You can also extend and override the default adapter using class inheritance:
 
 ```ts
-import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
+import { V0DateAdapter } from '@vuetify/v0/date'
+import type { Temporal } from '@js-temporal/polyfill'
 
-export class MyAdapter extends VuetifyDateAdapter {
+export class MyAdapter extends V0DateAdapter {
   sayHello () {
-    return `Hello, today is ${this.format(this.date(), 'fullDateWithWeekday')}`
+    return `Hello, today is ${this.format(this.date()!, 'fullDateWithWeekday')}`
   }
-  override format (date: Date, formatString: string): string {
+  override format (date: Temporal.PlainDateTime, formatString: string): string {
     return formatString === 'quarter'
-      ? `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`
+      ? `Q${Math.ceil(date.month / 3)} ${date.year}`
       : super.format(date, formatString)
   }
 }

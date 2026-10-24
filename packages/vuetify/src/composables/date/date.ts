@@ -29,7 +29,7 @@ export namespace DateModule {
 
 export interface DateOptions {
   adapter?: any
-  formats?: Record<string, string>
+  formats?: Record<string, any>
   locale?: Record<string, any>
 }
 
@@ -132,6 +132,10 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   } else if (isV0Adapter(userAdapter)) {
     // Already a v0 DateAdapter instance — use directly
     adapter = userAdapter
+  } else if (typeof userAdapter === 'function' && isV0Adapter(userAdapter.prototype)) {
+    // v0 adapter class (V0DateAdapter subclass, StringDateAdapter) — createV0Date sets the locale
+    // eslint-disable-next-line new-cap
+    adapter = new userAdapter()
   } else if (typeof userAdapter === 'function') {
     // Old Vuetify-style adapter class — instantiate then wrap
     // eslint-disable-next-line new-cap
@@ -164,7 +168,8 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
   })
 
   // 4. Wrap in bridge for Vuetify's DateAdapter interface
-  const instance = new VuetifyDateBridge(context.adapter)
+  // legacy adapters receive `formats` in their constructor and resolve them themselves
+  const instance = new VuetifyDateBridge(context.adapter, legacy ? {} : options?.formats)
 
   // 5. Return shape expected by framework.ts
   return {

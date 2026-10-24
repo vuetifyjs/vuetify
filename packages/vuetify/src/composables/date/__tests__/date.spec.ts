@@ -193,6 +193,21 @@ describe('StringDateAdapter', () => {
 })
 
 describe('createDate', () => {
+  it('should format strings, custom formats and Intl options with the default adapter', () => {
+    const { instance } = createDate({
+      formats: {
+        custom: (date: Date) => `custom ${date.getDate()}`,
+        short: { month: 'short', day: 'numeric' },
+      },
+    }, { current: shallowRef('en') } as LocaleInstance)
+    const date = instance.date('2010-04-13')
+
+    expect(instance.format('2010-04-13', 'fullDateWithWeekday')).toBe('Tuesday, April 13, 2010')
+    expect(instance.format(date, 'custom')).toBe('custom 13')
+    expect(instance.format(date, 'short')).toBe('Apr 13')
+    expect(instance.format(date, { weekday: 'narrow' })).toBe('T')
+  })
+
   it('should apply firstDayOfWeek and weekdayFormat for date-io adapters', () => {
     const { instance } = createDate({ adapter: DateFnsAdapter, locale: { en: enUS } }, { current: shallowRef('en') } as LocaleInstance)
     const march = new Date(2025, 2, 15)

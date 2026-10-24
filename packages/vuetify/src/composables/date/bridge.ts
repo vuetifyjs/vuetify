@@ -1,9 +1,11 @@
 // Utilities
 import { isUndefined } from '@vuetify/v0/utilities'
-import { consoleWarn } from '@/util'
+import { consoleWarn, isFunction, isObject, isString } from '@/util'
 
 // Types
 import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
+
+export type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
 /**
  * Vuetify's public-facing DateAdapter interface.
@@ -12,7 +14,7 @@ import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
  */
 export interface DateAdapter<T = unknown> {
   date (value?: any): T | null
-  format (date: T, formatString: string): string
+  format (date: T, formatString: string | Intl.DateTimeFormatOptions): string
   toJsDate (value: T): Date
   parseISO (date: string): T
   toISO (date: T): string
@@ -111,7 +113,10 @@ function calculateWeekWithFirstDayOfYear<T> (
  * v0 doesn't support directly.
  */
 export class VuetifyDateBridge<T> implements DateAdapter<T> {
-  constructor (public readonly adapter: V0DateAdapter<T>) {}
+  constructor (
+    public readonly adapter: V0DateAdapter<T>,
+    private formats: Record<string, CustomDateFormat> = {},
+  ) {}
 
   get locale (): string {
     return this.adapter.locale
@@ -154,8 +159,19 @@ export class VuetifyDateBridge<T> implements DateAdapter<T> {
     return this.adapter.date(value)
   }
 
-  format (date: T, formatString: string): string {
-    return this.adapter.format(date, formatString)
+  format (date: T, formatString: string | Intl.DateTimeFormatOptions): string {
+    const value = this.adapter.date(date)!
+    const custom = isString(formatString) ? this.formats[formatString] : formatString
+
+    if (isFunction(custom)) {
+      return custom(this.adapter.toJsDate(value), formatString as string, this.adapter.locale)
+    }
+
+    if (isObject(custom)) {
+      return new Intl.DateTimeFormat(this.adapter.locale, custom).format(this.adapter.toJsDate(value))
+    }
+
+    return this.adapter.format(value, formatString as string)
   }
 
   toJsDate (value: T): Date {
