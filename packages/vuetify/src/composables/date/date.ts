@@ -12,6 +12,7 @@ import type { LocaleInstance } from '@/composables/locale'
 
 // Adapters
 import { VuetifyDateAdapter } from './adapters/vuetify'
+import { withWeekFallback } from './adapters/week'
 
 export interface DateInstance extends DateModule.InternalAdapter {
   locale?: any
@@ -35,54 +36,56 @@ export type DateOptions = Partial<InternalDateOptions>
 export const DateOptionsSymbol: InjectionKey<InternalDateOptions> = Symbol.for('vuetify:date-options')
 export const DateAdapterSymbol: InjectionKey<DateInstance> = Symbol.for('vuetify:date-adapter')
 
+const defaultLocales: Record<string, string> = {
+  af: 'af-ZA',
+  ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in weekInfo
+  bg: 'bg-BG',
+  ca: 'ca-ES',
+  ckb: 'ckb-IQ',
+  cs: 'cs-CZ',
+  da: 'da-DK',
+  de: 'de-DE',
+  el: 'el-GR',
+  en: 'en-US',
+  // es: '', # not the same value for all variants
+  et: 'et-EE',
+  fa: 'fa-IR',
+  fi: 'fi-FI',
+  // fr: '', #not the same value for all variants
+  hr: 'hr-HR',
+  hu: 'hu-HU',
+  he: 'he-IL',
+  id: 'id-ID',
+  it: 'it-IT',
+  ja: 'ja-JP',
+  km: 'km-KH',
+  ko: 'ko-KR',
+  lv: 'lv-LV',
+  lt: 'lt-LT',
+  nl: 'nl-NL',
+  no: 'no-NO',
+  pl: 'pl-PL',
+  pt: 'pt-PT',
+  ro: 'ro-RO',
+  ru: 'ru-RU',
+  sk: 'sk-SK',
+  sl: 'sl-SI',
+  srCyrl: 'sr-Cyrl-RS',
+  srLatn: 'sr-Latn-RS',
+  sv: 'sv-SE',
+  th: 'th-TH',
+  tr: 'tr-TR',
+  az: 'az-AZ',
+  uk: 'uk-UA',
+  vi: 'vi-VN',
+  zhHans: 'zh-CN',
+  zhHant: 'zh-TW',
+}
+
 export function createDate (options: DateOptions | undefined, locale: LocaleInstance) {
   const _options = mergeDeep({
     adapter: VuetifyDateAdapter,
-    locale: {
-      af: 'af-ZA',
-      ar: 'ar-DZ', // bare 'ar' would resolve to Argentina in ../adapters/vuetify.ts:25
-      bg: 'bg-BG',
-      ca: 'ca-ES',
-      ckb: 'ckb-IQ',
-      cs: 'cs-CZ',
-      da: 'da-DK',
-      de: 'de-DE',
-      el: 'el-GR',
-      en: 'en-US',
-      // es: '', # not the same value for all variants
-      et: 'et-EE',
-      fa: 'fa-IR',
-      fi: 'fi-FI',
-      // fr: '', #not the same value for all variants
-      hr: 'hr-HR',
-      hu: 'hu-HU',
-      he: 'he-IL',
-      id: 'id-ID',
-      it: 'it-IT',
-      ja: 'ja-JP',
-      km: 'km-KH',
-      ko: 'ko-KR',
-      lv: 'lv-LV',
-      lt: 'lt-LT',
-      nl: 'nl-NL',
-      no: 'no-NO',
-      pl: 'pl-PL',
-      pt: 'pt-PT',
-      ro: 'ro-RO',
-      ru: 'ru-RU',
-      sk: 'sk-SK',
-      sl: 'sl-SI',
-      srCyrl: 'sr-Cyrl-RS',
-      srLatn: 'sr-Latn-RS',
-      sv: 'sv-SE',
-      th: 'th-TH',
-      tr: 'tr-TR',
-      az: 'az-AZ',
-      uk: 'uk-UA',
-      vi: 'vi-VN',
-      zhHans: 'zh-CN',
-      zhHant: 'zh-TW',
-    },
+    locale: defaultLocales,
   }, options) as InternalDateOptions
 
   return {
@@ -116,7 +119,7 @@ function createInstance (options: InternalDateOptions, locale: LocaleInstance) {
     instance.locale = options.locale[value] ?? value ?? instance.locale
   })
 
-  return instance
+  return withWeekFallback(instance, defaultLocales)
 }
 
 export function useDate (): DateInstance {
