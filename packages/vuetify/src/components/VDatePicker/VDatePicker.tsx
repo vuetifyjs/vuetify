@@ -253,7 +253,7 @@ export const VDatePicker = genericComponent<new <
 
     function isYearAllowed (year: number) {
       if (isFunction(props.allowedDates)) {
-        const startOfYear = adapter.parseISO(`${year}-01-01`)
+        const startOfYear = adapter.startOfYear(adapter.setYear(adapter.date(), year))
         return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
       }
 
@@ -269,8 +269,7 @@ export const VDatePicker = genericComponent<new <
 
     function isMonthAllowed (month: number) {
       if (isFunction(props.allowedDates)) {
-        const monthTwoDigits = String(month + 1).padStart(2, '0')
-        const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
+        const startOfMonth = adapter.setMonth(adapter.startOfYear(adapter.setYear(adapter.date(), year.value)), month)
         return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
       }
 
@@ -291,48 +290,37 @@ export const VDatePicker = genericComponent<new <
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
 
-    function onClickNextMonth () {
-      if (month.value < 11) {
-        month.value++
-      } else {
-        year.value++
-        month.value = 0
-        onUpdateYear()
-      }
+    function moveMonth (amount: number) {
+      const target = adapter.addMonths(monthStart.value, amount)
+      const targetYear = adapter.getYear(target)
+      const isYearChange = targetYear !== year.value
+
+      if (isYearChange) year.value = targetYear
+      month.value = adapter.getMonth(target)
+      if (isYearChange) onUpdateYear()
       onUpdateMonth()
     }
 
+    function onClickNextMonth () {
+      moveMonth(1)
+    }
+
     function onClickPrevMonth () {
-      if (month.value > 0) {
-        month.value--
-      } else {
-        year.value--
-        month.value = 11
-        onUpdateYear()
-      }
-      onUpdateMonth()
+      moveMonth(-1)
     }
 
     function onClickNextYear () {
       year.value++
-      if (maxDate.value) {
-        const monthTwoDigits = String(month.value + 1).padStart(2, '0')
-        const monthStart = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
-        if (adapter.isAfter(monthStart, maxDate.value)) {
-          month.value = adapter.getMonth(maxDate.value)
-        }
+      if (maxDate.value && adapter.isAfter(adapter.startOfMonth(monthStart.value), maxDate.value)) {
+        month.value = adapter.getMonth(maxDate.value)
       }
       onUpdateYear()
     }
 
     function onClickPrevYear () {
       year.value--
-      if (minDate.value) {
-        const monthTwoDigits = String(month.value + 1).padStart(2, '0')
-        const monthStart = adapter.endOfMonth(adapter.parseISO(`${year.value}-${monthTwoDigits}-01`))
-        if (adapter.isAfter(minDate.value, monthStart)) {
-          month.value = adapter.getMonth(minDate.value)
-        }
+      if (minDate.value && adapter.isAfter(minDate.value, adapter.endOfMonth(monthStart.value))) {
+        month.value = adapter.getMonth(minDate.value)
       }
       onUpdateYear()
     }
