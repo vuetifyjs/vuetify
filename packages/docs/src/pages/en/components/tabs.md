@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Tabs
   title: Tabs component

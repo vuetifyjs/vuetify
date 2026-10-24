@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: File inputs
   title: File input component

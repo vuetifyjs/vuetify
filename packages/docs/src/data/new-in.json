@@ -825,6 +825,9 @@
       "hideTitle": "3.10.0",
       "period": "3.10.0",
       "variant": "3.11.0"
+    },
+    "examples": {
+      "prop-scrollable": "4.3.0"
     }
   },
   "VTreeview": {

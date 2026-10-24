@@ -1,47 +1,13 @@
 // Utilities
 import { consoleWarn, createRange, padStart } from '@/util'
 
+// Adapters
+import { weekInfo } from './week'
+
 // Types
 import type { DateAdapter } from '../DateAdapter'
 
 type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
-
-function weekInfo (locale: string): { firstDay: number, firstWeekSize: number } | null {
-  // https://simplelocalize.io/data/locales/
-  // then `new Intl.Locale(...).getWeekInfo()`
-  const code = locale.slice(-2).toUpperCase()
-  switch (true) {
-    case locale === 'GB-alt-variant': {
-      return { firstDay: 0, firstWeekSize: 4 }
-    }
-    case locale === '001': {
-      return { firstDay: 1, firstWeekSize: 1 }
-    }
-    case `AG AS BD BR BS BT BW BZ CA CO DM DO ET GT GU HK HN ID IL IN JM JP KE
-    KH KR LA MH MM MO MT MX MZ NI NP PA PE PH PK PR PY SA SG SV TH TT TW UM US
-    VE VI WS YE ZA ZW`.includes(code): {
-      return { firstDay: 0, firstWeekSize: 1 }
-    }
-    case `AI AL AM AR AU AZ BA BM BN BY CL CM CN CR CY EC GE HR KG KZ LB LK LV
-    MD ME MK MN MY NZ RO RS SI TJ TM TR UA UY UZ VN XK`.includes(code): {
-      return { firstDay: 1, firstWeekSize: 1 }
-    }
-    case `AD AN AT AX BE BG CH CZ DE DK EE ES FI FJ FO FR GB GF GP GR HU IE IS
-    IT LI LT LU MC MQ NL NO PL RE RU SE SK SM VA`.includes(code): {
-      return { firstDay: 1, firstWeekSize: 4 }
-    }
-    case `AE AF BH DJ DZ EG IQ IR JO KW LY OM QA SD SY`.includes(code): {
-      return { firstDay: 6, firstWeekSize: 1 }
-    }
-    case code === 'MV': {
-      return { firstDay: 5, firstWeekSize: 1 }
-    }
-    case code === 'PT': {
-      return { firstDay: 0, firstWeekSize: 4 }
-    }
-    default: return null
-  }
-}
 
 function getWeekArray (date: Date, locale: string, firstDayOfWeek?: number) {
   const weeks = []

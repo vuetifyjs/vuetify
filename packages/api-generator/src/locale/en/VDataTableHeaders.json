@@ -6,7 +6,12 @@
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Deprecated, use `fixed-header` instead.",
-    "headerProps": "Additional props to be be passed to the default header"
+    "headerProps": "Additional props to be be passed to the default header",
+    "disableSort": "Disables sorting from the column headers.",
+    "fixedHeader": "Sticks the header to the top of the table.",
+    "multiSort": "Shows sort priority badges and allows multiple selection on mobile.",
+    "selectAllLabel": "Accessible label for the select-all checkbox. Accepts locale keys.",
+    "initialSortOrder": "Picks the sort icon shown on unsorted columns."
   },
   "slots": {
     "[`column.${string}`]": "Slot for custom rendering of a column.",
