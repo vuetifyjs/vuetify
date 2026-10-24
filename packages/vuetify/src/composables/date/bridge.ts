@@ -7,6 +7,28 @@ import type { DateAdapter as V0DateAdapter } from '@vuetify/v0/composables'
 
 export type CustomDateFormat = Intl.DateTimeFormatOptions | ((date: Date, formatString: string, locale: string) => string)
 
+function keyboardDateTime (options: Intl.DateTimeFormatOptions): CustomDateFormat {
+  return (date, _, locale) => new Intl.DateTimeFormat(locale, {
+    year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', ...options,
+  }).format(date).replace(/, /g, ' ')
+}
+
+// v4 output for keys v0's adapter lacks or renders differently
+export const defaultFormats: Record<string, CustomDateFormat> = {
+  fullDate: { year: 'numeric', month: 'short', day: 'numeric' },
+  normalDate: (date, _, locale) => `${date.getDate()} ${new Intl.DateTimeFormat(locale, { month: 'long' }).format(date)}`,
+  normalDateWithWeekday: { weekday: 'short', day: 'numeric', month: 'short' },
+  shortDate: { month: 'short', day: 'numeric' },
+  dayOfMonth: (date, _, locale) => new Intl.NumberFormat(locale).format(date.getDate()),
+  fullTime: { hour: 'numeric', minute: 'numeric' },
+  fullDateTime: { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' },
+  fullDateTime12h: { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true },
+  fullDateTime24h: { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', hour12: false },
+  keyboardDateTime: keyboardDateTime({}),
+  keyboardDateTime12h: keyboardDateTime({ hour12: true }),
+  keyboardDateTime24h: keyboardDateTime({ hour12: false }),
+}
+
 /**
  * Vuetify's public-facing DateAdapter interface.
  * Accepts `number | string` for firstDayOfWeek params (legacy contract).

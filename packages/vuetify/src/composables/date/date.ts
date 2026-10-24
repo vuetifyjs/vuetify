@@ -6,7 +6,7 @@ import { inject, watch } from 'vue'
 import { isString } from '@/util'
 
 // Adapters
-import { VuetifyDateBridge } from './bridge'
+import { defaultFormats, VuetifyDateBridge } from './bridge'
 import { LegacyDateAdapterCompat } from './compat'
 import { withWeekFallback } from './adapters/week'
 
@@ -169,7 +169,7 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
 
   // 4. Wrap in bridge for Vuetify's DateAdapter interface
   // legacy adapters receive `formats` in their constructor and resolve them themselves
-  const instance = new VuetifyDateBridge(context.adapter, legacy ? {} : options?.formats)
+  const instance = new VuetifyDateBridge(context.adapter, legacy ? {} : { ...defaultFormats, ...options?.formats })
 
   // 5. Return shape expected by framework.ts
   return {
