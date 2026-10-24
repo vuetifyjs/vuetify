@@ -61,4 +61,23 @@ describe('VDataTable headers', () => {
     expect(columns.value).toMatchObject([{ key: 'foo' }, { key: 'bar' }, { key: 'fizz' }, { key: 'buzz' }])
     expect('provide() can only be used inside setup()').toHaveBeenTipped()
   })
+
+  it('keeps the rows of 100 or more headers with children', () => {
+    const { headers } = createHeaders({
+      items: [],
+      headers: Array.from({ length: 100 }, (_, i) => ({
+        key: `group${i}`,
+        children: [{ key: `child${i}` }],
+      })),
+    })
+
+    expect(headers.value).toHaveLength(2)
+    expect(headers.value[0].map(header => header.key)).toEqual(
+      Array.from({ length: 100 }, (_, i) => `group${i}`)
+    )
+    expect(headers.value[1].map(header => header.key)).toEqual(
+      Array.from({ length: 100 }, (_, i) => `child${i}`)
+    )
+    expect('provide() can only be used inside setup()').toHaveBeenTipped()
+  })
 })

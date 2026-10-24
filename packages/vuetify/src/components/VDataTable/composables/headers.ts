@@ -25,35 +25,33 @@ type HeaderProps = {
 const defaultHeader = { title: '', sortable: false }
 const defaultActionHeader = { ...defaultHeader, width: 48 }
 
+type Priority = {
+  row: number
+  // Position within the row at each depth, with 0 where an ancestor spans that depth
+  order: number[]
+}
+
+function comparePriority (a: Priority, b: Priority) {
+  if (a.row !== b.row) return a.row - b.row
+  for (let i = 0; i < Math.min(a.order.length, b.order.length); i++) {
+    if (a.order[i] !== b.order[i]) return a.order[i] - b.order[i]
+  }
+  return a.order.length - b.order.length
+}
+
 function priorityQueue <T> (arr: T[] = []) {
-  const queue: { element: T, priority: number }[] = arr.map(element => ({ element, priority: 0 }))
+  const queue: ({ element: T } & Priority)[] = arr.map(element => ({ element, row: 0, order: [] }))
 
   return {
-    enqueue: (element: T, priority: number) => {
-      let added = false
-      for (let i = 0; i < queue.length; i++) {
-        const item = queue[i]
-        if (item.priority > priority) {
-          queue.splice(i, 0, { element, priority })
-          added = true
-          break
-        }
-      }
-
-      if (!added) queue.push({ element, priority })
+    enqueue: (element: T, priority: Priority) => {
+      const index = queue.findIndex(item => comparePriority(item, priority) > 0)
+      queue.splice(index === -1 ? queue.length : index, 0, { element, ...priority })
     },
     size: () => queue.length,
     count: () => {
-      let count = 0
-
       if (!queue.length) return 0
 
-      const whole = Math.floor(queue[0].priority)
-      for (let i = 0; i < queue.length; i++) {
-        if (Math.floor(queue[i].priority) === whole) count += 1
-      }
-
-      return count
+      return queue.filter(item => item.row === queue[0].row).length
     },
     dequeue: () => {
       return queue.shift()
@@ -218,7 +216,7 @@ function parse (items: InternalDataTableHeader[], maxDepth: number) {
     const row: InternalDataTableHeader[] = []
     let fraction = 1
     while (rowSize > 0) {
-      const { element: item, priority } = queue.dequeue()!
+      const { element: item, order } = queue.dequeue()!
       const diff = maxDepth - currentDepth - getDepth(item)
 
       row.push({
@@ -228,10 +226,11 @@ function parse (items: InternalDataTableHeader[], maxDepth: number) {
       })
 
       if (item.children) {
+        // This internally sorts items that are on the same row
+        const childOrder = Array.from({ length: currentDepth + 1 }, (_, i) => order[i] ?? 0)
+        childOrder[currentDepth] = fraction
         for (const child of item.children) {
-          // This internally sorts items that are on the same priority "row"
-          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 2))
-          queue.enqueue(child, currentDepth + diff + sort)
+          queue.enqueue(child, { row: currentDepth + diff, order: childOrder })
         }
       }
 
