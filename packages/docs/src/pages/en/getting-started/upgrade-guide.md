@@ -15,4 +15,3 @@ related:
 This page contains a detailed list of breaking changes and the steps required to upgrade your application from Vuetify 4 to Vuetify 5.
 
 <PageFeatures />
-
