@@ -19,7 +19,12 @@ export function withWeekFallback (adapter: DateInstance, locales: Record<string,
 
   function getLocale (): string | undefined {
     const code: string | undefined = isString(adapter.locale) ? adapter.locale : adapter.locale?.code
-    return code && (locales[code] ?? new Intl.Locale(code).maximize().toString())
+    try {
+      return code && (locales[code] ?? new Intl.Locale(code).maximize().toString())
+    } catch {
+      consoleWarn(`Invalid locale "${code}", expected BCP 47 tag`)
+      return undefined
+    }
   }
 
   const ownFirstDay = getWeekday(adapter.startOfWeek(adapter.date()))
