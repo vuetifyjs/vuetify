@@ -1,0 +1,6 @@
+{
+  "props": {
+    "groupCollapseIcon": "Icon to display when the row group is expanded.",
+    "groupExpandIcon": "Icon to display when the row group is collapsed."
+  }
+}

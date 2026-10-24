@@ -4,7 +4,8 @@
     "icon": "Turns the primary action into an icon button showing this icon.",
     "menu": "Controls whether the menu is open (v-model:menu).",
     "menuIcon": "Icon of the menu button. Rotates while the menu is open.",
-    "menuLabel": "Accessible label of the menu button."
+    "menuLabel": "Accessible label of the menu button.",
+    "loading": "Puts the primary action into a loading state. Accepts a color for the loader."
   },
   "events": {
     "click": "Emitted when the primary action is clicked."

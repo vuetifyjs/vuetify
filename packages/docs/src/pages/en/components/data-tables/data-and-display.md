@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Data and Display
   title: Data table - Data and Display

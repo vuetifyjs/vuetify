@@ -72,6 +72,12 @@
       .v-time-picker--variant-input &
         width: $time-picker-controls-input-seconds-field-width
 
+    .v-time-picker-controls__time--with-seconds:not(.v-time-picker-controls__time--with-ampm) &
+      width: $time-picker-controls-24hr-seconds-field-width
+
+      .v-time-picker--variant-input &
+        width: $time-picker-controls-input-24hr-seconds-field-width
+
     .v-field__input
       padding: 0
       font-weight: 500

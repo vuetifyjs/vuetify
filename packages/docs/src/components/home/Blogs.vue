@@ -142,6 +142,14 @@
 
   const items = [
     {
+      title: 'Announcing Vuetify v4.3',
+      shortDescription: 'Vuetify v4.3 "Paladin" adds more control over filtering and selection in data tables and forms, a batch of new labs components, right-click menus for VMenu, and opt-in Material Design Expressive styles for 7 components. It also includes new options for carousels and slide groups, and a more stable layout for SSR apps.',
+      date: 'October 20, 2026',
+      author: 'John Leider',
+      avatar: 'https://cdn.vuetifyjs.com/docs/images/team/john.png',
+      to: rpath('/blog/announcing-vuetify-4.3'),
+    },
+    {
       title: 'September 2026 Update',
       image: 'https://cdn.vuetifyjs.com/docs/images/blog/september-2026-update/september-hero.png',
       shortDescription: 'Vuetify 4.2 got three patches while dev filled up for 4.3: VInfiniteCarousel, MD3 tab sliders, modal rail drawers and localized VDateInput hints. Vuetify\'s RTL, locale and observer composables now run on @vuetify/v0, and moving display onto it surfaced two fixes in Vuetify0 1.2.3. Also: why component CSS can load before the layer order, and how to fix it...',
