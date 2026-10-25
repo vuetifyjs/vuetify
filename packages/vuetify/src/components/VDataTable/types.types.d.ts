@@ -80,6 +80,13 @@ export type DataTableHeader<T = Record<string, any>> = {
   children?: DataTableHeader<T>[]
 }
 
+// DeepReadonly<DataTableHeader[]> is anonymous and recursive, TS 7.1 refuses to emit it (TS5088)
+export interface ReadonlyDataTableHeader<T = Record<string, any>> extends Readonly<Omit<DataTableHeader<T>, 'children'>> {
+  readonly children?: readonly ReadonlyDataTableHeader<T>[]
+}
+
+export type ReadonlyDataTableHeaders<T = Record<string, any>> = readonly ReadonlyDataTableHeader<T>[]
+
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number | null
 
 export type DataTableLoading =

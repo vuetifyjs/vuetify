@@ -5,11 +5,11 @@ import { consoleError, isString, propsFactory } from '@/util'
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { SortItem } from './sort'
-import type { DataTableCompareFunction, DataTableHeader, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, DataTableHeader, InternalDataTableHeader, ReadonlyDataTableHeaders } from '../types'
 import type { FilterKeyFunctions } from '@/composables/filter'
 
 export const makeDataTableHeaderProps = propsFactory({
-  headers: Array as PropType<DeepReadonly<DataTableHeader[]>>,
+  headers: Array as PropType<ReadonlyDataTableHeaders>,
 }, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
@@ -18,7 +18,7 @@ export const VDataTableHeadersSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
-  headers: DeepReadonly<DataTableHeader[]> | undefined
+  headers: ReadonlyDataTableHeaders | undefined
   items: any[]
 }
 
@@ -275,8 +275,8 @@ export function createHeaders (
     showExpand?: Ref<boolean>
   }
 ) {
-  const headers = ref<InternalDataTableHeader[][]>([])
-  const columns = ref<InternalDataTableHeader[]>([])
+  const headers: Ref<InternalDataTableHeader[][]> = ref([])
+  const columns: Ref<InternalDataTableHeader[]> = ref([])
   const sortFunctions = ref<Record<string, DataTableCompareFunction>>({})
   const sortRawFunctions = ref<Record<string, DataTableCompareFunction>>({})
   const filterFunctions = ref<FilterKeyFunctions>({})

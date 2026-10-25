@@ -15,6 +15,7 @@ import type {
   ItemKeySlot,
   ItemSlot,
   ItemSlotBase,
+  ReadonlyDataTableHeaders,
   RowProps,
   RowPropsFunction,
 } from './types.types'
@@ -35,6 +36,7 @@ export type {
   ItemKeySlot,
   ItemSlot,
   ItemSlotBase,
+  ReadonlyDataTableHeaders,
   RowProps,
   RowPropsFunction,
 }

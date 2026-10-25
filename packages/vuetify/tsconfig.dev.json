@@ -12,7 +12,7 @@
     "allowJs": true,
     "allowImportingTsExtensions": true,
     "types": [
-      "@vitest/browser/providers/webdriverio"
+      "@vitest/browser-playwright"
     ]
   },
   "vueCompilerOptions": {
