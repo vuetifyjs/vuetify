@@ -1,5 +1,5 @@
 // Types
-import type { ComponentInternalInstance, ComputedRef, CSSProperties, Ref, RendererElement, RendererNode, ShallowRef, StyleValue, VNode } from 'vue'
+import type { ComponentInternalInstance, ComputedRef, CSSProperties, Ref, ShallowRef, StyleValue, VNode } from 'vue'
 import type { VDailyEventsMap, VEventScopeInput } from '@/components/VCalendar/composables/calendarWithEvents.types'
 import type {
   CalendarCategory,
@@ -19,7 +19,6 @@ import type {
 } from '@/components/VCalendar/types.types'
 import type { VTime, VTimestampInput } from '@/components/VCalendar/util/timestamp.types'
 import type { ColorValue } from '@/composables/color.types'
-import type { ForwardRefs } from '@/composables/forwardRefs.types'
 import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale.types'
 import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
 import type { JSXComponent } from '@/util/shared.types'
