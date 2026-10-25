@@ -74,8 +74,6 @@ function config ({ name, entry, library, css }) {
     optimization: {
       splitChunks: false,
       runtimeChunk: false,
-      // ESM consumers' bundlers resolve process.env themselves
-      nodeEnv: library === 'umd' ? 'production' : false,
       avoidEntryIife: library !== 'umd',
       concatenateModules: library === 'umd',
       minimize: true,
@@ -93,8 +91,8 @@ function config ({ name, entry, library, css }) {
       new rspack.BannerPlugin({ banner, raw: true, entryOnly: true }),
       new rspack.SourceMapDevToolPlugin({ test: /^vuetify(\.min|\.esm)?\.js$|^vuetify-labs\.esm\.js$/, filename: '[file].map' }),
       dropAssets(/^vuetify-labs\.min\.js/),
-      // @vuetify/v0 reads it at module init, CDN builds have no `process`
-      library === 'umd' && new rspack.DefinePlugin({ 'process.env.VITE_LOGGER_ENABLED': 'undefined' }),
+      // @vuetify/v0 reads it at module init; dist is loaded without a bundler, so there is no `process`
+      new rspack.DefinePlugin({ 'process.env.VITE_LOGGER_ENABLED': 'undefined' }),
     ],
     performance: false,
   }
