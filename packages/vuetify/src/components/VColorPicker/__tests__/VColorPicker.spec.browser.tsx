@@ -133,6 +133,43 @@ describe('VColorPicker', () => {
     expect(update).toHaveBeenCalledTimes(1)
   })
 
+  it('should support keyboard navigation and selection of swatches', async () => {
+    const update = vi.fn()
+    const colors = [['#ff0000', '#00ff00'], ['#0000ff']]
+    render(() => (
+      <VColorPicker
+        hideCanvas
+        hideInputs
+        hideSliders
+        showSwatches
+        swatches={ colors }
+        onUpdate:modelValue={ update }
+      />
+    ))
+
+    const swatches = screen.getAllByCSS('.v-color-picker-swatches__color')
+
+    expect(swatches).toHaveLength(3)
+    expect(swatches[0].tagName).toBe('BUTTON')
+    expect(swatches[0]).toHaveAccessibleName()
+
+    await userEvent.tab()
+    expect(swatches[0]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowRight}')
+    expect(swatches[2]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(swatches[0]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowDown}')
+    expect(swatches[1]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowUp}{Enter}')
+    expect(swatches[0]).toHaveFocus()
+    expect(update).toHaveBeenCalledTimes(1)
+  })
+
   it('should not use global defaults for slider color', async () => {
     render(VColorPicker, null, {
       defaults: {

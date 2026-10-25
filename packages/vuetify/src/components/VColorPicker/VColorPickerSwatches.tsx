@@ -81,6 +81,42 @@ export const VColorPickerSwatches = defineComponent({
       emit('update:color', hsva)
     }
 
+    function onSwatchKeydown (event: KeyboardEvent) {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
+
+      const currentSwatch = event.currentTarget as HTMLButtonElement
+      const swatches = currentSwatch.closest('.v-color-picker-swatches')
+        ?.querySelectorAll<HTMLButtonElement>('.v-color-picker-swatches__color:not(:disabled)')
+      if (!swatches?.length) return
+
+      const currentRect = currentSwatch.getBoundingClientRect()
+      const horizontal = event.key === 'ArrowLeft' || event.key === 'ArrowRight'
+      const forward = event.key === 'ArrowRight' || event.key === 'ArrowDown'
+      const currentPrimary = horizontal ? currentRect.x : currentRect.y
+      const currentSecondary = horizontal ? currentRect.y : currentRect.x
+      const candidates = Array.from(swatches)
+        .filter(swatch => swatch !== currentSwatch)
+        .map(swatch => {
+          const rect = swatch.getBoundingClientRect()
+          const primary = horizontal ? rect.x : rect.y
+          const secondary = horizontal ? rect.y : rect.x
+
+          return {
+            swatch,
+            primaryDistance: forward ? primary - currentPrimary : currentPrimary - primary,
+            secondaryDistance: Math.abs(secondary - currentSecondary),
+          }
+        })
+        .filter(candidate => candidate.primaryDistance > 0)
+        .sort((a, b) => a.secondaryDistance - b.secondaryDistance || a.primaryDistance - b.primaryDistance)
+      const nextSwatch = candidates[0]?.swatch
+
+      if (!nextSwatch) return
+
+      event.preventDefault()
+      nextSwatch.focus()
+    }
+
     useRender(() => (
       <div
         class={[
@@ -99,24 +135,31 @@ export const VColorPickerSwatches = defineComponent({
                 const rgba = parseColor(color)
                 const hsva = RGBtoHSV(rgba)
                 const background = RGBtoCSS(rgba)
+                const isSelected = !!props.color && deepEqual(props.color, hsva)
 
                 return (
-                  <div
+                  <button
+                    type="button"
                     class={[
                       'v-color-picker-swatches__color',
                       {
                         'v-color-picker-swatches__color--disabled': props.disabled,
                       },
                     ]}
+                    aria-label={ background }
+                    aria-pressed={ isSelected }
+                    aria-disabled={ props.readonly || undefined }
+                    disabled={ props.disabled }
+                    onKeydown={ onSwatchKeydown }
                     onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
-                      { props.color && deepEqual(props.color, hsva)
+                      { isSelected
                         ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined
                       }
                     </div>
-                  </div>
+                  </button>
                 )
               })}
             </div>
