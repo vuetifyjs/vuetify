@@ -54,7 +54,7 @@ export interface VRatingProps {
   theme?: string
 }
 
-export type VRatingDefaultKeys =
+type VRatingDefaultKeys =
   | 'clearable'
   | 'density'
   | 'disabled'
@@ -81,3 +81,5 @@ export declare const VRating: VuetifyComponent<
   VRatingSlots
 >
 export type VRating = InstanceType<typeof VRating>
+
+export {}

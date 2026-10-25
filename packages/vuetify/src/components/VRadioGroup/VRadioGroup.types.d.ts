@@ -65,7 +65,7 @@ export interface VRadioGroupProps {
   width?: string | number
 }
 
-export type VRadioGroupDefaultKeys =
+type VRadioGroupDefaultKeys =
   | 'centerAffix'
   | 'density'
   | 'detailsActive'
@@ -106,3 +106,5 @@ export declare const VRadioGroup: VuetifyComponent<
   ForwardRefs<{ isFocused: Ref<boolean, boolean> & { readonly externalValue: boolean } }, [VSelectionControlGroup, VInput]>
 >
 export type VRadioGroup = InstanceType<typeof VRadioGroup>
+
+export {}

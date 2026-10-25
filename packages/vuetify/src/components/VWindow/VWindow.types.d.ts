@@ -28,7 +28,7 @@ export interface VWindowProps<T = any> {
   wheel?: boolean
 }
 
-export type VWindowDefaultKeys =
+type VWindowDefaultKeys =
   | 'continuous'
   | 'crossfade'
   | 'direction'
@@ -79,3 +79,5 @@ export declare const VWindow: VuetifyComponent<
   VWindowExposed
 >
 export type VWindow = InstanceType<typeof VWindow>
+
+export {}

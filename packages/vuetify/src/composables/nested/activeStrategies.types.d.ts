@@ -24,3 +24,5 @@ export type ActiveStrategy = {
   in: ActiveStrategyTransformInFunction
   out: ActiveStrategyTransformOutFunction
 }
+
+export {}

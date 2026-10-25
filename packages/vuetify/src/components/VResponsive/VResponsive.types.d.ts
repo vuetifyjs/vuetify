@@ -21,7 +21,7 @@ export interface VResponsiveProps {
   width?: string | number
 }
 
-export type VResponsiveDefaultKeys =
+type VResponsiveDefaultKeys =
   | 'inline'
   | 'style'
 
@@ -32,3 +32,5 @@ export declare const VResponsive: VuetifyComponent<
   VResponsiveSlots
 >
 export type VResponsive = InstanceType<typeof VResponsive>
+
+export {}

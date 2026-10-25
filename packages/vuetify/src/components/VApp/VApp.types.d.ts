@@ -11,7 +11,7 @@ export interface VAppProps {
   theme?: string
 }
 
-export type VAppDefaultKeys =
+type VAppDefaultKeys =
   | 'style'
 
 export declare const VApp: VuetifyComponent<
@@ -22,3 +22,5 @@ export declare const VApp: VuetifyComponent<
   { getLayoutItem: (id: string) => { size: number, position: Position, top: number, bottom: number, left: number, right: number, id: string } | undefined, items: ComputedRef<{ size: number, position: Position, top: number, bottom: number, left: number, right: number, id: string }[]>, theme: ThemeInstance }
 >
 export type VApp = InstanceType<typeof VApp>
+
+export {}

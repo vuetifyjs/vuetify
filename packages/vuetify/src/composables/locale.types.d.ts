@@ -25,3 +25,5 @@ export interface LocaleInstance {
   n: (value: number) => string
   provide: (props: LocaleOptions) => LocaleInstance
 }
+
+export {}

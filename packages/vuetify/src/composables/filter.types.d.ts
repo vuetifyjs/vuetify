@@ -33,3 +33,5 @@ export interface FilterProps {
   ignoreAccents?: IgnoreAccents
   noFilter?: boolean
 }
+
+export {}

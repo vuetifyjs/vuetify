@@ -55,7 +55,7 @@ export interface VDialogProps {
   zIndex?: string | number
 }
 
-export type VDialogDefaultKeys =
+type VDialogDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'captureFocus'
@@ -98,3 +98,5 @@ export declare const VDialog: VuetifyComponent<
   ForwardRefs<{}, [VOverlay]>
 >
 export type VDialog = InstanceType<typeof VDialog>
+
+export {}

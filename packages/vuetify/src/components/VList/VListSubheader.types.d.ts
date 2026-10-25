@@ -13,7 +13,7 @@ export interface VListSubheaderProps {
   title?: string
 }
 
-export type VListSubheaderDefaultKeys =
+type VListSubheaderDefaultKeys =
   | 'inset'
   | 'sticky'
   | 'style'
@@ -25,3 +25,5 @@ export declare const VListSubheader: VuetifyComponent<
   Record<string, any>
 >
 export type VListSubheader = InstanceType<typeof VListSubheader>
+
+export {}

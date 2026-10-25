@@ -22,3 +22,5 @@ export interface FormValidationResult {
   valid: boolean
   errors: FieldValidationResult[]
 }
+
+export {}

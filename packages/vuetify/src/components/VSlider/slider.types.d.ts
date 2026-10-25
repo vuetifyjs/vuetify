@@ -7,3 +7,5 @@ export type Tick = {
 export type SliderVariant = 'default' | 'pill'
 export type SliderThumbState = 'idle' | 'active'
 export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+
+export {}

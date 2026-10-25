@@ -113,7 +113,7 @@ export interface VSnackbarQueueProps {
   zIndex?: string | number
 }
 
-export type VSnackbarQueueDefaultKeys =
+type VSnackbarQueueDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'closeOnBack'
@@ -161,3 +161,5 @@ export declare const VSnackbarQueue: VuetifyComponent<
   { clear: () => void }
 >
 export type VSnackbarQueue = InstanceType<typeof VSnackbarQueue>
+
+export {}

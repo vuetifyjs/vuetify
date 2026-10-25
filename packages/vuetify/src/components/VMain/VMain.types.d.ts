@@ -16,7 +16,7 @@ export interface VMainProps {
   width?: string | number
 }
 
-export type VMainDefaultKeys =
+type VMainDefaultKeys =
   | 'scrollable'
   | 'style'
   | 'tag'
@@ -27,3 +27,5 @@ export declare const VMain: VuetifyComponent<
   Record<string, any>
 >
 export type VMain = InstanceType<typeof VMain>
+
+export {}

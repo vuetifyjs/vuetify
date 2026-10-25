@@ -37,7 +37,7 @@ export interface VProgressProps {
   valueFormat?: ValueFormat
 }
 
-export type VProgressDefaultKeys =
+type VProgressDefaultKeys =
   | 'absolute'
   | 'detailsPosition'
   | 'hideLabel'
@@ -59,3 +59,5 @@ export declare const VProgress: VuetifyComponent<
   VProgressSlots
 >
 export type VProgress = InstanceType<typeof VProgress>
+
+export {}

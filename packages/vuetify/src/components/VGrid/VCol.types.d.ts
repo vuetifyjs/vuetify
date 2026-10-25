@@ -28,7 +28,7 @@ export interface VColProps {
   xxl?: string | number | boolean
 }
 
-export type VColDefaultKeys =
+type VColDefaultKeys =
   | 'alignSelf'
   | 'cols'
   | 'lg'
@@ -57,3 +57,5 @@ export declare const VCol: VuetifyComponent<
   Record<string, any>
 >
 export type VCol = InstanceType<typeof VCol>
+
+export {}

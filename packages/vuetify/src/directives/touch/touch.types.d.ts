@@ -18,3 +18,5 @@ export interface TouchData {
   offsetX: number
   offsetY: number
 }
+
+export {}

@@ -98,3 +98,5 @@ export type CalendarTimeDelta = (
   time: CalendarTimestamp | number | string,
   targetDate?: CalendarTimestamp
 ) => number | false
+
+export {}

@@ -108,7 +108,7 @@ export interface VCalendarProps {
   weekdays?: string | number[]
 }
 
-export type VCalendarDefaultKeys =
+type VCalendarDefaultKeys =
   | 'categories'
   | 'categoryDays'
   | 'categoryForInvalid'
@@ -177,3 +177,5 @@ export declare const VCalendar: VuetifyComponent<
   VCalendarExposed & { _allExposed: Omit<VCalendarExposed, '_'> | Record<'bodyHeight' | 'firstMinute' | 'getIntervalAtEvent' | 'getScrollPush' | 'getSlotScope' | 'getTimestampAtEvent' | 'init' | 'intervalFormatter' | 'intervalStyleDefault' | 'intervals' | 'isOutside' | 'minutesToPixels' | 'monthFormatter' | 'onResize' | 'pane' | 'parsedFirstInterval' | 'parsedFirstTime' | 'parsedIntervalCount' | 'parsedIntervalHeight' | 'parsedIntervalMinutes' | 'scrollAreaRef' | 'scrollPush' | 'scrollToTime' | 'showIntervalLabelDefault' | 'timeDelta' | 'timeToY' | 'todayWeek', unknown> }
 >
 export type VCalendar = InstanceType<typeof VCalendar>
+
+export {}

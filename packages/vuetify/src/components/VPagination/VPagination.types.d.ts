@@ -64,7 +64,7 @@ export interface VPaginationProps {
   variant?: Variant
 }
 
-export type VPaginationDefaultKeys =
+type VPaginationDefaultKeys =
   | 'ariaLabel'
   | 'currentPageAriaLabel'
   | 'density'
@@ -103,3 +103,5 @@ export declare const VPagination: VuetifyComponent<
   VPaginationSlots
 >
 export type VPagination = InstanceType<typeof VPagination>
+
+export {}

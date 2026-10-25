@@ -40,7 +40,7 @@ export interface VHeatmapProps {
   thresholds?: ColorScale
 }
 
-export type VHeatmapDefaultKeys =
+type VHeatmapDefaultKeys =
   | 'cellSize'
   | 'gap'
   | 'groupGap'
@@ -62,3 +62,5 @@ export declare const VHeatmap: VuetifyComponent<
   VHeatmapSlots
 >
 export type VHeatmap = InstanceType<typeof VHeatmap>
+
+export {}

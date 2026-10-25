@@ -68,7 +68,7 @@ export interface VTabsProps {
   tag?: string | JSXComponent
 }
 
-export type VTabsDefaultKeys =
+type VTabsDefaultKeys =
   | 'alignTabs'
   | 'centerActive'
   | 'density'
@@ -111,3 +111,5 @@ export declare const VTabs: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VTabs = InstanceType<typeof VTabs>
+
+export {}

@@ -75,7 +75,7 @@ export interface VFileUploadDropzoneProps {
   width?: string | number
 }
 
-export type VFileUploadDropzoneDefaultKeys =
+type VFileUploadDropzoneDefaultKeys =
   | 'browseText'
   | 'clearable'
   | 'density'
@@ -109,3 +109,5 @@ export declare const VFileUploadDropzone: VuetifyComponent<
   ForwardRefs<{}, [VSheet]>
 >
 export type VFileUploadDropzone = InstanceType<typeof VFileUploadDropzone>
+
+export {}

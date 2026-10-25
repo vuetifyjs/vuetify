@@ -18,7 +18,7 @@ export interface VPieTooltipProps {
   transition?: string | boolean | (TransitionProps & { component?: Component | undefined }) | null
 }
 
-export type VPieTooltipDefaultKeys =
+type VPieTooltipDefaultKeys =
   | 'item'
   | 'modelValue'
   | 'offset'
@@ -32,3 +32,5 @@ export declare const VPieTooltip: VuetifyComponent<
   VPieTooltipSlots
 >
 export type VPieTooltip = InstanceType<typeof VPieTooltip>
+
+export {}

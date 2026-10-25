@@ -5,7 +5,7 @@ export interface VDialogTransitionProps {
   target?: HTMLElement | [x: number, y: number]
 }
 
-export type VDialogTransitionDefaultKeys = never
+type VDialogTransitionDefaultKeys = never
 
 export declare const VDialogTransition: VuetifyComponent<
   VDialogTransitionProps,
@@ -13,3 +13,5 @@ export declare const VDialogTransition: VuetifyComponent<
   Record<string, any>
 >
 export type VDialogTransition = InstanceType<typeof VDialogTransition>
+
+export {}

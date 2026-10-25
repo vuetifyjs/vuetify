@@ -1,12 +1,12 @@
 // Types
-import type { VConfirmEditDefaultKeys, VConfirmEditProps } from '@/components/VConfirmEdit/VConfirmEdit.types'
+import type { VConfirmEdit, VConfirmEditProps } from '@/components/VConfirmEdit/VConfirmEdit.types'
 import type { VMenu } from '@/components/VMenu/VMenu.types'
-import type { VTextField, VTextFieldDefaultKeys, VTextFieldProps, VTextFieldSlots } from '@/components/VTextField/VTextField.types'
-import type { VTimePicker, VTimePickerDefaultKeys, VTimePickerProps } from '@/components/VTimePicker/VTimePicker.types'
+import type { VTextField, VTextFieldProps, VTextFieldSlots } from '@/components/VTextField/VTextField.types'
+import type { VTimePicker, VTimePickerProps } from '@/components/VTimePicker/VTimePicker.types'
 import type { DisplayBreakpoint } from '@/composables/display.types'
 import type { ForwardRefs } from '@/composables/forwardRefs.types'
 import type { Anchor } from '@/util/anchor.types'
-import type { VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, VuetifyComponent } from '@/util/defineComponent.types'
 
 export type VTimeInputActionsSlot = {
   save: () => void
@@ -36,10 +36,10 @@ export interface VTimeInputProps extends ConfirmEditProps, TextFieldProps, Picke
   updateOn?: ('blur' | 'enter')[]
 }
 
-export type VTimeInputDefaultKeys =
-  | Exclude<VConfirmEditDefaultKeys, keyof PickerProps | keyof TextFieldProps>
-  | Exclude<VTextFieldDefaultKeys, keyof PickerProps>
-  | Exclude<VTimePickerDefaultKeys, OmittedPickerKeys>
+type VTimeInputDefaultKeys =
+  | Exclude<DefaultKeysOf<typeof VConfirmEdit>, keyof PickerProps | keyof TextFieldProps>
+  | Exclude<DefaultKeysOf<typeof VTextField>, keyof PickerProps>
+  | Exclude<DefaultKeysOf<typeof VTimePicker>, OmittedPickerKeys>
   | 'hideActions'
   | 'hideTitle'
   | 'location'
@@ -63,3 +63,5 @@ export declare const VTimeInput: VuetifyComponent<
   ForwardRefs<{}, [VTextField]>
 >
 export type VTimeInput = InstanceType<typeof VTimeInput>
+
+export {}

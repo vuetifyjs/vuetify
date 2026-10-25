@@ -5,12 +5,12 @@ import type { VInputSlots } from '@/components/VInput/VInput.types'
 import type { VList } from '@/components/VList/VList.types'
 import type { VMenu } from '@/components/VMenu/VMenu.types'
 import type { TransitionValue } from '@/components/VOverlay/VOverlay.types'
-import type { VTextField, VTextFieldDefaultKeys, VTextFieldProps } from '@/components/VTextField/VTextField.types'
+import type { VTextField, VTextFieldProps } from '@/components/VTextField/VTextField.types'
 import type { FilterProps } from '@/composables/filter.types'
 import type { ForwardRefs } from '@/composables/forwardRefs.types'
 import type { IconValue } from '@/composables/icons.types'
 import type { ListItem } from '@/composables/list-items.types'
-import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
 import type { SelectItemKey, ValueComparator } from '@/util/shared.types'
 
 export interface VSelectBaseProps {
@@ -44,7 +44,7 @@ export interface VSelectBaseProps {
   valueComparator?: ValueComparator
 }
 
-export type VSelectBaseDefaultKeys =
+type VSelectBaseDefaultKeys =
   | 'chips'
   | 'closableChips'
   | 'closeText'
@@ -72,8 +72,8 @@ export interface VSelectProps extends Omit<VTextFieldProps, 'validationValue' | 
   transition?: TransitionValue | { component: Component }
 }
 
-export type VSelectDefaultKeys =
-  | Exclude<VTextFieldDefaultKeys, 'dirty'>
+type VSelectDefaultKeys =
+  | Exclude<DefaultKeysOf<typeof VTextField>, 'dirty'>
   | VSelectBaseDefaultKeys
   | 'filterKeys'
   | 'filterMode'
@@ -144,3 +144,5 @@ export declare const VSelect: VuetifyComponent<
   VSelectExposed
 >
 export type VSelect = InstanceType<typeof VSelect>
+
+export {}

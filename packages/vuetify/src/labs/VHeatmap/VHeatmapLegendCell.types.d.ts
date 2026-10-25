@@ -10,7 +10,7 @@ export interface VHeatmapLegendCellProps {
   width?: string | number
 }
 
-export type VHeatmapLegendCellDefaultKeys =
+type VHeatmapLegendCellDefaultKeys =
   | 'disabled'
   | 'height'
   | 'width'
@@ -22,3 +22,5 @@ export declare const VHeatmapLegendCell: VuetifyComponent<
   null
 >
 export type VHeatmapLegendCell = InstanceType<typeof VHeatmapLegendCell>
+
+export {}

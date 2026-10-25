@@ -35,7 +35,7 @@ export interface VRadioProps {
   valueComparator?: ValueComparator
 }
 
-export type VRadioDefaultKeys =
+type VRadioDefaultKeys =
   | 'density'
   | 'disabled'
   | 'error'
@@ -64,3 +64,5 @@ export declare const VRadio: VuetifyComponent<
   ForwardRefs<{}, [VSelectionControl]>
 >
 export type VRadio = InstanceType<typeof VRadio>
+
+export {}

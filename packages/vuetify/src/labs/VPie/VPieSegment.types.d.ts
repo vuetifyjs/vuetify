@@ -16,7 +16,7 @@ export interface VPieSegmentProps {
   value?: number
 }
 
-export type VPieSegmentDefaultKeys =
+type VPieSegmentDefaultKeys =
   | 'active'
   | 'animation'
   | 'hideSlice'
@@ -32,3 +32,5 @@ export declare const VPieSegment: VuetifyComponent<
   }
 >
 export type VPieSegment = InstanceType<typeof VPieSegment>
+
+export {}

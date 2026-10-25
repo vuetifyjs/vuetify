@@ -24,7 +24,7 @@ export interface VMediaVolumeProps {
   style?: StyleValue
 }
 
-export type VMediaVolumeDefaultKeys =
+type VMediaVolumeDefaultKeys =
   | 'direction'
   | 'disabled'
   | 'modelValue'
@@ -41,3 +41,5 @@ export declare const VMediaVolume: VuetifyComponent<
   { toggleMuted: () => void }
 >
 export type VMediaVolume = InstanceType<typeof VMediaVolume>
+
+export {}

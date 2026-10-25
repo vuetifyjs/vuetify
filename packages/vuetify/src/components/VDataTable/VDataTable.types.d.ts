@@ -14,7 +14,7 @@ import type { DisplayBreakpoint } from '@/composables/display.types'
 import type { FilterFunction, FilterKeyFunctions, FilterKeys, FilterMatchArrayMultiple, FilterMode } from '@/composables/filter.types'
 import type { IconValue } from '@/composables/icons.types'
 import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
-import type { JSXComponent, SelectItemKey, ValueComparator } from '@/util/shared.types'
+import type { ItemType, JSXComponent, SelectItemKey, ValueComparator } from '@/util/shared.types'
 
 export type VDataTableSlotProps<T> = {
   page: number
@@ -43,8 +43,6 @@ export type VDataTableSlotProps<T> = {
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
-
-export type ItemType<T> = T extends readonly (infer U)[] ? U : never
 
 export type VDataTableSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
   default: VDataTableSlotProps<T>
@@ -146,7 +144,7 @@ export interface VDataTableProps {
   width?: string | number
 }
 
-export type VDataTableDefaultKeys =
+type VDataTableDefaultKeys =
   | 'collapseIcon'
   | 'density'
   | 'disableSort'
@@ -238,3 +236,5 @@ export declare const VDataTable: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VDataTable = InstanceType<typeof VDataTable>
+
+export {}

@@ -62,7 +62,7 @@ export interface VStepperVerticalItemProps {
   width?: string | number
 }
 
-export type VStepperVerticalItemDefaultKeys =
+type VStepperVerticalItemDefaultKeys =
   | 'collapseIcon'
   | 'complete'
   | 'completeIcon'
@@ -96,3 +96,5 @@ export declare const VStepperVerticalItem: VuetifyComponent<
   VStepperVerticalItemSlots
 >
 export type VStepperVerticalItem = InstanceType<typeof VStepperVerticalItem>
+
+export {}

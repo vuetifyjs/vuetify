@@ -16,7 +16,7 @@ export interface VContainerProps {
   width?: string | number
 }
 
-export type VContainerDefaultKeys =
+type VContainerDefaultKeys =
   | 'fluid'
   | 'style'
   | 'tag'
@@ -27,3 +27,5 @@ export declare const VContainer: VuetifyComponent<
   Record<string, any>
 >
 export type VContainer = InstanceType<typeof VContainer>
+
+export {}

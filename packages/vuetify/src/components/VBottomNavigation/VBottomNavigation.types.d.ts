@@ -33,7 +33,7 @@ export interface VBottomNavigationProps {
   tile?: boolean
 }
 
-export type VBottomNavigationDefaultKeys =
+type VBottomNavigationDefaultKeys =
   | 'absolute'
   | 'active'
   | 'density'
@@ -66,3 +66,5 @@ export declare const VBottomNavigation: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VBottomNavigation = InstanceType<typeof VBottomNavigation>
+
+export {}

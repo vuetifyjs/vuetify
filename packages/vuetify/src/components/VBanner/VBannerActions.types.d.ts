@@ -9,7 +9,7 @@ export interface VBannerActionsProps {
   style?: StyleValue
 }
 
-export type VBannerActionsDefaultKeys =
+type VBannerActionsDefaultKeys =
   | 'style'
 
 export declare const VBannerActions: VuetifyComponent<
@@ -18,3 +18,5 @@ export declare const VBannerActions: VuetifyComponent<
   Record<string, any>
 >
 export type VBannerActions = InstanceType<typeof VBannerActions>
+
+export {}

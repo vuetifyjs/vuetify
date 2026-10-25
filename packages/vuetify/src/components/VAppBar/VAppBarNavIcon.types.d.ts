@@ -55,7 +55,7 @@ export interface VAppBarNavIconProps {
   width?: string | number
 }
 
-export type VAppBarNavIconDefaultKeys =
+type VAppBarNavIconDefaultKeys =
   | 'active'
   | 'block'
   | 'density'
@@ -84,3 +84,5 @@ export declare const VAppBarNavIcon: VuetifyComponent<
   VBtnSlots
 >
 export type VAppBarNavIcon = InstanceType<typeof VAppBarNavIcon>
+
+export {}

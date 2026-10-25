@@ -27,3 +27,5 @@ export type LocationStrategyFunction = (
   props: LocationStrategyProps,
   contentStyles: Ref<Record<string, string>>
 ) => undefined | { updateLocation: (e?: Event) => void }
+
+export {}

@@ -84,7 +84,7 @@ export interface VSwitchProps {
   width?: string | number
 }
 
-export type VSwitchDefaultKeys =
+type VSwitchDefaultKeys =
   | 'centerAffix'
   | 'density'
   | 'detailsActive'
@@ -129,3 +129,5 @@ export declare const VSwitch: VuetifyComponent<
   ForwardRefs<{ isFocused: Ref<boolean, boolean> & { readonly externalValue: boolean } }, [VSelectionControl, VInput]>
 >
 export type VSwitch = InstanceType<typeof VSwitch>
+
+export {}

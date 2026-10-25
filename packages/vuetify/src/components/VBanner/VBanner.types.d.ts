@@ -45,7 +45,7 @@ export interface VBannerProps {
   width?: string | number
 }
 
-export type VBannerDefaultKeys =
+type VBannerDefaultKeys =
   | 'density'
   | 'mobile'
   | 'rounded'
@@ -62,3 +62,5 @@ export declare const VBanner: VuetifyComponent<
   VBannerSlots
 >
 export type VBanner = InstanceType<typeof VBanner>
+
+export {}

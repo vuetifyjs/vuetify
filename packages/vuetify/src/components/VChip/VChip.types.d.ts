@@ -66,7 +66,7 @@ export interface VChipProps {
   variant?: Variant
 }
 
-export type VChipDefaultKeys =
+type VChipDefaultKeys =
   | 'closable'
   | 'closeIcon'
   | 'closeLabel'
@@ -102,3 +102,5 @@ export declare const VChip: VuetifyComponent<
   VChipSlots
 >
 export type VChip = InstanceType<typeof VChip>
+
+export {}

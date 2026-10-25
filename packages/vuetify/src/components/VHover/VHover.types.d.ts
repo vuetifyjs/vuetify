@@ -15,7 +15,7 @@ export interface VHoverProps {
   openDelay?: string | number
 }
 
-export type VHoverDefaultKeys =
+type VHoverDefaultKeys =
   | 'disabled'
   | 'modelValue'
 
@@ -28,3 +28,5 @@ export declare const VHover: VuetifyComponent<
   VHoverSlots
 >
 export type VHover = InstanceType<typeof VHover>
+
+export {}

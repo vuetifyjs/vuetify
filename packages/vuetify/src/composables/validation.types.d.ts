@@ -33,3 +33,5 @@ export type ValidationState = {
   validate: (silent?: boolean) => Promise<string[]>
   validationClasses: ComputedRef<Record<string, boolean>>
 }
+
+export {}

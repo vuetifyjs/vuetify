@@ -35,7 +35,7 @@ export interface VAppBarProps {
   title?: string
 }
 
-export type VAppBarDefaultKeys =
+type VAppBarDefaultKeys =
   | 'absolute'
   | 'collapse'
   | 'collapsePosition'
@@ -63,3 +63,5 @@ export declare const VAppBar: VuetifyComponent<
   VToolbarSlots
 >
 export type VAppBar = InstanceType<typeof VAppBar>
+
+export {}

@@ -16,7 +16,7 @@ export interface VHeatmapCellProps {
   y: number
 }
 
-export type VHeatmapCellDefaultKeys =
+type VHeatmapCellDefaultKeys =
   | 'disabled'
 
 export declare const VHeatmapCell: VuetifyComponent<
@@ -26,3 +26,5 @@ export declare const VHeatmapCell: VuetifyComponent<
   VHeatmapCellSlots
 >
 export type VHeatmapCell = InstanceType<typeof VHeatmapCell>
+
+export {}

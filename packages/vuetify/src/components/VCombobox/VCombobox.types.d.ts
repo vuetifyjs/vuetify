@@ -13,20 +13,18 @@ import type { IconValue } from '@/composables/icons.types'
 import type { ListItem } from '@/composables/list-items.types'
 import type { ValidateOn, ValidationResult } from '@/composables/validation.types'
 import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
-import type { SelectItemKey, ValueComparator } from '@/util/shared.types'
-
-export type ItemType<T> = T extends readonly (infer U)[] ? U : never
+import type { ItemType, SelectItemKey, ValueComparator } from '@/util/shared.types'
 
 export type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject> | null
 
-export type Val <T, ReturnObject extends boolean> = string | ([T] extends [Primitive]
+type Val <T, ReturnObject extends boolean> = string | ([T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any))
 
-export type Primitive = string | number | boolean | symbol
+type Primitive = string | number | boolean | symbol
 
 export interface VComboboxProps {
   active?: boolean
@@ -136,7 +134,7 @@ export interface VComboboxProps {
   width?: string | number
 }
 
-export type VComboboxDefaultKeys =
+type VComboboxDefaultKeys =
   | 'active'
   | 'alwaysFilter'
   | 'autofocus'
@@ -245,3 +243,5 @@ export declare const VCombobox: VuetifyComponent<
   ForwardRefs<{ isFocused: ShallowRef<boolean, boolean>, isPristine: ShallowRef<boolean, boolean>, menu: WritableComputedRef<boolean, boolean>, search: WritableComputedRef<string, string>, selectionIndex: ShallowRef<number, number>, filteredItems: ShallowRef<ListItem<any>[], ListItem<any>[]>, select: (item: ListItem<any> | undefined, set?: boolean | null, keepMenu?: boolean) => void }, [VTextField]>
 >
 export type VCombobox = InstanceType<typeof VCombobox>
+
+export {}

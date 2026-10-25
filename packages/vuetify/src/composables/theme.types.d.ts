@@ -62,3 +62,5 @@ export interface OnColors {
   'on-error': Color
   'on-info': Color
 }
+
+export {}

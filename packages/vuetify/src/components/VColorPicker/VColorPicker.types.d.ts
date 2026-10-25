@@ -48,7 +48,7 @@ export interface VColorPickerProps {
   width?: string | number
 }
 
-export type VColorPickerDefaultKeys =
+type VColorPickerDefaultKeys =
   | 'canvasHeight'
   | 'disabled'
   | 'divided'
@@ -82,3 +82,5 @@ export declare const VColorPicker: VuetifyComponent<
   null
 >
 export type VColorPicker = InstanceType<typeof VColorPicker>
+
+export {}

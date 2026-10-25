@@ -4,7 +4,7 @@ import type { VuetifyComponent } from '@/util/defineComponent.types'
 export interface VNoSsrProps {
 }
 
-export type VNoSsrDefaultKeys = never
+type VNoSsrDefaultKeys = never
 
 export declare const VNoSsr: VuetifyComponent<
   VNoSsrProps,
@@ -13,3 +13,5 @@ export declare const VNoSsr: VuetifyComponent<
   null
 >
 export type VNoSsr = InstanceType<typeof VNoSsr>
+
+export {}

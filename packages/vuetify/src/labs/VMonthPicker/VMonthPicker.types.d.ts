@@ -63,7 +63,7 @@ export interface VMonthPickerProps {
   yearsColumns?: string | number
 }
 
-export type VMonthPickerDefaultKeys =
+type VMonthPickerDefaultKeys =
   | 'disabled'
   | 'divided'
   | 'hideHeader'
@@ -102,3 +102,5 @@ export declare const VMonthPicker: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VMonthPicker = InstanceType<typeof VMonthPicker>
+
+export {}

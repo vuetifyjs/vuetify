@@ -17,3 +17,5 @@ export interface HeatmapGroup extends PivotGroup<HeatmapCell> {
   hasOverlap: boolean
   labelOffset: number
 }
+
+export {}

@@ -72,7 +72,7 @@ export interface VStepperProps {
   width?: string | number
 }
 
-export type VStepperDefaultKeys =
+type VStepperDefaultKeys =
   | 'altLabels'
   | 'disabled'
   | 'editable'
@@ -111,3 +111,5 @@ export declare const VStepper: VuetifyComponent<
   { prev: () => void, next: () => void }
 >
 export type VStepper = InstanceType<typeof VStepper>
+
+export {}

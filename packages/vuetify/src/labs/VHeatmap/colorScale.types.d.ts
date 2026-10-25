@@ -23,3 +23,5 @@ export type ColorMixSpace =
   | 'oklch'
 
 export type HueInterpolation = 'shorter' | 'longer'
+
+export {}

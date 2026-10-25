@@ -18,7 +18,7 @@ export interface VIconProps {
   theme?: string
 }
 
-export type VIconDefaultKeys =
+type VIconDefaultKeys =
   | 'disabled'
   | 'end'
   | 'size'
@@ -32,3 +32,5 @@ export declare const VIcon: VuetifyComponent<
   Record<string, any>
 >
 export type VIcon = InstanceType<typeof VIcon>
+
+export {}

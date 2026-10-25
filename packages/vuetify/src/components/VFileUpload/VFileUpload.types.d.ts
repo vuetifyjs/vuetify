@@ -84,7 +84,7 @@ export interface VFileUploadProps {
   width?: string | number
 }
 
-export type VFileUploadDefaultKeys =
+type VFileUploadDefaultKeys =
   | 'browseText'
   | 'centerAffix'
   | 'clearable'
@@ -125,3 +125,5 @@ export declare const VFileUpload: VuetifyComponent<
   ForwardRefs<{ controlRef: Ref<HTMLInputElement | null, HTMLInputElement | null> }, [VInput, VFileUploadDropzone]>
 >
 export type VFileUpload = InstanceType<typeof VFileUpload>
+
+export {}

@@ -16,7 +16,7 @@ export interface VKbdProps {
   tile?: boolean
 }
 
-export type VKbdDefaultKeys =
+type VKbdDefaultKeys =
   | 'rounded'
   | 'style'
   | 'tag'
@@ -28,3 +28,5 @@ export declare const VKbd: VuetifyComponent<
   Record<string, any>
 >
 export type VKbd = InstanceType<typeof VKbd>
+
+export {}

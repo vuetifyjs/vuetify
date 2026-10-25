@@ -20,7 +20,7 @@ export interface VTabsWindowProps {
   wheel?: boolean
 }
 
-export type VTabsWindowDefaultKeys =
+type VTabsWindowDefaultKeys =
   | 'crossfade'
   | 'direction'
   | 'disabled'
@@ -45,3 +45,5 @@ export declare const VTabsWindow: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VTabsWindow = InstanceType<typeof VTabsWindow>
+
+export {}

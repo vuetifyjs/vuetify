@@ -24,7 +24,7 @@ export interface VTimePickerControlsProps {
   viewMode?: VTimePickerViewMode
 }
 
-export type VTimePickerControlsDefaultKeys =
+type VTimePickerControlsDefaultKeys =
   | 'ampm'
   | 'disabled'
   | 'inputHints'
@@ -44,3 +44,5 @@ export declare const VTimePickerControls: VuetifyComponent<
   }
 >
 export type VTimePickerControls = InstanceType<typeof VTimePickerControls>
+
+export {}

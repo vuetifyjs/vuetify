@@ -86,7 +86,7 @@ export interface VFileInputProps {
   width?: string | number
 }
 
-export type VFileInputDefaultKeys =
+type VFileInputDefaultKeys =
   | 'active'
   | 'centerAffix'
   | 'chips'
@@ -140,3 +140,5 @@ export declare const VFileInput: VuetifyComponent<
   ForwardRefs<{}, [VInput, VField, HTMLInputElement]>
 >
 export type VFileInput = InstanceType<typeof VFileInput>
+
+export {}

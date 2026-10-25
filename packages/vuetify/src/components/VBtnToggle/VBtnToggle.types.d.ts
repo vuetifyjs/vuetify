@@ -40,7 +40,7 @@ export interface VBtnToggleProps {
   variant?: Variant
 }
 
-export type VBtnToggleDefaultKeys =
+type VBtnToggleDefaultKeys =
   | 'connected'
   | 'density'
   | 'direction'
@@ -71,3 +71,5 @@ export declare const VBtnToggle: VuetifyComponent<
   { next: () => void, prev: () => void, select: (id: string, value: boolean) => void }
 >
 export type VBtnToggle = InstanceType<typeof VBtnToggle>
+
+export {}

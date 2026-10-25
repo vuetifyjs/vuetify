@@ -40,7 +40,7 @@ export interface VHotkeyProps {
   variant?: HotkeyVariant
 }
 
-export type VHotkeyDefaultKeys =
+type VHotkeyDefaultKeys =
   | 'disabled'
   | 'displayMode'
   | 'inline'
@@ -57,3 +57,5 @@ export declare const VHotkey: VuetifyComponent<
   Record<string, any>
 >
 export type VHotkey = InstanceType<typeof VHotkey>
+
+export {}

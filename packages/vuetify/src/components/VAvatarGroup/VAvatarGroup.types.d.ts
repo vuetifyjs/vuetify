@@ -29,7 +29,7 @@ export interface VAvatarGroupProps {
   vertical?: boolean
 }
 
-export type VAvatarGroupDefaultKeys =
+type VAvatarGroupDefaultKeys =
   | 'hoverable'
   | 'itemProps'
   | 'items'
@@ -45,3 +45,5 @@ export declare const VAvatarGroup: VuetifyComponent<
   VAvatarGroupSlots
 >
 export type VAvatarGroup = InstanceType<typeof VAvatarGroup>
+
+export {}

@@ -12,7 +12,7 @@ export interface VComponentIconProps {
   tag: string | JSXComponent
 }
 
-export type VComponentIconDefaultKeys = never
+type VComponentIconDefaultKeys = never
 
 export declare const VComponentIcon: VuetifyComponent<
   VComponentIconProps,
@@ -26,7 +26,7 @@ export interface VSvgIconProps {
   tag: string | JSXComponent
 }
 
-export type VSvgIconDefaultKeys = never
+type VSvgIconDefaultKeys = never
 
 export declare const VSvgIcon: VuetifyComponent<
   VSvgIconProps,
@@ -41,7 +41,7 @@ export interface VLigatureIconProps {
   tag: string | JSXComponent
 }
 
-export type VLigatureIconDefaultKeys = never
+type VLigatureIconDefaultKeys = never
 
 export declare const VLigatureIcon: VuetifyComponent<
   VLigatureIconProps,
@@ -56,7 +56,7 @@ export interface VClassIconProps {
   tag: string | JSXComponent
 }
 
-export type VClassIconDefaultKeys = never
+type VClassIconDefaultKeys = never
 
 export declare const VClassIcon: VuetifyComponent<
   VClassIconProps,
@@ -65,3 +65,5 @@ export declare const VClassIcon: VuetifyComponent<
   null
 >
 export type VClassIcon = InstanceType<typeof VClassIcon>
+
+export {}

@@ -36,7 +36,7 @@ export interface VInfiniteCarouselProps {
   width?: string | number
 }
 
-export type VInfiniteCarouselDefaultKeys =
+type VInfiniteCarouselDefaultKeys =
   | 'direction'
   | 'draggable'
   | 'nextIcon'
@@ -58,3 +58,5 @@ export declare const VInfiniteCarousel: VuetifyComponent<
   { slide: (direction: 'next' | 'prev') => void }
 >
 export type VInfiniteCarousel = InstanceType<typeof VInfiniteCarousel>
+
+export {}

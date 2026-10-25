@@ -49,7 +49,7 @@ export interface VImgProps {
   width?: string | number
 }
 
-export type VImgDefaultKeys =
+type VImgDefaultKeys =
   | 'absolute'
   | 'cover'
   | 'draggable'
@@ -73,3 +73,5 @@ export declare const VImg: VuetifyComponent<
   { currentSrc: ShallowRef<string, string>, image: Ref<HTMLImageElement | undefined, HTMLImageElement | undefined>, state: ShallowRef<'error' | 'loading' | 'idle' | 'loaded', 'error' | 'loading' | 'idle' | 'loaded'>, naturalWidth: ShallowRef<number | undefined, number | undefined>, naturalHeight: ShallowRef<number | undefined, number | undefined> }
 >
 export type VImg = InstanceType<typeof VImg>
+
+export {}

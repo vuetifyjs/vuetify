@@ -1,10 +1,10 @@
 // Types
 import type { Ref } from 'vue'
 import type { VCounterSlot } from '@/components/VCounter/VCounter.types'
-import type { VField, VFieldBaseDefaultKeys, VFieldBaseProps, VFieldSlots } from '@/components/VField/VField.types'
-import type { VInput, VInputDefaultKeys, VInputProps, VInputSlots } from '@/components/VInput/VInput.types'
+import type { VField, VFieldBaseProps, VFieldSlots } from '@/components/VField/VField.types'
+import type { VInput, VInputProps, VInputSlots } from '@/components/VInput/VInput.types'
 import type { ForwardRefs } from '@/composables/forwardRefs.types'
-import type { VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, VuetifyComponent } from '@/util/defineComponent.types'
 
 export interface VTextFieldProps extends Omit<VInputProps, 'direction' | keyof VFieldBaseProps>, VFieldBaseProps {
   autocomplete?: string
@@ -21,9 +21,9 @@ export interface VTextFieldProps extends Omit<VInputProps, 'direction' | keyof V
   type?: string
 }
 
-export type VTextFieldDefaultKeys =
-  | Exclude<VInputDefaultKeys, 'direction'>
-  | VFieldBaseDefaultKeys
+type VTextFieldDefaultKeys =
+  | Exclude<DefaultKeysOf<typeof VInput>, 'direction'>
+  | Extract<DefaultKeysOf<typeof VField>, keyof VFieldBaseProps>
   | 'autofocus'
   | 'counter'
   | 'persistentCounter'
@@ -52,3 +52,5 @@ export declare const VTextField: VuetifyComponent<
   VTextFieldExposed
 >
 export type VTextField = InstanceType<typeof VTextField>
+
+export {}

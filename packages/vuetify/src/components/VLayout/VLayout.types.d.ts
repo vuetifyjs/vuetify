@@ -16,7 +16,7 @@ export interface VLayoutProps {
   width?: string | number
 }
 
-export type VLayoutDefaultKeys =
+type VLayoutDefaultKeys =
   | 'fullHeight'
   | 'style'
 
@@ -28,3 +28,5 @@ export declare const VLayout: VuetifyComponent<
   { getLayoutItem: (id: string) => { size: number, position: Position, top: number, bottom: number, left: number, right: number, id: string } | undefined, items: ComputedRef<{ size: number, position: Position, top: number, bottom: number, left: number, right: number, id: string }[]> }
 >
 export type VLayout = InstanceType<typeof VLayout>
+
+export {}

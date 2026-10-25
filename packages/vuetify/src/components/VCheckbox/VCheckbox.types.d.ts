@@ -64,7 +64,7 @@ export interface VCheckboxProps {
   width?: string | number
 }
 
-export type VCheckboxDefaultKeys =
+type VCheckboxDefaultKeys =
   | 'centerAffix'
   | 'density'
   | 'detailsActive'
@@ -105,3 +105,5 @@ export declare const VCheckbox: VuetifyComponent<
   ForwardRefs<{ isFocused: Ref<boolean, boolean> & { readonly externalValue: boolean } }, [VCheckboxBtn, VInput]>
 >
 export type VCheckbox = InstanceType<typeof VCheckbox>
+
+export {}

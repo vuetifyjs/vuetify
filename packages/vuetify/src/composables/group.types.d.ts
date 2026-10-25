@@ -40,3 +40,5 @@ export interface GroupItemProvide {
   register: () => void
   unregister: () => void
 }
+
+export {}

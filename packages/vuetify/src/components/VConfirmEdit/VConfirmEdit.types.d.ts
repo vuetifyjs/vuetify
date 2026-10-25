@@ -21,7 +21,7 @@ export interface VConfirmEditProps {
   okText?: string
 }
 
-export type VConfirmEditDefaultKeys =
+type VConfirmEditDefaultKeys =
   | 'cancelText'
   | 'disabled'
   | 'hideActions'
@@ -46,3 +46,5 @@ export declare const VConfirmEdit: VuetifyComponent<
   { save: () => void, cancel: () => void, isPristine: ComputedRef<boolean> }
 >
 export type VConfirmEdit = InstanceType<typeof VConfirmEdit>
+
+export {}

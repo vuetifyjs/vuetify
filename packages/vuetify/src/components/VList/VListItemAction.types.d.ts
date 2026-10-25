@@ -11,7 +11,7 @@ export interface VListItemActionProps {
   tag?: string | JSXComponent
 }
 
-export type VListItemActionDefaultKeys =
+type VListItemActionDefaultKeys =
   | 'end'
   | 'start'
   | 'style'
@@ -23,3 +23,5 @@ export declare const VListItemAction: VuetifyComponent<
   Record<string, any>
 >
 export type VListItemAction = InstanceType<typeof VListItemAction>
+
+export {}

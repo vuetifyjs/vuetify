@@ -25,7 +25,7 @@ export interface VBtnGroupProps {
   variant?: Variant
 }
 
-export type VBtnGroupDefaultKeys =
+type VBtnGroupDefaultKeys =
   | 'connected'
   | 'density'
   | 'direction'
@@ -43,3 +43,5 @@ export declare const VBtnGroup: VuetifyComponent<
   Record<string, any>
 >
 export type VBtnGroup = InstanceType<typeof VBtnGroup>
+
+export {}

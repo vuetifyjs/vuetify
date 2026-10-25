@@ -41,7 +41,7 @@ export interface VDataTableRowsProps {
   rowProps?: RowProps<any>
 }
 
-export type VDataTableRowsDefaultKeys =
+type VDataTableRowsDefaultKeys =
   | 'collapseIcon'
   | 'density'
   | 'expandIcon'
@@ -66,3 +66,5 @@ export declare const VDataTableRows: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VDataTableRows = InstanceType<typeof VDataTableRows>
+
+export {}

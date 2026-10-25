@@ -68,7 +68,7 @@ export interface VListProps {
   width?: string | number
 }
 
-export type VListDefaultKeys =
+type VListDefaultKeys =
   | 'activatable'
   | 'density'
   | 'disabled'
@@ -153,3 +153,5 @@ export declare const VList: VuetifyComponent<
   VListExposed
 >
 export type VList = InstanceType<typeof VList>
+
+export {}

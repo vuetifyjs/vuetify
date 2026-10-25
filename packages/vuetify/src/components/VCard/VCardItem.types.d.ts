@@ -26,7 +26,7 @@ export interface VCardItemProps {
   title?: string | number | boolean
 }
 
-export type VCardItemDefaultKeys =
+type VCardItemDefaultKeys =
   | 'density'
   | 'style'
   | 'subtitle'
@@ -40,3 +40,5 @@ export declare const VCardItem: VuetifyComponent<
   VCardItemSlots
 >
 export type VCardItem = InstanceType<typeof VCardItem>
+
+export {}

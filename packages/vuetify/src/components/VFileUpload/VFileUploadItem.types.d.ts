@@ -65,7 +65,7 @@ export interface VFileUploadItemProps {
   width?: string | number
 }
 
-export type VFileUploadItemDefaultKeys =
+type VFileUploadItemDefaultKeys =
   | 'active'
   | 'border'
   | 'clearable'
@@ -99,3 +99,5 @@ export declare const VFileUploadItem: VuetifyComponent<
   VFileUploadItemSlots
 >
 export type VFileUploadItem = InstanceType<typeof VFileUploadItem>
+
+export {}

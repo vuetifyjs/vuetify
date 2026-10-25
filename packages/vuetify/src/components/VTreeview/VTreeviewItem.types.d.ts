@@ -67,7 +67,7 @@ export interface VTreeviewItemProps {
   width?: string | number
 }
 
-export type VTreeviewItemDefaultKeys =
+type VTreeviewItemDefaultKeys =
   | 'active'
   | 'density'
   | 'disabled'
@@ -98,3 +98,5 @@ export declare const VTreeviewItem: VuetifyComponent<
   ForwardRefs<{}, [VListItem]>
 >
 export type VTreeviewItem = InstanceType<typeof VTreeviewItem>
+
+export {}

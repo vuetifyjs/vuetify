@@ -72,7 +72,7 @@ export interface VSnackbarProps {
   zIndex?: string | number
 }
 
-export type VSnackbarDefaultKeys =
+type VSnackbarDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'closeOnBack'
@@ -112,3 +112,5 @@ export declare const VSnackbar: VuetifyComponent<
   ForwardRefs<{}, [VOverlay]>
 >
 export type VSnackbar = InstanceType<typeof VSnackbar>
+
+export {}

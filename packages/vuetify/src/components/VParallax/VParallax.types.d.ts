@@ -9,7 +9,7 @@ export interface VParallaxProps {
   style?: StyleValue
 }
 
-export type VParallaxDefaultKeys =
+type VParallaxDefaultKeys =
   | 'scale'
   | 'style'
 
@@ -20,3 +20,5 @@ export declare const VParallax: VuetifyComponent<
   VImgSlots
 >
 export type VParallax = InstanceType<typeof VParallax>
+
+export {}

@@ -39,7 +39,7 @@ export interface VFieldBaseProps {
   variant?: VFieldVariant
 }
 
-export type VFieldBaseDefaultKeys =
+type VFieldBaseDefaultKeys =
   | 'active'
   | 'centerAffix'
   | 'clearable'
@@ -66,7 +66,7 @@ export interface VFieldProps<T = any> extends VFieldBaseProps {
   'onUpdate:focused'?: (value: boolean) => void
 }
 
-export type VFieldDefaultKeys =
+type VFieldDefaultKeys =
   | VFieldBaseDefaultKeys
   | 'details'
   | 'focused'
@@ -117,3 +117,5 @@ export declare const VField: VuetifyComponent<
   VFieldExposed
 >
 export type VField = InstanceType<typeof VField>
+
+export {}

@@ -17,7 +17,7 @@ export interface VHighlightProps {
   text?: string
 }
 
-export type VHighlightDefaultKeys =
+type VHighlightDefaultKeys =
   | 'ignoreCase'
   | 'matchAll'
   | 'tag'
@@ -30,3 +30,5 @@ export declare const VHighlight: VuetifyComponent<
   null
 >
 export type VHighlight = InstanceType<typeof VHighlight>
+
+export {}

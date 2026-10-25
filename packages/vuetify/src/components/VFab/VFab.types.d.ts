@@ -64,7 +64,7 @@ export interface VFabProps {
   width?: string | number
 }
 
-export type VFabDefaultKeys =
+type VFabDefaultKeys =
   | 'absolute'
   | 'active'
   | 'app'
@@ -102,3 +102,5 @@ export declare const VFab: VuetifyComponent<
   }
 >
 export type VFab = InstanceType<typeof VFab>
+
+export {}

@@ -14,9 +14,7 @@ import type { FilterFunction, FilterKeyFunctions, FilterKeys, FilterMatchArrayMu
 import type { IconValue } from '@/composables/icons.types'
 import type { ScrollToPosition } from '@/composables/virtual.types'
 import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
-import type { JSXComponent, SelectItemKey, TemplateRef, ValueComparator } from '@/util/shared.types'
-
-export type ItemType<T> = T extends readonly (infer U)[] ? U : never
+import type { ItemType, JSXComponent, SelectItemKey, TemplateRef, ValueComparator } from '@/util/shared.types'
 
 export type VDataTableVirtualSlots<T> = VDataTableRowsSlots<T> & VDataTableHeadersSlots & {
   caption: never
@@ -115,7 +113,7 @@ export interface VDataTableVirtualProps {
   width?: string | number
 }
 
-export type VDataTableVirtualDefaultKeys =
+type VDataTableVirtualDefaultKeys =
   | 'collapseIcon'
   | 'density'
   | 'disableSort'
@@ -190,3 +188,5 @@ export declare const VDataTableVirtual: VuetifyComponent<
   { calculateVisibleItems: () => void, scrollToIndex: (index: number, position?: ScrollToPosition) => void }
 >
 export type VDataTableVirtual = InstanceType<typeof VDataTableVirtual>
+
+export {}

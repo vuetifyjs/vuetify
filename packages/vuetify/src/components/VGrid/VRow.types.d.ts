@@ -40,7 +40,7 @@ export interface VRowProps {
   tag?: string | JSXComponent
 }
 
-export type VRowDefaultKeys =
+type VRowDefaultKeys =
   | 'align'
   | 'alignContent'
   | 'alignContentLg'
@@ -71,3 +71,5 @@ export declare const VRow: VuetifyComponent<
   Record<string, any>
 >
 export type VRow = InstanceType<typeof VRow>
+
+export {}

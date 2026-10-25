@@ -59,7 +59,7 @@ export interface VDateRangePickerProps {
   width?: string | number
 }
 
-export type VDateRangePickerDefaultKeys =
+type VDateRangePickerDefaultKeys =
   | 'disabled'
   | 'divided'
   | 'firstDayOfWeek'
@@ -101,3 +101,5 @@ export declare const VDateRangePicker: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VDateRangePicker = InstanceType<typeof VDateRangePicker>
+
+export {}

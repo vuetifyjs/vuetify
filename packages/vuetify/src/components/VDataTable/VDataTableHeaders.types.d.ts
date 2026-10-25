@@ -57,7 +57,7 @@ export interface VDataTableHeadersProps {
   sticky?: boolean
 }
 
-export type VDataTableHeadersDefaultKeys =
+type VDataTableHeadersDefaultKeys =
   | 'density'
   | 'disableSort'
   | 'fixedHeader'
@@ -75,3 +75,5 @@ export declare const VDataTableHeaders: VuetifyComponent<
   VDataTableHeadersSlots
 >
 export type VDataTableHeaders = InstanceType<typeof VDataTableHeaders>
+
+export {}

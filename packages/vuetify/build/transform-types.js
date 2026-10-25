@@ -11,6 +11,7 @@ for (const source of fg.sync('src/**/*.types.d.ts')) {
   const sourceCode = await fs.readFile(source, 'utf-8')
   const sourceImport = sourceCode.match(/from '((?:@|\.)\/[^']*)'/g)?.find(m => !m.endsWith(".types'"))
   if (sourceImport) throw new Error(`${source} imports a source module (${sourceImport}), which loads its emitted declarations`)
+  if (!/^export \{\}$/m.test(sourceCode)) throw new Error(`${source} needs \`export {}\`, otherwise every declaration in it is exported`)
 
   const name = path.basename(source, '.types.d.ts')
   const components = [...sourceCode.matchAll(/^export declare const (\w+)/gm)].map(m => m[1])
@@ -46,7 +47,7 @@ const importRegexp = /(?<a1>(?:import|export)(?:[^;])*?from ['"])(?<a2>(?:\.\.?|
 for (const name of files) {
   const code = await fs.readFile(name, 'utf-8')
 
-  let newCode = codeTransform(code)
+  let newCode = codeTransform(code, { keepEmptyExports: name.endsWith('.types.d.ts') })
 
   for (const match of code.matchAll(importRegexp)) {
     const pre = match.groups.a1 ?? match.groups.b1

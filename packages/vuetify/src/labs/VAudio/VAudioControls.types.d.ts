@@ -74,7 +74,7 @@ export interface VAudioControlsProps {
   volumeSlider?: VMediaVolumeSlider
 }
 
-export type VAudioControlsDefaultKeys =
+type VAudioControlsDefaultKeys =
   | 'actions'
   | 'buffer'
   | 'chapters'
@@ -107,3 +107,5 @@ export declare const VAudioControls: VuetifyComponent<
   { toggleMuted: () => void }
 >
 export type VAudioControls = InstanceType<typeof VAudioControls>
+
+export {}

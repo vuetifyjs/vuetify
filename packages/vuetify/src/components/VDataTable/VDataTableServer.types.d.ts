@@ -10,9 +10,7 @@ import type { DisplayBreakpoint } from '@/composables/display.types'
 import type { FilterMatchArrayMultiple } from '@/composables/filter.types'
 import type { IconValue } from '@/composables/icons.types'
 import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
-import type { JSXComponent, SelectItemKey, ValueComparator } from '@/util/shared.types'
-
-export type ItemType<T> = T extends readonly (infer U)[] ? U : never
+import type { ItemType, JSXComponent, SelectItemKey, ValueComparator } from '@/util/shared.types'
 
 export interface VDataTableServerProps {
   cellProps?: CellProps<any>
@@ -94,7 +92,7 @@ export interface VDataTableServerProps {
   width?: string | number
 }
 
-export type VDataTableServerDefaultKeys =
+type VDataTableServerDefaultKeys =
   | 'collapseIcon'
   | 'density'
   | 'disableSort'
@@ -183,3 +181,5 @@ export declare const VDataTableServer: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VDataTableServer = InstanceType<typeof VDataTableServer>
+
+export {}

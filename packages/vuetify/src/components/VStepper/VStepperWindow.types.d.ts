@@ -20,7 +20,7 @@ export interface VStepperWindowProps {
   wheel?: boolean
 }
 
-export type VStepperWindowDefaultKeys =
+type VStepperWindowDefaultKeys =
   | 'crossfade'
   | 'direction'
   | 'disabled'
@@ -45,3 +45,5 @@ export declare const VStepperWindow: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VStepperWindow = InstanceType<typeof VStepperWindow>
+
+export {}

@@ -38,7 +38,7 @@ export interface VPickerProps {
   width?: string | number
 }
 
-export type VPickerDefaultKeys =
+type VPickerDefaultKeys =
   | 'divided'
   | 'hideHeader'
   | 'hideTitle'
@@ -55,3 +55,5 @@ export declare const VPicker: VuetifyComponent<
   VPickerSlots
 >
 export type VPicker = InstanceType<typeof VPicker>
+
+export {}

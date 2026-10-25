@@ -65,7 +65,7 @@ export interface VStepperVerticalProps {
   variant?: 'default' | 'inset' | 'accordion' | 'popout'
 }
 
-export type VStepperVerticalDefaultKeys =
+type VStepperVerticalDefaultKeys =
   | 'altLabels'
   | 'collapseIcon'
   | 'disabled'
@@ -111,3 +111,5 @@ export declare const VStepperVertical: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VStepperVertical = InstanceType<typeof VStepperVertical>
+
+export {}

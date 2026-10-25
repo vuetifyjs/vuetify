@@ -46,7 +46,7 @@ export interface VPieProps {
   tooltip?: boolean | { titleFormat?: TextTemplate | undefined, subtitleFormat?: TextTemplate | undefined, avatarSize?: number | undefined, transition?: string | boolean | TransitionProps | undefined, offset?: number | undefined }
 }
 
-export type VPieDefaultKeys =
+type VPieDefaultKeys =
   | 'animation'
   | 'density'
   | 'hideSlice'
@@ -68,3 +68,5 @@ export declare const VPie: VuetifyComponent<
   VPieSlots
 >
 export type VPie = InstanceType<typeof VPie>
+
+export {}

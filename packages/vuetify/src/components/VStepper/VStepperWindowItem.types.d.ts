@@ -13,7 +13,7 @@ export interface VStepperWindowItemProps {
   value?: any
 }
 
-export type VStepperWindowItemDefaultKeys =
+type VStepperWindowItemDefaultKeys =
   | 'disabled'
   | 'eager'
   | 'reverseTransition'
@@ -26,3 +26,5 @@ export declare const VStepperWindowItem: VuetifyComponent<
   Record<string, any>
 >
 export type VStepperWindowItem = InstanceType<typeof VStepperWindowItem>
+
+export {}

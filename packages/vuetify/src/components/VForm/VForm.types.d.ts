@@ -29,7 +29,7 @@ export interface VFormProps {
   validateOn?: ValidateOn
 }
 
-export type VFormDefaultKeys =
+type VFormDefaultKeys =
   | 'disabled'
   | 'fastFail'
   | 'modelValue'
@@ -48,3 +48,5 @@ export declare const VForm: VuetifyComponent<
   ForwardRefs<{ errors: Ref<{ id: string | number, errorMessages: string[] }[], FieldValidationResult[] | { id: string | number, errorMessages: string[] }[]>, isDisabled: Readonly<Ref<boolean, boolean>>, isReadonly: Readonly<Ref<boolean, boolean>>, isValidating: ShallowRef<boolean, boolean>, isValid: Ref<boolean | null, boolean | null> & { readonly externalValue: boolean | null }, items: Ref<{ id: string | number, validate: () => Promise<string[]>, reset: () => Promise<void>, resetValidation: () => Promise<void>, vm: Raw<ComponentInternalInstance>, isValid: boolean | null, errorMessages: string[] }[], FormField[] | { id: string | number, validate: () => Promise<string[]>, reset: () => Promise<void>, resetValidation: () => Promise<void>, vm: Raw<ComponentInternalInstance>, isValid: boolean | null, errorMessages: string[] }[]>, validate: () => Promise<{ valid: boolean, errors: { id: string | number, errorMessages: string[] }[] }>, reset: () => void, resetValidation: () => void }, [HTMLFormElement]>
 >
 export type VForm = InstanceType<typeof VForm>
+
+export {}

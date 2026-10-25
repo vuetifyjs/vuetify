@@ -21,3 +21,5 @@ export type OpenStrategy = {
   open: OpenStrategyFunction
   select: OpenSelectStrategyFunction
 }
+
+export {}

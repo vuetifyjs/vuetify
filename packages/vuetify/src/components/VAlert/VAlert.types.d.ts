@@ -56,7 +56,7 @@ export interface VAlertProps {
   width?: string | number
 }
 
-export type VAlertDefaultKeys =
+type VAlertDefaultKeys =
   | 'closable'
   | 'closeIcon'
   | 'closeLabel'
@@ -83,3 +83,5 @@ export declare const VAlert: VuetifyComponent<
   VAlertSlots
 >
 export type VAlert = InstanceType<typeof VAlert>
+
+export {}

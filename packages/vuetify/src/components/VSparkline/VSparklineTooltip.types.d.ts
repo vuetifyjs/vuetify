@@ -17,7 +17,7 @@ export interface VSparklineTooltipProps {
   value?: number
 }
 
-export type VSparklineTooltipDefaultKeys =
+type VSparklineTooltipDefaultKeys =
   | 'index'
   | 'modelValue'
   | 'titleFormat'
@@ -32,3 +32,5 @@ export declare const VSparklineTooltip: VuetifyComponent<
   VSparklineTooltipSlots
 >
 export type VSparklineTooltip = InstanceType<typeof VSparklineTooltip>
+
+export {}

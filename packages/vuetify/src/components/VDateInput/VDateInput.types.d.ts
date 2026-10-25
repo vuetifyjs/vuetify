@@ -155,7 +155,7 @@ export interface VDateInputProps {
   year?: number
 }
 
-export type VDateInputDefaultKeys =
+type VDateInputDefaultKeys =
   | 'active'
   | 'autofocus'
   | 'cancelText'
@@ -254,3 +254,5 @@ export declare const VDateInput: VuetifyComponent<
   ForwardRefs<{}, [VTextField]>
 >
 export type VDateInput = InstanceType<typeof VDateInput>
+
+export {}

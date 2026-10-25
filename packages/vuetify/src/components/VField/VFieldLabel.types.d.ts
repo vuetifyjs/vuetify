@@ -8,7 +8,7 @@ export interface VFieldLabelProps {
   style?: StyleValue
 }
 
-export type VFieldLabelDefaultKeys =
+type VFieldLabelDefaultKeys =
   | 'floating'
   | 'style'
 
@@ -18,3 +18,5 @@ export declare const VFieldLabel: VuetifyComponent<
   Record<string, any>
 >
 export type VFieldLabel = InstanceType<typeof VFieldLabel>
+
+export {}

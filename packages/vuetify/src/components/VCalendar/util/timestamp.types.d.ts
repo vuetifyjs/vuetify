@@ -4,3 +4,5 @@ export type VTime = number | string | {
 }
 
 export type VTimestampInput = number | string | Date
+
+export {}

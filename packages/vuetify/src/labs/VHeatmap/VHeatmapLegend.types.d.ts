@@ -10,7 +10,7 @@ export interface VHeatmapLegendProps {
   thresholds?: ColorScale
 }
 
-export type VHeatmapLegendDefaultKeys =
+type VHeatmapLegendDefaultKeys =
   | 'cellSize'
   | 'labels'
   | 'thresholds'
@@ -24,3 +24,5 @@ export declare const VHeatmapLegend: VuetifyComponent<
   null
 >
 export type VHeatmapLegend = InstanceType<typeof VHeatmapLegend>
+
+export {}

@@ -37,3 +37,5 @@ export interface NavigableItemProps {
   to?: RouteLocationRaw
   href?: string
 }
+
+export {}

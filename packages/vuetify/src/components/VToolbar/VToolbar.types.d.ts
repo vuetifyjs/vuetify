@@ -40,7 +40,7 @@ export interface VToolbarProps {
   title?: string
 }
 
-export type VToolbarDefaultKeys =
+type VToolbarDefaultKeys =
   | 'absolute'
   | 'collapse'
   | 'collapsePosition'
@@ -63,3 +63,5 @@ export declare const VToolbar: VuetifyComponent<
   { contentHeight: ComputedRef<number>, extensionHeight: ComputedRef<number> }
 >
 export type VToolbar = InstanceType<typeof VToolbar>
+
+export {}

@@ -25,3 +25,5 @@ export type SelectStrategyProp =
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export type ItemsRegistrationType = 'props' | 'render'
+
+export {}

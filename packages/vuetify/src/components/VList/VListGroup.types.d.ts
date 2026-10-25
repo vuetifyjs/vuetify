@@ -28,7 +28,7 @@ export interface VListGroupProps {
   value?: any
 }
 
-export type VListGroupDefaultKeys =
+type VListGroupDefaultKeys =
   | 'collapseIcon'
   | 'disabled'
   | 'expandIcon'
@@ -45,3 +45,5 @@ export declare const VListGroup: VuetifyComponent<
   { isOpen: ComputedRef<boolean> }
 >
 export type VListGroup = InstanceType<typeof VListGroup>
+
+export {}

@@ -86,7 +86,7 @@ export interface VTextareaProps {
   width?: string | number
 }
 
-export type VTextareaDefaultKeys =
+type VTextareaDefaultKeys =
   | 'active'
   | 'autofocus'
   | 'autoGrow'
@@ -136,3 +136,5 @@ export declare const VTextarea: VuetifyComponent<
   ForwardRefs<{}, [VInput, VField, HTMLTextAreaElement]>
 >
 export type VTextarea = InstanceType<typeof VTextarea>
+
+export {}

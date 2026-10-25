@@ -124,3 +124,5 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
 export type HeaderCellPropsFunction = (
   data: Pick<ItemKeySlot<any>, 'index' | 'item' | 'internalItem' | 'value'>
 ) => Record<string, any>
+
+export {}

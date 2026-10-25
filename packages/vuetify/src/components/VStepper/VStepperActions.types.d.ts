@@ -17,7 +17,7 @@ export interface VStepperActionsProps {
   prevText?: string
 }
 
-export type VStepperActionsDefaultKeys =
+type VStepperActionsDefaultKeys =
   | 'disabled'
   | 'nextText'
   | 'prevText'
@@ -32,3 +32,5 @@ export declare const VStepperActions: VuetifyComponent<
   VStepperActionsSlots
 >
 export type VStepperActions = InstanceType<typeof VStepperActions>
+
+export {}

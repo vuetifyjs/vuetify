@@ -16,3 +16,5 @@ export interface ScrollStrategyProps {
 }
 
 export type ScrollStrategyFunction = (data: ScrollStrategyData, props: ScrollStrategyProps, scope: EffectScope) => void
+
+export {}

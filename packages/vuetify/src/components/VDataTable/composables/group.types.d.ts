@@ -27,3 +27,5 @@ export type GroupActions = {
   isGroupOpen: (group: Group) => boolean
   toggleGroup: (group: Group) => void
 }
+
+export {}

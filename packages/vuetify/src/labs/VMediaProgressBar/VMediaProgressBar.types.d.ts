@@ -36,7 +36,7 @@ export interface VMediaProgressBarProps {
   variant?: 'default' | 'pill' | 'wavy'
 }
 
-export type VMediaProgressBarDefaultKeys =
+type VMediaProgressBarDefaultKeys =
   | 'buffer'
   | 'chapters'
   | 'disabled'
@@ -63,3 +63,5 @@ export declare const VMediaProgressBar: VuetifyComponent<
   VMediaProgressBarSlots
 >
 export type VMediaProgressBar = InstanceType<typeof VMediaProgressBar>
+
+export {}

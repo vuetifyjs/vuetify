@@ -49,7 +49,7 @@ export interface VChipGroupProps {
   variant?: Variant
 }
 
-export type VChipGroupDefaultKeys =
+type VChipGroupDefaultKeys =
   | 'centerActive'
   | 'column'
   | 'direction'
@@ -84,3 +84,5 @@ export declare const VChipGroup: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VChipGroup = InstanceType<typeof VChipGroup>
+
+export {}

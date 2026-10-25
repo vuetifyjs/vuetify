@@ -5,7 +5,7 @@ export interface VOtpGroupProps {
   merged?: boolean | null
 }
 
-export type VOtpGroupDefaultKeys =
+type VOtpGroupDefaultKeys =
   | 'merged'
 
 export declare const VOtpGroup: VuetifyComponent<
@@ -14,3 +14,5 @@ export declare const VOtpGroup: VuetifyComponent<
   Record<string, any>
 >
 export type VOtpGroup = InstanceType<typeof VOtpGroup>
+
+export {}

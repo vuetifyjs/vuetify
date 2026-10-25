@@ -32,7 +32,7 @@ export interface VAvatarProps {
   variant?: Variant
 }
 
-export type VAvatarDefaultKeys =
+type VAvatarDefaultKeys =
   | 'badge'
   | 'density'
   | 'end'
@@ -51,3 +51,5 @@ export declare const VAvatar: VuetifyComponent<
   VAvatarSlots
 >
 export type VAvatar = InstanceType<typeof VAvatar>
+
+export {}

@@ -41,7 +41,7 @@ export interface VSparklineProps {
   width?: string | number
 }
 
-export type VSparklineDefaultKeys =
+type VSparklineDefaultKeys =
   | 'animation'
   | 'autoDraw'
   | 'autoDrawEasing'
@@ -76,3 +76,5 @@ export declare const VSparkline: VuetifyComponent<
   VSparklineSlots
 >
 export type VSparkline = InstanceType<typeof VSparkline>
+
+export {}

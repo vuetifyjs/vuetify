@@ -53,7 +53,7 @@ export interface VTimePickerProps {
   width?: string | number
 }
 
-export type VTimePickerDefaultKeys =
+type VTimePickerDefaultKeys =
   | 'density'
   | 'disabled'
   | 'divided'
@@ -85,3 +85,5 @@ export declare const VTimePicker: VuetifyComponent<
   VTimePickerSlots
 >
 export type VTimePicker = InstanceType<typeof VTimePicker>
+
+export {}

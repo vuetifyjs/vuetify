@@ -37,7 +37,7 @@ export interface VCheckboxBtnProps {
   valueComparator?: ValueComparator
 }
 
-export type VCheckboxBtnDefaultKeys =
+type VCheckboxBtnDefaultKeys =
   | 'density'
   | 'disabled'
   | 'error'
@@ -69,3 +69,5 @@ export declare const VCheckboxBtn: VuetifyComponent<
   ForwardRefs<{}, [VSelectionControl]>
 >
 export type VCheckboxBtn = InstanceType<typeof VCheckboxBtn>
+
+export {}

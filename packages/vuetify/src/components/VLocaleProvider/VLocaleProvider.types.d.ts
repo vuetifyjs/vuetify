@@ -11,7 +11,7 @@ export interface VLocaleProviderProps {
   style?: StyleValue
 }
 
-export type VLocaleProviderDefaultKeys =
+type VLocaleProviderDefaultKeys =
   | 'rtl'
   | 'style'
 
@@ -21,3 +21,5 @@ export declare const VLocaleProvider: VuetifyComponent<
   Record<string, any>
 >
 export type VLocaleProvider = InstanceType<typeof VLocaleProvider>
+
+export {}

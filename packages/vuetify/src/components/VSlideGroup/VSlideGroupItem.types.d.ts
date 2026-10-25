@@ -18,7 +18,7 @@ export interface VSlideGroupItemProps {
   value?: any
 }
 
-export type VSlideGroupItemDefaultKeys =
+type VSlideGroupItemDefaultKeys =
   | 'disabled'
 
 export declare const VSlideGroupItem: VuetifyComponent<
@@ -30,3 +30,5 @@ export declare const VSlideGroupItem: VuetifyComponent<
   VSlideGroupItemSlots
 >
 export type VSlideGroupItem = InstanceType<typeof VSlideGroupItem>
+
+export {}

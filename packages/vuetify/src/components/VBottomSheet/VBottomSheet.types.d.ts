@@ -55,7 +55,7 @@ export interface VBottomSheetProps {
   zIndex?: string | number
 }
 
-export type VBottomSheetDefaultKeys =
+type VBottomSheetDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'captureFocus'
@@ -98,3 +98,5 @@ export declare const VBottomSheet: VuetifyComponent<
   OverlaySlots
 >
 export type VBottomSheet = InstanceType<typeof VBottomSheet>
+
+export {}

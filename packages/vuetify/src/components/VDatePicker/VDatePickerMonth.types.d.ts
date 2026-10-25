@@ -55,7 +55,7 @@ export interface VDatePickerMonthProps {
   year?: string | number
 }
 
-export type VDatePickerMonthDefaultKeys =
+type VDatePickerMonthDefaultKeys =
   | 'disabled'
   | 'eventColor'
   | 'events'
@@ -92,3 +92,5 @@ export declare const VDatePickerMonth: VuetifyComponent<
   { focusGrid: () => void, focusItem: (value: string) => void }
 >
 export type VDatePickerMonth = InstanceType<typeof VDatePickerMonth>
+
+export {}

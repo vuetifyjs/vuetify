@@ -10,7 +10,7 @@ export interface VDefaultsProviderProps {
   scoped?: boolean
 }
 
-export type VDefaultsProviderDefaultKeys =
+type VDefaultsProviderDefaultKeys =
   | 'disabled'
   | 'scoped'
 
@@ -20,3 +20,5 @@ export declare const VDefaultsProvider: VuetifyComponent<
   Record<string, any>
 >
 export type VDefaultsProvider = InstanceType<typeof VDefaultsProvider>
+
+export {}

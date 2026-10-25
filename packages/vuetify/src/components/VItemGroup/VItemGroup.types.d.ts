@@ -26,7 +26,7 @@ export interface VItemGroupProps {
   theme?: string
 }
 
-export type VItemGroupDefaultKeys =
+type VItemGroupDefaultKeys =
   | 'disabled'
   | 'modelValue'
   | 'multiple'
@@ -49,3 +49,5 @@ export declare const VItemGroup: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VItemGroup = InstanceType<typeof VItemGroup>
+
+export {}

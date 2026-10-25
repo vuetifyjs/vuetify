@@ -82,7 +82,7 @@ export interface VMaskInputProps {
   width?: string | number
 }
 
-export type VMaskInputDefaultKeys =
+type VMaskInputDefaultKeys =
   | 'active'
   | 'autofocus'
   | 'centerAffix'
@@ -127,3 +127,5 @@ export declare const VMaskInput: VuetifyComponent<
   ForwardRefs<{}, [VTextField]>
 >
 export type VMaskInput = InstanceType<typeof VMaskInput>
+
+export {}

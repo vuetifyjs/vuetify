@@ -24,7 +24,7 @@ export interface VVirtualScrollProps {
   width?: string | number
 }
 
-export type VVirtualScrollDefaultKeys =
+type VVirtualScrollDefaultKeys =
   | 'itemHeight'
   | 'itemKey'
   | 'items'
@@ -49,3 +49,5 @@ export declare const VVirtualScroll: VuetifyComponent<
   { calculateVisibleItems: () => void, scrollToIndex: (index: number, position?: ScrollToPosition) => void }
 >
 export type VVirtualScroll = InstanceType<typeof VVirtualScroll>
+
+export {}

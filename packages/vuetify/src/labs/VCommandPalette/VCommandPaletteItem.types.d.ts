@@ -14,7 +14,7 @@ export interface VCommandPaletteItemProps {
   onExecute?: ((event: MouseEvent | KeyboardEvent) => void)
 }
 
-export type VCommandPaletteItemDefaultKeys = never
+type VCommandPaletteItemDefaultKeys = never
 
 export declare const VCommandPaletteItem: VuetifyComponent<
   VCommandPaletteItemProps,
@@ -23,3 +23,5 @@ export declare const VCommandPaletteItem: VuetifyComponent<
   VCommandPaletteItemSlots
 >
 export type VCommandPaletteItem = InstanceType<typeof VCommandPaletteItem>
+
+export {}

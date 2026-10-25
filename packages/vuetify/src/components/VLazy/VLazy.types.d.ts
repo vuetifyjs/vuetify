@@ -18,7 +18,7 @@ export interface VLazyProps {
   width?: string | number
 }
 
-export type VLazyDefaultKeys =
+type VLazyDefaultKeys =
   | 'modelValue'
   | 'options'
   | 'style'
@@ -33,3 +33,5 @@ export declare const VLazy: VuetifyComponent<
   }
 >
 export type VLazy = InstanceType<typeof VLazy>
+
+export {}

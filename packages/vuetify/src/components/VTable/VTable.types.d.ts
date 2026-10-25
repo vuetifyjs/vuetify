@@ -30,7 +30,7 @@ export interface VTableProps {
   theme?: string
 }
 
-export type VTableDefaultKeys =
+type VTableDefaultKeys =
   | 'density'
   | 'fixedFooter'
   | 'fixedHeader'
@@ -47,3 +47,5 @@ export declare const VTable: VuetifyComponent<
   VTableSlots
 >
 export type VTable = InstanceType<typeof VTable>
+
+export {}

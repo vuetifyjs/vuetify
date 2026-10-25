@@ -54,7 +54,7 @@ export interface VSkeletonLoaderProps {
   width?: string | number
 }
 
-export type VSkeletonLoaderDefaultKeys =
+type VSkeletonLoaderDefaultKeys =
   | 'boilerplate'
   | 'loading'
   | 'loadingText'
@@ -66,3 +66,5 @@ export declare const VSkeletonLoader: VuetifyComponent<
   Record<string, any>
 >
 export type VSkeletonLoader = InstanceType<typeof VSkeletonLoader>
+
+export {}

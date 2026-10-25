@@ -10,7 +10,7 @@ export interface VToolbarItemsProps {
   variant?: Variant
 }
 
-export type VToolbarItemsDefaultKeys =
+type VToolbarItemsDefaultKeys =
   | 'style'
   | 'variant'
 
@@ -20,3 +20,5 @@ export declare const VToolbarItems: VuetifyComponent<
   Record<string, any>
 >
 export type VToolbarItems = InstanceType<typeof VToolbarItems>
+
+export {}

@@ -13,7 +13,7 @@ export interface VTabsWindowItemProps {
   value?: any
 }
 
-export type VTabsWindowItemDefaultKeys =
+type VTabsWindowItemDefaultKeys =
   | 'disabled'
   | 'eager'
   | 'reverseTransition'
@@ -26,3 +26,5 @@ export declare const VTabsWindowItem: VuetifyComponent<
   Record<string, any>
 >
 export type VTabsWindowItem = InstanceType<typeof VTabsWindowItem>
+
+export {}

@@ -35,8 +35,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { DeepReadonly } from 'vue'
 import type { CellProps, DataTableHeader, RowProps } from './types'
-import type { ItemType, VDataTableSlotProps, VDataTableSlots } from './VDataTable.types'
+import type { VDataTableSlotProps, VDataTableSlots } from './VDataTable.types'
 import type { GenericProps, SelectItemKey } from '@/util'
+import type { ItemType } from '@/util/shared.types'
 
 export type { VDataTableSlotProps, VDataTableSlots }
 

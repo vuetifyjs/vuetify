@@ -51,7 +51,7 @@ export interface VSlideGroupProps {
   tag?: string | JSXComponent
 }
 
-export type VSlideGroupDefaultKeys =
+type VSlideGroupDefaultKeys =
   | 'centerActive'
   | 'direction'
   | 'disabled'
@@ -84,3 +84,5 @@ export declare const VSlideGroup: VuetifyComponent<
   { selected: Ref<readonly string[], readonly string[]>, slide: (target: VSlideGroupTarget) => void, scrollOffset: ShallowRef<number, number>, focus: (location?: 'next' | 'prev' | 'first' | 'last' | undefined) => void, hasPrev: ComputedRef<boolean>, hasNext: ComputedRef<boolean>, hasOverflow: ShallowRef<boolean, boolean> }
 >
 export type VSlideGroup = InstanceType<typeof VSlideGroup>
+
+export {}

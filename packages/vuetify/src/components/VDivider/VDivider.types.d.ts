@@ -17,7 +17,7 @@ export interface VDividerProps {
   vertical?: boolean
 }
 
-export type VDividerDefaultKeys =
+type VDividerDefaultKeys =
   | 'gradient'
   | 'inset'
   | 'style'
@@ -30,3 +30,5 @@ export declare const VDivider: VuetifyComponent<
   Record<string, any>
 >
 export type VDivider = InstanceType<typeof VDivider>
+
+export {}

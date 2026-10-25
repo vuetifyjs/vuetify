@@ -14,7 +14,7 @@ export interface VLoadingIndicatorProps {
   theme?: string
 }
 
-export type VLoadingIndicatorDefaultKeys =
+type VLoadingIndicatorDefaultKeys =
   | 'contained'
   | 'size'
   | 'style'
@@ -26,3 +26,5 @@ export declare const VLoadingIndicator: VuetifyComponent<
   Record<string, any>
 >
 export type VLoadingIndicator = InstanceType<typeof VLoadingIndicator>
+
+export {}

@@ -10,7 +10,7 @@ export interface VCardTextProps {
   tag?: string | JSXComponent
 }
 
-export type VCardTextDefaultKeys =
+type VCardTextDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -20,3 +20,5 @@ export declare const VCardText: VuetifyComponent<
   Record<string, any>
 >
 export type VCardText = InstanceType<typeof VCardText>
+
+export {}

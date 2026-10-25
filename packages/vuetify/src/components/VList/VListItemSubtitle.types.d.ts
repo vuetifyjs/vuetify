@@ -10,7 +10,7 @@ export interface VListItemSubtitleProps {
   tag?: string | JSXComponent
 }
 
-export type VListItemSubtitleDefaultKeys =
+type VListItemSubtitleDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -20,3 +20,5 @@ export declare const VListItemSubtitle: VuetifyComponent<
   Record<string, any>
 >
 export type VListItemSubtitle = InstanceType<typeof VListItemSubtitle>
+
+export {}

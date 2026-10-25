@@ -98,7 +98,7 @@ export interface VNumberInputProps {
   width?: string | number
 }
 
-export type VNumberInputDefaultKeys =
+type VNumberInputDefaultKeys =
   | 'active'
   | 'autofocus'
   | 'centerAffix'
@@ -153,3 +153,5 @@ export declare const VNumberInput: VuetifyComponent<
   ForwardRefs<{}, [VTextField]>
 >
 export type VNumberInput = InstanceType<typeof VNumberInput>
+
+export {}

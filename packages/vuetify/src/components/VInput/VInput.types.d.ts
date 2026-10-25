@@ -49,7 +49,7 @@ export interface VInputProps<T = any> {
   width?: string | number
 }
 
-export type VInputDefaultKeys =
+type VInputDefaultKeys =
   | 'centerAffix'
   | 'density'
   | 'detailsActive'
@@ -113,3 +113,5 @@ export declare const VInput: VuetifyComponent<
   VInputExposed
 >
 export type VInput = InstanceType<typeof VInput>
+
+export {}

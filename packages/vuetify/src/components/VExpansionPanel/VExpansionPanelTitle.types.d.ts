@@ -36,7 +36,7 @@ export interface VExpansionPanelTitleProps {
   width?: string | number
 }
 
-export type VExpansionPanelTitleDefaultKeys =
+type VExpansionPanelTitleDefaultKeys =
   | 'collapseIcon'
   | 'expandIcon'
   | 'focusable'
@@ -54,3 +54,5 @@ export declare const VExpansionPanelTitle: VuetifyComponent<
   VExpansionPanelTitleSlots
 >
 export type VExpansionPanelTitle = InstanceType<typeof VExpansionPanelTitle>
+
+export {}

@@ -90,7 +90,7 @@ export interface VCommandPaletteProps {
   zIndex?: string | number
 }
 
-export type VCommandPaletteDefaultKeys =
+type VCommandPaletteDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'captureFocus'
@@ -142,3 +142,5 @@ export declare const VCommandPalette: VuetifyComponent<
   VCommandPaletteSlots
 >
 export type VCommandPalette = InstanceType<typeof VCommandPalette>
+
+export {}

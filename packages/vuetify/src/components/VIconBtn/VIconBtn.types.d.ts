@@ -48,7 +48,7 @@ export interface VIconBtnProps {
   widthVariant?: VIconBtnWidthVariant
 }
 
-export type VIconBtnDefaultKeys =
+type VIconBtnDefaultKeys =
   | 'active'
   | 'baseVariant'
   | 'disabled'
@@ -74,3 +74,5 @@ export declare const VIconBtn: VuetifyComponent<
   VIconBtnSlots
 >
 export type VIconBtn = InstanceType<typeof VIconBtn>
+
+export {}

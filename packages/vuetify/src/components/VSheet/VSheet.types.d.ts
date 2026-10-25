@@ -25,7 +25,7 @@ export interface VSheetProps {
   width?: string | number
 }
 
-export type VSheetDefaultKeys =
+type VSheetDefaultKeys =
   | 'rounded'
   | 'style'
   | 'tag'
@@ -37,3 +37,5 @@ export declare const VSheet: VuetifyComponent<
   Record<string, any>
 >
 export type VSheet = InstanceType<typeof VSheet>
+
+export {}

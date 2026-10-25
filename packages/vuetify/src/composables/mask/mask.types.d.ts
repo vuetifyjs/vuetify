@@ -12,3 +12,5 @@ export type MaskItem = {
   pattern: RegExp
   test?: never
 })
+
+export {}

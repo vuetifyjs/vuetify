@@ -44,7 +44,7 @@ export interface VOtpInputProps {
   width?: string | number
 }
 
-export type VOtpInputDefaultKeys =
+type VOtpInputDefaultKeys =
   | 'autofocus'
   | 'density'
   | 'disabled'
@@ -74,3 +74,5 @@ export declare const VOtpInput: VuetifyComponent<
   { blur: () => void, focus: () => void, reset: () => void, isFocused: Ref<boolean, boolean> & { readonly externalValue: boolean } }
 >
 export type VOtpInput = InstanceType<typeof VOtpInput>
+
+export {}

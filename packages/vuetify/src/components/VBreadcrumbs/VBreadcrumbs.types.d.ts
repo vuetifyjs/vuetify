@@ -30,7 +30,7 @@ export interface VBreadcrumbsProps {
   tile?: boolean
 }
 
-export type VBreadcrumbsDefaultKeys =
+type VBreadcrumbsDefaultKeys =
   | 'density'
   | 'disabled'
   | 'divider'
@@ -58,3 +58,5 @@ export declare const VBreadcrumbs: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VBreadcrumbs = InstanceType<typeof VBreadcrumbs>
+
+export {}

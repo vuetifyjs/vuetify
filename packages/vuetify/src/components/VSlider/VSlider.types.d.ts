@@ -84,7 +84,7 @@ export interface VSliderProps {
   width?: string | number
 }
 
-export type VSliderDefaultKeys =
+type VSliderDefaultKeys =
   | 'centerAffix'
   | 'centered'
   | 'density'
@@ -132,3 +132,5 @@ export declare const VSlider: VuetifyComponent<
   ForwardRefs<{ focus: () => any }, [VInput]>
 >
 export type VSlider = InstanceType<typeof VSlider>
+
+export {}

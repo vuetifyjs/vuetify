@@ -55,7 +55,7 @@ export interface VNavigationDrawerProps {
   width?: string | number
 }
 
-export type VNavigationDrawerDefaultKeys =
+type VNavigationDrawerDefaultKeys =
   | 'absolute'
   | 'captureFocus'
   | 'disableResizeWatcher'
@@ -95,3 +95,5 @@ export declare const VNavigationDrawer: VuetifyComponent<
   { isStuck: ShallowRef<boolean | 'top' | 'bottom', boolean | 'top' | 'bottom'> }
 >
 export type VNavigationDrawer = InstanceType<typeof VNavigationDrawer>
+
+export {}

@@ -44,7 +44,7 @@ export interface VProgressLinearProps {
   variant?: 'split'
 }
 
-export type VProgressLinearDefaultKeys =
+type VProgressLinearDefaultKeys =
   | 'absolute'
   | 'active'
   | 'bufferValue'
@@ -80,3 +80,5 @@ export declare const VProgressLinear: VuetifyComponent<
   VProgressLinearSlots
 >
 export type VProgressLinear = InstanceType<typeof VProgressLinear>
+
+export {}

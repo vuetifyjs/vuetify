@@ -44,7 +44,7 @@ export interface VExpansionPanelsProps {
   variant?: 'default' | 'inset' | 'accordion' | 'popout'
 }
 
-export type VExpansionPanelsDefaultKeys =
+type VExpansionPanelsDefaultKeys =
   | 'collapseIcon'
   | 'disabled'
   | 'eager'
@@ -81,3 +81,5 @@ export declare const VExpansionPanels: VuetifyComponent<
   { next: () => void, prev: () => void }
 >
 export type VExpansionPanels = InstanceType<typeof VExpansionPanels>
+
+export {}

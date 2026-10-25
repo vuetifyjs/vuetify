@@ -19,7 +19,7 @@ export interface VMessagesProps {
   transition?: string | boolean | (TransitionProps & { component?: Component | undefined }) | { component: Component, leaveAbsolute: boolean, group: boolean } | null
 }
 
-export type VMessagesDefaultKeys =
+type VMessagesDefaultKeys =
   | 'active'
   | 'messages'
   | 'style'
@@ -32,3 +32,5 @@ export declare const VMessages: VuetifyComponent<
   VMessagesSlots
 >
 export type VMessages = InstanceType<typeof VMessages>
+
+export {}

@@ -63,7 +63,7 @@ export interface VBtnProps {
   width?: string | number
 }
 
-export type VBtnDefaultKeys =
+type VBtnDefaultKeys =
   | 'active'
   | 'block'
   | 'density'
@@ -94,3 +94,5 @@ export declare const VBtn: VuetifyComponent<
   { group: GroupItemProvide | null }
 >
 export type VBtn = InstanceType<typeof VBtn>
+
+export {}

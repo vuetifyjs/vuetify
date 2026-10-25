@@ -1,8 +1,8 @@
 // Types
 import type { Component, Ref, ShallowRef } from 'vue'
-import type { OverlaySlots, TransitionValue, VOverlay, VOverlayBaseDefaultKeys, VOverlayBaseProps } from '@/components/VOverlay/VOverlay.types'
+import type { OverlaySlots, TransitionValue, VOverlay, VOverlayBaseProps } from '@/components/VOverlay/VOverlay.types'
 import type { ForwardRefs } from '@/composables/forwardRefs.types'
-import type { VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, VuetifyComponent } from '@/util/defineComponent.types'
 
 export interface VMenuProps extends Omit<VOverlayBaseProps, 'absolute' | 'transition'> {
   _disableKeys?: boolean
@@ -12,8 +12,9 @@ export interface VMenuProps extends Omit<VOverlayBaseProps, 'absolute' | 'transi
   transition?: TransitionValue | { component: Component }
 }
 
-export type VMenuDefaultKeys =
-  | Exclude<VOverlayBaseDefaultKeys, 'absolute'>
+type VMenuDefaultKeys =
+  | Exclude<Extract<DefaultKeysOf<typeof VOverlay>, keyof VOverlayBaseProps>, 'absolute'>
+  | 'disableInitialFocus'
   | 'closeDelay'
   | '_disableKeys'
   | 'location'
@@ -37,3 +38,5 @@ export declare const VMenu: VuetifyComponent<
   VMenuExposed
 >
 export type VMenu = InstanceType<typeof VMenu>
+
+export {}

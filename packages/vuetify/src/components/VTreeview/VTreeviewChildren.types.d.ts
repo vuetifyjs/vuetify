@@ -30,3 +30,5 @@ export type VTreeviewChildrenSlots<T> = {
   divider: { props: InternalListItem['props'] }
   subheader: { props: InternalListItem['props'] }
 }
+
+export {}

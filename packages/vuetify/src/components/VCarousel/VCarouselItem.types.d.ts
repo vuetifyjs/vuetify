@@ -40,7 +40,7 @@ export interface VCarouselItemProps {
   width?: string | number
 }
 
-export type VCarouselItemDefaultKeys =
+type VCarouselItemDefaultKeys =
   | 'absolute'
   | 'cover'
   | 'disabled'
@@ -62,3 +62,5 @@ export declare const VCarouselItem: VuetifyComponent<
   VImgSlots
 >
 export type VCarouselItem = InstanceType<typeof VCarouselItem>
+
+export {}

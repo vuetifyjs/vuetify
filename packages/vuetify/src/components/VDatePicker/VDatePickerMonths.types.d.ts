@@ -25,7 +25,7 @@ export interface VDatePickerMonthsProps {
   year?: number
 }
 
-export type VDatePickerMonthsDefaultKeys =
+type VDatePickerMonthsDefaultKeys =
   | 'columns'
 
 export declare const VDatePickerMonths: VuetifyComponent<
@@ -38,3 +38,5 @@ export declare const VDatePickerMonths: VuetifyComponent<
   VDatePickerMonthsSlots
 >
 export type VDatePickerMonths = InstanceType<typeof VDatePickerMonths>
+
+export {}

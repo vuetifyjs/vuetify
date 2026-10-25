@@ -18,3 +18,5 @@ export interface PivotColumn<C> {
   cells: (C | null)[]
   items: C[]
 }
+
+export {}

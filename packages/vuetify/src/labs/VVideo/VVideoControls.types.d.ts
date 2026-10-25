@@ -83,7 +83,7 @@ export interface VVideoControlsProps {
   volumeSlider?: VMediaVolumeSlider
 }
 
-export type VVideoControlsDefaultKeys =
+type VVideoControlsDefaultKeys =
   | 'buffer'
   | 'chapters'
   | 'density'
@@ -121,3 +121,5 @@ export declare const VVideoControls: VuetifyComponent<
   { toggleMuted: () => void }
 >
 export type VVideoControls = InstanceType<typeof VVideoControls>
+
+export {}

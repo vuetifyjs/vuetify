@@ -78,7 +78,7 @@ export interface VFileUploadListProps {
   width?: string | number
 }
 
-export type VFileUploadListDefaultKeys =
+type VFileUploadListDefaultKeys =
   | 'activatable'
   | 'border'
   | 'clearable'
@@ -116,3 +116,5 @@ export declare const VFileUploadList: VuetifyComponent<
   VFileUploadListSlots
 >
 export type VFileUploadList = InstanceType<typeof VFileUploadList>
+
+export {}

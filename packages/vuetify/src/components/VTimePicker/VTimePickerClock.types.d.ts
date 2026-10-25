@@ -18,7 +18,7 @@ export interface VTimePickerClockProps {
   step?: number
 }
 
-export type VTimePickerClockDefaultKeys =
+type VTimePickerClockDefaultKeys =
   | 'ampm'
   | 'disabled'
   | 'double'
@@ -37,3 +37,5 @@ export declare const VTimePickerClock: VuetifyComponent<
   }
 >
 export type VTimePickerClock = InstanceType<typeof VTimePickerClock>
+
+export {}

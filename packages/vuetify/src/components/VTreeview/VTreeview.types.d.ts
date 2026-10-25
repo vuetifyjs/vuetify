@@ -90,7 +90,7 @@ export interface VTreeviewProps {
   width?: string | number
 }
 
-export type VTreeviewDefaultKeys =
+type VTreeviewDefaultKeys =
   | 'activatable'
   | 'collapseIcon'
   | 'density'
@@ -158,3 +158,5 @@ export declare const VTreeview: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VTreeview = InstanceType<typeof VTreeview>
+
+export {}

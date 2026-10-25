@@ -1,8 +1,8 @@
 // Types
-import type { VBtnGroupDefaultKeys, VBtnGroupProps } from '@/components/VBtnGroup/VBtnGroup.types'
+import type { VBtnGroup, VBtnGroupProps } from '@/components/VBtnGroup/VBtnGroup.types'
 import type { VMenu } from '@/components/VMenu/VMenu.types'
 import type { IconValue } from '@/composables/icons.types'
-import type { VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, VuetifyComponent } from '@/util/defineComponent.types'
 
 export type VSplitBtnSlots = {
   default: never
@@ -21,8 +21,8 @@ export interface VSplitBtnProps extends Omit<VBtnGroupProps, 'connected' | 'dire
   text?: string | number
 }
 
-export type VSplitBtnDefaultKeys =
-  | Exclude<VBtnGroupDefaultKeys, 'connected' | 'direction'>
+type VSplitBtnDefaultKeys =
+  | Exclude<DefaultKeysOf<typeof VBtnGroup>, 'connected' | 'direction'>
   | 'disabled'
   | 'menu'
   | 'menuIcon'
@@ -38,3 +38,5 @@ export declare const VSplitBtn: VuetifyComponent<
   VSplitBtnSlots
 >
 export type VSplitBtn = InstanceType<typeof VSplitBtn>
+
+export {}

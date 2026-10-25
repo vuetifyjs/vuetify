@@ -48,3 +48,5 @@ export type VExpandXTransition = InstanceType<typeof VExpandXTransition>
 
 export declare const VExpandBothTransition: JavascriptTransition
 export type VExpandBothTransition = InstanceType<typeof VExpandBothTransition>
+
+export {}

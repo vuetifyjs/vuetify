@@ -28,7 +28,7 @@ export interface VSelectionControlGroupProps {
   valueComparator?: ValueComparator
 }
 
-export type VSelectionControlGroupDefaultKeys =
+type VSelectionControlGroupDefaultKeys =
   | 'defaultsTarget'
   | 'density'
   | 'disabled'
@@ -56,3 +56,5 @@ export declare const VSelectionControlGroup: VuetifyComponent<
   { blur: () => void, focus: (options?: FocusOptions | undefined) => void }
 >
 export type VSelectionControlGroup = InstanceType<typeof VSelectionControlGroup>
+
+export {}

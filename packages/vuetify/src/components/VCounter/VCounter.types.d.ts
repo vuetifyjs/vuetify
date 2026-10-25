@@ -22,7 +22,7 @@ export interface VCounterProps {
   value?: string | number
 }
 
-export type VCounterDefaultKeys =
+type VCounterDefaultKeys =
   | 'active'
   | 'disabled'
   | 'style'
@@ -36,3 +36,5 @@ export declare const VCounter: VuetifyComponent<
   VCounterSlots
 >
 export type VCounter = InstanceType<typeof VCounter>
+
+export {}

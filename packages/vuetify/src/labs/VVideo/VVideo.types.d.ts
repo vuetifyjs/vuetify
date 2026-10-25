@@ -85,7 +85,7 @@ export interface VVideoProps {
   width?: string | number
 }
 
-export type VVideoDefaultKeys =
+type VVideoDefaultKeys =
   | 'autoplay'
   | 'chapters'
   | 'controlsVariant'
@@ -129,3 +129,5 @@ export declare const VVideo: VuetifyComponent<
   { retry: () => void, seek: (target: MediaSeekTarget) => void, skipTo: (percent: number) => void, toggleFullscreen: () => Promise<void>, _: ComponentInternalInstance, toggleMuted: () => void, _allExposed: { toggleMuted: () => void } | { retry: () => void, seek: (target: MediaSeekTarget) => void, skipTo: (percent: number) => void, toggleFullscreen: () => Promise<void> }, video: ShallowRef<HTMLVideoElement | undefined, HTMLVideoElement | undefined> }
 >
 export type VVideo = InstanceType<typeof VVideo>
+
+export {}

@@ -91,7 +91,7 @@ export interface VDatePickerProps {
   year?: number
 }
 
-export type VDatePickerDefaultKeys =
+type VDatePickerDefaultKeys =
   | 'controlVariant'
   | 'disabled'
   | 'divided'
@@ -154,3 +154,5 @@ export declare const VDatePicker: VuetifyComponent<
   { focusDate: (isoDate: string) => void }
 >
 export type VDatePicker = InstanceType<typeof VDatePicker>
+
+export {}

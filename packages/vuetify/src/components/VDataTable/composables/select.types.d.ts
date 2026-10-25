@@ -9,3 +9,5 @@ export type SelectionActions = {
   selectAll: (value: boolean) => void
   toggleSelect: (item: SelectableItem, index?: number, event?: MouseEvent) => void
 }
+
+export {}

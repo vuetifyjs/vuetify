@@ -15,7 +15,7 @@ export interface VPullToRefreshProps {
   pullDownThreshold?: number
 }
 
-export type VPullToRefreshDefaultKeys =
+type VPullToRefreshDefaultKeys =
   | 'disabled'
   | 'pullDownThreshold'
 
@@ -28,3 +28,5 @@ export declare const VPullToRefresh: VuetifyComponent<
   VPullToRefreshSlots
 >
 export type VPullToRefresh = InstanceType<typeof VPullToRefresh>
+
+export {}

@@ -10,7 +10,7 @@ export interface VLabelProps {
   theme?: string
 }
 
-export type VLabelDefaultKeys =
+type VLabelDefaultKeys =
   | 'style'
 
 export declare const VLabel: VuetifyComponent<
@@ -19,3 +19,5 @@ export declare const VLabel: VuetifyComponent<
   Record<string, any>
 >
 export type VLabel = InstanceType<typeof VLabel>
+
+export {}

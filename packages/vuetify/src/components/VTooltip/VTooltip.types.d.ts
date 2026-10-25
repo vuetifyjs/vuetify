@@ -53,7 +53,7 @@ export interface VTooltipProps {
   zIndex?: string | number
 }
 
-export type VTooltipDefaultKeys =
+type VTooltipDefaultKeys =
   | 'activatorProps'
   | 'closeOnBack'
   | 'closeOnContentClick'
@@ -93,3 +93,5 @@ export declare const VTooltip: VuetifyComponent<
   ForwardRefs<{}, [VOverlay]>
 >
 export type VTooltip = InstanceType<typeof VTooltip>
+
+export {}

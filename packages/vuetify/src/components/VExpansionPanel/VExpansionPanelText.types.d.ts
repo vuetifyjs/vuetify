@@ -8,7 +8,7 @@ export interface VExpansionPanelTextProps {
   style?: StyleValue
 }
 
-export type VExpansionPanelTextDefaultKeys =
+type VExpansionPanelTextDefaultKeys =
   | 'eager'
   | 'style'
 
@@ -18,3 +18,5 @@ export declare const VExpansionPanelText: VuetifyComponent<
   Record<string, any>
 >
 export type VExpansionPanelText = InstanceType<typeof VExpansionPanelText>
+
+export {}

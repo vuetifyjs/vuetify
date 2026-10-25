@@ -1,7 +1,7 @@
 // Types
-import type { VWindowDefaultKeys, VWindowEmits, VWindowProps, VWindowSlots } from '@/components/VWindow/VWindow.types'
+import type { VWindow, VWindowEmits, VWindowProps, VWindowSlots } from '@/components/VWindow/VWindow.types'
 import type { IconValue } from '@/composables/icons.types'
-import type { GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
+import type { DefaultKeysOf, GenericProps, VuetifyComponent } from '@/util/defineComponent.types'
 
 export interface VCarouselProps<T = any> extends VWindowProps<T> {
   color?: string
@@ -16,8 +16,8 @@ export interface VCarouselProps<T = any> extends VWindowProps<T> {
   verticalDelimiters?: boolean | 'left' | 'right'
 }
 
-export type VCarouselDefaultKeys =
-  | VWindowDefaultKeys
+type VCarouselDefaultKeys =
+  | DefaultKeysOf<typeof VWindow>
   | 'cycle'
   | 'delimiterIcon'
   | 'height'
@@ -51,3 +51,5 @@ export declare const VCarousel: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VCarousel = InstanceType<typeof VCarousel>
+
+export {}

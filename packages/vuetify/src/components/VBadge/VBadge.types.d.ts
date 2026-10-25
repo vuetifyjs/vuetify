@@ -41,7 +41,7 @@ export interface VBadgeProps {
   width?: string | number
 }
 
-export type VBadgeDefaultKeys =
+type VBadgeDefaultKeys =
   | 'bordered'
   | 'dot'
   | 'floating'
@@ -62,3 +62,5 @@ export declare const VBadge: VuetifyComponent<
   VBadgeSlots
 >
 export type VBadge = InstanceType<typeof VBadge>
+
+export {}

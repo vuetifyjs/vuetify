@@ -8,7 +8,7 @@ export interface VBreadcrumbsDividerProps {
   style?: StyleValue
 }
 
-export type VBreadcrumbsDividerDefaultKeys =
+type VBreadcrumbsDividerDefaultKeys =
   | 'style'
 
 export declare const VBreadcrumbsDivider: VuetifyComponent<
@@ -17,3 +17,5 @@ export declare const VBreadcrumbsDivider: VuetifyComponent<
   Record<string, any>
 >
 export type VBreadcrumbsDivider = InstanceType<typeof VBreadcrumbsDivider>
+
+export {}

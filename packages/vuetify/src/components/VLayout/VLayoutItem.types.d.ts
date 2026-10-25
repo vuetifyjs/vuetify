@@ -13,7 +13,7 @@ export interface VLayoutItemProps {
   style?: StyleValue
 }
 
-export type VLayoutItemDefaultKeys =
+type VLayoutItemDefaultKeys =
   | 'absolute'
   | 'modelValue'
   | 'order'
@@ -26,3 +26,5 @@ export declare const VLayoutItem: VuetifyComponent<
   Record<string, any>
 >
 export type VLayoutItem = InstanceType<typeof VLayoutItem>
+
+export {}

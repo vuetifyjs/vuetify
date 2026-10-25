@@ -6,3 +6,5 @@ import type { InternalItem } from '@/composables/filter.types'
 export interface DataIteratorItem<T = any> extends Omit<InternalItem<T>, 'type'>, GroupableItem<T>, SelectableItem {
   value: unknown
 }
+
+export {}

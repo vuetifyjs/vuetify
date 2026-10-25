@@ -61,7 +61,7 @@ export interface VAudioProps {
   width?: string | number
 }
 
-export type VAudioDefaultKeys =
+type VAudioDefaultKeys =
   | 'actions'
   | 'autoplay'
   | 'chapters'
@@ -100,3 +100,5 @@ export declare const VAudio: VuetifyComponent<
   ForwardRefs<{ audio: ShallowRef<HTMLAudioElement | undefined, HTMLAudioElement | undefined>, play: () => Promise<void>, pause: () => void, stop: () => void, seek: (target: MediaSeekTarget) => void, retry: () => void }, [VAudioControls]>
 >
 export type VAudio = InstanceType<typeof VAudio>
+
+export {}

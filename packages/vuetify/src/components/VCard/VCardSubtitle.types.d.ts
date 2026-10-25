@@ -10,7 +10,7 @@ export interface VCardSubtitleProps {
   tag?: string | JSXComponent
 }
 
-export type VCardSubtitleDefaultKeys =
+type VCardSubtitleDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -20,3 +20,5 @@ export declare const VCardSubtitle: VuetifyComponent<
   Record<string, any>
 >
 export type VCardSubtitle = InstanceType<typeof VCardSubtitle>
+
+export {}

@@ -19,3 +19,5 @@ export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'hre
   route: Readonly<Ref<RouteLocation & { href: string } | undefined>>
   navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
 }
+
+export {}

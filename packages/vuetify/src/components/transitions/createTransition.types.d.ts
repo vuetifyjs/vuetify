@@ -10,7 +10,7 @@ export interface CssTransitionProps {
   origin?: string
 }
 
-export type CssTransitionDefaultKeys =
+type CssTransitionDefaultKeys =
   | 'disabled'
   | 'group'
   | 'hideOnLeave'
@@ -31,7 +31,7 @@ export interface JavascriptTransitionProps {
   mode?: 'in-out' | 'out-in' | 'default'
 }
 
-export type JavascriptTransitionDefaultKeys =
+type JavascriptTransitionDefaultKeys =
   | 'disabled'
   | 'group'
   | 'hideOnLeave'
@@ -42,3 +42,5 @@ export type JavascriptTransition = VuetifyComponent<
   JavascriptTransitionDefaultKeys,
   Record<string, any>
 >
+
+export {}

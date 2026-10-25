@@ -38,7 +38,7 @@ export interface VTimelineItemProps {
   width?: string | number
 }
 
-export type VTimelineItemDefaultKeys =
+type VTimelineItemDefaultKeys =
   | 'fillDot'
   | 'hideDot'
   | 'hideOpposite'
@@ -55,3 +55,5 @@ export declare const VTimelineItem: VuetifyComponent<
   VTimelineItemSlots
 >
 export type VTimelineItem = InstanceType<typeof VTimelineItem>
+
+export {}

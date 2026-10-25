@@ -43,7 +43,7 @@ export interface VExpansionPanelProps {
   width?: string | number
 }
 
-export type VExpansionPanelDefaultKeys =
+type VExpansionPanelDefaultKeys =
   | 'collapseIcon'
   | 'disabled'
   | 'eager'
@@ -69,3 +69,5 @@ export declare const VExpansionPanel: VuetifyComponent<
   { groupItem: GroupItemProvide }
 >
 export type VExpansionPanel = InstanceType<typeof VExpansionPanel>
+
+export {}

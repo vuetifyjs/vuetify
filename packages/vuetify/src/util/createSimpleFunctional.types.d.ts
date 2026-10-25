@@ -9,7 +9,7 @@ export interface SimpleFunctionalProps {
   tag?: string
 }
 
-export type SimpleFunctionalDefaultKeys =
+type SimpleFunctionalDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -18,3 +18,5 @@ export type SimpleFunctional = VuetifyComponent<
   SimpleFunctionalDefaultKeys,
   Record<string, any>
 >
+
+export {}

@@ -18,7 +18,7 @@ export interface VItemProps {
   value?: any
 }
 
-export type VItemDefaultKeys =
+type VItemDefaultKeys =
   | 'disabled'
 
 export declare const VItem: VuetifyComponent<
@@ -30,3 +30,5 @@ export declare const VItem: VuetifyComponent<
   VItemSlots
 >
 export type VItem = InstanceType<typeof VItem>
+
+export {}

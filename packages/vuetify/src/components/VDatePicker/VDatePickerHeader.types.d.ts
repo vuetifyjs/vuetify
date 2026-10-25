@@ -17,7 +17,7 @@ export interface VDatePickerHeaderProps {
   transition?: string
 }
 
-export type VDatePickerHeaderDefaultKeys = never
+type VDatePickerHeaderDefaultKeys = never
 
 export declare const VDatePickerHeader: VuetifyComponent<
   VDatePickerHeaderProps,
@@ -29,3 +29,5 @@ export declare const VDatePickerHeader: VuetifyComponent<
   VDatePickerHeaderSlots
 >
 export type VDatePickerHeader = InstanceType<typeof VDatePickerHeader>
+
+export {}

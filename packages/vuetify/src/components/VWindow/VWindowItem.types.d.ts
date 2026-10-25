@@ -15,7 +15,7 @@ export interface VWindowItemProps {
   value?: any
 }
 
-export type VWindowItemDefaultKeys =
+type VWindowItemDefaultKeys =
   | 'disabled'
   | 'eager'
   | 'reverseTransition'
@@ -38,3 +38,5 @@ export declare const VWindowItem: VuetifyComponent<
   VWindowItemExposed
 >
 export type VWindowItem = InstanceType<typeof VWindowItem>
+
+export {}

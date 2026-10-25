@@ -60,7 +60,7 @@ export interface VSelectionControlProps {
   valueComparator?: ValueComparator
 }
 
-export type VSelectionControlDefaultKeys =
+type VSelectionControlDefaultKeys =
   | 'density'
   | 'disabled'
   | 'error'
@@ -88,3 +88,5 @@ export declare const VSelectionControl: VuetifyComponent<
   { blur: () => void, focus: (options?: FocusOptions | undefined) => void, isFocused: ShallowRef<boolean, boolean>, input: ShallowRef<HTMLInputElement | undefined, HTMLInputElement | undefined> }
 >
 export type VSelectionControl = InstanceType<typeof VSelectionControl>
+
+export {}

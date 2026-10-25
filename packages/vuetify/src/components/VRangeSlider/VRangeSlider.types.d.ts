@@ -77,7 +77,7 @@ export interface VRangeSliderProps {
   width?: string | number
 }
 
-export type VRangeSliderDefaultKeys =
+type VRangeSliderDefaultKeys =
   | 'centerAffix'
   | 'density'
   | 'detailsActive'
@@ -127,3 +127,5 @@ export declare const VRangeSlider: VuetifyComponent<
   ForwardRefs<{ focus: () => any }, [VInput]>
 >
 export type VRangeSlider = InstanceType<typeof VRangeSlider>
+
+export {}

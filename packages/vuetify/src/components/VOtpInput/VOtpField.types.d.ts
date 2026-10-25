@@ -5,7 +5,7 @@ export interface VOtpFieldProps {
   index: number
 }
 
-export type VOtpFieldDefaultKeys = never
+type VOtpFieldDefaultKeys = never
 
 export declare const VOtpField: VuetifyComponent<
   VOtpFieldProps,
@@ -13,3 +13,5 @@ export declare const VOtpField: VuetifyComponent<
   Record<string, any>
 >
 export type VOtpField = InstanceType<typeof VOtpField>
+
+export {}

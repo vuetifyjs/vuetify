@@ -26,7 +26,7 @@ export interface VProgressCircularProps {
   width?: string | number
 }
 
-export type VProgressCircularDefaultKeys =
+type VProgressCircularDefaultKeys =
   | 'modelValue'
   | 'reveal'
   | 'rotate'
@@ -46,3 +46,5 @@ export declare const VProgressCircular: VuetifyComponent<
   VProgressCircularSlots
 >
 export type VProgressCircular = InstanceType<typeof VProgressCircular>
+
+export {}

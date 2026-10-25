@@ -14,3 +14,5 @@ export type SparklineAnimationConfig = {
   duration?: number
   easing?: string
 }
+
+export {}

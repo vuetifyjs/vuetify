@@ -2,6 +2,7 @@
 import type {
   AllowedComponentProps,
   ComponentCustomProps,
+  ComponentOptionsBase,
   ComponentOptionsMixin,
   DefineComponent,
   EmitsOptions,
@@ -78,6 +79,9 @@ export type VuetifyComponent<
   filterProps<T extends Partial<Props>> (props: T): Partial<Pick<T, keyof Props & keyof T>>
 }
 
+// Generic keys are missing, VuetifyComponent leaves them out of Vue's defaults
+export type DefaultKeysOf<C> = C extends ComponentOptionsBase<any, any, any, any, any, any, any, any, any, infer D, any, any, any, any, any, any, any> ? keyof D : never
+
 export type EmitsToProps<T extends EmitsOptions> = T extends string[]
   ? {
     [K in string & `on${Capitalize<T[number]>}`]?: (...args: any[]) => any
@@ -101,3 +105,5 @@ export type PublicProps =
   & VNodeProps
   & AllowedComponentProps
   & ComponentCustomProps
+
+export {}

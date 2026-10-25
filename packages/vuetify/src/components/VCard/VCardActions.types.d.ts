@@ -9,7 +9,7 @@ export interface VCardActionsProps {
   tag?: string | JSXComponent
 }
 
-export type VCardActionsDefaultKeys =
+type VCardActionsDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -19,3 +19,5 @@ export declare const VCardActions: VuetifyComponent<
   Record<string, any>
 >
 export type VCardActions = InstanceType<typeof VCardActions>
+
+export {}

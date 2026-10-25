@@ -19,7 +19,7 @@ export interface VDataTableFooterProps {
   showFirstLastPage?: boolean | 'only-first'
 }
 
-export type VDataTableFooterDefaultKeys =
+type VDataTableFooterDefaultKeys =
   | 'firstIcon'
   | 'firstPageLabel'
   | 'itemsPerPageOptions'
@@ -41,3 +41,5 @@ export declare const VDataTableFooter: VuetifyComponent<
   { prepend: never }
 >
 export type VDataTableFooter = InstanceType<typeof VDataTableFooter>
+
+export {}

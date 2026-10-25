@@ -15,7 +15,7 @@ export interface VToolbarTitleProps {
   text?: string
 }
 
-export type VToolbarTitleDefaultKeys =
+type VToolbarTitleDefaultKeys =
   | 'style'
   | 'tag'
 
@@ -26,3 +26,5 @@ export declare const VToolbarTitle: VuetifyComponent<
   VToolbarTitleSlots
 >
 export type VToolbarTitle = InstanceType<typeof VToolbarTitle>
+
+export {}

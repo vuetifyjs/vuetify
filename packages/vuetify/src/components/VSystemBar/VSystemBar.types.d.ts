@@ -20,7 +20,7 @@ export interface VSystemBarProps {
   window?: boolean
 }
 
-export type VSystemBarDefaultKeys =
+type VSystemBarDefaultKeys =
   | 'absolute'
   | 'order'
   | 'rounded'
@@ -35,3 +35,5 @@ export declare const VSystemBar: VuetifyComponent<
   Record<string, any>
 >
 export type VSystemBar = InstanceType<typeof VSystemBar>
+
+export {}

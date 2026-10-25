@@ -22,7 +22,7 @@ export interface VBreadcrumbsItemProps {
   width?: string | number
 }
 
-export type VBreadcrumbsItemDefaultKeys =
+type VBreadcrumbsItemDefaultKeys =
   | 'active'
   | 'disabled'
   | 'exact'
@@ -36,3 +36,5 @@ export declare const VBreadcrumbsItem: VuetifyComponent<
   Record<string, any>
 >
 export type VBreadcrumbsItem = InstanceType<typeof VBreadcrumbsItem>
+
+export {}

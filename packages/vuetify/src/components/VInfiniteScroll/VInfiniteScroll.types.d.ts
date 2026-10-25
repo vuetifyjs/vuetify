@@ -36,7 +36,7 @@ export interface VInfiniteScrollProps {
   width?: string | number
 }
 
-export type VInfiniteScrollDefaultKeys =
+type VInfiniteScrollDefaultKeys =
   | 'direction'
   | 'emptyText'
   | 'loadMoreText'
@@ -54,3 +54,5 @@ export declare const VInfiniteScroll: VuetifyComponent<
   { reset: (side?: InfiniteScrollSide | undefined) => void }
 >
 export type VInfiniteScroll = InstanceType<typeof VInfiniteScroll>
+
+export {}

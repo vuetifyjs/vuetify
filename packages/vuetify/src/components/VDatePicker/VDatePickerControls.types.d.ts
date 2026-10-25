@@ -37,7 +37,7 @@ export interface VDatePickerControlsProps {
   yearText?: string
 }
 
-export type VDatePickerControlsDefaultKeys =
+type VDatePickerControlsDefaultKeys =
   | 'active'
   | 'controlVariant'
   | 'disabled'
@@ -61,3 +61,5 @@ export declare const VDatePickerControls: VuetifyComponent<
   VDatePickerControlsSlots
 >
 export type VDatePickerControls = InstanceType<typeof VDatePickerControls>
+
+export {}

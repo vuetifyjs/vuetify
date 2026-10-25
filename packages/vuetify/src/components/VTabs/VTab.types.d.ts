@@ -58,7 +58,7 @@ export interface VTabProps {
   width?: string | number
 }
 
-export type VTabDefaultKeys =
+type VTabDefaultKeys =
   | 'density'
   | 'direction'
   | 'disabled'
@@ -89,3 +89,5 @@ export declare const VTab: VuetifyComponent<
   ForwardRefs<{}, [VBtn]>
 >
 export type VTab = InstanceType<typeof VTab>
+
+export {}

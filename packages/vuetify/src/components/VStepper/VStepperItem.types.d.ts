@@ -40,7 +40,7 @@ export interface VStepperItemProps {
   value?: any
 }
 
-export type VStepperItemDefaultKeys =
+type VStepperItemDefaultKeys =
   | 'complete'
   | 'completeIcon'
   | 'disabled'
@@ -60,3 +60,5 @@ export declare const VStepperItem: VuetifyComponent<
   VStepperItemSlots
 >
 export type VStepperItem = InstanceType<typeof VStepperItem>
+
+export {}

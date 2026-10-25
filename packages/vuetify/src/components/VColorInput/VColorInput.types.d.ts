@@ -126,7 +126,7 @@ export interface VColorInputProps {
   width?: string | number
 }
 
-export type VColorInputDefaultKeys =
+type VColorInputDefaultKeys =
   | 'active'
   | 'autofocus'
   | 'cancelText'
@@ -196,3 +196,5 @@ export declare const VColorInput: VuetifyComponent<
   ForwardRefs<{}, [VTextField]>
 >
 export type VColorInput = InstanceType<typeof VColorInput>
+
+export {}

@@ -55,7 +55,7 @@ export interface VOverlayBaseProps {
   zIndex?: string | number
 }
 
-export type VOverlayBaseDefaultKeys =
+type VOverlayBaseDefaultKeys =
   | 'absolute'
   | 'activatorProps'
   | 'captureFocus'
@@ -87,7 +87,7 @@ export interface VOverlayProps extends Omit<VOverlayBaseProps, 'disableInitialFo
   _submenu?: boolean
 }
 
-export type VOverlayDefaultKeys =
+type VOverlayDefaultKeys =
   | Exclude<VOverlayBaseDefaultKeys, 'disableInitialFocus'>
   | '_disableGlobalStack'
   | '_submenu'
@@ -124,3 +124,5 @@ export declare const VOverlay: VuetifyComponent<
   VOverlayExposed
 >
 export type VOverlay = InstanceType<typeof VOverlay>
+
+export {}

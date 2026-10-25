@@ -11,7 +11,7 @@ export interface VThemeProviderProps {
   withBackground?: boolean
 }
 
-export type VThemeProviderDefaultKeys =
+type VThemeProviderDefaultKeys =
   | 'style'
   | 'tag'
   | 'withBackground'
@@ -22,3 +22,5 @@ export declare const VThemeProvider: VuetifyComponent<
   Record<string, any>
 >
 export type VThemeProvider = InstanceType<typeof VThemeProvider>
+
+export {}

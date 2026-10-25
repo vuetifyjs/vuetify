@@ -21,7 +21,7 @@ export interface VFooterProps {
   tile?: boolean
 }
 
-export type VFooterDefaultKeys =
+type VFooterDefaultKeys =
   | 'absolute'
   | 'app'
   | 'height'
@@ -37,3 +37,5 @@ export declare const VFooter: VuetifyComponent<
   Record<string, any>
 >
 export type VFooter = InstanceType<typeof VFooter>
+
+export {}

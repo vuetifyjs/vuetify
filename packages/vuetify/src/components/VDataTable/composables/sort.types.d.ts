@@ -15,3 +15,5 @@ export type SortActions = {
   toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent, mandatory?: boolean) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }
+
+export {}

@@ -56,7 +56,7 @@ export interface VSpeedDialProps {
   zIndex?: string | number
 }
 
-export type VSpeedDialDefaultKeys =
+type VSpeedDialDefaultKeys =
   | 'activatorProps'
   | 'captureFocus'
   | 'closeDelay'
@@ -100,3 +100,5 @@ export declare const VSpeedDial: VuetifyComponent<
   OverlaySlots
 >
 export type VSpeedDial = InstanceType<typeof VSpeedDial>
+
+export {}

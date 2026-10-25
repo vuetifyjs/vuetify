@@ -11,7 +11,7 @@ export interface VListItemMediaProps {
   tag?: string | JSXComponent
 }
 
-export type VListItemMediaDefaultKeys =
+type VListItemMediaDefaultKeys =
   | 'end'
   | 'start'
   | 'style'
@@ -23,3 +23,5 @@ export declare const VListItemMedia: VuetifyComponent<
   Record<string, any>
 >
 export type VListItemMedia = InstanceType<typeof VListItemMedia>
+
+export {}

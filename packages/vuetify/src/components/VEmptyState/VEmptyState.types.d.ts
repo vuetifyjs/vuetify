@@ -41,7 +41,7 @@ export interface VEmptyStateProps {
   width?: string | number
 }
 
-export type VEmptyStateDefaultKeys =
+type VEmptyStateDefaultKeys =
   | 'justify'
   | 'size'
   | 'style'
@@ -56,3 +56,5 @@ export declare const VEmptyState: VuetifyComponent<
   VEmptyStateSlots
 >
 export type VEmptyState = InstanceType<typeof VEmptyState>
+
+export {}

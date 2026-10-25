@@ -5,3 +5,5 @@ export type ExpandActions = {
   isExpanded: (item: DataTableItem) => boolean
   toggleExpand: (item: DataTableItem) => void
 }
+
+export {}

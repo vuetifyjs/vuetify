@@ -35,7 +35,7 @@ export interface VTimelineProps {
   truncateLine?: TimelineTruncateLine
 }
 
-export type VTimelineDefaultKeys =
+type VTimelineDefaultKeys =
   | 'density'
   | 'fillDot'
   | 'hideOpposite'
@@ -51,3 +51,5 @@ export declare const VTimeline: VuetifyComponent<
   Record<string, any>
 >
 export type VTimeline = InstanceType<typeof VTimeline>
+
+export {}

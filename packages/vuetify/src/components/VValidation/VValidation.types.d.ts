@@ -22,7 +22,7 @@ export interface VValidationProps {
   validationValue?: any
 }
 
-export type VValidationDefaultKeys =
+type VValidationDefaultKeys =
   | 'disabled'
   | 'error'
   | 'errorMessages'
@@ -46,3 +46,5 @@ export declare const VValidation: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VValidation = InstanceType<typeof VValidation>
+
+export {}

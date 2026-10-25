@@ -16,3 +16,5 @@ export interface VEventScopeInput {
   end: boolean
   timed: boolean
 }
+
+export {}

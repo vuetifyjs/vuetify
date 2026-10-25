@@ -44,7 +44,7 @@ export interface VAudioWaveformProps {
   tooltip?: boolean | { location?: 'top' | 'bottom' | undefined, offset?: string | number | undefined }
 }
 
-export type VAudioWaveformDefaultKeys =
+type VAudioWaveformDefaultKeys =
   | 'barGap'
   | 'barRadius'
   | 'barWidth'
@@ -77,3 +77,5 @@ export declare const VAudioWaveform: VuetifyComponent<
   VAudioWaveformSlots
 >
 export type VAudioWaveform = InstanceType<typeof VAudioWaveform>
+
+export {}

@@ -83,7 +83,7 @@ export interface VDataIteratorProps {
   valueComparator?: ValueComparator
 }
 
-export type VDataIteratorDefaultKeys =
+type VDataIteratorDefaultKeys =
   | 'expanded'
   | 'expandOnClick'
   | 'expandStrategy'
@@ -134,3 +134,5 @@ export declare const VDataIterator: VuetifyComponent<
   ) => GenericProps<typeof props, typeof slots>
 >
 export type VDataIterator = InstanceType<typeof VDataIterator>
+
+export {}

@@ -9,3 +9,5 @@ export type Anchor =
   | 'center center'
   | `${AnchorBlock} ${AnchorInline | 'center'}`
   | `${AnchorInline} ${AnchorBlock | 'center'}`
+
+export {}

@@ -23,7 +23,7 @@ export interface VTreeviewGroupProps {
   value?: any
 }
 
-export type VTreeviewGroupDefaultKeys =
+type VTreeviewGroupDefaultKeys =
   | 'collapseIcon'
   | 'disabled'
   | 'expandIcon'
@@ -38,3 +38,5 @@ export declare const VTreeviewGroup: VuetifyComponent<
   VListGroupSlots
 >
 export type VTreeviewGroup = InstanceType<typeof VTreeviewGroup>
+
+export {}

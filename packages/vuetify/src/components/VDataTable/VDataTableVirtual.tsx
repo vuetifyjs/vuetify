@@ -25,9 +25,10 @@ import { convertToUnit, genericComponent, omit, pickWithRest, propsFactory, useR
 
 // Types
 import type { DeepReadonly, VNode, VNodeArrayChildren } from 'vue'
-import type { ItemType, VDataTableVirtualSlotProps, VDataTableVirtualSlots } from './VDataTableVirtual.types'
+import type { VDataTableVirtualSlotProps, VDataTableVirtualSlots } from './VDataTableVirtual.types'
 import type { CellProps, DataTableHeader, RowProps } from '@/components/VDataTable/types'
 import type { GenericProps, SelectItemKey } from '@/util'
+import type { ItemType } from '@/util/shared.types'
 
 export type { VDataTableVirtualSlots }
 

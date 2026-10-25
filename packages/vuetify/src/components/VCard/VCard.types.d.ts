@@ -60,7 +60,7 @@ export interface VCardProps {
   width?: string | number
 }
 
-export type VCardDefaultKeys =
+type VCardDefaultKeys =
   | 'density'
   | 'disabled'
   | 'exact'
@@ -85,3 +85,5 @@ export declare const VCard: VuetifyComponent<
   VCardSlots
 >
 export type VCard = InstanceType<typeof VCard>
+
+export {}
