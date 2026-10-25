@@ -86,6 +86,10 @@ export const makeVDataTableHeadersProps = propsFactory({
     type: String,
     default: '$vuetify.dataTable.ariaLabel.selectAll',
   },
+  loadingText: {
+    type: String,
+    default: '$vuetify.dataIterator.loadingText',
+  },
 
   /** @deprecated */
   sticky: Boolean,
@@ -404,6 +408,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   active
                   color={ loadingConfig.color.value }
                   indeterminate
+                  ariaLabel={ t(props.loadingText) }
                   v-slots={{ default: slots.loader }}
                 />
               </th>

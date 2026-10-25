@@ -12,6 +12,7 @@ import type { SlotsToProps } from '@/util'
 export interface LoaderSlotProps {
   color: string | undefined
   isActive: boolean
+  ariaLabel?: string
 }
 
 export interface LoaderProps {
@@ -38,6 +39,7 @@ export function LoaderSlot (
   props: {
     absolute?: boolean
     active: boolean
+    ariaLabel?: string
     name: string
     color?: string
   } & ExtractPropTypes<SlotsToProps<{
@@ -50,11 +52,13 @@ export function LoaderSlot (
       { slots.default?.({
         color: props.color,
         isActive: props.active,
+        ariaLabel: props.ariaLabel,
       } satisfies LoaderSlotProps) || (
         <VProgressLinear
           absolute={ props.absolute }
           active={ props.active }
           color={ props.color }
+          aria-label={ props.ariaLabel }
           height="2"
           indeterminate
         />
