@@ -164,7 +164,6 @@
     "@fortawesome/free-solid-svg-icons": "catalog:",
     "@fortawesome/vue-fontawesome": "catalog:",
     "@intlify/devtools-types": "catalog:",
-    "@rollup/plugin-typescript": "catalog:",
     "@rspack/core": "catalog:",
     "@testing-library/dom": "catalog:",
     "@testing-library/user-event": "catalog:",
