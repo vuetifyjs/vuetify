@@ -59,8 +59,7 @@ catalog:
 
   # TypeScript tools
   typescript: '~6.0.2'
-  '@typescript/native-preview': 7.0.0-dev.20260323.1
-  tsc-rs: 0.8.0
+  typescript-7: npm:typescript@7.1.0-beta
   ts-node: '^10.9.2'
   ts-morph: '^25.0.1'
   '@types/node': 24.10.1
