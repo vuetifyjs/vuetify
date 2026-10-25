@@ -17,12 +17,27 @@ describe('VDatePicker accessibility', () => {
     })
   }
 
-  it('should have aria-labels on navigation buttons', () => {
-    render(<VDatePicker modelValue="2024-01-15" />)
+  it('should include the visible text in the month and year button names', () => {
+    render(<VDatePicker modelValue="2026-10-15" />)
 
     expect(screen.getByTestId('prev-month').getAttribute('aria-label')).toBe('Previous month')
     expect(screen.getByTestId('next-month').getAttribute('aria-label')).toBe('Next month')
-    expect(screen.getByTestId('year-btn').getAttribute('aria-label')).toBe('Select year')
+    expect(screen.getByTestId('month-btn').getAttribute('aria-label')).toBe('Oct, Select month')
+    expect(screen.getByTestId('year-btn').getAttribute('aria-label')).toBe('2026, Select year')
+  })
+
+  it('should include visible text in modal month and year button names', () => {
+    const { unmount } = render(<VDatePicker modelValue="2026-10-15" controlVariant="modal" />)
+
+    expect(screen.getByTestId('month-btn').getAttribute('aria-label')).toContain('Select month')
+    expect(screen.getByTestId('month-btn').getAttribute('aria-label')).toContain('October 2026')
+
+    unmount()
+
+    render(<VDatePicker modelValue="2026-10-15" controlVariant="modal" noMonthPicker />)
+
+    expect(screen.getByTestId('year-btn').getAttribute('aria-label')).toContain('October 2026')
+    expect(screen.getByTestId('year-btn').getAttribute('aria-label')).toContain('Select year')
   })
 
   it('should have aria-current="date" on today\'s date', () => {
