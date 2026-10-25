@@ -14,12 +14,14 @@ import type {
   RouterLink as _RouterLink,
   useLink as _useLink,
   NavigationGuardReturn,
-  RouteLocation,
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
 } from 'vue-router'
+import type { LinkProps, UseLink } from './router.types'
 import type { EventProp } from '@/util'
+
+export type { LinkProps }
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
   const vm = getCurrentInstance('useRoute')
@@ -31,28 +33,12 @@ export function useRouter (): Router | undefined {
   return getCurrentInstance('useRouter')?.proxy?.$router
 }
 
-export interface LinkProps {
-  href: string | undefined
-  replace: boolean | undefined
-  to: RouteLocationRaw | undefined
-  exact: boolean | undefined
-  disabled: boolean | undefined
-}
-
 export interface LinkListeners {
   onClick?: EventProp | undefined
   onClickOnce?: EventProp | undefined
 }
 
-export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href' | 'route' | 'navigate'> {
-  isLink: Readonly<Ref<boolean>>
-  isRouterLink: Readonly<Ref<boolean>>
-  isClickable: Readonly<Ref<boolean>>
-  href: Ref<string | undefined>
-  linkProps: Record<string, string | undefined>
-  route: Readonly<Ref<RouteLocation & { href: string } | undefined>>
-  navigate: Readonly<Ref<ReturnType<typeof _useLink>['navigate'] | undefined>>
-}
+export type { UseLink }
 
 export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string

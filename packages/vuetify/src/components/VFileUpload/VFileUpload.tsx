@@ -21,31 +21,10 @@ import { provide, ref, shallowRef, toRef, watch } from 'vue'
 import { filterInputAttrs, genericComponent, isBoolean, isObject, isString, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType, VNode } from 'vue'
-import type { VInputSlots } from '@/components/VInput/VInput'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { PropType } from 'vue'
+import type { VFileUploadSlots } from './VFileUpload.types'
 
-export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
-  browse: {
-    props: { onClick: (e: MouseEvent) => void }
-  }
-  default: never
-  icon: never
-  input: {
-    inputNode: VNode
-  }
-  item: {
-    file: File
-    props: { 'onClick:remove': () => void }
-  }
-  single: {
-    file: File
-    props: { 'onClick:remove': () => void }
-  }
-  title: never
-  divider: never
-  loader: LoaderSlotProps
-}
+export type { VFileUploadSlots }
 
 export const makeVFileUploadProps = propsFactory({
   browseText: {

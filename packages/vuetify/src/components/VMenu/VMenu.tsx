@@ -39,7 +39,8 @@ import {
 } from '@/util'
 
 // Types
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { Component } from 'vue'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay.types'
 
 export const makeVMenuProps = propsFactory({
   _disableKeys: Boolean,
@@ -59,7 +60,7 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: { component: VDialogTransition },
+    transition: { component: VDialogTransition as Component },
   }), ['absolute']),
 }, 'VMenu')
 

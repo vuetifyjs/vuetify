@@ -19,26 +19,11 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { ValidationAlias } from '@/composables/rules'
+import type { ValidationAlias } from '@/composables/rules/rules.types'
+import type { ValidateOn, ValidationResult, ValidationRule, ValidationState } from '@/composables/validation.types'
 import type { EventProp, MaybeRef } from '@/util'
 
-export type ValidationResult = string | boolean
-export type ValidationRule =
-  | ValidationResult
-  | PromiseLike<ValidationResult>
-  | ((value: any) => ValidationResult)
-  | ((value: any) => PromiseLike<ValidationResult>)
-
-type ValidateOnValue = 'blur' | 'input' | 'submit' | 'invalid-input'
-type ValidateOn =
-  | ValidateOnValue
-  | `${ValidateOnValue} lazy`
-  | `${ValidateOnValue} eager`
-  | `lazy ${ValidateOnValue}`
-  | `eager ${ValidateOnValue}`
-  | 'lazy'
-  | 'eager'
-
+export type { ValidateOn, ValidationResult, ValidationRule }
 export interface ValidationProps {
   disabled: boolean | null
   error: boolean
@@ -90,7 +75,7 @@ export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
   id: MaybeRef<string | number> = useId(),
-) {
+): ValidationState {
   const model = useProxiedModel(props, 'modelValue')
   const validationModel = computed(() => isUndefined(props.validationValue) ? model.value : props.validationValue)
   const form = useForm(props)

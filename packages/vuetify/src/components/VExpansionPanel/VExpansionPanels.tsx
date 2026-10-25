@@ -19,20 +19,14 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 
 // Types
 import type { PropType } from 'vue'
+import type { VExpansionPanelSlot, VExpansionPanelSlots } from './VExpansionPanels.types'
 import type { GenericProps } from '@/util'
+
+export type { VExpansionPanelSlot, VExpansionPanelSlots }
 
 const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
-
-export type VExpansionPanelSlot = {
-  prev: () => void
-  next: () => void
-}
-
-export type VExpansionPanelSlots = {
-  default: VExpansionPanelSlot
-}
 
 export const makeVExpansionPanelsProps = propsFactory({
   flat: Boolean,

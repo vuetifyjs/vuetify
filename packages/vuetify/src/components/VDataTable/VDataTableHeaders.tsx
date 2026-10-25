@@ -23,43 +23,12 @@ import { computed, mergeProps, nextTick } from 'vue'
 import { convertToUnit, genericComponent, isString, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { CSSProperties, PropType, UnwrapRef } from 'vue'
-import type { provideSelection } from './composables/select'
-import type { provideSort } from './composables/sort'
+import type { CSSProperties, PropType } from 'vue'
 import type { InternalDataTableHeader } from './types'
+import type { HeadersSlotProps, VDataTableHeaderCellColumnSlotProps, VDataTableHeadersSlots } from './VDataTableHeaders.types'
 import type { ItemProps } from '@/composables/list-items'
-import type { LoaderSlotProps } from '@/composables/loader'
 
-export type HeadersSlotProps = {
-  headers: InternalDataTableHeader[][]
-  columns: InternalDataTableHeader[]
-  sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
-  someSelected: UnwrapRef<ReturnType<typeof provideSelection>['someSelected']>
-  allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
-  toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  selectAll: ReturnType<typeof provideSelection>['selectAll']
-  getSortIcon: (column: InternalDataTableHeader) => IconValue
-  isSorted: ReturnType<typeof provideSort>['isSorted']
-}
-
-export type VDataTableHeaderCellColumnSlotProps = {
-  column: InternalDataTableHeader
-  selectAll: ReturnType<typeof provideSelection>['selectAll']
-  isSorted: ReturnType<typeof provideSort>['isSorted']
-  toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
-  someSelected: UnwrapRef<ReturnType<typeof provideSelection>['someSelected']>
-  allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
-  getSortIcon: (column: InternalDataTableHeader) => IconValue
-}
-
-export type VDataTableHeadersSlots = {
-  headers: HeadersSlotProps
-  loader: LoaderSlotProps
-  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
-  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
-  'mobile.header': HeadersSlotProps
-} & { [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps }
+export type { HeadersSlotProps, VDataTableHeaderCellColumnSlotProps, VDataTableHeadersSlots }
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,

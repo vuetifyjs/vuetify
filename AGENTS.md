@@ -29,7 +29,7 @@ pnpm dev docs            # root: docs at localhost:8095
 
 # in packages/vuetify
 pnpm test <path>         # single file or folder
-pnpm lint:fix            # tsgo typecheck + eslint --fix
+pnpm lint:fix            # tsc 7 typecheck + eslint --fix
 ```
 
 ## Workflow

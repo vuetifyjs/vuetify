@@ -7,33 +7,11 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
+import type { Group, GroupableItem, GroupKeyFunction, GroupSummary } from './group.types'
 import type { SortItem } from './sort'
 import type { DataTableItem } from '../types'
 
-export interface GroupableItem<T = any> {
-  type: 'item'
-  raw: T
-}
-
-export interface Group<T = any> {
-  type: 'group'
-  depth: number
-  id: string
-  key: string
-  value: any
-  items: readonly (T | Group<T> | GroupSummary<T>)[]
-}
-
-export interface GroupSummary<T = any> {
-  type: 'group-summary'
-  depth: number
-  id: string
-  key: string
-  value: any
-  items: readonly (T | Group<T> | GroupSummary<T>)[]
-}
-
-export type GroupKeyFunction = (options: { key: string, value: any, parentKey: string | null }) => string
+export type { Group, GroupKeyFunction, GroupSummary, GroupableItem }
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {

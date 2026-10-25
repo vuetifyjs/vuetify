@@ -9,10 +9,10 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-export type VResponsiveSlots = {
-  default: never
-  additional: never
-}
+// Types
+import type { VResponsiveSlots } from './VResponsive.types'
+
+export type { VResponsiveSlots }
 
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
   return {

@@ -6,9 +6,12 @@ import { computed, inject, markRaw, provide, ref, shallowRef, toRef, watch } fro
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, PropType, Raw, Ref } from 'vue'
+import type { ComponentInternalInstance, InjectionKey, PropType, Ref } from 'vue'
+import type { FieldValidationResult, FormField, FormValidationResult, SubmitEventPromise } from './form.types'
 import type { ValidationProps } from './validation'
 import type { EventProp } from '@/util'
+
+export type { FieldValidationResult, FormField, FormValidationResult, SubmitEventPromise }
 
 export interface FormProvide {
   register: (item: {
@@ -27,28 +30,6 @@ export interface FormProvide {
   isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
 }
-
-export interface FormField {
-  id: number | string
-  validate: () => Promise<string[]>
-  reset: () => Promise<void>
-  resetValidation: () => Promise<void>
-  vm: Raw<ComponentInternalInstance>
-  isValid: boolean | null
-  errorMessages: string[]
-}
-
-export interface FieldValidationResult {
-  id: number | string
-  errorMessages: string[]
-}
-
-export interface FormValidationResult {
-  valid: boolean
-  errors: FieldValidationResult[]
-}
-
-export interface SubmitEventPromise extends SubmitEvent, Promise<FormValidationResult> {}
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 

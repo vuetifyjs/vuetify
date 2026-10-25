@@ -4,8 +4,9 @@ import { destructComputed, hasLightForeground, isCssColor, isNumber, isParsableC
 
 // Types
 import type { CSSProperties, MaybeRefOrGetter, Ref } from 'vue'
+import type { ColorValue } from './color.types'
 
-export type ColorValue = string | false | null | undefined
+export type { ColorValue }
 
 export interface TextColorData {
   textColorClasses: Ref<string[]>

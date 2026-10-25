@@ -11,17 +11,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFileUploadListSlots } from './VFileUploadList.types'
 
-export type VFileUploadListSlots = {
-  default: {
-    files: readonly File[]
-    onClickRemove: (index: number) => void
-  }
-  item: {
-    file: File
-    props: { 'onClick:remove': () => void }
-  }
-}
+export type { VFileUploadListSlots }
 
 export const makeVFileUploadListProps = propsFactory({
   clearable: Boolean,

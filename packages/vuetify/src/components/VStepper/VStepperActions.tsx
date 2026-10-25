@@ -11,15 +11,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VStepperActionsSlots } from './VStepperActions.types'
 
-export type VStepperActionsSlots = {
-  prev: {
-    props: { onClick: () => void }
-  }
-  next: {
-    props: { onClick: () => void }
-  }
-}
+export type { VStepperActionsSlots }
 
 export const makeVStepperActionsProps = propsFactory({
   color: String,

@@ -12,23 +12,10 @@ import { computed, ref, toRefs } from 'vue'
 import { genericComponent, getPropertyFromItem, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { StepperVerticalItemActionSlot } from './VStepperVerticalItem'
-import type { VStepperSlot } from '@/components/VStepper/VStepper'
-import type { StepperItemSlot } from '@/components/VStepper/VStepperItem'
+import type { VStepperVerticalSlots } from './VStepperVertical.types'
 import type { GenericProps } from '@/util'
 
-export type VStepperVerticalSlots<T> = {
-  actions: StepperVerticalItemActionSlot<T>
-  default: VStepperSlot & { step: T }
-  icon: StepperItemSlot<T>
-  title: StepperItemSlot<T>
-  subtitle: StepperItemSlot<T>
-  prev: StepperVerticalItemActionSlot<T>
-  next: StepperVerticalItemActionSlot<T>
-} & {
-  [key: `header-item.${string}`]: StepperItemSlot<T>
-  [key: `item.${string}`]: StepperItemSlot<T>
-}
+export type { VStepperVerticalSlots }
 
 export const makeVStepperVerticalProps = propsFactory({
   prevText: {

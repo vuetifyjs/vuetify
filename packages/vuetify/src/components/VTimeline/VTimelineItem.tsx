@@ -16,14 +16,9 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { Prop, PropType } from 'vue'
+import type { TimelineItemSide, VTimelineItemSlots } from './VTimelineItem.types'
 
-// Types
-export type TimelineItemSide = 'start' | 'end' | undefined
-export type VTimelineItemSlots = {
-  default: never
-  icon: never
-  opposite: never
-}
+export type { TimelineItemSide, VTimelineItemSlots }
 
 export const makeVTimelineItemProps = propsFactory({
   density: String as PropType<'default' | 'compact'>,

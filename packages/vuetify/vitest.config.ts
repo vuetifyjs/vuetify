@@ -1,10 +1,10 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
 import { playwright } from '@vitest/browser-playwright'
 import { vizzlyPlugin } from '@vizzly-testing/vitest'
-import viteConfig from './vite.config'
+import viteConfig from './vite.config.ts'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
-import { commands } from './test/setup/browser-commands'
+import { commands } from './test/setup/browser-commands.ts'
 
 const viewport = { width: 1280, height: 800 }
 const IS_RUN = process.argv.slice(2).some(v => v === 'run')

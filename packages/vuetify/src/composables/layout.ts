@@ -31,8 +31,9 @@ import { Box } from '@/util/box'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
+import type { Position } from './layout.types'
 
-export type Position = 'top' | 'left' | 'right' | 'bottom'
+export type { Position }
 
 interface Layer {
   top: number

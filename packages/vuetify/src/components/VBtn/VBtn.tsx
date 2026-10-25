@@ -35,14 +35,10 @@ import { genericComponent, isBoolean, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VBtnSlots } from './VBtn.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type VBtnSlots = {
-  default: never
-  prepend: never
-  append: never
-  loader: never
-}
+export type { VBtnSlots }
 
 export const makeVBtnProps = propsFactory({
   active: {

@@ -13,13 +13,9 @@ import { genericComponent, humanReadableFileSize, isBoolean, propsFactory, useRe
 
 // Types
 import type { PropType } from 'vue'
-import type { VListItemSlots } from '@/components/VList/VListItem'
+import type { VFileUploadItemSlots } from './VFileUploadItem.types'
 
-export type VFileUploadItemSlots = {
-  clear: {
-    props: { onClick: () => void }
-  }
-} & VListItemSlots
+export type { VFileUploadItemSlots }
 
 export const makeVFileUploadItemProps = propsFactory({
   clearable: Boolean,

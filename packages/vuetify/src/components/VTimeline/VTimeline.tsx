@@ -15,13 +15,10 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 
 // Types
 import type { Prop } from 'vue'
+import type { TimelineAlign, TimelineDirection, TimelineJustify, TimelineSide, TimelineTruncateLine } from './VTimeline.types'
 import { makeVTimelineItemProps } from './VTimelineItem'
 
-export type TimelineDirection = 'vertical' | 'horizontal'
-export type TimelineSide = 'start' | 'end' | undefined
-export type TimelineAlign = 'center' | 'start'
-export type TimelineJustify = 'auto' | 'center'
-export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
+export type { TimelineAlign, TimelineDirection, TimelineJustify, TimelineSide, TimelineTruncateLine }
 
 export const makeVTimelineProps = propsFactory({
   align: {

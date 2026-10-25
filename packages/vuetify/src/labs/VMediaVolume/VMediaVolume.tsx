@@ -23,8 +23,9 @@ import { convertToUnit, EventProp, genericComponent, propsFactory, useRender } f
 
 // Types
 import type { PropType } from 'vue'
+import type { VMediaVolumeOptions, VMediaVolumeSlider } from './VMediaVolume.types'
 
-export type VMediaVolumeSlider = 'visible' | 'hover' | 'hidden'
+export type { VMediaVolumeOptions, VMediaVolumeSlider }
 
 export const makeVMediaVolumeProps = propsFactory({
   inline: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
@@ -197,7 +198,3 @@ export const VMediaVolume = genericComponent()({
 })
 
 export type VMediaVolume = InstanceType<typeof VMediaVolume>
-
-export type VMediaVolumeOptions = Pick<VMediaVolume['$props'],
-  'direction' | 'inline' | 'sliderProps' | 'menuProps'
->

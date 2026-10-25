@@ -9,6 +9,9 @@ import { genericComponent, pick, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { VCommandPaletteActionItem } from './types'
+import type { VCommandPaletteItemSlots } from './VCommandPaletteItem.types'
+
+export type { VCommandPaletteItemSlots }
 
 export const makeVCommandPaletteItemProps = propsFactory({
   item: {
@@ -21,12 +24,6 @@ export const makeVCommandPaletteItemProps = propsFactory({
   },
   onExecute: Function as PropType<(event: MouseEvent | KeyboardEvent) => void>,
 }, 'VCommandPaletteItem')
-
-export type VCommandPaletteItemSlots = {
-  prepend: never
-  title: never
-  append: never
-}
 
 export const VCommandPaletteItem = genericComponent<VCommandPaletteItemSlots>()({
   name: 'VCommandPaletteItem',

@@ -15,10 +15,10 @@ import { MaybeTransition } from '@/composables/transition'
 import { computed, inject, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
-export type VListGroupSlots = {
-  default: never
-  activator: { isOpen: boolean, props: Record<string, unknown> }
-}
+// Types
+import type { VListGroupSlots } from './VListGroup.types'
+
+export type { VListGroupSlots }
 
 const VListGroupActivator = defineComponent({
   name: 'VListGroupActivator',

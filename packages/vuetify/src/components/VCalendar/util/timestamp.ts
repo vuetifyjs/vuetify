@@ -4,7 +4,10 @@ import { isLeapYear } from './dateTimeUtils'
 import { isNumber, isObject, isString } from '@/util'
 
 // Types
+import type { VTime, VTimestampInput } from './timestamp.types'
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
+
+export type { VTime, VTimestampInput }
 
 export const PARSE_REGEX = /^(\d{4})-(\d{1,2})(-(\d{1,2}))?([^\d]+(\d{1,2}))?(:(\d{1,2}))?(:(\d{1,2}))?$/
 export const PARSE_TIME = /(\d\d?)(:(\d\d?)|)(:(\d\d?)|)/
@@ -30,12 +33,6 @@ export const OFFSET_TIME = 10000
 
 type CalendarTimestampFormatOptions = (timestamp: CalendarTimestamp, short: boolean) => Intl.DateTimeFormatOptions
 type CalendarTimestampOperation = (timestamp: CalendarTimestamp) => CalendarTimestamp
-export type VTime = number | string | {
-  hour: number
-  minute: number
-}
-
-export type VTimestampInput = number | string | Date
 
 export function getStartOfWeek (timestamp: CalendarTimestamp, weekdays: number[], today?: CalendarTimestamp): CalendarTimestamp {
   const start = copyTimestamp(timestamp)

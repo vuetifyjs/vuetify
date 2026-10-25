@@ -30,17 +30,13 @@ import { VOtpInputSymbol } from './shared'
 // Types
 import type { PropType } from 'vue'
 import type { OtpInputPattern } from './useOtpInput'
+import type { VOtpInputSlots } from './VOtpInput.types'
+
+export type { VOtpInputSlots }
 
 export type { OtpSlotData, OtpInputPattern } from './useOtpInput'
 export { VOtpInputSymbol } from './shared'
 export type { VOtpInputContext } from './shared'
-
-export type VOtpInputSlots = {
-  default: never
-  fields: never
-  divider: { index: number }
-  loader: never
-}
 
 export const makeVOtpInputProps = propsFactory({
   autofocus: Boolean,

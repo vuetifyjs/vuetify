@@ -18,16 +18,10 @@ import { computed, shallowRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VRadioGroupSlots } from './VRadioGroup.types'
 import type { GenericProps } from '@/util'
 
-export type VRadioGroupSlots = Omit<VInputSlots, 'default'> & {
-  default: never
-  label: {
-    label: string | undefined
-    props: Record<string, any>
-  }
-}
+export type { VRadioGroupSlots }
 
 export const makeVRadioGroupProps = propsFactory({
   height: {

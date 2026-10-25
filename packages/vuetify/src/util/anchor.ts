@@ -1,17 +1,14 @@
 // Utilities
 import { includes } from '@/util/helpers'
 
+// Types
+import type { Anchor } from '@/util/anchor.types'
+
 const block = ['top', 'bottom'] as const
 const inline = ['start', 'end', 'left', 'right'] as const
 type Tblock = typeof block[number]
 type Tinline = typeof inline[number]
-export type Anchor =
-  | Tblock
-  | Tinline
-  | 'center'
-  | 'center center'
-  | `${Tblock} ${Tinline | 'center'}`
-  | `${Tinline} ${Tblock | 'center'}`
+export type { Anchor }
 export type ParsedAnchor =
   | { side: 'center', align: 'center' }
   | { side: Tblock, align: 'left' | 'right' | 'center' }

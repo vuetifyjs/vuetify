@@ -39,6 +39,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['src/**/*.types.d.ts', 'src/components/__tests__/types.spec.ts'],
+    rules: {
+      'max-len': 'off'
+    },
+  },
+  {
     files: ['**/*.spec.?(browser.){ts,tsx}'],
     plugins: { vitest: vitestPlugin },
     settings: { vitest: { typecheck: true } },

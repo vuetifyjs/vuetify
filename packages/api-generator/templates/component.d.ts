@@ -1,6 +1,6 @@
 import type { AllowedComponentProps, ComponentOptionsBase, VNodeChild, VNodeProps, UnwrapRef } from 'vue'
-import type { UnionToIntersection } from '@/util'
-import type { __component__ } from '@/__name__'
+import type { UnionToIntersection } from '../../../vuetify/lib/util/shared.types.d.ts'
+import type { __component__ } from '../../../vuetify/lib/__name__/index.d.ts'
 
 type StripProps =
   | keyof VNodeProps

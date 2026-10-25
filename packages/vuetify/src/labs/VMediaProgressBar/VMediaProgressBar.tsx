@@ -32,9 +32,10 @@ import {
 
 // Types
 import type { PropType } from 'vue'
+import type { VMediaProgressBarChapter, VMediaProgressBarSlots } from './VMediaProgressBar.types'
 import type { MediaSeekStep } from '@/labs/composables/media'
 
-export type VMediaProgressBarChapter = { start: number | string, title?: string }
+export type { VMediaProgressBarChapter, VMediaProgressBarSlots }
 
 const WAVE_AMPLITUDE = 3
 const WAVE_LENGTH = 40
@@ -45,11 +46,6 @@ const SEEK_THRESHOLD = 1.5
 const DRAG_THRESHOLD = 4
 
 const HALF_GAP = 'calc(var(--v-media-progress-bar-chapter-gap) / 2)'
-
-export type VMediaProgressBarSlots = {
-  default: never
-  tooltip: { time: string, chapter: string | undefined, seconds: number }
-}
 
 export const makeVMediaProgressBarProps = propsFactory({
   modelValue: {
