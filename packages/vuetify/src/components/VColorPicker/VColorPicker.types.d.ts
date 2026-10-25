@@ -5,6 +5,8 @@ import type { Anchor } from '@/util/anchor.types'
 import type { VuetifyComponent } from '@/util/defineComponent.types'
 import type { JSXComponent } from '@/util/shared.types'
 
+export type ColorPickerMode = 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa'
+
 export interface VColorPickerProps {
   bgColor?: string
   border?: string | number | boolean
@@ -31,9 +33,9 @@ export interface VColorPickerProps {
   maxWidth?: string | number
   minHeight?: string | number
   minWidth?: string | number
-  mode?: 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa'
+  mode?: ColorPickerMode
   modelValue?: string | Record<string, unknown> | null
-  modes?: readonly ('rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa')[]
+  modes?: readonly ColorPickerMode[]
   position?: 'fixed' | 'relative' | 'absolute' | 'static' | 'sticky'
   readonly?: boolean
   rounded?: string | number | boolean
@@ -77,7 +79,7 @@ export declare const VColorPicker: VuetifyComponent<
   VColorPickerDefaultKeys,
   {
     'update:modelValue': (color: any) => true
-    'update:mode': (mode: 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa') => true
+    'update:mode': (mode: ColorPickerMode) => true
   },
   null
 >

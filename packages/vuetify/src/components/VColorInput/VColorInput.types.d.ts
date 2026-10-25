@@ -1,6 +1,6 @@
 // Types
 import type { StyleValue } from 'vue'
-import type { VColorPicker } from '@/components/VColorPicker/VColorPicker.types'
+import type { ColorPickerMode, VColorPicker } from '@/components/VColorPicker/VColorPicker.types'
 import type { VMenu } from '@/components/VMenu/VMenu.types'
 import type { VTextField, VTextFieldSlots } from '@/components/VTextField/VTextField.types'
 import type { Density } from '@/composables/density.types'
@@ -78,10 +78,10 @@ export interface VColorInputProps {
   menuProps?: VMenu['$props']
   messages?: string | readonly string[]
   minWidth?: string | number
-  mode?: 'rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa'
+  mode?: ColorPickerMode
   modelModifiers?: Record<string, boolean>
   modelValue?: string | Record<string, unknown> | null
-  modes?: readonly ('rgb' | 'rgba' | 'hsl' | 'hsla' | 'hex' | 'hexa')[]
+  modes?: readonly ColorPickerMode[]
   name?: string
   okText?: string
   'onClick:append'?: ((args_0: MouseEvent) => void)
