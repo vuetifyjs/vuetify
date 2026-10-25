@@ -3,6 +3,8 @@
   "include": [
     "src",
     "dev",
+    "vite.config.ts",
+    "vitest.config.ts",
   ],
   "exclude": ["dev/dist/**/*"],
   "compilerOptions": {
@@ -14,6 +16,8 @@
       "node",
       "vue-router"
     ],
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
     "stripInternal": true,
     "skipLibCheck": false
   }

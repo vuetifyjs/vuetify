@@ -17,13 +17,13 @@ import Vuetify from 'vite-plugin-vuetify'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 import MagicString from 'magic-string'
 
-import { configureMarkdown } from './build/markdown-it'
-import Api from './build/api-plugin'
-import { Examples } from './build/examples-plugin'
-import { generateOgImages } from './build/generate-og-images'
-import { genAppMetaInfo } from './src/utils/metadata'
-import { MdiJs } from './build/mdi-js'
-import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders'
+import { configureMarkdown } from './build/markdown-it.ts'
+import Api from './build/api-plugin.ts'
+import { Examples } from './build/examples-plugin.ts'
+import { renderOgImages, writeOgImages } from './build/generate-og-images.ts'
+import { genAppMetaInfo } from './src/utils/metadata.ts'
+import { MdiJs } from './build/mdi-js.ts'
+import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders.ts'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -38,6 +38,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   let allRoutes: any[]
+  let ogImages: ReturnType<typeof renderOgImages> | undefined
 
   return {
     logLevel: 'info',
@@ -51,13 +52,6 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
     define: {
       'process.env.NODE_ENV': mode === 'production' || isSsrBuild ? '"production"' : '"development"',
       __INTLIFY_PROD_DEVTOOLS__: 'false',
-    },
-    css: {
-      preprocessorOptions: {
-        sass: {
-          api: 'modern-compiler'
-        }
-      },
     },
     build: {
       sourcemap: true,
@@ -309,6 +303,12 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
         // lightweight head-only ssg
         name: 'vuetify:ssg',
         enforce: 'post',
+        buildStart () {
+          // overlaps the bundling instead of running after it
+          if (mode !== 'production' || command !== 'build') return
+          ogImages = renderOgImages()
+          ogImages.catch(() => {}) // rethrown where it is awaited
+        },
         transformIndexHtml: {
           order: 'post',
           async handler (html) {
@@ -352,7 +352,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
               await fs.writeFile(filename, route.content)
             }
 
-            await generateOgImages()
+            if (ogImages) await writeOgImages(await ogImages)
 
             return routes.find(r => r.path === '/en/')?.content
           }

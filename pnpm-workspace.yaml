@@ -19,9 +19,9 @@ catalog:
   '@vuetify/babel-plugin-jsx': '^1.7.0'
 
   # Build tools
-  vite: '^7.3.6'
+  vite: '^8.3.5'
   '@vitejs/plugin-vue': '^6.0.2'
-  '@vitejs/plugin-vue-jsx': '^5.1.2'
+  '@vitejs/plugin-vue-jsx': '^5.1.6'
   '@vitejs/plugin-basic-ssl': '^2.1.0'
   vitest: '^4.1.11'
   '@vitest/browser-playwright': '^4.1.11'
