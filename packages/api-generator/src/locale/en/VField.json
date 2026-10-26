@@ -26,10 +26,10 @@
     "update:focused": "Emitted when the input is focused or blurred"
   },
   "slots": {
-    "append-inner": "Slot that is appended to the input.",
+    "append-inner": "Slot that is appended to the input. Since v3.11.3, if the slot is declared, the icon is not rendered.",
     "clear": "Slot for custom clear icon (displayed when the **clearable** prop is equal to true).",
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component.",
-    "prepend-inner": "Slot that is prepended to the input."
+    "prepend-inner": "Slot that is prepended to the input. Since v3.11.3, if the slot is declared, the icon is not rendered."
   },
   "exposed": {
     "controlRef": "Reference to the control element of the field.",
