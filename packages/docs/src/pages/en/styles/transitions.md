@@ -153,3 +153,26 @@ The **createCssTransition** function will return a component that you can use in
 The components listed in [Transition prop](#transition-prop) accept a **transition** prop. You can send the name of your custom transition to the transition prop.
 
 <ExamplesExample file="transitions/create-css-transition-prop" />
+
+### JavaScript transitions
+
+When the animation depends on runtime values, such as an item's position in a list, **createJavascriptTransition** takes an object of Vue's [JavaScript hooks](https://vuejs.org/guide/built-ins/transition.html#javascript-hooks) as its second argument. Call `done` once the animation finishes. Pass the **group** prop to wrap a list, and the hooks are skipped when the user prefers reduced motion.
+
+```js
+import { createJavascriptTransition } from 'vuetify/util/transitions'
+
+const StaggerTransition = createJavascriptTransition('stagger-transition', {
+  onEnter (el, done) {
+    el.animate([
+      { opacity: 0, transform: 'translateY(16px)' },
+      { opacity: 1, transform: 'none' },
+    ], {
+      duration: 250,
+      delay: el.dataset.index * 40,
+      fill: 'backwards',
+    }).onfinish = done
+  },
+})
+```
+
+<ExamplesExample file="transitions/create-javascript-transition" />
