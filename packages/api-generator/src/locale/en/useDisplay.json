@@ -1,4 +1,5 @@
 {
+  "description": "Provides reactive breakpoints, viewport dimensions and platform information.",
   "exposed": {
     "height": "The inner height of the browser window.",
     "lg": "Returns **true** if the current browser breakpoint is **lg**.",
