@@ -15,7 +15,8 @@
     "finish": "Emitted when all slots have been filled."
   },
   "slots": {
-    "divider": "Slot for custom divider content between fields. Receives `{ index }` with the divider position."
+    "divider": "Slot for custom divider content between fields. Receives `{ index }` with the divider position.",
+    "fields": "Replaces the default fields. Use `v-otp-field` and `v-otp-group` to build a custom layout."
   },
   "exposed": {
     "reset": "Resets the input model to an empty string."

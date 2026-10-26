@@ -1,4 +1,5 @@
 export * from './VAudio'
+export * from './VCheckboxGroup'
 export * from './VCommandPalette'
 export * from './VDateRangePicker'
 export * from './VMonthPicker'

@@ -1,4 +1,5 @@
 {
+  "description": "Provides the date adapter configured in Vuetify options, used for parsing, formatting and date arithmetic.",
   "exposed": {
     "addWeeks": "Adds the specified number of weeks to the date.",
     "addDays": "Adds the specified number of days to the date.",

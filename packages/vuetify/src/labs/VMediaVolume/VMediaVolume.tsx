@@ -152,7 +152,7 @@ export const VMediaVolume = genericComponent()({
             v-tooltip={[{
               text: props.label,
               location: 'top',
-              disabled: !props.label || hasMenu.value,
+              disabled: !props.label || hasMenu.value || undefined,
             }]}
             onPointerdown={ (e: PointerEvent) => pointerType = e.pointerType }
             onClick={ onClick }

@@ -56,6 +56,7 @@
     "VCardTitle"
   ],
   "components/carousels": ["VCarousel", "VCarouselItem"],
+  "components/checkbox-groups": ["VCheckboxGroup", "VCheckbox"],
   "components/checkboxes": ["VCheckbox", "VCheckboxBtn"],
   "components/chip-groups": ["VChip", "VChipGroup"],
   "components/chips": ["VChip", "VChipGroup"],

@@ -25,42 +25,6 @@ type HeaderProps = {
 const defaultHeader = { title: '', sortable: false }
 const defaultActionHeader = { ...defaultHeader, width: 48 }
 
-function priorityQueue <T> (arr: T[] = []) {
-  const queue: { element: T, priority: number }[] = arr.map(element => ({ element, priority: 0 }))
-
-  return {
-    enqueue: (element: T, priority: number) => {
-      let added = false
-      for (let i = 0; i < queue.length; i++) {
-        const item = queue[i]
-        if (item.priority > priority) {
-          queue.splice(i, 0, { element, priority })
-          added = true
-          break
-        }
-      }
-
-      if (!added) queue.push({ element, priority })
-    },
-    size: () => queue.length,
-    count: () => {
-      let count = 0
-
-      if (!queue.length) return 0
-
-      const whole = Math.floor(queue[0].priority)
-      for (let i = 0; i < queue.length; i++) {
-        if (Math.floor(queue[i].priority) === whole) count += 1
-      }
-
-      return count
-    },
-    dequeue: () => {
-      return queue.shift()
-    },
-  }
-}
-
 function extractLeaves (item: InternalDataTableHeader, columns: InternalDataTableHeader[] = []) {
   if (!item.children) {
     columns.push(item)
@@ -209,38 +173,21 @@ function setFixedEndOffset (item: InternalDataTableHeader, offset = 0) {
 }
 
 function parse (items: InternalDataTableHeader[], maxDepth: number) {
-  const headers: InternalDataTableHeader[][] = []
-  let currentDepth = 0
-  const queue = priorityQueue(items)
+  const headers: InternalDataTableHeader[][] = Array.from({ length: maxDepth }, () => [])
 
-  while (queue.size() > 0) {
-    let rowSize = queue.count()
-    const row: InternalDataTableHeader[] = []
-    let fraction = 1
-    while (rowSize > 0) {
-      const { element: item, priority } = queue.dequeue()!
-      const diff = maxDepth - currentDepth - getDepth(item)
+  function walk (item: InternalDataTableHeader, row: number) {
+    const diff = maxDepth - row - getDepth(item)
 
-      row.push({
-        ...item,
-        rowspan: diff ?? 1,
-        colspan: item.children ? extractLeaves(item).length : 1,
-      })
+    headers[row].push({
+      ...item,
+      rowspan: diff,
+      colspan: item.children ? extractLeaves(item).length : 1,
+    })
 
-      if (item.children) {
-        for (const child of item.children) {
-          // This internally sorts items that are on the same priority "row"
-          const sort = priority % 1 + (fraction / Math.pow(10, currentDepth + 2))
-          queue.enqueue(child, currentDepth + diff + sort)
-        }
-      }
-
-      fraction += 1
-      rowSize -= 1
-    }
-    currentDepth += 1
-    headers.push(row)
+    item.children?.forEach(child => walk(child, row + diff))
   }
+
+  items.forEach(item => walk(item, 0))
 
   const columns = items.map(item => extractLeaves(item)).flat()
 
