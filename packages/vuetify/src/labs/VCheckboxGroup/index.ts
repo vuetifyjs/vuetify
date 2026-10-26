@@ -1,0 +1,1 @@
+export { VCheckboxGroup } from './VCheckboxGroup'
