@@ -314,6 +314,10 @@
         "subfolder": "components"
       },
       {
+        "title": "sparkline-groups",
+        "subfolder": "components"
+      },
+      {
         "title": "split-buttons",
         "subfolder": "components"
       },
