@@ -32,10 +32,10 @@ export type VCheckboxGroupSlots = Omit<VInputSlots, 'default'> & {
 
 export const makeVCheckboxGroupProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),
-  ...makeSelectionControlGroupProps({
+  ...omit(makeSelectionControlGroupProps({
     multiple: true,
     type: 'checkbox',
-  }),
+  }), ['indeterminateIcon', 'defaultsTarget', 'type']),
 }, 'VCheckboxGroup')
 
 export const VCheckboxGroup = genericComponent<new <T>(
