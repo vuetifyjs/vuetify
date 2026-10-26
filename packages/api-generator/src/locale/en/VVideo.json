@@ -4,6 +4,7 @@
     "aspectRatio": "Sets the aspect ratio for the playback, calculated as width/height.",
     "autoplay": "Starts loading the media file without waiting for user to click. Playback begins once enough data is loaded.",
     "chapters": "Splits the progress bar into chapters. Each item needs a `start`, given as seconds or formatted time (`'1:30'`), and can have a `title`.",
+    "controlsHideDelay": "Hides the playback controls after this many milliseconds of inactivity, even while the cursor remains over the player. Moving the cursor over the player reveals the controls. Set to `0` to disable inactivity-based hiding without changing the existing hover behavior.",
     "controlsProps": "Props passed to the [v-video-controls](/api/v-video-controls/#props) component, e.g. `class` or `gap`. Use camelCase keys. Playback state such as `playing`, `progress` or `volume` always comes from the video.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "**Deprecated**, use **actions** or **hide-controls**. Variant passed to the VVideoControls component.",

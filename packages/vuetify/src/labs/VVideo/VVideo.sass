@@ -121,6 +121,25 @@
       .v-video-controls
         opacity: 1
 
+    &--controls-auto-hide
+      &.v-video--controls-interacting
+        .v-video__header,
+        .v-video-controls
+          opacity: 1
+
+      &.v-video--controls-idle.v-video--playing
+        &,
+        .v-video__content
+          cursor: none
+
+        .v-video__header,
+        .v-video-controls
+          opacity: 0
+
+          &,
+          *
+            pointer-events: none
+
     &--rounded
       border-radius: $video-rounded-border-radius
 
