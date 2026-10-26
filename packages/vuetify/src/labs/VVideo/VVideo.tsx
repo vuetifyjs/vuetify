@@ -181,6 +181,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     let controlsTimer: ReturnType<typeof setTimeout> | undefined
     let controlsDocument: Document | undefined
+    let wakeTap = false
 
     function releaseControlsPointer () {
       controlsDocument?.removeEventListener('pointerup', onControlsPointerRelease, true)
@@ -217,6 +218,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     function onControlsPointerDown (e: PointerEvent) {
+      wakeTap = controlsIdle.value && e.pointerType !== 'mouse'
       if (!controlsAutoHide.value || e.button !== 0 || !e.isPrimary) return
 
       releaseControlsPointer()
@@ -371,7 +373,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     function onVideoClick (e: Event) {
       e.preventDefault()
-      if (state.value === 'loaded') {
+      if (state.value === 'loaded' && !wakeTap) {
         playing.value = !playing.value
         focusContainer()
       }
@@ -384,6 +386,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     let lastTap = 0
     function onTouchend (e: Event) {
+      if (wakeTap) return
       const now = performance.now()
       if ((now - lastTap) < 500) {
         e.preventDefault()

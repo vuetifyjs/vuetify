@@ -76,4 +76,25 @@ describe('VVideo controls inactivity', () => {
     wrapper.unmount()
     expect(vi.getTimerCount()).toBe(0)
   })
+
+  it('should reveal idle controls on tap without toggling playback', async () => {
+    const wrapper = mountVideo()
+    const video = wrapper.get('video')
+    const tap = (pointerId: number) => {
+      const init = { bubbles: true, button: 0, pointerId, isPrimary: true, pointerType: 'touch' }
+      video.element.dispatchEvent(new PointerEvent('pointerdown', init))
+      return video.trigger('click')
+    }
+    await video.trigger('loadeddata')
+    await vi.advanceTimersByTimeAsync(2000)
+    expect(wrapper.classes()).toContain('v-video--controls-idle')
+
+    await tap(1)
+    expect(wrapper.classes()).not.toContain('v-video--controls-idle')
+    expect(wrapper.emitted('update:playing')).toBeUndefined()
+
+    await tap(2)
+    expect(wrapper.emitted('update:playing')).toEqual([[false]])
+    wrapper.unmount()
+  })
 })
