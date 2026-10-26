@@ -190,7 +190,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       controlsPointer.value = undefined
     }
 
-    function resetControls () {
+    function stopIdleTracking () {
       clearTimeout(controlsTimer)
       controlsTimer = undefined
       controlsIdle.value = false
@@ -237,7 +237,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     watch([playing, state, waiting, error, fullscreen, isHydrated, controlsAutoHide, () => props.controlsHideDelay], onControlsActivity)
-    watch([() => props.src, () => props.srcObject, videoRef], resetControls)
+    watch([() => props.src, () => props.srcObject, videoRef], stopIdleTracking)
 
     function onLoadeddata () {
       loaded.value = true
@@ -330,7 +330,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
     })
 
     onBeforeUnmount(() => {
-      resetControls()
+      stopIdleTracking()
       document.body.removeEventListener('keydown', fullscreenExitShortcut)
       document.removeEventListener('fullscreenchange', onFullscreenExit)
     })
@@ -526,7 +526,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onLoadeddata }
-                onEmptied={ resetControls }
+                onEmptied={ stopIdleTracking }
                 onClick={ onVideoClick }
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }
