@@ -22,27 +22,28 @@
     "type": "MIME type of **src**, e.g. `video/mp4`."
   },
   "events": {
+    "error": "Emitted with the native MediaError when the video fails to load.",
     "loaded": "Emitted when the video has loaded and is ready to be played.",
+    "update:error": "Emitted with the native MediaError on failure, or `false` once the error is cleared.",
     "update:playing": "Emitted when playing state changes.",
     "update:progress": "Emitted with the playback position in percent (0 ~ 100).",
-    "update:volume": "Emitted when the volume changes.",
-    "error": "Emitted with the native MediaError when the video fails to load.",
-    "update:error": "Emitted with the native MediaError on failure, or `false` once the error is cleared."
+    "update:volume": "Emitted when the volume changes."
   },
   "slots": {
-    "header": "Slot for additional content placed on top of the video.",
+    "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods.",
     "append": "Additional content on the right within the control bar.",
     "controls": "Replaces controls bar with custom content.",
+    "error": "Replaces the warning icon in the overlay shown in the error state. Receives the MediaError.",
+    "header": "Slot for additional content placed on top of the video.",
     "loader": "Slot used to replace loader displayed when the video is being loaded.",
+    "play": "Replaces the play button. Receives `props` to bind on your own button.",
     "prepend": "Additional content on the left within the control bar.",
+    "progress": "Replaces the progress bar, also when it is stacked. Receives `props` to bind on `v-media-progress-bar`.",
     "sources": "Slot for content placed within native `<video>` element.",
-    "time": "Replaces the text of the `time` action. Receives the player state, formatted times are in `currentTime`.",
     "time.elapsed": "Replaces the elapsed time wherever it is shown.",
     "time.remaining": "Replaces the remaining time, including its minus sign, wherever it is shown.",
     "time.total": "Replaces the total duration wherever it is shown.",
-    "play": "Replaces the play button. Receives `props` to bind on your own button.",
-    "progress": "Replaces the progress bar, also when it is stacked. Receives `props` to bind on `v-media-progress-bar`.",
-    "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods."
+    "time": "Replaces the text of the `time` action. Receives the player state, formatted times are in `currentTime`."
   },
   "exposed": {
     "retry": "Reloads the media after an error and starts playback, unless the source is **srcObject**. Does nothing outside the error state.",
