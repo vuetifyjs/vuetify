@@ -5,6 +5,7 @@ import './VColorPickerSwatches.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { useRovingFocus } from '@vuetify/v0'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
@@ -72,6 +73,17 @@ export const VColorPickerSwatches = defineComponent({
 
   setup (props, { emit }) {
     const isInteractive = toRef(() => !props.disabled && !props.readonly)
+    const swatchElements = new Map<string, HTMLElement>()
+    const swatchItems = () => props.swatches.flatMap((swatch, row) => swatch.map((_, column) => {
+      const id = `${row}-${column}`
+
+      return {
+        id,
+        el: swatchElements.get(id),
+        disabled: props.disabled,
+      }
+    }))
+    const rovingFocus = useRovingFocus(swatchItems)
 
     function onSwatchClick (hsva: HSV) {
       if (!isInteractive.value || !hsva) {
@@ -81,12 +93,23 @@ export const VColorPickerSwatches = defineComponent({
       emit('update:color', hsva)
     }
 
-    function onSwatchKeydown (event: KeyboardEvent) {
+    function onSwatchKeydown (event: KeyboardEvent, hsva: HSV) {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        onSwatchClick(hsva)
+        return
+      }
+
+      if (event.key === ' ' || event.code === 'Space') {
+        event.preventDefault()
+        return
+      }
+
       if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
 
-      const currentSwatch = event.currentTarget as HTMLButtonElement
+      const currentSwatch = event.currentTarget as HTMLElement
       const swatches = currentSwatch.closest('.v-color-picker-swatches')
-        ?.querySelectorAll<HTMLButtonElement>('.v-color-picker-swatches__color:not(:disabled)')
+        ?.querySelectorAll<HTMLElement>('.v-color-picker-swatches__color:not(.v-color-picker-swatches__color--disabled)')
       if (!swatches?.length) return
 
       const currentRect = currentSwatch.getBoundingClientRect()
@@ -114,7 +137,14 @@ export const VColorPickerSwatches = defineComponent({
       if (!nextSwatch) return
 
       event.preventDefault()
-      nextSwatch.focus()
+      const nextId = swatchItems().find(item => item.el === nextSwatch)?.id
+      if (nextId) rovingFocus.focus(nextId)
+    }
+
+    function onSwatchKeyup (event: KeyboardEvent, hsva: HSV) {
+      if (event.key === ' ' || event.code === 'Space') {
+        onSwatchClick(hsva)
+      }
     }
 
     useRender(() => (
@@ -129,28 +159,38 @@ export const VColorPickerSwatches = defineComponent({
         ]}
       >
         <div>
-          { props.swatches.map(swatch => (
+          { props.swatches.map((swatch, row) => (
             <div class="v-color-picker-swatches__swatch">
-              { swatch.map(color => {
+              { swatch.map((color, column) => {
                 const rgba = parseColor(color)
                 const hsva = RGBtoHSV(rgba)
                 const background = RGBtoCSS(rgba)
                 const isSelected = !!props.color && deepEqual(props.color, hsva)
+                const id = `${row}-${column}`
 
                 return (
-                  <button
-                    type="button"
+                  <div
+                    ref={ element => {
+                      if (element instanceof HTMLElement) {
+                        swatchElements.set(id, element)
+                      } else {
+                        swatchElements.delete(id)
+                      }
+                    }}
                     class={[
                       'v-color-picker-swatches__color',
                       {
                         'v-color-picker-swatches__color--disabled': props.disabled,
                       },
                     ]}
+                    role="button"
+                    tabindex={ rovingFocus.isTabbable(id) && !props.disabled ? 0 : -1 }
                     aria-label={ background }
                     aria-pressed={ isSelected }
-                    aria-disabled={ props.readonly || undefined }
-                    disabled={ props.disabled }
-                    onKeydown={ onSwatchKeydown }
+                    aria-disabled={ props.disabled || props.readonly || undefined }
+                    onFocus={ () => { rovingFocus.focusedId.value = id } }
+                    onKeydown={ (event: KeyboardEvent) => onSwatchKeydown(event, hsva) }
+                    onKeyup={ (event: KeyboardEvent) => onSwatchKeyup(event, hsva) }
                     onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
@@ -159,7 +199,7 @@ export const VColorPickerSwatches = defineComponent({
                         : undefined
                       }
                     </div>
-                  </button>
+                  </div>
                 )
               })}
             </div>

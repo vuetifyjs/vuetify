@@ -137,21 +137,29 @@ describe('VColorPicker', () => {
     const update = vi.fn()
     const colors = [['#ff0000', '#00ff00'], ['#0000ff']]
     render(() => (
-      <VColorPicker
-        hideCanvas
-        hideInputs
-        hideSliders
-        showSwatches
-        swatches={ colors }
-        onUpdate:modelValue={ update }
-      />
+      <>
+        <VColorPicker
+          hideCanvas
+          hideInputs
+          hideSliders
+          showSwatches
+          swatches={ colors }
+          onUpdate:modelValue={ update }
+        />
+        <button>After swatches</button>
+      </>
     ))
 
     const swatches = screen.getAllByCSS('.v-color-picker-swatches__color')
+    const afterSwatches = screen.getByRole('button', { name: 'After swatches' })
 
     expect(swatches).toHaveLength(3)
-    expect(swatches[0].tagName).toBe('BUTTON')
+    expect(swatches[0].tagName).toBe('DIV')
+    expect(swatches[0]).toHaveAttribute('role', 'button')
     expect(swatches[0]).toHaveAccessibleName()
+    expect(swatches[0]).toHaveAttribute('tabindex', '0')
+    expect(swatches[1]).toHaveAttribute('tabindex', '-1')
+    expect(swatches[2]).toHaveAttribute('tabindex', '-1')
 
     await userEvent.tab()
     expect(swatches[0]).toHaveFocus()
@@ -168,6 +176,12 @@ describe('VColorPicker', () => {
     await userEvent.keyboard('{ArrowUp}{Enter}')
     expect(swatches[0]).toHaveFocus()
     expect(update).toHaveBeenCalledTimes(1)
+
+    await userEvent.keyboard('{ArrowRight}{Space}')
+    expect(update).toHaveBeenCalledTimes(2)
+
+    await userEvent.tab()
+    expect(afterSwatches).toHaveFocus()
   })
 
   it('should not use global defaults for slider color', async () => {
