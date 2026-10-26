@@ -1,0 +1,17 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-checkbox-group
+    > .v-input__control
+      flex-direction: column
+
+      > .v-label
+        margin-inline-start: $checkbox-group-label-margin-inline-start
+
+        + .v-selection-control-group
+          padding-inline-start: $checkbox-group-label-selection-group-padding-inline
+          margin-block-start: $checkbox-group-label-selection-group-margin-top
+
+    .v-checkbox .v-selection-control
+      min-height: var(--v-selection-control-size)

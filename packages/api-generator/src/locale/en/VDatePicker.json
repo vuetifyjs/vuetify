@@ -38,5 +38,8 @@
     "controls": "Slot for the controls.",
     "header": "Slot for the header.",
     "year": "Slot for the year."
+  },
+  "exposed": {
+    "focusDate": "Moves focus to the given date (ISO string) in the month view."
   }
 }
