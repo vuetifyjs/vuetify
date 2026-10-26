@@ -92,8 +92,8 @@ export default {
   },
   input: {
     clear: '{0} alanını temizle',
-    prependAction: '{0} ön işlem',
-    appendAction: '{0} ek işlem',
+    prependAction: '{0} alanının başındaki işlem',
+    appendAction: '{0} alanının sonundaki işlem',
     otp: 'Doğrulama kodunu girin',
   },
   fileInput: {
