@@ -1,9 +1,9 @@
 ---
 layout: blog
 meta:
-  title: Announcing Vuetify0 1.3.0
-  description: Vuetify0 1.3.0 adds Kanban and a headless Menu, plus Tour, Otp, Virtualizer, useFocusTrap, and a combobox that commits typed text.
-  keywords: Vuetify0 1.3.0, Kanban, Menu, Tour, Otp, Virtualizer, useFocusTrap, @vuetify/v0
+  title: Announcing Vuetify0 v1.3
+  description: Vuetify0 v1.3 adds Kanban and a headless Menu, plus Tour, Otp, Virtualizer, useFocusTrap, and a combobox that commits typed text.
+  keywords: Vuetify0 v1.3, Kanban, Menu, Tour, Otp, Virtualizer, useFocusTrap, @vuetify/v0
 ---
 
 <script setup>
@@ -17,13 +17,13 @@ meta:
   })
 </script>
 
-# Announcing Vuetify0 1.3.0
+# Announcing Vuetify0 v1.3
 
-Vuetify0 1.3.0 is out. The documentation is the part of this project I am most proud of, so if you open two pages before the changelog, make them [Kanban](https://0.vuetifyjs.com/components/data/kanban) and [Menu](https://0.vuetifyjs.com/components/disclosure/menu).
+Vuetify0 v1.3 is out. The documentation is the part of this project I am most proud of, so if you open two pages before the changelog, make them [Kanban](https://0.vuetifyjs.com/components/data/kanban) and [Menu](https://0.vuetifyjs.com/components/disclosure/menu).
 
-![Hero image for the Vuetify0 1.3 release](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/announcing-vuetify0-v1-3-hero.png "Vuetify0 1.3 hero image"){ height=112 }
+![Hero image for the Vuetify0 v1.3 release](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/announcing-vuetify0-v1-3-hero.png "Vuetify0 v1.3 hero image"){ height=112 }
 
-🖊️ John Leider • 📅 October 20th, 2026
+🖊️ John Leider • 📅 October 26th, 2026
 
 <PromotedEntry />
 
@@ -37,7 +37,6 @@ Vuetify0 1.3.0 is out. The documentation is the part of this project I am most p
 - [Menu](#menu)
 - [Tour, Otp, and Virtualizer](#tour-otp-and-virtualizer)
 - [The rest](#the-rest)
-- [Upgrade](#upgrade)
 
 ---
 
@@ -49,6 +48,55 @@ Vuetify0 1.3.0 is out. The documentation is the part of this project I am most p
 
 Each column binds its item array with `v-model`. A drop writes the new order back, and Root emits `move` once with `{ value, from, to, fromIndex, toIndex }`.
 
+```html
+<script setup lang="ts">
+  import { Kanban } from '@vuetify/v0'
+  import { ref } from 'vue'
+
+  interface Card {
+    id: number
+    title: string
+  }
+
+  const columns = [
+    { id: 'todo', label: 'Todo' },
+    { id: 'doing', label: 'Doing' },
+  ]
+
+  const board = ref<Record<string, Card[]>>({
+    todo: [{ id: 1, title: 'Write the spec' }],
+    doing: [{ id: 2, title: 'Build the board' }],
+  })
+</script>
+
+<template>
+  <Kanban.Root label="Project board">
+    <Kanban.Column
+      v-for="column in columns"
+      :id="column.id"
+      :key="column.id"
+      v-slot="{ items }"
+      v-model="board[column.id]"
+      :label="column.label"
+    >
+      <Kanban.List>
+        <Kanban.Item
+          v-for="card in items"
+          :key="card.id"
+          :label="card.title"
+          :value="card"
+        >
+          {{ card.title }}
+        </Kanban.Item>
+      </Kanban.List>
+    </Kanban.Column>
+
+    <Kanban.Instructions />
+    <Kanban.LiveRegion />
+  </Kanban.Root>
+</template>
+```
+
 Pointer drag works. So does the keyboard. Space or Enter picks an item up. Arrow keys, Home, and End move a previewed drop target. That preview follows RTL, and it skips a column that is `disabled` or whose `accept` refuses the item. Space or Enter drops. Escape cancels and does not touch the board.
 
 The pending target is `data-target` on the column and the list, and `data-drop="before"` or `data-drop="after"` on the item next to the gap. Every step is announced through the live region. A column gates incoming moves with `accept(value, from, index)` and freezes with `disabled`.
@@ -59,11 +107,28 @@ The pending target is `data-target` on the column and the list, and `data-drop="
 
 `Menu.Root`, `Menu.Bar`, `Menu.Activator`, `Menu.Context`, `Menu.Content`, `Menu.Item`, `Menu.CheckboxItem`, `Menu.RadioGroup`, `Menu.RadioItem`, `Menu.Separator`, `Menu.Sub`, `Menu.SubActivator`, and `Menu.SubContent`.
 
+```html
+<script setup lang="ts">
+  import { Menu } from '@vuetify/v0'
+</script>
+
+<template>
+  <Menu.Root>
+    <Menu.Activator>Actions</Menu.Activator>
+
+    <Menu.Content>
+      <Menu.Item>Copy</Menu.Item>
+      <Menu.Item>Paste</Menu.Item>
+    </Menu.Content>
+  </Menu.Root>
+</template>
+```
+
 A click, a right-click, or a pointer switch opens with no item highlighted. Arrow keys and pointer hover move the highlight. Light-dismiss of a submenu closes that layer and leaves the parent menu open.
 
 A follow-up fix ([#1056](https://github.com/vuetifyjs/0/pull/1056)): repeating a typeahead letter still accepts the next character. Letters typed within the pause build a prefix, and a different letter extends it. A repeated letter moves to the next match instead. After the pause, the next letter starts a new search. The same fix runs a click listener on a menu item before the item's own action, including when the item is disabled.
 
-![An open Vuetify0 Menu where typing "p" moves the highlight to the Paste item](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/menu.png "Menu typeahead"){ width=100% }
+![An open Vuetify0 Menu where typing the letter p moves the highlight to the Paste item](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/menu.png "Menu typeahead"){ width=100% }
 
 ## Tour, Otp, and Virtualizer
 
@@ -71,15 +136,101 @@ Three more compounds shipped in this release.
 
 **[Tour](https://0.vuetifyjs.com/components/disclosure/tour)** ([#178](https://github.com/vuetifyjs/0/pull/178)). `createTour` is a headless step sequencer: activator targeting, a form-gated next, and enter, leave, and completed handlers. The Tour compound adds highlight, anchored content, and keyboard chrome. `createTourPlugin` provides one app-level tour. The app owns the catalog and loads one tour at a time.
 
+```html
+<script setup lang="ts">
+  import { createTourContext, Tour } from '@vuetify/v0'
+
+  const [, provideTour, tour] = createTourContext()
+
+  provideTour()
+
+  tour.steps.onboard([
+    { id: 'search', placement: 'bottom' },
+  ])
+</script>
+
+<template>
+  <Tour.Keyboard />
+  <Tour.Highlight blocking />
+
+  <Tour.Activator step="search">
+    <input placeholder="Search" type="search">
+  </Tour.Activator>
+
+  <Tour.Root step="search">
+    <Tour.Content placement="bottom">
+      <Tour.Title>Search</Tour.Title>
+      <Tour.Description>Search pages, docs, and people.</Tour.Description>
+      <Tour.Progress />
+      <Tour.Next v-slot="{ isLast }">{{ isLast ? 'Done' : 'Next' }}</Tour.Next>
+    </Tour.Content>
+  </Tour.Root>
+
+  <button type="button" @click="tour.start()">Start tour</button>
+</template>
+```
+
 ![A Vuetify0 Tour on step 1 of 3, highlighting a search field with Skip, Back, and Next controls](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/tour.png "Tour"){ width=100% }
 
 **[Otp](https://0.vuetifyjs.com/components/forms/otp)** ([#787](https://github.com/vuetifyjs/0/pull/787), thanks [@sridhar-3009](https://github.com/sridhar-3009)). `Otp.Root`, `Otp.Item`, and `Otp.HiddenInput` over `createOtp`. Root bridges `v-model`, exposes `role="group"` with a locale-driven default accessible name, and renders a hidden input when `name` is set. Each item is one character (`autocomplete="one-time-code"`). It advances on input, moves back on Backspace of an empty box, supports arrow keys, and spreads pasted or autofilled text across the boxes. `@complete` fires when the code fills. Reject-and-retry lives on `createOtp`'s `onComplete`. Root slots an `items` array derived from `length`, same pattern as Rating, so the boxes are iterated once.
+
+```html
+<script setup lang="ts">
+  import { Otp } from '@vuetify/v0'
+  import { shallowRef } from 'vue'
+
+  const code = shallowRef('')
+</script>
+
+<template>
+  <Otp.Root v-slot="{ items }" v-model="code" :length="6">
+    <Otp.Item
+      v-for="item in items"
+      :key="item.index"
+      :index="item.index"
+    />
+  </Otp.Root>
+</template>
+```
 
 A patch on top of that ([#1011](https://github.com/vuetifyjs/0/pull/1011)): a code the browser inserts in one edit (SMS autofill, a password manager) fills every box. Dropping text onto a filled box writes from that box and clears every box after the pasted text. Pasting 99 into the third box of 11111 leaves 1199.
 
 ![A six-box Vuetify0 Otp input with four digits entered](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/otp.png "Otp"){ width=100% }
 
 **[Virtualizer](https://0.vuetifyjs.com/components/data/virtualizer)** ([#788](https://github.com/vuetifyjs/0/pull/788), also [@sridhar-3009](https://github.com/sridhar-3009)). `Virtualizer.Root`, `Virtualizer.Item`, and `Virtualizer.Spacer` over `createVirtual`. Root renders a keyboard-focusable scroll container and slots the visible window, plus `overscan`. Put a `Spacer` before the rows and a `Spacer` with `edge="end"` after them. Set `as` (for example `li` inside a `ul`) when a `div` cannot sit there. Each item measures its own border box, so variable-height rows with padding or borders need no manual `resize()` call. `@top` and `@bottom`, with `top-threshold` and `bottom-threshold`, drive infinite scroll. `scrollTo(index, options)` and `reset()` come from the default slot or a template ref on Root, which also exposes the container `element`.
+
+```html
+<script setup lang="ts">
+  import { Virtualizer } from '@vuetify/v0'
+
+  const items = Array.from({ length: 10_000 }, (_, index) => `Row ${index + 1}`)
+</script>
+
+<template>
+  <Virtualizer.Root
+    v-slot="{ items: visible }"
+    :height="320"
+    :item-height="40"
+    :items
+    role="list"
+  >
+    <Virtualizer.Spacer />
+
+    <Virtualizer.Item
+      v-for="item in visible"
+      :key="item.index"
+      :aria-posinset="item.index + 1"
+      :aria-setsize="items.length"
+      :index="item.index"
+      role="listitem"
+    >
+      {{ item.raw }}
+    </Virtualizer.Item>
+
+    <Virtualizer.Spacer edge="end" />
+  </Virtualizer.Root>
+</template>
+```
 
 ![A Vuetify0 Virtualizer list of 10,000 rows where only the visible window is mounted](https://cdn.vuetifyjs.com/docs/images/blog/announcing-vuetify0-v1-3/virtualizer.png "Virtualizer"){ width=100% }
 
@@ -115,12 +266,6 @@ The keydown listener is on `document` in the capture phase, so a later Tab still
 
 **DevTools** ([#948](https://github.com/vuetifyjs/0/pull/948)). `createPlugin` can opt a plugin into Vue DevTools with `devtools: true`. Inspector snapshots unwrap refs and class getters. Logger and storage supply an `inspect` hook so method-only contexts still show state. Storage gains `keys()`. The same change declares missing `update:model-value` emits on component roots, so Vue DevTools can track those v-models.
 
-## Upgrade
-
-```bash
-pnpm add @vuetify/v0@1.3.0
-```
-
 The [full release notes](https://github.com/vuetifyjs/0/releases/tag/v1.3.0) list every commit. The [getting started guide](https://0.vuetifyjs.com/introduction/getting-started) covers setup.
 
 - **Documentation:** [0.vuetifyjs.com](https://0.vuetifyjs.com)
@@ -128,3 +273,11 @@ The [full release notes](https://github.com/vuetifyjs/0/releases/tag/v1.3.0) lis
 - **Menu:** [components/disclosure/menu](https://0.vuetifyjs.com/components/disclosure/menu)
 - **Release:** [v1.3.0](https://github.com/vuetifyjs/0/releases/tag/v1.3.0)
 - **GitHub:** [vuetifyjs/0](https://github.com/vuetifyjs/0)
+
+---
+
+::: warning
+
+**Vuetify needs your support.** Open Collective is how we fund the team that builds releases like this one. If your team relies on Vuetify, point your organization at [Open Collective](https://opencollective.com/vuetify) or [GitHub Sponsors](https://github.com/sponsors/johnleider).
+
+:::
