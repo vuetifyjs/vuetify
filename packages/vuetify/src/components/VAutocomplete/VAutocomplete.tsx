@@ -7,6 +7,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
+import { VHighlight } from '@/components/VHighlight'
 import { VIcon } from '@/components/VIcon'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
@@ -15,7 +16,6 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VSheet } from '@/components/VSheet'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
-import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useAutofill } from '../VSelect/useAutofill'
@@ -59,6 +59,7 @@ import {
 import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilteredOrder } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
@@ -80,6 +81,11 @@ export const makeVAutocompleteProps = propsFactory({
   clearOnSelect: Boolean,
   search: String,
   closeOnInputClick: Boolean,
+
+  filteredOrder: {
+    type: String as PropType<FilteredOrder>,
+    default: 'none',
+  },
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps(),

@@ -5,9 +5,13 @@
     "value": "Value of the active data point. Forwarded to **title-format** and the default slot.",
     "titleFormat": "Function used to format the tooltip body when no slot is provided. Receives `{ index, value }`.",
     "target": "The coordinates used to position the tooltip.",
-    "offset": "Distance in pixels between the tooltip and the target point."
+    "offset": "Distance in pixels between the tooltip and the target point.",
+    "location": "Position of the tooltip relative to the target point."
   },
   "slots": {
     "default": "Custom content for the tooltip. Receives `{ index: number, value: number }`."
+  },
+  "events": {
+    "afterLeave": "Emitted after the tooltip has finished hiding transition."
   }
 }

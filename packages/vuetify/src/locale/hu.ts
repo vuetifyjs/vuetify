@@ -134,6 +134,15 @@ export default {
       item: 'Értékelés: {0} / {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'További lehetőségek',
+  },
   loading: 'Betöltés...',
   infiniteScroll: {
     loadMore: 'Továbbiak betöltése',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Billentyűparancs: {0}',
     or: 'vagy',
   },
-  video: {
+  media: {
     play: 'Lejátszás',
     pause: 'Szünet',
     seek: 'Keresés',
     volume: 'Hangerő',
-    showVolume: 'Hangerőszabályzó megjelenítése',
     mute: 'Némítás',
     unmute: 'Némítás feloldása',
     enterFullscreen: 'Teljes képernyő',

@@ -12,7 +12,7 @@ features:
   label: 'C: VCheckbox'
   report: true
   github: /components/VCheckbox/
-  spec: https://m2.material.io/components/checkboxes
+  spec: https://m3.material.io/components/checkboxes
 ---
 
 # Checkboxes

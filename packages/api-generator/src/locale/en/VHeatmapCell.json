@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-heatmap` that renders a single cell.",
   "props": {
     "cellProps": "Additional attributes spread on the cell `<g>` element. A `title` value renders as an SVG `<title>` child (native tooltip).",
     "disabled": "Renders the cell in a disabled when toggled off using interactive legend state.",

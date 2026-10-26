@@ -134,6 +134,15 @@ export default {
       item: 'Оценка {0} от {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Минимум',
+      end: 'Максимум',
+    },
+  },
+  splitBtn: {
+    menu: 'Още опции',
+  },
   loading: 'Зареждане...',
   infiniteScroll: {
     loadMore: 'Зареди още',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Клавиатурна комбинация: {0}',
     or: 'или',
   },
-  video: {
+  media: {
     play: 'Пусни',
     pause: 'Пауза',
     seek: 'Търсене',
     volume: 'Сила на звука',
-    showVolume: 'Покажи контрола за силата на звука',
     mute: 'Без звук',
     unmute: 'Включи звука',
     enterFullscreen: 'Цял екран',

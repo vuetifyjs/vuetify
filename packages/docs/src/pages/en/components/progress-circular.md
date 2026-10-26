@@ -13,7 +13,7 @@ features:
   github: /components/VProgressCircular/
   label: 'C: VProgressCircular'
   report: true
-  spec: https://m2.material.io/components/progress-indicators
+  spec: https://m3.material.io/components/progress-indicators
 ---
 
 # Progress circular

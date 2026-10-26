@@ -9,3 +9,4 @@ export const PREFERS_REDUCED_MOTION = () => (
   SUPPORTS_MATCH_MEDIA && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 )
 export const IS_WEBKIT = IN_BROWSER && CSS?.supports?.('-webkit-backdrop-filter', 'none')
+export const SUPPORTS_FIELD_SIZING = IN_BROWSER && CSS?.supports?.('field-sizing', 'content')

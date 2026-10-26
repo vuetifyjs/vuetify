@@ -134,6 +134,15 @@ export default {
       item: 'Evaluare {0} din {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minim',
+      end: 'Maxim',
+    },
+  },
+  splitBtn: {
+    menu: 'Mai multe opțiuni',
+  },
   loading: 'Se încarcă...',
   infiniteScroll: {
     loadMore: 'Încarcă mai multe',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Comandă rapidă de la tastatură: {0}',
     or: 'sau',
   },
-  video: {
+  media: {
     play: 'Redare',
     pause: 'Pauză',
     seek: 'Căutare',
     volume: 'Volum',
-    showVolume: 'Afișare control volum',
     mute: 'Fără sunet',
     unmute: 'Cu sunet',
     enterFullscreen: 'Ecran complet',

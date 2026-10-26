@@ -7,6 +7,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDivider } from '@/components/VDivider'
+import { VHighlight } from '@/components/VHighlight'
 import { VIcon } from '@/components/VIcon'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VList, VListItem, VListSubheader } from '@/components/VList'
@@ -16,7 +17,6 @@ import { VSheet } from '@/components/VSheet'
 import { VTextField } from '@/components/VTextField'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
-import { VHighlight } from '@/labs/VHighlight'
 
 // Composables
 import { useFocusRepair } from '../VSelect/useFocusRepair'
@@ -59,6 +59,7 @@ import {
 import type { PropType, Ref } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilteredOrder } from '@/composables/filter'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
@@ -85,6 +86,11 @@ export const makeVComboboxProps = propsFactory({
   delimiters: Array as PropType<readonly string[]>,
   closeOnInputClick: Boolean,
   trimValues: Boolean,
+
+  filteredOrder: {
+    type: String as PropType<FilteredOrder>,
+    default: 'none',
+  },
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps({ hideNoData: true, returnObject: true }),

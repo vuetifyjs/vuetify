@@ -134,6 +134,15 @@ export default {
       item: 'Ocena {0} od {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Više opcija',
+  },
   loading: 'Učitavanje...',
   infiniteScroll: {
     loadMore: 'Učitaj još',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Prečica na tastaturi: {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reprodukuj',
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Jačina zvuka',
-    showVolume: 'Prikaži kontrolu jačine zvuka',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Prikaz preko cijelog ekrana',

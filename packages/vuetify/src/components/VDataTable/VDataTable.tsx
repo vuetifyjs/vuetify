@@ -219,7 +219,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
       toggleSelect,
       someSelected,
       allSelected,
-    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
+    } = provideSelection(props, { allItems: items, filteredItems, currentPage: paginatedItemsWithoutGroups })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
 

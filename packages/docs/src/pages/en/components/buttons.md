@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Buttons
   title: Button component
@@ -13,7 +14,7 @@ features:
   github: /components/VBtn/
   label: 'C: VBtn'
   report: true
-  spec: https://m2.material.io/components/buttons
+  spec: https://m3.material.io/components/buttons
 ---
 
 # Buttons
@@ -78,6 +79,10 @@ The **density** prop is used to control the vertical space that the button takes
 The **size** property is used to control the size of the button and scales with density. The default size is **undefined** which essentially translates to **medium**.
 
 <ExamplesExample file="v-btn/prop-size" />
+
+::: info
+For Material Design 3 sizes, see [Material Design 3 button sizes](/features/md3-button-sizes/).
+:::
 
 #### Block
 

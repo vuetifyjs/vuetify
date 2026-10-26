@@ -20,16 +20,16 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
-import { convertToUnit, genericComponent, isFunction, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { convertToUnit, genericComponent, isFunction, omit, pickWithRest, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VDatePickerControlsDefaultSlotProps } from './VDatePickerControls'
 import type { VDatePickerHeaderSlots } from './VDatePickerHeader'
-import type { VDatePickerMonthSlots } from './VDatePickerMonth'
+import type { DatePickerDay, VDatePickerMonthSlots } from './VDatePickerMonth'
 import type { VDatePickerMonthsSlots } from './VDatePickerMonths'
 import type { VDatePickerYearsSlots } from './VDatePickerYears'
 import type { VPickerSlots } from '@/components/VPicker/VPicker'
-import type { GenericProps } from '@/util'
+import type { EventProp, GenericProps } from '@/util'
 
 // Types
 export type VDatePickerSlots =
@@ -98,6 +98,7 @@ export const VDatePicker = genericComponent<new <
     : T,
 > (
   props: {
+    [key: `on${Capitalize<string>}:day`]: EventProp<[Event, DatePickerDay]>
     modelValue?: TModel
     'onUpdate:modelValue'?: (value: TModel) => void
     multiple?: Multiple
@@ -118,7 +119,7 @@ export const VDatePicker = genericComponent<new <
     'boundary-navigate': (_payload: { direction: 'up' | 'down' | 'left' | 'right', targetIsoDate: string }) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { emit, slots, attrs }) {
     const adapter = useDate()
     const { t } = useLocale()
     const { rtlClasses } = useRtl()
@@ -252,7 +253,7 @@ export const VDatePicker = genericComponent<new <
 
     function isYearAllowed (year: number) {
       if (isFunction(props.allowedDates)) {
-        const startOfYear = adapter.parseISO(`${year}-01-01`)
+        const startOfYear = adapter.startOfYear(adapter.setYear(adapter.date(), year))
         return isAllowedInRange(startOfYear, adapter.endOfYear(startOfYear))
       }
 
@@ -268,8 +269,7 @@ export const VDatePicker = genericComponent<new <
 
     function isMonthAllowed (month: number) {
       if (isFunction(props.allowedDates)) {
-        const monthTwoDigits = String(month + 1).padStart(2, '0')
-        const startOfMonth = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
+        const startOfMonth = adapter.setMonth(adapter.startOfYear(adapter.setYear(adapter.date(), year.value)), month)
         return isAllowedInRange(startOfMonth, adapter.endOfMonth(startOfMonth))
       }
 
@@ -290,48 +290,37 @@ export const VDatePicker = genericComponent<new <
     //   inputMode.value = inputMode.value === 'calendar' ? 'keyboard' : 'calendar'
     // }
 
-    function onClickNextMonth () {
-      if (month.value < 11) {
-        month.value++
-      } else {
-        year.value++
-        month.value = 0
-        onUpdateYear()
-      }
+    function moveMonth (amount: number) {
+      const target = adapter.addMonths(monthStart.value, amount)
+      const targetYear = adapter.getYear(target)
+      const isYearChange = targetYear !== year.value
+
+      if (isYearChange) year.value = targetYear
+      month.value = adapter.getMonth(target)
+      if (isYearChange) onUpdateYear()
       onUpdateMonth()
     }
 
+    function onClickNextMonth () {
+      moveMonth(1)
+    }
+
     function onClickPrevMonth () {
-      if (month.value > 0) {
-        month.value--
-      } else {
-        year.value--
-        month.value = 11
-        onUpdateYear()
-      }
-      onUpdateMonth()
+      moveMonth(-1)
     }
 
     function onClickNextYear () {
       year.value++
-      if (maxDate.value) {
-        const monthTwoDigits = String(month.value + 1).padStart(2, '0')
-        const monthStart = adapter.parseISO(`${year.value}-${monthTwoDigits}-01`)
-        if (adapter.isAfter(monthStart, maxDate.value)) {
-          month.value = adapter.getMonth(maxDate.value)
-        }
+      if (maxDate.value && adapter.isAfter(adapter.startOfMonth(monthStart.value), maxDate.value)) {
+        month.value = adapter.getMonth(maxDate.value)
       }
       onUpdateYear()
     }
 
     function onClickPrevYear () {
       year.value--
-      if (minDate.value) {
-        const monthTwoDigits = String(month.value + 1).padStart(2, '0')
-        const monthStart = adapter.endOfMonth(adapter.parseISO(`${year.value}-${monthTwoDigits}-01`))
-        if (adapter.isAfter(minDate.value, monthStart)) {
-          month.value = adapter.getMonth(minDate.value)
-        }
+      if (minDate.value && adapter.isAfter(minDate.value, adapter.endOfMonth(monthStart.value))) {
+        month.value = adapter.getMonth(minDate.value)
       }
       onUpdateYear()
     }
@@ -505,6 +494,7 @@ export const VDatePicker = genericComponent<new <
                     <VDatePickerMonth
                       ref={ monthGridRef }
                       key="date-picker-month"
+                      { ...pickWithRest(attrs, [/^on.+:day$/])[0] }
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       v-model:month={ month.value }

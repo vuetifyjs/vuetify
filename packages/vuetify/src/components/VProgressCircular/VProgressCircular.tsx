@@ -1,22 +1,30 @@
 // Styles
 import './VProgressCircular.sass'
 
+// Components
+import { circularWavePath, hasWave } from '@/components/VProgressLinear/waves'
+
 // Composables
 import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
+import { useElementIntersection } from '@/composables/intersectionObserver'
+import { useElementSize } from '@/composables/resizeObserver'
 import { makeRevealProps, useReveal } from '@/composables/reveal'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, ref, toRef, watchEffect } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTION, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+// in px, scaled to the viewBox
+const WAVE_AMPLITUDE = 1.6
+const WAVELENGTH = 15
+const WAVE_GAP = 4
 
 export const makeVProgressCircularProps = propsFactory({
   bgColor: String,
@@ -30,6 +38,16 @@ export const makeVProgressCircularProps = propsFactory({
   rotate: {
     type: [Number, String],
     default: 0,
+  },
+  shape: {
+    type: String as PropType<'flat' | 'wavy'>,
+    default: 'flat',
+    validator: (v: string) => ['flat', 'wavy'].includes(v),
+  },
+  variant: {
+    type: String as PropType<'split'>,
+    default: undefined,
+    validator: (v: string) => ['split'].includes(v),
   },
   transition: {
     type: [Boolean, Object] as PropType<boolean | { duration?: number | string }>,
@@ -60,14 +78,14 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
     const MAGIC_RADIUS_CONSTANT = 20
     const CIRCUMFERENCE = 2 * Math.PI * MAGIC_RADIUS_CONSTANT
 
-    const root = ref<HTMLElement>()
+    const root = shallowRef<HTMLElement>()
 
     const { themeClasses } = provideTheme(props)
     const { sizeClasses, sizeStyles } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(() => props.bgColor)
-    const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, contentRect } = useResizeObserver()
+    const { width: containerWidth } = useElementSize(root)
+    const { isIntersecting } = useElementIntersection(root)
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const normalizedValue = toRef(() => revealState.value === 'initial' ? 0 : clamp(parseFloat(props.modelValue), 0, 100))
@@ -79,8 +97,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
       // Get size from element if size prop value is small, large etc
       return sizeStyles.value
         ? Number(props.size)
-        : contentRect.value
-          ? contentRect.value.width
+        : containerWidth.value
+          ? containerWidth.value
           : Math.max(width.value, 32)
     })
     const diameter = toRef(() => (MAGIC_RADIUS_CONSTANT / (1 - width.value / size.value)) * 2)
@@ -98,9 +116,28 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
         : baseAngle
     })
 
-    watchEffect(() => {
-      intersectionRef.value = root.value
-      resizeRef.value = root.value
+    const isWavy = toRef(() => props.shape === 'wavy')
+    const geometry = computed(() => {
+      if (props.variant !== 'split' && !isWavy.value) return undefined
+
+      const scale = diameter.value / size.value
+      const radius = MAGIC_RADIUS_CONSTANT
+      const amplitude = isWavy.value && (props.indeterminate || hasWave(normalizedValue.value)) ? WAVE_AMPLITUDE * scale : 0
+      const waves = Math.max(3, Math.floor(CIRCUMFERENCE / (WAVELENGTH * scale)))
+      const center = diameter.value / 2
+      const arc = `A ${radius} ${radius} 0 1 1`
+      const roundCaps = props.rounded || isWavy.value
+
+      return {
+        waves,
+        linecap: roundCaps ? 'round' as const : 'butt' as const,
+        // round caps reach half a stroke into the gap from each side
+        gap: (WAVE_GAP * scale + (roundCaps ? strokeWidth.value : 0)) / CIRCUMFERENCE * 100,
+        // two turns so the indeterminate track can wrap past the start
+        track: `M ${center + radius} ${center}` + ` ${arc} ${center - radius} ${center} ${arc} ${center + radius} ${center}`.repeat(2),
+        // peaks sit on the track and troughs dip inward, so a flat wave lands on the track
+        wave: circularWavePath(center, radius - amplitude, amplitude, waves),
+      }
     })
 
     useRender(() => (
@@ -111,6 +148,8 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           {
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
+            'v-progress-circular--variant-split': props.variant === 'split',
+            'v-progress-circular--shape-wavy': isWavy.value,
             'v-progress-circular--disable-shrink': props.indeterminate &&
               (props.indeterminate === 'disable-shrink' || PREFERS_REDUCED_MOTION()),
             'v-progress-circular--revealing': ['initial', 'pending'].includes(revealState.value),
@@ -142,32 +181,67 @@ export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
           xmlns="http://www.w3.org/2000/svg"
           viewBox={ `0 0 ${diameter.value} ${diameter.value}` }
         >
-          <circle
-            class={[
-              'v-progress-circular__underlay',
-              underlayColorClasses.value,
-            ]}
-            style={ underlayColorStyles.value }
-            fill="transparent"
-            cx="50%"
-            cy="50%"
-            r={ MAGIC_RADIUS_CONSTANT }
-            stroke-width={ strokeWidth.value }
-            stroke-dasharray={ CIRCUMFERENCE }
-            stroke-dashoffset={ 0 }
-          />
+          { geometry.value ? (
+            <g
+              class="v-progress-circular__split"
+              style={{
+                '--v-progress-circular-value': normalizedValue.value,
+                '--v-progress-circular-stroke': convertToUnit(strokeWidth.value),
+                '--v-progress-circular-waves': geometry.value.waves,
+                '--v-progress-circular-gap': geometry.value.gap,
+              }}
+            >
+              <path
+                class={[
+                  'v-progress-circular__underlay',
+                  'v-progress-circular__track',
+                  underlayColorClasses.value,
+                ]}
+                style={ underlayColorStyles.value }
+                d={ geometry.value.track }
+                pathLength="200"
+                stroke-linecap={ geometry.value.linecap }
+              />
 
-          <circle
-            class="v-progress-circular__overlay"
-            fill="transparent"
-            cx="50%"
-            cy="50%"
-            r={ MAGIC_RADIUS_CONSTANT }
-            stroke-width={ strokeWidth.value }
-            stroke-dasharray={ CIRCUMFERENCE }
-            stroke-dashoffset={ strokeDashOffset.value }
-            stroke-linecap={ props.rounded ? 'round' : undefined }
-          />
+              <path
+                class="v-progress-circular__wave"
+                // CSS d animates amplitude changes, the attribute covers Safari which ignores it
+                style={{ d: `path("${geometry.value.wave}")` }}
+                d={ geometry.value.wave }
+                pathLength={ 100 + 100 / geometry.value.waves }
+                stroke-linecap={ geometry.value.linecap }
+              />
+            </g>
+          ) : (
+            <>
+              <circle
+                class={[
+                  'v-progress-circular__underlay',
+                  underlayColorClasses.value,
+                ]}
+                style={ underlayColorStyles.value }
+                fill="transparent"
+                cx="50%"
+                cy="50%"
+                r={ MAGIC_RADIUS_CONSTANT }
+                stroke-width={ strokeWidth.value }
+                stroke-dasharray={ CIRCUMFERENCE }
+                stroke-dashoffset={ 0 }
+              />
+
+              <circle
+                class="v-progress-circular__overlay"
+                fill="transparent"
+                cx="50%"
+                cy="50%"
+                r={ MAGIC_RADIUS_CONSTANT }
+                stroke-width={ strokeWidth.value }
+                stroke-dasharray={ CIRCUMFERENCE }
+                stroke-dashoffset={ strokeDashOffset.value }
+                stroke-linecap={ props.rounded ? 'round' : undefined }
+              />
+            </>
+          )}
         </svg>
 
         { slots.default && (

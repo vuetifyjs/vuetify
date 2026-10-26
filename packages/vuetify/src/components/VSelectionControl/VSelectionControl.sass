@@ -28,6 +28,9 @@
       .v-label
         color: rgb(var(--v-theme-error))
 
+    &--has-description
+      align-items: flex-start
+
     &--inline
       display: inline-flex
       flex: 0 0 auto
@@ -40,6 +43,16 @@
     @at-root
       @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
         --v-selection-control-size: #{$selection-control-size + $modifier}
+
+  .v-selection-control__content
+    min-width: 0
+
+    > :first-child
+      margin-block-start: calc((var(--v-selection-control-size) - 1lh) / 2)
+
+  .v-selection-control__description
+    opacity: $selection-control-description-opacity
+    @include tools.typography($selection-control-description-typography...)
 
   .v-selection-control__wrapper
     width: var(--v-selection-control-size)

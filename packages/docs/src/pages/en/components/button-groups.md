@@ -12,7 +12,7 @@ features:
   github: /components/VBtnToggle/
   label: 'C: VBtnToggle'
   report: true
-  spec: https://m2.material.io/components/buttons#toggle-button
+  spec: https://m3.material.io/components/all-buttons
 ---
 
 # Button toggles

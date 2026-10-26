@@ -134,6 +134,15 @@ export default {
       item: 'Bewertung {0} von {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Weitere Optionen',
+  },
   loading: 'Laden...',
   infiniteScroll: {
     loadMore: 'Mehr laden',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Tastenkürzel: {0}',
     or: 'oder',
   },
-  video: {
+  media: {
     play: 'Abspielen',
     pause: 'Pause',
     seek: 'Suchen',
     volume: 'Lautstärke',
-    showVolume: 'Lautstärkeregler anzeigen',
     mute: 'Stummschalten',
     unmute: 'Stummschaltung aufheben',
     enterFullscreen: 'Vollbild',

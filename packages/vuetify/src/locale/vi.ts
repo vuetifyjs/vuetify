@@ -134,6 +134,15 @@ export default {
       item: 'Đánh giá {0} trên {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Tối thiểu',
+      end: 'Tối đa',
+    },
+  },
+  splitBtn: {
+    menu: 'Thêm tùy chọn',
+  },
   loading: 'Đang tải...',
   infiniteScroll: {
     loadMore: 'Tải thêm',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Phím tắt: {0}',
     or: 'hoặc',
   },
-  video: {
+  media: {
     play: 'Phát',
     pause: 'Tạm dừng',
     seek: 'Tìm kiếm',
     volume: 'Âm lượng',
-    showVolume: 'Hiện điều khiển âm lượng',
     mute: 'Tắt tiếng',
     unmute: 'Bật tiếng',
     enterFullscreen: 'Toàn màn hình',

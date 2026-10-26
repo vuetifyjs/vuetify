@@ -16,7 +16,7 @@ features:
   github: /components/VIcon/
   label: 'C: VIcon'
   report: true
-  spec: https://m2.material.io/design/iconography/system-icons.html
+  spec: https://m3.material.io/styles/icons
 ---
 
 # Icons

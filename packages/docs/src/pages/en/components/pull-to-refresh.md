@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Pull To Refresh
   description: The PullToRefresh allows users to update content with a simple downward swipe on their screen.

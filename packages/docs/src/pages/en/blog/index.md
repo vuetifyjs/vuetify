@@ -18,6 +18,22 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify0 v1.3
+
+🖊️ John Leider • 📅 October 26th, 2026
+
+Vuetify0 v1.3 is out. Kanban and Menu are the two pages to open in the docs first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1-3/) { .text-end }
+
+## Announcing Vuetify v4.3
+
+🖊️ John Leider • 📅 October 20th, 2026
+
+Vuetify v4.3 "Paladin" adds more control over filtering and selection in data tables and forms, a batch of new labs components, right-click menus for VMenu, and opt-in Material Design Expressive styles for 7 components. It also includes new options for carousels and slide groups, and a more stable layout for SSR apps. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify-4.3/) { .text-end }
+
 ## September 2026 Update
 
 🖊️ Jacek Czarniecki • 📅 October 7th, 2026

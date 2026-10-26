@@ -27,39 +27,73 @@ The following is a list of all planned components for the year 2026.
 | [v4.0 (Revisionist)](https://github.com/vuetifyjs/vuetify/milestone/62) | Q1 2026         |
 | [v4.1 (Ascendant)](https://github.com/vuetifyjs/vuetify/milestone/77)   | Q2 2026         |
 | [v4.2 (Crusader)](https://github.com/vuetifyjs/vuetify/milestone/90)    | Q3 2026         |
-| v4.3                                                                    | TBD             |
+| [v4.3 (Paladin)](https://github.com/vuetifyjs/vuetify/milestone/93)     | Q4 2026         |
+| [v4.4 (Arbiter)](https://github.com/vuetifyjs/vuetify/milestone/95)     | Q4 2026         |
 
 ### New form components and features
 
 | Name                                                            | Entering Labs | Production Release |
 |-----------------------------------------------------------------|---------------|--------------------|
-| [v-mask-input](/components/mask-inputs/)                        | *             | Q2 2026            |
+| [v-mask-input](/components/mask-inputs/)                        | *             | Q4 2026            |
 | [v-month-picker](/components/month-pickers)                     | *             | Q4 2026            |
 | [v-date-range-picker](/components/date-range-pickers/)          | *             | Q4 2026            |
-| [v-time-input](https://github.com/vuetifyjs/vuetify/pull/23141) | Q3 2026       | Q4 2026            |
-| v-date-time-picker                                              | Q3 2026       | Q4 2026            |
-| v-password-input                                                | Q3 2026       | Q4 2026            |
+| [v-time-input](/components/time-inputs/)                        | *             | Q4 2026            |
+| v-date-time-picker                                              | Q4 2026       | Q4 2026            |
+| v-password-input                                                | Q4 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
 ### Other components and features
 
-| Name                                              | Entering Labs | Production Release |
-|---------------------------------------------------|---------------|--------------------|
-| [v-avatar-group](/components/avatar-groups)       | *             | Q3 2026            |
-| [v-command-palette](/components/command-palettes) | *             | Q3 2026            |
-| [v-pie](/components/pie-charts)                   | *             | Q3 2026            |
-| [v-video](/components/videos)                     | *             | Q4 2026            |
-| [v-highlight](/components/highlights)             | *             | Q4 2026            |
-| [v-heatmap](/components/heatmaps)                 | *             | Q4 2026            |
-| v-split-btn                                       | Q3 2026       | Q4 2026            |
-| v-drag (directive)                                | Q3 2026       | Q4 2026            |
+| Name                                                  | Entering Labs | Production Release |
+|-------------------------------------------------------|---------------|--------------------|
+| [v-command-palette](/components/command-palettes)     | *             | Q4 2026            |
+| [v-pie](/components/pie-charts)                       | *             | Q4 2026            |
+| [v-video](/components/videos)                         | *             | Q4 2026            |
+| [v-heatmap](/components/heatmaps)                     | *             | Q4 2026            |
+| [v-split-btn](/components/split-buttons)              | *             | Q4 2026            |
+| [v-audio](/components/audio-players)                  | *             | Q4 2026            |
+| [v-infinite-carousel](/components/infinite-carousels) | *             | Q4 2026            |
+| [v-loading-indicator](/components/loading-indicators) | *             | Q4 2026            |
+| v-drag (directive)                                    | Q4 2026       | Q4 2026            |
 
 \* Already in Labs { .text-body-small }
 
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v4.3 (Paladin)
+
+- **Released:** October 2026
+- **Target Release:** Q4 2026
+- **Notes:** [v4.3 Release](/getting-started/release-notes/?version=v4.3.0)
+- **Overview:**
+  - MD3 alignment for buttons, tabs, sliders and progress indicators
+  - VNavigationDrawer - `modal` prop and `v-model:expanded`
+  - VAlert - `timeout` with countdown indicator
+  - VCheckbox/VRadio/VSwitch - `description` prop and slot
+  - mouse wheel navigation for VWindow, VCarousel and VDatePicker
+  - new [v-touch-hold](/directives/touch-hold/) directive and [v-time-input](/components/time-inputs/) in Labs
+  - Introduced 3 new components to the main framework from Labs:
+    - [v-avatar-group](/components/avatar-groups/)
+    - [v-highlight](/components/highlights/)
+    - [v-progress](/components/progress/)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/93)
+
+### v4.2 (Crusader)
+
+- **Released:** September 2026
+- **Target Release:** Q3 2026
+- **Notes:** [v4.2 Release](/getting-started/release-notes/?version=v4.2.0)
+- **Overview:**
+  - `@vuetify/v0` utilities consumed in core
+  - VSelect/VAutocomplete/VCombobox - `open-on-focus`, persistent menu, new events for multi-selection
+  - VSlideGroup - `scroll-snap`, `scroll-distance` and `slide` function
+  - VProgressLinear - `reveal` prop and transition duration for `model-value` changes
+  - VSkeletonLoader - updated `table`, new `types` prop and `chip-group` type
+  - promoted [rules](/features/rules/) from Labs
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/90)
 
 ### v4.1 (Ascendant)
 
@@ -82,7 +116,6 @@ The following are the already released **minor** and **major** version updates. 
     - [v-date-input](/components/date-inputs/)
     - [v-color-input](/components/color-inputs/)
     - [v-picker](/api/v-picker/)
-
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/77)
 
 ### v4.0 (Revisionist)

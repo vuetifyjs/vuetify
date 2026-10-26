@@ -168,7 +168,7 @@ export const VDataIterator = genericComponent<new <T> (
       select,
       selectAll,
       toggleSelect,
-    } = provideSelection(props, { allItems: items, currentPage: currentItemsWithoutGroups })
+    } = provideSelection(props, { allItems: items, filteredItems, currentPage: currentItemsWithoutGroups })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     useOptions({

@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Progress
   title: Progress component
@@ -8,7 +9,7 @@ related:
   - /components/progress-linear/
   - /components/progress-circular/
 features:
-  github: /labs/VProgress/
+  github: /components/VProgress/
   label: 'C: VProgress'
   report: true
 ---
@@ -21,23 +22,9 @@ The `v-progress` component is a unified wrapper for linear and circular progress
 
 ::: warning
 
-This feature requires [v4.0.3](/getting-started/release-notes/?version=v4.0.3)
+This feature was introduced in [v4.0.3](/getting-started/release-notes/?version=v4.0.3). Released from labs in [v4.3.0](/getting-started/release-notes/?version=v4.3.0).<br>Versions until **v4.2.6** may require import from `vuetify/labs/VProgress` (labs).
 
 :::
-
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VProgress } from 'vuetify/labs/VProgress'
-
-export default createVuetify({
-  components: {
-    VProgress,
-  },
-})
-```
 
 ## Usage
 
@@ -86,3 +73,9 @@ Use the **#label** and **#value** slots to fully customize the content displayed
 Use the **#default** slot to replace the built-in progress indicator with your own. The slot exposes `percent` and other scoped props for custom rendering.
 
 <ExamplesExample file="v-progress/misc-card-loader" />
+
+#### Loading indicator
+
+The **#default** slot also takes [v-loading-indicator](/components/loading-indicators/) for short waits with no measurable progress.
+
+<ExamplesExample file="v-progress/misc-loading-indicator" />

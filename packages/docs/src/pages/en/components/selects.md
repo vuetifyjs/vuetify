@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Selects
   title: Select component
@@ -13,7 +12,7 @@ features:
   label: 'C: VSelect'
   report: true
   github: /components/VSelect/
-  spec: https://m2.material.io/components/text-fields
+  spec: https://m3.material.io/components/text-fields
 ---
 
 # Selects

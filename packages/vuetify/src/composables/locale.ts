@@ -1,6 +1,7 @@
 // Utilities
-import { computed, inject, provide, ref, toRef } from 'vue'
+import { computed, inject, provide, readonly, ref, toRef, watch } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
+import { createV0Rtl } from '@/util'
 // Types
 import type { InjectionKey, Ref, ShallowRef } from 'vue'
 
@@ -75,7 +76,7 @@ export interface RtlProps {
 }
 
 export interface RtlInstance {
-  isRtl: Ref<boolean>
+  isRtl: Readonly<Ref<boolean>>
   rtl: Ref<Record<string, boolean>>
   rtlClasses: Ref<string>
 }
@@ -131,12 +132,23 @@ function genDefaults () {
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
   const rtl = ref<Record<string, boolean>>(options?.rtl ?? genDefaults())
-  const isRtl = computed(() => rtl.value[i18n.current.value] ?? false)
+  const direction = createV0Rtl()
+
+  // The locale map stays the driver. Sync flush keeps isRtl current in the
+  // same tick as a locale change. createRtlPlugin is not installed: it would
+  // write `dir` on documentElement, and Vuetify exposes the v-locale class.
+  watch(
+    () => rtl.value[i18n.current.value] ?? false,
+    value => {
+      direction.isRtl.value = value
+    },
+    { flush: 'sync', immediate: true },
+  )
 
   return {
-    isRtl,
+    isRtl: readonly(direction.isRtl),
     rtl,
-    rtlClasses: toRef(() => `v-locale--is-${isRtl.value ? 'rtl' : 'ltr'}`),
+    rtlClasses: toRef(() => `v-locale--is-${direction.isRtl.value ? 'rtl' : 'ltr'}`),
   }
 }
 

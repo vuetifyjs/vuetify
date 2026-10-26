@@ -5,3 +5,11 @@
 // VSelectionControl
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;
 $selection-control-size: 40px !default;
+$selection-control-description-opacity: var(--v-medium-emphasis-opacity) !default;
+$selection-control-description-typography: (
+  map.get(settings.$typography, 'body-medium', 'size'),
+  map.get(settings.$typography, 'body-medium', 'weight'),
+  map.get(settings.$typography, 'body-medium', 'letter-spacing'),
+  map.get(settings.$typography, 'body-medium', 'line-height'),
+  none
+) !default;

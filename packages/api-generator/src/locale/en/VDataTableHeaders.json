@@ -6,13 +6,19 @@
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Deprecated, use `fixed-header` instead.",
-    "headerProps": "Additional props to be be passed to the default header"
+    "headerProps": "Additional props to be be passed to the default header",
+    "disableSort": "Disables sorting from the column headers.",
+    "fixedHeader": "Sticks the header to the top of the table.",
+    "multiSort": "Shows sort priority badges and allows multiple selection on mobile.",
+    "selectAllLabel": "Accessible label for the select-all checkbox. Accepts locale keys.",
+    "initialSortOrder": "Picks the sort icon shown on unsorted columns."
   },
   "slots": {
     "[`column.${string}`]": "Slot for custom rendering of a column.",
     "[`header.${string}`]": "Slot for custom rendering of a header cell.",
     "header.data-table-expand": "Slot for the expand button in the header.",
     "header.data-table-select": "Slot for the select-all checkbox in the header.",
-    "headers": "Slot to replace the default rendering of the `<thead>` element."
+    "headers": "Slot to replace the default rendering of the `<thead>` element.",
+    "mobile.header": "Replaces the content of the header shown in mobile mode (sort select and select-all checkbox). Receives the same props as the `headers` slot."
   }
 }

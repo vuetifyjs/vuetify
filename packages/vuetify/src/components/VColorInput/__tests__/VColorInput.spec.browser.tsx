@@ -2,7 +2,8 @@
 import { VColorInput } from '../VColorInput'
 
 // Utilities
-import { render, screen, userEvent } from '@test'
+import { render, screen, userEvent, waitIdle } from '@test'
+import { ref } from 'vue'
 
 const openPickers = () => [...document.querySelectorAll<HTMLElement>('.v-color-picker')].filter(el => el.checkVisibility())
 
@@ -64,5 +65,28 @@ describe('VColorInput', () => {
     await userEvent.click(element, { position: { x: 92, y: 55 } })
 
     expect(onFocus).toHaveBeenCalledTimes(1)
+  })
+
+  it('should expose the VTextField api it wraps', async () => {
+    const cmp = ref<any>()
+
+    render(() => <VColorInput ref={ cmp } />)
+    await waitIdle()
+
+    const missing = [
+      'focus',
+      'blur',
+      'reset',
+      'resetValidation',
+      'validate',
+    ].filter(k => typeof cmp.value[k] !== 'function')
+
+    expect(missing).toEqual([])
+
+    expect('isValid' in cmp.value).toBe(true)
+    expect(cmp.value.validate()).toBeInstanceOf(Promise)
+
+    cmp.value.focus()
+    expect(document.activeElement).toBe(screen.getByCSS('.v-color-input input'))
   })
 })

@@ -134,6 +134,15 @@ export default {
       item: 'Gradering {0} van {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opsies',
+  },
   loading: 'Laai...',
   infiniteScroll: {
     loadMore: 'Laai meer',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Sleutelbordkortpad: {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Speel',
     pause: 'Pouseer',
     seek: 'Soek',
     volume: 'Volume',
-    showVolume: 'Wys volumebeheer',
     mute: 'Demp',
     unmute: 'Ontdemp',
     enterFullscreen: 'Volskerm',

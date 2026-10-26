@@ -5,6 +5,7 @@
     "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",
     "clearOnSelect": "Reset the search text when a selection is made while using the **multiple** prop.",
     "closeOnInputClick": "Clicking the field while the menu is open closes it.",
+    "filteredOrder": "Order of the matching items while searching. `none` keeps the order of **items**. `prefix` puts exact matches first, then items with a value starting with the search, then those with a word starting with it, then the rest. Every key in **filter-keys** counts, including ones that are not displayed; within a tier, a match in an earlier key wins. Remaining ties keep their order and items never move past a divider or subheader. Has no effect with **no-filter**.",
     "itemChildren": "This property currently has **no effect**.",
     "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys.",
     "trimValues": "Trims leading and trailing whitespace from entered values, and discards entries that are empty once trimmed.",

@@ -23,7 +23,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 
 // Utilities
-import { computed, nextTick, onMounted, shallowRef, toRef, watch } from 'vue'
+import { computed, nextTick, shallowRef, toRef, watch } from 'vue'
 import { createRange, genericComponent, isString, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -156,12 +156,13 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     provideDefaults(undefined, { scoped: true })
 
-    const { resizeRef } = useResizeObserver(() => {
+    const el = shallowRef<HTMLElement>()
+    useResizeObserver(el, () => {
       maxButtons.value = measure() ?? maxButtons.value
     })
 
     function measure () {
-      const list = resizeRef.el?.querySelector('.v-pagination__list')
+      const list = el.value?.querySelector('.v-pagination__list')
       const items = Array.from(list?.children ?? [])
 
       if (!list || items.length < 2) return
@@ -188,16 +189,12 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     }
 
     let parentWidth = 0
-    const { resizeRef: parentRef } = useResizeObserver(entries => {
+    useResizeObserver(() => el.value?.parentElement, entries => {
       const width = entries[0]?.contentRect.width ?? 0
       const grew = parentWidth > 0 && width > parentWidth
       parentWidth = width
 
       if (grew) maxButtons.value = -1
-    })
-
-    onMounted(() => {
-      parentRef.value = resizeRef.el?.parentElement ?? null
     })
 
     const length = computed(() => parseInt(props.length, 10))
@@ -376,7 +373,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
 
     useRender(() => (
       <props.tag
-        ref={ resizeRef }
+        ref={ el }
         class={[
           'v-pagination',
           themeClasses.value,

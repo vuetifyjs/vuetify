@@ -39,9 +39,7 @@ describe('VPagination', () => {
       </div>
     ))
 
-    await waitIdle()
-
-    expect(screen.getAllByCSS('.v-pagination__item').length).toBeLessThan(8)
+    await expect.poll(() => screen.getAllByCSS('.v-pagination__item').length).toBeLessThan(8)
     expect(screen.getByCSS('.v-pagination__list')).toHaveTextContent('100')
 
     const samples = await sampleFrames(20)

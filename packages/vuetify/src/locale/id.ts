@@ -134,6 +134,15 @@ export default {
       item: 'Penilaian {0} dari {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Opsi lainnya',
+  },
   loading: 'Memuat...',
   infiniteScroll: {
     loadMore: 'Muat lebih banyak',
@@ -174,12 +183,11 @@ export default {
     shortcut: 'Pintasan keyboard: {0}',
     or: 'atau',
   },
-  video: {
+  media: {
     play: 'Putar',
     pause: 'Jeda',
     seek: 'Cari',
     volume: 'Volume',
-    showVolume: 'Tampilkan kontrol volume',
     mute: 'Bisukan',
     unmute: 'Bunyikan',
     enterFullscreen: 'Layar penuh',

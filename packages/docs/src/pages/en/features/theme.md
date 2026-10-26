@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Theme
   description: Setup your application's theme and supplemental colors in a flash.
@@ -322,6 +321,12 @@ export default createVuetify({
   <div class="text-primary-darken-2">text color</div>
 </template>
 ```
+
+::: warning
+
+Generated variations are applied last and replace any color with the same name, including ones defined in your theme. To set a variation by hand, leave its base color out of `variations.colors` and define all of its variants yourself.
+
+:::
 
 ## Disable theme
 

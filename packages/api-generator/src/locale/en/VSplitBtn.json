@@ -1,0 +1,16 @@
+{
+  "description": "A button with a primary action and a button that opens a menu of related actions.",
+  "props": {
+    "icon": "Turns the primary action into an icon button showing this icon.",
+    "menu": "Controls whether the menu is open (v-model:menu).",
+    "menuIcon": "Icon of the menu button. Rotates while the menu is open.",
+    "menuLabel": "Accessible label of the menu button.",
+    "loading": "Puts the primary action into a loading state. Accepts a color for the loader."
+  },
+  "events": {
+    "click": "Emitted when the primary action is clicked."
+  },
+  "slots": {
+    "menu": "Content of the menu."
+  }
+}

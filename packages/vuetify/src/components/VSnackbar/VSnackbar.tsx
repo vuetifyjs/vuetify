@@ -110,6 +110,7 @@ export const makeVSnackbarProps = propsFactory({
     locationStrategy: null,
     transition: 'v-snackbar-transition',
   }), [
+    'contextMenu',
     'persistent',
     'noClickAnimation',
     'offset',
@@ -131,9 +132,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   emits: {
     'update:modelValue': (v: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
@@ -229,6 +233,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     function onAfterLeave () {
       if (isHovering.value) onPointerleave()
       isFocused.value = false
+      emit('afterLeave')
     }
 
     const locationClasses = computed(() => {
@@ -317,6 +322,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...overlayProps }
           transition={ transition.value }
           v-model={ isActive.value }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
           contentProps={ mergeProps({
             class: [
               'v-snackbar__wrapper',

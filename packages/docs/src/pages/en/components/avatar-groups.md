@@ -9,7 +9,7 @@ related:
   - /components/chip-groups/
   - /components/lists/
 features:
-  github: /labs/VAvatarGroup/
+  github: /components/VAvatarGroup/
   label: 'C: VAvatarGroup'
   report: true
 ---
@@ -20,19 +20,11 @@ The `v-avatar-group` component is used to display a collection of avatars in a s
 
 <PageFeatures />
 
-## Installation
+::: warning
 
-Labs components require manual import and registration with the Vuetify instance.
+This feature was introduced in [v3.12.0](/getting-started/release-notes/?version=v3.12.0). Released from labs in [v4.3.0](/getting-started/release-notes/?version=v4.3.0).<br>Versions until **v4.2.6** may require import from `vuetify/labs/VAvatarGroup` (labs).
 
-```js { resource="src/plugins/vuetify.js" }
-import { VAvatarGroup } from 'vuetify/labs/VAvatarGroup'
-
-export default createVuetify({
-  components: {
-    VAvatarGroup,
-  },
-})
-```
+:::
 
 ## Usage
 

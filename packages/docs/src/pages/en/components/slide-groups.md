@@ -85,3 +85,9 @@ You can select multiple items by setting the **multiple** prop.
 Customize the slide group to creatively display information on sheets. Using the selection, we can display auxiliary information easily for the user.
 
 <ExamplesExample file="v-slide-group/misc-pseudo-carousel" />
+
+#### Image slider
+
+Combine **gap**, **padding** and **scroll-snap** with the exposed methods and state to build external controls.
+
+<ExamplesExample file="v-slide-group/misc-image-slider" />

@@ -8,15 +8,17 @@ import {
 
 // Types
 import type { CalendarTimestamp } from '../types'
+import type { VTimestampInput } from '../util/timestamp'
 
-export function useTimes (props: { now: string | undefined }) {
+export function useTimes (now: () => VTimestampInput | undefined) {
   const times = reactive({
     now: parseTimestamp('0000-00-00 00:00', true),
     today: parseTimestamp('0000-00-00', true),
   })
 
   const parsedNow = computed((): CalendarTimestamp | null => {
-    return props.now && validateTimestamp(props.now) ? parseTimestamp(props.now, true) : null
+    const value = now()
+    return value && validateTimestamp(value) ? parseTimestamp(value, true) : null
   })
 
   function setPresent (): void {
