@@ -26,10 +26,10 @@ The rules composable provide a multitude of validation rules to be used with for
 To use the Rules plugin, you'll need to import and register it with your Vuetify instance:
 
 ```js
-import { createVue } from 'vue'
+import { createApp } from 'vue'
 import { createRulesPlugin, createVuetify } from 'vuetify'
 
-const app = createVue()
+const app = createApp()
 const vuetify = createVuetify()
 
 app.use(createRulesPlugin({ /* options */ }, vuetify.locale))
@@ -151,7 +151,7 @@ The example above is shorthand for `[rules.required()]`.
 
 ::: info
 
-Aliases are resolved by the rules plugin, so they only take effect when [`createRulesPlugin`](#installation) is registered. Without it, the string is passed through as-is and treated as a literal error message.
+Aliases are resolved by the rules plugin, so they only take effect when [`createRulesPlugin`](#installation) is registered.
 
 :::
 
@@ -189,10 +189,10 @@ Because aliases reference the same builders registered through `createRulesPlugi
 Vuetify comes with an existing set of validation rules but you can overwrite them or add yours.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVue } from 'vue'
+import { createApp } from 'vue'
 import { createRulesPlugin, createVuetify } from 'vuetify'
 
-const app = createVue()
+const app = createApp()
 const vuetify = createVuetify()
 
 app.use(createRulesPlugin({
@@ -206,5 +206,5 @@ app.use(createRulesPlugin({
       return v => Number.isInteger(v) || err || 'Field must contain an integer value'
     },
   },
-}, vuetify.locale)
+}, vuetify.locale))
 ```
