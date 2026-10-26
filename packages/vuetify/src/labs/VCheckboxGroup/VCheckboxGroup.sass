@@ -13,6 +13,5 @@
           padding-inline-start: $checkbox-group-label-selection-group-padding-inline
           margin-block-start: $checkbox-group-label-selection-group-margin-top
 
-  @include tools.density('v-input', $checkbox-group-density) using ($modifier)
-    .v-checkbox-group &.v-checkbox
-      --v-input-control-height: #{$checkbox-group-control-height + $modifier}
+    .v-checkbox .v-selection-control
+      min-height: var(--v-selection-control-size)
