@@ -533,6 +533,7 @@ Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `
   --color-surface:         rgb(var(--v-theme-surface));
   --color-surface-variant: rgb(var(--v-theme-surface-variant));
   --color-primary:         rgb(var(--v-theme-primary));
+  --color-secondary:       rgb(var(--v-theme-secondary));
   --color-success:         rgb(var(--v-theme-success));
   --color-warning:         rgb(var(--v-theme-warning));
   --color-error:           rgb(var(--v-theme-error));
@@ -542,10 +543,16 @@ Vuetify stores theme colors as raw RGB channels in CSS custom properties (e.g. `
 /* safelist classes used dynamically via color="..." prop */
 @source inline('bg-primary');
 @source inline('text-primary');
+@source inline('bg-secondary');
+@source inline('text-secondary');
 @source inline('bg-success');
 @source inline('text-success');
+@source inline('bg-warning');
+@source inline('text-warning');
 @source inline('bg-error');
 @source inline('text-error');
+@source inline('bg-info');
+@source inline('text-info');
 ```
 
 Disable Vuetify's own theme utility classes to avoid duplicate `bg-*` / `text-*` rules that can't be used with variants:
