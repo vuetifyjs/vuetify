@@ -135,6 +135,7 @@ export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>(
             props.class,
           ]}
           readonly={ !props.editable }
+          hover={ props.hover && canEdit.value }
           style={ props.style }
           color=""
           hideActions={ false }
