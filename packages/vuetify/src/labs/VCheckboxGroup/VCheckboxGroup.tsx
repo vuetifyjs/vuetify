@@ -102,7 +102,7 @@ export const VCheckboxGroup = genericComponent<new <T>(
         >
           {{
             ...slots,
-            default: ({ messagesId, isDisabled, isReadonly, isValid }) => (
+            default: ({ messagesId, isDisabled, isReadonly }) => (
               <>
                 { label && (
                   <VLabel id={ id.value }>
@@ -120,7 +120,6 @@ export const VCheckboxGroup = genericComponent<new <T>(
                   defaultsTarget="VCheckbox"
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
-                  error={ isValid.value === false }
                   { ...controlAttrs }
                   v-model={ model.value }
                   v-slots={ slots }

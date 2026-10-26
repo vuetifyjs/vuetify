@@ -235,15 +235,12 @@ describe('VCheckboxGroup', () => {
     ])
     expect(screen.getAllByText('Select at least one option')).toHaveLength(1)
     expect(group).toHaveAccessibleDescription('Select at least one option')
-    expect(screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')).toHaveClass('v-selection-control--error')
-    expect(screen.getByRole('checkbox', { name: 'B' }).closest('.v-selection-control')).toHaveClass('v-selection-control--error')
+    expect(document.querySelector('.v-selection-control--error')).toBeNull()
 
     await userEvent.click(screen.getByRole('checkbox', { name: 'B' }))
 
     await expect(form.value!.validate()).resolves.toEqual({ valid: true, errors: [] })
     await expect.poll(() => screen.queryByText('Select at least one option')).toBeNull()
-    expect(screen.getByRole('checkbox', { name: 'A' }).closest('.v-selection-control')).not.toHaveClass('v-selection-control--error')
-    expect(screen.getByRole('checkbox', { name: 'B' }).closest('.v-selection-control')).not.toHaveClass('v-selection-control--error')
   })
 
   it('should retain group registration and validation after removing a checkbox', async () => {
