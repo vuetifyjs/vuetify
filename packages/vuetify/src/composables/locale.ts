@@ -131,7 +131,8 @@ function genDefaults () {
 }
 
 export function createRtl (i18n: LocaleInstance, options?: RtlOptions): RtlInstance {
-  const rtl = ref<Record<string, boolean>>(options?.rtl ?? genDefaults())
+  // spread/copy to avoid server-side memory leak when options.rtl is shared between requests
+  const rtl = ref<Record<string, boolean>>(options?.rtl ? { ...options.rtl } : genDefaults())
   const direction = createV0Rtl()
 
   // The locale map stays the driver. Sync flush keeps isRtl current in the
