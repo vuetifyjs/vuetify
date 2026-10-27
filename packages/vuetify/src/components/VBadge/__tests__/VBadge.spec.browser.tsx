@@ -29,7 +29,7 @@ const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="$vuetify" />,
   'Icon sizes': gridOn([null], [undefined, 'x-small', 'small', 'default', 'large', 'x-large', 32], (_, size) => (
-    <VBadge inline v-slots={{ badge: () => <VIcon icon="$vuetify" size={ size } /> }} />
+    <VBadge inline icon="$vuetify" iconSize={ size } height="auto" />
   )),
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
     <VBadge { ...{ [xy]: offset } } content="0">
@@ -81,10 +81,8 @@ describe('VBadge', () => {
       ['large', 21],
       ['x-large', 24],
       [32, 32],
-    ])('should fit an icon with size %s inside the badge', (size, pixels) => {
-      render(() => (
-        <VBadge inline v-slots={{ badge: () => <VIcon icon="$vuetify" size={ size } /> }} />
-      ))
+    ])('should apply icon-size %s and fit icons with automatic height', (size, pixels) => {
+      render(() => <VBadge inline icon="$vuetify" iconSize={ size } height="auto" />)
 
       const icon = screen.getByCSS('.v-badge__badge .v-icon')
       expect(getComputedStyle(icon).fontSize).toBe(`${pixels}px`)
@@ -97,13 +95,27 @@ describe('VBadge', () => {
       expect(iconBounds.right).toBeLessThanOrEqual(badgeBounds.right)
     })
 
-    it('should update the icon size and restore the badge default when cleared', async () => {
-      const size = shallowRef<string | number>()
+    it('should apply icon-size to icons in the badge slot', () => {
       render(() => (
-        <VBadge inline v-slots={{ badge: () => <VIcon icon="$vuetify" size={ size.value } /> }} />
+        <VBadge inline iconSize="large" v-slots={{ badge: () => <VIcon icon="$vuetify" /> }} />
       ))
 
-      const icon = screen.getByCSS('.v-badge__badge .v-icon')
+      expect(getComputedStyle(screen.getByCSS('.v-icon')).fontSize).toBe('21px')
+    })
+
+    it('should allow a slotted icon to override icon-size', () => {
+      render(() => (
+        <VBadge inline iconSize={ 32 } v-slots={{ badge: () => <VIcon icon="$vuetify" size="small" /> }} />
+      ))
+
+      expect(getComputedStyle(screen.getByCSS('.v-icon')).fontSize).toBe('15px')
+    })
+
+    it('should react to icon-size changes', async () => {
+      const size = shallowRef<string | number>()
+      render(() => <VBadge inline icon="$vuetify" iconSize={ size.value } />)
+
+      const icon = screen.getByCSS('.v-icon')
       expect(getComputedStyle(icon).fontSize).toBe('12px')
 
       for (const [value, pixels] of [['large', 21], [32, 32], [undefined, 12]] as const) {
@@ -112,87 +124,48 @@ describe('VBadge', () => {
       }
     })
 
-    it.each([
-      { VIcon: { size: 24 } },
-      { VBadge: { VIcon: { size: 24 } } },
-      { global: { size: 24 } },
-    ])('should preserve inherited icon size defaults (%j)', defaults => {
+    it('should restore icon-size when the slotted icon size is cleared', async () => {
+      const size = shallowRef<string | number>()
       render(() => (
-        <VBadge inline v-slots={{ badge: () => <VIcon icon="$vuetify" /> }} />
-      ), null, { defaults })
+        <VBadge inline iconSize="large" v-slots={{ badge: () => <VIcon icon="$vuetify" size={ size.value } /> }} />
+      ))
 
-      expect(getComputedStyle(screen.getByCSS('.v-badge__badge .v-icon')).fontSize).toBe('24px')
+      const icon = screen.getByCSS('.v-icon')
+      expect(getComputedStyle(icon).fontSize).toBe('21px')
+
+      for (const [value, pixels] of [['small', 15], [32, 32], [undefined, 21]] as const) {
+        size.value = value
+        await expect.poll(() => getComputedStyle(icon).fontSize).toBe(`${pixels}px`)
+      }
     })
 
-    it.each([
-      [{ height: 24, width: 24 }, 24, 24],
-      [{ height: 40, width: 40 }, 40, 40],
-      [{ maxHeight: 16, maxWidth: 24 }, 16, 24],
-    ] as const)('should preserve explicit badge dimensions (%j)', (dimensions, height, width) => {
-      render(() => (
-        <VBadge inline { ...dimensions } v-slots={{ badge: () => <VIcon icon="$vuetify" size={ 32 } /> }} />
-      ))
+    it('should keep fixed height unless automatic height is requested', async () => {
+      const height = shallowRef<string | number>()
+      render(() => <VBadge inline icon="$vuetify" iconSize={ 32 } height={ height.value } />)
 
       const badge = screen.getByCSS('.v-badge__badge')
-      expect(getComputedStyle(badge).height).toBe(`${height}px`)
-      expect(getComputedStyle(badge).width).toBe(`${width}px`)
-      expect(getComputedStyle(screen.getByCSS('.v-icon')).fontSize).toBe('32px')
-    })
+      expect(getComputedStyle(badge).height).toBe('20px')
 
-    it.each([
-      [{ height: 12 }, 12],
-      [{ maxHeight: 16 }, 16],
-    ] as const)('should preserve nested badge dimensions (%j)', (dimensions, height) => {
-      render(() => (
-        <VBadge content="outer">
-          <VBadge { ...dimensions } icon="$vuetify" label="nested" />
-        </VBadge>
-      ))
-
-      expect(getComputedStyle(screen.getByLabelText('nested')).height).toBe(`${height}px`)
-    })
-
-    it('should fit icons in positioned badges', () => {
-      render(() => (
-        <VBadge v-slots={{ badge: () => <VIcon icon="$vuetify" size={ 32 } /> }}>
-          <VBtn>Notifications</VBtn>
-        </VBadge>
-      ))
-
-      const iconBounds = screen.getByCSS('.v-badge__badge .v-icon').getBoundingClientRect()
-      const badgeBounds = screen.getByCSS('.v-badge__badge').getBoundingClientRect()
-      expect(iconBounds.top).toBeGreaterThanOrEqual(badgeBounds.top)
-      expect(iconBounds.bottom).toBeLessThanOrEqual(badgeBounds.bottom)
-      expect(iconBounds.left).toBeGreaterThanOrEqual(badgeBounds.left)
-      expect(iconBounds.right).toBeLessThanOrEqual(badgeBounds.right)
-    })
-
-    it('should resume automatic height when a fixed height is cleared', async () => {
-      const height = shallowRef<number>()
-      render(() => (
-        <VBadge inline height={ height.value } v-slots={{ badge: () => <VIcon icon="$vuetify" size={ 32 } /> }} />
-      ))
-
-      const badge = screen.getByCSS('.v-badge__badge')
-      expect(badge.getBoundingClientRect().height).toBeGreaterThanOrEqual(32)
+      height.value = 'auto'
+      await expect.poll(() => badge.getBoundingClientRect().height).toBeGreaterThanOrEqual(32)
 
       height.value = 24
       await expect.poll(() => getComputedStyle(badge).height).toBe('24px')
-
-      height.value = undefined
-      await expect.poll(() => badge.getBoundingClientRect().height).toBeGreaterThanOrEqual(32)
     })
-  })
 
-  it.each([
-    [{ content: '99+' }, 20],
-    [{}, 20],
-    [{ dot: true }, 9],
-    [{ dot: true, dotSize: 12 }, 12],
-  ] as const)('should preserve non-icon badge height (%j)', (props, height) => {
-    render(<VBadge inline { ...props } />)
+    it('should support icon-size through badge defaults', () => {
+      render(<VBadge inline icon="$vuetify" />, null, { defaults: { VBadge: { iconSize: 24 } } })
 
-    expect(getComputedStyle(screen.getByCSS('.v-badge__badge')).height).toBe(`${height}px`)
+      expect(getComputedStyle(screen.getByCSS('.v-icon')).fontSize).toBe('24px')
+    })
+
+    it('should prefer icon-size over inherited icon defaults', () => {
+      render(() => (
+        <VBadge inline iconSize="large" v-slots={{ badge: () => <VIcon icon="$vuetify" /> }} />
+      ), null, { defaults: { VIcon: { size: 24 } } })
+
+      expect(getComputedStyle(screen.getByCSS('.v-icon')).fontSize).toBe('21px')
+    })
   })
 
   describe('label', () => {

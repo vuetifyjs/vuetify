@@ -9,7 +9,6 @@ import { VThemeProvider } from '@/components/VThemeProvider'
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
-import { injectComponentDefaults, injectDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
@@ -36,6 +35,10 @@ export const makeVBadgeProps = propsFactory({
   dotSize: [Number, String],
   floating: Boolean,
   icon: IconValue,
+  iconSize: {
+    type: [Number, String],
+    default: 'x-small',
+  },
   inline: Boolean,
   label: {
     type: String,
@@ -67,8 +70,6 @@ export const VBadge = genericComponent<VBadgeSlots>()({
   props: makeVBadgeProps(),
 
   setup (props, ctx) {
-    const defaults = injectDefaults()
-    const iconDefaults = injectComponentDefaults('VIcon')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { t } = useLocale()
@@ -129,9 +130,6 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 v-show={ props.modelValue }
                 class={[
                   'v-badge__badge',
-                  {
-                    'v-badge__badge--auto-height': !dimensionStyles.value.height && !dimensionStyles.value.maxHeight,
-                  },
                   themeClasses.value,
                   backgroundColorClasses.value,
                   roundedClasses.value,
@@ -154,10 +152,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 role="status"
                 { ...badgeAttrs }
               >
-                <VDefaultsProvider
-                  defaults={{ VIcon: { size: null } }}
-                  disabled={ iconDefaults.value?.size !== undefined || defaults.value?.global?.size !== undefined }
-                >
+                <VDefaultsProvider defaults={{ VIcon: { size: props.iconSize } }}>
                   <VThemeProvider theme={ props.theme }>
                     {
                       props.dot ? undefined

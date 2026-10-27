@@ -6,6 +6,7 @@
     "dot": "Reduce the size of the badge and hide its contents.",
     "dotSize": "Sets the size of the **dot** variant (includes border when using with **bordered**)",
     "floating": "Move the badge further away from the slotted content. Equivalent to an 8px offset.",
+    "iconSize": "Sets the size of the badge icon and the default **size** of `v-icon` components in the **badge** slot. Use `height=\"auto\"` for larger icons.",
     "inline": "Display as an inline block instead of absolute position. **location**, **floating**, and **offset** will have no effect.",
     "label": "The **aria-label** used for the badge.",
     "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",

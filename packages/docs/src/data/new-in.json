@@ -61,7 +61,11 @@
   },
   "VBadge": {
     "props": {
-      "dotSize": "4.0.0"
+      "dotSize": "4.0.0",
+      "iconSize": "4.4.0"
+    },
+    "examples": {
+      "prop-icon-size": "4.4.0"
     }
   },
   "VBanner": {
