@@ -17,6 +17,7 @@ import { mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, getActiveElement, noop, omit, propsFactory, useRender } from '@/util'
 
 // Types
+import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { LocationStrategyFunction } from '@/types'
 
@@ -29,7 +30,7 @@ export const makeVDialogProps = propsFactory({
     location: 'center center' as const,
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition },
+    transition: { component: VDialogTransition as Component },
     zIndex: 2400,
     retainFocus: true,
   }), ['disableInitialFocus']),
