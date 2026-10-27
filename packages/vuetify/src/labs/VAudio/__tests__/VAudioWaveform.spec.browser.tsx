@@ -6,7 +6,7 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { commands, render, screen, showcase } from '@test'
 import { ref } from 'vue'
 
-const peaks = [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4]
+const peaks = Array.from({ length: 15 }).flatMap(() => [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4])
 
 const stories = {
   Default: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } />,

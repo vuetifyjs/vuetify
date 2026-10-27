@@ -10,7 +10,7 @@ import { render, screen, showcase, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 import { makeSilentWav } from '@/labs/composables/__tests__/wav'
 
-const peaks = [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4]
+const peaks = Array.from({ length: 15 }).flatMap(() => [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4])
 
 const SILENT_WAV = makeSilentWav(4)
 
