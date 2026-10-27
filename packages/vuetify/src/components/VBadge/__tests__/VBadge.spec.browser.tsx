@@ -1,7 +1,9 @@
 // Components
 import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
+import { VChip } from '@/components/VChip'
 import { VIcon } from '@/components/VIcon'
+import { VTab, VTabs } from '@/components/VTabs'
 
 // Utilities
 import { gridOn, render, screen, showcase } from '@test'
@@ -72,6 +74,34 @@ describe('VBadge', () => {
         expect(getComputedStyle(icon.closest('.v-badge__badge')!).height).toBe('20px')
       }
       expect(getComputedStyle(screen.getByTestId('activator-icon')).fontSize).toBe('24px')
+    })
+
+    it.each(['button', 'tab', 'chip'])('should preserve badge icon sizes inside a %s', parent => {
+      const content = (
+        <>
+          <VIcon data-testid="parent-icon" icon="$vuetify" />
+          <VBadge inline icon="$vuetify">
+            <VIcon data-testid="activator-icon" icon="$vuetify" />
+          </VBadge>
+          <VBadge inline iconSize="large" height="auto" v-slots={{ badge: () => <VIcon icon="$vuetify" /> }} />
+          <VBadge inline icon="$vuetify" iconSize={ 32 } height="auto" />
+        </>
+      )
+
+      const { container } = render(
+        parent === 'button' ? <VBtn>{ content }</VBtn>
+        : parent === 'tab' ? <VTabs><VTab>{ content }</VTab></VTabs>
+        : <VChip>{ content }</VChip>
+      )
+
+      const icons = container.querySelectorAll('.v-badge__badge .v-icon')
+      expect(icons).toHaveLength(3)
+      expect(getComputedStyle(icons[0]).fontSize).toBe('12px')
+      expect(getComputedStyle(icons[1]).fontSize).toBe('21px')
+      expect(getComputedStyle(icons[2]).fontSize).toBe('32px')
+      expect(getComputedStyle(screen.getByTestId('activator-icon')).fontSize).toBe(
+        getComputedStyle(screen.getByTestId('parent-icon')).fontSize
+      )
     })
 
     it.each([
