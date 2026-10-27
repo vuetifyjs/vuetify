@@ -2,12 +2,14 @@
 import './VBadge.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VThemeProvider } from '@/components/VThemeProvider'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { injectComponentDefaults, injectDefaults } from '@/composables/defaults'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
@@ -65,6 +67,8 @@ export const VBadge = genericComponent<VBadgeSlots>()({
   props: makeVBadgeProps(),
 
   setup (props, ctx) {
+    const defaults = injectDefaults()
+    const iconDefaults = injectComponentDefaults('VIcon')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { t } = useLocale()
@@ -125,6 +129,9 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 v-show={ props.modelValue }
                 class={[
                   'v-badge__badge',
+                  {
+                    'v-badge__badge--auto-height': !dimensionStyles.value.height && !dimensionStyles.value.maxHeight,
+                  },
                   themeClasses.value,
                   backgroundColorClasses.value,
                   roundedClasses.value,
@@ -147,14 +154,19 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 role="status"
                 { ...badgeAttrs }
               >
-                <VThemeProvider theme={ props.theme }>
-                  {
-                    props.dot ? undefined
-                    : ctx.slots.badge ? ctx.slots.badge?.()
-                    : props.icon ? <VIcon icon={ props.icon } />
-                    : content
-                  }
-                </VThemeProvider>
+                <VDefaultsProvider
+                  defaults={{ VIcon: { size: null } }}
+                  disabled={ iconDefaults.value?.size !== undefined || defaults.value?.global?.size !== undefined }
+                >
+                  <VThemeProvider theme={ props.theme }>
+                    {
+                      props.dot ? undefined
+                      : ctx.slots.badge ? ctx.slots.badge?.()
+                      : props.icon ? <VIcon icon={ props.icon } />
+                      : content
+                    }
+                  </VThemeProvider>
+                </VDefaultsProvider>
               </span>
             </MaybeTransition>
           </div>

@@ -28,6 +28,10 @@
     &:has(.v-icon)
       padding: $badge-icon-padding
 
+      &.v-badge__badge--auto-height
+        height: auto
+        min-height: $badge-height
+
     .v-badge--bordered &
       &::after
         border-radius: inherit
@@ -55,7 +59,6 @@
 
     .v-icon
       color: inherit
-      font-size: $badge-font-size
       margin: $badge-icon-margin
 
     img,
