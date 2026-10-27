@@ -5,7 +5,9 @@ import './VColorPickerSwatches.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { useColumnFocus } from './columnFocus'
 import { makeComponentProps } from '@/composables/component'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { toRef } from 'vue'
@@ -72,6 +74,11 @@ export const VColorPickerSwatches = defineComponent({
 
   setup (props, { emit }) {
     const isInteractive = toRef(() => !props.disabled && !props.readonly)
+    const { isRtl } = useRtl()
+    const columnFocus = useColumnFocus(() => props.swatches.map(swatch => swatch.length), {
+      disabled: () => props.disabled,
+      rtl: isRtl,
+    })
 
     function onSwatchClick (hsva: HSV) {
       if (!isInteractive.value || !hsva) {
@@ -79,6 +86,24 @@ export const VColorPickerSwatches = defineComponent({
       }
 
       emit('update:color', hsva)
+    }
+
+    function onSwatchKeydown (event: KeyboardEvent, hsva: HSV) {
+      if (event.key === 'Enter') {
+        event.preventDefault()
+        onSwatchClick(hsva)
+        return
+      }
+
+      if (event.key === ' ') {
+        event.preventDefault()
+      }
+    }
+
+    function onSwatchKeyup (event: KeyboardEvent, hsva: HSV) {
+      if (event.key === ' ') {
+        onSwatchClick(hsva)
+      }
     }
 
     useRender(() => (
@@ -92,26 +117,36 @@ export const VColorPickerSwatches = defineComponent({
           props.style,
         ]}
       >
-        <div>
-          { props.swatches.map(swatch => (
+        <div ref={ columnFocus.containerEl } onKeydown={ columnFocus.onKeydown }>
+          { props.swatches.map((swatch, column) => (
             <div class="v-color-picker-swatches__swatch">
-              { swatch.map(color => {
+              { swatch.map((color, row) => {
                 const rgba = parseColor(color)
                 const hsva = RGBtoHSV(rgba)
                 const background = RGBtoCSS(rgba)
+                const isSelected = !!props.color && deepEqual(props.color, hsva)
 
                 return (
                   <div
+                    ref={ columnFocus.register(column, row) }
                     class={[
                       'v-color-picker-swatches__color',
                       {
                         'v-color-picker-swatches__color--disabled': props.disabled,
                       },
                     ]}
+                    role="button"
+                    tabindex={ columnFocus.isTabbable(column, row) && !props.disabled ? 0 : -1 }
+                    aria-label={ background }
+                    aria-pressed={ isSelected }
+                    aria-disabled={ props.disabled || props.readonly || undefined }
+                    onFocus={ () => columnFocus.onFocus(column, row) }
+                    onKeydown={ (event: KeyboardEvent) => onSwatchKeydown(event, hsva) }
+                    onKeyup={ (event: KeyboardEvent) => onSwatchKeyup(event, hsva) }
                     onClick={ () => onSwatchClick(hsva) }
                   >
                     <div style={{ background }}>
-                      { props.color && deepEqual(props.color, hsva)
+                      { isSelected
                         ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined
                       }
