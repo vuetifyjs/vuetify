@@ -354,52 +354,50 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                 </div>
               )}
 
-              { hasTitle && (
-                <div key="title" class="v-file-upload-title">
-                  { slots.title?.() ?? t(props.title) }
-                </div>
-              )}
+              <div key="text" class="v-file-upload-text">
+                { hasTitle && (
+                  <div key="title" class="v-file-upload-title">
+                    { slots.title?.() ?? t(props.title) }
+                  </div>
+                )}
 
-              { props.density === 'default' && (
+                { props.subtitle && (
+                  <div key="subtitle" class="v-file-upload-subtitle">
+                    { props.subtitle }
+                  </div>
+                )}
+              </div>
+
+              { props.density === 'default' && hasBrowse && (
                 <>
-                  { hasBrowse && (
-                    <>
-                      <div key="upload-divider" class="v-file-upload-divider">
-                        { slots.divider?.() ?? (
-                          <VDivider { ...dividerProps }>
-                            { t(props.dividerText) }
-                          </VDivider>
-                        )}
-                      </div>
-                      { !slots.browse ? (
-                        <VBtn
-                          readonly={ !interactive }
-                          size={ browseSize.value }
-                          text={ t(props.browseText) }
-                          variant={ browseVariant.value }
-                          onClick={ onClickBrowse }
-                        />
-                      ) : (
-                        <VDefaultsProvider
-                          defaults={{
-                            VBtn: {
-                              readonly: !interactive,
-                              size: browseSize.value,
-                              text: t(props.browseText),
-                              variant: browseVariant.value,
-                            },
-                          }}
-                        >
-                          { slots.browse({ props: { onClick: onClickBrowse } }) }
-                        </VDefaultsProvider>
-                      )}
-                    </>
-                  )}
-
-                  { props.subtitle && (
-                    <div class="v-file-upload-subtitle">
-                      { props.subtitle }
-                    </div>
+                  <div key="upload-divider" class="v-file-upload-divider">
+                    { slots.divider?.() ?? (
+                      <VDivider { ...dividerProps }>
+                        { t(props.dividerText) }
+                      </VDivider>
+                    )}
+                  </div>
+                  { !slots.browse ? (
+                    <VBtn
+                      readonly={ !interactive }
+                      size={ browseSize.value }
+                      text={ t(props.browseText) }
+                      variant={ browseVariant.value }
+                      onClick={ onClickBrowse }
+                    />
+                  ) : (
+                    <VDefaultsProvider
+                      defaults={{
+                        VBtn: {
+                          readonly: !interactive,
+                          size: browseSize.value,
+                          text: t(props.browseText),
+                          variant: browseVariant.value,
+                        },
+                      }}
+                    >
+                      { slots.browse({ props: { onClick: onClickBrowse } }) }
+                    </VDefaultsProvider>
                   )}
                 </>
               )}
