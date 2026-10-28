@@ -145,7 +145,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const prevHeight = sizes[index]
     const prevItemHeight = itemHeight.value
     const prevSize = prevHeight ?? itemHeight.value
-    const aboveViewport = calculateOffset(index) + prevSize <= lastScrollTop - markerOffset
+    // A missing estimate is 0, which would put the top row's end on the scroll
+    // position and shift scrollTop by the whole first measurement.
+    const aboveViewport = prevSize > 0 && calculateOffset(index) + prevSize <= lastScrollTop - markerOffset
 
     if (height > 0) {
       if (prevHeight) {
