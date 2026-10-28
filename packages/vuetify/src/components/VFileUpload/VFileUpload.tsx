@@ -199,8 +199,8 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     useRender(() => {
-      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const { modelValue: __, ...dropzoneProps } = VFileUploadDropzone.filterProps(props as any)
+      const inputProps = omit(VInput.filterProps(props), ['modelValue'])
+      const dropzoneProps = omit(VFileUploadDropzone.filterProps(props as any), ['modelValue', 'width', 'minWidth', 'maxWidth'])
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
