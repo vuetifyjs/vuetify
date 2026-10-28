@@ -54,7 +54,7 @@ const stories = {
 
 // Tests
 describe('VBadge', () => {
-  it('should preserve the default badge icon size inside a button', () => {
+  it('should render smaller icon to fit in default height', () => {
     render(
       <VBtn>
         <VBadge inline icon="$vuetify" />
