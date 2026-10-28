@@ -74,9 +74,15 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
   })
 
+  function getItemKey (item: T) {
+    return getPropertyFromItem(item, props.itemKey, item)
+  }
+
   let sizes = Array.from<number | null>({ length: items.value.length })
   let offsets = Array.from<number>({ length: items.value.length })
   let heights = new Map<number, number>()
+  // In-place edits mutate the array before the items watch runs.
+  let itemKeys = items.value.map(item => getItemKey(item))
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
   let targetScrollPosition: ScrollToPosition = 'start'
@@ -331,9 +337,37 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   })
 
   watch(items, () => {
-    sizes = Array.from({ length: items.value.length })
-    offsets = Array.from({ length: items.value.length })
+    const nextItems = items.value
+    const sizesByKey = new Map<unknown, number[]>()
+
+    for (let index = 0; index < itemKeys.length; index++) {
+      const size = sizes[index]
+      if (!size) continue
+
+      const key = itemKeys[index]
+      const matches = sizesByKey.get(key)
+      if (matches) matches.push(size)
+      else sizesByKey.set(key, [size])
+    }
+
+    const nextSizes = Array.from<number | null>({ length: nextItems.length })
+    const nextKeys = Array.from<unknown>({ length: nextItems.length })
     heights = new Map()
+
+    for (let index = 0; index < nextItems.length; index++) {
+      const key = getItemKey(nextItems[index])
+      nextKeys[index] = key
+
+      const size = sizesByKey.get(key)?.shift()
+      if (!size) continue
+
+      nextSizes[index] = size
+      heights.set(size, (heights.get(size) ?? 0) + 1)
+    }
+
+    sizes = nextSizes
+    offsets = Array.from({ length: nextItems.length })
+    itemKeys = nextKeys
     updateOffsets.immediate()
     calculateVisibleItems()
   }, { deep: 1 })
