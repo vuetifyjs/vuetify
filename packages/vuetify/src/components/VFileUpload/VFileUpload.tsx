@@ -210,6 +210,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const inputNode = (
         <input
           ref={ inputRef }
+          id={ props.id }
           type="file"
           accept={ inputAccept }
           disabled={ props.disabled ?? undefined }
@@ -249,6 +250,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       { slots.default() }
                       <input
                         ref={ inputRef }
+                        id={ props.id }
                         type="file"
                         accept={ inputAccept }
                         disabled={ props.disabled ?? undefined }
