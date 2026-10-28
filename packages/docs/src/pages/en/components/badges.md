@@ -52,6 +52,12 @@ Inline badges can be placed anywhere with content and can render without a *defa
 
 <ExamplesExample file="v-badge/prop-inline" />
 
+#### Icon size
+
+Use the **icon-size** prop to size the badge icon. It also sets the size of `v-icon` components in the **badge** slot unless they have their own **size** prop. Set `height="auto"` to let the badge grow around larger icons.
+
+<ExamplesExample file="v-badge/prop-icon-size" />
+
 #### Content
 
 For simple text, use the **content** property to display a *value* on the badge.
