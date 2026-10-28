@@ -83,6 +83,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   let heights = new Map<number, number>()
   // In-place edits mutate the array before the items watch runs.
   let itemKeys = items.value.map(item => getItemKey(item))
+  let lastScrollTop = 0
+  let scrollVelocity = 0
+  let lastScrollTime = 0
   const updateTime = shallowRef(0)
   let targetScrollIndex = -1
   let targetScrollPosition: ScrollToPosition = 'start'
@@ -141,6 +144,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   function handleItemResize (index: number, height: number) {
     const prevHeight = sizes[index]
     const prevItemHeight = itemHeight.value
+    const prevSize = prevHeight ?? itemHeight.value
+    const aboveViewport = calculateOffset(index) + prevSize <= lastScrollTop - markerOffset
 
     if (height > 0) {
       if (prevHeight) {
@@ -154,6 +159,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     if (prevHeight !== height || prevItemHeight !== itemHeight.value) {
       sizes[index] = height
       updateOffsets()
+
+      const sizeDelta = height - prevSize
+      if (aboveViewport && sizeDelta && containerRef.value) {
+        containerRef.value.scrollTop += sizeDelta
+        lastScrollTop = containerRef.value.scrollTop
+      }
     }
   }
 
@@ -170,10 +181,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   function calculateIndex (scrollTop: number) {
     return binaryClosest(offsets, scrollTop)
   }
-
-  let lastScrollTop = 0
-  let scrollVelocity = 0
-  let lastScrollTime = 0
 
   watch(viewportHeight, (val, oldVal) => {
     calculateVisibleItems()
@@ -339,6 +346,12 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   watch(items, () => {
     const nextItems = items.value
     const sizesByKey = new Map<unknown, number[]>()
+    const scrollTop = lastScrollTop - markerOffset
+    const anchorIndex = itemKeys.length
+      ? clamp(calculateIndex(scrollTop), 0, itemKeys.length - 1)
+      : -1
+    const anchorKey = ~anchorIndex ? itemKeys[anchorIndex] : undefined
+    const offsetInAnchor = ~anchorIndex ? scrollTop - (offsets[anchorIndex] || 0) : 0
 
     for (let index = 0; index < itemKeys.length; index++) {
       const size = sizes[index]
@@ -369,6 +382,30 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     offsets = Array.from({ length: nextItems.length })
     itemKeys = nextKeys
     updateOffsets.immediate()
+
+    if (~anchorIndex && nextItems.length) {
+      const nextAnchorIndex = nextKeys.indexOf(anchorKey)
+      if (~nextAnchorIndex) {
+        const indexDelta = nextAnchorIndex - anchorIndex
+        if (indexDelta) {
+          first.value = clamp(first.value + indexDelta, 0, Math.max(0, nextItems.length - 1))
+          last.value = clamp(last.value + indexDelta, first.value + 1, nextItems.length)
+        }
+        paddingTop.value = calculateOffset(first.value)
+        paddingBottom.value = calculateOffset(nextItems.length) - calculateOffset(last.value)
+
+        const nextScrollTop = calculateOffset(nextAnchorIndex) + offsetInAnchor + markerOffset
+        lastScrollTop = nextScrollTop
+        if (containerRef.value) {
+          containerRef.value.scrollTop = nextScrollTop
+          lastScrollTop = containerRef.value.scrollTop
+        }
+
+        scrollVelocity = 0
+        lastScrollTime = 0
+      }
+    }
+
     calculateVisibleItems()
   }, { deep: 1 })
 
