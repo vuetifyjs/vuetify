@@ -4,7 +4,7 @@
     <v-bottom-navigation
       v-model="value"
       color="primary"
-      horizontal
+      mode="horizontal"
     >
       <v-btn>
         <v-icon>mdi-history</v-icon>
