@@ -11,7 +11,7 @@ $stepper-elevation: 1 !default;
 $stepper-item-opacity: var(--v-medium-emphasis-opacity) !default;
 $stepper-item-padding: 1.5rem !default;
 $stepper-item-transition-duration: .2s !default;
-$stepper-item-transition-property: opacity !default;
+$stepper-item-transition-property: opacity, color !default;
 $stepper-item-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !default;
 $stepper-header-divider-margin: 0 -16px !default;
 $stepper-header-elevation: 1 !default;
