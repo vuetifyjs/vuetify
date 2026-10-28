@@ -614,6 +614,17 @@ describe('VHotkey.tsx', () => {
       expect(ariaLabel).toMatch(/then/i)
     })
 
+    it.each([
+      ['icon', 'mac', 'meta+shift+k', 'Keyboard shortcut: Command plus Shift plus K'],
+      ['symbol', 'mac', 'ctrl+alt+enter', 'Keyboard shortcut: Ctrl plus Option plus Enter'],
+      ['icon', 'pc', 'ctrl+arrowup', 'Keyboard shortcut: Ctrl plus Up Arrow'],
+      ['text', 'mac', 'meta+k', 'Keyboard shortcut: Command plus K'],
+    ] as const)('should read key names in %s mode on %s', (displayMode, platform, keys, expected) => {
+      render(() => <VHotkey keys={ keys } displayMode={ displayMode } platform={ platform } />)
+
+      expect(screen.getByCSS('.v-hotkey')).toHaveAttribute('aria-label', expected)
+    })
+
     it('should provide title tooltips for icon mode', () => {
       const originalUserAgent = navigator.userAgent
 
