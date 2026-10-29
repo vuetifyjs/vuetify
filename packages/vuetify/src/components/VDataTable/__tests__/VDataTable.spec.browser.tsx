@@ -89,6 +89,19 @@ const stories = {
 }
 
 describe('VDataTable', () => {
+  it('should label the bottom loading progress bar with loadingText', () => {
+    render(() => (
+      <VDataTable
+        headers={ DESSERT_HEADERS }
+        items={[]}
+        loading={{ side: 'end' }}
+        loadingText="Loading results"
+      />
+    ))
+
+    expect(screen.getByRole('progressbar', { name: 'Loading results' })).toBeVisible()
+  })
+
   it('should reset page when searching', async () => {
     const search = ref()
     const updatePage = vi.fn()
