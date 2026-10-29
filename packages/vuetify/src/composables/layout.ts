@@ -57,6 +57,7 @@ interface LayoutProvide {
       layoutSize: Ref<number | string>
       elementSize: Ref<number | string | undefined>
       active: Ref<boolean>
+      isMounted: Readonly<Ref<boolean>>
       disableTransitions?: Ref<boolean>
       absolute: Ref<boolean | undefined>
     }
@@ -134,12 +135,16 @@ export function useLayoutItem (options: {
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
+  const isMounted = shallowRef(false)
+  onMounted(() => isMounted.value = true)
+
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
   } = layout.register(vm, {
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
+    isMounted,
     id,
   })
 
@@ -300,9 +305,9 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = shallowRef(false)
+  const isBooted = shallowRef(false)
   onMounted(() => {
-    isMounted.value = true
+    isBooted.value = true
   })
 
   provide(VuetifyLayoutKey, {
@@ -315,6 +320,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         layoutSize,
         elementSize,
         active,
+        isMounted,
         disableTransitions,
         absolute,
       }
@@ -322,7 +328,10 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       priorities.set(id, order)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
-      activeItems.set(id, active)
+      // post-boot registrations may sit in an offscreen pending Suspense branch, so they only
+      // count once mounted; boot state is read once — hydrating items are on screen, not pending
+      const isEarly = !isBooted.value
+      activeItems.set(id, toRef(() => active.value && (isEarly || isMounted.value)))
       disableTransitions && disabledTransitions.set(id, disableTransitions)
 
       const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
@@ -332,7 +341,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       else registered.value.push(id)
 
       const index = computed(() => items.value.findIndex(i => i.id === id))
-      const zIndex = computed(() => rootZIndex.value + (isMounted.value ? layers.value.length * 2 : 0) - (index.value * 2))
+      const zIndex = computed(() => rootZIndex.value + (isBooted.value ? layers.value.length * 2 : 0) - (index.value * 2))
 
       const layoutItemStyles = computed<CSSProperties>(() => {
         const isHorizontal = position.value === 'left' || position.value === 'right'
