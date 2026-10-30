@@ -180,7 +180,7 @@ export default {
     backspace: 'Canc',
     space: 'Spazio',
     plus: 'più',
-    shortcut: 'Scorciatoia da tastiera: {0}',
+    shortcut: 'Scorciatoia da tastiera, {0}',
     or: 'o',
   },
   media: {

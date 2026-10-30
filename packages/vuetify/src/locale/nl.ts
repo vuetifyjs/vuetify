@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Spatie',
     plus: 'plus',
-    shortcut: 'Toetsenbordsnelkoppeling: {0}',
+    shortcut: 'Toetsenbordsnelkoppeling, {0}',
     or: 'of',
   },
   media: {

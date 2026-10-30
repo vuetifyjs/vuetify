@@ -180,7 +180,7 @@ export default {
     backspace: 'Geri Al',
     space: 'Boşluk',
     plus: 'artı',
-    shortcut: 'Klavye kısayolu: {0}',
+    shortcut: 'Klavye kısayolu, {0}',
     or: 'veya',
   },
   media: {
