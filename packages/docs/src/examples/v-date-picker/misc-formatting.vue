@@ -68,7 +68,10 @@
 </template>
 
 <script setup>
+  import { useDate } from 'vuetify'
   import { computed, ref, watch } from 'vue'
+
+  const adapter = useDate()
 
   const menu1 = ref()
 
@@ -87,7 +90,7 @@
 
   function formatDate (date) {
     if (!date) return null
-    const [year, month, day] = date.split('-')
+    const [year, month, day] = adapter.toISO(adapter.date(date)).split('-')
     return `${month}/${day}/${year}`
   }
   function parseDate (date) {
@@ -122,7 +125,7 @@
       formatDate (date) {
         if (!date) return null
 
-        const [year, month, day] = date.split('-')
+        const [year, month, day] = this.$vuetify.date.toISO(this.$vuetify.date.date(date)).split('-')
         return `${month}/${day}/${year}`
       },
       parseDate (date) {

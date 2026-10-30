@@ -191,6 +191,7 @@ catalog:
   '@date-io/dayjs': '^3.2.0'
   '@date-io/luxon': '^3.2.0'
   '@date-io/moment': '^3.2.0'
+  '@js-temporal/polyfill': '^0.5.1'
   cy-mobile-commands: '^0.3.0'
   '@octokit/openapi-types': '^25.0.0'
   '@testing-library/dom': 'npm:@vuetify/testing-library-dom@1.0.3'

@@ -15,7 +15,7 @@
       >
         <template v-slot:activator="{ props }">
           <v-text-field
-            v-model="date"
+            :model-value="isoDate(date)"
             label="Picker in menu"
             prepend-icon="mdi-calendar"
             readonly
@@ -59,7 +59,7 @@
       >
         <template v-slot:activator="{ props }">
           <v-text-field
-            v-model="date"
+            :model-value="isoDate(date)"
             label="Picker in dialog"
             prepend-icon="mdi-calendar"
             readonly
@@ -101,7 +101,7 @@
       >
         <template v-slot:activator="{ props }">
           <v-text-field
-            v-model="date"
+            :model-value="isoDate(date)"
             label="Picker without buttons"
             prepend-icon="mdi-calendar"
             readonly
@@ -119,14 +119,20 @@
 </template>
 
 <script setup>
+  import { useDate } from 'vuetify'
   import { ref } from 'vue'
 
+  const adapter = useDate()
   const menu = ref()
 
   const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
   const menuActive = ref(false)
   const modal = ref(false)
   const menu2 = ref(false)
+
+  function isoDate (value) {
+    return value ? adapter.toISO(adapter.date(value)) : ''
+  }
 </script>
 
 <script>
@@ -137,5 +143,11 @@
       modal: false,
       menu2: false,
     }),
+
+    methods: {
+      isoDate (value) {
+        return value ? this.$vuetify.date.toISO(this.$vuetify.date.date(value)) : ''
+      },
+    },
   }
 </script>

@@ -57,19 +57,22 @@
 </template>
 
 <script setup>
+  import { useDate } from 'vuetify'
   import { computed, ref } from 'vue'
   import moment from 'moment'
   import { format, parseISO } from 'date-fns'
 
   const date = ref(format(parseISO(new Date().toISOString()), 'yyyy-MM-dd'))
+  const adapter = useDate()
+  const isoDate = computed(() => date.value ? adapter.toISO(adapter.date(date.value)) : '')
   const menu1 = ref(false)
   const menu2 = ref(false)
 
   const computedDateFormattedMomentjs = computed(() => {
-    return date.value ? moment(date.value).format('dddd, MMMM Do YYYY') : ''
+    return isoDate.value ? moment(isoDate.value).format('dddd, MMMM Do YYYY') : ''
   })
   const computedDateFormattedDatefns = computed(() => {
-    return date.value ? format(parseISO(date.value), 'EEEE, MMMM do yyyy') : ''
+    return isoDate.value ? format(parseISO(isoDate.value), 'EEEE, MMMM do yyyy') : ''
   })
 </script>
 
@@ -86,11 +89,14 @@
     }),
 
     computed: {
+      isoDate () {
+        return this.date ? this.$vuetify.date.toISO(this.$vuetify.date.date(this.date)) : ''
+      },
       computedDateFormattedMomentjs () {
-        return this.date ? moment(this.date).format('dddd, MMMM Do YYYY') : ''
+        return this.isoDate ? moment(this.isoDate).format('dddd, MMMM Do YYYY') : ''
       },
       computedDateFormattedDatefns () {
-        return this.date ? format(parseISO(this.date), 'EEEE, MMMM do yyyy') : ''
+        return this.isoDate ? format(parseISO(this.isoDate), 'EEEE, MMMM do yyyy') : ''
       },
     },
   }

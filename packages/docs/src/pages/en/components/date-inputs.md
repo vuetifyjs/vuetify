@@ -45,7 +45,7 @@ The `v-date-input` component is a replacement for the standard date input. It pr
 
 ::: tip
 
-Use the built in parseISO and toISO methods available as part of the [date composable](/features/dates/) to format and parse the date input. Internally, `v-date-input` transforms the model into a plain JS Date object.
+Use the built in parseISO and toISO methods available as part of the [date composable](/features/dates/) to format and parse the date input.
 
 :::
 
@@ -55,7 +55,7 @@ The `v-date-input` component extends the [v-text-field](/components/text-fields/
 
 #### Model
 
-The default model value is a Date object, but is displayed as formatted text in the input..
+The model value is the date adapter's type, `Temporal.PlainDateTime` by default, and is displayed as formatted text in the input.
 
 <ExamplesExample file="v-date-input/prop-model" />
 
