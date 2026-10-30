@@ -24,6 +24,7 @@ import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, isPercentage, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 
 export const makeVBottomNavigationProps = propsFactory({
@@ -32,7 +33,7 @@ export const makeVBottomNavigationProps = propsFactory({
   color: String,
   grow: Boolean,
   mode: {
-    type: String,
+    type: String as PropType<'horizontal' | 'shift'>,
     validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
   },
   height: {
