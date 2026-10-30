@@ -23,7 +23,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useToggleScope } from '@/composables/toggleScope'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
@@ -351,8 +351,6 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
-          { genOverlays(false, 'v-snackbar') }
-
           { slots.header && (
             <div class="v-snackbar__header">{ slots.header?.() }</div>
           )}
