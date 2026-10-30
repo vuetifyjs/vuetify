@@ -279,6 +279,7 @@ export const VSwitch = genericComponent<new <T>(
                                           active={ slotProps.isActive }
                                           color={ slotProps.color }
                                           indeterminate
+                                          aria-label={ slotProps.ariaLabel }
                                           size={ iconSize.value }
                                           width="2"
                                         />
