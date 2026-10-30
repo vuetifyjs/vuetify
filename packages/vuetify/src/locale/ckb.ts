@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'بۆشایی',
     plus: 'زیادکردن',
-    shortcut: 'کورتەبڕی تەختەکلیل: {0}',
+    shortcut: 'کورتەبڕی تەختەکلیل، {0}',
     or: 'یان',
   },
   media: {

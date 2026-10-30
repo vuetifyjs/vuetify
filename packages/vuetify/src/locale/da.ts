@@ -180,7 +180,7 @@ export default {
     backspace: 'Slet',
     space: 'Mellemrum',
     plus: 'plus',
-    shortcut: 'Tastaturgenvej: {0}',
+    shortcut: 'Tastaturgenvej, {0}',
     or: 'eller',
   },
   media: {

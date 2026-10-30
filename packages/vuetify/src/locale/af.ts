@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Spasie',
     plus: 'plus',
-    shortcut: 'Sleutelbordkortpad: {0}',
+    shortcut: 'Sleutelbordkortpad, {0}',
     or: 'of',
   },
   media: {

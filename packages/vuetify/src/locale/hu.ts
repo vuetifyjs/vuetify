@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Szóköz',
     plus: 'plusz',
-    shortcut: 'Billentyűparancs: {0}',
+    shortcut: 'Billentyűparancs, {0}',
     or: 'vagy',
   },
   media: {

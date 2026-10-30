@@ -180,7 +180,7 @@ export default {
     backspace: 'Geri Sil',
     space: 'Boşluq',
     plus: 'plus',
-    shortcut: 'Klaviatura qısayolu: {0}',
+    shortcut: 'Klaviatura qısayolu, {0}',
     or: 'və ya',
   },
   media: {

@@ -180,7 +180,7 @@ export default {
     backspace: 'Rücktaste',
     space: 'Leertaste',
     plus: 'plus',
-    shortcut: 'Tastenkürzel: {0}',
+    shortcut: 'Tastenkürzel, {0}',
     or: 'oder',
   },
   media: {

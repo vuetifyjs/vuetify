@@ -180,7 +180,7 @@ export default {
     backspace: 'Връщане назад',
     space: 'Интервал',
     plus: 'плюс',
-    shortcut: 'Клавиатурна комбинация: {0}',
+    shortcut: 'Клавиатурна комбинация, {0}',
     or: 'или',
   },
   media: {

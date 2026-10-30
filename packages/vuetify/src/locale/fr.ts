@@ -180,7 +180,7 @@ export default {
     backspace: 'Retour',
     space: 'Espace',
     plus: 'plus',
-    shortcut: 'Raccourci clavier : {0}',
+    shortcut: 'Raccourci clavier, {0}',
     or: 'ou',
   },
   media: {
