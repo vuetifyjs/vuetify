@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'ផែនទី',
+    zoomIn: 'ពង្រីក',
+    zoomOut: 'បង្រួម',
+    reset: 'កំណត់ទិដ្ឋភាពឡើងវិញ',
+  },
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',

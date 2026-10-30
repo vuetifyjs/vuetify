@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'الخريطة',
+    zoomIn: 'تكبير',
+    zoomOut: 'تصغير',
+    reset: 'إعادة ضبط العرض',
+  },
   badge: 'شارة',
   open: 'فتح',
   close: 'إغلاق',

@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'แผนที่',
+    zoomIn: 'ขยาย',
+    zoomOut: 'ย่อ',
+    reset: 'รีเซ็ตมุมมอง',
+  },
   badge: 'สัญลักษณ์',
   open: 'เปิด',
   close: 'ปิด',

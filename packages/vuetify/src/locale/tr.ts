@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Harita',
+    zoomIn: 'Yakınlaştır',
+    zoomOut: 'Uzaklaştır',
+    reset: 'Görünümü sıfırla',
+  },
   badge: 'Rozet',
   open: 'Aç',
   close: 'Kapat',

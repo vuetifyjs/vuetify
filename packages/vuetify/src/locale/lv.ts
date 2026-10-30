@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Karte',
+    zoomIn: 'Pietuvināt',
+    zoomOut: 'Attālināt',
+    reset: 'Atiestatīt skatu',
+  },
   badge: 'Žetons',
   open: 'Atvērt',
   close: 'Aizvērt',

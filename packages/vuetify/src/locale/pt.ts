@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Mapa',
+    zoomIn: 'Ampliar',
+    zoomOut: 'Reduzir',
+    reset: 'Redefinir visualização',
+  },
   badge: 'Distintivo',
   open: 'Abrir',
   close: 'Fechar',

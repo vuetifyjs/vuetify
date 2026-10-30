@@ -81,6 +81,7 @@ The following is a list of available and up-and-coming components for use with L
 | [v-command-palette](/components/command-palettes/)   | A searchable command palette component                     | [v3.12.0](/getting-started/release-notes/?version=v3.12.0) |
 | [v-date-range-picker](/components/date-range-pickers/) | A dual-month range picker component                      | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-heatmap](/components/heatmaps/)                   | A component to display data as a colored grid              | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
+| [v-map](/components/maps/)                         | An interactive self-hosted SVG map                        | [v4.4.0](/getting-started/release-notes/?version=v4.4.0)   |
 | [v-month-picker](/components/month-pickers/)         | A month and year picker component                          | [v4.1.0](/getting-started/release-notes/?version=v4.1.0)   |
 | [v-audio](/components/audio-players/)                | A player for self-hosted audio with a seekable waveform    | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |
 | [v-loading-indicator](/components/loading-indicators/) | An indeterminate loader that morphs between shapes          | [v4.3.0](/getting-started/release-notes/?version=v4.3.0)   |

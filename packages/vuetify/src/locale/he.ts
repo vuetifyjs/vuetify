@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'מפה',
+    zoomIn: 'הגדלה',
+    zoomOut: 'הקטנה',
+    reset: 'איפוס התצוגה',
+  },
   badge: 'תג',
   open: 'פתח',
   close: 'סגור',

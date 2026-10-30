@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Mapa',
+    zoomIn: 'Apropa',
+    zoomOut: 'Allunya',
+    reset: 'Restableix la vista',
+  },
   badge: 'Insígnia',
   open: 'Obrir',
   close: 'Tancar',

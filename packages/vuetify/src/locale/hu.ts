@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Térkép',
+    zoomIn: 'Nagyítás',
+    zoomOut: 'Kicsinyítés',
+    reset: 'Nézet visszaállítása',
+  },
   badge: 'Jelvény',
   open: 'Megnyit',
   close: 'Bezárás',

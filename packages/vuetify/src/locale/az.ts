@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Xəritə',
+    zoomIn: 'Yaxınlaşdır',
+    zoomOut: 'Uzaqlaşdır',
+    reset: 'Görünüşü sıfırla',
+  },
   badge: 'Nişan',
   open: 'Açıq',
   close: 'Bağla',
