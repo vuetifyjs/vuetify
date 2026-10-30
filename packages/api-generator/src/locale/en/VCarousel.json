@@ -11,7 +11,7 @@
     "nextIcon": "The displayed icon for forcing pagination to the next item.",
     "pauseOnHover": "Pauses automatic cycling while the pointer is over the carousel. Keyboard focus inside the carousel pauses it regardless of this prop. Requires the **cycle** prop.",
     "prevIcon": "The displayed icon for forcing pagination to the previous item.",
-    "progress": "Displays a progress bar showing the position of the current slide among all slides. Accepts a color name to apply to the bar.",
+    "progress": "Displays a progress bar showing the position of the current slide among all slides. Accepts a color value to apply to the bar.",
     "showArrows": "Displays arrows for next/previous navigation.",
     "verticalArrows": "Displays the navigation arrows vertically instead of horizontally.",
     "verticalDelimiters": "Displays carousel delimiters vertically."
