@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Χάρτης',
+    zoomIn: 'Μεγέθυνση',
+    zoomOut: 'Σμίκρυνση',
+    reset: 'Επαναφορά προβολής',
+  },
   badge: 'Σήμα',
   open: 'Άνοιγμα',
   close: 'Κλείσιμο',

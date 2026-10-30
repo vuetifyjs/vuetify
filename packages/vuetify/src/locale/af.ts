@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Kaart',
+    zoomIn: 'Zoem in',
+    zoomOut: 'Zoem uit',
+    reset: 'Herstel aansig',
+  },
   badge: 'Kenteken',
   open: 'Maak oop',
   close: 'Maak toe',

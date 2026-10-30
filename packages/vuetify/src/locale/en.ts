@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Map',
+    zoomIn: 'Zoom in',
+    zoomOut: 'Zoom out',
+    reset: 'Reset view',
+  },
   badge: 'Badge',
   open: 'Open',
   close: 'Close',

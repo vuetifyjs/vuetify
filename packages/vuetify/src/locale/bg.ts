@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Карта',
+    zoomIn: 'Увеличаване',
+    zoomOut: 'Намаляване',
+    reset: 'Нулиране на изгледа',
+  },
   badge: 'Значка',
   open: 'Отвори',
   close: 'Затвори',

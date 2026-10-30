@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Peta',
+    zoomIn: 'Perbesar',
+    zoomOut: 'Perkecil',
+    reset: 'Atur ulang tampilan',
+  },
   badge: 'Lencana',
   open: 'Buka',
   close: 'Tutup',

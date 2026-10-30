@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Bản đồ',
+    zoomIn: 'Phóng to',
+    zoomOut: 'Thu nhỏ',
+    reset: 'Đặt lại chế độ xem',
+  },
   badge: 'Huy hiệu',
   open: 'Mở',
   close: 'Đóng',

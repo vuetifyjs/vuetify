@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Мапа',
+    zoomIn: 'Збільшити',
+    zoomOut: 'Зменшити',
+    reset: 'Скинути вигляд',
+  },
   badge: 'Індикатор',
   open: 'Відкрити',
   close: 'Закрити',

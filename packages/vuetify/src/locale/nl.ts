@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Kaart',
+    zoomIn: 'Inzoomen',
+    zoomOut: 'Uitzoomen',
+    reset: 'Weergave herstellen',
+  },
   badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',
