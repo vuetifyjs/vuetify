@@ -20,10 +20,11 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { computed, PropType, toRef } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, isPercentage, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 
 export const makeVBottomNavigationProps = propsFactory({
