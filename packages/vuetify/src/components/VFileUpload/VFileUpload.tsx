@@ -207,19 +207,6 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
       const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
 
-      const inputNode = (
-        <input
-          ref={ inputRef }
-          type="file"
-          accept={ inputAccept }
-          disabled={ props.disabled ?? undefined }
-          multiple={ props.multiple }
-          name={ props.name }
-          onChange={ onFileSelection }
-          { ...inputAttrs }
-        />
-      )
-
       return (
         <VInput
           ref={ vInputRef }
@@ -241,7 +228,21 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         >
           {{
             ...slots,
-            default: () => {
+            default: ({ id }) => {
+              const inputNode = (
+                <input
+                  ref={ inputRef }
+                  id={ id.value }
+                  type="file"
+                  accept={ inputAccept }
+                  disabled={ props.disabled ?? undefined }
+                  multiple={ props.multiple }
+                  name={ props.name }
+                  onChange={ onFileSelection }
+                  { ...inputAttrs }
+                />
+              )
+
               return (
                 <>
                   { slots.default ? (
@@ -249,6 +250,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                       { slots.default() }
                       <input
                         ref={ inputRef }
+                        id={ id.value }
                         type="file"
                         accept={ inputAccept }
                         disabled={ props.disabled ?? undefined }
