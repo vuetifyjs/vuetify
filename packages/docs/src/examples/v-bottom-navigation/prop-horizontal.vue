@@ -6,23 +6,11 @@
       color="primary"
       mode="horizontal"
     >
-      <v-btn>
-        <v-icon>mdi-history</v-icon>
+      <v-btn prepend-icon="mdi-history">Recents</v-btn>
 
-        Recents
-      </v-btn>
+      <v-btn prepend-icon="mdi-heart">Favorites</v-btn>
 
-      <v-btn>
-        <v-icon>mdi-heart</v-icon>
-
-        Favorites
-      </v-btn>
-
-      <v-btn>
-        <v-icon>mdi-map-marker</v-icon>
-
-        Nearby
-      </v-btn>
+      <v-btn prepend-icon="mdi-map-marker">Nearby</v-btn>
     </v-bottom-navigation>
   </v-layout>
 </template>

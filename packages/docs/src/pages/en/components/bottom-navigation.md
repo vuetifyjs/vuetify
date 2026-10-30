@@ -41,7 +41,7 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 
 ::: info
 
-For styles to apply properly when using the **shift** prop, `v-btn` text is **required** to be wrapped in a `span` tag.
+For styles to apply properly when setting the **mode** prop to `shift`, `v-btn` text is **required** to be wrapped in a `span` tag.
 
 :::
 
@@ -51,7 +51,7 @@ For styles to apply properly when using the **shift** prop, `v-btn` text is **re
 
 #### Color
 
-The **color** prop applies a color to the background of the bottom navigation. We recommend using the **light** and **dark** props to properly contrast text color.
+The **color** prop sets the color of the selected button. Use **bg-color** to color the background of the bottom navigation.
 
 <ExamplesExample file="v-bottom-navigation/prop-color" />
 
