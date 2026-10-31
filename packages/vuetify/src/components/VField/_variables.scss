@@ -8,6 +8,7 @@
 $field-border-radius: settings.$border-radius-root !default;
 $field-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 $field-disabled-color: tools.theme-color('on-surface', var(--v-disabled-opacity)) !default;
+$field-error-color: rgb(var(--v-theme-error)) !default;
 $field-font-size: 16px !default;
 $field-letter-spacing: .009375em !default;
 $field-max-width: 100% !default;
