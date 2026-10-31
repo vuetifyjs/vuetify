@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Kart',
-    zoomIn: 'Zoom inn',
-    zoomOut: 'Zoom ut',
-    reset: 'Tilbakestill visning',
   },
   badge: 'Skilt',
   open: 'Åpne',

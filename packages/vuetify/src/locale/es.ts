@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Mapa',
-    zoomIn: 'Acercar',
-    zoomOut: 'Alejar',
-    reset: 'Restablecer vista',
   },
   badge: 'Placa',
   open: 'Abrir',

@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'نقشه',
-    zoomIn: 'بزرگ‌نمایی',
-    zoomOut: 'کوچک‌نمایی',
-    reset: 'بازنشانی نما',
   },
   badge: 'نشان',
   open: 'باز کردن',

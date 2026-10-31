@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Carte',
-    zoomIn: 'Agrandir',
-    zoomOut: 'Réduire',
-    reset: 'Réinitialiser la vue',
   },
   badge: 'Badge',
   open: 'Ouvrir',

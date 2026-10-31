@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Mappa',
-    zoomIn: 'Ingrandisci',
-    zoomOut: 'Riduci',
-    reset: 'Reimposta vista',
   },
   badge: 'Distintivo',
   open: 'Apri',

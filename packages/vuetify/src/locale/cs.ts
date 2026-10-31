@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Mapa',
-    zoomIn: 'Přiblížit',
-    zoomOut: 'Oddálit',
-    reset: 'Obnovit zobrazení',
   },
   badge: 'Odznak',
   open: 'Otevřít',

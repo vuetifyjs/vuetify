@@ -1,9 +1,6 @@
 export default {
   map: {
     label: '地图',
-    zoomIn: '放大',
-    zoomOut: '缩小',
-    reset: '重置视图',
   },
   badge: '徽章',
   open: '打开',

@@ -3,7 +3,6 @@
 
 @include tools.layer('components')
   .v-map
-    background: $map-background
     height: $map-height
     isolation: isolate
     overflow: hidden
@@ -12,13 +11,9 @@
 
     &__svg
       display: block
-      fill: var(--v-map-color, #{$map-color})
+      fill: var(--v-map-color, #{$map-region-color})
       height: 100%
       width: 100%
-
-      &:focus-visible
-        outline: $map-focus-width solid currentColor
-        outline-offset: -$map-focus-offset
 
     &--interactive
       .v-map__svg
@@ -33,31 +28,27 @@
     &__region
       cursor: pointer
 
-      &:hover
-        opacity: $map-hover-opacity
-
       &:focus
         outline: none
 
+    &:not(&--disabled)
+      .v-map__svg:focus-visible
+        outline: $map-focus-width solid currentColor
+        outline-offset: -$map-focus-offset
+
+      .v-map__region:focus-visible
         &:is(path, rect, circle, ellipse, line, polyline, polygon, use), :is(path, rect, circle, ellipse, line, polyline, polygon, use)
-          stroke: currentColor
-          stroke-width: $map-focus-width
+          stroke: $map-region-focus-stroke
+          stroke-width: $map-region-focus-width
           vector-effect: non-scaling-stroke
+
+    &__region-overlay
+      opacity: $map-region-hover-opacity
+      pointer-events: none
 
     &--disabled
       .v-map__region
         cursor: default
-
-        &:hover
-          opacity: 1
-
-    &__controls
-      display: flex
-      flex-direction: column
-      gap: $map-control-gap
-      inset-block-start: $map-control-offset
-      inset-inline-end: $map-control-offset
-      position: absolute
 
     &__status
       align-items: center

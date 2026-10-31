@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Mapa',
-    zoomIn: 'Uvećaj',
-    zoomOut: 'Umanji',
-    reset: 'Vrati prikaz',
   },
   badge: 'Značka',
   open: 'Otvori',

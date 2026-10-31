@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Karta',
-    zoomIn: 'Povećaj',
-    zoomOut: 'Smanji',
-    reset: 'Vrati prikaz',
   },
   badge: 'Bedž',
   open: 'Otvori',

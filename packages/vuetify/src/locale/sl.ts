@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Zemljevid',
-    zoomIn: 'Povečaj',
-    zoomOut: 'Pomanjšaj',
-    reset: 'Ponastavi pogled',
   },
   badge: 'Značka',
   open: 'Odpri',

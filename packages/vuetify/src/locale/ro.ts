@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Hartă',
-    zoomIn: 'Mărește',
-    zoomOut: 'Micșorează',
-    reset: 'Resetează vizualizarea',
   },
   badge: 'Insignă',
   open: 'Deschideți',

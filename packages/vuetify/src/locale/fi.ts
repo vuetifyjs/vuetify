@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Kartta',
-    zoomIn: 'Lähennä',
-    zoomOut: 'Loitonna',
-    reset: 'Palauta näkymä',
   },
   badge: 'Infopiste',
   open: 'Avaa',

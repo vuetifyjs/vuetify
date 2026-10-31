@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Žemėlapis',
-    zoomIn: 'Priartinti',
-    zoomOut: 'Atitolinti',
-    reset: 'Atkurti vaizdą',
   },
   badge: 'Ženklelis',
   open: 'Atidaryti',

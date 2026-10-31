@@ -1,9 +1,6 @@
 export default {
   map: {
     label: 'Kort',
-    zoomIn: 'Zoom ind',
-    zoomOut: 'Zoom ud',
-    reset: 'Nulstil visning',
   },
   badge: 'Emblem',
   open: 'Åbn',
