@@ -12,6 +12,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 // Composables
 import { useColor } from '@/composables/color'
 import { makeDensityProps } from '@/composables/density'
+import { useLocale } from '@/composables/locale'
 
 // Directives
 import vClickOutside from '@/directives/click-outside'
@@ -67,6 +68,11 @@ export const makeVPieProps = propsFactory({
     type: String,
     default: 'title',
   },
+  maxVisibleItems: Number,
+  otherColor: {
+    type: String,
+    default: 'color-mix(in srgb, rgb(var(--v-theme-primary)) 50%, rgb(var(--v-theme-error)))',
+  },
   size: {
     type: [Number, String],
     default: 250,
@@ -111,6 +117,15 @@ export const VPie = genericComponent<VPieSlots>()({
   props: makeVPieProps(),
 
   setup (props, { slots }) {
+    const { t } = useLocale()
+    function isValidItemKey (key: unknown): key is PieItem['key'] {
+      return typeof key === 'string' || typeof key === 'symbol' || (typeof key === 'number' && Number.isFinite(key))
+    }
+
+    function isValidItemValue (value: unknown): value is number {
+      return typeof value === 'number' && Number.isFinite(value) && value >= 0
+    }
+
     const legendConfig = computed(() => ({
       visible: !!props.legend,
       position: 'bottom',
@@ -132,27 +147,53 @@ export const VPie = genericComponent<VPieSlots>()({
         : formatTextTemplate(legendConfig.value.textFormat, item)
     })
 
+    const fallbackItemKeys = new Map<number, symbol>()
+    function getFallbackItemKey (index: number) {
+      let key = fallbackItemKeys.get(index)
+      if (!key) {
+        key = Symbol(`v-pie-item-${index}`)
+        fallbackItemKeys.set(index, key)
+      }
+      return key
+    }
+
     const arcs = computed<PieItem[]>(() => {
       // hidden items get (value: 0) to trigger disappearing animation
-      return props.items
-        .filter(Boolean)
-        .map((item: any, index: number) => {
-          return {
-            key: item[props.itemKey],
-            color: item.color ?? colorFromPalette(index),
-            value: item[props.itemValue],
-            title: String(item[props.itemTitle]),
-            pattern: item.pattern ?? patternFromPalette(index),
-            raw: item,
-          } as PieItem
-        })
+      const keys = new Set<PieItem['key']>()
+      const items: PieItem[] = []
+
+      props.items.forEach((item: any, index: number) => {
+        if (!item) return
+
+        const rawKey = item[props.itemKey]
+        const key = isValidItemKey(rawKey) && !keys.has(rawKey)
+          ? rawKey
+          : getFallbackItemKey(index)
+        keys.add(key)
+
+        const value = item[props.itemValue]
+        items.push({
+          key,
+          color: item.color ?? colorFromPalette(index),
+          value: isValidItemValue(value) ? value : 0,
+          title: String(item[props.itemTitle]),
+          pattern: item.pattern ?? patternFromPalette(index),
+          raw: item,
+        } as PieItem)
+      })
+
+      return items
     })
 
     const visibleItemsKeys = shallowRef<PieItem['key'][]>([])
 
-    watch(() => arcs.value.length, () => {
-      // reset when number of items changes
-      visibleItemsKeys.value = arcs.value.map(a => a.key)
+    let previousArcKeys: PieItem['key'][] = []
+    watch(() => arcs.value.map(item => item.key), keys => {
+      const keysChanged = keys.length !== previousArcKeys.length ||
+        keys.some((key, index) => !Object.is(key, previousArcKeys[index]))
+
+      if (keysChanged) visibleItemsKeys.value = keys
+      previousArcKeys = keys
     }, { immediate: true })
 
     const visibleItems = computed(() => {
@@ -166,17 +207,53 @@ export const VPie = genericComponent<VPieSlots>()({
 
     const total = computed(() => visibleItems.value.reduce((sum, item) => sum + item.value, 0))
 
+    const otherItemKey = Symbol('v-pie-other')
+    const chartItems = computed(() => {
+      const maxVisibleItems = props.maxVisibleItems
+      if (
+        typeof maxVisibleItems !== 'number' ||
+        !Number.isInteger(maxVisibleItems) ||
+        maxVisibleItems < 1 ||
+        arcs.value.length <= maxVisibleItems
+      ) {
+        return visibleItems.value
+      }
+
+      const largestItems = new Set(
+        [...arcs.value]
+          .sort((a, b) => b.value - a.value)
+          .slice(0, maxVisibleItems)
+          .map(item => item.key),
+      )
+      const individualItems = visibleItems.value.filter(item => largestItems.has(item.key))
+      const overflowItems = visibleItems.value.filter(item => !largestItems.has(item.key))
+      const firstOverflowItem = overflowItems[0]!
+
+      return [
+        ...individualItems,
+        {
+          ...firstOverflowItem,
+          key: otherItemKey,
+          title: t('$vuetify.vPie.other'),
+          value: overflowItems.reduce((sum, item) => sum + item.value, 0),
+          color: props.otherColor,
+          pattern: undefined,
+          raw: undefined,
+        },
+      ]
+    })
+
     const gaugeCut = toRef(() => Number(props.gaugeCut ?? 0))
     const gaugeOffset = computed(() => (1 - Math.cos(Math.PI * Math.min(90, gaugeCut.value / 2) / 180)) / 2)
     const rotateDeg = computed(() => `${gaugeCut.value ? (180 + gaugeCut.value / 2) : (props.rotate ?? 0)}deg`)
 
     function arcOffset (index: number) {
-      return visibleItems.value
+      return chartItems.value
         .slice(0, index)
         .reduce((acc, s) => acc + (total.value > 0 ? s.value / total.value : 0) * (360 - gaugeCut.value), 0)
     }
 
-    function arcSize (v: number) { return v / total.value * (100 - gaugeCut.value / 3.6) }
+    function arcSize (v: number) { return total.value > 0 ? v / total.value * (100 - gaugeCut.value / 3.6) : 0 }
 
     function colorFromPalette (index: number) {
       if (props.palette.length === 0) return undefined
@@ -299,7 +376,11 @@ export const VPie = genericComponent<VPieSlots>()({
       }
 
       const avatarSlot = ({ item }: { item: PieItem }) => (
-        <VAvatar color={ item.color } start>
+        <VAvatar
+          color={ item.color?.startsWith('color-mix(') ? undefined : item.color }
+          style={{ backgroundColor: item.color }}
+          start
+        >
           { item.pattern && (
             <svg height="40" width="40">
               <rect width="40" height="40" fill={ item.pattern } />
@@ -347,13 +428,13 @@ export const VPie = genericComponent<VPieSlots>()({
               onTouchstart={ onSvgTouchstart }
               v-click-outside={{ handler: onSvgClickOutside }}
             >
-              { arcs.value.map((item, index) => (
+              { chartItems.value.map((item, index) => (
                 <VPieSegment
                   { ...segmentProps }
                   key={ item.key }
                   active={ activeItemKey.value === item.key }
                   color={ item.color }
-                  value={ isVisible(item) ? arcSize(item.value) : 0 }
+                  value={ arcSize(item.value) }
                   rotate={ arcOffset(index) }
                   pattern={ item.pattern }
                   onUpdate:active={ val => setItemActive(item, val) }

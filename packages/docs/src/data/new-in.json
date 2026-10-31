@@ -530,6 +530,12 @@
       "prop-transition": "4.2.0"
     }
   },
+  "VPie": {
+    "props": {
+      "maxVisibleItems": "4.4.0",
+      "otherColor": "4.4.0"
+    }
+  },
   "VProgressLinear": {
     "props": {
       "chunkCount": "3.10.0",
