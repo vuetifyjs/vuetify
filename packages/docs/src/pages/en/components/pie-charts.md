@@ -52,8 +52,9 @@ export default createVuetify({
 
 There are some notable features that are not common in other Vuetify components:
 
-- each item is expected to have a `key` field (name can be changed with `item-key`)
+- each item is expected to have a unique `key` field (name can be changed with `item-key`) and a finite, non-negative numeric `value`; invalid values are treated as zero, and missing or duplicate keys receive internal rendering keys
 - `tooltip` accept object and lets you customize transition, offset and the text. Notably, the `titleFormat` and `subtitleFormat` can be functions or simple string templates that support `[title]` and `[value]` macros.
+- `max-visible-items` keeps the largest items as individual slices and groups the remaining items into an `Other` slice. The legend still lists every item, so overflow items can be toggled individually.
 - `animations` prop lets you control duration and easing
 
 ### Props
@@ -83,6 +84,10 @@ The legend can be moved to any side or hidden entirely. With little effort you c
 Single item representation can be easily customized with string templates.
 
 <ExamplesExample file="v-pie/prop-formats" />
+
+#### Maximum visible items
+
+Use a positive integer `max-visible-items` value to keep the largest categories as separate slices. Remaining categories are combined into `Other`; each category remains individually toggleable in the legend. Invalid limits leave all items ungrouped. The `Other` slice uses a blend of the theme's primary and error colors by default and can be customized with `other-color`.
 
 ### Examples
 
