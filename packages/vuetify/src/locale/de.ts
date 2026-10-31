@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Karte',
+    zoomIn: 'Vergrößern',
+    zoomOut: 'Verkleinern',
+    reset: 'Ansicht zurücksetzen',
+  },
   badge: 'Abzeichen',
   open: 'Öffnen',
   close: 'Schließen',

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
+  <g stroke="#ffffff" stroke-width="3" stroke-linejoin="round">
+    <path id="west" aria-label="Western region" fill="#577c96" d="M64 98 180 54 278 88 254 188 152 258 58 218Z" />
+    <path id="central" aria-label="Central region" fill="#7b9b79" d="M278 88 388 68 444 158 374 266 254 288 254 188Z" />
+    <path id="east" aria-label="Eastern region" fill="#bd9468" d="M388 68 530 100 584 210 496 292 374 266 444 158Z" />
+  </g>
+</svg>

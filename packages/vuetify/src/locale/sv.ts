@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Karta',
+    zoomIn: 'Zooma in',
+    zoomOut: 'Zooma ut',
+    reset: 'Återställ vy',
+  },
   badge: 'Bricka',
   open: 'Öppna',
   close: 'Stäng',

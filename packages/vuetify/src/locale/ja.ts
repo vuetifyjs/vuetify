@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: '地図',
+    zoomIn: '拡大',
+    zoomOut: '縮小',
+    reset: '表示をリセット',
+  },
   badge: 'バッジ',
   open: '開く',
   close: '閉じる',

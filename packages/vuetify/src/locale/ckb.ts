@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'نەخشە',
+    zoomIn: 'گەورەکردنەوە',
+    zoomOut: 'بچووککردنەوە',
+    reset: 'گەڕاندنەوەی دیمەن',
+  },
   badge: 'باج',
   open: 'کردنەوە',
   close: 'داخستن',

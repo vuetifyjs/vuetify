@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: '지도',
+    zoomIn: '확대',
+    zoomOut: '축소',
+    reset: '보기 초기화',
+  },
   badge: '배지',
   open: '열기',
   close: '닫기',

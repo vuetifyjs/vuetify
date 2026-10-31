@@ -1,0 +1,42 @@
+{
+  "description": "Displays a self-hosted SVG map with region selection, tooltips, panning, and zooming.",
+  "props": {
+    "color": "Fallback fill color for shapes without a fill in the SVG. Accepts a theme color or CSS color.",
+    "controls": "Displays zoom and reset controls. Use the `controls` slot to customize their content.",
+    "disabled": "Disables region selection, tooltips, and map navigation.",
+    "label": "Accessible name of the map. Accepts plain text or a locale key.",
+    "maxZoom": "Maximum magnification relative to the complete SVG viewBox.",
+    "minZoom": "Minimum magnification. Values below one are treated as one.",
+    "modelValue": "Identifier of the selected region. Activating the selected region clears the selection.",
+    "pan": "Enables dragging and arrow-key panning within the SVG bounds.",
+    "readonly": "Prevents selection changes while retaining navigation and region events.",
+    "regionColors": "Maps region identifiers to theme colors or CSS fill colors.",
+    "regionLabels": "Maps region identifiers to accessible labels and tooltip text.",
+    "selectedColor": "Fill color of the selected region. Accepts a theme color or CSS color.",
+    "src": "URL of a self-hosted SVG file. No default map service is contacted.",
+    "svg": "Inline SVG markup. Takes precedence over **src**. Parsing runs after mounting in the browser.",
+    "tooltip": "Displays the active region label in a tooltip. A `tooltip` slot also enables tooltips.",
+    "zoom": "Magnification relative to the complete SVG viewBox. Supports `v-model:zoom`.",
+    "zoomable": "Enables zoom buttons, mouse wheel, double click, pinch gestures, and zoom keyboard shortcuts."
+  },
+  "slots": {
+    "controls": "Custom controls receiving the current zoom, `zoomIn`, `zoomOut`, and `reset` functions.",
+    "default": "Additional SVG content, such as markers, positioned in the source SVG coordinate system.",
+    "error": "Content shown when loading or parsing fails. Receives the error.",
+    "loading": "Content shown while the SVG source is loading.",
+    "tooltip": "Custom tooltip content receiving the region identifier, title, and selection state."
+  },
+  "events": {
+    "click:region": "Emitted with the region and originating mouse or keyboard event when a region is activated.",
+    "error": "Emitted when loading or parsing the SVG fails.",
+    "hover:region": "Emitted with the active region on pointer hover or keyboard focus, or null when it leaves.",
+    "load": "Emitted with the discovered regions after the current source has loaded.",
+    "update:modelValue": "Emitted when the selected region changes.",
+    "update:zoom": "Emitted when a navigation action changes magnification."
+  },
+  "exposed": {
+    "reset": "Restores centered framing at the minimum zoom.",
+    "zoomIn": "Increases zoom around the center of the current view.",
+    "zoomOut": "Decreases zoom around the center of the current view."
+  }
+}

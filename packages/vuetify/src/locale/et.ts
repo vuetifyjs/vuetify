@@ -1,4 +1,10 @@
 export default {
+  map: {
+    label: 'Kaart',
+    zoomIn: 'Suurenda',
+    zoomOut: 'Vähenda',
+    reset: 'Lähtesta vaade',
+  },
   badge: 'Märk',
   open: 'Ava',
   close: 'Sulge',

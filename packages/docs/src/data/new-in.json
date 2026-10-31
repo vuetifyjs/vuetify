@@ -449,6 +449,47 @@
       "slim": "3.4.0"
     }
   },
+  "VMap": {
+    "props": {
+      "src": "4.4.0",
+      "svg": "4.4.0",
+      "modelValue": "4.4.0",
+      "zoom": "4.4.0",
+      "minZoom": "4.4.0",
+      "maxZoom": "4.4.0",
+      "color": "4.4.0",
+      "selectedColor": "4.4.0",
+      "regionColors": "4.4.0",
+      "regionLabels": "4.4.0",
+      "label": "4.4.0",
+      "controls": "4.4.0",
+      "pan": "4.4.0",
+      "zoomable": "4.4.0",
+      "tooltip": "4.4.0",
+      "disabled": "4.4.0",
+      "readonly": "4.4.0"
+    },
+    "slots": {
+      "default": "4.4.0",
+      "controls": "4.4.0",
+      "tooltip": "4.4.0",
+      "loading": "4.4.0",
+      "error": "4.4.0"
+    },
+    "events": {
+      "update:modelValue": "4.4.0",
+      "update:zoom": "4.4.0",
+      "click:region": "4.4.0",
+      "hover:region": "4.4.0",
+      "load": "4.4.0",
+      "error": "4.4.0"
+    },
+    "exposed": {
+      "zoomIn": "4.4.0",
+      "zoomOut": "4.4.0",
+      "reset": "4.4.0"
+    }
+  },
   "VMenu": {
     "props": {
       "captureFocus": "3.11.0",
