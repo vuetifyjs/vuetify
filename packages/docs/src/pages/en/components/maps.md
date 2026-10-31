@@ -62,7 +62,7 @@ The supported SVG subset includes paths, groups, basic shapes, text, gradients, 
 
 ### Selection and colors
 
-`v-model` holds the selected region identifier, or `null`. Activating the selected region clears it. **region-colors** assigns fills by identifier, while **selected-color** controls the selected fill. Values accept theme names or CSS colors. Original SVG fills are preserved unless overridden. Shapes without a fill use a transparent fallback.
+`v-model` holds the selected region identifier, or `null`. Activating the selected region clears it. **region-colors** assigns fills by identifier, while **selected-color** controls the selected fill. Values accept theme names or CSS colors. Original SVG fills are preserved unless overridden. Shapes without a fill use a transparent fallback, and shapes without a stroke inherit the surrounding text color so unstyled maps remain visible. Explicit SVG strokes, including `stroke="none"`, are preserved.
 
 <ExamplesExample file="v-map/prop-region-colors" />
 
