@@ -222,7 +222,7 @@
 
     .v-field--error:not(.v-field--disabled) &
       > .v-icon
-        color: rgb(var(--v-theme-error))
+        color: $field-error-color
 
   .v-field__clearable
     cursor: pointer
@@ -280,7 +280,7 @@
       opacity: 1
 
     .v-field--error:not(.v-field--disabled) &
-      color: rgb(var(--v-theme-error))
+      color: $field-error-color
 
     &--floating
       --v-field-label-scale: #{$field-label-floating-scale}em
@@ -339,7 +339,7 @@
         --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
     .v-field--error:not(.v-field--disabled) &
-      color: rgb(var(--v-theme-error))
+      color: $field-error-color
 
     .v-field.v-field--focused &,
     .v-input.v-input--error &
