@@ -26,7 +26,7 @@ import { VMap } from 'vuetify/labs/VMap'
 
 ## Usage
 
-The example supplies a schematic SVG with three service areas through **svg**. Applications own the SVG source and any loading or caching. The component does not make network requests. Use SVG artwork with a license compatible with your application.
+The example loads an Austria map from jsDelivr and passes its SVG markup through **svg**. The CDN URL pins `@svg-maps/austria` to version `2.0.0`, and the example credits MapSVG and SVG Maps under CC BY 4.0. Applications own the SVG source and any loading or caching. The component does not make network requests. Use SVG artwork with a license compatible with your application.
 
 <ExamplesExample file="v-map/usage" />
 

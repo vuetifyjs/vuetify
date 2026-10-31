@@ -1,6 +1,9 @@
 <template>
   <div>
-    <v-map v-model="selected" :svg="svg" label="Regional service areas" wheel>
+    <v-progress-linear v-if="loading" aria-label="Loading map" indeterminate></v-progress-linear>
+    <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
+
+    <v-map v-model="selected" :svg="svg" label="Austria states" wheel>
       <template v-slot:default="{ zoom, minZoom, maxZoom, zoomIn, zoomOut, reset }">
         <div class="d-flex ga-2 position-absolute" style="inset-block-start: 12px; inset-inline-end: 12px">
           <v-btn :disabled="zoom.value >= maxZoom" size="small" @click="zoomIn">Zoom in</v-btn>
@@ -11,16 +14,32 @@
     </v-map>
 
     <div class="mt-3 text-body-small">Selected: {{ selected ?? 'None' }}</div>
+    <p class="mt-3 text-caption">
+      Map by <a href="https://mapsvg.com/maps/austria" rel="noopener" target="_blank">MapSVG</a>,
+      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/austria" rel="noopener" target="_blank">SVG Maps</a>
+      (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
+      Loaded from jsDelivr.
+    </p>
   </div>
 </template>
 
 <script setup>
-  import { shallowRef } from 'vue'
+  import { onMounted, shallowRef } from 'vue'
 
   const selected = shallowRef(null)
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
-    <path id="west" aria-label="West" fill="#607d8b" d="M30 80L190 30L230 160L150 280L30 220Z" />
-    <path id="central" aria-label="Central" fill="#78909c" d="M190 30L390 40L420 200L300 290L150 280L230 160Z" />
-    <path id="east" aria-label="East" fill="#90a4ae" d="M390 40L560 90L570 250L420 200Z" />
-  </svg>`
+  const svg = shallowRef()
+  const loading = shallowRef(true)
+  const error = shallowRef('')
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('https://cdn.jsdelivr.net/npm/@svg-maps/austria@2.0.0/austria.svg')
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      svg.value = await response.text()
+    } catch {
+      error.value = 'Could not load the map from jsDelivr.'
+    } finally {
+      loading.value = false
+    }
+  })
 </script>
