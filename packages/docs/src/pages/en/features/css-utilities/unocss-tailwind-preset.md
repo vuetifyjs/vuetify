@@ -549,6 +549,7 @@ theme: {
     surface:           'rgb(var(--v-theme-surface))',
     'surface-variant': 'rgb(var(--v-theme-surface-variant))',
     primary:           'rgb(var(--v-theme-primary))',
+    secondary:         'rgb(var(--v-theme-secondary))',
     success:           'rgb(var(--v-theme-success))',
     warning:           'rgb(var(--v-theme-warning))',
     error:             'rgb(var(--v-theme-error))',
@@ -561,9 +562,12 @@ Because `presetWind4` generates utilities on demand, also add `safelist` entries
 
 ```ts
 safelist: [
-  'bg-primary', 'text-primary',
-  'bg-success', 'text-success',
-  'bg-error',   'text-error',
+  'bg-primary',   'text-primary',
+  'bg-secondary', 'text-secondary',
+  'bg-success',   'text-success',
+  'bg-warning',   'text-warning',
+  'bg-error',     'text-error',
+  'bg-info',      'text-info',
 ],
 ```
 
