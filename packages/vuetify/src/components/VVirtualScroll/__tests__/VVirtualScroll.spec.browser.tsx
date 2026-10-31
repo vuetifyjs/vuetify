@@ -2,7 +2,7 @@
 import { VVirtualScroll } from '../VVirtualScroll'
 
 // Utilities
-import { render, screen, scroll, waitIdle } from '@test'
+import { render, screen, scroll, waitAnimationFrame, waitIdle } from '@test'
 import { nextTick, ref } from 'vue'
 import { createRange } from '@/util'
 
@@ -156,5 +156,177 @@ describe('VVirtualScroll', () => {
       expect(itemBox.top).toBeLessThan(rootBox.bottom)
       expect(itemBox.bottom).toBeLessThanOrEqual(rootBox.bottom + 1)
     }
+  })
+
+  function variedItems () {
+    return createRange(80).map(index => ({
+      id: index,
+      height: index >= 30 && index < 50 ? 400 : 40,
+    }))
+  }
+
+  async function revealVariedHeights (root: HTMLElement) {
+    root.scrollTop = 1100
+    await waitIdle()
+
+    let guard = 0
+    while (root.scrollTop < 3600 && guard < 30) {
+      root.scrollTop += 200
+      await waitIdle()
+      guard++
+    }
+
+    root.scrollTop = 3600
+    await waitIdle()
+    await waitIdle()
+  }
+
+  async function settleLayout () {
+    await nextTick()
+    await waitAnimationFrame()
+    await nextTick()
+    await waitAnimationFrame()
+    await waitIdle()
+  }
+
+  function itemOffset (root: HTMLElement, id: string) {
+    const row = screen.getAllByCSS('.v-virtual-scroll__item')
+      .find(el => el.textContent?.trim() === id)
+    if (!row) return null
+
+    return row.getBoundingClientRect().top - root.getBoundingClientRect().top
+  }
+
+  function visibleAnchor (root: HTMLElement) {
+    const box = root.getBoundingClientRect()
+    const row = screen.getAllByCSS('.v-virtual-scroll__item').find(el => {
+      const itemBox = el.getBoundingClientRect()
+      return itemBox.bottom > box.top + 1 && itemBox.top < box.bottom - 1
+    })
+
+    return row?.textContent?.trim() ?? null
+  }
+
+  it('keeps the scroll position when items are appended', async () => {
+    const items = ref(variedItems())
+
+    render(() => (
+      <VVirtualScroll height="400" items={ items.value }>
+        {{
+          default: ({ item }) => (
+            <div style={{ height: `${item.height}px` }}>{ item.id }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll') as HTMLElement
+    await waitIdle()
+    await revealVariedHeights(root)
+
+    expect(root.scrollHeight).toBeGreaterThan(5000)
+    expect(root.scrollTop).toBeGreaterThan(3200)
+
+    const scrollTop = root.scrollTop
+    const anchor = visibleAnchor(root)
+    const offset = itemOffset(root, anchor!)
+    expect(anchor).toBeTruthy()
+    expect(offset).not.toBeNull()
+
+    items.value.push({ id: 80, height: 40 })
+    await settleLayout()
+
+    expect(itemOffset(root, anchor!)).toBeCloseTo(offset!, 0)
+    expect(root.scrollTop).toBeCloseTo(scrollTop, 0)
+    expect(root.scrollHeight).toBeGreaterThan(5000)
+  })
+
+  it('keeps the anchored row in place when an item is prepended', async () => {
+    const items = ref(variedItems())
+
+    render(() => (
+      <VVirtualScroll height="400" items={ items.value }>
+        {{
+          default: ({ item }) => (
+            <div style={{ height: `${item.height}px` }}>{ item.id }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll') as HTMLElement
+    await waitIdle()
+    await revealVariedHeights(root)
+
+    const anchor = visibleAnchor(root)
+    const offset = itemOffset(root, anchor!)
+    expect(anchor).toBeTruthy()
+    expect(offset).not.toBeNull()
+
+    items.value.unshift({ id: -1, height: 40 })
+    await settleLayout()
+
+    expect(itemOffset(root, anchor!)).toBeCloseTo(offset!, 0)
+    expect(root.scrollHeight).toBeGreaterThan(5000)
+  })
+
+  it('keeps the anchored row in place when a taller item is prepended', async () => {
+    const items = ref(variedItems())
+
+    render(() => (
+      <VVirtualScroll height="400" itemKey="id" items={ items.value }>
+        {{
+          default: ({ item }) => (
+            <div style={{ height: `${item.height}px` }}>{ item.id }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll') as HTMLElement
+    await waitIdle()
+    await revealVariedHeights(root)
+
+    const anchor = visibleAnchor(root)
+    const offset = itemOffset(root, anchor!)
+    expect(anchor).toBeTruthy()
+    expect(offset).not.toBeNull()
+
+    items.value.unshift({ id: -1, height: 72 })
+    await settleLayout()
+
+    expect(itemOffset(root, anchor!)).toBeCloseTo(offset!, 0)
+    expect(root.scrollHeight).toBeGreaterThan(5000)
+  })
+
+  it('keeps measured sizes when items are replaced with the same key', async () => {
+    const items = ref(variedItems())
+
+    render(() => (
+      <VVirtualScroll height="400" itemKey="id" items={ items.value }>
+        {{
+          default: ({ item }) => (
+            <div style={{ height: `${item.height}px` }}>{ item.id }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll') as HTMLElement
+    await waitIdle()
+    await revealVariedHeights(root)
+
+    const scrollTop = root.scrollTop
+    const anchor = visibleAnchor(root)
+    const offset = itemOffset(root, anchor!)
+    expect(anchor).toBeTruthy()
+    expect(offset).not.toBeNull()
+
+    items.value = items.value.map(item => ({ ...item }))
+    await settleLayout()
+
+    expect(itemOffset(root, anchor!)).toBeCloseTo(offset!, 0)
+    expect(root.scrollTop).toBeCloseTo(scrollTop, 0)
+    expect(root.scrollHeight).toBeGreaterThan(5000)
   })
 })
