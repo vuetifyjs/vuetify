@@ -51,6 +51,8 @@ export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): Backgr
   return { backgroundColorClasses, backgroundColorStyles }
 }
 
+const CSS_IMAGE = /^(url\(|[a-z-]+-gradient\()/i
+
 function normalizeColors (colors: { background?: ColorValue, text?: ColorValue }) {
   return {
     text: isString(colors.text)
@@ -70,7 +72,11 @@ export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue
 
   if (_colors.background) {
     if (isCssColor(_colors.background)) {
-      styles.backgroundColor = _colors.background
+      if (CSS_IMAGE.test(_colors.background)) {
+        styles.backgroundImage = _colors.background
+      } else {
+        styles.backgroundColor = _colors.background
+      }
 
       if (!_colors.text && isParsableColor(_colors.background)) {
         const backgroundColor = parseColor(_colors.background)
@@ -86,7 +92,7 @@ export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue
     }
   }
 
-  if (_colors.text) {
+  if (_colors.text && !CSS_IMAGE.test(_colors.text)) {
     if (isCssColor(_colors.text)) {
       styles.color = _colors.text
       styles.caretColor = _colors.text
