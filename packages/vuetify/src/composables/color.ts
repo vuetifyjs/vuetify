@@ -52,6 +52,8 @@ export function useBackgroundColor (color: MaybeRefOrGetter<ColorValue>): Backgr
 }
 
 const CSS_IMAGE = /^(url\(|[a-z-]+-gradient\()/i
+const SAFE_GRADIENT = /^[a-z-]+-gradient\(((?!url\(|src\()[^"'\\])*\)$/i
+const SAFE_DATA_URL = /^url\(("data:image\/[^"\\]*"|'data:image\/[^'\\]*'|data:image\/[^"'()\\\s]*)\)$/i
 
 function normalizeColors (colors: { background?: ColorValue, text?: ColorValue }) {
   return {
@@ -73,7 +75,9 @@ export function computeColor (colors: MaybeRefOrGetter<{ background?: ColorValue
   if (_colors.background) {
     if (isCssColor(_colors.background)) {
       if (CSS_IMAGE.test(_colors.background)) {
-        styles.backgroundImage = _colors.background
+        if (SAFE_GRADIENT.test(_colors.background) || SAFE_DATA_URL.test(_colors.background)) {
+          styles.backgroundImage = _colors.background
+        }
       } else {
         styles.backgroundColor = _colors.background
       }

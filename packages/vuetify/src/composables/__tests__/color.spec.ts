@@ -25,7 +25,10 @@ describe('color.ts', () => {
       [{ bg: 'color-mix(in srgb, red 50%, blue)' }, [[], { backgroundColor: 'color-mix(in srgb, red 50%, blue)' }]],
       [{ bg: 'linear-gradient(90deg, #000, #fff)' }, [[], { backgroundImage: 'linear-gradient(90deg, #000, #fff)' }]],
       [{ bg: 'repeating-conic-gradient(#000, #fff)' }, [[], { backgroundImage: 'repeating-conic-gradient(#000, #fff)' }]],
-      [{ bg: 'url(/pattern.svg)' }, [[], { backgroundImage: 'url(/pattern.svg)' }]],
+      [{ bg: 'url(data:image/gif;base64,R0lGOD)' }, [[], { backgroundImage: 'url(data:image/gif;base64,R0lGOD)' }]],
+      [{ bg: 'url("data:image/svg+xml,%3Csvg a=\'b\'/%3E")' }, [[], { backgroundImage: 'url("data:image/svg+xml,%3Csvg a=\'b\'/%3E")' }]],
+      [{ bg: 'linear-gradient(rgb(var(--a)), #fff)' }, [[], { backgroundImage: 'linear-gradient(rgb(var(--a)), #fff)' }]],
+      [{ bg: 'url(/pattern.svg)' }, [[], {}]], // ignores URL with path
     ])('should return correct color classes and styles', (value, [classes, styles]) => {
       const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => value.bg)
 
