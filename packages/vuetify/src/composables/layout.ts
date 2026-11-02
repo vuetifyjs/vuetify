@@ -332,7 +332,15 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       // count once mounted; boot state is read once — hydrating items are on screen, not pending
       const isEarly = !isBooted.value
       activeItems.set(id, toRef(() => active.value && (isEarly || isMounted.value)))
-      disableTransitions && disabledTransitions.set(id, disableTransitions)
+
+      const isRelocating = shallowRef(false)
+      watch(position, () => {
+        isRelocating.value = true
+        // two frames so the browser commits the new edge with transitions off
+        requestAnimationFrame(() => requestAnimationFrame(() => isRelocating.value = false))
+      })
+
+      disabledTransitions.set(id, toRef(() => isRelocating.value || !!disableTransitions?.value))
 
       const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
       const instanceIndex = instances.indexOf(vm)
