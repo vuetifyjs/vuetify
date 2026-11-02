@@ -150,7 +150,7 @@ catalog:
   prism-theme-vars: '^0.2.5'
   front-matter: '^4.0.2'
   '@resvg/resvg-js': '^2.6.2'
-  satori: '^0.26.0'
+  satori: '^0.33.0'
 
   # Other dependencies
   '@lerna-lite/cli': '^4.9.3'
@@ -217,6 +217,8 @@ minimumReleaseAgeExclude:
   - playwright-core
   - vitest@4.1.11
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: satori@0.33.5
+  - satori@0.33.5
 
 nodeLinker: hoisted
 
