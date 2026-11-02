@@ -6,11 +6,11 @@
     "bars": "Fixed number of bars, stretched to the full width. When unset, as many bars as fit the width at **bar-width** and **bar-gap** are drawn. **peaks** shorter than the bar count are drawn as they are.",
     "barWidth": "Width of a single bar, in pixels. With a fixed **bars** count it only sets the ratio to **bar-gap**.",
     "barGap": "Gap between bars, in the same units as **bar-width**.",
-    "barRadius": "Corner radius of a single bar, in pixels, capped at half its width. Ignored for bars narrower than 4px.",
+    "barRadius": "Corner radius of a single bar, in pixels, capped at half its width. Ignored for bars narrower than 3px.",
     "normalize": "Rescales the peaks so the loudest bar reaches full height. Applied at render, so toggling it does not require decoding again.",
     "sampleStrategy": "How samples are reduced to one value per bar. `peak` preserves transients and suits speech; `rms` is smoother and suits music.",
-    "mirror": "Reflects the bars below a baseline at a reduced opacity. A number from 0 to 1 sets the reflection height relative to the bars; `true` is 1.",
-    "live": "Draws bars from the audio of the parent `v-audio` as it plays, scrolling right to left. Not seekable. Cross-origin media needs `crossorigin` on `v-audio`.",
+    "mirror": "Reflects the bars below a baseline at a reduced opacity. A number from 0 to 1 sets the reflection height relative to the bars; `0` keeps the bars on the baseline without a reflection, `true` is 1.",
+    "live": "Draws bars from the audio of the parent `v-audio` as it plays, scrolling right to left. With `spectrum` the bars stay in place, each following a frequency band from bass to treble, and show **peaks** while paused or with reduced motion. Not seekable. Cross-origin media needs `crossorigin` on `v-audio`.",
     "bgColor": "Color of the unplayed bars. Falls back to the current text color at a reduced opacity."
   },
   "events": {

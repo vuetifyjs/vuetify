@@ -12,8 +12,12 @@ const stories = {
   Default: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } />,
   Mirror: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror />,
   'Mirror 0.5': <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror={ 0.5 } />,
+  'Mirror 0': <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror={ 0 } />,
   Disabled: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } disabled />,
   'No peaks': <VAudioWaveform modelValue={ 40 } max={ 100 } />,
+  Spectrum: (
+    <VAudioWaveform peaks={[0.5, 0.8, 1, 0.5]} bars={ 4 } barWidth={ 2.5 } barGap={ 3 } height={ 20 } live="spectrum" style="width: 24px" />
+  ),
 }
 
 describe('VAudioWaveform', () => {

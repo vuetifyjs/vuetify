@@ -98,6 +98,10 @@ With **live**, the waveform skips decoding and draws bars from the audio as it p
 
 <ExamplesExample file="v-audio/prop-waveform-live" />
 
+`live="spectrum"` keeps the bars in place, each following a frequency band from bass to treble.
+
+<ExamplesExample file="v-audio/prop-waveform-spectrum" />
+
 #### Readonly and start position
 
 **readonly** locks the seek bar while playback, volume and custom actions stay usable. **start-at** starts playback at a position in seconds. **v-model:playback-rate** is applied to every file the player loads.
