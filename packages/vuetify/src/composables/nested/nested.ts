@@ -166,25 +166,6 @@ export const useNested = (
   const parents = shallowRef(new Map<unknown, unknown>())
   const disabled = shallowRef(new Set<unknown>())
 
-  const opened = useProxiedModel(
-    props,
-    'opened',
-    props.opened,
-    v => new Set(Array.isArray(v) ? v.map(i => toRaw(i)) : v),
-    v => [...v.values()],
-  )
-
-  // opening multiple nodes in a sync loop cannot wait for the proxied model to catch up
-  let batch: Set<unknown> | null = null
-  function currentOpened () {
-    if (!batch) queueMicrotask(() => { batch = null })
-    return batch ?? opened.value
-  }
-  function setOpened (value: Set<unknown>) {
-    batch = value
-    opened.value = value
-  }
-
   const activeStrategy = computed(() => {
     if (isFunction(props.activeStrategy)) return props.activeStrategy(props.mandatory)
     if (isObject(props.activeStrategy)) return props.activeStrategy
@@ -245,6 +226,25 @@ export const useNested = (
       if (comparator(value, itemVal)) return itemVal
     }
     return value
+  }
+
+  const opened = useProxiedModel(
+    props,
+    'opened',
+    props.opened,
+    v => new Set(Array.isArray(v) ? v.map(i => toRaw(resolveValue(i))) : v),
+    v => [...v.values()],
+  )
+
+  // opening multiple nodes in a sync loop cannot wait for the proxied model to catch up
+  let batch: Set<unknown> | null = null
+  function currentOpened () {
+    if (!batch) queueMicrotask(() => { batch = null })
+    return batch ?? opened.value
+  }
+  function setOpened (value: Set<unknown>) {
+    batch = value
+    opened.value = value
   }
 
   const activated = useProxiedModel(
