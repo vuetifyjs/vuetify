@@ -2,7 +2,7 @@
 @use '../../styles/tools';
 
 // VLabel
-$label-color: inherit !default;
+$label-color: currentColor !default;
 $label-display: inline-flex !default;
 $label-font-size: 1rem !default;
 $label-letter-spacing: .009375em !default;
