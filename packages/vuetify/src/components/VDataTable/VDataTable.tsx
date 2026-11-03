@@ -27,6 +27,7 @@ import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from 
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { LoaderSlot } from '@/composables/loader'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef, toRefs, toValue } from 'vue'
@@ -224,6 +225,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     const loadingConfig = useLoadingConfig(() => props.loading, () => props.color)
+    const { t } = useLocale()
 
     useOptions({
       page,
@@ -328,6 +330,7 @@ export const VDataTable = genericComponent<new <T extends readonly any[], V>(
                             active
                             color={ loadingConfig.color.value }
                             indeterminate
+                            ariaLabel={ t(props.loadingText) }
                             v-slots={{ default: slots.loader }}
                           />
                         </th>

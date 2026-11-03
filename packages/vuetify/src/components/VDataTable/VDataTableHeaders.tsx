@@ -15,7 +15,7 @@ import { injectNestedDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -26,7 +26,7 @@ import { convertToUnit, genericComponent, isString, propsFactory, useRender, wra
 import type { CSSProperties, PropType, UnwrapRef } from 'vue'
 import type { provideSelection } from './composables/select'
 import type { provideSort } from './composables/sort'
-import type { InternalDataTableHeader } from './types'
+import type { DataTableLoading, InternalDataTableHeader } from './types'
 import type { ItemProps } from '@/composables/list-items'
 import type { LoaderSlotProps } from '@/composables/loader'
 
@@ -86,13 +86,17 @@ export const makeVDataTableHeadersProps = propsFactory({
     type: String,
     default: '$vuetify.dataTable.ariaLabel.selectAll',
   },
+  loadingText: {
+    type: String,
+    default: '$vuetify.dataIterator.loadingText',
+  },
 
   /** @deprecated */
   sticky: Boolean,
 
   ...makeDensityProps(),
   ...makeDisplayProps(),
-  ...makeLoaderProps(),
+  loading: [Boolean, String, Object] as PropType<DataTableLoading>,
 }, 'VDataTableHeaders')
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
@@ -404,6 +408,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                   active
                   color={ loadingConfig.color.value }
                   indeterminate
+                  ariaLabel={ t(props.loadingText) }
                   v-slots={{ default: slots.loader }}
                 />
               </th>

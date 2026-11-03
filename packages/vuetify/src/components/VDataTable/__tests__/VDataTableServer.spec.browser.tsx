@@ -97,6 +97,20 @@ const DESSERT_ITEMS = [
 ]
 
 describe('VDataTableServer', () => {
+  it('should label the loading progress bar with loadingText', () => {
+    render(() => (
+      <VDataTableServer
+        headers={ DESSERT_HEADERS }
+        items={[]}
+        itemsLength={ 0 }
+        loading
+        loadingText="Loading results"
+      />
+    ))
+
+    expect(screen.getByRole('progressbar', { name: 'Loading results' })).toBeVisible()
+  })
+
   it('should render table', () => {
     const itemsLength = 2
 

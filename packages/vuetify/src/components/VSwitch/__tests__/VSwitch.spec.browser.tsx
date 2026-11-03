@@ -53,6 +53,12 @@ const props = {
 describe('VSwitch', () => {
   showcase({ stories, props, component: VSwitch })
 
+  it('should label the default loading progress indicator', () => {
+    render(() => <VSwitch loading />)
+
+    expect(screen.getByRole('progressbar', { name: 'Loading...' })).toBeVisible()
+  })
+
   it('should focus and blur from a ref', async () => {
     const cmp = ref<any>()
 
