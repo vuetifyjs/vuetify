@@ -209,8 +209,15 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     layoutRect.value = new Box({ x: left, y: top, width, height }) as DOMRectReadOnly
   })
 
+  function isHorizontal (position: Position) {
+    return position === 'left' || position === 'right'
+  }
+
+  // layoutRect follows content height, so only percentage sizes may depend on it
   function sizeOf (value: number | string | undefined, position: Position) {
-    const span = position === 'left' || position === 'right'
+    if (!isPercentage(value)) return resolveSize(value)
+
+    const span = isHorizontal(position)
       ? layoutRect.value?.width
       : layoutRect.value?.height
 
@@ -218,7 +225,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   }
 
   function percentOf (value: number | string | undefined) {
-    return !layoutRect.value && isPercentage(value) ? parseFloat(value) : 0
+    return isPercentage(value) && !layoutRect.value ? parseFloat(value) : 0
   }
 
   function toOffset (px: number, percent: number) {
@@ -227,7 +234,17 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const isResizing = shallowRef(false)
   let resizeTimeout = -1
-  watch(() => [layoutRect.value?.width, layoutRect.value?.height], () => {
+  const percentageAxes = computed(() => {
+    const sized = registered.value.filter(id => isPercentage(layoutSizes.get(id)?.value))
+    return {
+      x: sized.some(id => isHorizontal(positions.get(id)!.value)),
+      y: sized.some(id => !isHorizontal(positions.get(id)!.value)),
+    }
+  })
+  watch([
+    () => percentageAxes.value.x && layoutRect.value?.width,
+    () => percentageAxes.value.y && layoutRect.value?.height,
+  ], () => {
     isResizing.value = true
     window.clearTimeout(resizeTimeout)
     resizeTimeout = window.setTimeout(() => (isResizing.value = false), 100)
