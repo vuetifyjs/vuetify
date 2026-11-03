@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Maps
   title: SVG map component
