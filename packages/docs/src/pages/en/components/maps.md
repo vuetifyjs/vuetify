@@ -62,7 +62,9 @@ The supported SVG subset includes paths, groups, basic shapes, text, gradients, 
 
 ### Selection and colors
 
-`v-model` holds the selected region identifier, or `null`. Activating the selected region clears it. **region-colors** assigns fills by identifier, while **selected-color** controls the selected fill. Values accept theme names or CSS colors. Original SVG fills are preserved unless overridden. Shapes without a fill use a transparent fallback, and shapes without a stroke inherit the surrounding text color so unstyled maps remain visible. Explicit SVG strokes, including `stroke="none"`, are preserved.
+`v-model` holds the selected region identifier, or `null`. Activating the selected region clears it. **region-colors** assigns fills by identifier, and **color** controls the selected fill. Values accept theme names or CSS colors. Fills and strokes present in the SVG are preserved. **base-color** and **base-stroke** apply to shapes without them, and their theme-aware defaults keep holes such as lakes distinguishable and borders visible.
+
+Stroke colors and widths of base, selected, and focused regions, the hover overlay, and the default height are customizable through SASS variables. Strokes can also be adjusted at runtime with the `--v-map-stroke-width`, `--v-map-selected-stroke`, `--v-map-selected-stroke-width`, `--v-map-focus-stroke`, and `--v-map-focus-stroke-width` CSS variables. Selected and focused regions follow the base stroke width unless set separately.
 
 <ExamplesExample file="v-map/prop-region-colors" />
 
@@ -70,13 +72,18 @@ Enable **multiple** to select regions independently. The model then contains an 
 
 <ExamplesExample file="v-map/prop-multiple" />
 
+**mandatory** keeps the last selected region from being deselected.
+
+Use **highlighted** to show the hover overlay on regions from outside the map, for example while hovering rows of a related table. Bound with `v-model:highlighted`, it also reports the region under the pointer or keyboard focus, so both sides stay in sync.
+
 ### Navigation
 
-- Drag to pan within the map bounds.
+- Drag with the primary or middle mouse button to pan within the map bounds.
 - Double click to zoom around the pointer. Shift-double-click zooms out.
-- Enable **wheel** to opt into mouse wheel zoom. It is off by default so the map does not capture page scrolling. Browser shortcuts with modifier keys remain available.
+- `Ctrl` or `⌘` with the mouse wheel, and trackpad pinch, zoom around the pointer. Enable **wheel** to also zoom with the plain mouse wheel. It is off by default so the map does not capture page scrolling.
 - Pinch with two pointers to zoom on touch devices.
 - Tab enters the map at one region. Arrow keys move focus toward neighbouring regions; `Home` and `End` focus the first and last region. Tab leaves the map.
+- Hold `Shift` with an arrow key to pan the view without moving focus. The next plain arrow key reveals the newly focused region again.
 - Press `Enter` or `Space` to select a focused region. Regions outside the viewport are revealed by panning, with reduced motion preferences respected.
 
 `v-model:zoom` is the magnification relative to the full SVG. **min-zoom** and **max-zoom** constrain navigation, with a minimum supported magnification of one. **zoom-step** sets the relative increment for wheel zoom, double click, and the exposed zoom methods, and controls continuous pinch sensitivity. Smaller values produce gentler zoom changes. **readonly** freezes selection while preserving navigation. **disabled** also disables navigation, hover and focus styles, and region keyboard interaction.
@@ -87,7 +94,7 @@ Enable **zoom-on-focus** to fit the focused region in the viewport. Small region
 
 ### Custom controls
 
-The default slot renders inside `.v-map`, outside the SVG. It receives a mutable `zoom` ref, the zoom limits, and `zoomIn`, `zoomOut`, and `reset` functions. Use these to build buttons or bind a slider to `zoom.value`. The component does not ship control buttons or global zoom keyboard shortcuts. Application shortcuts can be added with `useHotkey`.
+The default slot renders inside `.v-map`, outside the SVG. It receives a mutable `zoom` ref, the zoom limits, and `zoomIn`, `zoomOut`, `reset`, and `reveal` functions. `reveal(ids, { zoom })` pans to one or more regions, for example from a linked table, and with `zoom: true` fits them in the view. The same functions are exposed on the component ref. Use these to build buttons or bind a slider to `zoom.value`. The component does not ship control buttons or global zoom keyboard shortcuts. Application shortcuts can be added with `useHotkey`.
 
 The following example enables shortcuts only while focus is inside its map. They are inactive elsewhere, and text inputs retain their normal behavior.
 

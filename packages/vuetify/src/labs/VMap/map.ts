@@ -1,7 +1,7 @@
 // Utilities
 import { computed, onScopeDispose, shallowRef, toValue, watch } from 'vue'
-import { constrainViewBox, zoomViewBox } from './viewport'
-import { clamp } from '@/util'
+import { constrainViewBox, flightZoom, zoomViewBox } from './viewport'
+import { clamp, wrapInArray } from '@/util'
 import { easingPatterns } from '@/util/easing'
 import { PREFERS_REDUCED_MOTION } from '@/util/globals'
 
@@ -75,14 +75,19 @@ export function useMapNavigation (
       if (nextZoom !== fromZoom) zoom.value = nextZoom
       return
     }
+    const distance = Math.hypot(target.x - from.x, target.y - from.y) / Math.max(current.width, current.height)
+    const duration = clamp(200 + 300 * (distance + Math.abs(Math.log2(nextZoom / fromZoom))), 200, 900)
     const start = performance.now()
     function tick (time: number) {
-      const progress = clamp((time - start) / 200, 0, 1)
-      const eased = easingPatterns.easeOutCubic(progress)
+      const progress = clamp((time - start) / duration, 0, 1)
+      const eased = easingPatterns.easeInOutCubic(progress)
       center.value = { x: from.x + (target.x - from.x) * eased, y: from.y + (target.y - from.y) * eased }
-      if (nextZoom !== fromZoom) {
-        animationZoom = fromZoom + (nextZoom - fromZoom) * eased
-        zoom.value = animationZoom
+      const value = progress < 1
+        ? Math.max(minimum.value, flightZoom(fromZoom, nextZoom, distance, eased))
+        : nextZoom
+      if (value !== scale.value) {
+        animationZoom = value
+        zoom.value = value
       }
       animation = progress < 1 ? requestAnimationFrame(tick) : 0
     }
@@ -120,14 +125,20 @@ export function useMapNavigation (
     moveTo({ ...view, x: view.x + x, y: view.y + y })
   }
 
-  function reveal (region: SVGGraphicsElement) {
+  function nudge (x: number, y: number) {
     const view = viewBox.value
-    if (!view || props.disabled || !props.pan) return
-    const rectangle = region.getBoundingClientRect()
-    const start = pointAt({ x: rectangle.left, y: rectangle.top })
-    const end = pointAt({ x: rectangle.right, y: rectangle.bottom })
+    if (!view || !props.pan || props.disabled) return
+    moveTo({ ...view, x: view.x + x * view.width / 4, y: view.y + y * view.height / 4 }, true)
+  }
+
+  function reveal (regions: SVGGraphicsElement | SVGGraphicsElement[], fit = props.zoomOnFocus) {
+    const view = viewBox.value
+    const rectangles = wrapInArray(regions).map(region => region.getBoundingClientRect())
+    if (!view || props.disabled || !props.pan || !rectangles.length) return
+    const start = pointAt({ x: Math.min(...rectangles.map(r => r.left)), y: Math.min(...rectangles.map(r => r.top)) })
+    const end = pointAt({ x: Math.max(...rectangles.map(r => r.right)), y: Math.max(...rectangles.map(r => r.bottom)) })
     if (!start || !end) return
-    if (props.zoomOnFocus && props.zoomable) {
+    if (fit && props.zoomable) {
       const base = toValue(bounds)!
       const nextZoom = clamp(Math.min(
         base.width / Math.max((end.x - start.x) * 1.08, Number.EPSILON),
@@ -149,7 +160,12 @@ export function useMapNavigation (
   }
 
   function onPointerdown (event: PointerEvent) {
-    if (props.disabled || (!props.pan && !props.zoomable) || (event.pointerType === 'mouse' && event.button !== 0)) return
+    if (props.disabled || (!props.pan && !props.zoomable)) return
+    if (event.pointerType === 'mouse' && event.button !== 0) {
+      if (event.button !== 1 || !props.pan) return
+      // stops middle-click autoscroll
+      event.preventDefault()
+    }
     stopAnimation()
     if (!pointers.size) {
       suppressClick = false
@@ -209,9 +225,12 @@ export function useMapNavigation (
   }
 
   function onWheel (event: WheelEvent) {
-    if (props.disabled || !props.zoomable || !props.wheel || event.ctrlKey || event.metaKey || event.altKey || !event.deltaY) return
+    // trackpad pinch arrives as ctrlKey + small deltaY, so zoom proportionally and cap at one step per mouse notch
+    const modified = event.ctrlKey || event.metaKey
+    if (props.disabled || !props.zoomable || (!props.wheel && !modified) || event.altKey || !event.deltaY) return
     event.preventDefault()
-    zoomTo(scale.value * (event.deltaY < 0 ? step.value : 1 / step.value), pointAt({ x: event.clientX, y: event.clientY }))
+    const delta = event.deltaY * (event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 33 : 1)
+    zoomTo(scale.value * step.value ** clamp(-delta / 100, -1, 1), pointAt({ x: event.clientX, y: event.clientY }))
   }
 
   function onDblclick (event: MouseEvent) {
@@ -249,6 +268,7 @@ export function useMapNavigation (
     dragging,
     reset,
     reveal,
+    nudge,
     zoomIn: () => zoomTo(scale.value * step.value),
     zoomOut: () => zoomTo(scale.value / step.value),
     isClickSuppressed: () => suppressClick,

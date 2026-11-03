@@ -23,3 +23,9 @@ export function zoomViewBox (view: MapViewBox, bounds: MapViewBox, zoom: number,
     height,
   }, bounds)
 }
+
+// simplified van Wijk–Nuij flight: log-space zoom, dipping out mid-way on trips longer than half a view
+export function flightZoom (from: number, to: number, distance: number, progress: number) {
+  const dip = 0.5 * clamp(distance - 0.5, 0, 1)
+  return from * (to / from) ** progress / (1 + dip * Math.sin(Math.PI * progress))
+}

@@ -5,7 +5,7 @@
     :region-labels="labels"
     :svg="svg"
     label="Regional availability"
-    selected-color="primary"
+    color="primary"
   ></v-map>
 </template>
 

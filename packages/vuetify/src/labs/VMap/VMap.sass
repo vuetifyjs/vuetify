@@ -11,9 +11,10 @@
 
     &__svg
       display: block
-      fill: var(--v-map-color, #{$map-region-color})
+      fill: var(--v-map-base-color, #{$map-region-color})
       height: 100%
-      stroke: $map-region-stroke
+      stroke: var(--v-map-stroke, #{$map-region-stroke})
+      stroke-width: var(--v-map-stroke-width, #{$map-region-stroke-width})
       width: 100%
 
     &--interactive
@@ -37,15 +38,20 @@
         outline: $map-focus-width solid currentColor
         outline-offset: -$map-focus-offset
 
-      .v-map__region:focus-visible
-        &:is(path, rect, circle, ellipse, line, polyline, polygon, use), :is(path, rect, circle, ellipse, line, polyline, polygon, use)
-          stroke: $map-region-focus-stroke
-          stroke-width: $map-region-focus-width
-          vector-effect: non-scaling-stroke
+    &__region-outline, &__region-focus, &__region-overlay
+      pointer-events: none
+
+    &__region-outline *
+      stroke: var(--v-map-selected-stroke, #{$map-region-selected-stroke})
+      stroke-width: var(--v-map-selected-stroke-width, var(--v-map-stroke-width, #{$map-region-selected-stroke-width}))
+
+    &__region-focus *
+      stroke: var(--v-map-focus-stroke, #{$map-region-focus-stroke})
+      stroke-width: var(--v-map-focus-stroke-width, var(--v-map-stroke-width, #{$map-region-focus-stroke-width}))
+      vector-effect: non-scaling-stroke
 
     &__region-overlay
       opacity: $map-region-hover-opacity
-      pointer-events: none
 
     &--disabled
       .v-map__region
@@ -68,4 +74,7 @@
 
       &__region--selected, &__region--selected :is(path, rect, circle, ellipse, polygon, polyline, use)
         fill: Highlight
+        stroke: HighlightText
+
+      &__region-outline *
         stroke: HighlightText

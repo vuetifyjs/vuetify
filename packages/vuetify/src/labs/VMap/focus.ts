@@ -5,6 +5,8 @@ import { shallowRef, toRef, watch } from 'vue'
 import type { MaybeRefOrGetter, Ref } from 'vue'
 import type { MapRegion } from './svg'
 
+const WIDE_CONE = Math.tan(75 * Math.PI / 180)
+
 export function useMapFocus (
   props: { disabled: boolean },
   element: Ref<SVGSVGElement | undefined>,
@@ -43,23 +45,21 @@ export function useMapFocus (
       const radius = Math.min(rectangle.width, rectangle.height) / 2
       const horizontal = ['ArrowLeft', 'ArrowRight'].includes(event.key)
       const direction = ['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1
-      let closest = Infinity
-      for (const candidate of candidates) {
-        if (candidate === current) continue
+      const scored = candidates.flatMap(candidate => {
         const bounds = candidate.getBoundingClientRect()
-        if (!bounds.width && !bounds.height) continue
+        if (candidate === current || (!bounds.width && !bounds.height)) return []
         const x = bounds.x + bounds.width / 2 - rectangle.x - rectangle.width / 2
         const y = bounds.y + bounds.height / 2 - rectangle.y - rectangle.height / 2
         const forward = (horizontal ? x : y) * direction
         const gap = Math.max(0, Math.hypot(x, y) - radius - Math.min(bounds.width, bounds.height) / 2)
         const perpendicular = Math.abs(horizontal ? y : x)
-        if (forward <= 0 || (forward <= perpendicular && gap > 0)) continue
-        const distance = gap + perpendicular
-        if (distance < closest) {
-          next = candidate
-          closest = distance
-        }
-      }
+        if (forward <= 0 || perpendicular > forward * WIDE_CONE) return []
+        return [{ candidate, distance: gap + perpendicular, narrow: !gap || forward > perpendicular }]
+      })
+      // 90° cone across gaps, 150° for touching circles or when the narrow cone is empty:
+      // a half-plane lets ← from Nebraska hit South Dakota, a 90° cone alone strands the Canary Islands
+      const pool = scored.some(item => item.narrow) ? scored.filter(item => item.narrow) : scored
+      next = pool.sort((a, b) => a.distance - b.distance)[0]?.candidate
     }
     event.preventDefault()
     next?.focus({ preventScroll: true })
