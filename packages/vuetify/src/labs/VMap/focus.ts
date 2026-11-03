@@ -38,7 +38,9 @@ export function useMapFocus (
     if (event.key === 'Home' || event.key === 'End') {
       next = event.key === 'Home' ? candidates[0] : candidates.at(-1)
     } else {
+      // inscribed circles ignore real borders, e.g. Minnesota → Michigan across Lake Superior
       const rectangle = current.getBoundingClientRect()
+      const radius = Math.min(rectangle.width, rectangle.height) / 2
       const horizontal = ['ArrowLeft', 'ArrowRight'].includes(event.key)
       const direction = ['ArrowLeft', 'ArrowUp'].includes(event.key) ? -1 : 1
       let closest = Infinity
@@ -49,8 +51,11 @@ export function useMapFocus (
         const x = bounds.x + bounds.width / 2 - rectangle.x - rectangle.width / 2
         const y = bounds.y + bounds.height / 2 - rectangle.y - rectangle.height / 2
         const forward = (horizontal ? x : y) * direction
-        const distance = Math.hypot(x, y) + Math.abs(horizontal ? y : x)
-        if (forward > 0 && distance < closest) {
+        const gap = Math.max(0, Math.hypot(x, y) - radius - Math.min(bounds.width, bounds.height) / 2)
+        const perpendicular = Math.abs(horizontal ? y : x)
+        if (forward <= 0 || (forward <= perpendicular && gap > 0)) continue
+        const distance = gap + perpendicular
+        if (distance < closest) {
           next = candidate
           closest = distance
         }
