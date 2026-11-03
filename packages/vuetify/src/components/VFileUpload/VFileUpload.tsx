@@ -207,19 +207,6 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
       const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
       const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
 
-      const inputNode = (
-        <input
-          ref={ inputRef }
-          type="file"
-          accept={ inputAccept }
-          disabled={ props.disabled ?? undefined }
-          multiple={ props.multiple }
-          name={ props.name }
-          onChange={ onFileSelection }
-          { ...inputAttrs }
-        />
-      )
-
       return (
         <VInput
           ref={ vInputRef }
@@ -241,23 +228,29 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         >
           {{
             ...slots,
-            default: () => {
+            default: ({ id, messagesId }) => {
+              const inputNode = (
+                <input
+                  ref={ inputRef }
+                  id={ id.value }
+                  type="file"
+                  accept={ inputAccept }
+                  disabled={ props.disabled ?? undefined }
+                  multiple={ props.multiple }
+                  name={ props.name }
+                  aria-describedby={ messagesId.value }
+                  style={ slots.default ? 'display: none;' : undefined }
+                  onChange={ onFileSelection }
+                  { ...inputAttrs }
+                />
+              )
+
               return (
                 <>
                   { slots.default ? (
                     <>
                       { slots.default() }
-                      <input
-                        ref={ inputRef }
-                        type="file"
-                        accept={ inputAccept }
-                        disabled={ props.disabled ?? undefined }
-                        multiple={ props.multiple }
-                        name={ props.name }
-                        style="display: none;"
-                        onChange={ onFileSelection }
-                        { ...inputAttrs }
-                      />
+                      { inputNode }
                     </>
                   ) : (
                     <VFileUploadDropzone
