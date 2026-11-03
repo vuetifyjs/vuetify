@@ -28,8 +28,7 @@
 
     <p class="mt-3 text-body-medium" role="status">{{ active ? 'Rome office selected' : 'Select the office marker' }}</p>
     <p class="mt-3 text-label-small text-medium-emphasis">
-      Map by <a href="https://mapsvg.com/maps/italy" rel="noopener" target="_blank">MapSVG</a>,
-      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/italy" rel="noopener" target="_blank">SVG Maps</a>
+      Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/italy" rel="noopener" target="_blank">SVG Maps</a>
       (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
     </p>
   </div>

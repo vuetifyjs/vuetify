@@ -3,8 +3,7 @@
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
     <v-map v-model="selected" :regions="regions" :svg="svg" label="Dutch delivery availability"></v-map>
     <p class="mt-3 text-label-small text-medium-emphasis">
-      Map by <a href="https://mapsvg.com/maps/netherlands" rel="noopener" target="_blank">MapSVG</a>,
-      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/netherlands" rel="noopener" target="_blank">SVG Maps</a>
+      Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/netherlands" rel="noopener" target="_blank">SVG Maps</a>
       (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
     </p>
   </div>

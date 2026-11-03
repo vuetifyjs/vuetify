@@ -7,8 +7,7 @@
 
     <p class="mt-3 text-body-small">Zoom: {{ zoom.toFixed(2) }}×</p>
     <p class="mt-3 text-label-small text-medium-emphasis">
-      Map by <a href="https://mapsvg.com/maps/brazil" rel="noopener" target="_blank">MapSVG</a>,
-      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/brazil" rel="noopener" target="_blank">SVG Maps</a>
+      Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/brazil" rel="noopener" target="_blank">SVG Maps</a>
       (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
     </p>
   </div>
