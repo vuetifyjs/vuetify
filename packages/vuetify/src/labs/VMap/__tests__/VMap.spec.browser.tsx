@@ -257,7 +257,7 @@ describe('VMap', () => {
     await whenLoaded()
     await userEvent.click(screen.getByRole('img', { name: 'East' }))
     expect(onUpdate).not.toHaveBeenCalled()
-    expect(onClick).toHaveBeenCalledOnce()
+    expect(onClick).toHaveBeenCalledTimes(1)
     disabled.value = true
     await nextTick()
     const svg = viewport()
@@ -270,7 +270,6 @@ describe('VMap', () => {
   it('should draw selection, focus and hover above every region', async () => {
     render(() => <VMap svg={ MAP } modelValue="west" hideTooltip />)
     await whenLoaded()
-    const svg = viewport()
     const east = screen.getByRole('button', { name: 'East' })
     const lock = await commands.getLock()
     try {
@@ -355,7 +354,7 @@ describe('VMap', () => {
     const regions = { west: { title: 'Western', color: '#123456', offices: 3 } }
     render(() => (
       <VMap svg={ MAP } regions={ regions } onClick:region={ onClick }>
-        {{ tooltip: ({ region }) => <span>{ region.title }: { region.offices } offices</span> }}
+        {{ tooltip: ({ region }) => <span>{ region.title }: { String(region.offices) } offices</span> }}
       </VMap>
     ))
     await whenLoaded()
