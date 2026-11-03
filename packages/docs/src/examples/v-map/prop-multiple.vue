@@ -36,6 +36,7 @@
               '--v-map-hover-opacity': .32,
             }"
             :svg="svg"
+            color="primary"
             label="German service coverage"
             multiple
             selectable

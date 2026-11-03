@@ -71,7 +71,7 @@
   import { mergeProps, onMounted, shallowRef } from 'vue'
 
   const selected = shallowRef(null)
-  const baseColor = shallowRef('#cfd8dc')
+  const baseColor = shallowRef('#546f7a')
   const selectionColor = shallowRef('#f4511e')
   const pickers = [
     { label: 'Base color', model: baseColor },
