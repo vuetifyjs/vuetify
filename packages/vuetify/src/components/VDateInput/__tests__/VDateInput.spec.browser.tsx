@@ -112,6 +112,15 @@ describe('VDateInput', () => {
     expect(iso(model.value)).toBe('2022-02-20')
   })
 
+  it('keeps selected text when typing a non-digit', async () => {
+    const { element } = render(<VDateInput inputFormat="YYYY-MM-DD" modelValue="2024-03-15" />)
+    await userEvent.click(element)
+    const input = screen.getByCSS('input') as HTMLInputElement
+    input.select()
+    await userEvent.keyboard('r')
+    expect(input.value).toBe('2024-03-15')
+  })
+
   it('should reset when the value is cleared', async () => {
     const model = ref('2025-05-21')
     const { emitted, getByRole } = render(<VDateInput v-model={ model.value } />)
