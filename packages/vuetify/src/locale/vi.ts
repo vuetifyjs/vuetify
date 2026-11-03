@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Bản đồ',
-  },
   badge: 'Huy hiệu',
   open: 'Mở',
   close: 'Đóng',

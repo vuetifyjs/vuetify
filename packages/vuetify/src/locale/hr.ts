@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Karta',
-  },
   badge: 'Bedž',
   open: 'Otvori',
   close: 'Zatvori',

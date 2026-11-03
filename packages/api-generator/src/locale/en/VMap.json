@@ -6,7 +6,7 @@
     "color": "Fill color of the selected region. Accepts a theme color or CSS color.",
     "disabled": "Disables region selection, tooltips, and map navigation.",
     "highlighted": "Region identifier, or array of identifiers, shown with the hover overlay. Supports `v-model:highlighted`, which also reports the region under the pointer or keyboard focus.",
-    "label": "Accessible name of the map. Accepts plain text or a locale key.",
+    "label": "Accessible name of the map. Accepts plain text or a locale key. Recommended, since the map has no visible name.",
     "mandatory": "Prevents deselecting the last selected region.",
     "maxZoom": "Maximum magnification relative to the complete SVG viewBox.",
     "minZoom": "Minimum magnification. Values below one are treated as one.",

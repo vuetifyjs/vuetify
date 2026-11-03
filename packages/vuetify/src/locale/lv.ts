@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Karte',
-  },
   badge: 'Žetons',
   open: 'Atvērt',
   close: 'Aizvērt',

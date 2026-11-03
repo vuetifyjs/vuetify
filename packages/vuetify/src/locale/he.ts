@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'מפה',
-  },
   badge: 'תג',
   open: 'פתח',
   close: 'סגור',

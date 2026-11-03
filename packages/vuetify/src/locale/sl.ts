@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Zemljevid',
-  },
   badge: 'Značka',
   open: 'Odpri',
   close: 'Zapri',

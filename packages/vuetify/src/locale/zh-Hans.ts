@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: '地图',
-  },
   badge: '徽章',
   open: '打开',
   close: '关闭',

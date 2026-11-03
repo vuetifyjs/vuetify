@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Χάρτης',
-  },
   badge: 'Σήμα',
   open: 'Άνοιγμα',
   close: 'Κλείσιμο',

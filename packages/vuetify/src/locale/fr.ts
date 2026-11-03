@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Carte',
-  },
   badge: 'Badge',
   open: 'Ouvrir',
   close: 'Fermer',

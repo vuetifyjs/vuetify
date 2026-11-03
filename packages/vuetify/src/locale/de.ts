@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Karte',
-  },
   badge: 'Abzeichen',
   open: 'Öffnen',
   close: 'Schließen',

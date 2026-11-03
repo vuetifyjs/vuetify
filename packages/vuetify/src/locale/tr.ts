@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Harita',
-  },
   badge: 'Rozet',
   open: 'Aç',
   close: 'Kapat',

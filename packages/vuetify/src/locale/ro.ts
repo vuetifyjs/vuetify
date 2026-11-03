@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Hartă',
-  },
   badge: 'Insignă',
   open: 'Deschideți',
   close: 'Închideți',

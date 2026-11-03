@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Térkép',
-  },
   badge: 'Jelvény',
   open: 'Megnyit',
   close: 'Bezárás',

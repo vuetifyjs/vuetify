@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Xəritə',
-  },
   badge: 'Nişan',
   open: 'Açıq',
   close: 'Bağla',

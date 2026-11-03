@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kartta',
-  },
   badge: 'Infopiste',
   open: 'Avaa',
   close: 'Sulje',

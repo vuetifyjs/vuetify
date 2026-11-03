@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: '지도',
-  },
   badge: '배지',
   open: '열기',
   close: '닫기',

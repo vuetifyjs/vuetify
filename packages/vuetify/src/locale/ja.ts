@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: '地図',
-  },
   badge: 'バッジ',
   open: '開く',
   close: '閉じる',

@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'نقشه',
-  },
   badge: 'نشان',
   open: 'باز کردن',
   close: 'بستن',

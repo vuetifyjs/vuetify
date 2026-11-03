@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kaart',
-  },
   badge: 'Kenteken',
   open: 'Maak oop',
   close: 'Maak toe',

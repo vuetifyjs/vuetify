@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Karta',
-  },
   badge: 'Bricka',
   open: 'Öppna',
   close: 'Stäng',

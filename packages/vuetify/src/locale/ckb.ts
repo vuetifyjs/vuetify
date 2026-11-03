@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'نەخشە',
-  },
   badge: 'باج',
   open: 'کردنەوە',
   close: 'داخستن',

@@ -64,7 +64,7 @@ export const makeVMapProps = propsFactory({
   color: { type: String, default: 'primary' },
   regionColors: Object as PropType<Record<string, string>>,
   regionLabels: Object as PropType<Record<string, string>>,
-  label: { type: String, default: '$vuetify.map.label' },
+  label: String,
   pan: { type: Boolean, default: true },
   wheel: Boolean,
   zoomable: { type: Boolean, default: true },
@@ -328,7 +328,7 @@ export const VMap = genericComponent<VMapSlots>()({
             viewBox={ Object.values(navigation.viewBox.value).join(' ') }
             preserveAspectRatio="xMidYMid meet"
             role="group"
-            aria-label={ t(props.label) }
+            aria-label={ props.label && t(props.label) }
             aria-disabled={ props.disabled || undefined }
             tabindex={ !props.disabled && !map.value.regions.length ? 0 : -1 }
             onClick={ selectRegion }

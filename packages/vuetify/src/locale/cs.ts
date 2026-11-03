@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Mapa',
-  },
   badge: 'Odznak',
   open: 'Otevřít',
   close: 'Zavřít',

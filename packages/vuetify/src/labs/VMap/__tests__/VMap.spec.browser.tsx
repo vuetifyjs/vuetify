@@ -7,11 +7,11 @@ import { nextTick, shallowRef } from 'vue'
 import { MAP, PLAINS } from './fixtures'
 
 function viewport () {
-  return screen.getByRole('group', { name: 'Map' }) as unknown as SVGSVGElement
+  return screen.getByCSS('.v-map__svg') as unknown as SVGSVGElement
 }
 
 async function whenLoaded () {
-  await expect.poll(() => screen.queryByRole('group', { name: 'Map' })).toBeTruthy()
+  await expect.poll(() => screen.queryByCSS('.v-map__svg')).toBeTruthy()
 }
 
 function point (element: Element, type: string, id: number, x: number, y: number) {

@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Peta',
-  },
   badge: 'Lencana',
   open: 'Buka',
   close: 'Tutup',

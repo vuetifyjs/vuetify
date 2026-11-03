@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'الخريطة',
-  },
   badge: 'شارة',
   open: 'فتح',
   close: 'إغلاق',

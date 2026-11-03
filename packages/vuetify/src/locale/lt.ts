@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Žemėlapis',
-  },
   badge: 'Ženklelis',
   open: 'Atidaryti',
   close: 'Uždaryti',

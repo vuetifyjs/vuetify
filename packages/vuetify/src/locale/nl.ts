@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kaart',
-  },
   badge: 'Insigne',
   open: 'Openen',
   close: 'Sluiten',

@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'ផែនទី',
-  },
   badge: 'ផ្លាក',
   open: 'បើក',
   close: 'បិទ',

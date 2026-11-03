@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Карта',
-  },
   badge: 'Значка',
   open: 'Отвори',
   close: 'Затвори',

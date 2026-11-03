@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Mapa',
-  },
   badge: 'Insígnia',
   open: 'Obrir',
   close: 'Tancar',

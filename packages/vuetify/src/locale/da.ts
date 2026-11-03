@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kort',
-  },
   badge: 'Emblem',
   open: 'Åbn',
   close: 'Luk',

@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'แผนที่',
-  },
   badge: 'สัญลักษณ์',
   open: 'เปิด',
   close: 'ปิด',

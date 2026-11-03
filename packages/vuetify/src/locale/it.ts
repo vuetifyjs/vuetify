@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Mappa',
-  },
   badge: 'Distintivo',
   open: 'Apri',
   close: 'Chiudi',

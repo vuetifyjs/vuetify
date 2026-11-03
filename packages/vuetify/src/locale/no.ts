@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kart',
-  },
   badge: 'Skilt',
   open: 'Åpne',
   close: 'Lukk',

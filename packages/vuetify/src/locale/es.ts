@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Mapa',
-  },
   badge: 'Placa',
   open: 'Abrir',
   close: 'Cerrar',

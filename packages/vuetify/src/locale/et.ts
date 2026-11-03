@@ -1,7 +1,4 @@
 export default {
-  map: {
-    label: 'Kaart',
-  },
   badge: 'Märk',
   open: 'Ava',
   close: 'Sulge',
