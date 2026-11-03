@@ -1,0 +1,46 @@
+{
+  "description": "Displays an SVG map with region selection, tooltips, panning, and zooming.",
+  "props": {
+    "baseColor": "Fill color for shapes without a fill in the SVG. Accepts a theme color or CSS color.",
+    "baseStroke": "Stroke color for shapes without a stroke in the SVG. Accepts a theme color or CSS color.",
+    "color": "Fill color of selected regions. Accepts a theme color or CSS color.",
+    "disablePan": "Disables dragging, `Shift` + arrow key panning, and moving the view to reveal focused regions or regions passed to `reveal`.",
+    "disableZoom": "Disables double click, pinch, and wheel zoom, and the exposed zoom methods.",
+    "disabled": "Disables region selection, tooltips, and map navigation.",
+    "hideTooltip": "Hides the region tooltip.",
+    "highlighted": "Region identifier, or array of identifiers, shown with the hover overlay. Supports `v-model:highlighted`, which also reports the region under the pointer or keyboard focus.",
+    "label": "Accessible name of the map. Accepts plain text or a locale key. Recommended, since the map has no visible name.",
+    "mandatory": "Prevents deselecting the last selected region.",
+    "maxZoom": "Maximum magnification relative to the complete SVG viewBox.",
+    "minZoom": "Minimum magnification. Values below one are treated as one.",
+    "modelValue": "Selected region identifier, or an array of identifiers when **multiple** is enabled. Activating a selected region deselects it, unless **mandatory** keeps it.",
+    "multiple": "Allows selecting more than one region. The model contains an array of region identifiers.",
+    "regions": "Extra data per region, keyed by region identifier. `title` replaces the SVG label and `color` the fill. All fields reach the slots and the `click:region` event.",
+    "selectable": "Lets the pointer, `Enter`, and `Space` change the selection. Without it the map only shows **model-value**.",
+    "svg": "SVG markup supplied by the application. Parsing runs after mounting in the browser.",
+    "wheelZoom": "Zooms with the plain mouse wheel. `Ctrl` or `⌘` with the wheel, and trackpad pinch, zoom regardless.",
+    "zoom": "Magnification relative to the complete SVG viewBox. Supports `v-model:zoom`.",
+    "zoomOnFocus": "Fits a keyboard-focused region in the viewport, within the zoom limits. With **disable-zoom** it only pans, and with **disable-pan** it does nothing. Respects reduced motion preferences.",
+    "zoomStep": "Relative zoom increment used by the mouse wheel, double click, and exposed zoom methods. Also adjusts the sensitivity of continuous pinch zoom."
+  },
+  "slots": {
+    "default": "Content inside the map container, outside SVG. Receives the regions, selection, current `zoom` and its limits, and `setZoom`, `zoomIn`, `zoomOut`, `resetZoom`, and `reveal` functions for custom controls.",
+    "error": "Content shown when SVG parsing fails. Receives the error.",
+    "map": "Additional SVG content positioned in the source map coordinate system. Receives the regions, including fields from **regions**, the selection, and the current viewBox.",
+    "tooltip": "Custom tooltip content. Receives the `region`, including fields from **regions**, and its selection state."
+  },
+  "events": {
+    "click:region": "Emitted with the originating mouse or keyboard event and `{ region }` when a region is activated.",
+    "error": "Emitted when parsing the SVG fails.",
+    "load": "Emitted with the regions found in the SVG after it has been parsed.",
+    "update:highlighted": "Emitted with the region identifier under the pointer or keyboard focus, or null when it leaves.",
+    "update:modelValue": "Emitted when the selection changes.",
+    "update:zoom": "Emitted when a navigation action changes magnification."
+  },
+  "exposed": {
+    "resetZoom": "Restores centered framing at the minimum zoom.",
+    "reveal": "Pans to show one region or a group of regions by identifier. `{ zoom: true }` fits them in the view and `{ zoom: false }` only pans; without it, **zoom-on-focus** decides. Keyboard focus stays where it is.",
+    "zoomIn": "Increases zoom around the center of the current view.",
+    "zoomOut": "Decreases zoom around the center of the current view."
+  }
+}

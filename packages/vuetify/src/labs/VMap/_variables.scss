@@ -1,0 +1,13 @@
+$map-container-height: 400px !default;
+$map-container-outline-width: 2px !default;
+$map-container-outline-offset: 2px !default;
+$map-base-color: rgba(var(--v-theme-surface-variant), .2) !default;
+$map-base-stroke: rgb(var(--v-theme-surface)) !default;
+$map-base-stroke-width: 1px !default;
+$map-selected-color: currentColor !default;
+$map-selected-stroke: currentColor !default;
+$map-selected-stroke-width: $map-base-stroke-width !default;
+$map-focus-stroke: currentColor !default;
+$map-focus-stroke-width: $map-base-stroke-width !default;
+$map-hover-color: currentColor !default;
+$map-hover-opacity: .12 !default;

@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Tarpas',
     plus: 'plius',
-    shortcut: 'Klaviatūros trumpinys: {0}',
+    shortcut: 'Klaviatūros trumpinys, {0}',
     or: 'arba',
   },
   media: {

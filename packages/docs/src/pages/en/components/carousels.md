@@ -83,7 +83,7 @@ You can hide the bottom controls with **hide-delimiters** prop.
 
 #### Progress
 
-You can show a linear progress bar with the **progress** prop. It will indicate how far into the cycle the carousel currently is.
+You can show a linear progress bar with the **progress** prop. It indicates the position of the current slide among all slides.
 
 <ExamplesExample file="v-carousel/prop-progress" />
 

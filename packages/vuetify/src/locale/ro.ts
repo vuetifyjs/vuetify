@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Spațiu',
     plus: 'plus',
-    shortcut: 'Comandă rapidă de la tastatură: {0}',
+    shortcut: 'Comandă rapidă de la tastatură, {0}',
     or: 'sau',
   },
   media: {

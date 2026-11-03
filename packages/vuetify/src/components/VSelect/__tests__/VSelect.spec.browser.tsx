@@ -278,6 +278,28 @@ describe('VSelect', () => {
     await expect.poll(() => screen.getAllByCSS('.v-chip')).toHaveLength(2)
   })
 
+  it('should not multiply duplicate items in the model', async () => {
+    const model = ref<string[]>([])
+
+    const { element } = render(() => (
+      <VSelect v-model={ model.value } items={['Alabama', 'Alabama', 'Alaska']} multiple />
+    ))
+
+    await userEvent.click(element)
+    const options = await screen.findAllByRole('option')
+    await waitForClickable(options[0])
+    await userEvent.click(options[0])
+    expect(model.value).toStrictEqual(['Alabama'])
+
+    await userEvent.click(options[2])
+    expect(model.value).toStrictEqual(['Alabama', 'Alaska'])
+
+    await userEvent.click(options[1])
+    expect(model.value).toStrictEqual(['Alaska'])
+
+    expect('Multiple nodes with the same ID').toHaveBeenTipped()
+  })
+
   describe('prefilled data', () => {
     it('should work with array of strings when using multiple', async () => {
       const items = ['California', 'Colorado', 'Florida']

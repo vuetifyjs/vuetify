@@ -122,3 +122,20 @@ export function normalizePeaks (peaks: readonly number[]): number[] {
 
   return peaks.map(peak => max > 0 ? clamp(peak / max, 0, 1) : 0)
 }
+
+const SPECTRUM_MIN = 60
+const SPECTRUM_MAX = 5000
+
+export function spectrumBands (frequencyData: ArrayLike<number>, count: number, binWidth: number): number[] {
+  const ratio = SPECTRUM_MAX / SPECTRUM_MIN
+  const edge = (index: number) => Math.max(1, Math.floor(SPECTRUM_MIN * ratio ** (index / count) / binWidth))
+
+  return Array.from({ length: count }, (_, index) => {
+    const start = edge(index)
+    const end = Math.min(frequencyData.length, Math.max(start + 1, edge(index + 1)))
+    let sum = 0
+    // runs every animation frame: a plain loop avoids slicing the bins
+    for (let bin = start; bin < end; bin++) sum += frequencyData[bin]
+    return end > start ? sum / (end - start) / 255 : 0
+  })
+}

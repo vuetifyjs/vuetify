@@ -50,9 +50,8 @@ describe('typing', () => {
       })
 
       it('rejects non-numeric characters', () => {
-        const result = processGroupedInput('insertText', 'a', '1,234', 5, 5, opts())
-        // "1234a" is invalid → extractNumber → "1234" → no change
-        expect(result).toEqual({ text: '1,234', cursor: 5 })
+        expect(processGroupedInput('insertText', 'a', '1,234', 5, 5, opts())).toBe(false)
+        expect(processGroupedInput('insertText', 'a', '1,234', 0, 5, opts())).toBe(false)
       })
 
       it('allows minus at start', () => {
@@ -66,8 +65,7 @@ describe('typing', () => {
       })
 
       it('rejects decimal separator when precision=0', () => {
-        const result = processGroupedInput('insertText', '.', '1234', 4, 4, opts({ precision: 0 }))
-        expect(result).toEqual({ text: '1,234', cursor: 5 })
+        expect(processGroupedInput('insertText', '.', '1234', 4, 4, opts({ precision: 0 }))).toBe(false)
       })
 
       it('replaces selection with digit', () => {
@@ -228,7 +226,7 @@ describe('typing', () => {
         // hi-IN: 3-digit primary group, then 2-digit groups
         const o = opts({ locale: 'hi-IN' })
         const result = processGroupedInput('insertFromPaste', '1234567890', '', 0, 0, o)
-        expect(result?.text).toBe('1,23,45,67,890')
+        expect(result).toMatchObject({ text: '1,23,45,67,890' })
       })
     })
   })
@@ -261,11 +259,11 @@ describe('typing', () => {
 
     describe('rejects invalid characters', () => {
       it.each([
-        { data: 'a', value: '12', sel: 2, expected: '12' },
-        { data: '+', value: '12', sel: 2, expected: '12' },
-        { data: ' ', value: '12', sel: 2, expected: '12' },
-      ])('rejects "$data" in "$value"', ({ data, value, sel, expected }) => {
-        expect(processPlainInput(data, value, sel, sel, plain())).toMatchObject({ text: expected })
+        { data: 'a', value: '12', sel: 2 },
+        { data: '+', value: '12', sel: 2 },
+        { data: ' ', value: '12', sel: 2 },
+      ])('rejects "$data" in "$value"', ({ data, value, sel }) => {
+        expect(processPlainInput(data, value, sel, sel, plain())).toBe(false)
       })
 
       it('extracts digits from mixed input (paste-like)', () => {
@@ -274,10 +272,8 @@ describe('typing', () => {
       })
 
       it('preserves cursor position when typing/pasting incorrect characters', () => {
-        // type 'x' at middle of "111|111" → rejected, cursor stays at 3
-        expect(processPlainInput('x', '111111', 3, 3, plain())).toMatchObject({ text: '111111', cursor: 3 })
-        // paste 'asd' → no valid chars extracted, cursor stays at 3
-        expect(processPlainInput('asd', '111111', 3, 3, plain())).toMatchObject({ text: '111111', cursor: 3 })
+        expect(processPlainInput('x', '111111', 3, 3, plain())).toBe(false)
+        expect(processPlainInput('asd', '111111', 3, 3, plain())).toBe(false)
         // paste '_5x' → '5' extracted (length 1), cursor at 3+1=4
         expect(processPlainInput('_5x', '111111', 3, 3, plain())).toMatchObject({ text: '1115111', cursor: 4 })
         // paste ' 456' → '456' extracted (length 3), cursor at 3+3=6 (selection should not matter)
@@ -291,12 +287,16 @@ describe('typing', () => {
       })
 
       it('rejects second minus sign', () => {
-        expect(processPlainInput('-', '-5', 2, 2, plain())).toMatchObject({ text: '-5', cursor: 2 })
-        expect(processPlainInput('-', '-5', 1, 1, plain())).toMatchObject({ text: '-5', cursor: 1 })
+        expect(processPlainInput('-', '-5', 2, 2, plain())).toBe(false)
+        expect(processPlainInput('-', '-5', 1, 1, plain())).toBe(false)
+        expect(processPlainInput('-', '123', 1, 3, plain())).toBe(false)
+        expect(processGroupedInput('insertText', '-', '1,234', 2, 5, opts())).toBe(false)
       })
 
       it('rejects second decimal separator', () => {
-        expect(processPlainInput('.', '1.2', 3, 3, plain({ precision: 2 }))).toMatchObject({ text: '1.2' })
+        expect(processPlainInput('.', '1.2', 3, 3, plain({ precision: 2 }))).toBe(false)
+        expect(processPlainInput('.', '1.234', 3, 5, plain({ precision: 3 }))).toBe(false)
+        expect(processGroupedInput('insertText', '.', '1,234.5', 2, 5, opts({ precision: 2 }))).toBe(false)
       })
     })
 
@@ -306,8 +306,7 @@ describe('typing', () => {
       })
 
       it('keeps an existing U+2212 sign when correcting the field', () => {
-        // rejected char is stripped; the existing minus must survive, not be dropped
-        expect(processPlainInput('x', '−12', 3, 3, plain())).toMatchObject({ text: '-12', cursor: 3 })
+        expect(processPlainInput('4', '−1.23', 5, 5, plain({ precision: 2 }))).toMatchObject({ text: '-1.23' })
       })
 
       it('renders the locale minus sign on correction', () => {
@@ -322,7 +321,7 @@ describe('typing', () => {
 
     describe('precision enforcement', () => {
       it('rejects decimal separator when precision=0', () => {
-        expect(processPlainInput('.', '42', 2, 2, plain({ precision: 0 }))).toMatchObject({ text: '42' })
+        expect(processPlainInput('.', '42', 2, 2, plain({ precision: 0 }))).toBe(false)
       })
 
       it('rejects digit beyond precision limit', () => {
@@ -341,7 +340,7 @@ describe('typing', () => {
       })
 
       it('rejects period when comma is the decimal separator', () => {
-        expect(processPlainInput('.', '12', 2, 2, plain({ decimalSeparator: ',' }))).toMatchObject({ text: '12' })
+        expect(processPlainInput('.', '12', 2, 2, plain({ decimalSeparator: ',' }))).toBe(false)
       })
     })
 

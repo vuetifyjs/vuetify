@@ -180,7 +180,7 @@ export default {
     backspace: 'Askelpalautin',
     space: 'Välilyönti',
     plus: 'plus',
-    shortcut: 'Näppäinyhdistelmä: {0}',
+    shortcut: 'Näppäinyhdistelmä, {0}',
     or: 'tai',
   },
   media: {

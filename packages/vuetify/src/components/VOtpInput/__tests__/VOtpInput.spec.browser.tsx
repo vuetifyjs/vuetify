@@ -18,7 +18,27 @@ const stories = {
   'With placeholder': <VOtpInput placeholder="0" />,
   'With focus all': <VOtpInput focusAll />,
   Merged: <VOtpInput merged />,
-  'Merged with divider': <VOtpInput merged divider="-" />,
+  'Merged with divider': (
+    <VOtpInput>
+      {{
+        fields: () => (
+          <>
+            <VOtpGroup merged>
+              <VOtpField index={ 0 } />
+              <VOtpField index={ 1 } />
+            </VOtpGroup>
+            <VOtpSeparator>-</VOtpSeparator>
+            <VOtpGroup merged>
+              <VOtpField index={ 2 } />
+              <VOtpField index={ 3 } />
+              <VOtpField index={ 4 } />
+              <VOtpField index={ 5 } />
+            </VOtpGroup>
+          </>
+        ),
+      }}
+    </VOtpInput>
+  ),
 }
 
 describe('VOtpInput', () => {

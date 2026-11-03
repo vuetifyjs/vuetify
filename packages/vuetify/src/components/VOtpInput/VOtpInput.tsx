@@ -341,7 +341,7 @@ export const VOtpInput = genericComponent<VOtpInputSlots>()({
           class={[
             'v-otp-input',
             {
-              'v-otp-input--divided': !!props.divider,
+              'v-otp-input--divided': !!props.divider && !props.merged,
             },
             densityClasses.value,
             props.class,

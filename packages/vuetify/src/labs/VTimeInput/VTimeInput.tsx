@@ -121,7 +121,7 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
       onInput: onMaskInput,
       onKeydown: onInputKeydown,
       text,
-    } = createSegmentedEdit(maskTime, ':')
+    } = createSegmentedEdit(maskTime, ':', undefined, data => hour12.value && !!readPeriod(data))
 
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)

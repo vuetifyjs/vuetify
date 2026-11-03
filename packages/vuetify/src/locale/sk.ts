@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Medzera',
     plus: 'plus',
-    shortcut: 'Klávesová skratka: {0}',
+    shortcut: 'Klávesová skratka, {0}',
     or: 'alebo',
   },
   media: {
