@@ -1,3 +1,40 @@
+// Shared chips + density spacing for VSelect, VAutocomplete and VCombobox
+$select-chips-comfortable-gap: 4px !default;
+$select-chips-comfortable-chip-reduction: 2px !default;
+$select-chips-compact-gap: 2px !default;
+$select-chips-compact-chip-reduction: 4px !default;
+
+@mixin select-comfortable-chip-label {
+  &--chips.v-input--density-comfortable {
+    .v-field {
+      .v-field__input > input {
+        line-height: 1;
+      }
+
+      .v-select__selection,
+      .v-autocomplete__selection,
+      .v-combobox__selection {
+        height: auto;
+      }
+
+      .v-field__input {
+        row-gap: $select-chips-comfortable-gap;
+      }
+      .v-chip {
+        height: calc(
+          var(--v-chip-height) - #{$select-chips-comfortable-chip-reduction}
+        );
+      }
+
+      &:not(.v-field--variant-outlined) {
+        .v-field__input {
+          padding-bottom: $select-chips-comfortable-gap;
+        }
+      }
+    }
+  }
+}
+
 @mixin select-compact-chip-label {
   &--chips.v-input--density-compact {
     .v-field--variant-solo,
@@ -7,6 +44,33 @@
       .v-label.v-field-label {
         &--floating {
           top: 0px;
+        }
+      }
+    }
+
+    .v-field {
+      .v-field__input > input {
+        line-height: 1;
+      }
+
+      .v-select__selection,
+      .v-autocomplete__selection,
+      .v-combobox__selection {
+        height: auto;
+      }
+
+      .v-field__input {
+        row-gap: $select-chips-compact-gap;
+      }
+      .v-chip {
+        height: calc(
+          var(--v-chip-height) - #{$select-chips-compact-chip-reduction}
+        );
+      }
+
+      &:not(.v-field--variant-outlined) {
+        .v-field__input {
+          padding-bottom: $select-chips-compact-gap;
         }
       }
     }
