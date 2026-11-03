@@ -3,7 +3,7 @@
 
 @include tools.layer('components')
   .v-map
-    height: $map-height
+    height: $map-container-height
     isolation: isolate
     overflow: hidden
     position: relative
@@ -35,8 +35,14 @@
 
     &:not(&--disabled)
       .v-map__svg:focus-visible
-        outline: $map-outline-width solid currentColor
-        outline-offset: -$map-outline-offset
+        outline: $map-container-outline-width solid currentColor
+        outline-offset: -$map-container-outline-offset
+
+    &__selected-fill
+      fill: var(--v-map-selected-color, #{$map-selected-color})
+
+    &__selected-stroke
+      stroke: var(--v-map-selected-color, #{$map-selected-color})
 
     &__region-outline, &__region-focus, &__region-overlay
       pointer-events: none
@@ -51,7 +57,8 @@
       vector-effect: non-scaling-stroke
 
     &__region-overlay
-      opacity: $map-hover-opacity
+      color: var(--v-map-hover-color, #{$map-hover-color})
+      opacity: var(--v-map-hover-opacity, #{$map-hover-opacity})
 
     &--disabled
       .v-map__region

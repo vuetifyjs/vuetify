@@ -3,7 +3,6 @@
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
 
     <v-map
-      v-model="selected"
       :regions="regions"
       :svg="svg"
       label="Dutch delivery availability"
@@ -19,7 +18,6 @@
 <script setup>
   import { onMounted, shallowRef } from 'vue'
 
-  const selected = shallowRef('ut')
   const svg = shallowRef()
   const error = shallowRef('')
   const regions = {

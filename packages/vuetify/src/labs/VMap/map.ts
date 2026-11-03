@@ -9,7 +9,7 @@ import { PREFERS_REDUCED_MOTION } from '@/util/globals'
 import type { MaybeRefOrGetter, Ref } from 'vue'
 import type { MapPoint, MapViewBox } from './viewport'
 
-export const DEFAULT_ZOOM_STEP = 0.2
+const NATURAL_PINCH_STEP = 0.2
 const DRAG_THRESHOLD = 4
 const FIT_MARGIN = 1.08
 const REVEAL_MARGIN = 0.04
@@ -39,7 +39,7 @@ export function useMapNavigation (
   // v-model:zoom can be bound to an emptied number field
   const scale = computed(() => clamp(Number.isFinite(zoom.value) ? zoom.value : 1, minimum.value, maximum.value))
   const step = computed(() => 1 + Math.max(0.01, props.zoomStep))
-  const sensitivity = computed(() => Math.log(step.value) / Math.log1p(DEFAULT_ZOOM_STEP))
+  const sensitivity = computed(() => Math.log(step.value) / Math.log1p(NATURAL_PINCH_STEP))
   const viewBox = computed(() => {
     const base = toValue(bounds)
     if (!base) return

@@ -5,11 +5,49 @@
 
     <v-map
       v-model="selected"
+      :base-color="baseColor"
+      :color="selectionColor"
       :svg="svg"
       label="Austria states"
+      selectable
       wheel-zoom
     >
       <template v-slot:default="{ zoom, minZoom, maxZoom, zoomIn, zoomOut, resetZoom }">
+        <div
+          class="d-flex ga-2 position-absolute"
+          style="inset-block-start: 12px; inset-inline-start: 12px"
+        >
+          <v-menu
+            v-for="picker in pickers"
+            :key="picker.label"
+            :close-on-content-click="false"
+          >
+            <template v-slot:activator="{ props: menu }">
+              <v-tooltip :text="picker.label" location="bottom">
+                <template v-slot:activator="{ props: tooltip }">
+                  <v-avatar
+                    v-bind="mergeProps(menu, tooltip)"
+                    :aria-label="picker.label"
+                    :color="picker.model.value ?? 'surface'"
+                    class="elevation-2"
+                    icon="$color"
+                    size="36"
+                    tag="button"
+                  ></v-avatar>
+                </template>
+              </v-tooltip>
+            </template>
+
+            <v-color-picker
+              v-model="picker.model.value"
+              hide-canvas
+              hide-inputs
+              hide-sliders
+              show-swatches
+            ></v-color-picker>
+          </v-menu>
+        </div>
+
         <div
           class="d-flex ga-2 position-absolute"
           style="inset-block-start: 12px; inset-inline-end: 12px"
@@ -30,9 +68,15 @@
 </template>
 
 <script setup>
-  import { onMounted, shallowRef } from 'vue'
+  import { mergeProps, onMounted, shallowRef } from 'vue'
 
   const selected = shallowRef(null)
+  const baseColor = shallowRef('#cfd8dc')
+  const selectionColor = shallowRef('#f4511e')
+  const pickers = [
+    { label: 'Base color', model: baseColor },
+    { label: 'Selection color', model: selectionColor },
+  ]
   const svg = shallowRef()
   const loading = shallowRef(true)
   const error = shallowRef('')

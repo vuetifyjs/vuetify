@@ -2,7 +2,7 @@
 meta:
   nav: Maps
   title: SVG map component
-  description: Display an SVG map with selection, tooltips, panning, and zooming, without a mapping library.
+  description: Display an SVG map with selection, tooltips, panning, and zooming.
   keywords: vuetify map component, vue svg map, interactive regions
 features:
   github: /labs/VMap/
@@ -12,14 +12,28 @@ features:
 
 # Maps
 
-The `v-map` component turns an SVG file into an interactive map with selectable regions, tooltips, panning, and zooming. Your application supplies the SVG; there is no map service or mapping dependency.
+The `v-map` component turns an SVG file into an interactive map with selectable regions, tooltips, panning, and zooming.
 
 <PageFeatures />
 
+::: warning
+
+This feature requires [v4.3.2](/getting-started/release-notes/?version=v4.3.2)
+
+:::
+
 ## Installation
 
-```js
+Labs components require manual import and registration with the Vuetify instance.
+
+```js { resource="src/plugins/vuetify.js" }
 import { VMap } from 'vuetify/labs/VMap'
+
+export default createVuetify({
+  components: {
+    VMap,
+  },
+})
 ```
 
 ## Usage
@@ -62,33 +76,38 @@ Scripts, stylesheets, animation, images, foreign HTML, and external references a
 
 <ExamplesExample file="v-map/prop-regions" />
 
+### Selection and highlighting
+
+Regions are selected by click or keyboard only with **selectable**; otherwise the map just shows **model-value**. With **multiple**, the model holds an array of region identifiers. Use **highlighted** to highlight regions from outside the map, for example from a related list. With `v-model:highlighted`, the map also writes back the region under the pointer or focus.
+
 <ExamplesExample file="v-map/prop-multiple" />
 
-Use **highlighted** to highlight regions from outside the map, for example from a related table. With `v-model:highlighted`, the map also writes back the region under the pointer or focus.
+### Strokes and hover
 
-### Stroke width
-
-Strokes are set with Sass variables, or at runtime with CSS variables. Selected and focused regions copy the base width unless their own is set.
+Strokes and the hover overlay are set with Sass variables, or at runtime with CSS variables. Selected and focused regions copy the base width unless their own is set.
 
 | CSS variable | Sass variable | Applies to |
 | - | - | - |
 | `--v-map-base-stroke` | `$map-base-stroke` | Shapes without their own stroke, including `map` slot content. Also set by **base-stroke** |
 | `--v-map-base-stroke-width` | `$map-base-stroke-width` | Stroke width of those shapes |
+| `--v-map-selected-color` | `$map-selected-color` | Fill of selected regions. Also set by **color** |
 | `--v-map-selected-stroke` | `$map-selected-stroke` | Outline of selected regions |
 | `--v-map-selected-stroke-width` | `$map-selected-stroke-width` | Width of the selected outline |
 | `--v-map-focus-stroke` | `$map-focus-stroke` | Keyboard focus outline |
 | `--v-map-focus-stroke-width` | `$map-focus-stroke-width` | Width of the focus outline |
+| `--v-map-hover-color` | `$map-hover-color` | Overlay on hovered and highlighted regions |
+| `--v-map-hover-opacity` | `$map-hover-opacity` | Opacity of that overlay |
 
-Region strokes are drawn in map units and thicken as you zoom in, while the focus outline keeps its on-screen width. To control border thickness on screen, derive the base stroke width from `v-model:zoom`, and give the focus outline its own width.
+Region strokes are drawn in map units and get thicker as you zoom in, while the focus outline keeps its on-screen width. To control stroke width on screen, derive the base stroke width from `v-model:zoom`, and (optionally) give the focus outline its own width.
 
 <ExamplesExample file="v-map/misc-zoom-stroke" />
 
 ### Navigation
 
 - Drag with the primary or middle mouse button to pan. Double click zooms in, `Shift` + double click zooms out.
-- `Ctrl` / `⌘` + wheel and trackpad pinch always zoom. The plain wheel zooms only with **wheel-zoom**, so the map does not capture page scrolling.
+- `Ctrl` / `⌘` + wheel and trackpad pinch always zoom. The plain wheel zooms only with **wheel-zoom**.
 - Tab enters the map at one region and leaves it again. Arrow keys move to the neighbouring region in that direction, `Home` and `End` to the first and last.
-- `Shift` + arrow keys pan without moving focus. `Enter` or `Space` selects.
+- `Shift` + arrow keys pan without moving focus. `Enter` or `Space` selects with **selectable**, and emits `click:region` either way.
 
 **zoom-on-focus** fits each focused region in the view; without it, the view only pans to keep the focused region visible.
 

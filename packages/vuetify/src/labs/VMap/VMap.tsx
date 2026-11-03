@@ -6,7 +6,7 @@ import { VTooltip } from '@/components/VTooltip'
 
 // Composables
 import { useMapFocus } from './focus'
-import { DEFAULT_ZOOM_STEP, useMapNavigation } from './map'
+import { useMapNavigation } from './map'
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useLocale } from '@/composables/locale'
@@ -15,7 +15,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { cloneVNode, computed, h, onMounted, onScopeDispose, shallowRef, toRef, useId, watch } from 'vue'
 import { parseMapSvg } from './svg'
-import { genericComponent, isCssColor, isNullOrUndefined, isString, pick, propsFactory, useRender, wrapInArray } from '@/util'
+import {
+  EventProp,
+  genericComponent,
+  hasEvent,
+  isCssColor,
+  isNullOrUndefined,
+  isString,
+  pick,
+  propsFactory,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -58,17 +69,18 @@ const definitionTags = new Set(['defs', 'clipPath', 'mask'])
 export const makeVMapProps = propsFactory({
   svg: String,
   modelValue: { type: [String, Array] as PropType<string | readonly string[] | null>, default: null },
+  selectable: Boolean,
   multiple: Boolean,
   mandatory: Boolean,
   highlighted: { type: [String, Array] as PropType<string | readonly string[] | null>, default: null },
   zoom: { type: Number, default: 1 },
-  zoomStep: { type: Number, default: DEFAULT_ZOOM_STEP },
+  zoomStep: { type: Number, default: 0.2 },
   zoomOnFocus: Boolean,
   minZoom: { type: Number, default: 1 },
   maxZoom: { type: Number, default: 8 },
   baseColor: String,
   baseStroke: String,
-  color: { type: String, default: 'primary' },
+  color: String,
   regions: Object as PropType<Record<string, MapRegionData>>,
   label: String,
   disablePan: Boolean,
@@ -76,7 +88,7 @@ export const makeVMapProps = propsFactory({
   wheelZoom: Boolean,
   hideTooltip: Boolean,
   disabled: Boolean,
-  readonly: Boolean,
+  'onClick:region': EventProp<[MouseEvent | KeyboardEvent, { region: MapRegionItem }]>(),
   ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'VMap')
@@ -116,6 +128,7 @@ export const VMap = genericComponent<VMapSlots>()({
     const regions = computed(() => (map.value?.regions ?? []).map(region => ({ ...region, ...props.regions?.[region.id], id: region.id })))
     const regionById = computed(() => new Map(regions.value.map(region => [region.id, region])))
     const activeRegion = toRef(() => regionById.value.get(active.value?.getAttribute('data-v-map-region') ?? ''))
+    const isClickable = toRef(() => props.selectable || hasEvent(props, 'click:region'))
     const hovered = toRef(() => props.disabled || navigation.dragging.value ? undefined : activeRegion.value?.id)
     const dismissed = shallowRef<string>()
     const focusRing = shallowRef<string>()
@@ -201,7 +214,7 @@ export const VMap = genericComponent<VMapSlots>()({
       if (props.disabled || (navigation.isClickSuppressed() && event instanceof MouseEvent)) return
       const region = regionById.value.get(focus.regionElement(event.target)?.getAttribute('data-v-map-region') ?? '')
       if (!region) return
-      if (!props.readonly) {
+      if (props.selectable) {
         const isSelected = selection.value.has(region.id)
         const isLast = props.mandatory && selection.value.size === 1
         if (!props.multiple) {
@@ -254,11 +267,13 @@ export const VMap = genericComponent<VMapSlots>()({
       const isShape = shapeTags.has(node.tag)
       const originalFill = node.attributes.fill ?? inheritedFill
       const strokeOnly = originalFill === 'none' || node.tag === 'line'
-      const fill = resolveColor(isSelected ? props.color : item?.color)
+      const paint = strokeOnly ? 'stroke' : 'fill'
+      const fill = resolveColor(item?.color)
       const isLayer = mode !== 'map' && mode !== 'reference'
 
-      const attributes: Record<string, string> = { ...node.attributes }
-      if (isShape && region && fill) Object.assign(attributes, strokeOnly ? { stroke: fill } : { fill })
+      const attributes: Record<string, unknown> = { ...node.attributes }
+      if (isShape && region && fill) attributes[paint] = fill
+      if (isShape && isSelected && !isLayer) attributes.class = [attributes.class, `v-map__selected-${paint}`]
       if (isLayer) delete attributes.id
       if (isLayer && isShape) {
         Object.assign(attributes, mode !== 'overlay' ? { fill: 'none' }
@@ -267,12 +282,12 @@ export const VMap = genericComponent<VMapSlots>()({
       }
       const regionAttributes = mode === 'map' && node.region ? {
         'data-v-map-region': node.region.id,
-        class: ['v-map__region', { 'v-map__region--selected': isSelected }],
+        class: [attributes.class, 'v-map__region', { 'v-map__region--selected': isSelected }],
         tabindex: !props.disabled && focus.tabStop.value === node.region.id ? 0 : -1,
-        role: props.readonly ? 'img' : 'button',
+        role: isClickable.value ? 'button' : 'img',
         'aria-label': item?.title,
         'aria-describedby': hovered.value === node.region.id && !props.hideTooltip ? tooltipId : undefined,
-        'aria-pressed': props.readonly ? undefined : isSelected,
+        'aria-pressed': props.selectable ? isSelected : undefined,
         'aria-disabled': props.disabled || undefined,
       } : {}
       const children = node.children.map(child => renderNode(child, region, originalFill, mode))
@@ -335,7 +350,11 @@ export const VMap = genericComponent<VMapSlots>()({
         ]}
         style={[
           dimensionStyles.value,
-          { '--v-map-base-color': resolveColor(props.baseColor), '--v-map-base-stroke': resolveColor(props.baseStroke) },
+          {
+            '--v-map-base-color': resolveColor(props.baseColor),
+            '--v-map-base-stroke': resolveColor(props.baseStroke),
+            '--v-map-selected-color': resolveColor(props.color),
+          },
           props.style,
         ]}
       >
