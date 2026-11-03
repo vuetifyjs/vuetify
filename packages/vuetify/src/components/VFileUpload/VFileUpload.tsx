@@ -238,6 +238,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   disabled={ props.disabled ?? undefined }
                   multiple={ props.multiple }
                   name={ props.name }
+                  style={ slots.default ? 'display: none;' : undefined }
                   onChange={ onFileSelection }
                   { ...inputAttrs }
                 />
@@ -248,18 +249,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   { slots.default ? (
                     <>
                       { slots.default() }
-                      <input
-                        ref={ inputRef }
-                        id={ id.value }
-                        type="file"
-                        accept={ inputAccept }
-                        disabled={ props.disabled ?? undefined }
-                        multiple={ props.multiple }
-                        name={ props.name }
-                        style="display: none;"
-                        onChange={ onFileSelection }
-                        { ...inputAttrs }
-                      />
+                      { inputNode }
                     </>
                   ) : (
                     <VFileUploadDropzone
