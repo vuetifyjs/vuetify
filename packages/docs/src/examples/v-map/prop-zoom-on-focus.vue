@@ -1,9 +1,20 @@
 <template>
   <div>
     <v-switch v-model="fit" label="Fit the focused region" hide-details></v-switch>
-    <p class="mb-3 text-body-medium">Tab into the map, then use the arrow keys to move between states. Small ones such as Distrito Federal are magnified, and large ones such as Amazonas zoom back out.</p>
+
+    <p class="mb-3 text-body-medium">
+      Tab into the map, then use the arrow keys to move between states.
+    </p>
+
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
-    <v-map v-model:zoom="zoom" :max-zoom="16" :svg="svg" :zoom-on-focus="fit" label="Brazilian states"></v-map>
+
+    <v-map
+      v-model:zoom="zoom"
+      :max-zoom="16"
+      :svg="svg"
+      :zoom-on-focus="fit"
+      label="Brazilian states"
+    ></v-map>
 
     <p class="mt-3 text-body-small">Zoom: {{ zoom.toFixed(2) }}×</p>
     <p class="mt-3 text-label-small text-medium-emphasis">

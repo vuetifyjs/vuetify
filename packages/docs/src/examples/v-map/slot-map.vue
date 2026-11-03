@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
+
     <v-map :svg="svg" label="Italian offices">
       <template v-slot:map>
         <circle

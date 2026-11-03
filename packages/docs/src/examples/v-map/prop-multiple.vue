@@ -1,7 +1,14 @@
 <template>
   <div>
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
-    <v-map v-model="selected" :svg="svg" label="German service coverage" multiple></v-map>
+
+    <v-map
+      v-model="selected"
+      :svg="svg"
+      label="German service coverage"
+      multiple
+    ></v-map>
+
     <div class="mt-3 text-body-small">Selected: {{ selected.join(', ') || 'None' }}</div>
     <p class="mt-3 text-label-small text-medium-emphasis">
       Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/germany" rel="noopener" target="_blank">SVG Maps</a>

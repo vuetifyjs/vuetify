@@ -7,7 +7,10 @@
       ref="map"
       v-model:zoom="zoom"
       :max-zoom="maxZoom"
-      :style="{ '--v-map-base-stroke-width': `${border / zoom}px`, '--v-map-focus-stroke-width': '2px' }"
+      :style="{
+        '--v-map-base-stroke-width': `${border / zoom}px`,
+        '--v-map-focus-stroke-width': '2px',
+      }"
       :svg="svg"
       label="World countries"
       wheel-zoom
