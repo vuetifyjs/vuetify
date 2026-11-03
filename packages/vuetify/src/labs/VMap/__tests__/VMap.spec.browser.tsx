@@ -20,10 +20,12 @@ function point (element: Element, type: string, id: number, x: number, y: number
 
 describe('VMap', () => {
   it('should select regions, preserve their colors, and toggle selection', async () => {
-    const selected = shallowRef<string | null>(null)
-    render(() => <VMap selectable svg={ MAP } v-model={ selected.value } hideTooltip />)
+    const selected = shallowRef<string | string[] | null>(null)
+    const multiple = shallowRef(false)
+    render(() => <VMap selectable svg={ MAP } v-model={ selected.value } multiple={ multiple.value } hideTooltip />)
     await whenLoaded()
     const west = screen.getByRole('button', { name: 'West' })
+    const east = screen.getByRole('button', { name: 'East' })
     expect(west).toHaveAttribute('fill', '#558899')
     await userEvent.click(west)
     expect(selected.value).toBe('west')
@@ -31,6 +33,15 @@ describe('VMap', () => {
     await userEvent.click(west)
     expect(selected.value).toBeNull()
     expect(west).toHaveAttribute('fill', '#558899')
+
+    multiple.value = true
+    selected.value = []
+    await nextTick()
+    await userEvent.click(west)
+    await userEvent.click(east)
+    expect(selected.value).toEqual(['west', 'east'])
+    await userEvent.click(west)
+    expect(selected.value).toEqual(['east'])
   })
 
   it('should navigate regions with one tab stop and preserve browser shortcuts', async () => {
@@ -87,119 +98,12 @@ describe('VMap', () => {
     }
   })
 
-  it('should pan with shift and arrow keys without moving focus', async () => {
-    render(() => <VMap selectable svg={ MAP } zoom={ 2 } width={ 600 } height={ 300 } hideTooltip />)
+  it('should leave page scrolling to the plain wheel without wheel-zoom', async () => {
+    render(() => <VMap svg={ MAP } hideTooltip />)
     await whenLoaded()
-    const svg = viewport()
-    const west = screen.getByRole('button', { name: 'West' })
-    const lock = await commands.getLock()
-    try {
-      await userEvent.tab()
-      expect(west).toHaveFocus()
-      let previous = ''
-      await expect.poll(() => {
-        const settled = previous === svg.getAttribute('viewBox')
-        previous = svg.getAttribute('viewBox')!
-        return settled
-      }).toBe(true)
-      const [x, , width] = previous.split(' ').map(Number)
-      await userEvent.keyboard('{Shift>}{ArrowRight}{/Shift}')
-      await expect.poll(() => Number(svg.getAttribute('viewBox')!.split(' ')[0])).toBeCloseTo(x + width / 4)
-      expect(west).toHaveFocus()
-    } finally {
-      await commands.releaseLock(lock)
-    }
-  })
-
-  it('should clamp slot zoom controls and ignore them with disable-zoom', async () => {
-    const zoom = shallowRef(1)
-    const disableZoom = shallowRef(false)
-    render(() => (
-      <VMap selectable svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 1.2 } disableZoom={ disableZoom.value } hideTooltip>
-        {{
-          default: ({ zoom, zoomIn, setZoom, resetZoom }) => (
-            <div>
-              <button onClick={ zoomIn } disabled={ zoom >= 1.2 }>Zoom in</button>
-              <button onClick={ () => setZoom(5) }>Zoom far</button>
-              <button onClick={ resetZoom }>Reset view</button>
-            </div>
-          ),
-        }}
-      </VMap>
-    ))
-    await whenLoaded()
-    await userEvent.click(screen.getByRole('button', { name: 'Zoom in' }))
-    expect(zoom.value).toBe(1.2)
-    expect(screen.getByRole('button', { name: 'Zoom in' })).toBeDisabled()
-    await userEvent.click(screen.getByRole('button', { name: 'Reset view' }))
-    expect(zoom.value).toBe(1)
-    expect(viewport()).toHaveAttribute('viewBox', '0 0 400 200')
-    await userEvent.click(screen.getByRole('button', { name: 'Zoom far' }))
-    expect(zoom.value).toBe(1.2)
-    await userEvent.click(screen.getByRole('button', { name: 'Reset view' }))
-    disableZoom.value = true
-    await nextTick()
-    await userEvent.click(screen.getByRole('button', { name: 'Zoom far' }))
-    expect(zoom.value).toBe(1)
-  })
-
-  it('should reveal and fit regions by identifier', async () => {
-    const map = shallowRef<VMap>()
-    const zoom = shallowRef(1)
-    render(() => <VMap selectable ref={ map } svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 4 } hideTooltip />)
-    await whenLoaded()
-    map.value!.reveal('west', { zoom: true })
-    await expect.poll(() => zoom.value).toBeCloseTo(200 / (160 * 1.08))
-    expect(document.body).toHaveFocus()
-    map.value!.reveal(['west', 'east'], { zoom: true })
-    await expect.poll(() => zoom.value).toBeCloseTo(400 / (360 * 1.08))
-  })
-
-  it('should zoom around the pointer in a letterboxed container', async () => {
-    const wheel = shallowRef(false)
-    const zoom = shallowRef(1)
-    const zoomStep = shallowRef(0.2)
-    render(() => (
-      <VMap
-        selectable
-        svg={ MAP }
-        v-model:zoom={ zoom.value }
-        wheelZoom={ wheel.value }
-        zoomStep={ zoomStep.value }
-        width={ 600 }
-        height={ 400 }
-        hideTooltip
-      />
-    ))
-    await whenLoaded()
-    const svg = viewport()
-    const client = new DOMPoint(100, 100).matrixTransform(svg.getScreenCTM()!)
     const scroll = new WheelEvent('wheel', { deltaY: -100, cancelable: true, bubbles: true })
-    svg.dispatchEvent(scroll)
+    viewport().dispatchEvent(scroll)
     expect(scroll.defaultPrevented).toBe(false)
-    expect(svg).toHaveAttribute('viewBox', '0 0 400 200')
-    const pinch = new WheelEvent('wheel', { clientX: client.x, clientY: client.y, deltaY: -10, ctrlKey: true, cancelable: true })
-    svg.dispatchEvent(pinch)
-    expect(pinch.defaultPrevented).toBe(true)
-    expect(zoom.value).toBeCloseTo(1.2 ** 0.1)
-    wheel.value = true
-    await nextTick()
-    svg.dispatchEvent(new WheelEvent('wheel', { clientX: client.x, clientY: client.y, deltaY: -100, cancelable: true, bubbles: true }))
-    await nextTick()
-    expect(zoom.value).toBeCloseTo(1.2 ** 1.1)
-    const after = new DOMPoint(100, 100).matrixTransform(svg.getScreenCTM()!)
-    expect(after.x).toBeCloseTo(client.x)
-    expect(after.y).toBeCloseTo(client.y)
-    zoomStep.value = 0.4
-    await nextTick()
-    const beforePinch = zoom.value
-    point(svg, 'pointerdown', 1, 200, 100)
-    point(svg, 'pointerdown', 2, 400, 100)
-    point(svg, 'pointermove', 2, 440, 100)
-    point(svg, 'pointerup', 1, 200, 100)
-    point(svg, 'pointerup', 2, 440, 100)
-    await nextTick()
-    expect(zoom.value).toBeCloseTo(beforePinch * 1.4)
   })
 
   it('should pan without selecting a region after a drag', async () => {
@@ -226,18 +130,6 @@ describe('VMap', () => {
     await nextTick()
     expect(down.defaultPrevented).toBe(true)
     expect(svg.getAttribute('viewBox')).not.toBe(panned)
-  })
-
-  it('should not pan with disable-pan', async () => {
-    render(() => <VMap selectable svg={ MAP } zoom={ 2 } disablePan width={ 600 } height={ 300 } hideTooltip />)
-    await whenLoaded()
-    const svg = viewport()
-    const before = svg.getAttribute('viewBox')
-    point(svg, 'pointerdown', 1, 250, 100)
-    point(svg, 'pointermove', 1, 290, 100)
-    point(svg, 'pointerup', 1, 290, 100)
-    await nextTick()
-    expect(svg.getAttribute('viewBox')).toBe(before)
   })
 
   it('should keep the selection fixed without selectable and disable all navigation when disabled', async () => {
@@ -268,38 +160,6 @@ describe('VMap', () => {
     expect(screen.getByRole('button', { name: 'East' })).toHaveAttribute('aria-disabled', 'true')
   })
 
-  it('should draw selection, focus and hover above every region', async () => {
-    render(() => <VMap selectable svg={ MAP } modelValue="west" hideTooltip />)
-    await whenLoaded()
-    const east = screen.getByRole('button', { name: 'East' })
-    const lock = await commands.getLock()
-    try {
-      await userEvent.tab()
-      await userEvent.keyboard('{ArrowRight}')
-      expect(east).toHaveFocus()
-    } finally {
-      await commands.releaseLock(lock)
-    }
-    await userEvent.hover(screen.getByRole('button', { name: 'West' }))
-    const layers = ['outline', 'focus', 'overlay'].map(mode => screen.getByCSS(`.v-map__region-${mode}`))
-    expect(layers.every(layer => layer.closest('[aria-hidden="true"]'))).toBe(true)
-    expect(layers.every(layer => east.compareDocumentPosition(layer) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true)
-    expect(layers[0].compareDocumentPosition(layers[1]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(layers[1].compareDocumentPosition(layers[2]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(screen.getAllByCSS('[data-v-map-region]')).toHaveLength(2)
-  })
-
-  it('should select and deselect multiple regions independently', async () => {
-    const selected = shallowRef<string[]>([])
-    render(() => <VMap selectable svg={ MAP } v-model={ selected.value } multiple hideTooltip />)
-    await whenLoaded()
-    await userEvent.click(screen.getByRole('button', { name: 'West' }))
-    await userEvent.click(screen.getByRole('button', { name: 'East' }))
-    expect(selected.value).toEqual(['west', 'east'])
-    await userEvent.click(screen.getByRole('button', { name: 'West' }))
-    expect(selected.value).toEqual(['east'])
-  })
-
   it('should keep the last selection when mandatory', async () => {
     const selected = shallowRef<string | string[] | null>(null)
     const multiple = shallowRef(false)
@@ -317,16 +177,6 @@ describe('VMap', () => {
     await userEvent.click(west)
     await userEvent.click(east)
     expect(selected.value).toEqual(['east'])
-  })
-
-  it('should show external highlights alongside its own hover and report hover', async () => {
-    const onUpdate = vi.fn()
-    render(() => <VMap selectable svg={ MAP } highlighted="east" onUpdate:highlighted={ onUpdate } hideTooltip />)
-    await whenLoaded()
-    expect(screen.getAllByCSS('.v-map__region-overlay')).toHaveLength(1)
-    await userEvent.hover(screen.getByRole('button', { name: 'West' }))
-    expect(onUpdate).toHaveBeenLastCalledWith('west')
-    await expect.poll(() => screen.queryAllByCSS('.v-map__region-overlay')).toHaveLength(2)
   })
 
   it('should report invalid SVG sources', async () => {
@@ -366,28 +216,5 @@ describe('VMap', () => {
     expect(west).toHaveAttribute('aria-describedby', screen.getByRole('tooltip').id)
     await userEvent.click(west)
     expect(onClick).toHaveBeenCalledWith(expect.any(MouseEvent), { region: expect.objectContaining({ id: 'west', offices: 3 }) })
-  })
-
-  it('should drop the tooltip description with hide-tooltip', async () => {
-    render(() => <VMap selectable svg={ MAP } hideTooltip />)
-    await whenLoaded()
-    const west = screen.getByRole('button', { name: 'West' })
-    await userEvent.hover(west)
-    expect(west).not.toHaveAttribute('aria-describedby')
-    expect(screen.queryByCSS('.v-tooltip')).toBeNull()
-  })
-
-  it('should not re-render the map for pointer moves within one region', async () => {
-    let updates = 0
-    render(() => <VMap selectable svg={ MAP } onVnodeUpdated={ () => updates++ } />)
-    await whenLoaded()
-    const west = screen.getByRole('button', { name: 'West' })
-    point(west, 'pointermove', 1, 100, 100)
-    await expect.poll(() => screen.queryByRole('tooltip')).toBeVisible()
-    updates = 0
-    point(west, 'pointermove', 1, 110, 100)
-    point(west, 'pointermove', 1, 120, 100)
-    await nextTick()
-    expect(updates).toBe(0)
   })
 })

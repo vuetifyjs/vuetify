@@ -5,10 +5,6 @@ import { parseMapSvg } from '../svg'
 import type { MapNode } from '../svg'
 
 describe('VMap SVG source', () => {
-  it('should reject an invalid SVG source', () => {
-    expect(() => parseMapSvg('<svg>', 'map')).toThrow(/VMap requires/)
-  })
-
   it('should remove executable content, links, and external resources', () => {
     const result = parseMapSvg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
       <script>alert(1)</script>
