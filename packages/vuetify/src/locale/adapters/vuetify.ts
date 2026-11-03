@@ -42,7 +42,22 @@ const createTranslateFunction = (
   messages: Ref<LocaleMessages>,
 ) => {
   // keep computed instead of watch to avoid server-side memory leak
-  const bundle = computed(() => createBundle(current.value, fallback.value, messages.value))
+  // since createBundle writes reactive state it reads, we caching + hacks for computed to act like watch
+  let lastEditCount = 0
+  const snapshot = computed(() => ({
+    key: ++lastEditCount,
+    current: current.value,
+    fallback: fallback.value,
+    messages: JSON.parse(JSON.stringify(messages.value)) as LocaleMessages, // hack for deep tracking
+  }))
+  let cache: { key: number, bundle: Bundle } | undefined
+  const bundle = computed(() => {
+    const { key, current, fallback, messages } = snapshot.value
+    if (cache?.key !== key) {
+      cache = { key, bundle: createBundle(current, fallback, messages) }
+    }
+    return cache.bundle
+  })
 
   return (key: string, ...params: unknown[]) => {
     if (!key.startsWith(LANG_PREFIX)) {
