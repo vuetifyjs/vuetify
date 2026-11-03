@@ -228,7 +228,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         >
           {{
             ...slots,
-            default: ({ id }) => {
+            default: ({ id, messagesId }) => {
               const inputNode = (
                 <input
                   ref={ inputRef }
@@ -238,6 +238,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                   disabled={ props.disabled ?? undefined }
                   multiple={ props.multiple }
                   name={ props.name }
+                  aria-describedby={ messagesId.value }
                   style={ slots.default ? 'display: none;' : undefined }
                   onChange={ onFileSelection }
                   { ...inputAttrs }
