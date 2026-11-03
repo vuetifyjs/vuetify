@@ -48,6 +48,20 @@ Setting `$button-named-sizes` replaces the default size scale entirely, so every
 
 Icon buttons get the same height as text buttons, `$button-icon-density` is ignored. Date picker days and pagination buttons keep their size through `$date-picker-month-day-btn-size` and `$pagination-btn-sizes`.
 
+::: info
+
+Vuetify's **default** maps to the Material **medium** size (56px), while Material's default button is **small** (40px). Set a [global default](/features/global-configuration/) to match the spec:
+
+```js { resource="src/plugins/vuetify.js" }
+export default createVuetify({
+  defaults: {
+    VBtn: { size: 'small' },
+  },
+})
+```
+
+:::
+
 <details>
 <summary>Material Design 3 Expressive</summary>
 
