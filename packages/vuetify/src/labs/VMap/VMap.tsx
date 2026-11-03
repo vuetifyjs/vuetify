@@ -13,29 +13,33 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { cloneVNode, h, onMounted, onScopeDispose, shallowRef, toRef, useId, watch } from 'vue'
+import { cloneVNode, computed, h, onMounted, onScopeDispose, shallowRef, toRef, useId, watch } from 'vue'
 import { parseMapSvg } from './svg'
 import { genericComponent, isCssColor, isNullOrUndefined, isString, pick, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType, Ref, VNode } from 'vue'
+import type { PropType, VNode } from 'vue'
 import type { MapDocument, MapNode, MapRegion } from './svg'
 import type { MapViewBox } from './viewport'
 
+export type MapRegionData = { [key: string]: unknown, title?: string, color?: string }
+export type MapRegionItem = MapRegion & MapRegionData
+
 export type VMapSlots = {
   default: {
-    regions: MapRegion[]
+    regions: MapRegionItem[]
     selected: string | readonly string[] | null
-    zoom: Ref<number>
+    zoom: number
     minZoom: number
     maxZoom: number
+    setZoom: (value: number) => void
     zoomIn: () => void
     zoomOut: () => void
-    reset: () => void
+    resetZoom: () => void
     reveal: (ids: string | readonly string[], options?: { zoom?: boolean }) => void
   }
-  map: { regions: MapRegion[], selected: string | readonly string[] | null, viewBox: MapViewBox }
-  tooltip: MapRegion & { selected: boolean }
+  map: { regions: MapRegionItem[], selected: string | readonly string[] | null, viewBox: MapViewBox }
+  tooltip: { region: MapRegionItem, selected: boolean }
   error: { error: Error }
 }
 
@@ -47,6 +51,9 @@ const panOffsets: Record<string, [number, number]> = {
 }
 
 type LayerMode = 'overlay' | 'outline' | 'focus'
+
+const shapeTags = new Set(['path', 'rect', 'circle', 'ellipse', 'line', 'polygon', 'polyline', 'use'])
+const definitionTags = new Set(['defs', 'clipPath', 'mask'])
 
 export const makeVMapProps = propsFactory({
   svg: String,
@@ -62,13 +69,12 @@ export const makeVMapProps = propsFactory({
   baseColor: String,
   baseStroke: String,
   color: { type: String, default: 'primary' },
-  regionColors: Object as PropType<Record<string, string>>,
-  regionLabels: Object as PropType<Record<string, string>>,
+  regions: Object as PropType<Record<string, MapRegionData>>,
   label: String,
-  pan: { type: Boolean, default: true },
-  wheel: Boolean,
-  zoomable: { type: Boolean, default: true },
-  tooltip: { type: Boolean, default: true },
+  disablePan: Boolean,
+  disableZoom: Boolean,
+  wheelZoom: Boolean,
+  hideTooltip: Boolean,
   disabled: Boolean,
   readonly: Boolean,
   ...makeComponentProps(),
@@ -83,7 +89,7 @@ export const VMap = genericComponent<VMapSlots>()({
   emits: {
     'update:modelValue': (value: string | readonly string[] | null) => true,
     'update:zoom': (value: number) => true,
-    'click:region': (region: MapRegion, event: MouseEvent | KeyboardEvent) => true,
+    'click:region': (event: MouseEvent | KeyboardEvent, value: { region: MapRegionItem }) => true,
     'update:highlighted': (value: string | readonly string[] | null) => true,
     load: (regions: MapRegion[]) => true,
     error: (value: Error) => true,
@@ -93,7 +99,8 @@ export const VMap = genericComponent<VMapSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { t } = useLocale()
     const selected = useProxiedModel(props, 'modelValue')
-    const selection = toRef(() => new Set(wrapInArray(selected.value)))
+    // computed, not toRef: read once per SVG node on every render, and pointer moves re-render
+    const selection = computed(() => new Set(wrapInArray(selected.value)))
     const zoom = useProxiedModel(props, 'zoom')
     const highlight = useProxiedModel(props, 'highlighted')
     const element = shallowRef<SVGSVGElement>()
@@ -104,17 +111,14 @@ export const VMap = genericComponent<VMapSlots>()({
     const target = shallowRef<[number, number]>([0, 0])
     const prefix = `v-map-${useId()}`
     const tooltipId = `${prefix}-tooltip`
-    const description = toRef(() => props.tooltip || slots.tooltip ? tooltipId : undefined)
     const navigation = useMapNavigation(props, element, () => map.value?.viewBox, zoom)
-    const focus = useMapFocus(props, element, () => map.value?.regions ?? [], navigation.reveal)
-    const activeRegion = toRef(() => {
-      const id = active.value?.getAttribute('data-v-map-region')
-      const region = map.value?.regions.find(region => region.id === id)
-      return region ? { ...region, title: props.regionLabels?.[region.id] ?? region.title } : undefined
-    })
+    const focus = useMapFocus(element, () => map.value?.regions ?? [], navigation.reveal)
+    const regions = computed(() => (map.value?.regions ?? []).map(region => ({ ...region, ...props.regions?.[region.id], id: region.id })))
+    const regionById = computed(() => new Map(regions.value.map(region => [region.id, region])))
+    const activeRegion = toRef(() => regionById.value.get(active.value?.getAttribute('data-v-map-region') ?? ''))
     const hovered = toRef(() => props.disabled || navigation.dragging.value ? undefined : activeRegion.value?.id)
     const dismissed = shallowRef<string>()
-    const ring = shallowRef<string>()
+    const focusRing = shallowRef<string>()
     const tooltipOpen = toRef(() => !!hovered.value && hovered.value !== dismissed.value)
     // includes the own hover so a one-way :highlighted binding still shows pointer feedback
     const highlights = toRef(() => props.disabled ? new Set() : new Set([...wrapInArray(highlight.value), hovered.value]))
@@ -154,12 +158,15 @@ export const VMap = genericComponent<VMapSlots>()({
     watch(() => props.disabled, disabled => { if (disabled) active.value = undefined })
 
     watch(navigation.viewBox, () => {
-      if (!active.value?.matches(':focus-visible')) return
-      const rectangle = active.value.getBoundingClientRect()
-      target.value = [rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2]
+      if (active.value?.matches(':focus-visible')) anchorTooltip(active.value)
     }, { flush: 'post' })
 
-    function onActivate (event: PointerEvent) {
+    function anchorTooltip (region: Element) {
+      const rectangle = region.getBoundingClientRect()
+      target.value = [rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2]
+    }
+
+    function onHover (event: PointerEvent) {
       if (props.disabled || navigation.dragging.value) return
       active.value = focus.regionElement(event.target)
       target.value = [event.clientX, event.clientY]
@@ -167,37 +174,33 @@ export const VMap = genericComponent<VMapSlots>()({
 
     function onPointermove (event: PointerEvent) {
       navigation.onPointermove(event)
-      onActivate(event)
+      onHover(event)
     }
 
     function onFocus (event: FocusEvent) {
       if (props.disabled) return
       focus.onFocus(event)
       active.value = focus.regionElement(event.target)
-      ring.value = active.value?.matches(':focus-visible') ? active.value.getAttribute('data-v-map-region')! : undefined
-      if (ring.value && active.value) {
-        const rectangle = active.value.getBoundingClientRect()
-        target.value = [rectangle.x + rectangle.width / 2, rectangle.y + rectangle.height / 2]
-      }
+      const visible = active.value?.matches(':focus-visible')
+      focusRing.value = visible ? active.value!.getAttribute('data-v-map-region')! : undefined
+      if (visible) anchorTooltip(active.value!)
     }
 
-    function onDeactivate (event: MouseEvent | FocusEvent) {
+    function onLeave (event: MouseEvent | FocusEvent) {
       const related = event.relatedTarget as Node | null
       if (active.value?.contains(related)) return
       active.value = props.disabled ? undefined : focus.regionElement(event.relatedTarget)
     }
 
     function onFocusout (event: FocusEvent) {
-      ring.value = undefined
-      onDeactivate(event)
+      focusRing.value = undefined
+      onLeave(event)
     }
 
     function selectRegion (event: MouseEvent | KeyboardEvent) {
       if (props.disabled || (navigation.isClickSuppressed() && event instanceof MouseEvent)) return
-      const id = focus.regionElement(event.target)?.getAttribute('data-v-map-region')
-      const region = map.value?.regions.find(region => region.id === id)
+      const region = regionById.value.get(focus.regionElement(event.target)?.getAttribute('data-v-map-region') ?? '')
       if (!region) return
-      const item = { ...region, title: props.regionLabels?.[region.id] ?? region.title }
       if (!props.readonly) {
         const isSelected = selection.value.has(region.id)
         const isLast = props.mandatory && selection.value.size === 1
@@ -210,7 +213,7 @@ export const VMap = genericComponent<VMapSlots>()({
           selected.value = [...selection.value, region.id]
         }
       }
-      emit('click:region', item, event)
+      emit('click:region', event, { region })
     }
 
     function onKeydown (event: KeyboardEvent) {
@@ -245,55 +248,48 @@ export const VMap = genericComponent<VMapSlots>()({
       mode: 'map' | 'reference' | LayerMode = 'map',
     ): VNode | string {
       if (isString(node)) return node
-      const region = ['defs', 'clipPath', 'mask'].includes(node.tag) ? undefined : node.region ?? parent
+      const region = definitionTags.has(node.tag) ? undefined : node.region ?? parent
+      const item = region && regionById.value.get(region.id)
       const isSelected = !!region && selection.value.has(region.id)
-      const fill = region && resolveColor(isSelected ? props.color : props.regionColors?.[region.id])
-      const isShape = ['path', 'rect', 'circle', 'ellipse', 'line', 'polygon', 'polyline', 'use'].includes(node.tag)
+      const isShape = shapeTags.has(node.tag)
       const originalFill = node.attributes.fill ?? inheritedFill
-
-      const attributes: Record<string, string> = {
-        ...node.attributes,
-        ...(isShape && fill ? originalFill === 'none' || node.tag === 'line' ? { stroke: fill } : { fill } : {}),
-      }
+      const strokeOnly = originalFill === 'none' || node.tag === 'line'
+      const fill = resolveColor(isSelected ? props.color : item?.color)
       const isLayer = mode !== 'map' && mode !== 'reference'
-      if (isLayer) {
-        delete attributes.id
-        if (isShape && mode !== 'overlay') attributes.fill = 'none'
-        else if (isShape) {
-          Object.assign(attributes, originalFill === 'none' || node.tag === 'line'
-            ? { stroke: 'currentColor' }
-            : { fill: 'currentColor', stroke: 'none' })
-        }
+
+      const attributes: Record<string, string> = { ...node.attributes }
+      if (isShape && region && fill) Object.assign(attributes, strokeOnly ? { stroke: fill } : { fill })
+      if (isLayer) delete attributes.id
+      if (isLayer && isShape) {
+        Object.assign(attributes, mode !== 'overlay' ? { fill: 'none' }
+          : strokeOnly ? { stroke: 'currentColor' }
+          : { fill: 'currentColor', stroke: 'none' })
       }
       const regionAttributes = mode === 'map' && node.region ? {
         'data-v-map-region': node.region.id,
         class: ['v-map__region', { 'v-map__region--selected': isSelected }],
         tabindex: !props.disabled && focus.tabStop.value === node.region.id ? 0 : -1,
         role: props.readonly ? 'img' : 'button',
-        'aria-label': props.regionLabels?.[node.region.id] ?? node.region.title,
-        'aria-describedby': hovered.value === node.region.id ? description.value : undefined,
+        'aria-label': item?.title,
+        'aria-describedby': hovered.value === node.region.id && !props.hideTooltip ? tooltipId : undefined,
         'aria-pressed': props.readonly ? undefined : isSelected,
         'aria-disabled': props.disabled || undefined,
       } : {}
       const children = node.children.map(child => renderNode(child, region, originalFill, mode))
-      let content: VNode
-      if (node.reference) {
-        const id = `${node.reference.attributes.id}${isLayer ? `-${mode}` : ''}`
-        const reference = renderNode(node.reference, region, originalFill, isLayer ? mode : 'reference') as VNode
-        content = h('g', regionAttributes, [
-          h('defs', [cloneVNode(reference, { id })]),
-          h(node.tag, { ...attributes, href: `#${id}` }, children),
-        ])
-      } else {
-        content = h(node.tag, { ...attributes, ...regionAttributes }, children)
-      }
-      return content
+      if (!node.reference) return h(node.tag, { ...attributes, ...regionAttributes }, children)
+
+      const id = `${node.reference.attributes.id}${isLayer ? `-${mode}` : ''}`
+      const reference = renderNode(node.reference, region, originalFill, isLayer ? mode : 'reference') as VNode
+      return h('g', regionAttributes, [
+        h('defs', [cloneVNode(reference, { id })]),
+        h(node.tag, { ...attributes, href: `#${id}` }, children),
+      ])
     }
 
     // SVG paints in document order, so states that must not be covered by neighbours are redrawn on top
     function renderLayer (nodes: (MapNode | string)[], ids: Set<unknown>, mode: LayerMode, inheritedFill?: string): VNode[] {
       return nodes.flatMap(node => {
-        if (isString(node) || ['defs', 'clipPath', 'mask'].includes(node.tag)) return []
+        if (isString(node) || definitionTags.has(node.tag)) return []
         if (node.region && ids.has(node.region.id)) {
           return [h('g', { class: `v-map__region-${mode}` }, [renderNode(node, node.region, inheritedFill, mode)])]
         }
@@ -302,20 +298,44 @@ export const VMap = genericComponent<VMapSlots>()({
       })
     }
 
+    // own render scope: pointer moves update only the tooltip, not the whole SVG
+    function MapTooltip () {
+      return (
+        <VTooltip
+          id={ tooltipId }
+          modelValue={ tooltipOpen.value }
+          // ignores click-outside: the tooltip only shows over the map, so that click lands on the map
+          onUpdate:modelValue={ () => {} }
+          target={ target.value }
+          text={ activeRegion.value?.title }
+          openDelay={ 0 }
+          closeDelay={ 0 }
+          v-slots={{
+            default: slots.tooltip
+              ? () => {
+                const region = activeRegion.value
+                return region && slots.tooltip!({ region, selected: selection.value.has(region.id) })
+              }
+              : undefined,
+          }}
+        />
+      )
+    }
+
     useRender(() => (
       <div
         class={[
           'v-map',
           {
             'v-map--disabled': props.disabled,
-            'v-map--interactive': !props.disabled && (props.pan || props.zoomable),
+            'v-map--interactive': !props.disabled && (!props.disablePan || !props.disableZoom),
             'v-map--dragging': navigation.dragging.value,
           },
           props.class,
         ]}
         style={[
           dimensionStyles.value,
-          { '--v-map-base-color': resolveColor(props.baseColor), '--v-map-stroke': resolveColor(props.baseStroke) },
+          { '--v-map-base-color': resolveColor(props.baseColor), '--v-map-base-stroke': resolveColor(props.baseStroke) },
           props.style,
         ]}
       >
@@ -340,8 +360,8 @@ export const VMap = genericComponent<VMapSlots>()({
             onLostpointercapture={ navigation.onPointerup }
             onWheel={ navigation.onWheel }
             onDblclick={ navigation.onDblclick }
-            onPointerover={ onActivate }
-            onPointerout={ onDeactivate }
+            onPointerover={ onHover }
+            onPointerout={ onLeave }
             onFocusin={ onFocus }
             onFocusout={ onFocusout }
           >
@@ -350,10 +370,10 @@ export const VMap = genericComponent<VMapSlots>()({
             </g>
             <g { ...pick(map.value.attributes, ['transform', 'clip-path', 'mask']) } aria-hidden="true">
               { renderLayer(map.value.children, selection.value, 'outline', map.value.attributes.fill) }
-              { renderLayer(map.value.children, new Set(props.disabled ? [] : [ring.value]), 'focus', map.value.attributes.fill) }
+              { renderLayer(map.value.children, new Set(props.disabled ? [] : [focusRing.value]), 'focus', map.value.attributes.fill) }
               { renderLayer(map.value.children, highlights.value, 'overlay', map.value.attributes.fill) }
             </g>
-            { slots.map?.({ regions: map.value.regions, selected: selected.value, viewBox: navigation.viewBox.value }) }
+            { slots.map?.({ regions: regions.value, selected: selected.value, viewBox: navigation.viewBox.value }) }
           </svg>
         )}
 
@@ -364,41 +384,23 @@ export const VMap = genericComponent<VMapSlots>()({
         )}
 
         { slots.default?.({
-          regions: map.value?.regions ?? [],
+          regions: regions.value,
           selected: selected.value,
-          zoom,
+          zoom: navigation.scale.value,
           minZoom: navigation.minimum.value,
           maxZoom: navigation.maximum.value,
+          setZoom: navigation.zoomTo,
           zoomIn: navigation.zoomIn,
           zoomOut: navigation.zoomOut,
-          reset: navigation.reset,
+          resetZoom: navigation.resetZoom,
           reveal,
         })}
 
-        { mounted.value && (props.tooltip || slots.tooltip) && (
-          <VTooltip
-            id={ tooltipId }
-            modelValue={ tooltipOpen.value }
-            // ignores click-outside: the tooltip only shows over the map, so that click lands on the map
-            onUpdate:modelValue={ () => {} }
-            target={ target.value }
-            text={ activeRegion.value?.title }
-            openDelay={ 0 }
-            closeDelay={ 0 }
-            v-slots={{
-              default: slots.tooltip
-                ? () => {
-                  const region = activeRegion.value
-                  return region && slots.tooltip!({ ...region, selected: selection.value.has(region.id) })
-                }
-                : undefined,
-            }}
-          />
-        )}
+        { mounted.value && !props.hideTooltip && <MapTooltip /> }
       </div>
     ))
 
-    return { zoomIn: navigation.zoomIn, zoomOut: navigation.zoomOut, reset: navigation.reset, reveal }
+    return { zoomIn: navigation.zoomIn, zoomOut: navigation.zoomOut, resetZoom: navigation.resetZoom, reveal }
   },
 })
 

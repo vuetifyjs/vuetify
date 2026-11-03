@@ -10,12 +10,16 @@ import type { MaybeRefOrGetter, Ref } from 'vue'
 import type { MapPoint, MapViewBox } from './viewport'
 
 export const DEFAULT_ZOOM_STEP = 0.2
+const DRAG_THRESHOLD = 4
+const FIT_MARGIN = 1.08
+const REVEAL_MARGIN = 0.04
+const WHEEL_LINE_HEIGHT = 33
 
 interface MapNavigationProps {
   disabled: boolean
-  pan: boolean
-  zoomable: boolean
-  wheel: boolean
+  disablePan: boolean
+  disableZoom: boolean
+  wheelZoom: boolean
   zoomStep: number
   zoomOnFocus: boolean
   minZoom: number
@@ -30,10 +34,11 @@ export function useMapNavigation (
 ) {
   const center = shallowRef<MapPoint>()
   const dragging = shallowRef(false)
-  const minimum = computed(() => Math.max(1, Number.isFinite(props.minZoom) ? props.minZoom : 1))
-  const maximum = computed(() => Math.max(minimum.value, Number.isFinite(props.maxZoom) ? props.maxZoom : 8))
+  const minimum = computed(() => Math.max(1, props.minZoom))
+  const maximum = computed(() => Math.max(minimum.value, props.maxZoom))
+  // v-model:zoom can be bound to an emptied number field
   const scale = computed(() => clamp(Number.isFinite(zoom.value) ? zoom.value : 1, minimum.value, maximum.value))
-  const step = computed(() => 1 + Math.max(0.01, Number.isFinite(props.zoomStep) ? props.zoomStep : DEFAULT_ZOOM_STEP))
+  const step = computed(() => 1 + Math.max(0.01, props.zoomStep))
   const sensitivity = computed(() => Math.log(step.value) / Math.log1p(DEFAULT_ZOOM_STEP))
   const viewBox = computed(() => {
     const base = toValue(bounds)
@@ -97,7 +102,7 @@ export function useMapNavigation (
   function zoomTo (value: number, anchor?: MapPoint) {
     const base = toValue(bounds)
     const view = viewBox.value
-    if (props.disabled || !props.zoomable || !base || !view) return
+    if (props.disabled || props.disableZoom || !base || !view) return
     stopAnimation()
     const next = clamp(value, minimum.value, maximum.value)
     const point = anchor ?? { x: view.x + view.width / 2, y: view.y + view.height / 2 }
@@ -106,7 +111,7 @@ export function useMapNavigation (
     zoom.value = next
   }
 
-  function reset () {
+  function resetZoom () {
     if (props.disabled) return
     stopAnimation()
     center.value = undefined
@@ -119,37 +124,42 @@ export function useMapNavigation (
     return new DOMPoint(point.x, point.y).matrixTransform(matrix.inverse())
   }
 
-  function panBy (x: number, y: number) {
+  function panBy (x: number, y: number, smooth = false) {
     const view = viewBox.value
-    if (!view || !props.pan || props.disabled) return
-    moveTo({ ...view, x: view.x + x, y: view.y + y })
+    if (!view || props.disablePan || props.disabled) return
+    moveTo({ ...view, x: view.x + x, y: view.y + y }, smooth)
   }
 
   function nudge (x: number, y: number) {
     const view = viewBox.value
-    if (!view || !props.pan || props.disabled) return
-    moveTo({ ...view, x: view.x + x * view.width / 4, y: view.y + y * view.height / 4 }, true)
+    if (view) panBy(x * view.width / 4, y * view.height / 4, true)
   }
 
   function reveal (regions: SVGGraphicsElement | SVGGraphicsElement[], fit = props.zoomOnFocus) {
     const view = viewBox.value
     const rectangles = wrapInArray(regions).map(region => region.getBoundingClientRect())
-    if (!view || props.disabled || !props.pan || !rectangles.length) return
-    const start = pointAt({ x: Math.min(...rectangles.map(r => r.left)), y: Math.min(...rectangles.map(r => r.top)) })
-    const end = pointAt({ x: Math.max(...rectangles.map(r => r.right)), y: Math.max(...rectangles.map(r => r.bottom)) })
+    if (!view || props.disabled || props.disablePan || !rectangles.length) return
+    const box = rectangles.reduce((a, b) => DOMRect.fromRect({
+      x: Math.min(a.left, b.left),
+      y: Math.min(a.top, b.top),
+      width: Math.max(a.right, b.right) - Math.min(a.left, b.left),
+      height: Math.max(a.bottom, b.bottom) - Math.min(a.top, b.top),
+    }))
+    const start = pointAt({ x: box.left, y: box.top })
+    const end = pointAt({ x: box.right, y: box.bottom })
     if (!start || !end) return
-    if (fit && props.zoomable) {
+    if (fit && !props.disableZoom) {
       const base = toValue(bounds)!
       const nextZoom = clamp(Math.min(
-        base.width / Math.max((end.x - start.x) * 1.08, Number.EPSILON),
-        base.height / Math.max((end.y - start.y) * 1.08, Number.EPSILON),
+        base.width / Math.max((end.x - start.x) * FIT_MARGIN, Number.EPSILON),
+        base.height / Math.max((end.y - start.y) * FIT_MARGIN, Number.EPSILON),
       ), minimum.value, maximum.value)
       const width = base.width / nextZoom
       const height = base.height / nextZoom
       moveTo({ x: (start.x + end.x - width) / 2, y: (start.y + end.y - height) / 2, width, height }, true, nextZoom)
       return
     }
-    const padding = Math.min(view.width, view.height) * 0.04
+    const padding = Math.min(view.width, view.height) * REVEAL_MARGIN
     const x = end.x - start.x > view.width - padding * 2
       ? (start.x + end.x - view.width) / 2
       : start.x < view.x + padding ? start.x - padding : Math.max(view.x, end.x + padding - view.width)
@@ -160,9 +170,9 @@ export function useMapNavigation (
   }
 
   function onPointerdown (event: PointerEvent) {
-    if (props.disabled || (!props.pan && !props.zoomable)) return
+    if (props.disabled || (props.disablePan && props.disableZoom)) return
     if (event.pointerType === 'mouse' && event.button !== 0) {
-      if (event.button !== 1 || !props.pan) return
+      if (event.button !== 1 || props.disablePan) return
       // stops middle-click autoscroll
       event.preventDefault()
     }
@@ -172,6 +182,7 @@ export function useMapNavigation (
       origin = { x: event.clientX, y: event.clientY }
     }
     pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+    // synthetic events have no active pointer to capture
     if (event.isTrusted) {
       const target = event.target as Element
       target.setPointerCapture(event.pointerId)
@@ -186,7 +197,7 @@ export function useMapNavigation (
     const other = Array.from(pointers.entries()).find(([id]) => id !== event.pointerId)?.[1]
     pointers.set(event.pointerId, current)
 
-    if (origin && Math.hypot(current.x - origin.x, current.y - origin.y) > 4) {
+    if (origin && Math.hypot(current.x - origin.x, current.y - origin.y) > DRAG_THRESHOLD) {
       suppressClick = true
       dragging.value = true
     }
@@ -197,7 +208,7 @@ export function useMapNavigation (
     const anchor = pointAt(previousCenter)
     const previousScale = scale.value
 
-    if (other && anchor && props.zoomable) {
+    if (other && anchor && !props.disableZoom) {
       const before = Math.hypot(previous.x - other.x, previous.y - other.y)
       const after = Math.hypot(current.x - other.x, current.y - other.y)
       if (before > 0 && after > 0) {
@@ -227,23 +238,23 @@ export function useMapNavigation (
   function onWheel (event: WheelEvent) {
     // trackpad pinch arrives as ctrlKey + small deltaY, so zoom proportionally and cap at one step per mouse notch
     const modified = event.ctrlKey || event.metaKey
-    if (props.disabled || !props.zoomable || (!props.wheel && !modified) || event.altKey || !event.deltaY) return
+    if (props.disabled || props.disableZoom || (!props.wheelZoom && !modified) || event.altKey || !event.deltaY) return
     event.preventDefault()
-    const delta = event.deltaY * (event.deltaMode === WheelEvent.DOM_DELTA_LINE ? 33 : 1)
+    const delta = event.deltaY * (event.deltaMode === WheelEvent.DOM_DELTA_LINE ? WHEEL_LINE_HEIGHT : 1)
     zoomTo(scale.value * step.value ** clamp(-delta / 100, -1, 1), pointAt({ x: event.clientX, y: event.clientY }))
   }
 
   function onDblclick (event: MouseEvent) {
-    if (props.disabled || !props.zoomable || event.ctrlKey || event.metaKey || event.altKey) return
+    if (props.disabled || props.disableZoom || event.ctrlKey || event.metaKey || event.altKey) return
     event.preventDefault()
     zoomTo(scale.value * (event.shiftKey ? 1 / step.value : step.value), pointAt({ x: event.clientX, y: event.clientY }))
   }
 
   function clearPointers () {
     stopAnimation()
-    for (const [id, target] of captures) {
+    captures.forEach((target, id) => {
       if (target.hasPointerCapture(id)) target.releasePointerCapture(id)
-    }
+    })
     captures.clear()
     pointers.clear()
     dragging.value = false
@@ -254,7 +265,7 @@ export function useMapNavigation (
     center.value = undefined
     clearPointers()
   })
-  watch(() => props.disabled || (!props.pan && !props.zoomable), clearPointers)
+  watch(() => props.disabled || (props.disablePan && props.disableZoom), clearPointers)
   watch(zoom, value => {
     if (animation && value !== animationZoom) stopAnimation()
   })
@@ -266,7 +277,8 @@ export function useMapNavigation (
     minimum,
     maximum,
     dragging,
-    reset,
+    resetZoom,
+    zoomTo,
     reveal,
     nudge,
     zoomIn: () => zoomTo(scale.value * step.value),

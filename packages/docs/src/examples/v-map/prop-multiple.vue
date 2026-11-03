@@ -1,17 +1,30 @@
 <template>
   <div>
-    <v-map v-model="selected" :svg="svg" label="Service coverage" multiple></v-map>
+    <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
+    <v-map v-model="selected" :svg="svg" label="German service coverage" multiple></v-map>
     <div class="mt-3 text-body-small">Selected: {{ selected.join(', ') || 'None' }}</div>
+    <p class="mt-3 text-label-small text-medium-emphasis">
+      Map by <a href="https://mapsvg.com/maps/germany" rel="noopener" target="_blank">MapSVG</a>,
+      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/germany" rel="noopener" target="_blank">SVG Maps</a>
+      (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
+    </p>
   </div>
 </template>
 
 <script setup>
-  import { shallowRef } from 'vue'
+  import { onMounted, shallowRef } from 'vue'
 
-  const selected = shallowRef(['west', 'east'])
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
-    <path id="west" aria-label="West" fill="#607d8b" d="M30 80L190 30L230 160L150 280L30 220Z" />
-    <path id="central" aria-label="Central" fill="#78909c" d="M190 30L390 40L420 200L300 290L150 280L230 160Z" />
-    <path id="east" aria-label="East" fill="#90a4ae" d="M390 40L560 90L570 250L420 200Z" />
-  </svg>`
+  const selected = shallowRef(['by', 'be'])
+  const svg = shallowRef()
+  const error = shallowRef('')
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('https://cdn.jsdelivr.net/npm/@svg-maps/germany@2.0.0/germany.svg')
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      svg.value = await response.text()
+    } catch {
+      error.value = 'Could not load the map from jsDelivr.'
+    }
+  })
 </script>

@@ -30,7 +30,8 @@ const elements = new Set([
   'text', 'tspan', 'title', 'desc', 'defs', 'linearGradient', 'radialGradient',
   'stop', 'clipPath', 'mask', 'symbol', 'use',
 ])
-const shapes = new Set(['g', 'path', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'use'])
+const regionTags = new Set(['g', 'path', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon', 'use'])
+const definitionTags = new Set(['defs', 'clipPath', 'mask', 'symbol', 'linearGradient', 'radialGradient'])
 const attributes = new Set([
   'id', 'd', 'points', 'x', 'y', 'x1', 'y1', 'x2', 'y2', 'cx', 'cy', 'r', 'rx', 'ry',
   'width', 'height', 'dx', 'dy', 'rotate', 'transform', 'opacity', 'fill', 'fill-opacity',
@@ -71,26 +72,29 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
 
   const identifiers = new Map<string, string>()
   const sources = new Map<string, Element>()
-  for (const element of [root, ...root.querySelectorAll('[id]')]) {
+  const identified = [root, ...root.querySelectorAll('[id]')]
+  identified.forEach(element => {
     const id = element.getAttribute('id')
-    if (!id) continue
+    if (!id) return
     if (identifiers.has(id)) throw new Error(`VMap requires unique SVG identifiers: ${id}`)
     const scoped = `${prefix}-${identifiers.size}`
     identifiers.set(id, scoped)
     sources.set(scoped, element)
-  }
+  })
 
   function readAttributes (element: Element, identifiers: Map<string, string>) {
     const result: Record<string, string> = {}
     const values = new Map(Array.from(element.attributes, attribute => [attribute.localName, attribute.value]))
-    for (const declaration of (element.getAttribute('style') ?? '').split(';')) {
+    const declarations = (element.getAttribute('style') ?? '').split(';')
+    declarations.forEach(declaration => {
       const separator = declaration.indexOf(':')
       const name = declaration.slice(0, separator).trim()
       if (separator > 0 && presentation.has(name)) values.set(name, declaration.slice(separator + 1).trim())
-    }
+    })
 
-    for (const [name, value] of values) {
-      if (!attributes.has(name) || /[\\<>]|\/\*|\*\/|@|!|expression\s*\(/i.test(value)) continue
+    values.forEach((value, name) => {
+      // drops values that could smuggle markup or CSS: comments, at-rules, !important, expression()
+      if (!attributes.has(name) || /[\\<>]|\/\*|\*\/|@|!|expression\s*\(/i.test(value)) return
       if (name === 'id') {
         result.id = identifiers.get(value)!
       } else if (name === 'href') {
@@ -101,7 +105,7 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
       } else {
         result[name] = value
       }
-    }
+    })
     return result
   }
 
@@ -113,12 +117,14 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
     if (element.namespaceURI !== namespace || !elements.has(element.localName)) return
 
     const tag = element.localName
-    const definitions = context.definitions || ['defs', 'clipPath', 'mask', 'symbol', 'linearGradient', 'radialGradient'].includes(tag)
-    const explicit = element.getAttribute('data-region')
-    const id = explicit || (context.group ? undefined : element.getAttribute('id'))
-    const title = element.getAttribute('aria-label') ||
-      Array.from(element.children).find(child => child.localName === 'title')?.textContent || id
-    const region = !definitions && shapes.has(tag) && id ? { id, title: title! } : undefined
+    const definitions = context.definitions || definitionTags.has(tag)
+    const dataRegion = element.getAttribute('data-region')
+    const id = dataRegion || (context.group ? undefined : element.getAttribute('id'))
+    const region = !definitions && regionTags.has(tag) && id ? {
+      id,
+      title: element.getAttribute('aria-label') ||
+        Array.from(element.children).find(child => child.localName === 'title')?.textContent || id,
+    } : undefined
     if (region && !regionIds.has(region.id)) {
       regionIds.add(region.id)
       regions.push(region)
@@ -128,7 +134,7 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
       ...context,
       definitions,
       region: region ?? context.region,
-      group: tag === 'g' && explicit && region ? region : context.group,
+      group: tag === 'g' && dataRegion && region ? region : context.group,
     }
     const node: MapNode = {
       tag,
@@ -144,13 +150,14 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
       } else {
         const scoped = new Map(context.identifiers)
         const referencePrefix = `${prefix}-ref-${referenceIndex++}`
-        for (const [index, element] of [source, ...source.querySelectorAll('[id]')].entries()) {
+        const referenced = [source, ...source.querySelectorAll('[id]')]
+        referenced.forEach((element, index) => {
           const id = element.getAttribute('id')
-          if (!id) continue
+          if (!id) return
           const identifier = `${referencePrefix}-${index}`
           scoped.set(id, identifier)
           sources.set(identifier, element)
-        }
+        })
         node.reference = readElement(source, {
           identifiers: scoped,
           references: new Set([...context.references, source]),
@@ -165,15 +172,16 @@ export function parseMapSvg (source: string, prefix: string): MapDocument {
 
   function readChildren (element: Element, context: MapSvgContext): (MapNode | string)[] {
     return Array.from(element.childNodes).flatMap<MapNode | string>(child => {
-      if (child.nodeType === 3) return [child.textContent ?? '']
-      if (child.nodeType !== 1) return []
+      if (child.nodeType === Node.TEXT_NODE) return [child.textContent ?? '']
+      if (child.nodeType !== Node.ELEMENT_NODE) return []
       const node = readElement(child as Element, context)
       return node ? [node] : []
     })
   }
 
   const rootAttributes = readAttributes(root, identifiers)
-  for (const name of ['id', 'x', 'y', 'width', 'height', 'viewBox', 'preserveAspectRatio']) delete rootAttributes[name]
+  const rootOnly = ['id', 'x', 'y', 'width', 'height', 'viewBox', 'preserveAspectRatio']
+  rootOnly.forEach(name => delete rootAttributes[name])
 
   return {
     viewBox: { x: viewBox[0], y: viewBox[1], width: viewBox[2], height: viewBox[3] },

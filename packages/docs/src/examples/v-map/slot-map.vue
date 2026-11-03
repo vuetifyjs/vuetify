@@ -1,16 +1,17 @@
 <template>
   <div>
-    <v-map :svg="svg" label="Office coverage">
+    <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
+    <v-map :svg="svg" label="Italian offices">
       <template v-slot:map>
         <circle
           ref="marker"
           :aria-pressed="active"
           :fill="active ? 'rgb(var(--v-theme-success))' : 'rgb(var(--v-theme-primary))'"
-          aria-label="Central office"
+          aria-label="Rome office"
           class="office-marker"
-          cx="320"
-          cy="160"
-          r="12"
+          cx="302"
+          cy="370"
+          r="8"
           role="button"
           tabindex="0"
           @click.stop="active = !active"
@@ -21,24 +22,36 @@
       </template>
 
       <template v-slot:default>
-        <v-tooltip :activator="marker" text="Central office: 12 staff members"></v-tooltip>
+        <v-tooltip :activator="marker" text="Rome office: 12 staff members"></v-tooltip>
       </template>
     </v-map>
 
-    <p class="mt-3 text-body-2" role="status">{{ active ? 'Central office selected' : 'Select the office marker' }}</p>
+    <p class="mt-3 text-body-medium" role="status">{{ active ? 'Rome office selected' : 'Select the office marker' }}</p>
+    <p class="mt-3 text-label-small text-medium-emphasis">
+      Map by <a href="https://mapsvg.com/maps/italy" rel="noopener" target="_blank">MapSVG</a>,
+      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/italy" rel="noopener" target="_blank">SVG Maps</a>
+      (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
+    </p>
   </div>
 </template>
 
 <script setup>
-  import { shallowRef, useTemplateRef } from 'vue'
+  import { onMounted, shallowRef, useTemplateRef } from 'vue'
 
   const marker = useTemplateRef('marker')
   const active = shallowRef(false)
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
-    <path id="west" aria-label="West" fill="#607d8b" d="M30 80L190 30L230 160L150 280L30 220Z" />
-    <path id="central" aria-label="Central" fill="#78909c" d="M190 30L390 40L420 200L300 290L150 280L230 160Z" />
-    <path id="east" aria-label="East" fill="#90a4ae" d="M390 40L560 90L570 250L420 200Z" />
-  </svg>`
+  const svg = shallowRef()
+  const error = shallowRef('')
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('https://cdn.jsdelivr.net/npm/@svg-maps/italy@2.0.0/italy.svg')
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      svg.value = await response.text()
+    } catch {
+      error.value = 'Could not load the map from jsDelivr.'
+    }
+  })
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 // Utilities
-import { shallowRef, toRef, watch } from 'vue'
+import { computed, shallowRef, toRef, watch } from 'vue'
 
 // Types
 import type { MaybeRefOrGetter, Ref } from 'vue'
@@ -8,14 +8,14 @@ import type { MapRegion } from './svg'
 const WIDE_CONE = Math.tan(75 * Math.PI / 180)
 
 export function useMapFocus (
-  props: { disabled: boolean },
   element: Ref<SVGSVGElement | undefined>,
   regions: MaybeRefOrGetter<MapRegion[]>,
   reveal: (region: SVGGraphicsElement) => void,
 ) {
   const focused = shallowRef<string>()
   const items = toRef(regions)
-  const tabStop = toRef(() => items.value.some(region => region.id === focused.value) ? focused.value : items.value[0]?.id)
+  // computed, not toRef: read once per region on every map render
+  const tabStop = computed(() => items.value.some(region => region.id === focused.value) ? focused.value : items.value[0]?.id)
   watch(items, () => { focused.value = undefined })
 
   function regionElement (target: EventTarget | null) {
@@ -25,13 +25,12 @@ export function useMapFocus (
 
   function onFocus (event: FocusEvent) {
     const region = regionElement(event.target)
-    if (!region || props.disabled) return
+    if (!region) return
     focused.value = region.getAttribute('data-v-map-region')!
     if (region.matches(':focus-visible')) reveal(region)
   }
 
   function onKeydown (event: KeyboardEvent) {
-    if (props.disabled || event.altKey || event.ctrlKey || event.metaKey) return
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return
     const current = regionElement(event.target)
     if (!current) return
@@ -40,7 +39,7 @@ export function useMapFocus (
     if (event.key === 'Home' || event.key === 'End') {
       next = event.key === 'Home' ? candidates[0] : candidates.at(-1)
     } else {
-      // inscribed circles ignore real borders, e.g. Minnesota → Michigan across Lake Superior
+      // inscribed circles stand in for borders, so regions across water or gaps still connect
       const rectangle = current.getBoundingClientRect()
       const radius = Math.min(rectangle.width, rectangle.height) / 2
       const horizontal = ['ArrowLeft', 'ArrowRight'].includes(event.key)
@@ -56,8 +55,7 @@ export function useMapFocus (
         if (forward <= 0 || perpendicular > forward * WIDE_CONE) return []
         return [{ candidate, distance: gap + perpendicular, narrow: !gap || forward > perpendicular }]
       })
-      // 90° cone across gaps, 150° for touching circles or when the narrow cone is empty:
-      // a half-plane lets ← from Nebraska hit South Dakota, a 90° cone alone strands the Canary Islands
+      // 90° cone across gaps, 150° for touching circles or when the 90° cone is empty
       const pool = scored.some(item => item.narrow) ? scored.filter(item => item.narrow) : scored
       next = pool.sort((a, b) => a.distance - b.distance)[0]?.candidate
     }

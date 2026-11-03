@@ -1,17 +1,39 @@
 <template>
-  <v-map :svg="svg" label="Regional offices">
-    <template v-slot:tooltip="{ id, title }">
-      <strong>{{ title }}</strong>
-      <div>{{ offices[id] }} offices</div>
-    </template>
-  </v-map>
+  <div>
+    <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
+    <v-map :regions="regions" :svg="svg" label="Mexican offices">
+      <template v-slot:tooltip="{ region }">
+        <strong>{{ region.title }}</strong>
+        <div>{{ region.offices ?? 'No' }} offices</div>
+      </template>
+    </v-map>
+    <p class="mt-3 text-label-small text-medium-emphasis">
+      Map by <a href="https://mapsvg.com/maps/mexico" rel="noopener" target="_blank">MapSVG</a>,
+      adapted by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/mexico" rel="noopener" target="_blank">SVG Maps</a>
+      (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
+    </p>
+  </div>
 </template>
 
 <script setup>
-  const offices = { west: 12, central: 8, east: 5 }
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 320">
-    <path id="west" aria-label="West" fill="#607d8b" d="M30 80L190 30L230 160L150 280L30 220Z" />
-    <path id="central" aria-label="Central" fill="#78909c" d="M190 30L390 40L420 200L300 290L150 280L230 160Z" />
-    <path id="east" aria-label="East" fill="#90a4ae" d="M390 40L560 90L570 250L420 200Z" />
-  </svg>`
+  import { onMounted, shallowRef } from 'vue'
+
+  const svg = shallowRef()
+  const error = shallowRef('')
+  const regions = {
+    cmx: { offices: 12 },
+    jal: { offices: 8 },
+    nle: { offices: 5 },
+    yuc: { offices: 3 },
+  }
+
+  onMounted(async () => {
+    try {
+      const response = await fetch('https://cdn.jsdelivr.net/npm/@svg-maps/mexico@2.0.0/mexico.svg')
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      svg.value = await response.text()
+    } catch {
+      error.value = 'Could not load the map from jsDelivr.'
+    }
+  })
 </script>

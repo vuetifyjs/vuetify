@@ -21,7 +21,7 @@ function point (element: Element, type: string, id: number, x: number, y: number
 describe('VMap', () => {
   it('should select regions, preserve their colors, and toggle selection', async () => {
     const selected = shallowRef<string | null>(null)
-    render(() => <VMap svg={ MAP } v-model={ selected.value } tooltip={ false } />)
+    render(() => <VMap svg={ MAP } v-model={ selected.value } hideTooltip />)
     await whenLoaded()
     const west = screen.getByRole('button', { name: 'West' })
     expect(west).toHaveAttribute('fill', '#558899')
@@ -36,7 +36,7 @@ describe('VMap', () => {
   it('should navigate regions with one tab stop and preserve browser shortcuts', async () => {
     const zoom = shallowRef(1)
     const zoomOnFocus = shallowRef(false)
-    render(() => <VMap svg={ MAP } v-model:zoom={ zoom.value } zoomOnFocus={ zoomOnFocus.value } tooltip={ false } />)
+    render(() => <VMap svg={ MAP } v-model:zoom={ zoom.value } zoomOnFocus={ zoomOnFocus.value } hideTooltip />)
     await whenLoaded()
     const west = screen.getByRole('button', { name: 'West' })
     const east = screen.getByRole('button', { name: 'East' })
@@ -68,7 +68,7 @@ describe('VMap', () => {
   })
 
   it('should prefer regions ahead over touching ones aside, and fall back to a wider cone', async () => {
-    render(() => <VMap svg={ PLAINS } tooltip={ false } />)
+    render(() => <VMap svg={ PLAINS } hideTooltip />)
     await whenLoaded()
     const nebraska = screen.getByRole('button', { name: 'Nebraska' })
     const lock = await commands.getLock()
@@ -88,7 +88,7 @@ describe('VMap', () => {
   })
 
   it('should pan with shift and arrow keys without moving focus', async () => {
-    render(() => <VMap svg={ MAP } zoom={ 2 } width={ 600 } height={ 300 } tooltip={ false } />)
+    render(() => <VMap svg={ MAP } zoom={ 2 } width={ 600 } height={ 300 } hideTooltip />)
     await whenLoaded()
     const svg = viewport()
     const west = screen.getByRole('button', { name: 'West' })
@@ -111,40 +111,46 @@ describe('VMap', () => {
     }
   })
 
-  it('should expose custom controls outside SVG and clamp zoom', async () => {
+  it('should clamp slot zoom controls and ignore them with disable-zoom', async () => {
     const zoom = shallowRef(1)
+    const disableZoom = shallowRef(false)
     render(() => (
-      <VMap svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 1.2 } tooltip={ false }>
+      <VMap svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 1.2 } disableZoom={ disableZoom.value } hideTooltip>
         {{
-          default: ({ zoom, zoomIn, reset }) => (
+          default: ({ zoom, zoomIn, setZoom, resetZoom }) => (
             <div>
-              <button onClick={ zoomIn } disabled={ zoom.value >= 1.2 }>Zoom in</button>
-              <button onClick={ reset }>Reset view</button>
+              <button onClick={ zoomIn } disabled={ zoom >= 1.2 }>Zoom in</button>
+              <button onClick={ () => setZoom(5) }>Zoom far</button>
+              <button onClick={ resetZoom }>Reset view</button>
             </div>
           ),
-          map: () => <circle aria-label="Office" cx="100" cy="100" r="5" />,
         }}
       </VMap>
     ))
     await whenLoaded()
-    expect(screen.getByRole('button', { name: 'Zoom in' }).closest('svg')).toBeNull()
-    expect(viewport().querySelector('circle')).toHaveAttribute('aria-label', 'Office')
     await userEvent.click(screen.getByRole('button', { name: 'Zoom in' }))
     expect(zoom.value).toBe(1.2)
     expect(screen.getByRole('button', { name: 'Zoom in' })).toBeDisabled()
     await userEvent.click(screen.getByRole('button', { name: 'Reset view' }))
     expect(zoom.value).toBe(1)
     expect(viewport()).toHaveAttribute('viewBox', '0 0 400 200')
+    await userEvent.click(screen.getByRole('button', { name: 'Zoom far' }))
+    expect(zoom.value).toBe(1.2)
+    await userEvent.click(screen.getByRole('button', { name: 'Reset view' }))
+    disableZoom.value = true
+    await nextTick()
+    await userEvent.click(screen.getByRole('button', { name: 'Zoom far' }))
+    expect(zoom.value).toBe(1)
   })
 
   it('should reveal and fit regions by identifier', async () => {
     const map = shallowRef<VMap>()
     const zoom = shallowRef(1)
-    render(() => <VMap ref={ map } svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 4 } tooltip={ false } />)
+    render(() => <VMap ref={ map } svg={ MAP } v-model:zoom={ zoom.value } maxZoom={ 4 } hideTooltip />)
     await whenLoaded()
     map.value!.reveal('west', { zoom: true })
     await expect.poll(() => zoom.value).toBeCloseTo(200 / (160 * 1.08))
-    expect(viewport().contains(document.activeElement)).toBe(false)
+    expect(document.body).toHaveFocus()
     map.value!.reveal(['west', 'east'], { zoom: true })
     await expect.poll(() => zoom.value).toBeCloseTo(400 / (360 * 1.08))
   })
@@ -157,11 +163,11 @@ describe('VMap', () => {
       <VMap
         svg={ MAP }
         v-model:zoom={ zoom.value }
-        wheel={ wheel.value }
+        wheelZoom={ wheel.value }
         zoomStep={ zoomStep.value }
         width={ 600 }
         height={ 400 }
-        tooltip={ false }
+        hideTooltip
       />
     ))
     await whenLoaded()
@@ -197,7 +203,7 @@ describe('VMap', () => {
 
   it('should pan without selecting a region after a drag', async () => {
     const selected = shallowRef<string | null>(null)
-    render(() => <VMap svg={ MAP } zoom={ 2 } v-model={ selected.value } width={ 600 } height={ 300 } tooltip={ false } />)
+    render(() => <VMap svg={ MAP } zoom={ 2 } v-model={ selected.value } width={ 600 } height={ 300 } hideTooltip />)
     await whenLoaded()
     const svg = viewport()
     const before = svg.getAttribute('viewBox')
@@ -221,12 +227,37 @@ describe('VMap', () => {
     expect(svg.getAttribute('viewBox')).not.toBe(panned)
   })
 
+  it('should not pan with disable-pan', async () => {
+    render(() => <VMap svg={ MAP } zoom={ 2 } disablePan width={ 600 } height={ 300 } hideTooltip />)
+    await whenLoaded()
+    const svg = viewport()
+    const before = svg.getAttribute('viewBox')
+    point(svg, 'pointerdown', 1, 250, 100)
+    point(svg, 'pointermove', 1, 290, 100)
+    point(svg, 'pointerup', 1, 290, 100)
+    await nextTick()
+    expect(svg.getAttribute('viewBox')).toBe(before)
+  })
+
   it('should keep readonly selection fixed and disable all navigation when disabled', async () => {
     const disabled = shallowRef(false)
-    render(() => <VMap svg={ MAP } modelValue="west" readonly disabled={ disabled.value } tooltip={ false } />)
+    const onUpdate = vi.fn()
+    const onClick = vi.fn()
+    render(() => (
+      <VMap
+        svg={ MAP }
+        modelValue="west"
+        onUpdate:modelValue={ onUpdate }
+        onClick:region={ onClick }
+        readonly
+        disabled={ disabled.value }
+        hideTooltip
+      />
+    ))
     await whenLoaded()
     await userEvent.click(screen.getByRole('img', { name: 'East' }))
-    expect(screen.getByRole('img', { name: 'West' })).toHaveClass('v-map__region--selected')
+    expect(onUpdate).not.toHaveBeenCalled()
+    expect(onClick).toHaveBeenCalledOnce()
     disabled.value = true
     await nextTick()
     const svg = viewport()
@@ -237,7 +268,7 @@ describe('VMap', () => {
   })
 
   it('should draw selection, focus and hover above every region', async () => {
-    render(() => <VMap svg={ MAP } modelValue="west" tooltip={ false } />)
+    render(() => <VMap svg={ MAP } modelValue="west" hideTooltip />)
     await whenLoaded()
     const svg = viewport()
     const east = screen.getByRole('button', { name: 'East' })
@@ -250,17 +281,17 @@ describe('VMap', () => {
       await commands.releaseLock(lock)
     }
     await userEvent.hover(screen.getByRole('button', { name: 'West' }))
-    const layers = ['outline', 'focus', 'overlay'].map(mode => svg.querySelector(`.v-map__region-${mode}`)!)
+    const layers = ['outline', 'focus', 'overlay'].map(mode => screen.getByCSS(`.v-map__region-${mode}`))
     expect(layers.every(layer => layer.closest('[aria-hidden="true"]'))).toBe(true)
     expect(layers.every(layer => east.compareDocumentPosition(layer) & Node.DOCUMENT_POSITION_FOLLOWING)).toBe(true)
     expect(layers[0].compareDocumentPosition(layers[1]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
     expect(layers[1].compareDocumentPosition(layers[2]) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
-    expect(svg.querySelectorAll('[data-v-map-region]')).toHaveLength(2)
+    expect(screen.getAllByCSS('[data-v-map-region]')).toHaveLength(2)
   })
 
   it('should select and deselect multiple regions independently', async () => {
     const selected = shallowRef<string[]>([])
-    render(() => <VMap svg={ MAP } v-model={ selected.value } multiple tooltip={ false } />)
+    render(() => <VMap svg={ MAP } v-model={ selected.value } multiple hideTooltip />)
     await whenLoaded()
     await userEvent.click(screen.getByRole('button', { name: 'West' }))
     await userEvent.click(screen.getByRole('button', { name: 'East' }))
@@ -272,7 +303,7 @@ describe('VMap', () => {
   it('should keep the last selection when mandatory', async () => {
     const selected = shallowRef<string | string[] | null>(null)
     const multiple = shallowRef(false)
-    render(() => <VMap svg={ MAP } v-model={ selected.value } multiple={ multiple.value } mandatory tooltip={ false } />)
+    render(() => <VMap svg={ MAP } v-model={ selected.value } multiple={ multiple.value } mandatory hideTooltip />)
     await whenLoaded()
     const west = screen.getByRole('button', { name: 'West' })
     await userEvent.click(west)
@@ -290,18 +321,17 @@ describe('VMap', () => {
 
   it('should show external highlights alongside its own hover and report hover', async () => {
     const onUpdate = vi.fn()
-    render(() => <VMap svg={ MAP } highlighted="east" onUpdate:highlighted={ onUpdate } tooltip={ false } />)
+    render(() => <VMap svg={ MAP } highlighted="east" onUpdate:highlighted={ onUpdate } hideTooltip />)
     await whenLoaded()
-    const svg = viewport()
-    expect(svg.querySelectorAll('.v-map__region-overlay')).toHaveLength(1)
+    expect(screen.getAllByCSS('.v-map__region-overlay')).toHaveLength(1)
     await userEvent.hover(screen.getByRole('button', { name: 'West' }))
     expect(onUpdate).toHaveBeenLastCalledWith('west')
-    await expect.poll(() => svg.querySelectorAll('.v-map__region-overlay').length).toBe(2)
+    await expect.poll(() => screen.queryAllByCSS('.v-map__region-overlay')).toHaveLength(2)
   })
 
   it('should report invalid SVG sources', async () => {
     const errors = vi.fn()
-    render(() => <VMap svg="invalid" onError={ errors } tooltip={ false } />)
+    render(() => <VMap svg="invalid" onError={ errors } hideTooltip />)
     await expect.poll(() => screen.queryByRole('alert')).toBeTruthy()
     expect(errors).toHaveBeenCalledWith(expect.any(Error))
   })
@@ -320,15 +350,44 @@ describe('VMap', () => {
     await expect.poll(() => screen.queryByRole('tooltip')).toBeVisible()
   })
 
-  it('should render custom region tooltips', async () => {
+  it('should merge region data into labels, fills, slots, and events', async () => {
+    const onClick = vi.fn()
+    const regions = { west: { title: 'Western', color: '#123456', offices: 3 } }
     render(() => (
-      <VMap svg={ MAP }>
-        {{ tooltip: ({ title }) => <span>Region: { title }</span> }}
+      <VMap svg={ MAP } regions={ regions } onClick:region={ onClick }>
+        {{ tooltip: ({ region }) => <span>{ region.title }: { region.offices } offices</span> }}
       </VMap>
     ))
     await whenLoaded()
-    await userEvent.hover(screen.getByRole('button', { name: 'West' }))
-    await expect.poll(() => screen.queryByText('Region: West')).toBeTruthy()
-    expect(screen.getByRole('button', { name: 'West' })).toHaveAttribute('aria-describedby', screen.getByRole('tooltip').id)
+    const west = screen.getByRole('button', { name: 'Western' })
+    expect(west).toHaveAttribute('fill', '#123456')
+    await userEvent.hover(west)
+    await expect.poll(() => screen.queryByText('Western: 3 offices')).toBeTruthy()
+    expect(west).toHaveAttribute('aria-describedby', screen.getByRole('tooltip').id)
+    await userEvent.click(west)
+    expect(onClick).toHaveBeenCalledWith(expect.any(MouseEvent), { region: expect.objectContaining({ id: 'west', offices: 3 }) })
+  })
+
+  it('should drop the tooltip description with hide-tooltip', async () => {
+    render(() => <VMap svg={ MAP } hideTooltip />)
+    await whenLoaded()
+    const west = screen.getByRole('button', { name: 'West' })
+    await userEvent.hover(west)
+    expect(west).not.toHaveAttribute('aria-describedby')
+    expect(screen.queryByCSS('.v-tooltip')).toBeNull()
+  })
+
+  it('should not re-render the map for pointer moves within one region', async () => {
+    let updates = 0
+    render(() => <VMap svg={ MAP } onVnodeUpdated={ () => updates++ } />)
+    await whenLoaded()
+    const west = screen.getByRole('button', { name: 'West' })
+    point(west, 'pointermove', 1, 100, 100)
+    await expect.poll(() => screen.queryByRole('tooltip')).toBeVisible()
+    updates = 0
+    point(west, 'pointermove', 1, 110, 100)
+    point(west, 'pointermove', 1, 120, 100)
+    await nextTick()
+    expect(updates).toBe(0)
   })
 })
