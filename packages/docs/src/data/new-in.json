@@ -678,6 +678,7 @@
   "VSlideGroup": {
     "props": {
       "contentClass": "3.9.0",
+      "draggable": "4.4.0",
       "gap": "4.3.0",
       "padding": "4.3.0",
       "scrollDistance": "4.2.0",
@@ -692,7 +693,8 @@
       "slide": "4.2.0"
     },
     "examples": {
-      "misc-image-slider": "4.3.0"
+      "misc-image-slider": "4.3.0",
+      "prop-draggable": "4.4.0"
     }
   },
   "VSnackbar": {
