@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## October 2026 Update
+
+🖊️ John Leider • 📅 November 3rd, 2026
+
+Paladin and Vuetify0 1.3 shipped a day apart. Alerts can dismiss themselves, the v0 bundle got smaller under Vite 8, and the next design systems are lined up: Onyx alongside Emerald, plus Bootstrap 6, Ant Design, a Material Design 1 anniversary edition, and HeroUI... { .text-medium-emphasis }
+
+[Read More](/blog/october-2026-update/) { .text-end }
+
 ## Announcing Vuetify0 v1.3
 
 🖊️ John Leider • 📅 October 26th, 2026
