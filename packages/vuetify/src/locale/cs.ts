@@ -90,6 +90,9 @@ export default {
     less: 'Méně',
     more: 'Více',
   },
+  vPie: {
+    other: 'Ostatní',
+  },
   input: {
     clear: 'Vymazat {0}',
     prependAction: '{0} předřazená akce',

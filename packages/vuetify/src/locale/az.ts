@@ -90,6 +90,9 @@ export default {
     less: 'Az',
     more: 'Çox',
   },
+  vPie: {
+    other: 'Digər',
+  },
   input: {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',

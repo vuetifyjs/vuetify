@@ -90,6 +90,9 @@ export default {
     less: 'Mindre',
     more: 'Mer',
   },
+  vPie: {
+    other: 'Annet',
+  },
   input: {
     clear: 'Fjern {0}',
     prependAction: '{0} foranstilt handling',

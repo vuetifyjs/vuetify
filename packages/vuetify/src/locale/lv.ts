@@ -90,6 +90,9 @@ export default {
     less: 'Mazāk',
     more: 'Vairāk',
   },
+  vPie: {
+    other: 'Citi',
+  },
   input: {
     clear: 'Notīrīt {0}',
     prependAction: '{0} pievienota darbība sākumā',

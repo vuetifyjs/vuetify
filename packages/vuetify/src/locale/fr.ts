@@ -90,6 +90,9 @@ export default {
     less: 'Moins',
     more: 'Plus',
   },
+  vPie: {
+    other: 'Autres',
+  },
   input: {
     clear: 'Vider {0}',
     prependAction: '{0} action avant',

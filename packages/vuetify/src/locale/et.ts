@@ -90,6 +90,9 @@ export default {
     less: 'Vähem',
     more: 'Rohkem',
   },
+  vPie: {
+    other: 'Muu',
+  },
   input: {
     clear: 'Tühjenda {0}',
     prependAction: '{0} eelnev toiming',

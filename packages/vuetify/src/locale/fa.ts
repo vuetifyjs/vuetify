@@ -90,6 +90,9 @@ export default {
     less: 'کمتر',
     more: 'بیشتر',
   },
+  vPie: {
+    other: 'سایر',
+  },
   input: {
     clear: 'پاکسازی {0}',
     prependAction: '{0} اقدام پیشین',
