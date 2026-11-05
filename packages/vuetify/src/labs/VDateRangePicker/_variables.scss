@@ -1,4 +1,12 @@
+@use '../../components/VDatePicker/variables' as date-picker;
+
 $date-range-picker-divider-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $date-range-picker-footer-min-height: 52px !default;
 $date-range-picker-footer-padding: .5rem !default;
 $date-range-picker-footer-gap: .5rem !default;
+$date-range-picker-scrollable-height: 500px !default;
+$date-range-picker-scrollable-width: date-picker.$date-picker-width !default;
+$date-range-picker-weekdays-padding: 0 12px !default;
+$date-range-picker-month-title-padding: 16px 24px !default;
+$date-range-picker-month-title-font-size: .875rem !default;
+$date-range-picker-month-title-font-weight: 500 !default;
