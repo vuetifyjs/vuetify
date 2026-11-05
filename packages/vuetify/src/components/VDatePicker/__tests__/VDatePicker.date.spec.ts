@@ -73,4 +73,21 @@ describe('range selection with time zone', () => {
     btn2.click()
     expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-10-02T04:00:00.000Z'), new Date('2025-10-04T03:59:59.999Z')])
   })
+
+  it('should count the days in the header near ST/DST transition', async () => {
+    const { wrapper } = renderWithVModel(['2025-03-08', '2025-03-10'])
+
+    await expect(wrapper.findByText('3 selected')).resolves.toBeTruthy()
+  })
+
+  it('should count the days in the header near DST/ST transition', async () => {
+    const { wrapper } = renderWithVModel(['2025-11-01', '2025-11-01'])
+
+    const btn1 = await wrapper.findByText('1') as HTMLElement
+    btn1.click()
+    const btn2 = await wrapper.findByText('2') as HTMLElement
+    btn2.click()
+
+    await expect(wrapper.findByText('2 selected')).resolves.toBeTruthy()
+  })
 })
