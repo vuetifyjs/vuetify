@@ -54,6 +54,11 @@ export type VVideoSlots = {
 const allowedVariants = ['background', 'player'] as const
 type Variant = typeof allowedVariants[number]
 
+type WebkitVideoElement = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void
+  webkitSupportsFullscreen?: boolean
+}
+
 export const makeVVideoProps = propsFactory({
   aspectRatio: [String, Number],
   autoplay: Boolean,
@@ -333,6 +338,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       stopIdleTracking()
       document.body.removeEventListener('keydown', fullscreenExitShortcut)
       document.removeEventListener('fullscreenchange', onFullscreenExit)
+      videoRef.value?.removeEventListener('webkitendfullscreen', onVideoFullscreenExit)
     })
 
     function focusContainer () {
@@ -347,7 +353,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     async function toggleFullscreen () {
-      if (props.noFullscreen || !document.fullscreenEnabled) {
+      if (props.noFullscreen) return
+      if (!document.fullscreenEnabled) {
+        // iPhone has no Fullscreen API, only native fullscreen for the <video> element
+        enterVideoFullscreen()
         return
       }
       if (document.fullscreenElement) {
@@ -369,6 +378,24 @@ export const VVideo = genericComponent<VVideoSlots>()({
       fullscreen.value = false
       document.body.removeEventListener('keydown', fullscreenExitShortcut)
       document.removeEventListener('fullscreenchange', onFullscreenExit)
+    }
+
+    function enterVideoFullscreen () {
+      const video = videoRef.value as WebkitVideoElement | undefined
+      if (!video?.webkitEnterFullscreen || video.webkitSupportsFullscreen === false) return
+
+      video.addEventListener('webkitendfullscreen', onVideoFullscreenExit, { once: true })
+      try {
+        video.webkitEnterFullscreen()
+        fullscreen.value = true
+      } catch {
+        video.removeEventListener('webkitendfullscreen', onVideoFullscreenExit)
+      }
+    }
+
+    function onVideoFullscreenExit () {
+      fullscreen.value = false
+      focusContainer()
     }
 
     function onVideoClick (e: Event) {

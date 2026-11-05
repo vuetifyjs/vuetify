@@ -98,3 +98,36 @@ describe('VVideo controls inactivity', () => {
     wrapper.unmount()
   })
 })
+
+describe('VVideo fullscreen', () => {
+  beforeEach(() => {
+    vi.spyOn(HTMLMediaElement.prototype, 'play').mockResolvedValue()
+    vi.spyOn(HTMLMediaElement.prototype, 'pause').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    vi.mocked(HTMLMediaElement.prototype.play).mockRestore()
+    vi.mocked(HTMLMediaElement.prototype.pause).mockRestore()
+  })
+
+  it('should fall back to native video fullscreen when the Fullscreen API is unavailable', async () => {
+    expect(document.fullscreenEnabled).toBeFalsy()
+    const wrapper = mountVideo()
+    const video = wrapper.get('video').element as HTMLVideoElement & { webkitEnterFullscreen: () => void }
+    const webkitEnterFullscreen = vi.fn()
+    video.webkitEnterFullscreen = webkitEnterFullscreen
+    await wrapper.get('video').trigger('loadeddata')
+
+    await (wrapper.vm as any).toggleFullscreen()
+    expect(webkitEnterFullscreen).toHaveBeenCalledTimes(1)
+
+    video.dispatchEvent(new Event('webkitendfullscreen'))
+    await (wrapper.vm as any).toggleFullscreen()
+    expect(webkitEnterFullscreen).toHaveBeenCalledTimes(2)
+
+    await wrapper.setProps({ noFullscreen: true })
+    await (wrapper.vm as any).toggleFullscreen()
+    expect(webkitEnterFullscreen).toHaveBeenCalledTimes(2)
+    wrapper.unmount()
+  })
+})
