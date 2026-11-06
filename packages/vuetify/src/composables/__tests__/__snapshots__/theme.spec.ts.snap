@@ -53,6 +53,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -117,6 +118,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -181,6 +183,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
@@ -443,6 +446,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -507,6 +511,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -571,6 +576,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
@@ -838,6 +844,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -902,6 +909,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 0, 0, 0;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 0.87;
     --v-medium-emphasis-opacity: 0.6;
@@ -966,6 +974,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-theme-on-warning: 255,255,255;
     --v-border-color: 255, 255, 255;
     --v-border-opacity: 0.12;
+    --v-progress-linear-opacity: 0.12;
     --v-shadow-color: 0, 0, 0;
     --v-high-emphasis-opacity: 1;
     --v-medium-emphasis-opacity: 0.7;
