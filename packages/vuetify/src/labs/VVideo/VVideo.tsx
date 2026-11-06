@@ -26,7 +26,7 @@ import { MaybeTransition } from '@/composables/transition'
 import { getSeekStep, useMedia, usePlayhead } from '@/labs/composables/media'
 
 // Utilities
-import { onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
 import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -147,7 +147,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const fullscreen = shallowRef(false)
     const triggered = shallowRef(false)
+    const eagerTriggered = shallowRef(false)
     const loaded = shallowRef(false)
+    const metadataLoaded = shallowRef(false)
     const startAfterLoad = shallowRef(false)
 
     const { duration, buffered, waiting, play, seek, retry: reload } = useMedia(videoRef, props, {
@@ -156,6 +158,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       volume,
       error,
       onError: value => emit('error', value),
+      onLoaded: () => metadataLoaded.value = true,
     })
 
     const hasControls = toRef(() => props.variant === 'player' && !props.hideControls && props.controlsVariant !== 'hidden')
@@ -163,7 +166,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const state = toRef(() => error.value ? 'error'
       : loaded.value ? 'loaded'
-      : triggered.value || props.autoplay ? 'loading'
+      : triggered.value || props.autoplay || (eagerTriggered.value && !metadataLoaded.value) ? 'loading'
       : 'idle')
 
     const isHydrated = useHydration()
@@ -254,6 +257,12 @@ export const VVideo = genericComponent<VVideoSlots>()({
       emit('loaded', videoRef.value!)
     }
 
+    function onEmptied () {
+      loaded.value = false
+      metadataLoaded.value = false
+      stopIdleTracking()
+    }
+
     function retry () {
       if (state.value !== 'error') return
 
@@ -275,6 +284,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       triggered.value = true
       startAfterLoad.value = !startAfterLoad.value
+
+      nextTick(() => {
+        if (startAfterLoad.value) {
+          play()
+        } else {
+          videoRef.value?.pause()
+        }
+      })
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -325,7 +342,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(() => props.srcObject, v => v && (triggered.value = true))
 
-    watch(() => props.eager, v => v && (triggered.value = true), { immediate: true })
+    watch(() => props.eager, v => v && (eagerTriggered.value = true), { immediate: true })
 
     onMounted(() => {
       if (props.autoplay && !ssr) {
@@ -538,13 +555,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
               props.variant === 'background' ? [] : dimensionStyles.value,
             ]}
           >
-            { (props.eager || triggered.value) && (
+            { (triggered.value || eagerTriggered.value) && (
               <video
                 key="video-element"
                 class={[
                   'v-video__video',
                   roundedClasses.value,
                 ]}
+                preload="auto"
                 { ...omit(attrs, ['controlslist', 'class', 'style']) }
                 controlslist={ controlslist }
                 autoplay={ props.autoplay }
@@ -552,7 +570,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onLoadeddata }
-                onEmptied={ stopIdleTracking }
+                onEmptied={ onEmptied }
                 onClick={ onVideoClick }
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }
