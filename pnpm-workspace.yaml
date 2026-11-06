@@ -217,6 +217,8 @@ minimumReleaseAgeExclude:
   - playwright-core
   - vitest@4.1.11
   - '@vizzly-testing/vitest@0.1.1'
+  # Renovate security update: vue-i18n@11.4.14
+  - vue-i18n@11.4.14
 
 nodeLinker: hoisted
 
