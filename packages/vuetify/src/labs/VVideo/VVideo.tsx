@@ -355,7 +355,6 @@ export const VVideo = genericComponent<VVideoSlots>()({
     async function toggleFullscreen () {
       if (props.noFullscreen) return
       if (!document.fullscreenEnabled) {
-        // iPhone has no Fullscreen API, only native fullscreen for the <video> element
         enterVideoFullscreen()
         return
       }
@@ -384,13 +383,13 @@ export const VVideo = genericComponent<VVideoSlots>()({
       const video = videoRef.value as WebkitVideoElement | undefined
       if (!video?.webkitEnterFullscreen || video.webkitSupportsFullscreen === false) return
 
-      video.addEventListener('webkitendfullscreen', onVideoFullscreenExit, { once: true })
       try {
         video.webkitEnterFullscreen()
-        fullscreen.value = true
       } catch {
-        video.removeEventListener('webkitendfullscreen', onVideoFullscreenExit)
+        return
       }
+      video.addEventListener('webkitendfullscreen', onVideoFullscreenExit, { once: true })
+      fullscreen.value = true
     }
 
     function onVideoFullscreenExit () {
