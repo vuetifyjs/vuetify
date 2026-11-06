@@ -200,35 +200,40 @@ describe('VOverlay', () => {
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
   })
 
-  it('should block scroll once mounted inside a pending suspense', async () => {
-    document.documentElement.style.overflowY = 'scroll'
-
-    let resolveChild!: () => void
-    const childReady = new Promise<void>(resolve => resolveChild = resolve)
-    const AsyncChild = defineComponent({
-      async setup () {
-        await childReady
-        return () => <div />
-      },
+  describe('scroll strategy', () => {
+    afterEach(() => {
+      document.documentElement.style.overflowY = ''
     })
 
-    render(() => (
-      <Suspense>
-        <div>
-          <AsyncChild />
-          <VOverlay modelValue>
-            <div>Content</div>
-          </VOverlay>
-        </div>
-      </Suspense>
-    ), null, { ssr: true })
+    it('should block scroll once mounted inside a pending Suspense', async () => {
+      document.documentElement.style.overflowY = 'scroll'
 
-    await wait()
-    resolveChild()
+      let resolveChild!: () => void
+      const childReady = new Promise<void>(resolve => resolveChild = resolve)
+      const AsyncChild = defineComponent({
+        name: 'AsyncChild',
+        async setup () {
+          await childReady
+          return () => <div />
+        },
+      })
 
-    await expect.poll(() => document.documentElement.classList.contains('v-overlay-scroll-blocked')).toBe(true)
-    expect(screen.getByCSS('.v-overlay')).toHaveClass('v-overlay--scroll-blocked')
+      render(() => (
+        <Suspense>
+          <div>
+            <AsyncChild />
+            <VOverlay modelValue>
+              <div>Content</div>
+            </VOverlay>
+          </div>
+        </Suspense>
+      ))
 
-    document.documentElement.style.overflowY = ''
+      await wait()
+      resolveChild()
+
+      await expect.poll(() => document.documentElement.classList.contains('v-overlay-scroll-blocked')).toBe(true)
+      expect(screen.getByCSS('.v-overlay')).toHaveClass('v-overlay--scroll-blocked')
+    })
   })
 })
