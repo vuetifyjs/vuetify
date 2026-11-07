@@ -579,12 +579,18 @@
       "prop-value-format": "4.3.0"
     },
     "props": {
+      "appendInnerIcon": "4.4.0",
       "endThumbAriaLabel": "4.3.0",
+      "prependInnerIcon": "4.4.0",
       "size": "4.3.0",
       "startThumbAriaLabel": "4.3.0",
       "thumbGap": "4.3.0",
       "valueFormat": "4.3.0",
       "variant": "4.3.0"
+    },
+    "slots": {
+      "append-inner": "4.4.0",
+      "prepend-inner": "4.4.0"
     }
   },
   "VRating": {
