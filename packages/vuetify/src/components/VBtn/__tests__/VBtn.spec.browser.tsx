@@ -3,8 +3,8 @@ import { VBtn } from '../VBtn'
 import { VBtnToggle } from '@/components/VBtnToggle'
 
 // Utilities
-import { gridOn, render, screen, showcase, userEvent } from '@test'
-import { ref } from 'vue'
+import { commands, gridOn, render, screen, showcase, userEvent, waitAnimationFrame } from '@test'
+import { nextTick, ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Types
@@ -221,6 +221,58 @@ describe('VBtn', () => {
 
       variant.value = 'elevated'
       await expect.element(wrapper.element).not.toHaveClass('v-btn--variant-plain')
+    })
+  })
+
+  describe('transitions', () => {
+    beforeEach(() => commands.setReduceMotionDisabled())
+
+    afterEach(() => commands.setReduceMotionEnabled())
+
+    it('should not flash when enabled together with a color change', async () => {
+      const enabled = ref(false)
+      const { wrapper } = render(() => (
+        <VBtn
+          theme="dark"
+          variant="flat"
+          color={ enabled.value ? undefined : 'blue-lighten-2' }
+          disabled={ !enabled.value }
+        >
+          Button
+        </VBtn>
+      ))
+      const button = wrapper.element as HTMLElement
+      const overlay = button.querySelector('.v-btn__overlay')!
+      const context = document.createElement('canvas').getContext('2d')!
+
+      function toRgba (color: string) {
+        context.clearRect(0, 0, 1, 1)
+        context.fillStyle = color
+        context.fillRect(0, 0, 1, 1)
+        const [r, g, b, a] = context.getImageData(0, 0, 1, 1).data
+        return { r, g, b, a: a / 255 }
+      }
+
+      function brightness () {
+        const background = toRgba(getComputedStyle(button).backgroundColor)
+        const tint = toRgba(getComputedStyle(overlay).backgroundColor)
+        const alpha = tint.a * Number(getComputedStyle(overlay).opacity)
+        const blend = (from: number, to: number) => (from * (1 - alpha) + to * alpha) / 255
+        return 0.2126 * blend(background.r, tint.r) + 0.7152 * blend(background.g, tint.g) + 0.0722 * blend(background.b, tint.b)
+      }
+
+      const initial = brightness()
+      enabled.value = true
+      await nextTick()
+
+      const samples = []
+      const start = performance.now()
+      while (performance.now() - start < 300) {
+        samples.push(brightness())
+        await waitAnimationFrame()
+      }
+
+      expect(Math.max(...samples)).toBeLessThan(initial + 0.1)
     })
   })
 
