@@ -4,6 +4,7 @@
 
     <v-map
       ref="map"
+      v-model:center="center"
       v-model:zoom="zoom"
       :svg="svg"
       label="New Zealand counties"
@@ -28,10 +29,15 @@
       </v-card>
     </v-map>
 
-    <p class="mt-3 text-label-small text-medium-emphasis">
-      Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/new-zealand" rel="noopener" target="_blank">SVG Maps</a>
-      (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
-    </p>
+    <div class="d-flex flex-wrap justify-space-between ga-2 mt-3 text-label-small text-medium-emphasis">
+      <p>
+        Map by <a href="https://github.com/VictorCazanave/svg-maps/tree/master/packages/new-zealand" rel="noopener" target="_blank">SVG Maps</a>
+        (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener" target="_blank">CC BY 4.0</a>).
+      </p>
+      <p>
+        Center: {{ `${Math.round(center.x)}, ${Math.round(center.y)}` }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -40,10 +46,12 @@
   import { useHotkey } from 'vuetify'
 
   const initialZoom = 2
+  const initialCenter = { x: 438, y: 272 }
 
   const map = useTemplateRef('map')
   const active = shallowRef(false)
   const zoom = shallowRef(initialZoom)
+  const center = shallowRef(initialCenter)
   const svg = shallowRef()
   const error = shallowRef('')
 
@@ -57,7 +65,10 @@
 
   useHotkey(toRef(() => active.value ? '=/plus/shift+plus' : undefined), () => map.value?.zoomIn())
   useHotkey(toRef(() => active.value ? 'minus' : undefined), () => map.value?.zoomOut())
-  useHotkey(toRef(() => active.value ? '0' : undefined), () => zoom.value = initialZoom)
+  useHotkey(toRef(() => active.value ? '0' : undefined), () => {
+    zoom.value = initialZoom
+    center.value = initialCenter
+  })
 
   function onFocusout (event) {
     active.value = !!map.value?.$el.contains(event.relatedTarget)

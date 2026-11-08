@@ -31,8 +31,8 @@ export function useMapNavigation (
   element: Ref<SVGSVGElement | undefined>,
   bounds: MaybeRefOrGetter<MapViewBox | undefined>,
   zoom: Ref<number | string>,
+  center: Ref<MapPoint | null | undefined>,
 ) {
-  const center = shallowRef<MapPoint>()
   const dragging = shallowRef(false)
   const minimum = computed(() => Math.max(1, Number(props.minZoom)))
   const maximum = computed(() => Math.max(minimum.value, Number(props.maxZoom)))
@@ -264,8 +264,8 @@ export function useMapNavigation (
     origin = undefined
   }
 
-  watch(() => toValue(bounds), () => {
-    center.value = undefined
+  watch(() => toValue(bounds), (value, previous) => {
+    if (previous) center.value = undefined
     clearPointers()
   })
   watch(() => props.disabled || (props.disablePan && props.disableZoom), clearPointers)
