@@ -1,5 +1,5 @@
 // Utilities
-import { render, screen, userEvent, wait } from '@test'
+import { page, render, screen, userEvent, wait } from '@test'
 import { ref } from 'vue'
 import { VDataTableVirtual } from '..'
 
@@ -29,6 +29,24 @@ const VIRTUAL_ITEMS = Array.from({ length: 50 }, (_, i) => ({ id: String(i), nam
 const VIRTUAL_HEADERS = [{ title: 'Name', key: 'name' }]
 
 describe('VDataTableVirtual', () => {
+  it('should sort using the column initial order', async () => {
+    render(() => (
+      <VDataTableVirtual
+        headers={[
+          { title: 'Dessert', key: 'name' },
+          { title: 'Calories', key: 'calories', initialSortOrder: 'desc' },
+        ]}
+        items={ DESSERT_ITEMS }
+        height={ 500 }
+      />
+    ))
+
+    const calories = screen.getByRole('columnheader', { name: 'Calories' })
+    await userEvent.click(page.getByRole('columnheader', { name: 'Calories' }))
+    expect(calories).toHaveAttribute('aria-sort', 'descending')
+    expect(screen.getAllByCSS('tbody .v-data-table__tr td:nth-child(2)')[0]).toHaveTextContent('518')
+  })
+
   it('should render only visible items', async () => {
     const items = [...new Array(10)].reduce(curr => {
       curr.push(...DESSERT_ITEMS)

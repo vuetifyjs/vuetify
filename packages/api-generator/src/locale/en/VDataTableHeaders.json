@@ -2,7 +2,7 @@
   "description": "Used to define the headers for a `v-data-table`.",
   "props": {
     "color": "Applies a color to checkboxes, page size dropdown and sort badges in the table header.",
-    "sortIcon": "Icon used for unsorted columns. By default it uses either **sortAscIcon** or **sortDescIcon** depending on **initialSortOrder**, but can be customized to show a neutral icon instead.",
+    "sortIcon": "Icon used for unsorted columns. By default it uses either **sortAscIcon** or **sortDescIcon** depending on the header's **initialSortOrder**, falling back to the table's **initialSortOrder**. Can be customized to show a neutral icon instead.",
     "sortAscIcon": "Icon used for ascending sort button.",
     "sortDescIcon": "Icon used for descending sort button.",
     "sticky": "Deprecated, use `fixed-header` instead.",
@@ -11,7 +11,7 @@
     "fixedHeader": "Sticks the header to the top of the table.",
     "multiSort": "Shows sort priority badges and allows multiple selection on mobile.",
     "selectAllLabel": "Accessible label for the select-all checkbox. Accepts locale keys.",
-    "initialSortOrder": "Picks the sort icon shown on unsorted columns."
+    "initialSortOrder": "Picks the sort icon shown on unsorted columns. Can be overridden by **initialSortOrder** on individual headers."
   },
   "slots": {
     "[`column.${string}`]": "Slot for custom rendering of a column.",
