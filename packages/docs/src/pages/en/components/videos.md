@@ -121,13 +121,11 @@ Border radius for the video and controls can be controled separately if you pass
 
 The `v-video` component has several slots that allow you to customize the appearance and behavior of its items.
 
-<!--
 #### Sources
 
-Using the the **sources** slot you can make it possible to select different playback quality.
+Use the **sources** slot to provide several `<source>` elements in place of the single one created from **src** and **type**. The browser plays the first source it supports, so you can offer a modern format such as WebM with an MP4 fallback.
 
 <ExamplesExample file="v-video/slot-sources" />
--->
 
 #### Error
 
