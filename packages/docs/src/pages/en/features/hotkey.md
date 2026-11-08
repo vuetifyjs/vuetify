@@ -189,8 +189,34 @@ The hotkey string supports various modifiers and special keys:
 - Use `/` to separate alternative keys or combinations: `ctrl+k/ctrl+f`, `up/down`
 - Use `-` to create sequences: `ctrl+k-p` (Ctrl+K, then P) `ctrl+k/ctrl+f-p` (Ctrl+K or Ctrl+F, then P)
 - Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
+- Keys match the character the key types. When that character can't name a shortcut, the key's US QWERTY position is used instead: `ctrl+k` works on a Russian layout, `alt+k` with macOS Option, `ctrl+1` on AZERTY, and `shift+1` where Shift+1 types `!`
+
+- Put a [key code](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values) in brackets to match a key's position on any layout: `ctrl+[KeyS]`, `shift+[Equal]`. Use it for position-based controls such as WASD movement, or for hotkeys users record
 
 Check out [all possible keycodes](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code/code_values).
+
+## Recording hotkeys
+
+`useHotkeyRecorder` turns key presses in a focused element into a hotkey string. Bind its `onKeydown` and `onKeyup` handlers to the element and call `start`. While recording, `Enter` commits, `Escape` cancels, and `Backspace` removes the last step. Recorded keys don't trigger other hotkeys.
+
+```js
+const recorder = useHotkeyRecorder({
+  recordBy: 'code', // ctrl+[KeyS]; 'key' records the typed character instead
+  onRecord: keys => settings.saveHotkey = keys,
+})
+```
+
+```html
+<v-text-field
+  :model-value="settings.saveHotkey"
+  readonly
+  @focus="recorder.start"
+  @keydown="recorder.onKeydown"
+  @keyup="recorder.onKeyup"
+></v-text-field>
+```
+
+Set `maxSteps` above one to record sequences. A chord past the limit starts over, and `idleTimeout` commits after a pause. Some shortcuts, such as `Ctrl+W` and `Ctrl+T`, are kept by the browser and never reach the page.
 
 ## Manual cleanup
 
