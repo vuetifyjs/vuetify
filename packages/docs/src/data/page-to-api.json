@@ -128,6 +128,7 @@
   "components/locale-providers": ["VLocaleProvider"],
   "components/mask-inputs": ["VMaskInput"],
   "components/menus": ["VMenu"],
+  "components/navigation-buttons": ["VNavigationBtn"],
   "components/navigation-drawers": ["VNavigationDrawer"],
   "components/no-ssr": ["VNoSsr"],
   "components/month-pickers": ["VMonthPicker"],
