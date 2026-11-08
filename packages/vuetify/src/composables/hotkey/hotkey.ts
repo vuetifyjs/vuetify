@@ -63,6 +63,9 @@ export function useHotkey (
   }
 
   function handler (e: KeyboardEvent) {
+    // a modifier press must not reset a sequence; Safari sends the IME commit Enter with keyCode 229
+    if (e.isComposing || e.keyCode === 229 || ['Control', 'Shift', 'Alt', 'AltGraph', 'Meta'].includes(e.key)) return
+
     const group = keyGroups[groupIndex]
 
     if (!group || isInputFocused()) return
