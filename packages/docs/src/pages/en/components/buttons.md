@@ -190,7 +190,7 @@ In this example we utilize multiple different button variants and styles to crea
 
 ### Survey group
 
-In addition to [Button groups](/components/button-groups/), the `v-btn` component cant hook into a [v-item-group](/components/item-groups/) using a special symbol. In the next example we create a group of buttons that are used to select a survey answer and add custom **active** state styling.
+In addition to [Button groups](/components/button-groups/), the `v-btn` component can hook into a [v-item-group](/components/item-groups/) using a special symbol. In the next example we create a group of buttons that are used to select a survey answer and add custom **active** state styling.
 
 <ExamplesExample file="v-btn/misc-group-survey" hide-invert />
 
