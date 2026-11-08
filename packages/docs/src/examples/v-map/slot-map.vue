@@ -7,8 +7,27 @@
       label="Warehouse network"
     >
       <template v-slot:tooltip="{ region }">
-        <strong>{{ region.title }}</strong>
-        <div>{{ warehouses.filter(warehouse => warehouse.region === region.id).length || 'No' }} warehouses</div>
+        <div class="d-flex align-baseline ga-4">
+          <strong>{{ region.title }}</strong>
+          <span class="ms-auto text-caption opacity-60">Last 6 months</span>
+        </div>
+        <div
+          v-for="metric in metrics(region.id)"
+          :key="metric.label"
+          class="d-flex align-end ga-4 mt-1"
+        >
+          <div>
+            <div class="text-caption opacity-70">{{ metric.label }}</div>
+            <div class="font-weight-medium">{{ metric.format(metric.values.at(-1)) }}</div>
+          </div>
+          <div aria-hidden="true" class="region-sparkline ms-auto">
+            <span
+              v-for="(height, index) in bars(metric.values)"
+              :key="index"
+              :style="{ height: `${height}%` }"
+            ></span>
+          </div>
+        </div>
       </template>
 
       <template v-slot:map>
@@ -114,6 +133,33 @@
     { id: 'pmo', city: 'Palermo', region: 'sicily', x: 345, y: 627, status: 'degraded', orders: 41, capacity: 88 },
   ]
 
+  const unitFormat = new Intl.NumberFormat('en')
+  const costFormat = new Intl.NumberFormat('en', { style: 'currency', currency: 'EUR', notation: 'compact' })
+
+  function seeded (id) {
+    let seed = Math.abs([...id].reduce((hash, char) => hash * 31 + char.charCodeAt(0) | 0, 7)) % 2147483646 + 1
+    return () => (seed = seed * 16807 % 2147483647) / 2147483647
+  }
+
+  function series (random, base) {
+    let value = base
+    return Array.from({ length: 6 }, () => Math.round(value *= 0.85 + random() * 0.3))
+  }
+
+  function bars (values) {
+    const min = Math.min(...values)
+    const max = Math.max(...values)
+    return values.map(value => 20 + (value - min) / (max - min || 1) * 80)
+  }
+
+  function metrics (id) {
+    const random = seeded(id)
+    return [
+      { label: 'Units sold', values: series(random, 2000 + random() * 8000), format: value => unitFormat.format(value) },
+      { label: 'Operating costs', values: series(random, 20000 + random() * 60000), format: value => costFormat.format(value) },
+    ]
+  }
+
   const online = warehouses.filter(warehouse => warehouse.status !== 'down').length
 
   onMounted(async () => {
@@ -128,6 +174,24 @@
 </script>
 
 <style scoped>
+  .region-sparkline {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    height: 24px;
+  }
+
+  .region-sparkline > span {
+    width: 5px;
+    background: currentColor;
+    border-radius: 1px;
+    opacity: .5;
+  }
+
+  .region-sparkline > span:last-child {
+    opacity: 1;
+  }
+
   .warehouse-marker {
     cursor: pointer;
     outline: none;
