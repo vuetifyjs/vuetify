@@ -123,7 +123,7 @@ The `v-video` component has several slots that allow you to customize the appear
 
 #### Sources
 
-Use the **sources** slot to render your own `<source>` elements in place of the single one created from **src** and **type**. List more than one to offer several formats, for example WebM with an MP4 fallback. The browser plays the first source it supports.
+Use the **sources** slot to render your own `<source>` elements in place of the single one created from **src** and **type**. List more than one to offer several formats, for example WebM with an MP4 fallback. The browser plays the first source it supports: in the example below, browsers can't play the WMV file, so they skip it without downloading it and play the MP4.
 
 <ExamplesExample file="v-video/slot-sources" />
 
