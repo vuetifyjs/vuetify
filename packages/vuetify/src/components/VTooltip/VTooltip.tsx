@@ -113,14 +113,13 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           style={[
             props.style,
           ]}
-          id={ id.value }
           { ...overlayProps }
           contentClass={[
             colorClasses.value,
             props.contentClass,
           ]}
           contentProps={ mergeProps(
-            { style: [colorStyles.value] },
+            { style: [colorStyles.value], id: id.value, role: 'tooltip' },
             props.contentProps,
           )}
           v-model={ isActive.value }
@@ -128,7 +127,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           absolute
           location={ location.value }
           origin={ origin.value }
-          role="tooltip"
           activatorProps={ activatorProps.value }
           _disableGlobalStack
           onClick:outside={ e => emit('click:outside', e) }
