@@ -88,7 +88,7 @@ export const makeVMapProps = propsFactory({
   wheelZoom: Boolean,
   hideTooltip: Boolean,
   disabled: Boolean,
-  'onClick:region': EventProp<[MouseEvent | KeyboardEvent, { region: MapRegionItem }]>(),
+  'onClick:region': EventProp<[MouseEvent | KeyboardEvent, { region: MapRegionItem, reveal: VMapSlots['default']['reveal'] }]>(),
   ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'VMap')
@@ -101,7 +101,7 @@ export const VMap = genericComponent<VMapSlots>()({
   emits: {
     'update:modelValue': (value: string | readonly string[] | null) => true,
     'update:zoom': (value: number) => true,
-    'click:region': (event: MouseEvent | KeyboardEvent, value: { region: MapRegionItem }) => true,
+    'click:region': (event: MouseEvent | KeyboardEvent, value: { region: MapRegionItem, reveal: VMapSlots['default']['reveal'] }) => true,
     'update:highlighted': (value: string | readonly string[] | null) => true,
     load: (regions: MapRegion[]) => true,
     error: (value: Error) => true,
@@ -226,7 +226,7 @@ export const VMap = genericComponent<VMapSlots>()({
           selected.value = [...selection.value, region.id]
         }
       }
-      emit('click:region', event, { region })
+      emit('click:region', event, { region, reveal })
     }
 
     function onKeydown (event: KeyboardEvent) {

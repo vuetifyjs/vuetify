@@ -30,7 +30,7 @@
     "tooltip": "Custom tooltip content. Receives the `region`, including fields from **regions**, and its selection state."
   },
   "events": {
-    "click:region": "Emitted with the originating mouse or keyboard event and `{ region }` when a region is activated.",
+    "click:region": "Emitted when region is clicked.",
     "error": "Emitted when parsing the SVG fails.",
     "load": "Emitted with the regions found in the SVG after it has been parsed.",
     "update:highlighted": "Emitted with the region identifier under the pointer or keyboard focus, or null when it leaves.",

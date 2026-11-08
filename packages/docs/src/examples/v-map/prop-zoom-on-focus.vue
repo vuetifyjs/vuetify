@@ -1,9 +1,14 @@
 <template>
   <div>
-    <v-switch v-model="fit" label="Fit the focused region" hide-details></v-switch>
+    <v-switch
+      v-model="fit"
+      color="primary"
+      label="Fit the focused region"
+      hide-details
+    ></v-switch>
 
     <p class="mb-3 text-body-medium">
-      Tab into the map, then use the arrow keys to move between states.
+      Click a state, or tab into the map and use the arrow keys to move between states.
     </p>
 
     <v-alert v-if="error" :text="error" type="error" variant="tonal"></v-alert>
@@ -14,6 +19,7 @@
       :svg="svg"
       :zoom-on-focus="fit"
       label="Brazilian states"
+      @click:region="(_, { region, reveal }) => reveal(region.id)"
     ></v-map>
 
     <p class="mt-3 text-body-small">Zoom: {{ zoom.toFixed(2) }}×</p>
