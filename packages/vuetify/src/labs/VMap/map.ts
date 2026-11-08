@@ -22,22 +22,25 @@ interface MapNavigationProps {
   wheelZoom: boolean
   zoomStep: number
   zoomOnFocus: boolean
-  minZoom: number
-  maxZoom: number
+  minZoom: number | string
+  maxZoom: number | string
 }
 
 export function useMapNavigation (
   props: MapNavigationProps,
   element: Ref<SVGSVGElement | undefined>,
   bounds: MaybeRefOrGetter<MapViewBox | undefined>,
-  zoom: Ref<number>,
+  zoom: Ref<number | string>,
 ) {
   const center = shallowRef<MapPoint>()
   const dragging = shallowRef(false)
-  const minimum = computed(() => Math.max(1, props.minZoom))
-  const maximum = computed(() => Math.max(minimum.value, props.maxZoom))
+  const minimum = computed(() => Math.max(1, Number(props.minZoom)))
+  const maximum = computed(() => Math.max(minimum.value, Number(props.maxZoom)))
   // v-model:zoom can be bound to an emptied number field
-  const scale = computed(() => clamp(Number.isFinite(zoom.value) ? zoom.value : 1, minimum.value, maximum.value))
+  const scale = computed(() => {
+    const value = Number(zoom.value)
+    return clamp(Number.isFinite(value) ? value : 1, minimum.value, maximum.value)
+  })
   const step = computed(() => 1 + Math.max(0.01, props.zoomStep))
   const sensitivity = computed(() => Math.log(step.value) / Math.log1p(NATURAL_PINCH_STEP))
   const viewBox = computed(() => {
