@@ -72,8 +72,10 @@ export function useHotkey (
     if (!group || isInputFocused()) return
 
     if (!matchesKeyGroup(e, group, isMac)) {
-      if (isSequence) resetSequence()
-      return
+      if (!isSequence) return
+      const restart = groupIndex > 0 && matchesKeyGroup(e, keyGroups[0], isMac)
+      resetSequence()
+      if (!restart) return
     }
 
     if (toValue(preventDefault)) e.preventDefault()
