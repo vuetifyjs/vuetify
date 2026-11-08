@@ -160,15 +160,17 @@ $_fade: $navigation-btn-text-transition-duration $navigation-btn-text-transition
 
   .v-navigation-btn--stacked.v-navigation-btn--labels-none,
   .v-navigation-btn--stacked.v-navigation-btn--labels-selected:not(.v-navigation-btn--active)
-    grid-template-rows: 0fr
-    padding-bottom: calc(#{$navigation-btn-stacked-padding-block} - #{$navigation-btn-stacked-icon-text-gap})
-
     .v-navigation-btn__label
       opacity: 0
       visibility: hidden
       transition: opacity $_fade, visibility 0s $navigation-btn-text-transition-duration
 
+  // Keeps the row height; the icon sits centered where the label would be.
+  .v-navigation-btn--stacked.v-navigation-btn--labels-selected:not(.v-navigation-btn--active) .v-navigation-btn__pill
+    top: calc(50% - #{$navigation-btn-stacked-padding-block} - #{$navigation-btn-stacked-indicator-height} / 2)
+
   .v-navigation-btn--stacked.v-navigation-btn--labels-none
+    grid-template-rows: 0fr
     padding-block: $navigation-btn-stacked-unlabeled-indicator-height 0
 
     .v-navigation-btn__indicator,
@@ -197,9 +199,6 @@ $_fade: $navigation-btn-text-transition-duration $navigation-btn-text-transition
     &.v-navigation-btn--stacked .v-navigation-btn__pill
       width: $navigation-btn-stacked-indicator-width
       padding: 0
-
-    &.v-navigation-btn--stacked.v-navigation-btn--labels-selected:not(.v-navigation-btn--active) .v-navigation-btn__pill
-      top: calc(50% - #{$navigation-btn-stacked-padding-block} - #{$navigation-btn-stacked-indicator-height} / 2)
 
     &.v-navigation-btn--stacked.v-navigation-btn--labels-none .v-navigation-btn__pill
       top: calc(50% - #{$navigation-btn-stacked-unlabeled-indicator-height} / 2)
