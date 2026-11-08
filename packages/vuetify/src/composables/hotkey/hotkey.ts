@@ -17,6 +17,7 @@ function isModifier (key: string): key is Modifier {
 }
 const emptyModifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<Modifier, boolean>
 
+export const APPLE_PLATFORM = /mac|iphone|ipad|ipod/i
 const TEXT_INPUT_TYPES = new Set([
   'text', 'search', 'email', 'password', 'tel', 'url', 'number',
   'date', 'datetime-local', 'month', 'time', 'week',
@@ -56,7 +57,7 @@ export function useHotkey (
     sequenceTimeout = 1000,
   } = options
 
-  const isMac = navigator?.userAgent?.includes('Macintosh') ?? false
+  const isMac = APPLE_PLATFORM.test(navigator?.userAgent ?? '')
   let timeout = 0
   let keyGroups: (Exclude<KeyCombination, Sequence>)[]
   let isSequence = false

@@ -38,6 +38,7 @@ import { VKbd } from '@/components/VKbd'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { APPLE_PLATFORM } from '@/composables/hotkey/hotkey'
 import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -244,7 +245,7 @@ export const VHotkey = genericComponent()({
 
     const isMac = computed(() =>
       props.platform === 'auto'
-        ? (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
+        ? (typeof navigator !== 'undefined' && APPLE_PLATFORM.test(navigator.userAgent))
         : props.platform === 'mac'
     )
 
