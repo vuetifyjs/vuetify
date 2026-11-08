@@ -17,6 +17,24 @@ function isModifier (key: string): key is Modifier {
 }
 const emptyModifiers = Object.fromEntries(MODIFIERS.map(m => [m, false])) as Record<Modifier, boolean>
 
+const TEXT_INPUT_TYPES = new Set([
+  'text', 'search', 'email', 'password', 'tel', 'url', 'number',
+  'date', 'datetime-local', 'month', 'time', 'week',
+])
+const CONTROL_KEYS = new Set([' ', 'Enter', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'])
+
+function isTextField (element: HTMLElement) {
+  if (element.tagName === 'INPUT') return TEXT_INPUT_TYPES.has((element as HTMLInputElement).type)
+
+  return (
+    element.tagName === 'TEXTAREA' ||
+    element.tagName === 'SELECT' ||
+    element.isContentEditable ||
+    element.contentEditable === 'true' ||
+    ['textbox', 'searchbox', 'combobox'].includes(element.getAttribute('role') ?? '')
+  )
+}
+
 interface HotkeyOptions {
   event?: MaybeRef<'keydown' | 'keyup'>
   inputs?: MaybeRef<boolean>
@@ -44,16 +62,16 @@ export function useHotkey (
   let isSequence = false
   let groupIndex = 0
 
-  function isInputFocused () {
-    if (toValue(inputs)) return false
+  function isInputFocused (e: KeyboardEvent) {
+    const activeElement = getActiveElement() as HTMLElement | null
+    if (toValue(inputs) || !activeElement) return false
+    if (isTextField(activeElement)) return true
 
-    const activeElement = getActiveElement() as HTMLElement
-
-    return activeElement && (
-      activeElement.tagName === 'INPUT' ||
-      activeElement.tagName === 'TEXTAREA' ||
-      activeElement.isContentEditable ||
-      activeElement.contentEditable === 'true'
+    // checkboxes, radios, ranges, spinbuttons and button inputs keep the keys they act on
+    return (
+      (activeElement.tagName === 'INPUT' || activeElement.getAttribute('role') === 'spinbutton') &&
+      !e.ctrlKey && !e.metaKey && !e.altKey &&
+      CONTROL_KEYS.has(e.key)
     )
   }
 
@@ -69,7 +87,7 @@ export function useHotkey (
 
     const group = keyGroups[groupIndex]
 
-    if (!group || isInputFocused()) return
+    if (!group || isInputFocused(e)) return
 
     if (!matchesKeyGroup(e, group, isMac)) {
       if (!isSequence) return
