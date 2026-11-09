@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: October 2026 Update
-  description: v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0.
+  description: v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, less JavaScript in Vite 8 builds, steadier SSR layouts, and design systems on the way.
   keywords: Vuetify October 2026, Vuetify v4.3.0, Paladin, Vuetify0, Vite 8, bundle size, SSR, Nuxt
 ---
 
@@ -63,6 +63,7 @@ Before we dig in, a big thank you to the companies that back Vuetify every singl
   * [Design systems](#design-systems)
 * [Play, MCP and Nuxt](#ecosystem)
 * [What's Next](#whats-next)
+
 ---
 
 ## Before you update { #before-you-update }
