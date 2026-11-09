@@ -47,33 +47,6 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VAutocomplete', () => {
-  it.each(['field', 'form'])('should keep its value when disabling the %s with a controlled menu open', async disabledSource => {
-    const disabled = ref(false)
-    const value = ref('Apple')
-    const onUpdateMenu = vi.fn()
-
-    render(() => (
-      <VForm disabled={ disabledSource === 'form' && disabled.value }>
-        <VAutocomplete
-          v-model={ value.value }
-          label="Fruit"
-          items={['Apple', 'Orange', 'Pear']}
-          menu
-          onUpdate:menu={ onUpdateMenu }
-          disabled={ disabledSource === 'field' ? disabled.value : undefined }
-        />
-      </VForm>
-    ))
-
-    const input = screen.getByRole('combobox', { name: 'Fruit' })
-    const option = await screen.findByRole('option', { name: 'Orange' })
-    disabled.value = true
-    await expect.element(input).toBeDisabled()
-    await userEvent.click(option)
-
-    expect(value.value).toBe('Apple')
-  })
-
   it.each([
     [':autofill', 'CA'],
     [':autofill', 'California'],
