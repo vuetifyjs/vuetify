@@ -260,7 +260,7 @@ We recommend using the latest version of Vuetify 4 from [jsdelivr](https://www.j
 
 `https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
 
-Rememeber to include additional script for Vue.js. See full example below:
+Remember to include additional script for Vue.js. See full example below:
 
 ```html
 <!DOCTYPE html>

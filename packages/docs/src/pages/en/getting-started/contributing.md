@@ -48,7 +48,7 @@ The Vuetify repository is a [lerna](https://github.com/lerna/lerna) monorepo tha
 
 ### Setting up your environment
 
-We recommend using [FNM](https://github.com/Schniz/fnm#installation) (with all four [options](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) enabled) to automatically set up and use the exect node and pnpm versions specified in package.json.
+We recommend using [FNM](https://github.com/Schniz/fnm#installation) (with all four [options](https://github.com/Schniz/fnm/blob/master/docs/configuration.md) enabled) to automatically set up and use the exact node and pnpm versions specified in package.json.
 
 Required software:
 
