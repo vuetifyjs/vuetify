@@ -289,7 +289,8 @@ export const VTimePickerClock = genericComponent()({
           aria-label={ t(`$vuetify.timePicker.${props.viewMode}`) }
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
-          aria-valuenow={ displayedValue.value }
+          aria-valuenow={ props.modelValue ?? undefined }
+          aria-valuetext={ props.modelValue == null ? undefined : props.format(props.modelValue) }
           aria-disabled={ props.disabled || undefined }
           aria-readonly={ props.readonly || undefined }
           class={[

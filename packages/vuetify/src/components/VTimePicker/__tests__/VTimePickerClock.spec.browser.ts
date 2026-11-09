@@ -128,4 +128,24 @@ describe('VTimePickerClock', () => {
       expect(onChange).not.toHaveBeenCalled()
     })
   })
+
+  it('should expose formatted value and omit it when empty', async () => {
+    const { rerender } = render(VTimePickerClock, {
+      props: {
+        min: 12,
+        max: 23,
+        modelValue: 15,
+        viewMode: 'hour',
+        format: (v: number) => v - 12,
+      },
+    })
+
+    const clock = screen.getByRole('spinbutton')
+    expect(clock).toHaveAttribute('aria-valuenow', '15')
+    expect(clock).toHaveAttribute('aria-valuetext', '3')
+
+    await rerender({ modelValue: undefined })
+    expect(clock).not.toHaveAttribute('aria-valuenow')
+    expect(clock).not.toHaveAttribute('aria-valuetext')
+  })
 })
