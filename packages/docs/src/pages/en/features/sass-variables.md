@@ -127,7 +127,7 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 ## Disabling utility classes
 
-Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selecively keeping only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selectively keep only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
