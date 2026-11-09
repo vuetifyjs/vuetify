@@ -40,7 +40,7 @@ describe('range selection with time zone', () => {
 
   afterEach(() => vi.unstubAllEnvs())
 
-  function renderWithVModel (initialValue: string[]) {
+  function renderWithVModel (initialValue: unknown[]) {
     const update = vi.fn()
     const modelValue = ref<readonly unknown[]>(initialValue)
     update.mockImplementation((v: unknown[]) => { modelValue.value = v })
@@ -75,19 +75,14 @@ describe('range selection with time zone', () => {
   })
 
   it('should count the days in the header near ST/DST transition', async () => {
-    const { wrapper } = renderWithVModel(['2025-03-08', '2025-03-10'])
+    renderWithVModel(['2025-03-08', '2025-03-10'])
 
-    await expect(wrapper.findByText('3 selected')).resolves.toBeTruthy()
+    expect(document.querySelector('.v-date-picker-header__content')?.textContent).toBe('3 selected')
   })
 
   it('should count the days in the header near DST/ST transition', async () => {
-    const { wrapper } = renderWithVModel(['2025-11-01', '2025-11-01'])
+    renderWithVModel([new Date(2025, 10, 1), new Date(2025, 10, 2, 23, 59, 59, 999)])
 
-    const btn1 = await wrapper.findByText('1') as HTMLElement
-    btn1.click()
-    const btn2 = await wrapper.findByText('2') as HTMLElement
-    btn2.click()
-
-    await expect(wrapper.findByText('2 selected')).resolves.toBeTruthy()
+    expect(document.querySelector('.v-date-picker-header__content')?.textContent).toBe('2 selected')
   })
 })
