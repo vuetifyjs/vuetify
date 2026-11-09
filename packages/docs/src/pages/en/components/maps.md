@@ -124,8 +124,6 @@ The default slot renders outside the SVG and receives `zoom`, its limits, and `s
 
 The `tooltip` slot receives the `region` with its **regions** fields. `Escape` hides the tooltip until another region is hovered or focused.
 
-<ExamplesExample file="v-map/slot-tooltip" />
-
 The `map` slot renders inside the SVG, in the map's own coordinates. Interactive content there needs its own labels and keyboard handling, and should stop pointer events so it does not select the region underneath or start a drag.
 
 <ExamplesExample file="v-map/slot-map" />

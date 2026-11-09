@@ -47,7 +47,7 @@ export function useScrollStrategies (
   watchEffect(async () => {
     scope?.stop()
 
-    if (!(data.isActive.value && props.scrollStrategy)) return
+    if (!(data.isActive.value && data.root.value && props.scrollStrategy)) return
 
     scope = effectScope()
     await new Promise(resolve => setTimeout(resolve))

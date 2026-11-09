@@ -371,6 +371,39 @@ describe.each([
     })
   })
 
+  describe('open', () => {
+    it('should apply value-comparator to initial opened', async () => {
+      const caseItems = [
+        {
+          title: 'Group A',
+          value: 'GROUP_A',
+          children: [
+            { title: 'Alpha', value: 'ALPHA' },
+          ],
+        },
+        {
+          title: 'Group B',
+          value: 'GROUP_B',
+          children: [
+            { title: 'Beta', value: 'BETA' },
+          ],
+        },
+      ]
+      const opened = ref<string[]>(['group_b'])
+
+      render(() => (
+        <VTreeview
+          v-model:opened={ opened.value }
+          items={ caseItems }
+          valueComparator={ (a: string, b: string) => a.toLowerCase() === b.toLowerCase() }
+          itemsRegistration={ itemsRegistration }
+        />
+      ))
+
+      await expect.element(screen.getByText('Beta')).toBeVisible()
+    })
+  })
+
   describe('return-object', () => {
     describe('open', () => {
       it('open and collapse should both work', async () => {

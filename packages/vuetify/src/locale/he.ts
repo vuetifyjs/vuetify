@@ -29,8 +29,8 @@ export default {
   dataFooter: {
     itemsPerPageText: 'פריטים לדף:',
     itemsPerPageAll: 'הכל',
-    nextPage: 'עמוד הבא',
-    prevPage: 'עמוד הקודם',
+    nextPage: 'העמוד הבא',
+    prevPage: 'העמוד הקודם',
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
     pageText: '{0}-{1} מתוך {2}',
@@ -117,12 +117,12 @@ export default {
   pagination: {
     ariaLabel: {
       root: 'ניווט עימוד',
-      next: 'עמוד הבא',
-      previous: 'עמוד הקודם',
-      page: '{0} לך לעמוד',
-      currentPage: '{0} עמוד נוכחי, עמוד',
-      first: 'First page',
-      last: 'Last page',
+      next: 'העמוד הבא',
+      previous: 'העמוד הקודם',
+      page: 'מעבר לעמוד {0}',
+      currentPage: 'עמוד {0}, עמוד נוכחי',
+      first: 'עמוד ראשון',
+      last: 'עמוד אחרון',
     },
   },
   stepper: {
