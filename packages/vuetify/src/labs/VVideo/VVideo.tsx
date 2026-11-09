@@ -13,10 +13,12 @@ import { VProgressCircular } from '@/components/VProgressCircular/VProgressCircu
 // Composables
 import { useDisplay } from '@/composables'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useElevation } from '@/composables/elevation'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useHydration } from '@/composables/hydration'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -24,7 +26,7 @@ import { MaybeTransition } from '@/composables/transition'
 import { getSeekStep, useMedia, usePlayhead } from '@/labs/composables/media'
 
 // Utilities
-import { onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, shallowRef, toRef, Transition, watch } from 'vue'
 import { createRange, genericComponent, omit, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -52,6 +54,11 @@ export type VVideoSlots = {
 const allowedVariants = ['background', 'player'] as const
 type Variant = typeof allowedVariants[number]
 
+type WebkitVideoElement = HTMLVideoElement & {
+  webkitEnterFullscreen?: () => void
+  webkitSupportsFullscreen?: boolean
+}
+
 export const makeVVideoProps = propsFactory({
   aspectRatio: [String, Number],
   autoplay: Boolean,
@@ -78,6 +85,11 @@ export const makeVVideoProps = propsFactory({
   controlsVariant: {
     type: String as PropType<VVideoControlsVariant>,
     default: 'default',
+  },
+  controlsHideDelay: {
+    type: Number,
+    default: 2000,
+    validator: (value: number) => Number.isFinite(value) && value >= 0,
   },
   controlsProps: {
     type: Object as PropType<VVideoControls['$props']>,
@@ -135,7 +147,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const fullscreen = shallowRef(false)
     const triggered = shallowRef(false)
+    const eagerTriggered = shallowRef(false)
     const loaded = shallowRef(false)
+    const metadataLoaded = shallowRef(false)
     const startAfterLoad = shallowRef(false)
 
     const { duration, buffered, waiting, play, seek, retry: reload } = useMedia(videoRef, props, {
@@ -144,6 +158,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
       volume,
       error,
       onError: value => emit('error', value),
+      onLoaded: () => metadataLoaded.value = true,
     })
 
     const hasControls = toRef(() => props.variant === 'player' && !props.hideControls && props.controlsVariant !== 'hidden')
@@ -151,8 +166,86 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     const state = toRef(() => error.value ? 'error'
       : loaded.value ? 'loaded'
-      : triggered.value || props.autoplay ? 'loading'
+      : triggered.value || props.autoplay || (eagerTriggered.value && !metadataLoaded.value) ? 'loading'
       : 'idle')
+
+    const isHydrated = useHydration()
+    const controlsIdle = shallowRef(false)
+    const controlsPointer = shallowRef<number>()
+    const controlsAutoHide = toRef(() => hasControls.value &&
+      !(props.controlsProps?.detached ?? props.detached) &&
+      Number.isFinite(props.controlsHideDelay) && props.controlsHideDelay > 0)
+    const controlsClasses = toRef(() => ({
+      'v-video--controls-auto-hide': controlsAutoHide.value,
+      'v-video--controls-idle': controlsAutoHide.value && controlsIdle.value,
+      'v-video--controls-interacting': controlsAutoHide.value && controlsPointer.value !== undefined,
+    }))
+
+    provideDefaults({
+      VTooltip: {
+        disabled: toRef(() => (controlsAutoHide.value && controlsIdle.value) || undefined),
+      },
+    })
+
+    let controlsTimer: ReturnType<typeof setTimeout> | undefined
+    let controlsDocument: Document | undefined
+    let wakeTap = false
+
+    function releaseControlsPointer () {
+      controlsDocument?.removeEventListener('pointerup', onControlsPointerRelease, true)
+      controlsDocument?.removeEventListener('pointercancel', onControlsPointerRelease, true)
+      controlsDocument = undefined
+      controlsPointer.value = undefined
+    }
+
+    function stopIdleTracking () {
+      clearTimeout(controlsTimer)
+      controlsTimer = undefined
+      controlsIdle.value = false
+      releaseControlsPointer()
+    }
+
+    function canHideControls () {
+      return isHydrated.value && controlsAutoHide.value && state.value === 'loaded' && playing.value &&
+        !waiting.value && !error.value && controlsPointer.value === undefined
+    }
+
+    function onControlsActivity () {
+      clearTimeout(controlsTimer)
+      controlsTimer = undefined
+      controlsIdle.value = false
+
+      if (!controlsAutoHide.value) {
+        releaseControlsPointer()
+      } else if (canHideControls()) {
+        controlsTimer = setTimeout(() => {
+          controlsTimer = undefined
+          if (canHideControls()) controlsIdle.value = true
+        }, props.controlsHideDelay)
+      }
+    }
+
+    function onControlsPointerDown (e: PointerEvent) {
+      wakeTap = controlsIdle.value && e.pointerType !== 'mouse'
+      if (!controlsAutoHide.value || e.button !== 0 || !e.isPrimary) return
+
+      releaseControlsPointer()
+      controlsPointer.value = e.pointerId
+      controlsDocument = containerRef.value?.ownerDocument
+      controlsDocument?.addEventListener('pointerup', onControlsPointerRelease, true)
+      controlsDocument?.addEventListener('pointercancel', onControlsPointerRelease, true)
+      onControlsActivity()
+    }
+
+    function onControlsPointerRelease (e: PointerEvent) {
+      if (e.pointerId !== controlsPointer.value) return
+
+      releaseControlsPointer()
+      onControlsActivity()
+    }
+
+    watch([playing, state, waiting, error, fullscreen, isHydrated, controlsAutoHide, () => props.controlsHideDelay], onControlsActivity)
+    watch([() => props.src, () => props.srcObject, videoRef], stopIdleTracking)
 
     function onLoadeddata () {
       loaded.value = true
@@ -162,6 +255,12 @@ export const VVideo = genericComponent<VVideoSlots>()({
       }
 
       emit('loaded', videoRef.value!)
+    }
+
+    function onEmptied () {
+      loaded.value = false
+      metadataLoaded.value = false
+      stopIdleTracking()
     }
 
     function retry () {
@@ -185,6 +284,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
       triggered.value = true
       startAfterLoad.value = !startAfterLoad.value
+
+      nextTick(() => {
+        if (startAfterLoad.value) {
+          play()
+        } else {
+          videoRef.value?.pause()
+        }
+      })
     }
 
     function onKeydown (e: KeyboardEvent) {
@@ -235,7 +342,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     watch(() => props.srcObject, v => v && (triggered.value = true))
 
-    watch(() => props.eager, v => v && (triggered.value = true), { immediate: true })
+    watch(() => props.eager, v => v && (eagerTriggered.value = true), { immediate: true })
 
     onMounted(() => {
       if (props.autoplay && !ssr) {
@@ -245,8 +352,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
     })
 
     onBeforeUnmount(() => {
+      stopIdleTracking()
       document.body.removeEventListener('keydown', fullscreenExitShortcut)
       document.removeEventListener('fullscreenchange', onFullscreenExit)
+      videoRef.value?.removeEventListener('webkitendfullscreen', onVideoFullscreenExit)
     })
 
     function focusContainer () {
@@ -261,7 +370,9 @@ export const VVideo = genericComponent<VVideoSlots>()({
     }
 
     async function toggleFullscreen () {
-      if (props.noFullscreen || !document.fullscreenEnabled) {
+      if (props.noFullscreen) return
+      if (!document.fullscreenEnabled) {
+        enterVideoFullscreen()
         return
       }
       if (document.fullscreenElement) {
@@ -285,9 +396,27 @@ export const VVideo = genericComponent<VVideoSlots>()({
       document.removeEventListener('fullscreenchange', onFullscreenExit)
     }
 
+    function enterVideoFullscreen () {
+      const video = videoRef.value as WebkitVideoElement | undefined
+      if (!video?.webkitEnterFullscreen || video.webkitSupportsFullscreen === false) return
+
+      try {
+        video.webkitEnterFullscreen()
+      } catch {
+        return
+      }
+      video.addEventListener('webkitendfullscreen', onVideoFullscreenExit, { once: true })
+      fullscreen.value = true
+    }
+
+    function onVideoFullscreenExit () {
+      fullscreen.value = false
+      focusContainer()
+    }
+
     function onVideoClick (e: Event) {
       e.preventDefault()
-      if (state.value === 'loaded') {
+      if (state.value === 'loaded' && !wakeTap) {
         playing.value = !playing.value
         focusContainer()
       }
@@ -300,6 +429,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
 
     let lastTap = 0
     function onTouchend (e: Event) {
+      if (wakeTap) return
       const now = performance.now()
       if ((now - lastTap) < 500) {
         e.preventDefault()
@@ -396,6 +526,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
             `v-video--variant-${props.variant}`,
             `v-video--${state.value}`,
             { 'v-video--playing': playing.value },
+            controlsClasses.value,
             themeClasses.value,
             densityClasses.value,
             roundedClasses.value,
@@ -409,6 +540,10 @@ export const VVideo = genericComponent<VVideoSlots>()({
           ]}
           tabindex="-1"
           onKeydown={ onKeydown }
+          onKeydownCapture={ onControlsActivity }
+          onPointermoveCapture={ onControlsActivity }
+          onPointerdownCapture={ onControlsPointerDown }
+          onFocusinCapture={ onControlsActivity }
           onClick={ onClick }
         >
           <div
@@ -420,13 +555,14 @@ export const VVideo = genericComponent<VVideoSlots>()({
               props.variant === 'background' ? [] : dimensionStyles.value,
             ]}
           >
-            { (props.eager || triggered.value) && (
+            { (triggered.value || eagerTriggered.value) && (
               <video
                 key="video-element"
                 class={[
                   'v-video__video',
                   roundedClasses.value,
                 ]}
+                preload="auto"
                 { ...omit(attrs, ['controlslist', 'class', 'style']) }
                 controlslist={ controlslist }
                 autoplay={ props.autoplay }
@@ -434,6 +570,7 @@ export const VVideo = genericComponent<VVideoSlots>()({
                 playsinline
                 ref={ videoRef }
                 onLoadeddata={ onLoadeddata }
+                onEmptied={ onEmptied }
                 onClick={ onVideoClick }
                 onDblclick={ onDoubleClick }
                 onTouchend={ onTouchend }

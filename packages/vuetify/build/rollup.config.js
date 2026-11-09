@@ -25,6 +25,11 @@ import {
 
 const extensions = ['.ts', '.tsx', '.js', '.jsx', '.es6', '.es', '.mjs']
 
+const define = ['transform-define', {
+  'process.env.NODE_ENV': 'production',
+  'process.env.VITE_LOGGER_ENABLED': undefined,
+}, 'process-env']
+
 /** @type {import("rollup").RollupOptions[]} */
 const options = [
   {
@@ -70,6 +75,7 @@ const options = [
       babel({
         extensions,
         babelHelpers: 'inline',
+        plugins: [define],
       }),
       sass({
         options: {
@@ -213,6 +219,7 @@ const options = [
       babel({
         extensions,
         babelHelpers: 'inline',
+        plugins: [define],
       }),
       sass({
         options: {

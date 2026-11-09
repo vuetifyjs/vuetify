@@ -180,7 +180,7 @@ export default {
     backspace: 'Tagasiklahv',
     space: 'Tühik',
     plus: 'pluss',
-    shortcut: 'Klaviatuuri otsetee: {0}',
+    shortcut: 'Klaviatuuri otsetee, {0}',
     or: 'või',
   },
   media: {

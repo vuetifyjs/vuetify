@@ -48,6 +48,22 @@ These guidelines exist so AI edits look like what a human would write and expect
 - Cover neighbouring combinations (variant, density, disabled/readonly, RTL), not just the reported case. Label each case with a short `<code>` line, not prose
 - Deterministic local data, no fetches
 
+### Third-party imports
+
+The demo gets pasted into Vuetify Play, which only knows `vue` and `vuetify`. Put the CDN URL in a comment directly above each other import; Play adds it to the import map, Vite ignores it:
+
+```js
+// importmap: https://esm.sh/@date-io/date-fns@3.2.1?deps=date-fns@3.6.0
+import DateFnsAdapter from '@date-io/date-fns'
+// importmap: https://esm.sh/date-fns@3.6.0/locale
+import { enUS } from 'date-fns/locale'
+```
+
+- `https://esm.sh` or `https://cdn.jsdelivr.net` only, at most 200 characters — Play ignores other hints
+- Exact versions, taken from the `catalog` in `pnpm-workspace.yaml` when the package is there
+- Packages that import Vue need `?external=vue`, otherwise esm.sh bundles a second Vue copy
+- No `<script type="importmap">` block: the SFC compiler reads it as the component's `<script>` and fails
+
 ## Running
 
 Only when asked, or when the scope of changes needs a visual check.

@@ -129,9 +129,8 @@ describe('VPagination', () => {
       const before = screen.getAllByCSS('.v-pagination__item').length
 
       width.value = 600
-      await waitIdle()
 
-      expect(screen.getAllByCSS('.v-pagination__item').length).toBeGreaterThan(before)
+      await expect.poll(() => screen.getAllByCSS('.v-pagination__item').length).toBeGreaterThan(before)
     })
 
     it('should still honor an explicit total-visible when length is less than 3', () => {

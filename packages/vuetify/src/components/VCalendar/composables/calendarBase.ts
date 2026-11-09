@@ -2,10 +2,11 @@
 import { useTimes } from './times'
 import { computeColor } from '@/composables/color'
 import { useDate } from '@/composables/date'
+import { DateOptionsSymbol } from '@/composables/date/date'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, inject, toRef } from 'vue'
 import {
   createDayList,
   createNativeLocaleFormatter,
@@ -20,21 +21,26 @@ import {
   validateTimestamp,
   validateWeekdays,
 } from '../util/timestamp'
-import { propsFactory } from '@/util'
+import { isNullOrUndefined, isNumber, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { CalendarFormatter, CalendarTimestamp } from '../types'
+import type { VTimestampInput } from '../util/timestamp'
 import type { ColorValue } from '@/composables/color'
+
+export function isAdapterValue (value: unknown) {
+  return !isNullOrUndefined(value) && !isString(value) && !isNumber(value) && !(value instanceof Date)
+}
 
 export const makeCalendarBaseProps = propsFactory({
   start: {
-    type: [String, Number, Date],
+    type: null as any as PropType<unknown>,
     validate: validateTimestamp,
     default: () => parseDate(new Date()).date,
   },
   end: {
-    type: [String, Number, Date],
+    type: null as any as PropType<unknown>,
     validate: validateTimestamp,
   },
   weekdays: {
@@ -55,8 +61,8 @@ export const makeCalendarBaseProps = propsFactory({
   format: String as PropType<'ampm' | '24hr'>,
   locale: String,
   now: {
-    type: String,
-    validator: validateTimestamp,
+    type: null as any as PropType<unknown>,
+    validator: (value: unknown) => isAdapterValue(value) || validateTimestamp(value as VTimestampInput),
   },
   type: {
     type: String as PropType<'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'>,
@@ -65,10 +71,10 @@ export const makeCalendarBaseProps = propsFactory({
 }, 'VCalendar-base')
 
 export interface CalendarBaseProps {
-  modelValue?: string | number | Date
+  modelValue?: unknown
   categoryDays?: string | number
-  start: string | number | Date
-  end: string | number | Date | undefined
+  start: unknown
+  end: unknown
   weekdays: string | number[]
   firstDayOfWeek: number | string | undefined
   firstDayOfYear: number | string | undefined
@@ -76,26 +82,34 @@ export interface CalendarBaseProps {
   dayFormat: CalendarFormatter | string | undefined
   format: 'ampm' | '24hr' | undefined
   locale: string | undefined
-  now: string | undefined
+  now?: unknown
   type: 'month' | 'week' | 'day' | '4day' | 'custom-weekly' | 'custom-daily' | 'category'
 }
 
 export function useCalendarBase (props: CalendarBaseProps) {
-  const { times, updateTimes } = useTimes({ now: props.now })
   const locale = provideLocale(props)
-
   const adapter = useDate()
+  const dateOptions = inject(DateOptionsSymbol)
+
+  function toTimestampInput (value: unknown) {
+    return (isAdapterValue(value) ? adapter.toJsDate(value) : value) as VTimestampInput
+  }
+
+  const { times, updateTimes } = useTimes(() => toTimestampInput(props.now))
+
+  const formatLocale = toRef(() => {
+    const value = dateOptions?.locale[locale.current.value]
+    return isString(value) ? value : value?.code ?? locale.current.value
+  })
 
   const parsedStart = computed((): CalendarTimestamp => {
-    if (props.type === 'month') {
-      return getStartOfMonth(parseTimestamp(props.start, true))
-    }
-    return parseTimestamp(props.start, true)
+    const start = parseTimestamp(toTimestampInput(props.start), true)
+    return props.type === 'month' ? getStartOfMonth(start) : start
   })
 
   const parsedEnd = computed((): CalendarTimestamp => {
     const start = parsedStart.value
-    const end: CalendarTimestamp = props.end ? parseTimestamp(props.end) || start : start
+    const end: CalendarTimestamp = props.end ? parseTimestamp(toTimestampInput(props.end)) || start : start
     const value = getTimestampIdentifier(end) < getTimestampIdentifier(start) ? start : end
 
     if (props.type === 'month') {
@@ -105,8 +119,9 @@ export function useCalendarBase (props: CalendarBaseProps) {
   })
 
   const parsedValue = computed((): CalendarTimestamp => {
-    return (validateTimestamp(props.modelValue)
-      ? parseTimestamp(props.modelValue, true)
+    const value = toTimestampInput(props.modelValue)
+    return (validateTimestamp(value)
+      ? parseTimestamp(value, true)
       : (parsedStart.value || times.today))
   })
 
@@ -158,7 +173,7 @@ export function useCalendarBase (props: CalendarBaseProps) {
     }
 
     return createNativeLocaleFormatter(
-      locale.current.value,
+      formatLocale.value,
       () => ({ timeZone: 'UTC', day: 'numeric' })
     )
   })
@@ -169,7 +184,7 @@ export function useCalendarBase (props: CalendarBaseProps) {
     }
 
     return createNativeLocaleFormatter(
-      locale.current.value,
+      formatLocale.value,
       (_tms, short) => ({ timeZone: 'UTC', weekday: short ? 'short' : 'long' })
     )
   })
@@ -204,12 +219,14 @@ export function useCalendarBase (props: CalendarBaseProps) {
   }
 
   function getFormatter (options: Intl.DateTimeFormatOptions): CalendarFormatter {
-    return createNativeLocaleFormatter(locale.current.value, () => options)
+    return createNativeLocaleFormatter(formatLocale.value, () => options)
   }
 
   return {
     times,
     locale,
+    formatLocale,
+    toTimestampInput,
     parsedValue,
     parsedWeekdays,
     effectiveWeekdays,

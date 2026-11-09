@@ -45,6 +45,24 @@ describe('VLayout', () => {
     expect(screen.getByCSS('.v-main')).toHaveStyle({ paddingLeft: '100px', paddingTop: '100px' })
   })
 
+  it('should keep transitions when content height changes', async () => {
+    const height = ref(100)
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer width="20%" permanent />
+        <VMain>
+          <div style={{ height: `${height.value}px` }} />
+        </VMain>
+      </VLayout>
+    ))
+
+    await wait(150)
+    height.value = 300
+    await wait(50)
+
+    expect(screen.getByCSS('.v-main').style.transition).toBe('')
+  })
+
   it('should work with sticky elements', async () => {
     render(() => (
       <VLayout>

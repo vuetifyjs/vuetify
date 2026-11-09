@@ -9,10 +9,11 @@ import { VCalendarDaily } from './VCalendarDaily'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
-import { makeCalendarBaseProps } from './composables/calendarBase'
+import { isAdapterValue, makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
 import { makeCalendarWithIntervalsProps } from './composables/calendarWithIntervals'
 import { makeIntervalHighlightProps } from './composables/intervalHighlight'
+import { useDate } from '@/composables/date'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Directives
@@ -118,7 +119,7 @@ export const VCalendar = genericComponent<new (
 
   props: {
     modelValue: {
-      type: [String, Number, Date] as PropType<string | number | Date>,
+      type: null as any as PropType<unknown>,
       validate: validateTimestamp,
     },
     categoryDays: {
@@ -153,6 +154,7 @@ export const VCalendar = genericComponent<new (
   setup (props, { slots, attrs, emit }) {
     const root = ref<VCalendarWeekly | VCalendarDaily | VCalendarCategory>()
     const base = useCalendarWithEvents(props, slots, attrs)
+    const adapter = useDate()
 
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
@@ -306,11 +308,17 @@ export const VCalendar = genericComponent<new (
         emit('update:modelValue', timestampToDate(moved))
       } else if (isNumber(props.modelValue)) {
         emit('update:modelValue', timestampToDate(moved).getTime())
+      } else if (isAdapterValue(props.modelValue)) {
+        emit('update:modelValue', toAdapterValue(moved))
       } else {
         emit('update:modelValue', moved.date)
       }
 
       emit('moved', moved)
+    }
+
+    function toAdapterValue (timestamp: CalendarTimestamp) {
+      return adapter.date(new Date(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
     }
 
     function next (amount = 1): void {
@@ -400,7 +408,8 @@ export const VCalendar = genericComponent<new (
           weekdays={ base.effectiveWeekdays.value }
           categories={ categories }
           onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
-            if (attrs['onUpdate:modelValue']) emit('update:modelValue', day.date)
+            if (!attrs['onUpdate:modelValue']) return
+            emit('update:modelValue', isAdapterValue(props.modelValue) ? toAdapterValue(day) : day.date)
           }}
           v-slots={ base.getScopedSlots() }
         />

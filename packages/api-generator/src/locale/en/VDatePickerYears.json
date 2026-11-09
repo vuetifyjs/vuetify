@@ -8,5 +8,8 @@
   },
   "slots": {
     "year": "Slot for the year."
+  },
+  "events": {
+    "escape": "Emitted when **Escape** is pressed within the years grid."
   }
 }

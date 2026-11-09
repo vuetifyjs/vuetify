@@ -1,6 +1,6 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import { prettifyType } from './utils.ts'
+import { prettifyType, stripLinks } from './utils.ts'
 import { kebabCase } from './helpers/text.ts'
 
 const project = new Project({
@@ -115,8 +115,9 @@ export async function generateComponentDataFromTypes (component: string): Promis
   })
 
   for (const [name, { formatted }] of Object.entries(props.properties)) {
-    if (formatted.length > 400) {
-      console.log(`\x1b[33mLong prop type (${formatted.length}): ${component}.${name}\x1b[0m`)
+    const { length } = stripLinks(formatted)[0]
+    if (length > 400) {
+      console.log(`\x1b[33mLong prop type (${length}): ${component}.${name}\x1b[0m`)
     }
   }
 
@@ -330,11 +331,13 @@ const allowedRefs = [
   'OpenSelectStrategyFunction',
   'OpenStrategy',
   'OpenStrategyFunction',
+  'PieItem',
   'ScrollStrategyFunction',
   'SelectableItem',
   'SelectItemKey',
   'SelectStrategy',
   'SelectStrategyFunction',
+  'SnackbarMessage',
   'SortItem',
   'SubmitEventPromise',
   'ItemKeySlot',

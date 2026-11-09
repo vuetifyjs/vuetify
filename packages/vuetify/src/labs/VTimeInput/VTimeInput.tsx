@@ -14,6 +14,7 @@ import { makeVTimePickerProps, VTimePicker } from '@/components/VTimePicker/VTim
 import { useDate } from '@/composables/date'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
@@ -77,6 +78,8 @@ export const makeVTimeInputProps = propsFactory({
     hideTitle: true,
   }), [
     'format',
+    'disabled',
+    'readonly',
     'location',
     'rounded',
     'height',
@@ -121,7 +124,7 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
       onInput: onMaskInput,
       onKeydown: onInputKeydown,
       text,
-    } = createSegmentedEdit(maskTime, ':')
+    } = createSegmentedEdit(maskTime, ':', undefined, data => hour12.value && !!readPeriod(data))
 
     const { mobile } = useDisplay(props)
     const { InputIcon } = useInputIcon(props)
@@ -129,6 +132,7 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
 
     const model = useProxiedModel(props, 'modelValue', null)
     const menu = useProxiedModel(props, 'menu')
+    const form = useForm(props)
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const viewMode = shallowRef<VTimePickerViewMode>('hour')
@@ -138,7 +142,7 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
     const hintWidth = shallowRef(0)
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
-    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !form.isDisabled.value)
 
     const display = computed(() => model.value ? formatTime(model.value) : '')
     const formatHint = computed(() => getHint(text.value))
@@ -158,12 +162,12 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
       return 'none'
     })
 
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isInteractive = computed(() => !form.isDisabled.value && !form.isReadonly.value)
 
     const isReadonly = computed(() => {
       if (!props.updateOn.length) return true
 
-      return !(mobile.value && isEditingInput.value) && props.readonly
+      return !(mobile.value && isEditingInput.value) && form.isReadonly.value
     })
 
     const showHint = toRef(() => isFocused.value && !isReadonly.value && !!text.value)
@@ -200,19 +204,19 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
         menu.value = true
       }
 
-      if (props.updateOn.includes('enter') && !props.readonly) {
+      if (props.updateOn.includes('enter') && !form.isReadonly.value) {
         onUserInput(e.target as HTMLInputElement)
       }
     }
 
     function onClick (e: MouseEvent) {
-      if (props.disabled) return
+      if (form.isDisabled.value) return
 
       e.preventDefault()
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        isEditingInput.value = !props.readonly
+        isEditingInput.value = !form.isReadonly.value
       } else {
         menu.value = true
       }
@@ -236,7 +240,7 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
     }
 
     function onBlur (e: FocusEvent) {
-      if (props.updateOn.includes('blur') && !props.readonly) {
+      if (props.updateOn.includes('blur') && !form.isReadonly.value) {
         onUserInput(e.target as HTMLInputElement)
       }
 
@@ -303,6 +307,8 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const timePickerProps = {
         ...VTimePicker.filterProps(omit(props, [
+          'disabled',
+          'readonly',
           'active',
           'bgColor',
           'color',
@@ -314,6 +320,8 @@ export const VTimeInput = genericComponent<VTimeInputSlots>()({
         ])),
         format: hour12.value ? 'ampm' as const : '24hr' as const,
         variant: mobile.value ? 'dial' as const : 'input' as const,
+        disabled: form.isDisabled.value,
+        readonly: form.isReadonly.value,
         ...props.pickerProps,
       }
       const textFieldProps = VTextField.filterProps(omit(props, ['placeholder']))

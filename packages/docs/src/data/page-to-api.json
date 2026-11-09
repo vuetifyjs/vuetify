@@ -56,6 +56,7 @@
     "VCardTitle"
   ],
   "components/carousels": ["VCarousel", "VCarouselItem"],
+  "components/checkbox-groups": ["VCheckboxGroup", "VCheckbox"],
   "components/checkboxes": ["VCheckbox", "VCheckboxBtn"],
   "components/chip-groups": ["VChip", "VChipGroup"],
   "components/chips": ["VChip", "VChipGroup"],
@@ -100,6 +101,7 @@
   "components/forms": ["VForm"],
   "components/grids": ["VCol", "VContainer", "VRow", "VSpacer"],
   "components/heatmaps": ["VHeatmap", "VHeatmapCell", "VHeatmapLegend", "VHeatmapLegendCell"],
+  "components/maps": ["VMap"],
   "components/highlights": ["VHighlight"],
   "components/hotkeys": ["VHotkey"],
   "components/hover": ["VHover"],

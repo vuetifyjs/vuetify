@@ -24,6 +24,7 @@
     "contentEl": "Ref to the current content element.",
     "globalTop": "Used by activator to determine a components position in the global stack order.",
     "localTop": "Used by activator to determine a components position in the local stack order.",
+    "openedByHover": "**FOR INTERNAL USE ONLY**",
     "rootEl": "Ref to the root v-overlay element.",
     "scrimEl": "Ref to the current scrim element.",
     "target": "Ref to the current target element.",

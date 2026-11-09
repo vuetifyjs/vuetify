@@ -53,8 +53,7 @@ function useCountdown (milliseconds: () => number) {
 
   function reset () {
     clear()
-
-    nextTick(() => time.value = milliseconds())
+    time.value = milliseconds()
   }
 
   function start (el?: HTMLElement) {

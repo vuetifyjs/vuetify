@@ -295,7 +295,7 @@ export const VHotkey = genericComponent()({
           if (Array.isArray(key)) {
             // Always use text representation for screen readers
             const textKey = key[0] === 'icon' || key[0] === 'symbol'
-              ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
+              ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', key[2], isMac.value)[1]
               : key[1]
             readableParts.push(translateKey(textKey as string))
           } else {

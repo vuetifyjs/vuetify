@@ -1373,9 +1373,8 @@ describe('VMenu', () => {
       activator.value = screen.getByTestId('second')
       await wait(50) // for ~25% of 0.2s glide transition
       activator.value = screen.getByTestId('first')
-      await commands.waitStable('.v-overlay__content')
 
-      expect(screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
+      await expect.poll(() => screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
     })
   })
 

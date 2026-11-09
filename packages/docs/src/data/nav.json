@@ -282,6 +282,10 @@
         "subfolder": "components"
       },
       {
+        "title": "checkbox-groups",
+        "subfolder": "components"
+      },
+      {
         "title": "command-palettes",
         "subfolder": "components"
       },
@@ -303,6 +307,10 @@
       },
       {
         "title": "mask-inputs",
+        "subfolder": "components"
+      },
+      {
+        "title": "maps",
         "subfolder": "components"
       },
       {

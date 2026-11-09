@@ -19,6 +19,10 @@
     "click:append": "Emitted when appended icon is clicked.",
     "click:prepend": "Emitted when prepended icon is clicked."
   },
+  "slots": {
+    "append": "Adds an item inside the input and after input content. Since v3.11.3, if the slot is declared, the icon is not rendered.",
+    "prepend": "Adds an item outside the input and before input content. Since v3.11.3, if the slot is declared, the icon is not rendered."
+  },
   "exposed": {
     "errorMessages": "An array of error messages that were set by the `setErrors` method.",
     "isValid": "Boolean indicating if the input is valid.",

@@ -322,6 +322,12 @@ export default createVuetify({
 </template>
 ```
 
+::: warning
+
+Generated variations are applied last and replace any color with the same name, including ones defined in your theme. To set a variation by hand, leave its base color out of `variations.colors` and define all of its variants yourself.
+
+:::
+
 ## Disable theme
 
 The theme functionality can be disabled by setting the **theme** configuration property to `false`. This prevents the creation of the Vuetify stylesheet, and theme classes will not be applied to components.

@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'ដកឃ្លា',
     plus: 'បូក',
-    shortcut: 'គ្រាប់ចុចរហ័ស: {0}',
+    shortcut: 'គ្រាប់ចុចរហ័ស, {0}',
     or: 'ឬ',
   },
   media: {

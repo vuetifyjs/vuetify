@@ -1,0 +1,6 @@
+{
+  "description": "Groups checkboxes with a shared model, label, and validation.",
+  "props": {
+    "inline": "Displays the checkboxes in a row."
+  }
+}

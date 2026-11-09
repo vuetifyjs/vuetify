@@ -449,7 +449,7 @@ export const VAutocomplete = genericComponent<new <
 
     /** @param set - null means toggle */
     function select (item: ListItem | undefined, set: boolean | null = true) {
-      if (!item || item.props.disabled) return
+      if (form.isDisabled.value || !item || item.props.disabled) return
 
       const comparator = props.valueComparator || deepEqual
 

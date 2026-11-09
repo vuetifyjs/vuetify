@@ -278,7 +278,7 @@ Just like selection, row items require a unique property on each item for expans
 
 ::: tip
 
-The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside inside it, so you can split the expanded area into multiple columns. If you intend to use `colspand="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
+The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside it, so you can split the expanded area into multiple columns. If you intend to use `colspan="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
 
 :::
 

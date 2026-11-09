@@ -133,6 +133,86 @@ describe('VColorPicker', () => {
     expect(update).toHaveBeenCalledTimes(1)
   })
 
+  it('should support keyboard navigation and selection of swatches', async () => {
+    const update = vi.fn()
+    const colors = [['#ff0000', '#00ff00'], ['#0000ff']]
+    render(() => (
+      <>
+        <VColorPicker
+          hideCanvas
+          hideInputs
+          hideSliders
+          showSwatches
+          swatches={ colors }
+          onUpdate:modelValue={ update }
+        />
+        <button>After swatches</button>
+      </>
+    ))
+
+    const swatches = screen.getAllByCSS('.v-color-picker-swatches__color')
+    const afterSwatches = screen.getByRole('button', { name: 'After swatches' })
+
+    expect(swatches).toHaveLength(3)
+    expect(swatches[0]).toHaveAttribute('role', 'button')
+    expect(swatches[0]).toHaveAccessibleName()
+    expect(swatches[0]).toHaveAttribute('tabindex', '0')
+    expect(swatches[1]).toHaveAttribute('tabindex', '-1')
+    expect(swatches[2]).toHaveAttribute('tabindex', '-1')
+
+    await userEvent.tab()
+    expect(swatches[0]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowRight}')
+    expect(swatches[2]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(swatches[0]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowDown}')
+    expect(swatches[1]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowUp}{Enter}')
+    expect(swatches[0]).toHaveFocus()
+    expect(update).toHaveBeenCalledTimes(1)
+
+    await userEvent.keyboard('{ArrowRight}{Space}')
+    expect(update).toHaveBeenCalledTimes(2)
+
+    await userEvent.tab()
+    expect(afterSwatches).toHaveFocus()
+  })
+
+  it('should navigate wrapped and uneven swatch columns', async () => {
+    const lengths = [2, 2, 2, 1, 2, 2]
+    render(() => (
+      <VColorPicker
+        hideCanvas
+        hideInputs
+        hideSliders
+        showSwatches
+        swatches={ lengths.map(length => Array(length).fill('#ff0000')) }
+      />
+    ))
+
+    const swatches = screen.getAllByCSS('.v-color-picker-swatches__color')
+    const columns = screen.getAllByCSS('.v-color-picker-swatches__swatch')
+    expect(columns[5].offsetTop).toBeGreaterThan(columns[4].offsetTop)
+
+    await userEvent.tab()
+    await userEvent.keyboard('{ArrowRight}{ArrowRight}')
+    expect(swatches[4]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowDown}{ArrowDown}')
+    expect(swatches[9]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowUp}')
+    expect(swatches[5]).toHaveFocus()
+
+    await userEvent.keyboard('{ArrowRight}')
+    expect(swatches[6]).toHaveFocus()
+  })
+
   it('should not use global defaults for slider color', async () => {
     render(VColorPicker, null, {
       defaults: {
