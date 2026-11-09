@@ -111,7 +111,7 @@ The component uses the `aria-label` attribute to provide a clear description of 
 will generate the following HTML:
 
 ```html
-<div class="v-hotkey" role="img" aria-label="Keyboard shortcut: Ctrl plus S">
+<div class="v-hotkey" role="img" aria-label="Keyboard shortcut, Ctrl plus S">
   <span class="v-hotkey__combination">
     <div class="v-kbd v-hotkey__key" aria-hidden="true">Ctrl</div>
     <span class="v-hotkey__divider" aria-hidden="true">+</span>

@@ -1,5 +1,6 @@
 // Components
 import { VDateInput } from '../VDateInput'
+import { VForm } from '@/components/VForm'
 import { VLocaleProvider } from '@/components/VLocaleProvider/VLocaleProvider'
 
 // Utilities
@@ -84,6 +85,21 @@ describe('VDateInput', () => {
     await expect.poll(() => menuB.value).toBe(false)
   })
 
+  it.each(['disabled', 'readonly'] as const)('should keep its value in a %s form with the picker open', async state => {
+    const model = ref(new Date(2026, 10, 9))
+    const { getByRole } = render(() => (
+      <VForm { ...{ [state]: true } }>
+        <VDateInput v-model={ model.value } menu hideActions />
+      </VForm>
+    ))
+
+    expect(getByRole('textbox')).toHaveAttribute(state)
+    const day = await screen.findByText('15', { selector: '.v-date-picker-month__day .v-btn__content' })
+    await userEvent.click(day, { force: true })
+
+    expect(iso(model.value)).toBe('2026-11-09')
+  })
+
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
     const onFocus = vi.fn()
     const { element } = render(() => (
@@ -110,6 +126,15 @@ describe('VDateInput', () => {
     await userEvent.type(input, '02/20/2022{Enter}')
 
     expect(iso(model.value)).toBe('2022-02-20')
+  })
+
+  it('keeps selected text when typing a non-digit', async () => {
+    const { element } = render(<VDateInput inputFormat="YYYY-MM-DD" modelValue="2024-03-15" />)
+    await userEvent.click(element)
+    const input = screen.getByCSS('input') as HTMLInputElement
+    input.select()
+    await userEvent.keyboard('r')
+    expect(input.value).toBe('2024-03-15')
   })
 
   it('should reset when the value is cleared', async () => {

@@ -118,6 +118,20 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     }
 
+    function onBeforeinput (e: InputEvent) {
+      const inputElement = e.target as HTMLInputElement
+      const start = inputElement.selectionStart ?? 0
+      const end = inputElement.selectionEnd ?? 0
+
+      if (!props.mask || e.inputType !== 'insertText' || !e.data || start === end) return
+
+      const value = inputElement.value
+      const settle = (text: string) => mask.unmask(mask.mask(text))
+      if (settle(value.slice(0, start) + e.data + value.slice(end)) === settle(value.slice(0, start) + value.slice(end))) {
+        e.preventDefault()
+      }
+    }
+
     async function onCut (e: Event) {
       e.preventDefault()
 
@@ -227,6 +241,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           onCut={ onCut }
           onPaste={ onPaste }
           onKeydown={ onKeyDown }
+          onBeforeinput={ onBeforeinput }
         >
           {{ ...slots }}
         </VTextField>

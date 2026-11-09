@@ -410,6 +410,8 @@ function isSameYear (date: Date, comparing: Date) {
 function getDiff (date: Date, comparing: Date | string, unit?: string) {
   const d = new Date(date)
   const c = new Date(comparing)
+  // days and weeks count wall-clock time, so a DST shift must not shorten or stretch the span
+  const localDiff = (d.getTime() - d.getTimezoneOffset() * 60000) - (c.getTime() - c.getTimezoneOffset() * 60000)
 
   switch (unit) {
     case 'years':
@@ -419,9 +421,9 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
     case 'months':
       return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
     case 'weeks':
-      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24 * 7))
+      return Math.floor(localDiff / (1000 * 60 * 60 * 24 * 7))
     case 'days':
-      return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60 * 24))
+      return Math.floor(localDiff / (1000 * 60 * 60 * 24))
     case 'hours':
       return Math.floor((d.getTime() - c.getTime()) / (1000 * 60 * 60))
     case 'minutes':

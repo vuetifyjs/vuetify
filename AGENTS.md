@@ -69,6 +69,7 @@ Each item is a real finding when a diff violates it. Details in the rule named a
 - Non-component exports from a component `index.ts` (breaks api-generator) — `components.md`
 - New prop without `new-in.json` entry or api-generator description — `components.md`
 - Changed arguments or return shape of a public composable outside `next` — `composables.md`
+- `computed` / `toRef` getter that calls a v0 `create*` or writes reactive state — `composables.md`
 - Raw `typeof` / `== null` checks instead of `@/util` guards — `utilities.md`
 - Hardcoded tunable values instead of `!default` variables, styles outside `tools.layer`, physical `left`/`right` where logical properties work — `sass.md`
 - Surfaces or states invisible in forced-colors mode — `sass.md`

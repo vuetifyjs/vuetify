@@ -60,4 +60,20 @@ describe('VTooltip', () => {
     // the menu should remain open
     expect(screen.queryByCSS('.v-menu .v-overlay__content')).toBeVisible()
   })
+
+  it('should position at target="parent" when initially open', async () => {
+    render(() => (
+      <div style="padding: 200px">
+        <VBtn data-testid="btn">
+          Button
+          <VTooltip target="parent" modelValue location="bottom">Tooltip</VTooltip>
+        </VBtn>
+      </div>
+    ))
+
+    const content = screen.getByCSS('.v-tooltip .v-overlay__content')
+    await expect.poll(() => content.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+      screen.getByTestId('btn').getBoundingClientRect().bottom
+    )
+  })
 })

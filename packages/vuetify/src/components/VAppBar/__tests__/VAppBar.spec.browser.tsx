@@ -5,9 +5,57 @@ import { VMain } from '@/components/VMain'
 
 // Utilities
 import { render, screen, scroll } from '@test'
-import { ref } from 'vue'
+import { defineComponent, ref, shallowRef, Suspense } from 'vue'
 
 describe('VAppBar', () => {
+  it('should not shift the layout while a replacement app bar is pending inside Suspense', async () => {
+    let release!: () => void
+    let suspended = false
+    const AsyncPage = defineComponent({
+      name: 'AsyncPage',
+      async setup () {
+        suspended = true
+        await new Promise<void>(resolve => release = resolve)
+        return () => <div />
+      },
+    })
+    const Shell = defineComponent({
+      name: 'Shell',
+      props: { name: String },
+      setup (props) {
+        return () => (
+          <>
+            <VAppBar height={ props.name === 'a' ? 64 : 128 } />
+            <VMain>{ props.name === 'b' ? <AsyncPage /> : undefined }</VMain>
+          </>
+        )
+      },
+    })
+    const layout = shallowRef('a')
+    render(() => (
+      <VLayout>
+        <Suspense>
+          <Shell key={ layout.value } name={ layout.value } />
+        </Suspense>
+      </VLayout>
+    ))
+
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ top: '0px', height: '64px' })
+    await expect.element(screen.getByCSS('.v-main')).toHaveStyle({ paddingTop: '64px' })
+
+    layout.value = 'b'
+    await expect.poll(() => suspended).toBe(true)
+
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ top: '0px' })
+    await expect.element(screen.getByCSS('.v-main')).toHaveStyle({ paddingTop: '64px' })
+
+    release()
+
+    await expect.poll(() => document.querySelector('.v-app-bar')?.getBoundingClientRect().height).toBe(128)
+    await expect.element(screen.getByCSS('.v-app-bar')).toHaveStyle({ top: '0px' })
+    await expect.element(screen.getByCSS('.v-main')).toHaveStyle({ paddingTop: '128px' })
+  })
+
   it('allows custom height', async () => {
     const height = ref(64)
     render(() => (

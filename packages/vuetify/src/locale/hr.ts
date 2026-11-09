@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Razmak',
     plus: 'plus',
-    shortcut: 'Tipkovnička prečica: {0}',
+    shortcut: 'Tipkovnička prečica, {0}',
     or: 'ili',
   },
   media: {

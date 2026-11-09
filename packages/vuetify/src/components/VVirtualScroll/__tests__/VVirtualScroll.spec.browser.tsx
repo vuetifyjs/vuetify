@@ -1,5 +1,6 @@
 // Components
 import { VVirtualScroll } from '../VVirtualScroll'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Utilities
 import { render, screen, scroll, waitAnimationFrame, waitIdle } from '@test'
@@ -328,5 +329,31 @@ describe('VVirtualScroll', () => {
     expect(itemOffset(root, anchor!)).toBeCloseTo(offset!, 0)
     expect(root.scrollTop).toBeCloseTo(scrollTop, 0)
     expect(root.scrollHeight).toBeGreaterThan(5000)
+  })
+
+  it('keeps the measured item height when defaults change', async () => {
+    const defaults = ref({})
+    const scroller = ref<VVirtualScroll>()
+
+    render(() => (
+      <VDefaultsProvider defaults={ defaults.value }>
+        <VVirtualScroll ref={ scroller } height="100" items={ createRange(50) }>
+          {{
+            default: ({ item }) => (
+              <div style="height: 25px">{ item }</div>
+            ),
+          }}
+        </VVirtualScroll>
+      </VDefaultsProvider>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll')
+    await waitIdle()
+
+    defaults.value = {}
+    await nextTick()
+    scroller.value!.scrollToIndex(40)
+
+    await expect.poll(() => root.scrollTop).toBeGreaterThan(900)
   })
 })

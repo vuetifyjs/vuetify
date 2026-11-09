@@ -180,7 +180,7 @@ export default {
     backspace: 'Atpakaļatkāpe',
     space: 'Atstarpe',
     plus: 'plus',
-    shortcut: 'Tastatūras saīsne: {0}',
+    shortcut: 'Tastatūras saīsne, {0}',
     or: 'vai',
   },
   media: {

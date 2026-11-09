@@ -463,8 +463,13 @@
   "VNavigationDrawer": {
     "props": {
       "captureFocus": "3.11.0",
-      "retainFocus": "3.11.0",
-      "persistent": "3.6.0"
+      "expanded": "4.3.0",
+      "modal": "4.3.0",
+      "persistent": "3.6.0",
+      "retainFocus": "3.11.0"
+    },
+    "events": {
+      "update:expanded": "4.3.0"
     }
   },
   "VNumberInput": {
