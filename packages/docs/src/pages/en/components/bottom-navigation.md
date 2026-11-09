@@ -82,3 +82,11 @@ Setting the **mode** prop to `shift` hides button text when not active. This pro
 Since `v-bottom-navigation` supports v-model, use the **active** prop to control the display state.
 
 <ExamplesExample file="v-bottom-navigation/prop-toggle" />
+
+### Misc
+
+#### Navigation buttons
+
+Use [v-navigation-btn](/components/navigation-buttons/) instead of v-btn for a Material Design 3 bar. The same items work in a drawer rail on larger screens.
+
+<ExamplesExample file="v-bottom-navigation/misc-navigation-buttons" />

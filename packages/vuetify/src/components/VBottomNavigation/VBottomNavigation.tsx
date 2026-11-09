@@ -112,6 +112,12 @@ export const VBottomNavigation = genericComponent<new <T>(
         stacked: toRef(() => props.mode !== 'horizontal'),
         variant: 'text',
       },
+      VNavigationBtn: {
+        baseColor: toRef(() => props.baseColor),
+        color: toRef(() => props.color),
+        labels: toRef(() => props.mode === 'shift' ? 'selected' : 'always'),
+        stacked: toRef(() => props.mode !== 'horizontal'),
+      },
     }, { scoped: true })
 
     useRender(() => {
