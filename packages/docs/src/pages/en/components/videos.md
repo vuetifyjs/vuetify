@@ -113,7 +113,7 @@ Three density modes provide basic control over control bar height and the icon s
 
 #### Rounded
 
-Border radius for the video and controls can be controled separately if you pass an array to the `rounded` prop.
+Border radius for the video and controls can be controlled separately if you pass an array to the `rounded` prop.
 
 <ExamplesExample file="v-video/prop-rounded" />
 

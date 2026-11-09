@@ -105,7 +105,7 @@ The following are the already released **minor** and **major** version updates. 
   - VDialog/VCommandPalette - `location` and `origin` to enforce specific viewport placement
   - VNumberInput - support for grouping (typically for thousands separators)
   - VDatePicker - improved range selection, keyboard navigation
-  - VDataTable - programatic control over groups state with `v-model:opened`
+  - VDataTable - programmatic control over groups state with `v-model:opened`
   - VSparkline - hover interactivity, markers and tooltips
   - VOtpInputs - grouping fields into segments, a11y and emojis
   - Introduced 7 new components to the main framework from Labs:
@@ -442,7 +442,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Released:** October 2018
 - **Notes:** [v1.2 Release](/getting-started/release-notes/?version=v1.2.0)
 - **Overview:**
-  Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Als added numerous new locales.
+  Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Also added numerous new locales.
 
 ----
 

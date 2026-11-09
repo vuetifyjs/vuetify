@@ -1,5 +1,6 @@
 // Components
 import { VDateInput } from '../VDateInput'
+import { VForm } from '@/components/VForm'
 import { VLocaleProvider } from '@/components/VLocaleProvider/VLocaleProvider'
 
 // Utilities
@@ -82,6 +83,21 @@ describe('VDateInput', () => {
     await expect.poll(() => document.activeElement).toBe(inputs[0])
     await expect.poll(() => menuA.value).toBe(true)
     await expect.poll(() => menuB.value).toBe(false)
+  })
+
+  it.each(['disabled', 'readonly'] as const)('should keep its value in a %s form with the picker open', async state => {
+    const model = ref(new Date(2026, 10, 9))
+    const { getByRole } = render(() => (
+      <VForm { ...{ [state]: true } }>
+        <VDateInput v-model={ model.value } menu hideActions />
+      </VForm>
+    ))
+
+    expect(getByRole('textbox')).toHaveAttribute(state)
+    const day = await screen.findByText('15', { selector: '.v-date-picker-month__day .v-btn__content' })
+    await userEvent.click(day, { force: true })
+
+    expect(iso(model.value)).toBe('2026-11-09')
   })
 
   it('should not fire @update:focus twice when clicking bottom of input', async () => {
