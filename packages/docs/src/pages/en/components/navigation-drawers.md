@@ -12,7 +12,7 @@ features:
   label: "C: VNavigationDrawer"
   report: true
   github: /components/VNavigationDrawer/
-  spec: https://m2.material.io/components/navigation-drawer
+  spec: https://m3.material.io/components/navigation-drawer
 ---
 
 # Navigation drawers

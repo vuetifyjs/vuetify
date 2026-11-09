@@ -136,6 +136,12 @@ date.format(adapter.date(), { weekday: 'narrow' })
 
 The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
+::: info
+
+Starting with [v4.3.1](/getting-started/release-notes/?version=v4.3.1), Vuetify computes weeks itself for date-io adapters, which ignore the week arguments, to make **first-day-of-week**, **first-day-of-year** and **weekday-format** work. Remove any patched `startOfWeek` left over from older workarounds; Vuetify trusts an adapter whose `startOfWeek` honors the argument and skips this handling for all week methods.
+
+:::
+
 ### Using DateFns
 
 To use DateFns as the date adapter, install the necessary packages:
@@ -379,10 +385,12 @@ import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'
 
 export class MyAdapter extends VuetifyDateAdapter {
   sayHello () {
-    return `Hello, current week starts at ${this.startOfWeek(this.date())}`
+    return `Hello, today is ${this.format(this.date(), 'fullDateWithWeekday')}`
   }
-  override startOfWeek (date: Date, firstDayOfWeek?: string | number): Date {
-    return super.startOfWeek(date, 2) // forcing Tuesday
+  override format (date: Date, formatString: string): string {
+    return formatString === 'quarter'
+      ? `Q${Math.floor(date.getMonth() / 3) + 1} ${date.getFullYear()}`
+      : super.format(date, formatString)
   }
 }
 ```

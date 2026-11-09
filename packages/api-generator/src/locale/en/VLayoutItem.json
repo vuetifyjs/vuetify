@@ -1,6 +1,7 @@
 {
   "description": "Abstract component to use within a `v-layout` or `v-app` container.",
   "props": {
-    "position": "The position of the item."
+    "position": "The position of the item.",
+    "size": "The size of the item. Percentage values are relative to the layout."
   }
 }

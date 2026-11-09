@@ -2,7 +2,9 @@
 import './VBadge.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
+import { VThemeProvider } from '@/components/VThemeProvider'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -17,6 +19,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
+import { toRef } from 'vue'
 import { convertToUnit, genericComponent, pickWithRest, propsFactory, useRender } from '@/util'
 
 export type VBadgeSlots = {
@@ -32,6 +35,10 @@ export const makeVBadgeProps = propsFactory({
   dotSize: [Number, String],
   floating: Boolean,
   icon: IconValue,
+  iconSize: {
+    type: [Number, String],
+    default: 'x-small',
+  },
   inline: Boolean,
   label: {
     type: String,
@@ -67,7 +74,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(() => props.textColor)
-    const { themeClasses } = useTheme()
+
+    const theme = useTheme()
+    // use props.theme and fallback to inherited
+    const themeClasses = toRef(() => theme.isDisabled ? undefined : `${theme.prefix}theme--${props.theme ?? theme.name.value}`)
 
     const { locationStyles } = useLocation(props, true, side => {
       const base = props.floating
@@ -142,12 +152,16 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 role="status"
                 { ...badgeAttrs }
               >
-                {
-                  props.dot ? undefined
-                  : ctx.slots.badge ? ctx.slots.badge?.()
-                  : props.icon ? <VIcon icon={ props.icon } />
-                  : content
-                }
+                <VDefaultsProvider defaults={{ VIcon: { size: props.iconSize } }}>
+                  <VThemeProvider theme={ props.theme }>
+                    {
+                      props.dot ? undefined
+                      : ctx.slots.badge ? ctx.slots.badge?.()
+                      : props.icon ? <VIcon icon={ props.icon } />
+                      : content
+                    }
+                  </VThemeProvider>
+                </VDefaultsProvider>
               </span>
             </MaybeTransition>
           </div>

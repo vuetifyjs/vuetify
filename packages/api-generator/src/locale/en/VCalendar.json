@@ -26,8 +26,10 @@
     "eventTimed": "If Dates or milliseconds are used as the start or end timestamp of an event, this prop can be a string to a property on the event that is truthy if the event is a timed event or a function which takes the event and returns a truthy value if the event is a timed event.",
     "firstInterval": "The first interval to display in the `day` view. If `intervalMinutes` is set to 60 and this is set to 9 the first time in the view is 9am.",
     "firstTime": "The first time to display in the `day` view. If specified, this overwrites any `firstInterval` value specified. This can be the number of minutes since midnight, a string in the format of `HH:mm`, or an object with number properties hour and minute.",
+    "format": "Forces a clock convention for interval labels and event times, overriding the locale.",
     "hideHeader": "If the header at the top of the `day` view should be visible.",
     "intervalCount": "The number of intervals to display in the `day` view.",
+    "intervalHighlight": "Highlights the interval row under the cursor in the `day`, `week`, and `category` views. Pass a color string to tint the highlight, otherwise the theme's `surface-variant` is used.",
     "intervalFormat": "Formats time of day string that appears in the interval gutter of the `day` and `week` view to specified locale",
     "intervalHeight": "The height of an interval in pixels in the `day` view.",
     "intervalWidth": "The width of the interval gutter on the left side in the `day` view.",
@@ -73,5 +75,22 @@
     "[`${string}:time`]": "Any event at a specific time in the `day` view. The second argument is the day & time object.",
     "change": "The range of days displayed on the calendar changed. This is triggered on initialization. The event passed is an object with start and end date objects.",
     "moved": "One of the functions `next`, `prev`, and `move` was called. The event passed is the day object calculated for the movement."
+  },
+  "exposed": {
+    "checkChange": "Emits `change` when the displayed range of days differs from the last emitted one.",
+    "getEndOfWeek": "Returns the last day of the week containing the given timestamp, based on **weekdays**.",
+    "getStartOfWeek": "Returns the first day of the week containing the given timestamp, based on **weekdays**.",
+    "getTimestampAtEvent": "Returns the timestamp at the pointer position of a mouse or touch event within the given day. Useful for creating or dragging events. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "getVisibleEvents": "Returns the parsed events that overlap the displayed range of days.",
+    "getWeekNumber": "Returns the week number of the given timestamp.",
+    "minutesToPixels": "Converts a duration in minutes to a height in pixels. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "move": "Moves the calendar by the given number of periods of the current **type**. Negative values move backwards. Emits `update:modelValue` and `moved`.",
+    "next": "Moves the calendar forward by the given number of periods of the current **type**.",
+    "prev": "Moves the calendar backward by the given number of periods of the current **type**.",
+    "scrollToTime": "Scrolls the interval area to the given time. Accepts minutes since midnight, `HH:mm` string or `{ hour, minute }` object. Returns `false` when the time is invalid or the view has no interval area.",
+    "timeDelta": "Returns the position of the given time as a fraction of the interval area height, or `false` when the time is invalid. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "timeToY": "Returns the vertical offset in pixels of the given time within the interval area, or `false` when the time is invalid. Pass `true` or a target date as the second argument to clamp the result to the visible range. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "title": "Text describing the displayed range, e.g. `March 2026` or `Mar - Apr 2026`.",
+    "updateTimes": "Refreshes the current date and time used for **now** highlighting. Call it periodically to keep the current time indicator moving."
   }
 }

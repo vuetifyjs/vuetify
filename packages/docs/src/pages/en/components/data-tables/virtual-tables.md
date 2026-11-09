@@ -39,3 +39,9 @@ The v-data-table-virtual component relies on all data being available locally. B
 When customizing rows with the `#item` slot, you must bind the provided `itemRef` to your `<tr>`. This ensures that the virtual scroller can correctly measure and recycle rows.
 
 <ExamplesExample file="v-data-table/virtual-custom" />
+
+### Expanded rows
+
+The `expanded-row` slot may hold any number of rows. Use `v-data-table-row` instead of plain `<tr>` for rows that should line up with the parent columns.
+
+<ExamplesExample file="v-data-table/virtual-expanded-rows" />

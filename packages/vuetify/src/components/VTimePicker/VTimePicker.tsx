@@ -4,7 +4,7 @@ import './VTimePicker.sass'
 // Components
 import { VTimePickerClock } from './VTimePickerClock'
 import { VTimePickerControls } from './VTimePickerControls'
-import { makeVPickerProps, VPicker } from '@/labs/VPicker/VPicker'
+import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -20,7 +20,7 @@ import { clamp, genericComponent, omit, propsFactory, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { Period, VTimePickerViewMode } from './shared'
-import type { VPickerSlots } from '@/labs/VPicker/VPicker'
+import type { VPickerSlots } from '@/components/VPicker/VPicker'
 
 export type VTimePickerSlots = Omit<VPickerSlots, 'header'>
 
@@ -43,7 +43,7 @@ export const makeVTimePickerProps = propsFactory({
   },
   modelValue: null as any as PropType<any>,
   readonly: Boolean,
-  scrollable: Boolean,
+  scrollable: [Boolean, String] as PropType<boolean | 'clock' | 'controls'>,
   useSeconds: Boolean,
   variant: {
     type: String as PropType<Variant>,
@@ -225,8 +225,8 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
 
     useRender(() => {
       const pickerProps = omit(VPicker.filterProps(props), ['hideHeader'])
-      const timePickerControlsProps = VTimePickerControls.filterProps(props)
-      const timePickerClockProps = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max']))
+      const timePickerControlsProps = VTimePickerControls.filterProps(omit(props, ['scrollable']))
+      const timePickerClockProps = VTimePickerClock.filterProps(omit(props, ['format', 'modelValue', 'min', 'max', 'scrollable']))
 
       const clockValidation = viewMode.value === 'hour'
         ? isAllowedHour.value
@@ -262,6 +262,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                 second={ inputSecond.value as number }
                 viewMode={ viewMode.value }
                 inputHints={ props.variant === 'input' }
+                scrollable={ props.scrollable === 'controls' }
                 onUpdate:hour={ (val: number) => inputHour.value = val }
                 onUpdate:minute={ (val: number) => inputMinute.value = val }
                 onUpdate:second={ (val: number) => inputSecond.value = val }
@@ -290,6 +291,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
                     : inputSecond.value as number)
                 }
                 viewMode={ viewMode.value }
+                scrollable={ props.scrollable === true || props.scrollable === 'clock' }
                 onChange={ onChange }
                 onInput={ onInput }
                 onKeydown={ onClockKeydown }

@@ -118,6 +118,20 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       }
     }
 
+    function onBeforeinput (e: InputEvent) {
+      const inputElement = e.target as HTMLInputElement
+      const start = inputElement.selectionStart ?? 0
+      const end = inputElement.selectionEnd ?? 0
+
+      if (!props.mask || e.inputType !== 'insertText' || !e.data || start === end) return
+
+      const value = inputElement.value
+      const settle = (text: string) => mask.unmask(mask.mask(text))
+      if (settle(value.slice(0, start) + e.data + value.slice(end)) === settle(value.slice(0, start) + value.slice(end))) {
+        e.preventDefault()
+      }
+    }
+
     async function onCut (e: Event) {
       e.preventDefault()
 
@@ -188,8 +202,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
     async function replaceSelection (inputElement: HTMLInputElement, pastedCharacters: string[]) {
       caretPosition.value = inputElement.selectionStart || 0
       for (let i = 0; i < pastedCharacters.length; i++) {
-        if (await replaceCharacter(caretPosition.value, pastedCharacters[i])) {
-          caretPosition.value++
+        const nextIndex = await replaceCharacter(caretPosition.value, pastedCharacters[i])
+        if (nextIndex !== -1) {
+          caretPosition.value = nextIndex
         }
       }
     }
@@ -207,9 +222,9 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
       if (mask.isValid(newValue)) {
         model.value = newValue
         await nextTick()
-        return true
+        return targetIndex + 1
       }
-      return false
+      return -1
     }
 
     useRender(() => {
@@ -226,6 +241,7 @@ export const VMaskInput = genericComponent<VMaskInputSlots>()({
           onCut={ onCut }
           onPaste={ onPaste }
           onKeydown={ onKeyDown }
+          onBeforeinput={ onBeforeinput }
         >
           {{ ...slots }}
         </VTextField>

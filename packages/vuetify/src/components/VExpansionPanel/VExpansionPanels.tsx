@@ -38,7 +38,10 @@ export const makeVExpansionPanelsProps = propsFactory({
   flat: Boolean,
   gap: [String, Number],
   noDivider: Boolean,
-  rounded: [Boolean, Number, String, Array] as PropType<boolean | number | string | (number | string)[]>,
+  rounded: {
+    type: [Boolean, Number, String, Array] as PropType<boolean | number | string | (number | string)[]>,
+    default: undefined,
+  },
 
   ...makeGroupProps(),
   ...pick(makeVExpansionPanelProps(), [
@@ -50,6 +53,7 @@ export const makeVExpansionPanelsProps = propsFactory({
     'expandIcon',
     'focusable',
     'hideActions',
+    'hover',
     'readonly',
     'ripple',
     'static',
@@ -102,6 +106,7 @@ export const VExpansionPanels = genericComponent<new <TModel>(
         expandIcon: toRef(() => props.expandIcon),
         focusable: toRef(() => props.focusable),
         hideActions: toRef(() => props.hideActions),
+        hover: toRef(() => props.hover),
         readonly: toRef(() => props.readonly),
         ripple: toRef(() => props.ripple),
         static: toRef(() => props.static),

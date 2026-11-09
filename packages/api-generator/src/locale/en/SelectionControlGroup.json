@@ -8,6 +8,7 @@
     "multiple": "Changes select to multiple. Accepts array for value.",
     "readonly": "Puts input in readonly state.",
     "trueIcon": "The icon used when active.",
-    "type": "Provides the default type for children selection controls."
+    "type": "**FOR INTERNAL USE ONLY**",
+    "indeterminateIcon": "The icon used when in an indeterminate state."
   }
 }

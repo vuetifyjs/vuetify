@@ -47,6 +47,7 @@ const aliases: IconAliases = {
   plus: 'i-lucide:plus',
   minus: 'i-lucide:minus',
   calendar: 'i-lucide:calendar',
+  clock: 'i-lucide:clock',
   treeviewCollapse: 'i-lucide:chevron-down',
   treeviewExpand: 'i-lucide:chevron-right',
   tableGroupExpand: 'i-lucide:chevron-right',

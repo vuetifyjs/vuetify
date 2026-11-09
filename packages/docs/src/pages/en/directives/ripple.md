@@ -8,6 +8,10 @@ related:
   - /components/buttons/
   - /components/expansion-panels/
   - /styles/transitions/
+features:
+  label: 'D: ripple'
+  report: true
+  github: /directives/ripple/
 ---
 
 # Ripple directive

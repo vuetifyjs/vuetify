@@ -50,7 +50,7 @@ export function defineComponent<
   I extends {} = {},
   II extends string = string,
   S extends SlotsType = {},
->(
+> (
   options: ComponentOptionsWithoutProps<
     Props,
     RawBindings,
@@ -81,7 +81,7 @@ export function defineComponent<
   I extends {} = {},
   II extends string = string,
   S extends SlotsType = {},
->(
+> (
   options: ComponentOptionsWithObjectProps<
     PropsOptions,
     RawBindings,
@@ -309,25 +309,25 @@ export type ComponentInstance<T> = T extends { new (): ComponentPublicInstance<a
   : T extends FunctionalComponent<infer Props, infer Emits>
     ? ComponentPublicInstance<Props, {}, {}, {}, {}, ShortEmitsToObject<Emits>>
     : T extends Component<
-          infer Props,
-          infer RawBindings,
-          infer D,
-          infer C,
-          infer M
-        >
-      ? // NOTE we override Props/RawBindings/D to make sure is not `unknown`
-      ComponentPublicInstance<
-          unknown extends Props ? {} : Props,
-          unknown extends RawBindings ? {} : RawBindings,
-          unknown extends D ? {} : D,
-          C,
-          M
-        >
+      infer Props,
+      infer RawBindings,
+      infer D,
+      infer C,
+      infer M
+    >
+      ? ComponentPublicInstance<
+        // NOTE we override Props/RawBindings/D to make sure is not `unknown`
+        unknown extends Props ? {} : Props,
+        unknown extends RawBindings ? {} : RawBindings,
+        unknown extends D ? {} : D,
+        C,
+        M
+      >
       : never // not a vue Component
 
 type ShortEmitsToObject<E> = E extends Record<string, any[]> ? {
   [K in keyof E]: (...args: E[K]) => any;
-} : E;
+} : E
 
 export type JSXComponent<Props = any> =
   | { new (): ComponentPublicInstance<Props> }

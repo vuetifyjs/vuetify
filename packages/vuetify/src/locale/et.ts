@@ -20,6 +20,9 @@ export default {
       activateNone: 'Vajuta uuesti sorteerimise eemaldamiseks.',
       activateDescending: 'Vajuta uuesti, et sorteerida kahanevalt.',
       activateAscending: 'Vajuta kasvavalt sorteerimiseks.',
+      selectRow: 'Vali rida',
+      selectAll: 'Vali kõik',
+      selectGroup: 'Vali rühm',
     },
     sortBy: 'Sorteerimise alus',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'kuni',
+  },
+  monthPicker: {
+    title: 'Valige kuu',
+    itemsSelected: '{0} valitud',
+    header: 'Sisesta kuu',
+    range: {
+      title: 'Sisesta kuud',
+    },
+    ariaLabel: {
+      previousYear: 'Eelmine aasta',
+      nextYear: 'Järgmine aasta',
+      selectYear: 'Vali aasta',
+      currentMonth: 'Praegune kuu, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valitud',
@@ -77,7 +94,7 @@ export default {
     clear: 'Tühjenda {0}',
     prependAction: '{0} eelnev toiming',
     appendAction: '{0} lisatud toiming',
-    otp: 'Palun sisesta OTP sümbol {0}',
+    otp: 'Sisestage kinnituskood',
   },
   fileInput: {
     counter: '{0} faili',
@@ -117,6 +134,15 @@ export default {
       item: 'Hinnang {0} {1}st',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Miinimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Rohkem valikuid',
+  },
   loading: 'Laadimine...',
   infiniteScroll: {
     loadMore: 'Laadi rohkem',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Tagasiklahv',
     space: 'Tühik',
     plus: 'pluss',
-    shortcut: 'Klaviatuuri otsetee: {0}',
+    shortcut: 'Klaviatuuri otsetee, {0}',
     or: 'või',
   },
-  video: {
+  media: {
     play: 'Esita',
     pause: 'Peata',
     seek: 'Otsi',
     volume: 'Helitugevus',
-    showVolume: 'Näita helitugevuse regulaatorit',
     mute: 'Vaigista',
     unmute: 'Lülita vaigistus välja',
     enterFullscreen: 'Täisekraan',

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktifkan untuk menghapus penyortiran.',
       activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
       activateAscending: 'Aktifkan untuk mengurutkan keatas.',
+      selectRow: 'Pilih baris',
+      selectAll: 'Pilih semua',
+      selectGroup: 'Pilih grup',
     },
     sortBy: 'Urutkan berdasar',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'hingga',
+  },
+  monthPicker: {
+    title: 'Pilih bulan',
+    itemsSelected: '{0} dipilih',
+    header: 'Masukkan bulan',
+    range: {
+      title: 'Masukkan bulan',
+    },
+    ariaLabel: {
+      previousYear: 'Tahun sebelumnya',
+      nextYear: 'Tahun berikutnya',
+      selectYear: 'Pilih tahun',
+      currentMonth: 'Bulan ini, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
@@ -77,7 +94,7 @@ export default {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',
     appendAction: '{0} aksi diakhir',
-    otp: 'Masukkan karakter OTP {0}',
+    otp: 'Masukkan kode verifikasi',
   },
   fileInput: {
     counter: '{0} berkas',
@@ -117,6 +134,15 @@ export default {
       item: 'Penilaian {0} dari {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Opsi lainnya',
+  },
   loading: 'Memuat...',
   infiniteScroll: {
     loadMore: 'Muat lebih banyak',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Hapus',
     space: 'Spasi',
     plus: 'plus',
-    shortcut: 'Pintasan keyboard: {0}',
+    shortcut: 'Pintasan keyboard, {0}',
     or: 'atau',
   },
-  video: {
+  media: {
     play: 'Putar',
     pause: 'Jeda',
     seek: 'Cari',
     volume: 'Volume',
-    showVolume: 'Tampilkan kontrol volume',
     mute: 'Bisukan',
     unmute: 'Bunyikan',
     enterFullscreen: 'Layar penuh',

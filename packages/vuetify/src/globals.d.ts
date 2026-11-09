@@ -12,11 +12,14 @@ import type {
   VNode,
 } from 'vue'
 import type { TouchStoredHandlers } from './directives/touch'
+import type { TouchHoldState } from './directives/touch-hold'
 
 declare global {
   interface Element {
     _clickOutside?: Record<number, {
       onClick: EventListener
+      onAuxclick: EventListener
+      onContextmenu: EventListener
       onMousedown: EventListener
     } | undefined> & { lastMousedownWasOutside: boolean }
     _onResize?: Record<number, {
@@ -49,6 +52,7 @@ declare global {
     _touchHandlers?: {
       [_uid: number]: TouchStoredHandlers
     }
+    _touchHold?: Record<number, TouchHoldState | undefined>
     _transitionInitialStyles?: {
       position: string
       top: string
@@ -93,8 +97,8 @@ declare global {
     focusVisible?: boolean
   }
 
-  function parseInt(s: string | number, radix?: number): number
-  function parseFloat(string: string | number): number
+  function parseInt (s: string | number, radix?: number): number
+  function parseFloat (string: string | number): number
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string

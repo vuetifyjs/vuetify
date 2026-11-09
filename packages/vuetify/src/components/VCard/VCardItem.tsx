@@ -157,7 +157,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                   v-slots:default={ slots.append }
                 />
               )}
-           </div>
+            </div>
           )}
         </props.tag>
       )

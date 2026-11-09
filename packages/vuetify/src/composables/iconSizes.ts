@@ -4,12 +4,12 @@ import { propsFactory } from '@/util'
 
 // Types
 import type { ComputedGetter, PropType } from 'vue'
-import type { VIconBtnSizes } from '@/labs/VIconBtn/VIconBtn'
+import type { VIconBtnSizes } from '@/components/VIconBtn/VIconBtn'
 
 // Types
 export interface IconSizeProps {
   iconSize?: VIconBtnSizes | number | string
-  iconSizes: [VIconBtnSizes, number][]
+  iconSizes?: [VIconBtnSizes, number][]
 }
 
 // Composables

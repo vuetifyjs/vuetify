@@ -2,9 +2,11 @@
 import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
+import { shallowRef } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -38,6 +40,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
   setup (props, { slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
+    const controlRef = shallowRef<VSelectionControl>()
 
     function onChange (v: any) {
       if (indeterminate.value) {
@@ -49,6 +52,7 @@ export const VCheckboxBtn = genericComponent<new <T>(
       const controlProps = omit(VSelectionControl.filterProps(props), ['modelValue'])
       return (
         <VSelectionControl
+          ref={ controlRef }
           { ...controlProps }
           v-model={ model.value }
           class={[
@@ -58,13 +62,13 @@ export const VCheckboxBtn = genericComponent<new <T>(
           style={ props.style }
           type="checkbox"
           onUpdate:modelValue={ onChange }
-          aria-checked={ indeterminate.value ? 'mixed' : undefined }
+          indeterminate={ indeterminate.value }
           v-slots={ slots }
         />
       )
     })
 
-    return {}
+    return forwardRefs({}, controlRef)
   },
 })
 

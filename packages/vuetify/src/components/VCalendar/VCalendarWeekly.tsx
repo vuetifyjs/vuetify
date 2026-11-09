@@ -1,5 +1,5 @@
 // Components
-import { VIconBtn } from '@/labs/VIconBtn'
+import { VIconBtn } from '@/components/VIconBtn'
 
 // Composables
 import { makeCalendarBaseProps, useCalendarBase } from './composables/calendarBase'
@@ -93,7 +93,7 @@ export const VCalendarWeekly = defineComponent({
       }
 
       return createNativeLocaleFormatter(
-        base.locale.current.value,
+        base.formatLocale.value,
         (_tms, short) => ({ timeZone: 'UTC', month: short ? 'short' : 'long' })
       )
     })

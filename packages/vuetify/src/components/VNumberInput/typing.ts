@@ -1,7 +1,7 @@
 /* eslint-disable complexity */
 
 // Utilities
-import { escapeForRegex, extractNumber } from '@/util'
+import { escapeForRegex, extractNumber, normalizeMinusSign } from '@/util'
 
 type GroupingOption = 'always' | 'auto' | 'min2' | boolean
 
@@ -11,11 +11,16 @@ interface GroupedInputOptions {
   precision: number | null
   grouping: GroupingOption
   locale: string
+  minusSign: string
 }
 
 interface InputResult {
   text: string
   cursor: number
+}
+
+function localizeMinusSign (text: string, minusSign: string): string {
+  return minusSign === '-' ? text : text.replace('-', minusSign)
 }
 
 function stripGrouping (text: string, groupSeparator: string): string {
@@ -90,31 +95,35 @@ function toDisplayPosition (text: string, groupSeparator: string, logicalPositio
 
 /**
  * Process a beforeinput event for plain (non-grouped) number input.
- * Returns { text, cursor } when the input needs correction, or null to let browser handle it.
+ * Returns { text, cursor } when the input needs correction, false when nothing can be inserted, or null to let browser handle it.
  */
 export function processPlainInput (
   data: string | null,
   value: string,
   selectionStart: number,
   selectionEnd: number,
-  options: { decimalSeparator: string, precision: number | null },
-): InputResult | null {
+  options: { decimalSeparator: string, precision: number | null, minusSign: string },
+): InputResult | null | false {
   if (!data) return null
 
-  const { decimalSeparator, precision } = options
+  const { decimalSeparator, precision, minusSign } = options
+
+  value = normalizeMinusSign(value)
+
   const beforePart = value.slice(0, selectionStart)
   let cleanData = extractNumber(data, precision, decimalSeparator)
   if (cleanData.startsWith('-') && beforePart.length > 0) cleanData = cleanData.slice(1)
-  if (cleanData.includes(decimalSeparator) && beforePart.includes(decimalSeparator)) {
+  if (cleanData.includes(decimalSeparator) && (beforePart + value.slice(selectionEnd)).includes(decimalSeparator)) {
     cleanData = cleanData.replace(decimalSeparator, '')
   }
+  if (!cleanData) return false
 
   const candidate = beforePart + cleanData + value.slice(selectionEnd)
   const validPattern = new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator)}?\\d*$`)
 
   if (!validPattern.test(candidate)) {
     return {
-      text: extractNumber(candidate, precision, decimalSeparator),
+      text: localizeMinusSign(extractNumber(candidate, precision, decimalSeparator), minusSign),
       cursor: selectionStart,
     }
   }
@@ -122,7 +131,7 @@ export function processPlainInput (
   if (precision != null && (candidate.split(decimalSeparator)[1]?.length ?? 0) > precision) {
     const text = extractNumber(candidate, precision, decimalSeparator)
     return {
-      text,
+      text: localizeMinusSign(text, minusSign),
       cursor: text === beforePart + value.slice(selectionEnd)
         ? selectionStart
         : selectionStart + cleanData.length,
@@ -131,14 +140,14 @@ export function processPlainInput (
 
   if (cleanData === data) return null
   return {
-    text: candidate,
+    text: localizeMinusSign(candidate, minusSign),
     cursor: selectionStart + cleanData.length,
   }
 }
 
 /**
  * Process a beforeinput event for grouped number input.
- * Returns { text, cursor } to apply, or null for interactions that do not need override
+ * Returns { text, cursor } to apply, false when nothing can be inserted, or null for interactions that do not need override
  */
 export function processGroupedInput (
   inputType: string,
@@ -147,8 +156,12 @@ export function processGroupedInput (
   selectionStart: number,
   selectionEnd: number,
   options: GroupedInputOptions,
-): InputResult | null {
-  const { groupSeparator, decimalSeparator, precision, grouping, locale } = options
+): InputResult | null | false {
+  const { groupSeparator, decimalSeparator, precision, grouping, locale, minusSign } = options
+
+  value = normalizeMinusSign(value)
+  data = data && normalizeMinusSign(data)
+
   const raw = stripGrouping(value, groupSeparator)
   const logicalStart = toLogicalPosition(value, groupSeparator, selectionStart)
   const logicalEnd = toLogicalPosition(value, groupSeparator, selectionEnd)
@@ -158,12 +171,7 @@ export function processGroupedInput (
   let newLogicalCursor: number
 
   switch (inputType) {
-    case 'insertText': {
-      if (!data) return null
-      newRaw = raw.slice(0, logicalStart) + data + raw.slice(logicalEnd)
-      newLogicalCursor = logicalStart + data.length
-      break
-    }
+    case 'insertText':
     case 'insertFromPaste':
     case 'insertFromDrop': {
       if (!data) return null
@@ -172,9 +180,10 @@ export function processGroupedInput (
       if (cleanData.startsWith('-') && rawBefore.length > 0) {
         cleanData = cleanData.slice(1)
       }
-      if (cleanData.includes(decimalSeparator) && rawBefore.includes(decimalSeparator)) {
+      if (cleanData.includes(decimalSeparator) && (rawBefore + raw.slice(logicalEnd)).includes(decimalSeparator)) {
         cleanData = cleanData.replace(decimalSeparator, '')
       }
+      if (!cleanData) return false
       newRaw = rawBefore + cleanData + raw.slice(logicalEnd)
       newLogicalCursor = logicalStart + cleanData.length
       break
@@ -275,5 +284,5 @@ export function processGroupedInput (
   const formatted = addGrouping(newRaw, groupSeparator, decimalSeparator, grouping, locale)
   const cursor = toDisplayPosition(formatted, groupSeparator, newLogicalCursor)
 
-  return { text: formatted, cursor }
+  return { text: localizeMinusSign(formatted, minusSign), cursor }
 }

@@ -1,6 +1,8 @@
 {
   "description": "Complements the `v-slider` component letting user to pick 2 data points on the linear scale.",
   "props": {
+    "endThumbAriaLabel": "Accessible name for the end thumb. Accepts locale keys.",
+    "startThumbAriaLabel": "Accessible name for the start thumb. Accepts locale keys.",
     "strict": "Disallows dragging the ending thumb past the starting thumb and vice versa."
   },
   "slots": {

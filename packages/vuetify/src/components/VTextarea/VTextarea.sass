@@ -36,6 +36,7 @@
         position: absolute
         top: 0
         left: 0
+        overflow: hidden
         pointer-events: none
 
         @include tools.layer('overrides')
@@ -45,6 +46,14 @@
     &--no-resize
       .v-field__input
         resize: none
+
+    &--auto-grow:not(&--capped) textarea.v-field__input:not(.v-textarea__sizer)
+      overflow-y: hidden
+
+    &--field-sizing textarea.v-field__input
+      field-sizing: content
+      height: auto
+      min-height: var(--v-textarea-min-height)
 
     textarea
       flex: 1

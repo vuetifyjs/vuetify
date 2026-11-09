@@ -9,6 +9,9 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     @layer vuetify-utilities {
   @layer theme-base {
   :root {
+    color-scheme: light;
+  }
+  :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;
@@ -72,7 +75,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-highlight-opacity: 8%;
   }
   .v-theme--light {
-    color-scheme: normal;
+    color-scheme: light;
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;
@@ -396,6 +399,9 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     @layer vuetify-utilities {
   @layer theme-base {
   :where(#my-app) {
+    color-scheme: light;
+  }
+  :where(#my-app) {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;
@@ -459,7 +465,7 @@ exports[`createTheme > should allow for themes to be scoped 1`] = `
     --v-highlight-opacity: 8%;
   }
   :where(#my-app) .v-theme--light {
-    color-scheme: normal;
+    color-scheme: light;
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;
@@ -788,6 +794,9 @@ exports[`createTheme > should create style element 1`] = `
     @layer vuetify-utilities {
   @layer theme-base {
   :root {
+    color-scheme: light;
+  }
+  :root {
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;
@@ -851,7 +860,7 @@ exports[`createTheme > should create style element 1`] = `
     --v-highlight-opacity: 8%;
   }
   .v-theme--light {
-    color-scheme: normal;
+    color-scheme: light;
     --v-theme-background: 255,255,255;
     --v-theme-background-overlay-multiplier: 1;
     --v-theme-surface: 255,255,255;

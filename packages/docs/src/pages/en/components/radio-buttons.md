@@ -12,7 +12,7 @@ features:
   label: 'C: VRadio'
   report: true
   github: /components/VRadio/
-  spec: https://m2.material.io/components/radio-buttons
+  spec: https://m3.material.io/components/radio-buttons
 ---
 
 # Radio buttons

@@ -20,6 +20,9 @@ export default {
       activateNone: 'Sıralamanı yığışdır.',
       activateDescending: 'Azalan sıra ilə düz.',
       activateAscending: 'Artan sıra ilə düz.',
+      selectRow: 'Sıra seç',
+      selectAll: 'Hamısını seç',
+      selectGroup: 'Qrupu seç',
     },
     sortBy: 'Sırala',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'ilə',
+  },
+  monthPicker: {
+    title: 'Ayı seçin',
+    itemsSelected: '{0} seçilib',
+    header: 'Ayı daxil edin',
+    range: {
+      title: 'Ayları daxil edin',
+    },
+    ariaLabel: {
+      previousYear: 'Əvvəlki il',
+      nextYear: 'Növbəti il',
+      selectYear: 'İli seçin',
+      currentMonth: 'Cari ay, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seçilib',
@@ -77,7 +94,7 @@ export default {
     clear: 'Təmizlə {0}',
     prependAction: '{0} qabaqcıl əməliyyat',
     appendAction: '{0} sonrakı əməliyyat',
-    otp: 'OTP daxil et {0}',
+    otp: 'Təsdiq kodunu daxil edin',
   },
   fileInput: {
     counter: '{0} fayl',
@@ -117,6 +134,15 @@ export default {
       item: 'Reytinq {0}/{1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Daha çox seçim',
+  },
   loading: 'Yüklənir...',
   infiniteScroll: {
     loadMore: 'Daha çox yüklə',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Geri Sil',
     space: 'Boşluq',
     plus: 'plus',
-    shortcut: 'Klaviatura qısayolu: {0}',
+    shortcut: 'Klaviatura qısayolu, {0}',
     or: 'və ya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Pauza',
     seek: 'Axtar',
     volume: 'Səs',
-    showVolume: 'Səs səviyyəsini göstər',
     mute: 'Səsi kəs',
     unmute: 'Səsi aç',
     enterFullscreen: 'Tam ekran',

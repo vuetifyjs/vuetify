@@ -17,7 +17,7 @@ import { makeDelayProps, useDelay } from '@/composables/delay'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeFocusTrapProps, useFocusTrap } from '@/composables/focusTrap'
-import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { makeLayoutItemProps, useLayout, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useRouter } from '@/composables/router'
@@ -29,7 +29,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, nextTick, readonly, ref, shallowRef, toRef, Transition, watch } from 'vue'
-import { genericComponent, omit, propsFactory, toPhysical, useRender } from '@/util'
+import { genericComponent, isString, omit, propsFactory, resolveSize, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -51,8 +51,10 @@ export const makeVNavigationDrawerProps = propsFactory({
   color: String,
   disableResizeWatcher: Boolean,
   disableRouteWatcher: Boolean,
+  expanded: Boolean,
   expandOnHover: Boolean,
   floating: Boolean,
+  modal: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,
     default: null,
@@ -105,6 +107,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   emits: {
     'update:modelValue': (val: boolean) => true,
     'update:rail': (val: boolean) => true,
+    'update:expanded': (val: boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -122,19 +125,22 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
 
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
+    const isExpanded = useProxiedModel(props, 'expanded')
 
     const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
       isHovering.value = value
+      if (props.expandOnHover) isExpanded.value = value
     })
 
-    const width = computed(() => {
-      return (props.rail && props.expandOnHover && isHovering.value)
-        ? Number(props.width)
-        : Number(props.rail ? props.railWidth : props.width)
-    })
-    const location = computed(() => {
-      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
-    })
+    const { layoutRect } = useLayout()
+
+    const location = computed(() => toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'top' | 'bottom')
+    const isVertical = computed(() => location.value === 'top' || location.value === 'bottom')
+    const layoutSpan = computed(() => (isVertical.value ? layoutRect.value?.height : layoutRect.value?.width) ?? 0)
+
+    const width = computed(() => props.rail && !isExpanded.value ? props.railWidth : props.width)
+    const widthPx = computed(() => resolveSize(width.value, layoutSpan.value))
+
     const isPersistent = toRef(() => props.persistent)
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
     const isSticky = computed(() =>
@@ -146,7 +152,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     useFocusTrap(props, { isActive, localTop: isTemporary, contentEl: rootEl })
 
     useToggleScope(() => props.expandOnHover && props.rail != null, () => {
-      watch(isHovering, val => emit('update:rail', !val))
+      watch(isExpanded, val => emit('update:rail', !val))
     })
 
     useToggleScope(() => !props.disableResizeWatcher, () => {
@@ -169,17 +175,19 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       el: rootEl,
       isActive,
       isTemporary,
-      width,
+      width: widthPx,
       touchless: toRef(() => props.touchless),
       position: location,
     })
 
     const layoutSize = computed(() => {
       const size = isTemporary.value ? 0
-        : props.rail && props.expandOnHover ? Number(props.railWidth)
-        : width.value
+        : props.rail ? props.railWidth
+        : props.width
 
-      return isDragging.value ? size * dragProgress.value : size
+      return isDragging.value
+        ? resolveSize(size, layoutSpan.value) * dragProgress.value
+        : size
     })
     const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
@@ -191,18 +199,23 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       disableTransitions: toRef(() => isDragging.value),
       absolute: computed(() =>
         // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        props.absolute || (isSticky.value && typeof isStuck.value !== 'string')
+        props.absolute || (isSticky.value && !isString(isStuck.value))
       ),
     })
 
     const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
     const scrimColor = useBackgroundColor(() => {
-      return typeof props.scrim === 'string' ? props.scrim : null
+      return isString(props.scrim) ? props.scrim : null
     })
+    const showScrim = computed(() => !!props.scrim && (
+      isTemporary.value
+        ? isDragging.value || isActive.value
+        : props.modal && isActive.value && !!props.rail && isExpanded.value
+    ))
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
-        opacity: dragProgress.value * 0.2,
+        opacity: `calc(var(--v-navigation-drawer-scrim-opacity, 0.2) * ${dragProgress.value})`,
         transition: 'none',
       } : undefined,
       ...layoutItemScrimStyles.value,
@@ -228,6 +241,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               `v-navigation-drawer--${location.value}`,
               {
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
+                'v-navigation-drawer--expanded': isExpanded.value,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
@@ -301,14 +315,15 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             )}
           </props.tag>
 
-          <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
+          <Transition name="fade-transition" appear>
+            { showScrim.value && (
               <div
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => {
                   if (isPersistent.value) return
-                  isActive.value = false
+                  if (isTemporary.value) isActive.value = false
+                  else isExpanded.value = false
                 }}
                 { ...scopeId }
               />

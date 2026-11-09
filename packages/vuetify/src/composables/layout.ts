@@ -9,13 +9,25 @@ import {
   onBeforeUnmount,
   onDeactivated,
   onMounted,
+  onScopeDispose,
   provide,
   reactive,
   ref,
   shallowRef, toRef,
   useId,
+  watch,
 } from 'vue'
-import { consoleWarn, convertToUnit, findChildrenWithProvide, getCurrentInstance, propsFactory } from '@/util'
+import {
+  consoleWarn,
+  convertToUnit,
+  findChildrenWithProvide,
+  getCurrentInstance,
+  isPercentage,
+  propsFactory,
+  resolveSize,
+  templateRef,
+} from '@/util'
+import { Box } from '@/util/box'
 
 // Types
 import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
@@ -45,6 +57,7 @@ interface LayoutProvide {
       layoutSize: Ref<number | string>
       elementSize: Ref<number | string | undefined>
       active: Ref<boolean>
+      isMounted: Readonly<Ref<boolean>>
       disableTransitions?: Ref<boolean>
       absolute: Ref<boolean | undefined>
     }
@@ -74,8 +87,6 @@ export const makeLayoutProps = propsFactory({
   } as Prop<string[]>,
   fullHeight: Boolean,
 }, 'layout')
-
-// Composables
 export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
@@ -96,6 +107,7 @@ export function useLayout () {
     getLayoutItem: layout.getLayoutItem,
     mainRect: layout.mainRect,
     mainStyles: layout.mainStyles,
+    layoutRect: layout.layoutRect,
   }
 }
 
@@ -123,12 +135,16 @@ export function useLayoutItem (options: {
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
+  const isMounted = shallowRef(false)
+  onMounted(() => isMounted.value = true)
+
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
   } = layout.register(vm, {
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
+    isMounted,
     id,
   })
 
@@ -142,9 +158,12 @@ const generateLayers = (
   positions: Map<string, Ref<Position>>,
   layoutSizes: Map<string, Ref<number | string>>,
   activeItems: Map<string, Ref<boolean>>,
-): { id: string, layer: Layer }[] => {
+  sizeOf: (value: number | string | undefined, position: Position) => number,
+  percentOf: (value: number | string | undefined) => number,
+): { id: string, layer: Layer, percent: Layer }[] => {
   let previousLayer: Layer = { top: 0, left: 0, right: 0, bottom: 0 }
-  const layers = [{ id: '', layer: { ...previousLayer } }]
+  let previousPercent: Layer = { ...previousLayer }
+  const layers = [{ id: '', layer: { ...previousLayer }, percent: { ...previousPercent } }]
   for (const id of layout) {
     const position = positions.get(id)
     const amount = layoutSizes.get(id)
@@ -153,15 +172,22 @@ const generateLayers = (
 
     const layer = {
       ...previousLayer,
-      [position.value]: parseInt(previousLayer[position.value], 10) + (active.value ? parseInt(amount.value, 10) : 0),
+      [position.value]: previousLayer[position.value] + (active.value ? sizeOf(amount.value, position.value) : 0),
+    }
+
+    const percent = {
+      ...previousPercent,
+      [position.value]: previousPercent[position.value] + (active.value ? percentOf(amount.value) : 0),
     }
 
     layers.push({
       id,
       layer,
+      percent,
     })
 
     previousLayer = layer
+    previousPercent = percent
   }
 
   return layers
@@ -176,7 +202,54 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const priorities = reactive(new Map<string, Ref<number>>())
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
-  const { resizeRef, contentRect: layoutRect } = useResizeObserver()
+  const layoutRef = templateRef()
+  const layoutRect = shallowRef<DOMRectReadOnly>()
+  useResizeObserver(() => layoutRef.el, entries => {
+    const { left, top, width, height } = entries[0].contentRect
+    layoutRect.value = new Box({ x: left, y: top, width, height }) as DOMRectReadOnly
+  })
+
+  function isHorizontal (position: Position) {
+    return position === 'left' || position === 'right'
+  }
+
+  // layoutRect follows content height, so only percentage sizes may depend on it
+  function sizeOf (value: number | string | undefined, position: Position) {
+    if (!isPercentage(value)) return resolveSize(value)
+
+    const span = isHorizontal(position)
+      ? layoutRect.value?.width
+      : layoutRect.value?.height
+
+    return resolveSize(value, span ?? 0)
+  }
+
+  function percentOf (value: number | string | undefined) {
+    return isPercentage(value) && !layoutRect.value ? parseFloat(value) : 0
+  }
+
+  function toOffset (px: number, percent: number) {
+    return percent ? `calc(${percent}% + ${px}px)` : `${px}px`
+  }
+
+  const isResizing = shallowRef(false)
+  let resizeTimeout = -1
+  const percentageAxes = computed(() => {
+    const sized = registered.value.filter(id => isPercentage(layoutSizes.get(id)?.value))
+    return {
+      x: sized.some(id => isHorizontal(positions.get(id)!.value)),
+      y: sized.some(id => !isHorizontal(positions.get(id)!.value)),
+    }
+  })
+  watch([
+    () => percentageAxes.value.x && layoutRect.value?.width,
+    () => percentageAxes.value.y && layoutRect.value?.height,
+  ], () => {
+    isResizing.value = true
+    window.clearTimeout(resizeTimeout)
+    resizeTimeout = window.setTimeout(() => (isResizing.value = false), 100)
+  })
+  onScopeDispose(() => window.clearTimeout(resizeTimeout))
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -192,8 +265,8 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
       if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue
 
-      map.set(bottom, { position: topPosition.value, amount: parseInt(topAmount.value, 10) })
-      map.set(top, { position: bottomPosition.value, amount: -parseInt(bottomAmount.value, 10) })
+      map.set(bottom, { position: topPosition.value, amount: sizeOf(topAmount.value, topPosition.value) })
+      map.set(top, { position: bottomPosition.value, amount: -sizeOf(bottomAmount.value, bottomPosition.value) })
     }
 
     return map
@@ -206,11 +279,11 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       const items = registered.value.filter(id => priorities.get(id)?.value === p)
       layout.push(...items)
     }
-    return generateLayers(layout, positions, layoutSizes, activeItems)
+    return generateLayers(layout, positions, layoutSizes, activeItems, sizeOf, percentOf)
   })
 
   const transitionsEnabled = computed(() => {
-    return !Array.from(disabledTransitions.values()).some(ref => ref.value)
+    return !isResizing.value && !Array.from(disabledTransitions.values()).some(ref => ref.value)
   })
 
   const mainRect = computed(() => {
@@ -218,11 +291,12 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   })
 
   const mainStyles = toRef(() => {
+    const { percent } = layers.value[layers.value.length - 1]
     return {
-      '--v-layout-left': convertToUnit(mainRect.value.left),
-      '--v-layout-right': convertToUnit(mainRect.value.right),
-      '--v-layout-top': convertToUnit(mainRect.value.top),
-      '--v-layout-bottom': convertToUnit(mainRect.value.bottom),
+      '--v-layout-left': toOffset(mainRect.value.left, percent.left),
+      '--v-layout-right': toOffset(mainRect.value.right, percent.right),
+      '--v-layout-top': toOffset(mainRect.value.top, 0),
+      '--v-layout-bottom': toOffset(mainRect.value.bottom, 0),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     } satisfies CSSProperties
   })
@@ -236,7 +310,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       return {
         id,
         ...layer,
-        size: Number(size!.value),
+        size: sizeOf(size!.value, position!.value),
         position: position!.value,
       }
     })
@@ -248,9 +322,9 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = shallowRef(false)
+  const isBooted = shallowRef(false)
   onMounted(() => {
-    isMounted.value = true
+    isBooted.value = true
   })
 
   provide(VuetifyLayoutKey, {
@@ -263,6 +337,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         layoutSize,
         elementSize,
         active,
+        isMounted,
         disableTransitions,
         absolute,
       }
@@ -270,8 +345,19 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       priorities.set(id, order)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
-      activeItems.set(id, active)
-      disableTransitions && disabledTransitions.set(id, disableTransitions)
+      // post-boot registrations may sit in an offscreen pending Suspense branch, so they only
+      // count once mounted; boot state is read once — hydrating items are on screen, not pending
+      const isEarly = !isBooted.value
+      activeItems.set(id, toRef(() => active.value && (isEarly || isMounted.value)))
+
+      const isRelocating = shallowRef(false)
+      watch(position, () => {
+        isRelocating.value = true
+        // two frames so the browser commits the new edge with transitions off
+        requestAnimationFrame(() => requestAnimationFrame(() => isRelocating.value = false))
+      })
+
+      disabledTransitions.set(id, toRef(() => isRelocating.value || !!disableTransitions?.value))
 
       const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
       const instanceIndex = instances.indexOf(vm)
@@ -280,50 +366,57 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       else registered.value.push(id)
 
       const index = computed(() => items.value.findIndex(i => i.id === id))
-      const zIndex = computed(() => rootZIndex.value + (layers.value.length * 2) - (index.value * 2))
+      const zIndex = computed(() => rootZIndex.value + (isBooted.value ? layers.value.length * 2 : 0) - (index.value * 2))
 
       const layoutItemStyles = computed<CSSProperties>(() => {
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
-        const size = Number(elementSize.value ?? layoutSize.value)
+        const direction = isOppositeHorizontal || isOppositeVertical ? 1 : -1
+        const offscreen = `calc(${100 * direction}% + ${direction}px)`
         const transformFunction = `translate${isHorizontal ? 'X' : 'Y'}`
-        const transformValue = active.value ? 0
-          : (size === 0 ? 100 : size + 1) * (isOppositeHorizontal || isOppositeVertical ? 1 : -1)
-        const unit = size === 0 ? '%' : 'px'
 
         const styles = {
           [position.value]: 0,
           zIndex: zIndex.value,
-          transform: `${transformFunction}(${transformValue}${unit})`,
+          transform: `${transformFunction}(${active.value ? '0px' : offscreen})`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
 
-        if (!isMounted.value) return styles
+        // percentages stay in CSS until the layout is measured
+        const measuredSize = isPercentage(elementSize.value) && layoutRect.value
+          ? sizeOf(elementSize.value, position.value)
+          : elementSize.value
 
-        const item = items.value[index.value]
+        const item = { ...items.value[index.value] }
 
-        if (!item) consoleWarn(`[Vuetify] Could not find layout item "${id}"`)
+        if (!items.value[index.value]) consoleWarn(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {
           item[overlap.position] += overlap.amount
         }
 
+        const { percent } = layers.value[index.value]
+        const left = toOffset(item.left, percent.left)
+        const right = toOffset(item.right, percent.right)
+        const top = toOffset(item.top, percent.top)
+        const bottom = toOffset(item.bottom, percent.bottom)
+
         return {
           ...styles,
           height:
-            isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)`
-            : elementSize.value ? `${elementSize.value}px`
+            isHorizontal ? `calc(100% - ${top} - ${bottom})`
+            : measuredSize ? convertToUnit(measuredSize)
             : undefined,
-          left: isOppositeHorizontal ? undefined : `${item.left}px`,
-          right: isOppositeHorizontal ? `${item.right}px` : undefined,
-          top: position.value !== 'bottom' ? `${item.top}px` : undefined,
-          bottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
+          left: isOppositeHorizontal ? undefined : left,
+          right: isOppositeHorizontal ? right : undefined,
+          top: position.value !== 'bottom' ? top : undefined,
+          bottom: position.value !== 'top' ? bottom : undefined,
           width:
-            !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)`
-            : elementSize.value ? `${elementSize.value}px`
+            !isHorizontal ? `calc(100% - ${left} - ${right})`
+            : measuredSize ? convertToUnit(measuredSize)
             : undefined,
         }
       })
@@ -366,6 +459,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     getLayoutItem,
     items,
     layoutRect,
-    layoutRef: resizeRef,
+    layoutRef,
   }
 }

@@ -1,10 +1,12 @@
 {
+  "description": "Displays values as a grid of colored cells, e.g. activity over days and weeks.",
   "props": {
     "cellSize": "Sets size of each cell. A single value sets both width and height. Accepts `[width, height]` tuple.",
     "columns": "Explicit list of column keys. When omitted, columns are derived from the items.",
+    "emptyColor": "Fill color for cells with `null` value.",
     "gap": "Spacing between cells.",
     "groupBy": "Property name or function used to split items into separate column groups (e.g. by month).",
-    "groupGap": "Spacing between column groups. Defaults to one cell width plus `gap`.",
+    "groupGap": "Spacing between column groups, in pixels.",
     "hideColumnHeaders": "Hides the column labels.",
     "hideRowHeaders": "Hides the row labels.",
     "legend": "Controls the legend rendered below the grid. Accepts boolean or an object allowing you to configure labels and legend cell size.",
@@ -21,6 +23,7 @@
   },
   "slots": {
     "cell": "Slot used to render custom content inside each cell.",
+    "column-header": "Slot used to customize the column labels shown above the grid. Receives `{ column, index, items }`.",
     "group-header": "Slot used to customize the group label shown above each column group.",
     "legend": "Slot used to fully override the legend.",
     "row-header": "Slot used to customize the row label shown on the left."

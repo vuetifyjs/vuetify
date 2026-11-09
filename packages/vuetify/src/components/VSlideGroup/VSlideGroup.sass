@@ -59,3 +59,33 @@
     .v-slide-group__container
       overflow-x: hidden
       overflow-y: auto
+
+  .v-slide-group--draggable .v-slide-group__container
+    cursor: grab
+
+  .v-slide-group--dragging
+    .v-slide-group__container
+      cursor: grabbing
+      user-select: none
+
+    .v-slide-group__content
+      transition: none
+
+      @if $slide-group-overscroll-max > 0
+        @media (prefers-reduced-motion: no-preference)
+          translate: calc(var(--v-slide-group-overscroll) * #{$slide-group-overscroll-max}) 0
+
+    &.v-slide-group--vertical .v-slide-group__content
+      @if $slide-group-overscroll-max > 0
+        @media (prefers-reduced-motion: no-preference)
+          translate: 0 calc(var(--v-slide-group-overscroll) * #{$slide-group-overscroll-max})
+
+  .v-slide-group--snap
+    .v-slide-group__container
+      scroll-snap-type: x mandatory
+
+    .v-slide-group__content > *
+      scroll-snap-align: var(--v-slide-group-snap-align, start)
+
+    &.v-slide-group--vertical .v-slide-group__container
+      scroll-snap-type: y mandatory

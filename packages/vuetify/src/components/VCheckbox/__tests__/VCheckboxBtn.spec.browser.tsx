@@ -57,4 +57,15 @@ describe('VCheckboxBtn', () => {
     expect(input).not.toBeChecked()
     expect(model.value).toBe(false)
   })
+
+  it('should keep indeterminate state when it is readonly', async () => {
+    render(() => (
+      <VCheckboxBtn modelValue={ false } indeterminate readonly />
+    ))
+
+    const input = screen.getByCSS('input')
+
+    await userEvent.click(input)
+    expect(input).toBePartiallyChecked()
+  })
 })

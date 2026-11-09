@@ -1,7 +1,7 @@
 import { VAlert } from '..'
 
 // Utilities
-import { render, screen, showcase } from '@test'
+import { render, screen, showcase, wait } from '@test'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 
@@ -37,6 +37,27 @@ describe('VAlert', () => {
         // TODO: useless assert
         expect(alert).toHaveTextContent(defaultColors[idx])
       })
+    })
+  })
+
+  describe('timeout', () => {
+    // keeps the alert away from the resting cursor, which would pause the countdown
+    const offset = { paddingTop: '200px' }
+
+    it('starts counting once scrolled into view', async () => {
+      render(() => (
+        <div style={ offset }>
+          <div style={{ height: '200vh' }} />
+          <VAlert text="hidden" timeout={ 200 } />
+        </div>
+      ))
+
+      const alert = await screen.findByCSS('.v-alert')
+      await wait(400)
+      expect(alert).toBeInTheDocument()
+
+      alert.scrollIntoView()
+      await expect.poll(() => screen.queryByCSS('.v-alert')).toBeNull()
     })
   })
 

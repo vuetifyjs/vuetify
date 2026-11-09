@@ -1,5 +1,3 @@
-/* eslint-disable local-rules/sort-imports */
-
 // Styles
 import './styles/main.sass'
 

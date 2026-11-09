@@ -1,0 +1,11 @@
+{
+  "description": "Combines a text field with a time picker.",
+  "props": {
+    "format": "Hour cycle used for typing and display, `ampm` or `24hr`. Falls back to the hour cycle of the current locale.",
+    "hideActions": "Hide the Cancel and OK buttons, and automatically update the value when a time is selected.",
+    "location": "Specifies the time picker's location. Can combine by using a space separated string.",
+    "modelValue": "The selected time as a 24-hour `HH:mm` string, or `HH:mm:ss` with **use-seconds**.",
+    "openOnFocus": "Open the time picker menu when the input receives focus.",
+    "updateOn": "Specifies when the text input should update the model value. If empty, the text field will go into read-only state."
+  }
+}

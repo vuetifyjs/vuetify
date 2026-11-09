@@ -2,7 +2,7 @@
 import { convertToUnit, destructComputed, getCurrentInstanceName, includes, propsFactory } from '@/util'
 
 // Types
-const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
+export const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
   size?: string | number

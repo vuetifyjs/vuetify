@@ -35,7 +35,7 @@
               <v-card>
                 <v-empty-state
                   class="pa-0"
-                  image="https://vuetifyjs.b-cdn.net/docs/images/components/v-empty-state/astro-cat.svg"
+                  image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/astro-cat.svg"
                   size="200"
                 >
                   <template v-slot:media>
@@ -69,7 +69,7 @@
               <v-card>
                 <v-empty-state
                   class="pa-0"
-                  image="https://vuetifyjs.b-cdn.net/docs/images/components/v-empty-state/astro-dog.svg"
+                  image="https://cdn.vuetifyjs.com/docs/images/components/v-empty-state/astro-dog.svg"
                   size="200"
                 >
                   <template v-slot:media>

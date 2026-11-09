@@ -1,4 +1,4 @@
-/* eslint-disable local-rules/sort-imports */
+/* eslint-disable local/sort-imports */
 
 import 'vue/jsx'
 import type { UnwrapNestedRefs, VNodeChild } from 'vue'
@@ -15,7 +15,19 @@ import type {
   ThemeInstance,
 } from './framework'
 
+interface ViewTransitionTypesInit {
+  update: () => void | Promise<void>
+  types: string[]
+}
+
 declare global {
+  interface ViewTransition {
+    finished: Promise<void>
+  }
+  interface Document {
+    startViewTransition (init: ViewTransitionTypesInit): ViewTransition
+  }
+
   namespace JSX {
     interface ElementChildrenAttribute {
       $children: {}

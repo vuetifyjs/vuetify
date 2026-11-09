@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivoi lajittelun poistamiseksi.',
       activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
       activateAscending: 'Aktivoi lajitella nouseva.',
+      selectRow: 'Valitse rivi',
+      selectAll: 'Valitse kaikki',
+      selectGroup: 'Valitse ryhmä',
     },
     sortBy: 'Järjestä',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: '–',
+  },
+  monthPicker: {
+    title: 'Valitse kuukausi',
+    itemsSelected: '{0} valittu',
+    header: 'Syötä kuukausi',
+    range: {
+      title: 'Syötä kuukaudet',
+    },
+    ariaLabel: {
+      previousYear: 'Edellinen vuosi',
+      nextYear: 'Seuraava vuosi',
+      selectYear: 'Valitse vuosi',
+      currentMonth: 'Nykyinen kuukausi, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valittu',
@@ -77,7 +94,7 @@ export default {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',
     appendAction: '{0} lisätty toiminto',
-    otp: 'Syötä OTP-merkki {0}',
+    otp: 'Syötä vahvistuskoodi',
   },
   fileInput: {
     counter: '{0} tiedostoa',
@@ -117,6 +134,15 @@ export default {
       item: 'Luokitus {0}/{1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimi',
+      end: 'Maksimi',
+    },
+  },
+  splitBtn: {
+    menu: 'Lisää vaihtoehtoja',
+  },
   loading: 'Ladataan...',
   infiniteScroll: {
     loadMore: 'Lataa lisää',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Askelpalautin',
     space: 'Välilyönti',
     plus: 'plus',
-    shortcut: 'Näppäinyhdistelmä: {0}',
+    shortcut: 'Näppäinyhdistelmä, {0}',
     or: 'tai',
   },
-  video: {
+  media: {
     play: 'Toista',
     pause: 'Tauko',
     seek: 'Hae',
     volume: 'Äänenvoimakkuus',
-    showVolume: 'Näytä äänenvoimakkuuden säädin',
     mute: 'Mykistä',
     unmute: 'Poista mykistys',
     enterFullscreen: 'Koko näyttö',

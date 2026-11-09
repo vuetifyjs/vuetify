@@ -5,7 +5,18 @@
     :name="name"
     :options="options"
   >
-    <div>
+    <div class="d-flex flex-column align-center ga-3">
+      <v-fade-transition>
+        <v-chip
+          v-if="model === 'wavy'"
+          class="position-absolute top-0 mt-6"
+          color="warning"
+          prepend-icon="mdi-information-outline"
+          text="Requires Vuetify v4.3.0+"
+          variant="tonal"
+        ></v-chip>
+      </v-fade-transition>
+
       <v-progress-linear v-bind="props"></v-progress-linear>
     </div>
 
@@ -36,14 +47,15 @@
   const color = ref()
   const indeterminate = ref(false)
   const height = ref()
-  const options = ['split']
+  const options = ['split', 'wavy']
   const props = computed(() => {
     return {
       color: color.value || undefined,
       indeterminate: indeterminate.value || undefined,
+      shape: model.value === 'wavy' ? 'wavy' : undefined,
       'model-value': !indeterminate.value ? '20' : undefined,
       height: height.value !== 4 ? height.value : undefined,
-      variant: model.value === 'default' ? undefined : model.value,
+      variant: model.value === 'split' ? 'split' : undefined,
     }
   })
 

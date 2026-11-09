@@ -6,6 +6,7 @@ import { VMain } from '@/components/VMain'
 
 // Utilities
 import { commands, page, render, screen, showcase, userEvent } from '@test'
+import { onTestFinished } from 'vitest'
 import { ref } from 'vue'
 
 const stories = {
@@ -59,9 +60,53 @@ describe('VNavigationDrawer', () => {
 
     await userEvent.hover(drawer)
     await expect.element(drawer).toHaveStyle({ width: '256px' })
+    expect(screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
 
     await userEvent.unhover(drawer)
     await expect.element(drawer).toHaveStyle({ width: '56px' })
+  })
+
+  it('should show scrim while expanded on hover when using modal', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer permanent expandOnHover rail modal />
+        <VMain />
+      </VLayout>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+
+    expect(screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
+
+    await userEvent.hover(drawer)
+    const scrim = screen.getByCSS('.v-navigation-drawer__scrim')
+    await expect.element(scrim).toBeInViewport()
+
+    await userEvent.unhover(drawer)
+    await expect.poll(() => screen.queryAllByCSS('.v-navigation-drawer__scrim')).toHaveLength(0)
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
+  })
+
+  it('should expand over the content when using v-model:expanded', async () => {
+    const expanded = ref(false)
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer v-model:expanded={ expanded.value } permanent rail modal />
+        <VMain style="height: 400px" />
+      </VLayout>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    const main = screen.getByCSS('.v-main')
+
+    expanded.value = true
+    await expect.element(drawer).toHaveStyle({ width: '256px' })
+    await expect.element(main).toHaveStyle({ paddingLeft: '56px' })
+
+    await userEvent.click(screen.getByCSS('.v-navigation-drawer__scrim'))
+    await expect.element(drawer).toHaveStyle({ width: '56px' })
+    expect(expanded.value).toBe(false)
+    await expect.element(drawer).toHaveClass('v-navigation-drawer--active')
   })
 
   it('should change width when using bound and unbound rail and expandOnHover', async () => {
@@ -163,6 +208,23 @@ describe('VNavigationDrawer', () => {
     await expect.element(screen.getByCSS('.v-navigation-drawer')).toHaveStyle({ width: '300px' })
   })
 
+  it('should allow percentage widths relative to the layout', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer width="20%" permanent />
+        <VMain />
+      </VLayout>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    const layoutWidth = screen.getByCSS('.v-layout').getBoundingClientRect().width
+
+    await commands.waitStable('.v-navigation-drawer')
+
+    expect(drawer.getBoundingClientRect().width).toBeCloseTo(layoutWidth * 0.2, 1)
+    await expect.element(screen.getByCSS('.v-main')).toHaveStyle({ paddingLeft: `${layoutWidth * 0.2}px` })
+  })
+
   it('should position drawer scrim correctly', async () => {
     const visible = ref(false)
     render(() => (
@@ -195,6 +257,37 @@ describe('VNavigationDrawer', () => {
 
     await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
     await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
+  })
+
+  it('should not slide across the screen when switching direction while closed', async () => {
+    await commands.setReduceMotionDisabled()
+    onTestFinished(() => commands.setReduceMotionEnabled())
+
+    const rtl = ref(false)
+
+    render(() => (
+      <VLocaleProvider rtl={ rtl.value }>
+        <VLayout>
+          <VNavigationDrawer temporary />
+        </VLayout>
+      </VLocaleProvider>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    await expect.poll(() => getComputedStyle(drawer).transitionDuration).not.toBe('0s')
+
+    rtl.value = true
+
+    const lefts = await new Promise<number[]>(resolve => {
+      const samples: number[] = []
+      function sample () {
+        samples.push(drawer.getBoundingClientRect().left)
+        samples.length < 20 ? requestAnimationFrame(sample) : resolve(samples)
+      }
+      requestAnimationFrame(sample)
+    })
+
+    expect(lefts.every(left => left >= window.innerWidth)).toBe(true)
   })
 
   showcase({ stories })

@@ -1,4 +1,5 @@
 {
+  "description": "Returns a function that scrolls the page or a given container to a target element or offset.",
   "exposed": {
     "rtl": "The current RTL state.",
     "options": "The current goTo scrolling options."

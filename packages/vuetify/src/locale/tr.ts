@@ -14,14 +14,17 @@ export default {
   dataTable: {
     itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
-      sortDescending: 'Z den A ya sıralı.',
-      sortAscending: 'A dan Z ye sıralı.',
-      sortNone: 'Sıralı değil. ',
+      sortDescending: 'Z\'den A\'ya sıralı.',
+      sortAscending: 'A\'dan Z\'ye sıralı.',
+      sortNone: 'Sıralı değil.',
       activateNone: 'Sıralamayı kaldırmak için etkinleştir.',
-      activateDescending: 'Z den A ya sıralamak için etkinleştir.',
-      activateAscending: 'A dan Z ye sıralamak için etkinleştir.',
+      activateDescending: 'Z\'den A\'ya sıralamak için etkinleştir.',
+      activateAscending: 'A\'dan Z\'ye sıralamak için etkinleştir.',
+      selectRow: 'Satırı seç',
+      selectAll: 'Tümünü seç',
+      selectGroup: 'Grubu seç',
     },
-    sortBy: 'Sırala',
+    sortBy: 'Sıralama ölçütü',
   },
   dataFooter: {
     itemsPerPageText: 'Sayfa başına satır:',
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'ile',
+  },
+  monthPicker: {
+    title: 'Ay seçin',
+    itemsSelected: '{0} seçildi',
+    header: 'Ay girin',
+    range: {
+      title: 'Ayları girin',
+    },
+    ariaLabel: {
+      previousYear: 'Önceki yıl',
+      nextYear: 'Sonraki yıl',
+      selectYear: 'Yıl seçin',
+      currentMonth: 'Bu ay, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seçildi',
@@ -74,10 +91,10 @@ export default {
     more: 'Çok',
   },
   input: {
-    clear: '{0} temizle',
-    prependAction: '{0} ön işlem',
-    appendAction: '{0} ek işlem',
-    otp: 'Lütfen OTP karakterini girin {0}',
+    clear: '{0} alanını temizle',
+    prependAction: '{0} alanının başındaki işlem',
+    appendAction: '{0} alanının sonundaki işlem',
+    otp: 'Doğrulama kodunu girin',
   },
   fileInput: {
     counter: '{0} dosya',
@@ -102,7 +119,7 @@ export default {
       root: 'Sayfalandırma Navigasyonu',
       next: 'Sonraki sayfa',
       previous: 'Önceki sayfa',
-      page: 'Sayfaya git {0}',
+      page: '{0}. sayfaya git',
       currentPage: 'Geçerli Sayfa, Sayfa {0}',
       first: 'İlk sayfa',
       last: 'Son sayfa',
@@ -116,6 +133,15 @@ export default {
     ariaLabel: {
       item: '{1} üzerinden {0} puan',
     },
+  },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Daha fazla seçenek',
   },
   loading: 'Yükleniyor...',
   infiniteScroll: {
@@ -131,7 +157,7 @@ export default {
     maxLength: 'En fazla {0} karakter girmelisiniz',
     minLength: 'En az {0} karakter girmelisiniz',
     strictLength: 'Girilen alanın uzunluğu geçersiz',
-    exclude: '{0} karakteri izin verilmez',
+    exclude: '{0} karakterine izin verilmez',
     notEmpty: 'Lütfen en az bir değer seçin',
     pattern: 'Geçersiz biçim',
   },
@@ -154,15 +180,14 @@ export default {
     backspace: 'Geri Al',
     space: 'Boşluk',
     plus: 'artı',
-    shortcut: 'Klavye kısayolu: {0}',
+    shortcut: 'Klavye kısayolu, {0}',
     or: 'veya',
   },
-  video: {
+  media: {
     play: 'Oynat',
     pause: 'Duraklat',
     seek: 'Ara',
     volume: 'Ses',
-    showVolume: 'Ses kontrolünü göster',
     mute: 'Sesi kapat',
     unmute: 'Sesi aç',
     enterFullscreen: 'Tam ekran',
@@ -179,7 +204,7 @@ export default {
       alphaInput: 'Alfa',
       hueInput: 'Ton',
       saturationInput: 'Doygunluk',
-      lightnessInput: 'Parlaklık',
+      lightnessInput: 'Açıklık',
       hexInput: 'HEX değeri',
       hexaInput: 'Alfa değerli HEX',
       changeFormat: 'Renk biçimini değiştir',

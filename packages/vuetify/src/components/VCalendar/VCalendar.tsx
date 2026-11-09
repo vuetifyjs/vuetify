@@ -9,8 +9,11 @@ import { VCalendarDaily } from './VCalendarDaily'
 import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Composables
-import { makeCalendarBaseProps } from './composables/calendarBase'
+import { isAdapterValue, makeCalendarBaseProps } from './composables/calendarBase'
 import { makeCalendarWithEventsProps, useCalendarWithEvents } from './composables/calendarWithEvents'
+import { makeCalendarWithIntervalsProps } from './composables/calendarWithIntervals'
+import { makeIntervalHighlightProps } from './composables/intervalHighlight'
+import { useDate } from '@/composables/date'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Directives
@@ -35,7 +38,7 @@ import {
   updateWeekday,
   validateTimestamp,
 } from './util/timestamp'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, isNumber, isObject, isString, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -98,15 +101,15 @@ export const VCalendar = genericComponent<new (
     [key: `on${Capitalize<string>}:time`]: EventProp<[Event, CalendarDayBodySlotScope]>
   },
   slots: {
-    'category': CalendarDayCategorySlotScope
-    'day': DaySlotScope
+    category: CalendarDayCategorySlotScope
+    day: DaySlotScope
     'day-body': CalendarDayBodySlotScope
     'day-header': DayHeaderSlotScope
     'day-label': CalendarTimestamp
     'day-label-header': CalendarTimestamp
     'day-month': CalendarTimestamp
-    'event': EventSlotScope
-    'interval': CalendarDayCategorySlotScope
+    event: EventSlotScope
+    interval: CalendarDayCategorySlotScope
     'interval-header': never
   },
 ) => GenericProps<typeof props, typeof slots>>()({
@@ -116,7 +119,7 @@ export const VCalendar = genericComponent<new (
 
   props: {
     modelValue: {
-      type: [String, Number, Date] as PropType<string | number | Date>,
+      type: null as any as PropType<unknown>,
       validate: validateTimestamp,
     },
     categoryDays: {
@@ -131,10 +134,6 @@ export const VCalendar = genericComponent<new (
     categoryText: {
       type: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
     },
-    maxDays: {
-      type: Number,
-      default: 7,
-    },
     categoryHideDynamic: {
       type: Boolean,
     },
@@ -146,13 +145,16 @@ export const VCalendar = genericComponent<new (
       default: '',
     },
 
+    ...makeIntervalHighlightProps(),
     ...makeCalendarBaseProps(),
     ...makeCalendarWithEventsProps(),
+    ...makeCalendarWithIntervalsProps(),
   },
 
   setup (props, { slots, attrs, emit }) {
     const root = ref<VCalendarWeekly | VCalendarDaily | VCalendarCategory>()
     const base = useCalendarWithEvents(props, slots, attrs)
+    const adapter = useDate()
 
     const lastStart = ref<CalendarTimestamp | null>(null)
     const lastEnd = ref<CalendarTimestamp | null>(null)
@@ -304,13 +306,19 @@ export const VCalendar = genericComponent<new (
 
       if (props.modelValue instanceof Date) {
         emit('update:modelValue', timestampToDate(moved))
-      } else if (typeof props.modelValue === 'number') {
+      } else if (isNumber(props.modelValue)) {
         emit('update:modelValue', timestampToDate(moved).getTime())
+      } else if (isAdapterValue(props.modelValue)) {
+        emit('update:modelValue', toAdapterValue(moved))
       } else {
         emit('update:modelValue', moved.date)
       }
 
       emit('moved', moved)
+    }
+
+    function toAdapterValue (timestamp: CalendarTimestamp) {
+      return adapter.date(new Date(timestamp.year, timestamp.month - 1, timestamp.day, timestamp.hour, timestamp.minute))
     }
 
     function next (amount = 1): void {
@@ -324,8 +332,8 @@ export const VCalendar = genericComponent<new (
     function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!base.noEvents.value) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-          else if (typeof category === 'string') map[category] = { index, count: 0 }
+          if (isObject(category) && category.categoryName) map[category.categoryName] = { index, count: 0 }
+          else if (isString(category)) map[category] = { index, count: 0 }
           return map
         }, {})
 
@@ -335,7 +343,7 @@ export const VCalendar = genericComponent<new (
           base.parsedEvents.value.forEach(ev => {
             let category = ev.category
 
-            if (typeof category !== 'string') {
+            if (!isString(category)) {
               category = props.categoryForInvalid
             }
 
@@ -363,9 +371,9 @@ export const VCalendar = genericComponent<new (
         }
 
         categories = categories.filter((category: CalendarCategory) => {
-          if (typeof category === 'object' && category.categoryName) {
+          if (isObject(category) && category.categoryName) {
             return categoryMap.hasOwnProperty(category.categoryName)
-          } else if (typeof category === 'string') {
+          } else if (isString(category)) {
             return categoryMap.hasOwnProperty(category)
           }
           return false
@@ -400,7 +408,8 @@ export const VCalendar = genericComponent<new (
           weekdays={ base.effectiveWeekdays.value }
           categories={ categories }
           onClick:date={ (e: MouseEvent, day: CalendarTimestamp) => {
-            if (attrs['onUpdate:modelValue']) emit('update:modelValue', day.date)
+            if (!attrs['onUpdate:modelValue']) return
+            emit('update:modelValue', isAdapterValue(props.modelValue) ? toAdapterValue(day) : day.date)
           }}
           v-slots={ base.getScopedSlots() }
         />

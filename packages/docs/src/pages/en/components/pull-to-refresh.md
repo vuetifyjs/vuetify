@@ -15,20 +15,6 @@ The PullToRefresh allows users to update content with a simple downward swipe on
 
 <PageFeatures />
 
-## Installation
-
-Labs components require manual import and registration with the Vuetify instance.
-
-```js { resource="src/plugins/vuetify.js" }
-import { VPullToRefresh } from 'vuetify/labs/VPullToRefresh'
-
-export default createVuetify({
-  components: {
-    VPullToRefresh,
-  },
-})
-```
-
 ## Usage
 
 Drag the list downward to activate the pull-to-refresh feature.

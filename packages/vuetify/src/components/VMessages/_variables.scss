@@ -1,7 +1,6 @@
 @use '../../styles/tools';
 
 // VMessages
-$messages-color: tools.theme-color('on-surface', var(--v-medium-emphasis-opacity)) !default;
 $messages-font-size: 12px !default;
 $messages-line-height: $messages-font-size !default;
 $messages-min-height: 14px !default;

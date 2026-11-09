@@ -1,0 +1,3 @@
+{
+  "description": "Resolves component props against global and `v-defaults-provider` defaults. Intended for building custom components."
+}

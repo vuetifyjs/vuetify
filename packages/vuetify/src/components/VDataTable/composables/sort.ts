@@ -64,9 +64,9 @@ function resolveMultiSort (
   multiSort: boolean | MultiSortProps,
   event?: KeyboardEvent | PointerEvent
 ): {
-    active: boolean
-    mode?: MultiSortMode
-  } {
+  active: boolean
+  mode?: MultiSortMode
+} {
   if (!isObject(multiSort)) {
     return { active: !!multiSort }
   }

@@ -4,9 +4,13 @@
     "min": "Sets the minimum selectable date. Months before this date will be disabled.",
     "max": "Sets the maximum selectable date. Months after this date will be disabled.",
     "year": "Sets the year for the given months.",
-    "allowedMonths": "Restricts which months can be selected."
+    "allowedMonths": "Restricts which months can be selected.",
+    "columns": "Number of columns in the months grid."
   },
   "slots": {
     "month": "Slot for the month."
+  },
+  "events": {
+    "escape": "Emitted when **Escape** is pressed within the months grid."
   }
 }

@@ -55,7 +55,7 @@ describe('hotkey.ts', () => {
 
       window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[0] }))
       vi.advanceTimersByTime(gap)
-      // eslint-disable-next-line @vitest/no-conditional-in-test
+      // eslint-disable-next-line vitest/no-conditional-in-test
       if (seq[1]) window.dispatchEvent(new KeyboardEvent('keydown', { key: seq[1] }))
       expect(cb).toHaveBeenCalledTimes(expected)
 
@@ -63,6 +63,25 @@ describe('hotkey.ts', () => {
 
       vi.useRealTimers()
     })
+  })
+
+  it.each([
+    ['k', 'checkbox', 'k', 1],
+    ['space', 'checkbox', ' ', 0],
+    ['k', 'text', 'k', 0],
+  ])('%s with focused %s input', (combo, type, key, expected) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo, cb)
+    const input = Object.assign(document.createElement('input'), { type })
+    document.body.appendChild(input)
+    input.focus()
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+
+    expect(cb).toHaveBeenCalledTimes(expected)
+
+    input.remove()
+    stop()
   })
 
   it.each([

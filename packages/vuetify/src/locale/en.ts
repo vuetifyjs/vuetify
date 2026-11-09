@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activate to remove sorting.',
       activateDescending: 'Activate to sort descending.',
       activateAscending: 'Activate to sort ascending.',
+      selectRow: 'Select row',
+      selectAll: 'Select all',
+      selectGroup: 'Select group',
     },
     sortBy: 'Sort by',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'to',
+  },
+  monthPicker: {
+    title: 'Select month',
+    itemsSelected: '{0} selected',
+    header: 'Enter month',
+    range: {
+      title: 'Enter months',
+    },
+    ariaLabel: {
+      previousYear: 'Previous year',
+      nextYear: 'Next year',
+      selectYear: 'Select year',
+      currentMonth: 'Current month, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} selected',
@@ -77,7 +94,7 @@ export default {
     clear: 'Clear {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
-    otp: 'Please enter OTP character {0}',
+    otp: 'Enter verification code',
   },
   fileInput: {
     counter: '{0} files',
@@ -117,6 +134,15 @@ export default {
       item: 'Rating {0} of {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'More options',
+  },
   loading: 'Loading...',
   infiniteScroll: {
     loadMore: 'Load more',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Backspace',
     option: 'Option',
     plus: 'plus',
-    shortcut: 'Keyboard shortcut: {0}',
+    shortcut: 'Keyboard shortcut, {0}',
     or: 'or',
   },
-  video: {
+  media: {
     play: 'Play',
     pause: 'Pause',
     seek: 'Seek',
     volume: 'Volume',
-    showVolume: 'Show volume control',
     mute: 'Mute',
     unmute: 'Unmute',
     enterFullscreen: 'Full screen',

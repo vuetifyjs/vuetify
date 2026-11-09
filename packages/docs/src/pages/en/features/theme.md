@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Theme
   description: Setup your application's theme and supplemental colors in a flash.
@@ -141,6 +140,54 @@ export default createVuetify({
 })
 ```
 
+### Theme transition
+
+The **transition** option enables an expanding circle animation when changing themes using the [View Transition API](https://developer.mozilla.org/en-US/docs/Web/API/View_Transition_API). In browsers that do not support the View Transition API, the theme change is applied instantly.
+
+| Browser                 | minimal version for View Transition |
+|-------------------------|:------------------------------------|
+| Chromium (Chrome, Edge) | 111                                 |
+| Firefox                 | 144                                 |
+| Safari                  | 18.0                                |
+
+To enable theme transitions, set the **transition** option to `true` or pass an options object with default origin of the expanding circle:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    transition: true, // default origin: top center
+    // or provide options:
+    transition: { origin: '100% 0%' }, // right corner
+  },
+})
+```
+
+You can also override the transition per-call by passing a second argument to `change`, `toggle`, or `cycle`. This is useful for originating the circle from the click position:
+
+```html
+<template>
+  <v-container class="d-flex justify-center">
+    <v-btn
+      icon="mdi-theme-light-dark"
+      @click="toggleTheme"
+    />
+  </v-container>
+</template>
+
+<script setup>
+  import { useTheme } from 'vuetify'
+  const theme = useTheme()
+
+  function toggleTheme (e) {
+    // passing target element will make it work for both clicks and keyboard interactions
+    theme.setTransitionOrigin(e.target)
+    theme.toggle()
+  }
+</script>
+```
+
 ## Custom themes
 
 Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
@@ -274,6 +321,12 @@ export default createVuetify({
   <div class="text-primary-darken-2">text color</div>
 </template>
 ```
+
+::: warning
+
+Generated variations are applied last and replace any color with the same name, including ones defined in your theme. To set a variation by hand, leave its base color out of `variations.colors` and define all of its variants yourself.
+
+:::
 
 ## Disable theme
 

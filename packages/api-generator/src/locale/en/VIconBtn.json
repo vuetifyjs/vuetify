@@ -10,7 +10,8 @@
     "loading": "Displays circular progress bar in place of the icon.",
     "readonly": "Puts the button in a readonly state. Cannot be clicked or navigated to by keyboard.",
     "rotate": "The rotation of the icon in degrees.",
-    "sizes": "An array of tuples that define the button sizes for each named size."
+    "widthVariant": "Makes the button narrower or wider than its height. Requires [Material Design 3 button sizes](/features/md3-button-sizes/).",
+    "sizes": "Deprecated, use `$icon-btn-named-sizes` SASS variable instead."
   },
   "events": {
     "update:active": "Event that is emitted when the active state changes."

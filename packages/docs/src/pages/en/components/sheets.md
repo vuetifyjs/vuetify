@@ -12,7 +12,7 @@ features:
   github: /components/VSheet/
   label: 'C: VSheet'
   report: true
-  spec: https://m2.material.io/design/environment/elevation.html
+  spec: https://m3.material.io/styles/elevation
 ---
 
 # Sheets

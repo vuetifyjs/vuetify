@@ -1,13 +1,22 @@
-/* eslint-disable max-statements */
-/* eslint-disable no-labels */
-
 // Utilities
 import { computed, shallowRef, unref, watchEffect } from 'vue'
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import {
+  findMatchRanges,
+  getPropertyFromItem,
+  isBoolean,
+  isFunction,
+  isNullOrUndefined,
+  isNumber,
+  isObject,
+  isString,
+  isUndefined,
+  propsFactory,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { MaybeRef } from '@/util'
+import type { IgnoreAccents, MaybeRef } from '@/util'
 
 /**
  * - boolean: match without highlight
@@ -23,12 +32,15 @@ export type FilterFunction = (value: string, query: string, item?: InternalItem)
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
+export type FilteredOrder = 'none' | 'prefix'
 
 export interface FilterProps {
   customFilter?: FilterFunction
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  filteredOrder?: FilteredOrder
+  ignoreAccents?: IgnoreAccents
   noFilter?: boolean
 }
 
@@ -45,27 +57,26 @@ type FilterResult = {
 }
 
 // Composables
-export const defaultFilter: FilterFunction = (value, query, item) => {
-  if (value == null || query == null) return -1
-  if (!query.length) return 0
+export function createDefaultFilter (ignoreAccents?: IgnoreAccents): FilterFunction {
+  return (value, query) => {
+    if (isNullOrUndefined(value) || isNullOrUndefined(query)) return -1
+    if (!query.length) return 0
 
-  value = value.toString().toLocaleLowerCase()
-  query = query.toString().toLocaleLowerCase()
+    const ranges = findMatchRanges(value.toString(), query.toString(), {
+      ignoreCase: true,
+      ignoreAccents,
+      matchAll: true,
+    })
 
-  const result = []
-  let idx = value.indexOf(query)
-  while (~idx) {
-    result.push([idx, idx + query.length] as const)
-
-    idx = value.indexOf(query, idx + query.length)
+    return ranges.length ? ranges : -1
   }
-
-  return result.length ? result : -1
 }
 
+export const defaultFilter: FilterFunction = createDefaultFilter()
+
 function normaliseMatch (match: FilterMatch, query: string): FilterMatchArrayMultiple | undefined {
-  if (match == null || typeof match === 'boolean' || match === -1) return
-  if (typeof match === 'number') return [[match, match + query.length]]
+  if (isNullOrUndefined(match) || isBoolean(match) || match === -1) return
+  if (isNumber(match)) return [[match, match + query.length]]
   if (Array.isArray(match[0])) return match as FilterMatchArrayMultiple
   return [match] as FilterMatchArrayMultiple
 }
@@ -78,6 +89,7 @@ export const makeFilterProps = propsFactory({
     type: String as PropType<FilterMode>,
     default: 'intersection',
   },
+  ignoreAccents: [Boolean, String] as PropType<IgnoreAccents>,
   noFilter: Boolean,
 }, 'filter')
 
@@ -90,12 +102,13 @@ export function filterItems (
     default?: FilterFunction
     filterKeys?: FilterKeys
     filterMode?: FilterMode
+    ignoreAccents?: IgnoreAccents
     noFilter?: boolean
   },
 ) {
   const array: FilterResult[] = []
   // always ensure we fall back to a functioning filter
-  const filter = options?.default ?? defaultFilter
+  const filter = options?.default ?? createDefaultFilter(options?.ignoreAccents)
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
 
@@ -113,7 +126,7 @@ export function filterItems (
     if ((query || customFiltersLength > 0) && !options?.noFilter) {
       let hasOnlyCustomFilters = false
 
-      if (typeof item === 'object') {
+      if (isObject(item)) {
         if (item.type === 'divider' || item.type === 'subheader') {
           if (lookAheadItems.at(-1)?.type !== 'divider' || item.type !== 'subheader') {
             // clear unless, divider appears before subheader
@@ -180,6 +193,48 @@ export function filterItems (
   return array
 }
 
+const WORD_BOUNDARY = /[^\p{L}\p{M}\p{N}]/u
+
+function prefixRank (value: unknown, ranges: FilterMatchArrayMultiple) {
+  let offset = 0
+  const spans = (Array.isArray(value) ? value : [value]).map(part => {
+    const start = offset
+    offset += String(part ?? '').length + 1
+    return [start, offset - 1] as const
+  })
+  if (ranges.some(([start, end]) => spans.some(span => span[0] === start && span[1] === end))) return 0
+  if (ranges.some(([start]) => spans.some(span => span[0] === start))) return 1
+  const text = String(value)
+  return ranges.some(([start]) => WORD_BOUNDARY.test(text[start - 1])) ? 2 : 3
+}
+
+function sortByPrefix (
+  results: FilterResult[],
+  items: Parameters<typeof filterItems>[0],
+  filterKeys?: FilterKeys,
+) {
+  let group = 0
+  return results
+    .map(result => {
+      if (result.type) return { result, group: ++group, rank: -1, keyIndex: 0 }
+
+      const [item, transformed = item] = wrapInArray(items[result.index]) as readonly [InternalItem, {}]
+      const keys = !isObject(item) ? ['title']
+        : filterKeys ? wrapInArray(filterKeys)
+        : Object.keys(transformed)
+      const [rank, keyIndex] = keys.reduce<[number, number]>((best, key, index) => {
+        const ranges = result.matches[key]
+        if (!ranges) return best
+        const keyRank = prefixRank(isObject(item) ? getPropertyFromItem(transformed, key) : item, ranges)
+        return keyRank < best[0] ? [keyRank, index] : best
+      }, [4, keys.length])
+
+      return { result, group, rank, keyIndex }
+    })
+    .sort((a, b) => a.group - b.group || a.rank - b.rank || a.keyIndex - b.keyIndex)
+    .map(({ result }) => result)
+}
+
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
@@ -198,13 +253,13 @@ export function useFilter <T extends InternalItem> (
   ))
 
   watchEffect(() => {
-    const _query = typeof query === 'function' ? query() : unref(query)
+    const _query = isFunction(query) ? query() : unref(query)
     const strQuery = (
-      typeof _query !== 'string' &&
-      typeof _query !== 'number'
+      !isString(_query) &&
+      !isNumber(_query)
     ) ? '' : String(_query)
 
-    const results = filterItems(
+    let results = filterItems(
       transformedItems.value,
       strQuery,
       {
@@ -215,9 +270,14 @@ export function useFilter <T extends InternalItem> (
         default: props.customFilter,
         filterKeys: props.filterKeys,
         filterMode: props.filterMode,
+        ignoreAccents: props.ignoreAccents,
         noFilter: props.noFilter,
       },
     )
+
+    if (strQuery && props.filteredOrder === 'prefix') {
+      results = sortByPrefix(results, transformedItems.value, props.filterKeys)
+    }
 
     const originalItems = unref(items)
 
@@ -226,7 +286,7 @@ export function useFilter <T extends InternalItem> (
     results.forEach(({ index, matches }) => {
       const item = originalItems[index]
       _filteredItems.push(item)
-      if (item.value !== undefined) {
+      if (!isUndefined(item.value)) {
         _filteredMatches.set(item.value, matches)
       }
     })

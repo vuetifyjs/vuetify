@@ -20,6 +20,9 @@ export default {
       activateNone: 'Klikni da ukloniš sortiranje.',
       activateDescending: 'Klikni da sortiraš opadajuće.',
       activateAscending: 'Klikni da sortiraš rastuće.',
+      selectRow: 'Izaberi red',
+      selectAll: 'Izaberi sve',
+      selectGroup: 'Izaberi grupu',
     },
     sortBy: 'Sortiraj po',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'do',
+  },
+  monthPicker: {
+    title: 'Izaberi mesec',
+    itemsSelected: '{0} izabrano',
+    header: 'Unesite mesec',
+    range: {
+      title: 'Unesite mesece',
+    },
+    ariaLabel: {
+      previousYear: 'Prethodna godina',
+      nextYear: 'Sledeća godina',
+      selectYear: 'Izaberi godinu',
+      currentMonth: 'Trenutni mesec, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} izabrano',
@@ -77,7 +94,7 @@ export default {
     clear: 'Obriši {0}',
     prependAction: '{0} prethodna radnja',
     appendAction: '{0} sledeća radnja',
-    otp: 'Unesite OTP znak {0}',
+    otp: 'Unesite kod za potvrdu',
   },
   fileInput: {
     counter: '{0} fajlova',
@@ -117,6 +134,15 @@ export default {
       item: 'Ocena {0} od {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Više opcija',
+  },
   loading: 'Učitavanje...',
   infiniteScroll: {
     loadMore: 'Učitaj još',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Backspace',
     space: 'Razmak',
     plus: 'plus',
-    shortcut: 'Prečica na tastaturi: {0}',
+    shortcut: 'Prečica na tastaturi, {0}',
     or: 'ili',
   },
-  video: {
+  media: {
     play: 'Reprodukuj',
     pause: 'Pauziraj',
     seek: 'Traži',
     volume: 'Jačina zvuka',
-    showVolume: 'Prikaži kontrolu jačine zvuka',
     mute: 'Isključi zvuk',
     unmute: 'Uključi zvuk',
     enterFullscreen: 'Prikaz preko cijelog ekrana',

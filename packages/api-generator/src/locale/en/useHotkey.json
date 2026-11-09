@@ -1,4 +1,5 @@
 {
+  "description": "Binds a keyboard shortcut to a callback. Supports modifier combinations, key sequences and platform-aware keys.",
   "props": {
     "keys": "A reactive string defining the keyboard shortcut combination. Supports single keys (e.g., 'a'), modifier combinations (e.g., 'cmd+s', 'ctrl+shift+z'), sequential key combinations (e.g., 'cmd+k-t'), and multiple alternatives separated by spaces. Platform-aware: 'cmd' automatically maps to Ctrl on PC and Command on Mac. Use '-' for sequences, '+' for simultaneous key combinations.",
     "callback": "Function to execute when the hotkey is triggered. Receives the KeyboardEvent as a parameter, allowing access to event details and the ability to call preventDefault() if needed.",

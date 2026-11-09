@@ -3,6 +3,7 @@
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
     "centerAffix": "Vertically align **appendInner**, **prependInner**, **clearIcon** and **label** in the center.",
+    "detailsActive": "Overrides the automatic check for details content when [hide-details](#props-hide-details) is set to `auto`.",
     "direction": "Changes the direction of the input.",
     "hideDetails": "Hides hint and validation errors. When set to `auto` messages will be rendered only if there's a message (hint, error message, counter value etc) to display.",
     "hideSpinButtons": "Hides spin buttons on the input when type is set to `number`.",
@@ -17,6 +18,10 @@
   "events": {
     "click:append": "Emitted when appended icon is clicked.",
     "click:prepend": "Emitted when prepended icon is clicked."
+  },
+  "slots": {
+    "append": "Adds an item inside the input and after input content. Since v3.11.3, if the slot is declared, the icon is not rendered.",
+    "prepend": "Adds an item outside the input and before input content. Since v3.11.3, if the slot is declared, the icon is not rendered."
   },
   "exposed": {
     "errorMessages": "An array of error messages that were set by the `setErrors` method.",

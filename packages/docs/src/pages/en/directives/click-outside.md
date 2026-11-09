@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Click outside
   title: Click outside directive
@@ -8,6 +9,10 @@ related:
   - /components/dialogs/
   - /components/navigation-drawers/
   - /directives/intersect/
+features:
+  label: 'D: click-outside'
+  report: true
+  github: /directives/click-outside/
 ---
 
 # Click outside
@@ -18,7 +23,7 @@ The `v-click-outside` directive calls a function when something outside of the t
 
 ## Usage
 
-The `v-click-outside` directive allows you to provide a handler to be invoked when the user clicks outside of the target element.
+The `v-click-outside` directive allows you to provide a handler to be invoked when the user clicks outside of the target element. Right click, middle click and touch long-press also count, so the handler may receive a `contextmenu` or `auxclick` event.
 
 <ExamplesExample file="v-click-outside/usage" />
 

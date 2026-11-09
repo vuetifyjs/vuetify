@@ -1,6 +1,6 @@
 // Utilities
 import { computed, warn } from 'vue'
-import { IN_BROWSER } from '@/util'
+import { IN_BROWSER, isString } from '@/util'
 
 export function useTeleport (target: () => (boolean | string | ParentNode)) {
   const teleportTarget = computed(() => {
@@ -10,10 +10,10 @@ export function useTeleport (target: () => (boolean | string | ParentNode)) {
 
     const targetElement =
       _target === false ? document.body
-      : typeof _target === 'string' ? document.querySelector(_target)
+      : isString(_target) ? document.querySelector(_target)
       : _target
 
-    if (targetElement == null) {
+    if (!targetElement) {
       warn(`Unable to locate target ${_target}`)
       return undefined
     }

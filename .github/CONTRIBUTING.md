@@ -49,6 +49,7 @@ Thank you for your interest in improving Vuetify! Please review these guidelines
    - Run `pnpm dev` from the root to start a dev server at `localhost:8090` with `packages/vuetify/dev/Playground.vue`.
    - Test changes in `Playground.vue` and include its contents in your PR.
    - For documentation, run `pnpm dev docs` (after building Vuetify with `pnpm build:lib`) at `localhost:8095`.
+   - Using AI assistants? They pick up `AGENTS.md`, `.claude/rules/` and `.claude/skills/` automatically. Review everything they produce before submitting.
 
 1. **Submitting Changes:**
    - Fork the repository and add your fork as a remote:

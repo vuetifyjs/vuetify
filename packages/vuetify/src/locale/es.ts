@@ -20,6 +20,9 @@ export default {
       activateNone: 'Pulse para quitar orden.',
       activateDescending: 'Pulse para ordenar de forma descendente.',
       activateAscending: 'Pulse para ordenar de forma ascendente.',
+      selectRow: 'Seleccionar fila',
+      selectAll: 'Seleccionar todo',
+      selectGroup: 'Seleccionar grupo',
     },
     sortBy: 'Ordenado por',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'a',
+  },
+  monthPicker: {
+    title: 'Seleccionar mes',
+    itemsSelected: '{0} seleccionados',
+    header: 'Introducir mes',
+    range: {
+      title: 'Introducir meses',
+    },
+    ariaLabel: {
+      previousYear: 'Año anterior',
+      nextYear: 'Año siguiente',
+      selectYear: 'Seleccionar año',
+      currentMonth: 'Mes actual, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} seleccionados',
@@ -77,7 +94,7 @@ export default {
     clear: 'Borrar {0}',
     prependAction: '{0} acción adelantada',
     appendAction: '{0} acción añadida',
-    otp: 'Por favor, introduzca el carácter OTP {0}',
+    otp: 'Introduzca el código de verificación',
   },
   fileInput: {
     counter: '{0} archivos',
@@ -117,6 +134,15 @@ export default {
       item: 'Puntuación {0} de {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Mínimo',
+      end: 'Máximo',
+    },
+  },
+  splitBtn: {
+    menu: 'Más opciones',
+  },
   loading: 'Cargando...',
   infiniteScroll: {
     loadMore: 'Cargar más',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Retroceso',
     space: 'Espacio',
     plus: 'más',
-    shortcut: 'Atajo de teclado: {0}',
+    shortcut: 'Atajo de teclado, {0}',
     or: 'o',
   },
-  video: {
+  media: {
     play: 'Reproducir',
     pause: 'Pausa',
     seek: 'Buscar',
     volume: 'Volumen',
-    showVolume: 'Mostrar control de volumen',
     mute: 'Silenciar',
     unmute: 'Activar sonido',
     enterFullscreen: 'Pantalla completa',

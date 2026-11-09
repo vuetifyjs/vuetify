@@ -47,6 +47,7 @@ const aliases: IconAliases = {
   plus: 'i-fa6-solid:plus',
   minus: 'i-fa6-solid:minus',
   calendar: 'i-fa6-regular:calendar',
+  clock: 'i-fa6-regular:clock',
   treeviewCollapse: 'i-fa6-solid:caret-down',
   treeviewExpand: 'i-fa6-solid:caret-right',
   tableGroupExpand: 'i-fa6-solid:chevron-right',

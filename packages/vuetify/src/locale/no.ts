@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktiver for å fjerne sortering.',
       activateDescending: 'Aktiver for å sortere synkende.',
       activateAscending: 'Aktiver for å sortere stigende.',
+      selectRow: 'Velg rad',
+      selectAll: 'Velg alle',
+      selectGroup: 'Velg gruppe',
     },
     sortBy: 'Sorter etter',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'til',
+  },
+  monthPicker: {
+    title: 'Velg måned',
+    itemsSelected: '{0} valgt',
+    header: 'Velg måned',
+    range: {
+      title: 'Velg måneder',
+    },
+    ariaLabel: {
+      previousYear: 'Forrige år',
+      nextYear: 'Neste år',
+      selectYear: 'Velg år',
+      currentMonth: 'Denne måneden, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} valgt',
@@ -77,7 +94,7 @@ export default {
     clear: 'Fjern {0}',
     prependAction: '{0} foranstilt handling',
     appendAction: '{0} etterstilt handling',
-    otp: 'Vennligst skriv inn OTP-tegn {0}',
+    otp: 'Skriv inn bekreftelseskode',
   },
   fileInput: {
     counter: '{0} filer',
@@ -117,6 +134,15 @@ export default {
       item: 'Anmeldelse {0} av {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maksimum',
+    },
+  },
+  splitBtn: {
+    menu: 'Flere alternativer',
+  },
   loading: 'Laster...',
   infiniteScroll: {
     loadMore: 'Last flere',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Slett',
     space: 'Mellomrom',
     plus: 'pluss',
-    shortcut: 'Tastatursnarveier: {0}',
+    shortcut: 'Tastatursnarveier, {0}',
     or: 'eller',
   },
-  video: {
+  media: {
     play: 'Spill av',
     pause: 'Pause',
     seek: 'Søk',
     volume: 'Volum',
-    showVolume: 'Vis volumkontroll',
     mute: ' Demp',
     unmute: 'Slå på lyd',
     enterFullscreen: 'Fullskjerm',

@@ -36,8 +36,14 @@ describe('rounded.ts', () => {
     [{ rounded: 'circle' }, ['rounded-circle']],
     [{ rounded: 'shaped' }, ['rounded-shaped']],
     [{ rounded: 'pill' }, ['rounded-pill']],
+    [{ rounded: '2xl' }, ['rounded-2xl']],
     // Corner and axis rounded
     [{ rounded: 'te-xl be-lg' }, ['rounded-te-xl', 'rounded-be-lg']],
+    [{ rounded: 'e-0 s-lg' }, ['rounded-e-0', 'rounded-s-lg']],
+    [{ rounded: 't-0' }, ['rounded-t-0']],
+    // Arbitrary values produce no classes
+    [{ rounded: '8px' }, []],
+    [{ rounded: 'calc(1rem + 2px)' }, []],
   ] as RoundedProps[])('should return correct rounded classes', (props: RoundedProps, expected: any) => {
     const { roundedClasses } = useRounded(props, 'foo')
 
@@ -76,6 +82,8 @@ describe('rounded.ts', () => {
     [{ rounded: '2xl' }, {}],
     [{ rounded: 'pill' }, {}],
     [{ rounded: 'te-xl be-lg' }, {}],
+    [{ rounded: 'e-0 s-lg' }, {}],
+    [{ rounded: 't-0' }, {}],
     // Arbitrary numeric values
     [{ rounded: 8 }, { borderRadius: '8px' }],
     [{ rounded: 16 }, { borderRadius: '16px' }],
@@ -84,7 +92,8 @@ describe('rounded.ts', () => {
     [{ rounded: '50%' }, { borderRadius: '50%' }],
     [{ rounded: '1em' }, { borderRadius: '1em' }],
     [{ rounded: '4px 8px' }, { borderRadius: '4px 8px' }],
-  ] as RoundedProps[])('should return correct rounded styles', (props: RoundedProps, expected: any) => {
+    [{ rounded: 'calc(1rem + 2px)' }, { borderRadius: 'calc(1rem + 2px)' }],
+  ] as RoundedProps[])('%s should return correct rounded styles', (props: RoundedProps, expected: any) => {
     const { roundedStyles } = useRounded(props, 'foo')
 
     expect(roundedStyles.value).toStrictEqual(expected)

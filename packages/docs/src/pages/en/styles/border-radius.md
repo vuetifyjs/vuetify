@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Border radius
   description: Use border utilities to quickly style the border-radius of any element.

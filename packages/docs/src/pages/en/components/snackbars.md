@@ -1,9 +1,8 @@
 ---
-emphasized: true
 meta:
   nav: Snackbars
   title: Snackbar component
-  description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions. Timer will stop when user hovers over the snackbar.
+  description: The snackbar component informs users of a process your application has performed or will perform. It is often temporary and can contain actions.
   keywords: snackbars, vuetify snackbar component, vue snackbar component
 related:
   - /components/buttons/

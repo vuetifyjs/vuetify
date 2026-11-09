@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   title: Browser support
   description: Vuetify is a progressive framework that supports all evergreen browsers.

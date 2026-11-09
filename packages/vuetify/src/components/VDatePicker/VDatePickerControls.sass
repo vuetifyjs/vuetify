@@ -1,5 +1,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
+@use '../VBtn/variables' as btn
 @use './variables' as *
 
 @include tools.layer('components')
@@ -45,6 +46,14 @@
 
       @include tools.rtl()
         flex-direction: row-reverse
+
+    & &__month .v-btn,
+    & &__year .v-btn
+      --v-btn-height: #{btn.$button-height}
+
+      &.v-btn--icon
+        width: var(--v-btn-height)
+        height: var(--v-btn-height)
 
     & &__month-btn,
     & &__year-btn

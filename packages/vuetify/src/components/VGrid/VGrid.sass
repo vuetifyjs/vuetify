@@ -66,6 +66,11 @@ $false: ' '
       margin-inline-start: calc($offset * (100% + $gap) / $offsetCols)
 
   @include make-grid-columns using ($infix)
+    // must stay after density and no-gutters rules to override them
+    .v-row--gap#{$infix}
+      --v-col-gap-x: var(--v-row-gap-x#{$infix})
+      --v-col-gap-y: var(--v-row-gap-y#{$infix})
+
     @if $infix != ''
       .v-col-#{$infix}
         --v-col-is-size: #{$false}

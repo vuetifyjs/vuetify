@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: January 2026 Update
-  description: January delivered Vuetify 4.0.0-beta.0, MD3 typography and elevation levels, VCommandPalette labs release, grid system overhaul, and Vuetify0 hitting v0.1.0 with 21 merged PRs including Tabs, Radio, and Checkbox components.
+  description: January shipped Vuetify 4.0.0-beta.0, MD3 typography and elevation, the VCommandPalette labs release, a grid overhaul, and Vuetify0 v0.1.0.
   keywords: Vuetify January 2026, v4.0.0-beta.0, VCommandPalette, MD3 typography, grid system, Vuetify0, CLI
 ---
 
@@ -195,7 +195,7 @@ Enhanced mask input supporting multiple and dynamic mask resolution for complex 
 
 ---
 
-## Ecosystem Spotlight: Vuetify Snips
+## Ecosystem Spotlight: Vuetify Snips { #ecosystem-spotlight-vuetify-snips }
 
 <AppFigure :src="snipslogo" alt="Vuetify Snips logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Snips Logo" />
 
@@ -230,7 +230,7 @@ Enhanced mask input supporting multiple and dynamic mask resolution for complex 
 
 ---
 
-## Vuetify CLI: Rapid Development
+## Vuetify CLI: Rapid Development { #vuetify-cli-rapid-development }
 
 <AppFigure :src="clilogo" alt="Vuetify CLI Logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify CLI Logo" />
 
@@ -281,7 +281,7 @@ bun add -g @vuetify/cli
 
 ---
 
-## Vuetify MCP: V4 Migration Tools
+## Vuetify MCP: V4 Migration Tools { #vuetify-mcp-v4-migration-tools }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
 
@@ -365,7 +365,7 @@ Vuetify One shipped **8 releases** in January (v2.11.0 through v2.13.2), with th
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0: Progress Update { #vuetify0-progress-update }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
@@ -539,7 +539,7 @@ The following section provides an overview of the changes made in January 2026, 
 
 ---
 
-## What's Next{ .mt-4 }
+## What's Next{ #whats-next .mt-4 }
 
 **Vuetify 4.0 launches February 23rd.** The final beta releases are landing now, incorporating community feedback on the new typography, elevation, and grid systems. This is a pivotal Vuetify release—bringing CSS layers, a DX overhaul, and minimal migration effort. The [v3 → v4 MCP migration tools](#vuetify-mcp-v4-migration-tools) make an already straightforward upgrade even easier. Importantly, v4 includes the infrastructure changes that make **unstyled components possible**—the foundation for true styling freedom in future releases.
 

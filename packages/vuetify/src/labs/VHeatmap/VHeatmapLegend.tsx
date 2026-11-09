@@ -10,7 +10,8 @@ import { isLinearScale } from './heatmap'
 import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { CSSProperties, PropType } from 'vue'
+import type { ColorScaleStop } from './colorScale'
 import type { HeatmapThresholds } from './heatmap'
 
 export const makeVHeatmapLegendProps = propsFactory({
@@ -49,15 +50,24 @@ export const VHeatmapLegend = defineComponent({
       const cellWidth = Array.isArray(props.cellSize) ? props.cellSize[0] : props.cellSize
       const cellHeight = Array.isArray(props.cellSize) ? props.cellSize[1] : props.cellSize
       const linear = isLinearScale(props.thresholds) ? props.thresholds : null
+      const buckets = !linear && Array.isArray(props.thresholds) ? props.thresholds : null
+
+      const style: CSSProperties = {
+        '--v-heatmap-cell-width': convertToUnit(cellWidth),
+        '--v-heatmap-cell-height': convertToUnit(cellHeight),
+      }
+      if (linear) {
+        style['--v-heatmap-color-start'] = linear.from.color
+        style['--v-heatmap-color-end'] = linear.to.color
+      }
+      if (buckets) {
+        buckets.forEach((stop, i) => {
+          style[`--v-heatmap-color-bucket-${i}`] = stop.color
+        })
+      }
 
       return (
-        <div
-          class="v-heatmap-legend"
-          style={{
-            '--v-heatmap-cell-width': convertToUnit(cellWidth),
-            '--v-heatmap-cell-height': convertToUnit(cellHeight),
-          }}
-        >
+        <div class="v-heatmap-legend" style={ style }>
           { props.labels[0] && (
             <div
               key="legend-label-start"
@@ -69,15 +79,15 @@ export const VHeatmapLegend = defineComponent({
               key="legend-gradient"
               class="v-heatmap-legend__gradient"
               style={{
-                background: `linear-gradient(${getInterpolationMethod(linear)} to right, ${linear.from.color}, ${linear.to.color})`,
+                background: `linear-gradient(${getInterpolationMethod(linear)} to right, var(--v-heatmap-color-start), var(--v-heatmap-color-end))`,
               }}
             />
           ) : (
-            (props.thresholds as { min: number, color: string }[]).map(({ min, color }, i) => (
+            (props.thresholds as ColorScaleStop[]).map(({ min }, i) => (
               <VHeatmapLegendCell
                 key={ min }
                 class="v-heatmap-legend__cell"
-                color={ color }
+                bucketIndex={ i }
                 disabled={ !props.activeBuckets.includes(i) }
                 rounded={ props.rounded }
                 width={ cellWidth }

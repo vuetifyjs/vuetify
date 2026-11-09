@@ -37,9 +37,22 @@
 
     .v-calendar-daily__day-interval
       border-top: $calendar-grid-color $calendar-line-width solid
+      position: relative
 
       &:first-child
         border-top: none
+
+      &--hover
+        cursor: pointer
+
+        .v-calendar-daily__day-interval__underlay
+          opacity: var(--v-hover-opacity)
+
+    .v-calendar-daily__day-interval__underlay
+      @include tools.absolute()
+      background: currentColor
+      pointer-events: none
+      opacity: 0
 
     .v-calendar-daily__interval::after
       border-top: $calendar-grid-color $calendar-line-width solid

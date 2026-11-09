@@ -1,32 +1,55 @@
 {
-  "description": "Subcomponent for `v-video` used to display a video player controls.",
+  "description": "Controls bar of `v-video`, also usable on its own.",
   "props": {
+    "actions": "Which built-in and custom actions to render, in order. Accepts an array or a space/comma separated string. Built-ins: `play`, `progress` (when omitted, the progress bar is placed above the controls), `time`, `elapsed`, `remaining`, `volume`, `fullscreen`, and `-` (a spacer). With **pills**, actions wrapped in parentheses (or a nested array) share one box, and `-` splits it. Any other name renders the `action.<name>` slot, which can also replace a built-in. `prepend` and `append` slots render at the edges unless listed.",
+    "backgroundColor": "**Deprecated**, use **bg-color**.",
+    "bgColor": "Container background color.",
+    "buffer": "End of the buffered range shown on the progress bar, in seconds.",
+    "chapters": "Splits the progress bar into chapters. Each item needs a `start`, given as seconds or formatted time (`'1:30'`), and can have a `title`.",
     "color": "General color applied to icons and sliders.",
-    "backgroundColor": "Container background color.",
-    "trackColor": "Passed to the main slider `color` prop.",
-    "playing": "Applies correct icon of the default play button.",
-    "hidePlay": "Hides default play button.",
-    "hideProgressBar": "Hides default progress bar.",
-    "hideVolume": "Hides default volume control.",
-    "hideFullscreen": "Hides default fullscreen button.",
-    "fullscreen": "Applies correct icon on the default fullscreen button.",
-    "floating": "Introduces visual spacing from the video boundaries.",
-    "splitTime": "Splits time into elapsed and remaining on each side of the main slider.",
-    "pills": "Makes the container transparent and shows inner actions in separated boxes.",
     "detached": "Moves the container below so it won't obstruct the video.",
-    "progress": "Controls main slider value (0 ~ 100)",
-    "duration": "Total duration of the video used to calculate displayed time.",
-    "volume": "Volume value passed to the underlying control and slots.",
-    "volumeProps": "Props passed down to the VVideoVolume component."
+    "duration": "Duration of the video, in seconds.",
+    "floating": "Introduces visual spacing from the video boundaries.",
+    "fullscreen": "Shows the exit icon on the fullscreen button.",
+    "gap": "Space between actions. Pass `[controls, pills]` to set the gap between **pills** and the gap inside them separately.",
+    "hideFullscreen": "**Deprecated**, use **actions** instead.",
+    "hidePlay": "**Deprecated**, use **actions** instead.",
+    "hideProgressBar": "Hides the progress bar, including the stacked one.",
+    "hideThumb": "Hides the progress bar thumb.",
+    "hideVolume": "**Deprecated**, use **actions** instead.",
+    "muted": "Locks the volume control in the muted state.",
+    "pills": "Makes the container transparent and shows inner actions in separated boxes.",
+    "playing": "Playing state. Switches the play button to the pause icon.",
+    "playProps": "Props passed to the default play button, e.g. `color`, `variant` or `size`.",
+    "progress": "Current playback time, as a percentage of the duration (0 ~ 100).",
+    "progressColor": "Color of the played part of the progress bar.",
+    "progressVariant": "`pill` gives the progress bar the MD3 look with a bar-shaped thumb. `wavy` also draws the played part as a wave.",
+    "rounded": "Rounds the container, or each pill when **pills** is set.",
+    "seekStep": "Seconds moved by the arrow keys on the progress bar. Shift multiplies it by 10, or pass `[step, shiftStep]` to set both.",
+    "splitTime": "**Deprecated**, use `elapsed` and `remaining` in **actions**.",
+    "trackColor": "**Deprecated**, use **progress-color**.",
+    "variant": "**Deprecated**, use **actions**. Presets: `default`, `tube`, `mini`.",
+    "volume": "Volume (0 ~ 100).",
+    "volumeProps": "Props passed to the VMediaVolume component, e.g. `inline` or `direction`.",
+    "volumeSlider": "`visible` shows the volume slider, `hover` keeps it collapsed until the control is hovered or focused, `hidden` leaves only the mute button."
   },
   "events": {
     "update:playing": "Emitted when the playing state changes.",
     "update:progress": "Emitted when the playback progress changes.",
     "update:volume": "Emitted when the volume value changes.",
-    "skip": "Emitted when a skip action is triggered.",
     "click:fullscreen": "Emitted when the fullscreen button is clicked."
   },
   "exposed": {
-    "toggleMuted": "Toggles the muted state of the video."
+    "toggleMuted": "Switches between 0 and the last non-zero volume. Does nothing while **muted**."
+  },
+  "slots": {
+    "progress": "Replaces the progress bar, also when it is stacked. Receives `props` to bind on `v-media-progress-bar`.",
+    "time": "Replaces the text of the `time` action. Receives the player state, formatted times are in `currentTime`.",
+    "time.elapsed": "Replaces the elapsed time wherever it is shown.",
+    "time.remaining": "Replaces the remaining time, including its minus sign, wherever it is shown.",
+    "time.total": "Replaces the total duration wherever it is shown.",
+    "play": "Replaces the play button. Receives `props` to bind on your own button.",
+    "[`action.${string}`]": "Renders the action of the same name listed in **actions**. Receives the player state and methods.",
+    "default": "Replaces all controls. Receives the player state and methods."
   }
 }

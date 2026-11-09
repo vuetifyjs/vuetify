@@ -8,7 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent, keys, propsFactory } from '@/util'
+import { genericComponent, isString, keys, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ const propMap = {
 }
 
 function parseCols (val: boolean | string | number) {
-  if (typeof val === 'string' && val.includes('/')) {
+  if (isString(val) && val.includes('/')) {
     const [cols, size] = val.split('/')
     return { cols: Number(cols), size: Number(size) }
   }

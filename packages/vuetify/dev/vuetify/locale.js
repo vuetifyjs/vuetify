@@ -1,10 +1,8 @@
-import { ar, en, ja, sv } from '@/locale'
+import * as messages from '@/locale'
+
+const locale = new URLSearchParams(globalThis.location?.search).get('locale')
 
 export default {
-  messages: {
-    en,
-    ar,
-    sv,
-    ja,
-  },
+  locale: locale || 'en',
+  messages,
 }

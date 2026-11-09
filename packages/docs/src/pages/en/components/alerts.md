@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Alerts
   title: Alert component
@@ -127,7 +128,7 @@ The `v-alert` has 6 style variants, **elevated**, **flat**, **tonal**, **outline
 
 #### Closable
 
-The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
+The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting its internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
 
 <ExamplesExample file="v-alert/prop-closable" />
 
@@ -136,6 +137,14 @@ The close icon automatically applies a default `aria-label` and is configurable 
 ::: info
   For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
 :::
+
+#### Timeout
+
+The **timeout** prop closes the alert after the given number of milliseconds. The countdown starts once the alert scrolls into view. Hovering or focusing the alert stops it, and it starts over afterwards. Use **timer** to show the remaining time as a bar along the `top` or `bottom` edge, or as a ring around the close button with `close`.
+
+<ExamplesExample file="v-alert/prop-timeout" />
+
+To draw your own indicator, the **close** slot exposes `timerProgress`, the remaining time in percent, from 100 down to 0.
 
 ## Additional Examples
 

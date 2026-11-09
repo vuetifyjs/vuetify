@@ -8,6 +8,10 @@ related:
   - /components/cards/
   - /components/images/
   - /components/text-fields/
+features:
+  label: 'D: intersect'
+  report: true
+  github: /directives/intersect/
 ---
 
 # Intersection observer

@@ -8,7 +8,8 @@
     "insetFileList": "Renders the file list inside the dropzone container instead of below it.",
     "multiple": "Allows multiple files to be uploaded.",
     "scrim": "Determines whether an overlay is used when hovering over the component with files. Accepts true/false to enable background, and string to define color.",
-    "showSize": "Shows the size of the file."
+    "showSize": "Shows the size of the file.",
+    "readonly": "Prevents adding or removing files."
   },
   "slots": {
     "browse": "Slot for the browse button.",

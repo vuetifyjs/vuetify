@@ -64,7 +64,7 @@ Cool example of the month: [VTreeview File structure](https://play.vuetifyjs.com
 
 May continued our steady release cadence with several patch updates addressing bugs and introducing minor enhancements. These releases focused on stability and performance improvements, ensuring that Vuetify remains a reliable foundation for your applications.
 
-![Hero image for latest release notes](https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-release-note.png "Latest release notes hero image")
+![Hero image for latest release notes](https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-release-note.png "Latest release notes hero image")
 
 **Details:**
 
@@ -73,7 +73,7 @@ May continued our steady release cadence with several patch updates addressing b
 - [v3.8.6](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.6)
 - [v3.8.7](https://vuetifyjs.com/getting-started/release-notes/?version=v3.8.7)
 
-## Official @vuetify/mcp Release
+## Official @vuetify/mcp Release { #official-vuetifymcp-release }
 
 After months of development and anticipation, we're excited to announce that **@vuetify/mcp** is officially publicly available!
 
@@ -100,7 +100,7 @@ Recent additions to @vuetify/mcp include:
 - Up next: Application upgrade between major versions
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-%40vuetify-mcp.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-%40vuetify-mcp.mp4" type="video/mp4"></source>
 </video>
 
 This release marks just the beginning of our MCP journey. We're actively working on expanding its capabilities and integrations, with a focus on making Vuetify development more intuitive and efficient than ever before.
@@ -123,7 +123,7 @@ We continue to make improvements to the core framework, focusing on resolving bu
 May brought substantial improvements to several core components, with VDateInput receiving particular attention. The component now features enhanced parsing capabilities, improved validation, and more flexible configuration options. The spotlight for this month is on the [VDateInput](https://vuetifyjs.com/components/date-inputs/).
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-date-input.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-date-input.mp4" type="video/mp4"></source>
 </video>
 
 For details on other changes, please check the [May 2025 Changelog](#may-2025-changelog).
@@ -145,7 +145,7 @@ This month also saw multiple updates to the [VNumberInput](https://vuetifyjs.com
 - Better extraction of numbers from pasted text
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-number-input.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-number-input.mp4" type="video/mp4"></source>
 </video>
 
 **Details:**
@@ -154,7 +154,7 @@ This month also saw multiple updates to the [VNumberInput](https://vuetifyjs.com
 - [VNumberInput touch pointer capture PR #21436](https://github.com/vuetifyjs/vuetify/pull/21436)
 - [VNumberInput paste text extraction PR #21263](https://github.com/vuetifyjs/vuetify/pull/21263)
 
-### New Labs Component: VColorInput
+### New Labs Component: VColorInput { #new-labs-component-vcolorinput }
 
 This month also saw the introduction of a new [VColorInput](https://vuetifyjs.com/components/color-inputs/) component in the Labs section. This component provides an intuitive interface for color selection and input, featuring integration with color pickers and text-based hex input. As a Labs component, VColorInput is available for testing and feedback as we refine its API and functionality.
 
@@ -173,7 +173,7 @@ Basic usage is simple:
 ```
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-color-input.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-color-input.mp4" type="video/mp4"></source>
 </video>
 
 The component supports both picker and text input modes, making it flexible for different use cases.
@@ -199,7 +199,7 @@ You can now save your favorite search results in the Vuetify documentation. Just
 You can now choose a language for your code snippets in Vuetify Bin, improving syntax highlighting and code organization. This enhancement makes it easier to share and collaborate on code examples with proper language-specific formatting.
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-vbin.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-vbin.mp4" type="video/mp4"></source>
 </video>
 
 ### Vuetify Play Enhancements
@@ -207,7 +207,7 @@ You can now choose a language for your code snippets in Vuetify Bin, improving s
 Vuetify Play continues to evolve with new features and improvements that make it an even more powerful tool for exploring and experimenting with Vuetify components.
 
 <video width="100%" height="auto" autoplay loop controls>
-  <source src="https://vuetifyjs.b-cdn.net/docs/images/blog/may-2025-update/may-2025-vplay.mp4" type="video/mp4"></source>
+  <source src="https://cdn.vuetifyjs.com/docs/images/blog/may-2025-update/may-2025-vplay.mp4" type="video/mp4"></source>
 </video>
 
 Key enhancements to Vuetify Play include:
@@ -290,7 +290,7 @@ Expand this section to see the detailed changelog for May 2025, including bug fi
 
 ---
 
-## What's Next
+## What's Next { #whats-next }
 
 June is all about shipping. MCP gets API keys and primer prompts, v3.9.0 lands with the features we've been building, and we'll start showing off more of the new theming work in the release blog post coming next week. VDateInput will likely graduate from Labs soon, and we've got some performance improvements in the pipeline that I'm excited about.
 

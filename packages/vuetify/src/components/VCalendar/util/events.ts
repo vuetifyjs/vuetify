@@ -9,6 +9,7 @@ import {
 } from './timestamp'
 
 // Types
+import type { VTimestampInput } from './timestamp'
 import type { CalendarEvent, CalendarEventParsed, CalendarTimestamp } from '../types'
 
 export function parseEvent (
@@ -18,9 +19,10 @@ export function parseEvent (
   endProperty: string,
   timed = false,
   category: string | false = false,
+  toInput = (value: unknown) => value as VTimestampInput,
 ): CalendarEventParsed {
-  const startInput = input[startProperty]
-  const endInput = input[endProperty]
+  const startInput = toInput(input[startProperty])
+  const endInput = toInput(input[endProperty])
   const startParsed: CalendarTimestamp = parseTimestamp(startInput, true)
   const endParsed: CalendarTimestamp = (endInput ? parseTimestamp(endInput, true) : startParsed)
   const start: CalendarTimestamp = isTimedless(startInput)

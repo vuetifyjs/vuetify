@@ -27,7 +27,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 
 // Utilities
 import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, noop, omit, propsFactory, refElement, useRender } from '@/util'
+import { convertToUnit, genericComponent, isString, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -53,8 +53,7 @@ function useCountdown (milliseconds: () => number) {
 
   function reset () {
     clear()
-
-    nextTick(() => time.value = milliseconds())
+    time.value = milliseconds()
   }
 
   function start (el?: HTMLElement) {
@@ -110,6 +109,7 @@ export const makeVSnackbarProps = propsFactory({
     locationStrategy: null,
     transition: 'v-snackbar-transition',
   }), [
+    'contextMenu',
     'persistent',
     'noClickAnimation',
     'offset',
@@ -131,9 +131,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
   emits: {
     'update:modelValue': (v: boolean) => true,
+    'click:outside': (e: MouseEvent) => true,
+    afterEnter: () => true,
+    afterLeave: () => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
@@ -170,11 +173,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
 
     let activeTimeout = -1
     function startTimeout () {
-      countdown.reset()
+      countdown.clear()
       window.clearTimeout(activeTimeout)
       const timeout = Number(props.timeout)
 
       if (!isActive.value || timeout === -1) return
+
+      countdown.reset()
 
       const element = refElement(timerRef.value)
 
@@ -227,6 +232,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     function onAfterLeave () {
       if (isHovering.value) onPointerleave()
       isFocused.value = false
+      emit('afterLeave')
     }
 
     const locationClasses = computed(() => {
@@ -261,7 +267,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     })
 
     const transition = computed(() => {
-      if (typeof props.transition !== 'string' || !props.transition.endsWith('-auto')) {
+      if (!isString(props.transition) || !props.transition.endsWith('-auto')) {
         return props.transition
       }
 
@@ -315,6 +321,8 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...overlayProps }
           transition={ transition.value }
           v-model={ isActive.value }
+          onClick:outside={ e => emit('click:outside', e) }
+          onAfterEnter={ () => emit('afterEnter') }
           contentProps={ mergeProps({
             class: [
               'v-snackbar__wrapper',
@@ -348,7 +356,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             <div class="v-snackbar__header">{ slots.header?.() }</div>
           )}
 
-          { props.timer && countdown.time.value > 0 && !isHovering.value && (
+          { props.timer && Number(props.timeout) > 0 && !isHovering.value && (
             <div
               key="timer"
               class={[

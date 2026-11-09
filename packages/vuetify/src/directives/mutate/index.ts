@@ -1,6 +1,17 @@
+// Utilities
+import { isFunction } from '@/util'
+
 // Types
 import type { DirectiveBinding } from 'vue'
-import type { MutationOptions } from '@/composables/mutationObserver'
+
+export interface MutationOptions {
+  attr?: boolean
+  char?: boolean
+  child?: boolean
+  sub?: boolean
+  once?: boolean
+  immediate?: boolean
+}
 
 export interface MutationDirectiveBinding extends Omit<DirectiveBinding, 'modifiers' | 'value'> {
   value: MutationCallback | { handler: MutationCallback, options?: MutationObserverInit }
@@ -13,17 +24,15 @@ function mounted (el: HTMLElement, binding: MutationDirectiveBinding) {
   const { once, immediate, ...modifierKeys } = modifiers
   const defaultValue = !Object.keys(modifierKeys).length
 
-  const { handler, options } = typeof value === 'object'
-    ? value
-    : {
-      handler: value,
-      options: {
-        attributes: modifierKeys?.attr ?? defaultValue,
-        characterData: modifierKeys?.char ?? defaultValue,
-        childList: modifierKeys?.child ?? defaultValue,
-        subtree: modifierKeys?.sub ?? defaultValue,
-      },
+  const handler = isFunction(value) ? value : value.handler
+  const options = isFunction(value)
+    ? {
+      attributes: modifierKeys?.attr ?? defaultValue,
+      characterData: modifierKeys?.char ?? defaultValue,
+      childList: modifierKeys?.child ?? defaultValue,
+      subtree: modifierKeys?.sub ?? defaultValue,
     }
+    : value.options
 
   const observer = new MutationObserver((
     mutations: MutationRecord[] = [],

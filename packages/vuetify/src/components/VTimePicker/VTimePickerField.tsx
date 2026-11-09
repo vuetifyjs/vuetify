@@ -39,6 +39,8 @@ export const VTimePickerField = genericComponent()({
     const isFocused = shallowRef(false)
 
     function onKeydown (e: KeyboardEvent) {
+      if (props.readonly) return
+
       if (['Backspace', 'Delete'].includes(e.key)) {
         e.preventDefault()
 
@@ -61,6 +63,7 @@ export const VTimePickerField = genericComponent()({
           ]}
           style={ props.active ? textColorStyles.value : [] }
           disabled={ props.disabled }
+          readonly={ props.readonly }
           variant="solo-filled"
           inputmode="numeric"
           hideDetails="auto"

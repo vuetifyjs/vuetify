@@ -114,7 +114,7 @@ useHotkey('ctrl+s', handleSave, { event: 'keyup' })
 
 ### Input handling
 
-By default, hotkeys are disabled when input elements are focused to prevent conflicts with typing:
+By default, hotkeys are disabled while a text field, textarea, select, or editable element has focus. Other inputs, such as checkboxes, radio button, range sliders, and buttons, only keep the keys they act on, like Space, Enter, and the arrow keys.
 
 ```js
 // Default: hotkeys disabled in input fields

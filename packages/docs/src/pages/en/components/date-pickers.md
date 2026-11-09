@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Date pickers
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
@@ -11,7 +12,7 @@ features:
   github: /components/VDatePicker/
   label: 'C: VDatePicker'
   report: true
-  spec: https://m2.material.io/components/date-pickers
+  spec: https://m3.material.io/components/date-pickers
 ---
 
 # Date pickers
@@ -73,6 +74,12 @@ You can specify the picker's width or make it full width.
 By default days from previous and next months are not visible. They can be displayed using the **show-adjacent-months** prop.
 
 <ExamplesExample file="v-date-picker/prop-show-adjacent-months" />
+
+#### Wheel
+
+Use **wheel** to navigate months with horizontal scrolling or Shift + mouse wheel.
+
+<ExamplesExample file="v-date-picker/prop-wheel" />
 
 #### Colors
 

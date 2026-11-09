@@ -1,5 +1,5 @@
 // Utilities
-import { attachedRoot } from '@/util'
+import { attachedRoot, isFunction } from '@/util'
 
 // Types
 import type { DirectiveBinding } from 'vue'
@@ -18,12 +18,12 @@ function defaultConditional () {
   return true
 }
 
-function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): boolean {
+function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding, ignoreActive = false): boolean {
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
   // with non-toggleable components
-  if (!e || checkIsActive(e, binding) === false) return false
+  if (!e || (!ignoreActive && checkIsActive(e, binding) === false)) return false
 
   // If we're clicking inside the shadowroot, then the app root doesn't get the same
   // level of introspection as to _what_ we're clicking. We want to check to see if
@@ -37,7 +37,8 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 
   // Check if additional elements were passed to be included in check
   // (click must be outside all included elements, if any)
-  const elements = ((typeof binding.value === 'object' && binding.value.include) || (() => []))()
+  const value = binding.value
+  const elements = ((isFunction(value) ? undefined : value.include) || (() => []))()
   // Add the root element for the component this directive was defined on
   elements.push(el)
 
@@ -50,18 +51,24 @@ function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirect
 }
 
 function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
-  const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
+  const value = binding.value
+  const isActive = (isFunction(value) ? undefined : value.closeConditional) || defaultConditional
 
   return isActive(e)
 }
 
-function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
-  const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
+function directive (
+  e: MouseEvent,
+  el: HTMLElement,
+  binding: ClickOutsideDirectiveBinding,
+  pressedOutside = el._clickOutside!.lastMousedownWasOutside,
+) {
+  const handler = isFunction(binding.value) ? binding.value : binding.value.handler
 
   // Clicks in the Shadow DOM change their target while using setTimeout, so the original target is saved here
   e.shadowTarget = e.target
 
-  el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
+  pressedOutside && checkEvent(e, el, binding) && setTimeout(() => {
     checkIsActive(e, binding) && handler && handler(e)
   }, 0)
 }
@@ -84,12 +91,21 @@ export const ClickOutside = {
   // clicks on body
   mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
+    // a touch long-press fires contextmenu without any mousedown
+    const onContextmenu = (e: Event) => directive(e as MouseEvent, el, binding, true)
+    // right-click already went through contextmenu; letting its auxclick through calls the handler twice
+    const onAuxclick = (e: Event) => (e as MouseEvent).button !== 2 && onClick(e)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
+      // Ignore the active check here so ancestors of the top overlay (e.g. a menu
+      // with an open submenu, which isn't localTop) still record that the click
+      // landed outside, letting the close cascade propagate. #20003
+      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding, true)
     }
 
     handleShadow(el, (app: HTMLElement) => {
       app.addEventListener('click', onClick, true)
+      app.addEventListener('auxclick', onAuxclick, true)
+      app.addEventListener('contextmenu', onContextmenu, true)
       app.addEventListener('mousedown', onMousedown, true)
     })
     if (!el._clickOutside) {
@@ -100,6 +116,8 @@ export const ClickOutside = {
 
     el._clickOutside[binding.instance!.$.uid] = {
       onClick,
+      onAuxclick,
+      onContextmenu,
       onMousedown,
     }
   },
@@ -110,9 +128,11 @@ export const ClickOutside = {
     handleShadow(el, (app: HTMLElement) => {
       if (!app || !el._clickOutside?.[binding.instance!.$.uid]) return
 
-      const { onClick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
+      const { onClick, onAuxclick, onContextmenu, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
 
       app.removeEventListener('click', onClick, true)
+      app.removeEventListener('auxclick', onAuxclick, true)
+      app.removeEventListener('contextmenu', onContextmenu, true)
       app.removeEventListener('mousedown', onMousedown, true)
     })
 

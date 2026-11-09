@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   nav: Sliders
   title: Slider component
@@ -12,7 +13,7 @@ features:
   label: 'C: VSlider'
   report: true
   github: /components/VSlider/
-  spec: https://m2.material.io/components/sliders
+  spec: https://m3.material.io/components/sliders
 ---
 
 # Sliders
@@ -58,6 +59,12 @@ You cannot interact with **disabled** sliders.
 Using the **step** prop you can control the precision of the slider, and how much it should move each step.
 
 <ExamplesExample file="v-slider/prop-step" />
+
+#### Value format
+
+The **value-format** prop formats the thumb label and the value read by screen readers. Use `[value]`, `[max]` and `[percent]` as placeholders, or pass a function.
+
+<ExamplesExample file="v-slider/prop-value-format" />
 
 #### Icons
 

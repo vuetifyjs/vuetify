@@ -9,7 +9,9 @@ related:
   - /components/slide-groups/
   - /components/windows/
 features:
+  label: 'D: tooltip'
   report: true
+  github: /directives/tooltip/
 ---
 
 # Tooltip directive

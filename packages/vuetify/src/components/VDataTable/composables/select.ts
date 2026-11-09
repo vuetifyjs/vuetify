@@ -3,7 +3,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, shallowRef, toRef, toValue } from 'vue'
-import { deepEqual, isPrimitive, propsFactory, wrapInArray } from '@/util'
+import { deepEqual, isObject, isPrimitive, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
@@ -19,6 +19,7 @@ export interface DataTableSelectStrategy {
   showSelectAll: boolean
   allSelected: (data: {
     allItems: SelectableItem[]
+    filteredItems: SelectableItem[]
     currentPage: SelectableItem[]
   }) => SelectableItem[]
   select: (data: {
@@ -29,6 +30,7 @@ export interface DataTableSelectStrategy {
   selectAll: (data: {
     value: boolean
     allItems: SelectableItem[]
+    filteredItems: SelectableItem[]
     currentPage: SelectableItem[]
     selected: Set<unknown>
   }) => Set<unknown>
@@ -36,7 +38,7 @@ export interface DataTableSelectStrategy {
 
 type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
-  selectStrategy: 'single' | 'page' | 'all'
+  selectStrategy: 'single' | 'page' | 'filtered' | 'all'
   valueComparator?: ValueComparator
   'onUpdate:modelValue': EventProp<[any[]]> | undefined
 }
@@ -64,6 +66,13 @@ const pageSelectStrategy: DataTableSelectStrategy = {
   selectAll: ({ value, currentPage, selected }) => pageSelectStrategy.select({ items: currentPage, value, selected }),
 }
 
+const filteredSelectStrategy: DataTableSelectStrategy = {
+  showSelectAll: true,
+  allSelected: ({ filteredItems }) => filteredItems,
+  select: pageSelectStrategy.select,
+  selectAll: ({ value, filteredItems, selected }) => pageSelectStrategy.select({ items: filteredItems, value, selected }),
+}
+
 const allSelectStrategy: DataTableSelectStrategy = {
   showSelectAll: true,
   allSelected: ({ allItems }) => allItems,
@@ -83,7 +92,7 @@ const allSelectStrategy: DataTableSelectStrategy = {
 export const makeDataTableSelectProps = propsFactory({
   showSelect: Boolean,
   selectStrategy: {
-    type: [String, Object] as PropType<'single' | 'page' | 'all'>,
+    type: [String, Object] as PropType<'single' | 'page' | 'filtered' | 'all'>,
     default: 'page',
   },
   modelValue: {
@@ -97,7 +106,11 @@ export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSe
 
 export function provideSelection (
   props: SelectionProps,
-  { allItems, currentPage }: { allItems: Ref<SelectableItem[]>, currentPage: MaybeRefOrGetter<readonly SelectableItem[]> }
+  { allItems, filteredItems = allItems, currentPage }: {
+    allItems: Ref<SelectableItem[]>
+    filteredItems?: MaybeRefOrGetter<readonly SelectableItem[]>
+    currentPage: MaybeRefOrGetter<readonly SelectableItem[]>
+  }
 ) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     const customComparator = props.valueComparator
@@ -116,13 +129,15 @@ export function provideSelection (
   })
 
   const allSelectable = computed(() => allItems.value.filter(item => item.selectable))
+  const filteredSelectable = computed(() => toValue(filteredItems).filter(item => item.selectable))
   const currentPageSelectable = computed(() => toValue(currentPage).filter(item => item.selectable))
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
+    if (isObject(props.selectStrategy)) return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single': return singleSelectStrategy
+      case 'filtered': return filteredSelectStrategy
       case 'all': return allSelectStrategy
       case 'page':
       default: return pageSelectStrategy
@@ -170,6 +185,7 @@ export function provideSelection (
     const newSelected = selectStrategy.value.selectAll({
       value,
       allItems: allSelectable.value,
+      filteredItems: filteredSelectable.value,
       currentPage: currentPageSelectable.value,
       selected: new Set(selected.value),
     })
@@ -181,6 +197,7 @@ export function provideSelection (
   const allSelected = computed(() => {
     const items = selectStrategy.value.allSelected({
       allItems: allSelectable.value,
+      filteredItems: filteredSelectable.value,
       currentPage: currentPageSelectable.value,
     })
     return !!items.length && isSelected(items)

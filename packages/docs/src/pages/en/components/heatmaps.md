@@ -1,5 +1,4 @@
 ---
-emphasized: true
 meta:
   nav: Heatmaps
   title: Heatmap component
@@ -120,3 +119,9 @@ The following are a collection of examples that demonstrate more advanced capabi
 Combine `group-by` with inferred columns to render a multi-month calendar heatmap.
 
 <ExamplesExample file="v-heatmap/misc-calendar" />
+
+#### Waffle charts
+
+With pinned `rows` and `columns` and simplified `thresholds` value, you can render nice-looking charts – alternative to the typical circular progress.
+
+<ExamplesExample file="v-heatmap/misc-waffles" />

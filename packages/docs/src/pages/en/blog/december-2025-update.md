@@ -2,7 +2,7 @@
 layout: blog
 meta:
   title: December 2025 Update
-  description: December delivered Vuetify 4.0.0-alpha.0 with CSS layers and theme improvements, five v3.11.x patch releases, the Vuetify CLI public release, PWA rollout across all ecosystem products, and significant Vuetify0 progress.
+  description: December shipped Vuetify 4.0.0-alpha.0 with CSS layers, five v3.11.x patches, the Vuetify CLI public release, ecosystem-wide PWA rollout, and v0 progress.
   keywords: Vuetify December 2025, v4.0.0-alpha.0, Vuetify CLI, PWA, CSS layers, Vuetify0, MCP
 ---
 
@@ -65,7 +65,7 @@ December was our most productive month of 2025. With **522 commits** across 16 a
 * [Product Updates](#product-updates)
   * [Vuetify Bin](#vuetify-bin)
   * [Vuetify Play](#vuetify-play)
-  * [Vuetify Issues Reporter](#vuetify-issues-reporter)
+  * [Vuetify Issues Reporter](#vuetify-issues)
   * [Other Products](#other-products)
 * [Vuetify MCP: Rate Limiting & CLI Support](#vuetify-mcp-rate-limiting-cli-support)
 * [Vuetify0: Progress Update](#vuetify0-progress-update)
@@ -151,7 +151,7 @@ v4.0.0-alpha.0 is for testing and feedback only. Production applications should 
 
 ---
 
-## Ecosystem Spotlight: Vuetify CLI
+## Ecosystem Spotlight: Vuetify CLI { #ecosystem-spotlight-vuetify-cli }
 
 <AppFigure :src="clilogo" alt="Vuetify CLI Logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify CLI Logo" />
 
@@ -319,7 +319,7 @@ The [OTP input](/components/otp-input/) component now supports the `density` pro
 * [VImg attribute passthrough PR#22439](https://github.com/vuetifyjs/vuetify/pull/22439)
 * [VOtpInput density PR#22401](https://github.com/vuetifyjs/vuetify/pull/22401)
 
-### Accessibility & Compatibility
+### Accessibility & Compatibility { #accessibility-compatibility }
 
 **Forced Colors Mode**
 
@@ -442,7 +442,7 @@ The **Vuetify Issues** reporter received **31 commits** with significant improve
 
 ---
 
-## Vuetify MCP: Rate Limiting & CLI Support
+## Vuetify MCP: Rate Limiting & CLI Support { #vuetify-mcp-rate-limiting-cli-support }
 
 <AppFigure :src="mcplogo" alt="Vuetify MCP logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify MCP Logo" />
 
@@ -492,7 +492,7 @@ Or run locally:
 
 ---
 
-## Vuetify0: Progress Update
+## Vuetify0: Progress Update { #vuetify0-progress-update }
 
 <AppFigure :src="zerologo" alt="Vuetify0 logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify0 Logo" />
 
@@ -752,7 +752,7 @@ The following section provides an overview of the changes made in December 2025,
 
 </details>
 
-## What's Next{ .mt-4 }
+## What's Next{ #whats-next .mt-4 }
 
 January kicks off with continued development on Vuetify 4, incorporating feedback from the alpha release. We're targeting additional alpha releases throughout Q1 2026 as we refine the CSS layers architecture and modernize remaining components.
 

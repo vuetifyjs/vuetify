@@ -1,6 +1,8 @@
 {
+  "description": "Provides access to the dimensions of the nearest `v-layout` and the layout items registered in it.",
   "exposed": {
     "getLayoutItem": "Function that returns position and size information about a specific layout item.",
+    "layoutRect": "Measured position and size of the layout container. `undefined` until the first measurement.",
     "mainRect": "Position and size information for the v-main area.",
     "mainStyles": "CSS styles applied to the v-main area."
   }

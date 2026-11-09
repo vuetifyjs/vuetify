@@ -45,6 +45,7 @@ const aliases: IconAliases = {
   plus: 'i-material-symbols:add',
   minus: 'i-material-symbols:remove',
   calendar: 'i-material-symbols:calendar-today',
+  clock: 'i-material-symbols:schedule-outline',
   treeviewCollapse: 'i-material-symbols:arrow-drop-down',
   treeviewExpand: 'i-material-symbols:arrow-right',
   tableGroupExpand: 'i-material-symbols:chevron-right',

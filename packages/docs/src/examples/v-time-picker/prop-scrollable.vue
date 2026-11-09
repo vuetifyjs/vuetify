@@ -2,7 +2,12 @@
   <v-row class="align-center justify-space-around">
     <v-time-picker
       v-model="picker"
-      scrollable
+      scrollable="clock"
+    ></v-time-picker>
+    <v-time-picker
+      v-model="picker"
+      scrollable="controls"
+      variant="input"
     ></v-time-picker>
   </v-row>
 </template>

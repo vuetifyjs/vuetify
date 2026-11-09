@@ -20,6 +20,9 @@ export default {
       activateNone: 'Activeer om de sortering te verwijderen.',
       activateDescending: 'Activeer om aflopend te sorteren.',
       activateAscending: 'Activeer om oplopend te sorteren.',
+      selectRow: 'Rij selecteren',
+      selectAll: 'Alles selecteren',
+      selectGroup: 'Groep selecteren',
     },
     sortBy: 'Sorteer op',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'tot',
+  },
+  monthPicker: {
+    title: 'Selecteer maand',
+    itemsSelected: '{0} geselecteerd',
+    header: 'Voer maand in',
+    range: {
+      title: 'Voer maanden in',
+    },
+    ariaLabel: {
+      previousYear: 'Vorig jaar',
+      nextYear: 'Volgend jaar',
+      selectYear: 'Selecteer jaar',
+      currentMonth: 'Huidige maand, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
@@ -77,7 +94,7 @@ export default {
     clear: 'Maak {0} leeg',
     prependAction: '{0} voorafgaande actie',
     appendAction: '{0} bijgevoegde actie',
-    otp: 'Voer OTP-teken {0} in',
+    otp: 'Voer verificatiecode in',
   },
   fileInput: {
     counter: '{0} bestanden',
@@ -117,6 +134,15 @@ export default {
       item: 'Beoordeling {0} van {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Meer opties',
+  },
   loading: 'Bezig met laden...',
   infiniteScroll: {
     loadMore: 'Meer laden',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Backspace',
     space: 'Spatie',
     plus: 'plus',
-    shortcut: 'Toetsenbordsnelkoppeling: {0}',
+    shortcut: 'Toetsenbordsnelkoppeling, {0}',
     or: 'of',
   },
-  video: {
+  media: {
     play: 'Afspelen',
     pause: 'Pauzeren',
     seek: 'Zoeken',
     volume: 'Volume',
-    showVolume: 'Volumeregeling weergeven',
     mute: 'Dempen',
     unmute: 'Dempen opheffen',
     enterFullscreen: 'Volledig scherm',

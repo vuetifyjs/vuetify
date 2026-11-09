@@ -8,13 +8,14 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
+import { injectNestedDefaults } from '@/composables/defaults'
 import { IconValue } from '@/composables/icons'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
+import { nextTick, onMounted, ref, shallowRef, toRef, watch } from 'vue'
+import { convertToUnit, genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -40,6 +41,7 @@ export const makeVCarouselProps = propsFactory({
     default: 6000,
     validator: (value: string | number) => Number(value) > 0,
   },
+  pauseOnHover: Boolean,
   progress: [Boolean, String],
   verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
 
@@ -79,20 +81,21 @@ export const VCarousel = genericComponent<new <T>(
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
+    const { isRtl } = useRtl()
     const windowRef = ref<VWindow>()
+    const delimiterDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
+
+    const isHovering = shallowRef(false)
+    const isFocused = shallowRef(false)
+    const isCycling = toRef(() => props.cycle && !isFocused.value && !(props.pauseOnHover && isHovering.value))
 
     let slideTimeout = -1
-    watch(model, restartTimeout)
-    watch(() => props.interval, restartTimeout)
-    watch(() => props.cycle, val => {
-      if (val) restartTimeout()
-      else window.clearTimeout(slideTimeout)
-    })
+    watch([isCycling, model, () => props.interval], restartTimeout)
 
     onMounted(startTimeout)
 
     function startTimeout () {
-      if (!props.cycle || !windowRef.value) return
+      if (!isCycling.value || !windowRef.value) return
 
       slideTimeout = window.setTimeout(
         windowRef.value.group.next,
@@ -102,12 +105,22 @@ export const VCarousel = genericComponent<new <T>(
 
     function restartTimeout () {
       window.clearTimeout(slideTimeout)
-      window.requestAnimationFrame(startTimeout)
+      if (isCycling.value) window.requestAnimationFrame(startTimeout)
+    }
+
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = (e.target as HTMLElement).matches(':focus-visible')
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (!windowRef.value?.$el.contains(e.relatedTarget)) isFocused.value = false
     }
 
     function onDelimiterKeyDown (e: KeyboardEvent, group: GroupProvide) {
+      const [backKey, forwardKey] = isRtl.value ? ['ArrowRight', 'ArrowLeft'] : ['ArrowLeft', 'ArrowRight']
+
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowLeft') ||
+        (props.direction === 'horizontal' && e.key === backKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowUp')
       ) {
         e.preventDefault()
@@ -116,7 +129,7 @@ export const VCarousel = genericComponent<new <T>(
       }
 
       if (
-        (props.direction === 'horizontal' && e.key === 'ArrowRight') ||
+        (props.direction === 'horizontal' && e.key === forwardKey) ||
         (props.direction === 'vertical' && e.key === 'ArrowDown')
       ) {
         e.preventDefault()
@@ -145,6 +158,10 @@ export const VCarousel = genericComponent<new <T>(
             { height: convertToUnit(props.height) },
             props.style,
           ]}
+          onFocusin={ onFocusin }
+          onFocusout={ onFocusout }
+          onPointerenter={ () => isHovering.value = true }
+          onPointerleave={ () => isHovering.value = false }
         >
           {{
             default: slots.default,
@@ -164,8 +181,8 @@ export const VCarousel = genericComponent<new <T>(
                           VBtn: {
                             color: props.color,
                             icon: props.delimiterIcon,
-                            size: 'x-small',
-                            variant: 'text',
+                            size: delimiterDefaults.value?.size ?? 'x-small',
+                            variant: delimiterDefaults.value?.variant ?? 'text',
                           },
                         }}
                         scoped
@@ -195,7 +212,7 @@ export const VCarousel = genericComponent<new <T>(
                   <VProgressLinear
                     absolute
                     class="v-carousel__progress"
-                    color={ typeof props.progress === 'string' ? props.progress : undefined }
+                    color={ isString(props.progress) ? props.progress : undefined }
                     modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                   />
                 )}

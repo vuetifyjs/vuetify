@@ -73,9 +73,18 @@
   .v-alert__close
     flex: 0 1 auto
     grid-area: close
+    position: relative
 
     > .v-btn
       margin-block: calc(-1 * (var(--v-btn-height) + 12px - #{$alert-prepend-icon-size}) / 2)
+
+  .v-alert__timer
+    pointer-events: none
+
+    &--close
+      inset: 0
+      margin: auto
+      position: absolute
 
   .v-alert__content
     align-self: center
@@ -161,3 +170,15 @@
       &--variant-elevated,
       &--variant-flat
         border-width: thick
+
+@include tools.layer('transitions')
+  .v-alert
+    &.expand-transition-leave-active
+      flex-basis: auto
+      transition-property: height, padding-top, padding-bottom, margin-top, margin-bottom
+
+    &.expand-transition-leave-to
+      margin-bottom: 0
+      margin-top: 0
+      padding-bottom: 0
+      padding-top: 0

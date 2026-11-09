@@ -81,35 +81,30 @@ describe('vuetify date adapter', () => {
     })
   })
 
-  // TODO: why do these only fail locally
-  describe.todo('getPreviousMonth', () => {
+  describe('getPreviousMonth', () => {
     const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
     it.each([
-      [new Date('2024-03-15'), new Date('2024-02-01'), '2024-03-15 -> 2024-02-01'],
-      [new Date('2024-01-01'), new Date('2023-12-01'), '2024-01-01 -> 2023-12-01'],
-      [new Date('2025-01-31'), new Date('2024-12-01'), '2025-01-31 -> 2024-12-01'],
-      [new Date('2024-02-29'), new Date('2024-01-01'), '2024-02-29 -> 2024-01-01 (Leap Year)'],
-      [new Date('2023-03-01'), new Date('2023-02-01'), '2023-03-01 -> 2023-02-01'],
-    ])('correctly calculates the first day of the previous month: %s', (date, expected) => {
-      const result = dateUtils.getPreviousMonth(date)
-      expect(result.getFullYear()).toBe(expected.getFullYear())
-      expect(result.getMonth()).toBe(expected.getMonth())
-      expect(result.getDate()).toBe(expected.getDate())
+      [new Date('2024-03-15T00:00'), new Date('2024-02-01T00:00')],
+      [new Date('2024-01-01T00:00'), new Date('2023-12-01T00:00')],
+      [new Date('2025-01-31T00:00'), new Date('2024-12-01T00:00')],
+      [new Date('2024-02-29T00:00'), new Date('2024-01-01T00:00')],
+      [new Date('2023-03-01T00:00'), new Date('2023-02-01T00:00')],
+    ])('returns first day of the previous month for %s', (date, expected) => {
+      expect(dateUtils.getPreviousMonth(date)).toEqual(expected)
     })
   })
 
-  // TODO: why do these only fail locally
-  describe.todo('isSameYear', () => {
+  describe('isSameYear', () => {
     const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
 
     it.each([
-      [new Date('2024-01-01'), new Date('2024-12-31'), true],
-      [new Date('2024-06-15'), new Date('2024-11-20'), true],
-      [new Date('2023-01-01'), new Date('2024-01-01'), false],
-      [new Date('2024-12-31'), new Date('2025-01-01'), false],
-      [new Date('2024-07-07'), new Date('2023-07-07'), false],
-    ])('returns %s when comparing %s and %s', (date1, date2, expected) => {
+      [new Date('2024-01-01T00:00'), new Date('2024-12-31T00:00'), true],
+      [new Date('2024-06-15T00:00'), new Date('2024-11-20T00:00'), true],
+      [new Date('2023-01-01T00:00'), new Date('2024-01-01T00:00'), false],
+      [new Date('2024-12-31T00:00'), new Date('2025-01-01T00:00'), false],
+      [new Date('2024-07-07T00:00'), new Date('2023-07-07T00:00'), false],
+    ])('compares year for %s and %s', (date1, date2, expected) => {
       expect(dateUtils.isSameYear(date1, date2)).toBe(expected)
     })
   })

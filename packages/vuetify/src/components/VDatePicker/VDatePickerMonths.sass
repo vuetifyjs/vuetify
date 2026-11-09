@@ -1,4 +1,5 @@
 @use '../../styles/tools'
+@use '../VBtn/variables' as btn
 @use './variables' as *
 
 @include tools.layer('components')
@@ -11,12 +12,13 @@
     flex: 1 1
     height: inherit
     justify-content: space-around
-    grid-template-columns: repeat(2, 1fr)
+    grid-template-columns: repeat(var(--v-date-picker-months-columns, 2), 1fr)
     grid-gap: $date-picker-months-grid-gap
     padding-inline-start: 36px
     padding-inline-end: 36px
 
     .v-btn
+      --v-btn-height: #{btn.$button-height}
       text-transform: none
       padding-inline-start: 8px
       padding-inline-end: 8px

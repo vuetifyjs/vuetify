@@ -5,7 +5,6 @@ import {
   copyTimestamp,
   createDayList,
   createIntervalList,
-  createNativeLocaleFormatter,
   findWeekday,
   getDayIdentifier,
   getEndOfMonth,
@@ -27,7 +26,7 @@ import {
   validateTimestamp,
 } from '../timestamp'
 
-describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-statements
+describe('VCalendar/util/timestamp', () => {
   it('should parse time number', () => {
     expect(parseTime(0)).toBe(0)
     expect(parseTime(120)).toBe(120)
@@ -313,7 +312,7 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
     expect(cc.future).toBe(false)
   })
 
-  it('should calculate weekday', () => { // eslint-disable-line max-statements
+  it('should calculate weekday', () => {
     expect(parseTimestamp('2019-01-01')!.weekday).toBe(2)
     expect(parseTimestamp('2019-01-02')!.weekday).toBe(3)
     expect(parseTimestamp('2019-01-03')!.weekday).toBe(4)
@@ -381,15 +380,6 @@ describe.skip('VCalendar/util/timestamp.ts', () => { // eslint-disable-line max-
     expect(createIntervalList(parseTimestamp('2019-02-08')!, 15, 15, 10)).toMatchSnapshot()
     expect(createIntervalList(parseTimestamp('2019-02-08')!, 10, 5, 2)).toMatchSnapshot()
   })
-
-  // TODO Create a test that doesn't fail when
-  // the day changes or ignore the code it
-  // covers
-  it.todo('should create native locale formatter')
-
-  it.todo(`should return emptyFormatter if Intl isn't defined`)
-
-  it.todo('should return emptyFormatter if Intl throws error')
 
   it('should get month start', () => {
     expect(getStartOfMonth(parseTimestamp('2019-02-08')!).date).toBe('2019-02-01')

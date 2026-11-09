@@ -20,6 +20,9 @@ export default {
       activateNone: 'Aktivujte na zrušenie zoradenia.',
       activateDescending: 'Aktivujte na zoradenie zostupne.',
       activateAscending: 'Aktivujte na zoradenie vzostupne.',
+      selectRow: 'Vybrať riadok',
+      selectAll: 'Vybrať všetko',
+      selectGroup: 'Vybrať skupinu',
     },
     sortBy: 'Zoradiť podľa',
   },
@@ -34,6 +37,20 @@ export default {
   },
   dateRangeInput: {
     divider: 'až',
+  },
+  monthPicker: {
+    title: 'Vyberte mesiac',
+    itemsSelected: '{0} vybraných',
+    header: 'Zadajte mesiac',
+    range: {
+      title: 'Zadajte mesiace',
+    },
+    ariaLabel: {
+      previousYear: 'Predchádzajúci rok',
+      nextYear: 'Nasledujúci rok',
+      selectYear: 'Vyberte rok',
+      currentMonth: 'Aktuálny mesiac, {0}',
+    },
   },
   datePicker: {
     itemsSelected: '{0} vybraných',
@@ -77,7 +94,7 @@ export default {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',
     appendAction: 'Akcia za {0}',
-    otp: 'Prosím zadajte OTP znak {0}',
+    otp: 'Zadajte verifikačný kód',
   },
   fileInput: {
     counter: '{0} súborov',
@@ -117,6 +134,15 @@ export default {
       item: 'Hodnotenie {0} z {1}',
     },
   },
+  rangeSlider: {
+    ariaLabel: {
+      start: 'Minimum',
+      end: 'Maximum',
+    },
+  },
+  splitBtn: {
+    menu: 'Ďalšie možnosti',
+  },
   loading: 'Načítavam...',
   infiniteScroll: {
     loadMore: 'Načítať viac',
@@ -154,15 +180,14 @@ export default {
     backspace: 'Backspace',
     space: 'Medzera',
     plus: 'plus',
-    shortcut: 'Klávesová skratka: {0}',
+    shortcut: 'Klávesová skratka, {0}',
     or: 'alebo',
   },
-  video: {
+  media: {
     play: 'Prehrať',
     pause: 'Pozastaviť',
     seek: 'Vyhľadať',
     volume: 'Hlasitosť',
-    showVolume: 'Zobraziť ovládanie hlasitosti',
     mute: 'Stlmiť',
     unmute: 'Zrušiť stlmenie',
     enterFullscreen: 'Celá obrazovka',

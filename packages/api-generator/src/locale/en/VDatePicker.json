@@ -16,16 +16,19 @@
     "max": "Maximum allowed date/month (ISO 8601 format).",
     "min": "Minimum allowed date/month (ISO 8601 format).",
     "multiple": "Allow the selection of multiple dates. The **range** value selects all dates between two selections.",
+    "noAutoNavigation": "Prevents the displayed month from automatically following the selected value. Useful when building multi-calendar layouts where each picker manages its own view.",
     "nextIcon": "Sets the icon for next month/year button.",
     "prevIcon": "Sets the icon for previous month/year button.",
     "readonly": "Makes the picker readonly (doesn't allow to select new date).",
     "showAdjacentMonths": "Toggles visibility of days from previous and next months.",
     "showWeek": "Toggles visibility of the week numbers in the body of the calendar.",
+    "wheel": "Navigate between months with the mouse wheel or trackpad. Responds to horizontal scrolling or Shift + wheel.",
     "width": "Width of the picker.",
     "modeIcon": "Icon displayed next to the current month and year, toggles year selection when clicked.",
     "viewMode": "Determines which picker in the date or month picker is being displayed. Allowed values: `'month'`, `'months'`, `'year'`."
   },
   "events": {
+    "[`${string}:day`]": "Any event on a day button. The second argument is the day value.",
     "update:month": "Emitted when the month changes.",
     "update:viewMode": "Emitted when the view mode changes.",
     "update:year": "Emitted when the year changes."
@@ -35,5 +38,8 @@
     "controls": "Slot for the controls.",
     "header": "Slot for the header.",
     "year": "Slot for the year."
+  },
+  "exposed": {
+    "focusDate": "Moves focus to the given date (ISO string) in the month view."
   }
 }

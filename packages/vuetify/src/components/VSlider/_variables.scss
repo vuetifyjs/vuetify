@@ -1,18 +1,16 @@
+@use 'sass:map';
 @use '../../styles/settings';
-@use '../../styles/tools';
 
 $slider-horizontal-start: 8px !default;
 $slider-horizontal-min-height: 32px !default;
 $slider-horizontal-end: 8px !default;
 $slider-label-margin-end: 12px !default;
-$slider-label-margin-start: 12px !default;
-$slider-state-track-background-opacity: 0.4 !default;
 $slider-thumb-hover-opacity: var(--v-hover-opacity) !default;
 $slider-thumb-focus-opacity: var(--v-focus-opacity) !default;
 $slider-thumb-pressed-opacity: var(--v-pressed-opacity) !default;
 $slider-thumb-border-radius: 50% !default;
-$slider-thumb-focused-size-increase: 24px !default;
-$slider-thumb-label-font-size: tools.map-deep-get(settings.$typography, 'label-small', 'size') !default;
+$slider-thumb-size: 20px !default;
+$slider-thumb-label-font-size: map.get(settings.$typography, 'label-small', 'size') !default;
 $slider-thumb-label-border-radius: 4px !default;
 $slider-thumb-label-height: 25px !default;
 $slider-thumb-label-min-width: 35px !default;
@@ -32,4 +30,36 @@ $slider-vertical-margin-bottom: 12px !default;
 $slider-vertical-margin-top: 12px !default;
 $slider-vertical-min-height: 300px !default;
 
+$slider-track-size: 4px !default;
 $slider-track-active-size: calc(var(--v-slider-track-size) + #{$slider-track-active-size-offset}) !default;
+
+// Pill variant
+$slider-pill-sizes: (
+  'x-small': (track-size: 16px, handle-height: 44px, track-radius: 8px, icon-size: 24px),
+  'small': (track-size: 24px, handle-height: 44px, track-radius: 8px, icon-size: 24px),
+  'medium': (track-size: 40px, handle-height: 52px, track-radius: 12px, icon-size: 24px),
+  'large': (track-size: 56px, handle-height: 68px, track-radius: 16px, icon-size: 24px),
+  'x-large': (track-size: 96px, handle-height: 108px, track-radius: 28px, icon-size: 32px),
+) !default;
+$slider-pill-track-inner-radius: 2px !default;
+$slider-pill-thumb-width: 4px !default;
+$slider-pill-active-thumb-width: 2px !default;
+$slider-pill-thumb-border-radius: 4px !default;
+$slider-pill-thumb-focus-outline: 3px solid currentColor !default;
+$slider-pill-thumb-focus-outline-offset: 2px !default;
+$slider-pill-thumb-gap: 6px !default;
+$slider-pill-track-background-opacity: 0.24 !default;
+$slider-pill-stop-indicator-size: 4px !default;
+$slider-pill-stop-indicator-offset: 4px !default;
+$slider-pill-stop-indicator-border-radius: 50% !default;
+$slider-pill-tick-filled-background: color-mix(in srgb, currentColor 24%, rgb(var(--v-theme-surface))) !default;
+$slider-pill-thumb-label-background: rgb(var(--v-theme-surface-variant)) !default;
+$slider-pill-thumb-label-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$slider-pill-thumb-label-typography: map.get(settings.$typography, 'label-large') !default;
+$slider-pill-thumb-label-height: 44px !default;
+$slider-pill-thumb-label-min-width: 48px !default;
+$slider-pill-thumb-label-padding: 0 16px !default;
+$slider-pill-thumb-label-border-radius: 9999px !default;
+$slider-pill-thumb-label-offset: 4px !default;
+$slider-pill-inner-icon-inset: 8px !default;
+$slider-pill-inner-icon-filled-color: color-mix(in srgb, currentColor 24%, rgb(var(--v-theme-surface))) !default;

@@ -1,0 +1,211 @@
+@use 'sass:list';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
+@use '../VBtn/variables' as btn;
+@use './variables' as *;
+
+@include tools.layer('components') {
+  .v-icon-btn {
+    @include tools.border($icon-btn-border...);
+    @include tools.states('.v-icon-btn__overlay');
+    @include tools.variant($icon-btn-variants...);
+
+    & {
+      align-items: center;
+      border-radius: var(--v-icon-btn-border-radius, #{$icon-btn-border-radius});
+      cursor: pointer;
+      display: inline-flex;
+      flex: none;
+      font-size: $icon-btn-font-size;
+      font-weight: $icon-btn-font-weight;
+      line-height: $icon-btn-line-height;
+      height: #{$icon-btn-height};
+      justify-content: center;
+      outline: none;
+      overflow: hidden;
+      position: relative;
+      transition-property: width, height, transform, border-radius, background-color, color, box-shadow, opacity;
+      transition-duration: .2s;
+      transition-timing-function: settings.$standard-easing;
+      vertical-align: middle;
+      width: #{$icon-btn-width};
+
+      @supports selector(:focus-visible) {
+        &::after {
+          pointer-events: none;
+          border: 2px solid currentColor;
+          border-radius: inherit;
+          opacity: 0;
+          transition: opacity .2s ease-in-out;
+          @include tools.absolute(true);
+        }
+
+        &:focus-visible::after {
+          opacity: calc(.25 * var(--v-theme-overlay-multiplier));
+        }
+      }
+    }
+
+    &--disabled,
+    &--loading,
+    &--readonly {
+      pointer-events: none;
+    }
+
+    &--disabled {
+      opacity: $icon-btn-disabled-opacity;
+    }
+
+    &--start {
+      margin-inline-end: $icon-btn-margin-start;
+    }
+
+    &--end {
+      margin-inline-start: $icon-btn-margin-end;
+    }
+
+    @each $name, $size in $icon-btn-sizes {
+      &--#{$name} {
+        --v-icon-btn-height: #{$size};
+        --v-icon-btn-width: #{$size};
+      }
+    }
+
+    &--width-narrow {
+      width: var(--v-icon-btn-narrow-width, #{$icon-btn-width});
+    }
+
+    &--width-wide {
+      width: var(--v-icon-btn-wide-width, #{$icon-btn-width});
+    }
+
+    $icon-selector: '.v-icon-btn__icon';
+    @if btn.$icon-btn-named-sizes != () {
+      $icon-selector: '.v-icon';
+    }
+
+    @each $name, $size in $icon-btn-icon-sizes {
+      #{$icon-selector}.v-icon--size-#{$name} {
+        font-size: var(--v-icon-btn-icon-size, #{$size});
+      }
+
+      .v-icon-btn__loader > .v-progress-circular--size-#{$name} {
+        height: var(--v-icon-btn-icon-size, #{$size});
+        width: var(--v-icon-btn-icon-size, #{$size});
+      }
+    }
+  }
+
+  $keys: height, width, narrow-width, wide-width, icon-size, border-radius, border-radius-pressed;
+
+  @if btn.$icon-btn-named-sizes != () {
+    .v-icon-btn__overlay,
+    .v-icon-btn__underlay {
+      will-change: opacity;
+    }
+  }
+
+  @each $name, $tokens in btn.$icon-btn-named-sizes {
+    @if not map.has-key(settings.$size-scales, $name) {
+      @error '$icon-btn-named-sizes: unknown size `#{$name}`, use one of: #{map.keys(settings.$size-scales)}';
+    }
+
+    .v-icon-btn--#{$name} {
+      @each $key, $value in $tokens {
+        @if not list.index($keys, $key) {
+          @error '$icon-btn-named-sizes: unsupported key `#{$key}` in `#{$name}`, use one of: #{$keys}';
+        }
+        --v-icon-btn-#{$key}: #{$value};
+      }
+
+      @if map.has-key($tokens, 'border-radius-pressed') {
+        &:active {
+          border-radius: var(--v-icon-btn-border-radius-pressed);
+        }
+      }
+    }
+  }
+
+  .v-icon-btn__content {
+    align-items: center;
+    justify-content: center;
+    display: inline-flex;
+    transition-property: transform;
+    transition-duration: inherit;
+    transition-timing-function: inherit;
+    transition-delay: inherit;
+    transform: rotate(var(--v-icon-btn-rotate, 0deg));
+
+    .v-icon-btn--loading & {
+      opacity: 0;
+    }
+
+    .v-icon {
+      transition: 0.2s settings.$standard-easing;
+      transition-property: opacity, font-size, width, height;
+      transform-origin: center;
+    }
+  }
+
+  .v-icon-btn__loader {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  .v-icon-btn__overlay,
+  .v-icon-btn__underlay {
+    pointer-events: none;
+
+    @include tools.absolute();
+  }
+
+  .v-icon-btn__overlay {
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity .2s ease-in-out;
+
+    .v-icon-btn--active:not(:hover) & {
+      --v-activated-opacity: 0;
+    }
+  }
+}
+
+@include tools.layer('trumps') {
+  @media (forced-colors: active) {
+    .v-icon-btn {
+      &:focus-visible {
+        outline: 2px solid;
+        outline-offset: 2px;
+      }
+
+      &:not(&--active):hover,
+      &:not(&--active):focus {
+        color: highlight;
+      }
+
+      &--active:not(&--disabled),
+      &--active:not(&--disabled)[class*="bg-"] {
+        outline-color: canvastext;
+        background: highlight;
+        color: highlighttext;
+      }
+
+      &--disabled {
+        color: graytext;
+      }
+
+      &__overlay,
+      &__underlay,
+      .v-icon {
+        forced-color-adjust: preserve-parent-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "description": "Sub-component intend for use inside the `#fields` slot of VOtpInput",
+  "props": {
+    "merged": "Merges fields within this group into a single visual block."
+  }
+}

@@ -2,15 +2,19 @@
   "description": "Low-level component used by `v-checkbox-btn` and `v-switch` for binary selection with support for indeterminate state as well.",
   "props": {
     "baseColor": "Sets the color of the input when it is not focused.",
+    "description": "Supporting text displayed below the label. Linked to the input with `aria-describedby`.",
     "indeterminate": "Styles the control as an intermediate 'partially selected' state.",
     "indeterminateIcon": "The icon used when the control is in the indeterminate state.",
     "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
   },
   "slots": {
+    "description": "Slot for the supporting text below the label.",
     "input": "The slot used for the default input element."
   },
   "exposed": {
-    "isFocused": "Will return true if the component is currently focused.",
-    "input": "Reference to the root input element."
+    "blur": "Removes focus from the input.",
+    "focus": "Focuses the input. Accepts standard `FocusOptions`, including `focusVisible`.",
+    "input": "Reference to the root input element.",
+    "isFocused": "Will return true if the component is currently focused."
   }
 }

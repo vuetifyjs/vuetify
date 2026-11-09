@@ -1,8 +1,8 @@
-diff --git a/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js b/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
-index a22a3b0d0e13e08a34bce430bc284d998de8528b..00c0722cb008a9a6d527ecfd50844d92f2674a60 100644
---- a/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
-+++ b/dist/client/__vitest_browser__/orchestrator-8U3FyXSU.js
-@@ -290,18 +290,9 @@ async function setIframeViewport(iframe, width, height) {
+diff --git a/dist/client/__vitest_browser__/orchestrator-jtzFEKPy.js b/dist/client/__vitest_browser__/orchestrator-jtzFEKPy.js
+index 1e8eb0f19f58c50bd7649464919b91f8a1090342..77b5038c26f5fa24b544f48f4b4d51533296a994 100644
+--- a/dist/client/__vitest_browser__/orchestrator-jtzFEKPy.js
++++ b/dist/client/__vitest_browser__/orchestrator-jtzFEKPy.js
+@@ -396,18 +396,9 @@ async function setIframeViewport(iframe, width, height) {
        [{ width, height }]
      );
    } else {

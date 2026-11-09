@@ -9,7 +9,7 @@
     "min": "Minimum allowed time.",
     "period": "Sets period for 12hr format.",
     "readonly": "Puts picker in readonly state.",
-    "scrollable": "Allows changing hour/minute with mouse scroll.",
+    "scrollable": "Allows changing the time with the mouse wheel. `true` or `clock` scrolls over the clock, `controls` scrolls over the hour, minute and second fields.",
     "useSeconds": "Toggles the use of seconds in picker.",
     "width": "Width of the picker.",
     "viewMode": "The current view mode of the picker.`"
