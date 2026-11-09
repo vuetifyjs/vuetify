@@ -124,7 +124,7 @@ The `v-video` component has several slots that allow you to customize the appear
 <!--
 #### Sources
 
-Using the the **sources** slot you can make it possible to select different playback quality.
+Using the **sources** slot you can make it possible to select different playback quality.
 
 <ExamplesExample file="v-video/slot-sources" />
 -->

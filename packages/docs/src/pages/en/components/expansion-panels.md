@@ -46,7 +46,7 @@ Expansion panels in their simplest form display a list of expandable items. You 
 
 #### Variant
 
-There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while poput expansion-panels become larger.
+There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while popout expansion-panels become larger.
 
 <ExamplesExample file="v-expansion-panels/prop-variant" />
 

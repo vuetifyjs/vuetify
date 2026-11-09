@@ -84,7 +84,7 @@ You can use custom icons.
 
 #### Length
 
-Change the number of items by modifying the the **length** prop.
+Change the number of items by modifying the **length** prop.
 
 <ExamplesExample file="v-rating/prop-length" />
 
