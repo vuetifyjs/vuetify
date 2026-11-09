@@ -2,8 +2,8 @@
 layout: blog
 meta:
   title: October 2026 Update
-  description: Paladin and Vuetify0 1.3 shipped a day apart. Alerts can dismiss themselves, the v0 bundle got smaller under Vite 8, and 4.2 and v3 picked up another round of patches.
-  keywords: Vuetify October 2026, Vuetify 4.3, Paladin, Vuetify0 1.3, Onyx, Emerald, Bootstrap 6, HeroUI
+  description: v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0.
+  keywords: Vuetify October 2026, Vuetify v4.3.0, Paladin, Vuetify0, Vite 8, bundle size, SSR, Nuxt
 ---
 
 <script setup>
@@ -22,7 +22,7 @@ meta:
 
 # October 2026 Update
 
-Welcome to the October update. [v4.3 Paladin](/blog/announcing-vuetify-4.3/) shipped on the 19th: data tables, a right-click menu, the new labs players, and Expressive styles on seven components. [Vuetify0 1.3](/blog/announcing-vuetify0-v1-3/) followed the next morning, with Kanban and Menu. Both had a patch before the month was over.
+Welcome to the October update. [v4.3.0 Paladin](/blog/announcing-vuetify-4.3/) shipped on the 19th, and [Vuetify0 v1.3.0](/blog/announcing-vuetify0-v1-3/) followed the next day. Both have their own posts, so this one covers what they left out: a few things to check before you update, a dependency update that lets Vuetify apps built with Vite 8 ship less JavaScript, SSR layouts that stopped shifting, and the design systems on the way for Vuetify0.
 
 ![Hero image for October update](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/october-hero.png "October hero image"){ height=112 }
 
@@ -34,7 +34,7 @@ Welcome to the October update. [v4.3 Paladin](/blog/announcing-vuetify-4.3/) shi
 
 ## October in numbers
 
-**60 merged PRs** in the framework repo, **30 features and 42 fixes** (unique commits on `master`) and **8 releases**. **84 issues closed** and **30 opened**. [Vuetify0](https://0.vuetifyjs.com/) merged 126 PRs and shipped three releases, headlined by [v1.3.0](https://0.vuetifyjs.com/releases/?version=v1.3.0). npm downloads of `@vuetify/v0` went from 294k in September to 534k in October.
+**60 merged PRs** in the framework repo, **8 releases**, **84 issues closed** and **29 opened**. [Vuetify0](https://0.vuetifyjs.com/) merged 120 PRs and shipped three releases, headlined by [v1.3.0](https://0.vuetifyjs.com/releases/?version=v1.3.0). npm downloads of `@vuetify/v0` went from 298k in September to 562k in October.
 
 ---
 
@@ -54,83 +54,94 @@ Before we dig in, a big thank you to the companies that back Vuetify every singl
 
 ## Table of Contents
 
-* [v4.3 Paladin](#in-4-3)
-* [If you're staying on 4.2 or v3](#if-youre-staying-on-4-2-or-v3)
+* [Before you update](#before-you-update)
+* [Spotlight: the library grew, the bundle shrank](#spotlight)
+* [v4.3.0 Paladin, in short](#in-4-3)
+* [SSR layout](#ssr-layout)
+* [v4.2.x and v3.13.x](#patches)
 * [Vuetify0 Progress Update](#vuetify0-progress)
-* [Design systems](#design-systems)
-* [Play](#play)
+  * [Design systems](#design-systems)
+* [Play, MCP and Nuxt](#ecosystem)
 * [What's Next](#whats-next)
+---
+
+## Before you update { #before-you-update }
+
+* **Dismissible VAlert in a flex container?** Since v4.3.0 the alert collapses when dismissed, which can look wrong next to flex siblings. `:transition="false"` turns it off ([#23280](https://github.com/vuetifyjs/vuetify/pull/23280)).
+* **Building with Vite 8?** Refresh your lockfile so it resolves `@vuetify/v0` v1.2.4 or later. An app that uses VSelect ships about 23 kB less gzipped JS on Vue 3.5, and about 73 kB less on Vue 3.6, with no code changes. [The spotlight](#spotlight) explains why.
+* **Importing VAvatarGroup, VHighlight or VProgress from `vuetify/labs`?** They left labs in v4.3.0. Import them from `vuetify/components`.
+* **Loading Vuetify from a CDN on v4.3.0?** It throws `process is not defined`. Update to v4.3.1 or later ([#23308](https://github.com/vuetifyjs/vuetify/pull/23308), thanks [lazerg](https://github.com/lazerg)).
 
 ---
 
-## v4.3 Paladin { #in-4-3 }
+## Spotlight: the library grew, the bundle shrank { #spotlight }
+
+Vuetify gained new labs components in October, and a Vite 8 build still got smaller.
+
+`@vuetify/v0` creates 63 contexts at module level, and none of them were marked as free of side effects. Vite 8 kept them all. Importing VSelect pulls in VHighlight, which imports a v0 helper, and that kept every context in the chunk. Through `useId()` it also kept the whole `vue` namespace, which on Vue 3.6 includes the Vapor runtime. [v1.2.4](https://0.vuetifyjs.com/releases/?version=v1.2.4) marks those calls pure, so Vite can tree-shake the unused ones ([#1043](https://github.com/vuetifyjs/0/pull/1043), thanks [araishi](https://github.com/araishi)).
+
+Gzipped JS of a Vite 8 production build, before → after:
+
+| App uses       | Vue 3.5       | Vue 3.6       |
+|----------------|---------------|---------------|
+| VSelect only   | 121 → 97 kB   | 171 → 98 kB   |
+| all components | 244 → 221 kB  | 294 → 222 kB  |
+
+The saving is the same either way, because none of that code was needed. Vite 7 builds don't change. If your bundle is measured in megabytes you won't notice, but in a small app it's a fair share.
+
+[v1.3.1](https://0.vuetifyjs.com/releases/?version=v1.3.1) goes after the Vue 3.6 part directly: v0 no longer imports `vue` as a namespace, so VDOM apps stop shipping the Vapor runtime ([#1095](https://github.com/vuetifyjs/0/pull/1095)).
+
+Apps on Vuetify v4.2.0 or later get it with their next dependency update.
+
+---
+
+## v4.3.0 Paladin, in short { #in-4-3 }
 
 <AppFigure :src="vuetifylogo" alt="Vuetify logo" width="200" height="auto" class="mx-auto mt-4" title="Vuetify Logo" />
 
 <br>
 
-[v4.3.0](/getting-started/release-notes/?version=v4.3.0) went out on October 19. No breaking changes. [v4.3.1](/getting-started/release-notes/?version=v4.3.1) followed on the 26th. The [release post](/blog/announcing-vuetify-4.3/) has the screenshots. Here's what landed.
+[v4.3.0](/getting-started/release-notes/?version=v4.3.0) shipped on October 19: right-click menus, new labs components, MD3 options for buttons, progress indicators, sliders and tabs, VAvatarGroup, VHighlight and VProgress out of labs, and small improvements to data tables. The [release post](/blog/announcing-vuetify-4.3/) walks through them with demos.
 
-### Tables and forms
+Stable components follow semver, so nothing there breaks in a minor. Labs components don't carry that promise, because that's where new APIs settle before promotion. We rarely break them anyway, but this time VVideo moved its translation keys from `$vuetify.video.*` to `$vuetify.media.*` ([2191e30](https://github.com/vuetifyjs/vuetify/commit/2191e305e6210852b3f458970f028998c2f3e5a6)).
 
-Select-all on a filtered table used to grab every row, including the ones the filter had hidden. The `filtered` strategy limits it to the rows that match ([041bb72](https://github.com/vuetifyjs/vuetify/commit/041bb7269d228e97f9dda210362d149a4d0ff709)). [VAutocomplete](/components/autocompletes/) and [VCombobox](/components/combobox/) can keep a `filtered-order` after the list narrows ([#23282](https://github.com/vuetifyjs/vuetify/pull/23282)). `row-props` now receives `isSelected` and `isExpanded`, and those rows are marked with data attributes, so you can style them without keeping a second list ([#23238](https://github.com/vuetifyjs/vuetify/pull/23238), thanks [DangTAnh](https://github.com/DangTAnh)).
+### Also in v4.3.x
 
-Checkboxes, radios, and switches can show a description under the label ([3e734be](https://github.com/vuetifyjs/vuetify/commit/3e734be3d6e9141237f1b57dd32a1010f5a4f7b8)). [VDateInput](/components/date-inputs/) shows a localized hint for the format it expects ([#23173](https://github.com/vuetifyjs/vuetify/pull/23173)). A [VTextarea](/components/textareas/) with `auto-grow` keeps the browser's own undo history ([#23279](https://github.com/vuetifyjs/vuetify/pull/23279), thanks [b84330808](https://github.com/b84330808)).
-
-### Labs
-
-Five new labs components, plus one more in the patch a week later. [VAudio](/components/audio-players/) ([#23227](https://github.com/vuetifyjs/vuetify/pull/23227)), [VSplitBtn](/components/split-buttons/) ([#23267](https://github.com/vuetifyjs/vuetify/pull/23267)), [VTimeInput](/components/time-inputs/) ([#23141](https://github.com/vuetifyjs/vuetify/pull/23141)), [VLoadingIndicator](/components/loading-indicators/) ([c5ce339](https://github.com/vuetifyjs/vuetify/commit/c5ce3396e1c3e51c6925aab8f3a63365f7acc42a)), and [VInfiniteCarousel](/components/infinite-carousels/) ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116)). [VCheckboxGroup](/components/checkbox-groups/) arrived in 4.3.1. It owns the selected values of its child checkboxes and shows one label and one set of validation messages. Import it from `vuetify/labs/VCheckboxGroup` ([#23299](https://github.com/vuetifyjs/vuetify/pull/23299)). [VVideo](/components/videos/) got an `actions` prop and a rebuilt progress bar and volume control ([#23241](https://github.com/vuetifyjs/vuetify/pull/23241)).
-
-Labs APIs can still move. Pin the version if you ship one of these.
-
-### Right click, and a long press
-
-[VMenu](/components/menus/) opens on right click with `context-menu` ([#23196](https://github.com/vuetifyjs/vuetify/pull/23196)). `v-touch-hold` is the long-press directive for touch devices ([#23269](https://github.com/vuetifyjs/vuetify/pull/23269)).
-
-### Material Design Expressive
-
-Seven components picked up Expressive options: [VBtn](/components/buttons/), `VIconBtn`, `VBtnGroup`, [VProgressLinear](/components/progress-linear/), [VProgressCircular](/components/progress-circular/), [VSlider](/components/sliders/), and [VTabs](/components/tabs/). They're ordinary props. You don't have to switch blueprints to use them. The `md3` blueprint does turn the new progress look on by default, along with the primary tab slider. Buttons get the new sizes and a radius animation on press ([#23253](https://github.com/vuetifyjs/vuetify/pull/23253)). Progress can split, round, stop, or wave ([#23276](https://github.com/vuetifyjs/vuetify/pull/23276)). Sliders have a `pill` variant and a `centered` prop for a value that starts in the middle ([#22699](https://github.com/vuetifyjs/vuetify/pull/22699), [#23277](https://github.com/vuetifyjs/vuetify/pull/23277)). Tabs have a `slider-variant` for the indicator ([#23181](https://github.com/vuetifyjs/vuetify/pull/23181)). The button sizes have their own guide: [MD3 button sizes](/features/md3-button-sizes/).
-
-### Carousels and slide groups
-
-[VSlideGroup](/components/slide-groups/) has `padding` and `gap`, so tabs and chip groups can space themselves without custom CSS ([#23184](https://github.com/vuetifyjs/vuetify/pull/23184)). A cycling [VCarousel](/components/carousels/) can `pause-on-hover`, and keyboard focus inside it pauses the cycle either way ([e835b88](https://github.com/vuetifyjs/vuetify/commit/e835b885a181052f830f75e80cb716764e634da6)). [VWindow](/components/windows/) and the carousel also take wheel navigation ([#22906](https://github.com/vuetifyjs/vuetify/pull/22906), thanks [mahsarajabpour](https://github.com/mahsarajabpour)).
-
-[VInfiniteCarousel](/components/infinite-carousels/) loops. Arrow keys move between focusable items and scroll them into view, or shift the track when there's nothing to focus. The motion runs on the Web Animations API, so a pause, a reverse, or a drag keeps its place ([#23116](https://github.com/vuetifyjs/vuetify/pull/23116)).
-
-### Layout
-
-Layout item sizes render before mount, so an SSR app stops shifting once it hydrates ([#23250](https://github.com/vuetifyjs/vuetify/pull/23250)). [VRow](/components/grids/) has responsive gap props ([#23246](https://github.com/vuetifyjs/vuetify/pull/23246)). [VNavigationDrawer](/components/navigation-drawers/) has a `modal` prop and `v-model:expanded` ([#23182](https://github.com/vuetifyjs/vuetify/pull/23182)). There's a `vuetify/styles/layers` entry that carries only the default `@layer` order ([ed2dbea](https://github.com/vuetifyjs/vuetify/commit/ed2dbeaa96c944052e85e7bf9678f8b8da9956a3)).
-
-[VAvatarGroup](/components/avatar-groups/), [VHighlight](/components/highlights/), and [VProgress](/components/progress/) left labs. Update any `vuetify/labs` imports.
-
-Display, locale, RTL, and the observers now run on `@vuetify/v0` ([#23210](https://github.com/vuetifyjs/vuetify/pull/23210), [#23220](https://github.com/vuetifyjs/vuetify/pull/23220)). Your app should look the same.
-
-### The week after
-
-[VAlert](/components/alerts/) can dismiss itself. Set `timeout` and it counts down, then closes ([#23280](https://github.com/vuetifyjs/vuetify/pull/23280)). The request has been open since September 2024.
-
-[VDatePicker](/components/date-pickers/) grew a `wheel` prop. A horizontal scroll moves the month, and so does shift plus a vertical one ([#22929](https://github.com/vuetifyjs/vuetify/pull/22929)). The day cell also forwards its own events now, so `@click:day` and `@dblclick:day` are real listeners ([#22491](https://github.com/vuetifyjs/vuetify/pull/22491)). The input variant of [VTimePicker](/components/time-pickers/) picked up the `scrollable` prop the clock variant already had ([ad89b1f](https://github.com/vuetifyjs/vuetify/commit/ad89b1f291033835d77efb776c1f7afe89e0f771)).
-
-[VRangeSlider](/components/range-sliders/) was announcing both thumbs with the same name, so a screen reader couldn't tell the low end from the high one. `start-thumb-aria-label` and `end-thumb-aria-label` split them ([750744d](https://github.com/vuetifyjs/vuetify/commit/750744d2f77ebac8f928bf966d18e312802f0317)). Checkboxes, radios, switches, and color inputs also expose `focus` now, if you've been reaching in to do that yourself ([#23148](https://github.com/vuetifyjs/vuetify/pull/23148)).
-
-4.3.1 also stripped `process.env` out of the published bundles. That throw hit any app whose bundler doesn't invent a `process` global ([#23308](https://github.com/vuetifyjs/vuetify/pull/23308)). `first-day-of-week` and `weekday-format` are honored ([#23310](https://github.com/vuetifyjs/vuetify/pull/23310)), [VCalendar](/components/calendars/) accepts adapter values ([#23313](https://github.com/vuetifyjs/vuetify/pull/23313)), and the date picker takes its month and year steps from the adapter and includes its visible text in the accessible name ([#23311](https://github.com/vuetifyjs/vuetify/pull/23311), [#23315](https://github.com/vuetifyjs/vuetify/pull/23315)). Nested data-table headers order without a column cap ([fa8591c](https://github.com/vuetifyjs/vuetify/commit/fa8591ccff763ec3c53eea9f49d097baae8ca80b)), and a single-select table hides select-all in the mobile header ([#23304](https://github.com/vuetifyjs/vuetify/pull/23304)).
-
-[VCommandPalette](/components/command-palettes/) tells screen readers which item is highlighted ([#23258](https://github.com/vuetifyjs/vuetify/pull/23258)), and custom slots get the keyboard and click wiring instead of having to rebuild it ([#23260](https://github.com/vuetifyjs/vuetify/pull/23260)).
-
-**Details:**
-
-* [Announcing Vuetify v4.3](/blog/announcing-vuetify-4.3/)
-* [v4.3.0](/getting-started/release-notes/?version=v4.3.0) · [v4.3.1](/getting-started/release-notes/?version=v4.3.1) · [v4.3.0-beta.0](/getting-started/release-notes/?version=v4.3.0-beta.0)
+* [VAlert](/components/alerts/#timeout) can now close itself after a set `timeout`, with an optional countdown shown as a bar along an edge or a ring around the close button. The request had been open since September 2024 ([#23280](https://github.com/vuetifyjs/vuetify/pull/23280)).
+* [VDatePicker](/components/date-pickers/) gets a `wheel` prop, so horizontal scrolling or Shift + wheel changes the month, as the `scrollable` prop did in Vuetify 2 ([#22929](https://github.com/vuetifyjs/vuetify/pull/22929), thanks [ascott18](https://github.com/ascott18)). Day buttons forward their events, such as `@click:day` and `@dblclick:day` ([#22491](https://github.com/vuetifyjs/vuetify/pull/22491), thanks [ikushum](https://github.com/ikushum)).
+* The input variant of [VTimePicker](/components/time-pickers/) supports the `scrollable` prop ([ad89b1f](https://github.com/vuetifyjs/vuetify/commit/ad89b1f291033835d77efb776c1f7afe89e0f771)).
+* [VCommandPalette](/components/command-palettes/) got a11y and custom slot fixes ([#23258](https://github.com/vuetifyjs/vuetify/pull/23258), [#23260](https://github.com/vuetifyjs/vuetify/pull/23260), thanks [MatthewAry](https://github.com/MatthewAry)).
+* [VRating](/components/ratings/) scales its icons with a numeric `size` and has an `icon-size` prop ([3112446](https://github.com/vuetifyjs/vuetify/commit/3112446c2a45991eb61e57286558b33928c68b71)).
+* [VCheckboxGroup](/components/checkbox-groups/) (labs) holds the `v-model` of its child checkboxes, with one shared label and group validation ([#23299](https://github.com/vuetifyjs/vuetify/pull/23299), thanks [morimorimokenpi](https://github.com/morimorimokenpi)).
+* `first-day-of-week` and `weekday-format` now work with date-io adapters ([#23310](https://github.com/vuetifyjs/vuetify/pull/23310)).
+* VSelect and VAutocomplete with `multiple` no longer duplicate items in the model ([17b7887](https://github.com/vuetifyjs/vuetify/commit/17b78872e1)).
 
 ---
 
-## If you're staying on 4.2 or v3 { #if-youre-staying-on-4-2-or-v3 }
+## SSR layout { #ssr-layout }
 
-4.3 is a minor with no breaking changes, and a lot of apps still won't take it this month. The patch lines kept moving anyway. [v4.2.4](/getting-started/release-notes/?version=v4.2.4) and [v3.13.6](/getting-started/release-notes/?version=v3.13.6) went out on October 6 and October 5.
+In server-rendered apps, some layout configurations hit the well-known hydration problem: parts of the layout shifted once the app mounted on the client ([#22925](https://github.com/vuetifyjs/vuetify/issues/22925), [#22944](https://github.com/vuetifyjs/vuetify/issues/22944)). Since v4.3.0 the server renders layout sizes and offsets up front ([#23250](https://github.com/vuetifyjs/vuetify/pull/23250)).
 
-Take the overlay leak if you take nothing else. Unmount a `VOverlay` immediately and it used to stick around. That's fixed on both lines ([fc19d63](https://github.com/vuetifyjs/vuetify/commit/fc19d63fda932084c03c6569c596507585890908)).
+It started as a quick look at one drawer report. Testing the fix with a few more layouts turned up other shifts and hydration mismatches, so the fix grew to cover them, checked against over 20 layout variations. As a bug fix it could have gone into a patch release, but changing how every layout item gets its size carries regression risk, so it waited for v4.3.0. If you render on the server, a smoke test of a few distinct layouts after updating would be recommended.
 
-4.2.4 also puts [VPagination](/components/paginations/) back together inside a flex container ([#23149](https://github.com/vuetifyjs/vuetify/pull/23149)), points carousel and window arrows the right way in RTL, and makes `VWindow` `transition-duration` work once CSS layers are in play. Weekday names on the date picker follow the locale ([#23240](https://github.com/vuetifyjs/vuetify/pull/23240)), router links stay unresolved while a page is leaving ([a795665](https://github.com/vuetifyjs/vuetify/commit/a795665f337cbe85355caddeda0ee5257a7bfb05)), and the Material Icons preset uses real ligatures ([ee5ece2](https://github.com/vuetifyjs/vuetify/commit/ee5ece26729f9ec77961601863fb70a78f045e3f)). 4.2.5 stops an [OTP input](/components/otp-input/) from spilling out of a narrow box, corrects an RTL overlay when the page scroll is locked ([#23261](https://github.com/vuetifyjs/vuetify/pull/23261)), and fills in the Romanian translations ([#23262](https://github.com/vuetifyjs/vuetify/pull/23262)). 4.2.6 lets a [virtual table](/components/data-tables/virtual-tables/) expand a row without `show-expand`, and an indeterminate selection control uses the native state instead of `aria-checked` ([9d10999](https://github.com/vuetifyjs/vuetify/commit/9d109999e22ecafbc773c9db5d62b4ea7393db4e)). On v3, [v3.13.7](/getting-started/release-notes/?version=v3.13.7) gives data-table cells stable keys so a slot stops getting reused for the wrong row ([#23256](https://github.com/vuetifyjs/vuetify/pull/23256)), and brings that expand fix along.
+Some setups still shift, mostly where the server can't know a size up front. The PR description lists them with workarounds.
+
+---
+
+## v4.2.x and v3.13.x { #patches }
+
+If you can't move to v4.3.x yet, these fixes landed on the older lines in October:
+
+| Fix | Version | Link |
+|-----|---------|------|
+| VPagination fits in a flex container | v4.2.4 | [#23149](https://github.com/vuetifyjs/vuetify/pull/23149) |
+| VCarousel and VWindow arrows point the right way in RTL | v4.2.4 | [e19e47c](https://github.com/vuetifyjs/vuetify/commit/e19e47c025) |
+| VWindow `transition-duration` works with CSS layers | v4.2.4 | [d6ab69b](https://github.com/vuetifyjs/vuetify/commit/d6ab69bfe5) |
+| Correct week start and date formatting for Danish, Serbian and Central Kurdish | v4.2.4 | [#23240](https://github.com/vuetifyjs/vuetify/pull/23240), thanks [SulimanAbdulrazzaq](https://github.com/SulimanAbdulrazzaq) |
+| VOtpInput stays inside a narrow container | v4.2.5 | [a4c36f9](https://github.com/vuetifyjs/vuetify/commit/a4c36f92d006b4828797814f9aee6159c8ad4e52) |
+| VOverlay content in RTL stays in place when page scroll is locked | v4.2.5 | [#23261](https://github.com/vuetifyjs/vuetify/pull/23261), thanks [diaeai](https://github.com/diaeai) |
+| VDataTableVirtual allows expanding rows without `show-expand` | v4.2.6, v3.13.7 | [8b41813](https://github.com/vuetifyjs/vuetify/commit/8b41813068) |
+| VDataTable cell slots no longer get reused for the wrong row | v3.13.7 | [#23256](https://github.com/vuetifyjs/vuetify/pull/23256), thanks [cestercian](https://github.com/cestercian) |
 
 **Details:**
 
@@ -145,33 +156,19 @@ Take the overlay leak if you take nothing else. Unmount a `VOverlay` immediately
 
 <br>
 
-[v1.3.0](/blog/announcing-vuetify0-v1-3/) shipped on October 20. [Kanban](https://0.vuetifyjs.com/components/data/kanban) is a board you can drag with a pointer or the keyboard. Space or Enter picks a card up, the arrows move where it will land, Space drops it, and Escape puts it back. The preview follows RTL and skips a column that refuses the card. [Menu](https://0.vuetifyjs.com/components/disclosure/menu) is one compound for a button, a right-click, or a menubar, submenus included ([#1038](https://github.com/vuetifyjs/0/pull/1038)).
+[v1.3.0](https://0.vuetifyjs.com/releases/?version=v1.3.0) shipped on October 20 with Kanban, Menu, Tour, Otp and Virtualizer, plus useFocusTrap and typeahead in Select. The [release post](/blog/announcing-vuetify0-v1-3/) covers them. Otp and Virtualizer come from [sridhar-3009](https://github.com/sridhar-3009) ([#787](https://github.com/vuetifyjs/0/pull/787), [#788](https://github.com/vuetifyjs/0/pull/788)), and useFocusTrap from [Haviles04](https://github.com/Haviles04) ([#939](https://github.com/vuetifyjs/0/pull/939)).
 
-[Tour](https://0.vuetifyjs.com/components/disclosure/tour) sequences steps, highlights a target, and anchors the copy to it ([#178](https://github.com/vuetifyjs/0/pull/178)). [Otp](https://0.vuetifyjs.com/components/forms/otp) is the one-time-code row. Paste and SMS autofill spread across the boxes, and a paste into the middle writes from that box and clears whatever comes after ([#787](https://github.com/vuetifyjs/0/pull/787), thanks [sridhar-3009](https://github.com/sridhar-3009)). [Virtualizer](https://0.vuetifyjs.com/components/data/virtualizer) mounts the visible window of a long list and measures each row itself, so a variable height doesn't need a manual `resize()` ([#788](https://github.com/vuetifyjs/0/pull/788)).
+[v1.3.1](https://0.vuetifyjs.com/releases/?version=v1.3.1) followed on October 27. A bare `disabled` attribute, as in `<Menu.Item disabled>`, used to arrive as an empty string and left the item enabled. It now counts as `true` ([#1106](https://github.com/vuetifyjs/0/pull/1106)). Arrow keys on horizontal tabs also follow RTL ([#1105](https://github.com/vuetifyjs/0/pull/1105)).
 
-A combobox keeps text that matches no option, unless you set `strict` ([#383](https://github.com/vuetifyjs/0/pull/383)). [useFocusTrap](https://0.vuetifyjs.com/composables/system/use-focus-trap) is the loop for anything the browser doesn't trap on its own: a drawer, a dialog rendered as a div, a command palette ([#939](https://github.com/vuetifyjs/0/pull/939), thanks [Haviles04](https://github.com/Haviles04)). Tab wraps inside it, focus moves in when it activates and back when it lets go, and the trap never closes anything itself. Select gained typeahead ([#1058](https://github.com/vuetifyjs/0/pull/1058)). Pagination can shrink its row of page buttons when they overflow and grow back when the container widens ([#1040](https://github.com/vuetifyjs/0/pull/1040)). Checkbox, radio, switch, and toggle groups expose `focus` ([#935](https://github.com/vuetifyjs/0/pull/935)).
+Support for non-Gregorian calendars in `useDate` is merged but not released yet ([#1100](https://github.com/vuetifyjs/0/pull/1100)).
 
-The change that hits a normal Vuetify app shipped the same morning, a few hours earlier, as [v1.2.4](https://0.vuetifyjs.com/releases/?version=v1.2.4).
-
-### A smaller bundle
-
-[v1.2.4](https://0.vuetifyjs.com/releases/?version=v1.2.4) stops Vite 8 from pulling unused v0 contexts into a production build ([#1043](https://github.com/vuetifyjs/0/pull/1043), thanks [araishi](https://github.com/araishi)). If the app uses `VSelect`, `VAutocomplete`, `VCombobox`, or `VDataTable`, that's about 23 kB less gzipped JS on Vue 3.5 and about 73 kB on Vue 3.6. The rest of the app's size doesn't matter. Vuetify 4.2 and 4.3 depend on `@vuetify/v0`, so this shows up the next time you refresh the lockfile. You don't have to be writing headless components to get it.
-
-The same tag is quieter everywhere else. `createFilter` does its plain-list work once per pass ([#1053](https://github.com/vuetifyjs/0/pull/1053)). `useResizeObserver` reports border and content box sizes on Safari from before 15.4 ([#1026](https://github.com/vuetifyjs/0/pull/1026)). A reversed virtual list opens at the bottom, and its edge callbacks stop after unmount.
-
-### v1.3.1
-
-[v1.3.1](https://0.vuetifyjs.com/releases/?version=v1.3.1) came out on October 27. If you tried the new Menu and `<Menu.Item disabled>` did nothing, this is why. A bare boolean attribute was arriving as `''`, and an empty string is not disabled. It is `true` now ([#1106](https://github.com/vuetifyjs/0/pull/1106)). The same patch stops pulling the Vue Vapor runtime into apps that don't use it ([#1095](https://github.com/vuetifyjs/0/pull/1095)), and it flips Arrow Left and Arrow Right on horizontal tabs when the page is RTL ([#1105](https://github.com/vuetifyjs/0/pull/1105)).
-
-### Bulma
-
-[@paper/bulma@0.2.0](https://github.com/vuetifyjs/0/releases/tag/%40paper/bulma%400.2.0) lets a compound's parts come in with the parent. Import `BuModal` and `<BuModal.Head />` is there. The old flat names still work ([#946](https://github.com/vuetifyjs/0/pull/946)). The modal also stopped adding a second scrim on top of `.modal-background` ([#961](https://github.com/vuetifyjs/0/pull/961)). Genesis 1.1, the docs kit, added `GnDocsCallout` and `GnDocsBadge`.
+[@paper/bulma v0.2.0](https://github.com/vuetifyjs/0/releases/tag/%40paper/bulma%400.2.0) lets you reach a compound's parts from the parent import: import `BuModal` and use `<BuModal.Head />` ([#946](https://github.com/vuetifyjs/0/pull/946)).
 
 ### Design systems { #design-systems }
 
-[Emerald](https://0.vuetifyjs.com/systems/emerald) shipped in August. **Onyx** is the other original, and it's still to come. Its own look, the same headless core, meant to sit next to Emerald.
+Vuetify0 is headless. Design systems are what give it a look. [Emerald](https://0.vuetifyjs.com/systems/emerald) shipped in August. **Onyx**, the second original system, is still to come, with its own look on the same headless core.
 
-We're also planning four recreations. Each one is a full system on Vuetify0.
+We're also planning full recreations of other design systems on Vuetify0:
 
 * **Bootstrap 6**
 * **Ant Design**
@@ -194,21 +191,24 @@ No dates yet. [Bulma](https://0.vuetifyjs.com/systems/bulma) is the recreation t
 
 ---
 
-## Play { #play }
+## Play, MCP and Nuxt { #ecosystem }
 
-[Play](https://play.vuetifyjs.com/) spent the last week of October learning the imports people are actually writing. `vuetify/*` and `@vuetify/v0` resolve, and `unpkg.com` is accepted in an import hint. Open an old playground and it migrates `vuetify.js`, and bumps Vue when the pin no longer matches the Vuetify you asked for. The same playground can open in [v0 Play](https://v0play.vuetifyjs.com/). Paste on localhost works again. So do bare imports, and saves whose content isn't a tuple.
+[Play](https://play.vuetifyjs.com/) resolves `vuetify/*` and `@vuetify/v0` imports, and accepts `unpkg.com` in import hints. Old playgrounds migrate `vuetify.js` when opened, and bump Vue when the pinned version doesn't fit the chosen Vuetify. A playground can also open in [v0 Play](https://v0play.vuetifyjs.com/). Pasting on localhost and bare imports work again.
 
-[MCP v0.12.2](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.2) is housekeeping. The server has a name for the MCP registry ([#51](https://github.com/vuetifyjs/mcp/pull/51)), and the docs stopped telling agents to call `get_available_features`, which isn't there anymore ([#50](https://github.com/vuetifyjs/mcp/pull/50)). The upgrade tools from [September](/blog/september-2026-update/#upgrade-with-vuetify-mcp) are unchanged.
+[Vuetify MCP v0.12.2](https://github.com/vuetifyjs/mcp/releases/tag/v0.12.2) registers the server with the MCP registry ([#51](https://github.com/vuetifyjs/mcp/pull/51)) and stops pointing agents at a removed tool ([#50](https://github.com/vuetifyjs/mcp/pull/50), thanks [Being-RAYtastic](https://github.com/Being-RAYtastic)).
 
-The Nuxt module didn't ship in October. The layer-order fix ([#382](https://github.com/vuetifyjs/nuxt-module/pull/382)) and the `useLayout` rename ([#388](https://github.com/vuetifyjs/nuxt-module/pull/388)) have been merged since September 15, after [v1.0.0-rc.6](https://github.com/vuetifyjs/nuxt-module/releases/tag/v1.0.0-rc.6). They're on main. They're not on npm yet.
+The Nuxt module had no release in October. The layer-order fix ([#382](https://github.com/vuetifyjs/nuxt-module/pull/382)) and the fix for shadowing Nuxt's `useLayout` ([#388](https://github.com/vuetifyjs/nuxt-module/pull/388)) are merged after [v1.0.0-rc.6](https://github.com/vuetifyjs/nuxt-module/releases/tag/v1.0.0-rc.6), but not on npm yet.
 
 ---
 
 ## What's Next { #whats-next .mt-4 }
 
-The next patch is already on `master`, and it isn't in 4.3.1. Locale was leaking during SSR ([#23325](https://github.com/vuetifyjs/vuetify/pull/23325)). [VFileUpload](/components/file-upload/) was applying its width props to more than the input ([#23327](https://github.com/vuetifyjs/vuetify/pull/23327)). Keyboard navigation in [VColorPicker](/components/color-pickers/) got lost when a swatch row wrapped ([#23331](https://github.com/vuetifyjs/vuetify/pull/23331)). Layout was still counting items that registered and then unmounted ([#23332](https://github.com/vuetifyjs/vuetify/pull/23332)). [VHotkey](/components/hotkeys/) was spelling keys wrong in its accessible label ([#23340](https://github.com/vuetifyjs/vuetify/pull/23340)).
+Patches ship weekly, and [v4.3.2](/getting-started/release-notes/?version=v4.3.2) went out on November 3. The deadline for v4.4.0 is December 8. Merged on `dev` for it so far:
 
-Two more are on `dev`, so they wait for the next minor. [VBadge](/components/badges/) gets an `icon-size` prop ([#23323](https://github.com/vuetifyjs/vuetify/pull/23323)). [VFab](/components/floating-action-buttons/) learns `start` and `end`, so the position doesn't have to be thought of as left and right ([#23341](https://github.com/vuetifyjs/vuetify/pull/23341)).
+* [VBadge](/components/badges/) gets an `icon-size` prop ([#23323](https://github.com/vuetifyjs/vuetify/pull/23323), thanks [morimorimokenpi](https://github.com/morimorimokenpi))
+* [VFab](/components/floating-action-buttons/) with a `start` or `end` location flips in RTL ([#23341](https://github.com/vuetifyjs/vuetify/pull/23341))
+
+One open PR may make it too: type definitions for components, written by hand next to their sources ([#23266](https://github.com/vuetifyjs/vuetify/pull/23266)). They make it easier to wrap Vuetify components in your own. Type-checking an app that calls `createVuetify()` also takes about a quarter of the time and memory it does now.
 
 ::: warning
 
@@ -216,7 +216,7 @@ Two more are on `dev`, so they wait for the next minor. [VBadge](/components/bad
 
 :::
 
-Thanks to everyone who sent a PR in October: [aozmekik](https://github.com/aozmekik), [ardaalkan](https://github.com/ardaalkan), [ascott18](https://github.com/ascott18), [b84330808](https://github.com/b84330808), [cestercian](https://github.com/cestercian), [DangTAnh](https://github.com/DangTAnh), [diaeai](https://github.com/diaeai), [dilipsaroj](https://github.com/dilipsaroj), [lazerg](https://github.com/lazerg), [mahsarajabpour](https://github.com/mahsarajabpour), [morimorimokenpi](https://github.com/morimorimokenpi), [rafaself](https://github.com/rafaself), [SulimanAbdulrazzaq](https://github.com/SulimanAbdulrazzaq), [userquin](https://github.com/userquin), [vicuts](https://github.com/vicuts) and [ZainnQureshii](https://github.com/ZainnQureshii) in the framework, [araishi](https://github.com/araishi) and [sridhar-3009](https://github.com/sridhar-3009) in Vuetify0, and [Being-RAYtastic](https://github.com/Being-RAYtastic) in Vuetify MCP.
+Thanks to everyone who sent a PR in October: [aozmekik](https://github.com/aozmekik), [ardaalkan](https://github.com/ardaalkan), [ascott18](https://github.com/ascott18), [b84330808](https://github.com/b84330808), [cestercian](https://github.com/cestercian), [DangTAnh](https://github.com/DangTAnh), [diaeai](https://github.com/diaeai), [dilipsaroj](https://github.com/dilipsaroj), [ikushum](https://github.com/ikushum), [lazerg](https://github.com/lazerg), [mahsarajabpour](https://github.com/mahsarajabpour), [MatthewAry](https://github.com/MatthewAry), [morimorimokenpi](https://github.com/morimorimokenpi), [rafaself](https://github.com/rafaself), [SulimanAbdulrazzaq](https://github.com/SulimanAbdulrazzaq), [userquin](https://github.com/userquin), [vicuts](https://github.com/vicuts) and [ZainnQureshii](https://github.com/ZainnQureshii) in the framework, [araishi](https://github.com/araishi) and [sridhar-3009](https://github.com/sridhar-3009) in Vuetify0, and [Being-RAYtastic](https://github.com/Being-RAYtastic) in Vuetify MCP.
 
 See you in November!
 
