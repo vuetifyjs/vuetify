@@ -10,6 +10,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 
 // Composables
 import { makeFocusProps } from '@/composables/focus'
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -60,6 +61,8 @@ export const makeVColorInputProps = propsFactory({
   ...makeVConfirmEditProps(),
   ...makeVTextFieldProps(),
   ...omit(makeVColorPickerProps(), [
+    'disabled',
+    'readonly',
     'location',
     'height',
     'minHeight',
@@ -79,11 +82,12 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const menu = shallowRef(false)
+    const form = useForm(props)
     const vMenuRef = shallowRef<VMenu>()
     const vTextFieldRef = shallowRef<VTextField>()
     const isFocused = shallowRef(props.focused)
 
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isInteractive = computed(() => !form.isDisabled.value && !form.isReadonly.value)
 
     const display = computed(() => model.value || null)
 
@@ -126,6 +130,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const colorPickerProps = {
         ...VColorPicker.filterProps(omit(props, [
+          'disabled',
+          'readonly',
           'active',
           'bgColor',
           'color',
@@ -134,6 +140,8 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           'minWidth',
           'width',
         ])),
+        disabled: form.isDisabled.value,
+        readonly: form.isReadonly.value,
         ...props.pickerProps,
       }
       const textFieldProps = VTextField.filterProps(props)
@@ -166,11 +174,11 @@ export const VColorInput = genericComponent<VColorInputSlots>()({
           modelValue={ display.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           focused={ menu.value || isFocused.value }
-          onClick:control={ !props.disabled ? onClick : undefined }
-          onClick:prependInner={ !props.disabled ? onClick : undefined }
+          onClick:control={ !form.isDisabled.value ? onClick : undefined }
+          onClick:prependInner={ !form.isDisabled.value ? onClick : undefined }
           onUpdate:focused={ event => isFocused.value = event }
           onBlur={ onBlur }
-          onClick:appendInner={ !props.disabled ? onClick : undefined }
+          onClick:appendInner={ !form.isDisabled.value ? onClick : undefined }
           onUpdate:modelValue={ val => {
             model.value = val
           }}
