@@ -9,7 +9,7 @@ import { useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, onScopeDispose, ref, watch } from 'vue'
+import { computed, onScopeDispose, ref, toRef, watch } from 'vue'
 import { debounce, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
@@ -72,7 +72,7 @@ export const VTimePickerClock = genericComponent()({
   },
 
   setup (props, { emit }) {
-    const { t } = useLocale()
+    const { t, current } = useLocale()
     const clockRef = ref<HTMLElement | null>(null)
     const innerClockRef = ref<HTMLElement | null>(null)
     const inputValue = ref<number | undefined>(undefined)
@@ -89,6 +89,16 @@ export const VTimePickerClock = genericComponent()({
     const degrees = computed(() => degreesPerUnit.value * Math.PI / 180)
     const displayedValue = computed(() => props.modelValue == null ? props.min : props.modelValue)
     const innerRadiusScale = computed(() => 0.62)
+
+    const valueText = toRef(() => {
+      if (props.modelValue == null) return undefined
+      if (props.viewMode === 'hour') {
+        return new Intl.DateTimeFormat(current.value, { hour: 'numeric', hourCycle: props.ampm ? 'h12' : 'h23' })
+          .format(new Date(2000, 0, 1, props.modelValue))
+      }
+      return new Intl.NumberFormat(current.value, { style: 'unit', unit: props.viewMode, unitDisplay: 'long' })
+        .format(props.modelValue)
+    })
 
     const genChildren = computed(() => {
       const children = []
@@ -290,7 +300,7 @@ export const VTimePickerClock = genericComponent()({
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue ?? undefined }
-          aria-valuetext={ props.modelValue == null ? undefined : props.format(props.modelValue) }
+          aria-valuetext={ valueText.value }
           aria-disabled={ props.disabled || undefined }
           aria-readonly={ props.readonly || undefined }
           class={[

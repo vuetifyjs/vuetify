@@ -275,6 +275,7 @@ export const VTimePicker = genericComponent<VTimePickerSlots>()({
               <VTimePickerClock
                 { ...timePickerClockProps }
                 allowedValues={ clockValidation }
+                ampm={ isAmPm.value }
                 double={ viewMode.value === 'hour' && !isAmPm.value }
                 format={ viewMode.value === 'hour'
                   ? (isAmPm.value ? convert24to12 : (val: number) => val)

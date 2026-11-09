@@ -129,22 +129,23 @@ describe('VTimePickerClock', () => {
     })
   })
 
-  it('should expose formatted value and omit it when empty', async () => {
-    const { rerender } = render(VTimePickerClock, {
-      props: {
-        min: 12,
-        max: 23,
-        modelValue: 15,
-        viewMode: 'hour',
-        format: (v: number) => v - 12,
-      },
-    })
+  it.each([
+    ['12h hour', { viewMode: 'hour', ampm: true, modelValue: 15 }, /^3\sPM$/],
+    ['24h hour', { viewMode: 'hour', modelValue: 15 }, /^15$/],
+    ['minute', { viewMode: 'minute', modelValue: 5 }, /^5 minutes$/],
+    ['second', { viewMode: 'second', modelValue: 1 }, /^1 second$/],
+  ] as const)('should announce %s value', (_, props, expected) => {
+    render(VTimePickerClock, { props: { min: 0, max: 59, ...props } })
 
     const clock = screen.getByRole('spinbutton')
-    expect(clock).toHaveAttribute('aria-valuenow', '15')
-    expect(clock).toHaveAttribute('aria-valuetext', '3')
+    expect(clock).toHaveAttribute('aria-valuenow', String(props.modelValue))
+    expect(clock).toHaveAttribute('aria-valuetext', expect.stringMatching(expected))
+  })
 
-    await rerender({ modelValue: undefined })
+  it('should omit value when empty', () => {
+    render(VTimePickerClock, { props: { min: 0, max: 59, viewMode: 'minute' } })
+
+    const clock = screen.getByRole('spinbutton')
     expect(clock).not.toHaveAttribute('aria-valuenow')
     expect(clock).not.toHaveAttribute('aria-valuetext')
   })
