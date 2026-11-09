@@ -73,6 +73,11 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBottomNavigation": {
+    "examples": {
+      "misc-navigation-buttons": "4.3.3"
+    }
+  },
   "VBottomSheet": {
     "props": {
       "contextMenu": "4.3.0"
@@ -474,6 +479,9 @@
     },
     "events": {
       "update:expanded": "4.3.0"
+    },
+    "examples": {
+      "misc-navigation-rail": "4.3.3"
     }
   },
   "VNumberInput": {

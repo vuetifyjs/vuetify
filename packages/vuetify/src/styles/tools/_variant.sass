@@ -18,7 +18,7 @@
       opacity: 1
 
   &--variant-plain
-    .#{$name}__overlay
+    > .#{$name}__overlay
       display: none
 
   &--variant-elevated,
@@ -37,11 +37,11 @@
     border: $border-width-root solid currentColor
 
   &--variant-text
-    .#{$name}__overlay
+    > .#{$name}__overlay
       background: currentColor
 
   &--variant-tonal
-    .#{$name}__underlay
+    > .#{$name}__underlay
       background: currentColor
       opacity: var(--v-activated-opacity)
       top: 0
@@ -50,5 +50,5 @@
       left: 0
       pointer-events: none
 
-  .#{$name}__underlay
+  > .#{$name}__underlay
     position: absolute

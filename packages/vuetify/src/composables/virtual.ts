@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useElementSize } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, nextTick, onScopeDispose, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, shallowRef, watch } from 'vue'
 import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '@/util'
 
 // Types
@@ -40,9 +40,9 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const display = useDisplay()
 
   const itemHeight = shallowRef(0)
-  watchEffect(() => {
-    itemHeight.value = parseFloat(props.itemHeight || 0)
-  })
+  watch(() => parseFloat(props.itemHeight || 0), value => {
+    itemHeight.value = value
+  }, { immediate: true })
 
   const first = shallowRef(0)
   const last = shallowRef(Math.ceil(

@@ -1,0 +1,239 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+$_label-offset: calc(#{$navigation-btn-stacked-padding-block} + #{$navigation-btn-stacked-indicator-height} + #{$navigation-btn-stacked-icon-text-gap})
+$_spatial: $navigation-btn-transition-duration $navigation-btn-transition-timing-function
+$_fade: $navigation-btn-text-transition-duration $navigation-btn-text-transition-timing-function
+
+@include tools.layer('components')
+  // Fixed offsets from the inline start only: a % of the parent width moves while the rail resizes.
+  .v-navigation-btn
+    position: relative
+    display: grid
+    grid-template-rows: 0fr
+    flex: none
+    width: 100%
+    padding-block: $_label-offset calc(#{$navigation-btn-height} - #{$_label-offset})
+    padding-inline: 0
+    border: none
+    background: none
+    color: $navigation-btn-color
+    text-align: start
+    text-decoration: none
+    outline: none
+    cursor: pointer
+    user-select: none
+    transition: grid-template-rows $_spatial, padding $_spatial, margin $_spatial
+
+    &--disabled
+      opacity: $navigation-btn-disabled-opacity
+      pointer-events: none
+
+  .v-navigation-btn--active
+    color: $navigation-btn-active-color
+
+  .v-navigation-btn__pill
+    position: absolute
+    transition: top $_spatial
+    top: 0
+    inset-inline-start: $navigation-btn-inset
+    display: flex
+    align-items: center
+    width: max-content
+    height: $navigation-btn-height
+    padding-inline: calc(#{$navigation-btn-padding-inline} + #{$navigation-btn-icon-size} + #{$navigation-btn-icon-text-gap}) $navigation-btn-padding-inline
+    white-space: nowrap
+
+  .v-navigation-btn__indicator,
+  .v-navigation-btn__overlay
+    position: absolute
+    top: 0
+    inset-inline-start: 0
+    width: 100%
+    height: 100%
+    border-radius: $navigation-btn-indicator-border-radius
+    transition: top $_spatial, width $_spatial, height $_spatial
+
+  .v-navigation-btn__indicator
+    background: currentColor
+    opacity: 0
+
+  .v-navigation-btn--active .v-navigation-btn__indicator
+    opacity: $navigation-btn-indicator-opacity
+
+  .v-navigation-btn__overlay
+    overflow: hidden
+
+    &::after
+      content: ''
+      position: absolute
+      inset: 0
+      background: currentColor
+      opacity: 0
+      transition: opacity $_fade
+      pointer-events: none
+
+  .v-navigation-btn:hover .v-navigation-btn__overlay::after
+    opacity: var(--v-hover-opacity)
+
+  .v-navigation-btn:focus-visible .v-navigation-btn__overlay
+    outline: $navigation-btn-focus-outline
+    outline-offset: $navigation-btn-focus-outline-offset
+
+    &::after
+      opacity: var(--v-focus-opacity)
+
+  .v-navigation-btn:active .v-navigation-btn__overlay::after
+    opacity: var(--v-pressed-opacity)
+
+  .v-navigation-btn__icon
+    position: absolute
+    top: calc((#{$navigation-btn-height} - #{$navigation-btn-icon-size}) / 2)
+    inset-inline-start: $navigation-btn-padding-inline
+    z-index: 1
+    display: flex
+    width: $navigation-btn-icon-size
+    height: $navigation-btn-icon-size
+    align-items: center
+    justify-content: center
+    transition: top $_spatial
+
+    .v-icon
+      --v-icon-size-multiplier: 1
+      font-size: $navigation-btn-icon-size
+
+    .v-badge:not(.v-badge--dot) .v-badge__badge
+      height: $navigation-btn-badge-height
+      min-width: $navigation-btn-badge-height
+      padding: 0 $navigation-btn-badge-padding-inline
+
+      @include tools.typography($navigation-btn-badge-typography...)
+
+  // Enters after the stacked label has faded out; leaves in place, then resets its offset.
+  .v-navigation-btn__text
+    position: relative
+    transition: opacity $_fade $navigation-btn-text-transition-duration, transform $navigation-btn-text-slide-duration $navigation-btn-text-slide-timing-function $navigation-btn-text-transition-duration
+
+    @include tools.typography($navigation-btn-text-typography...)
+
+  .v-navigation-btn__label
+    width: $navigation-btn-stacked-text-width
+    min-height: 0
+    margin-inline-start: calc(#{$navigation-btn-inset} + (#{$navigation-btn-stacked-indicator-width} - #{$navigation-btn-stacked-text-width}) / 2)
+    overflow-wrap: break-word
+    text-align: center
+    opacity: 0
+    visibility: hidden
+    transition: opacity $_fade, visibility 0s $navigation-btn-text-transition-duration
+
+    @include tools.typography($navigation-btn-stacked-text-typography...)
+
+  .v-navigation-btn--stacked
+    grid-template-rows: 1fr
+    padding-bottom: $navigation-btn-stacked-padding-block
+
+    & + &
+      margin-top: $navigation-btn-stacked-gap
+
+    .v-navigation-btn__indicator,
+    .v-navigation-btn__overlay
+      top: $navigation-btn-stacked-padding-block
+      width: $navigation-btn-stacked-indicator-width
+      height: $navigation-btn-stacked-indicator-height
+
+    .v-navigation-btn__icon
+      top: calc(#{$navigation-btn-stacked-padding-block} + (#{$navigation-btn-stacked-indicator-height} - #{$navigation-btn-icon-size}) / 2)
+
+    .v-navigation-btn__text
+      opacity: 0
+      transform: translateX(calc(-1 * #{$navigation-btn-text-slide-distance}))
+      pointer-events: none
+      transition: opacity $_fade, transform 0s $navigation-btn-text-transition-duration
+
+      @include tools.rtl
+        transform: translateX($navigation-btn-text-slide-distance)
+
+    .v-navigation-btn__label
+      opacity: 1
+      visibility: visible
+      transition: opacity $_fade, visibility 0s
+
+  .v-navigation-btn--stacked.v-navigation-btn--labels-none,
+  .v-navigation-btn--stacked.v-navigation-btn--labels-selected:not(.v-navigation-btn--active)
+    .v-navigation-btn__label
+      opacity: 0
+      visibility: hidden
+      transition: opacity $_fade, visibility 0s $navigation-btn-text-transition-duration
+
+  // Keeps the row height; the icon sits centered where the label would be.
+  .v-navigation-btn--stacked.v-navigation-btn--labels-selected:not(.v-navigation-btn--active) .v-navigation-btn__pill
+    top: calc(50% - #{$navigation-btn-stacked-padding-block} - #{$navigation-btn-stacked-indicator-height} / 2)
+
+  .v-navigation-btn--stacked.v-navigation-btn--labels-none
+    grid-template-rows: 0fr
+    padding-block: $navigation-btn-stacked-unlabeled-indicator-height 0
+
+    .v-navigation-btn__indicator,
+    .v-navigation-btn__overlay
+      top: 0
+      height: $navigation-btn-stacked-unlabeled-indicator-height
+
+    .v-navigation-btn__icon
+      top: calc((#{$navigation-btn-stacked-unlabeled-indicator-height} - #{$navigation-btn-icon-size}) / 2)
+
+  .v-bottom-navigation .v-navigation-btn
+    flex: 1 1 0
+    width: auto
+    min-width: 0
+    height: 100%
+    margin: 0
+
+    .v-navigation-btn__pill
+      inset-inline: 0
+      margin-inline: auto
+
+    .v-navigation-btn__label
+      width: auto
+      margin-inline: 0
+
+    &.v-navigation-btn--stacked .v-navigation-btn__pill
+      width: $navigation-btn-stacked-indicator-width
+      padding: 0
+
+    &.v-navigation-btn--stacked.v-navigation-btn--labels-none .v-navigation-btn__pill
+      top: calc(50% - #{$navigation-btn-stacked-unlabeled-indicator-height} / 2)
+
+    &:not(.v-navigation-btn--stacked)
+      flex: 0 1 $navigation-btn-bar-max-width
+      min-width: max-content
+      padding: 0
+
+      .v-navigation-btn__pill
+        top: calc(50% - #{$navigation-btn-bar-indicator-height} / 2)
+        height: $navigation-btn-bar-indicator-height
+        padding-inline-start: calc(#{$navigation-btn-padding-inline} + #{$navigation-btn-icon-size} + #{$navigation-btn-bar-icon-text-gap})
+
+      .v-navigation-btn__icon
+        top: calc((#{$navigation-btn-bar-indicator-height} - #{$navigation-btn-icon-size}) / 2)
+
+      .v-navigation-btn__text
+        @include tools.typography($navigation-btn-stacked-text-typography...)
+
+  .v-bottom-navigation--grow .v-navigation-btn:not(.v-navigation-btn--stacked)
+    flex: 1 1 0
+
+  @media (forced-colors: active)
+    .v-navigation-btn--active .v-navigation-btn__indicator
+      border: 2px solid
+      background: none
+      opacity: 1
+
+  @media (prefers-reduced-motion: reduce)
+    .v-navigation-btn,
+    .v-navigation-btn .v-navigation-btn__pill,
+    .v-navigation-btn .v-navigation-btn__indicator,
+    .v-navigation-btn .v-navigation-btn__overlay,
+    .v-navigation-btn .v-navigation-btn__icon,
+    .v-navigation-btn .v-navigation-btn__text,
+    .v-navigation-btn .v-navigation-btn__label
+      transition: none
