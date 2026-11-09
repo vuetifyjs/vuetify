@@ -180,7 +180,7 @@ export default {
     backspace: 'مسافة للخلف',
     space: 'مسافة',
     plus: 'زائد',
-    shortcut: 'اختصار لوحة المفاتيح: {0}',
+    shortcut: 'اختصار لوحة المفاتيح، {0}',
     or: 'أو',
   },
   media: {

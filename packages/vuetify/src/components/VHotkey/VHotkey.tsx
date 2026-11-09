@@ -38,6 +38,7 @@ import { VKbd } from '@/components/VKbd'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { APPLE_PLATFORM } from '@/composables/hotkey/hotkey'
 import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -244,7 +245,7 @@ export const VHotkey = genericComponent()({
 
     const isMac = computed(() =>
       props.platform === 'auto'
-        ? (typeof navigator !== 'undefined' && /macintosh/i.test(navigator.userAgent))
+        ? (typeof navigator !== 'undefined' && APPLE_PLATFORM.test(navigator.userAgent))
         : props.platform === 'mac'
     )
 
@@ -295,7 +296,7 @@ export const VHotkey = genericComponent()({
           if (Array.isArray(key)) {
             // Always use text representation for screen readers
             const textKey = key[0] === 'icon' || key[0] === 'symbol'
-              ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', String(key[1]), isMac.value)[1]
+              ? applyDisplayModeToKey(mergeDeep(hotkeyMap, props.keyMap), 'text', key[2], isMac.value)[1]
               : key[1]
             readableParts.push(translateKey(textKey as string))
           } else {

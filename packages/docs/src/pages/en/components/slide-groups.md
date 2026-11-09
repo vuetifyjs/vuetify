@@ -66,6 +66,12 @@ Use the **direction** prop for a vertical layout. Pair it with **scroll-snap** a
 
 <ExamplesExample file="v-slide-group/prop-direction" />
 
+#### Draggable
+
+The **draggable** prop lets mouse users scroll by dragging the content. Clicks still select items, a drag doesn't. With **scroll-snap**, releasing moves to the next item in the drag direction.
+
+<ExamplesExample file="v-slide-group/prop-draggable" />
+
 ### Mandatory
 
 the **mandatory** prop will make the slide group require at least 1 item must be selected.

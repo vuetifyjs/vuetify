@@ -199,26 +199,13 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
     }
 
     useRender(() => {
-      const { modelValue: _, ...inputProps } = VInput.filterProps(props)
-      const { modelValue: __, ...dropzoneProps } = VFileUploadDropzone.filterProps(props as any)
+      const inputProps = omit(VInput.filterProps(props), ['modelValue'])
+      const dropzoneProps = omit(VFileUploadDropzone.filterProps(props as any), ['modelValue', 'width', 'minWidth', 'maxWidth'])
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       const expectsDirectory = attrs.webkitdirectory !== undefined && attrs.webkitdirectory !== false
       const acceptFallback = attrs.accept ? String(attrs.accept) : undefined
       const inputAccept = expectsDirectory ? undefined : (props.filterByType ?? acceptFallback)
-
-      const inputNode = (
-        <input
-          ref={ inputRef }
-          type="file"
-          accept={ inputAccept }
-          disabled={ props.disabled ?? undefined }
-          multiple={ props.multiple }
-          name={ props.name }
-          onChange={ onFileSelection }
-          { ...inputAttrs }
-        />
-      )
 
       return (
         <VInput
@@ -241,23 +228,29 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
         >
           {{
             ...slots,
-            default: () => {
+            default: ({ id, messagesId }) => {
+              const inputNode = (
+                <input
+                  ref={ inputRef }
+                  id={ id.value }
+                  type="file"
+                  accept={ inputAccept }
+                  disabled={ props.disabled ?? undefined }
+                  multiple={ props.multiple }
+                  name={ props.name }
+                  aria-describedby={ messagesId.value }
+                  style={ slots.default ? 'display: none;' : undefined }
+                  onChange={ onFileSelection }
+                  { ...inputAttrs }
+                />
+              )
+
               return (
                 <>
                   { slots.default ? (
                     <>
                       { slots.default() }
-                      <input
-                        ref={ inputRef }
-                        type="file"
-                        accept={ inputAccept }
-                        disabled={ props.disabled ?? undefined }
-                        multiple={ props.multiple }
-                        name={ props.name }
-                        style="display: none;"
-                        onChange={ onFileSelection }
-                        { ...inputAttrs }
-                      />
+                      { inputNode }
                     </>
                   ) : (
                     <VFileUploadDropzone

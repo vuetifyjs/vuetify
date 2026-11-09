@@ -26,6 +26,9 @@ const props = {
 const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="$vuetify" />,
+  'Icon sizes': gridOn([null], [undefined, 'x-small', 'small', 'default', 'large', 'x-large', 32], (_, size) => (
+    <VBadge inline icon="$vuetify" iconSize={ size } height="auto" />
+  )),
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
     <VBadge { ...{ [xy]: offset } } content="0">
       <VBtn variant="tonal">
@@ -51,6 +54,16 @@ const stories = {
 
 // Tests
 describe('VBadge', () => {
+  it('should render smaller icon to fit in default height', () => {
+    render(
+      <VBtn>
+        <VBadge inline icon="$vuetify" />
+      </VBtn>
+    )
+
+    expect(getComputedStyle(screen.getByCSS('.v-badge__badge .v-icon')).fontSize).toBe('12px')
+  })
+
   describe('label', () => {
     it('should have the designated aria label', async () => {
       render(<VBadge label="label-badge">label</VBadge>)

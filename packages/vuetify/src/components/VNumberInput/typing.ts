@@ -95,7 +95,7 @@ function toDisplayPosition (text: string, groupSeparator: string, logicalPositio
 
 /**
  * Process a beforeinput event for plain (non-grouped) number input.
- * Returns { text, cursor } when the input needs correction, or null to let browser handle it.
+ * Returns { text, cursor } when the input needs correction, false when nothing can be inserted, or null to let browser handle it.
  */
 export function processPlainInput (
   data: string | null,
@@ -103,7 +103,7 @@ export function processPlainInput (
   selectionStart: number,
   selectionEnd: number,
   options: { decimalSeparator: string, precision: number | null, minusSign: string },
-): InputResult | null {
+): InputResult | null | false {
   if (!data) return null
 
   const { decimalSeparator, precision, minusSign } = options
@@ -113,9 +113,10 @@ export function processPlainInput (
   const beforePart = value.slice(0, selectionStart)
   let cleanData = extractNumber(data, precision, decimalSeparator)
   if (cleanData.startsWith('-') && beforePart.length > 0) cleanData = cleanData.slice(1)
-  if (cleanData.includes(decimalSeparator) && beforePart.includes(decimalSeparator)) {
+  if (cleanData.includes(decimalSeparator) && (beforePart + value.slice(selectionEnd)).includes(decimalSeparator)) {
     cleanData = cleanData.replace(decimalSeparator, '')
   }
+  if (!cleanData) return false
 
   const candidate = beforePart + cleanData + value.slice(selectionEnd)
   const validPattern = new RegExp(`^-?\\d*${escapeForRegex(decimalSeparator)}?\\d*$`)
@@ -146,7 +147,7 @@ export function processPlainInput (
 
 /**
  * Process a beforeinput event for grouped number input.
- * Returns { text, cursor } to apply, or null for interactions that do not need override
+ * Returns { text, cursor } to apply, false when nothing can be inserted, or null for interactions that do not need override
  */
 export function processGroupedInput (
   inputType: string,
@@ -155,7 +156,7 @@ export function processGroupedInput (
   selectionStart: number,
   selectionEnd: number,
   options: GroupedInputOptions,
-): InputResult | null {
+): InputResult | null | false {
   const { groupSeparator, decimalSeparator, precision, grouping, locale, minusSign } = options
 
   value = normalizeMinusSign(value)
@@ -170,12 +171,7 @@ export function processGroupedInput (
   let newLogicalCursor: number
 
   switch (inputType) {
-    case 'insertText': {
-      if (!data) return null
-      newRaw = raw.slice(0, logicalStart) + data + raw.slice(logicalEnd)
-      newLogicalCursor = logicalStart + data.length
-      break
-    }
+    case 'insertText':
     case 'insertFromPaste':
     case 'insertFromDrop': {
       if (!data) return null
@@ -184,9 +180,10 @@ export function processGroupedInput (
       if (cleanData.startsWith('-') && rawBefore.length > 0) {
         cleanData = cleanData.slice(1)
       }
-      if (cleanData.includes(decimalSeparator) && rawBefore.includes(decimalSeparator)) {
+      if (cleanData.includes(decimalSeparator) && (rawBefore + raw.slice(logicalEnd)).includes(decimalSeparator)) {
         cleanData = cleanData.replace(decimalSeparator, '')
       }
+      if (!cleanData) return false
       newRaw = rawBefore + cleanData + raw.slice(logicalEnd)
       newLogicalCursor = logicalStart + cleanData.length
       break

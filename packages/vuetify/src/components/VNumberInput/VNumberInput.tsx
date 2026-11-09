@@ -310,6 +310,7 @@ export const VNumberInput = genericComponent<VNumberInputSlots>()({
       if (result === null) return
 
       e.preventDefault()
+      if (!result) return
 
       inputElement.value = result.text
       inputElement.setSelectionRange(result.cursor, result.cursor)

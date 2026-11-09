@@ -180,7 +180,7 @@ export default {
     backspace: 'Retrocés',
     space: 'Espai',
     plus: 'més',
-    shortcut: 'Drecera de teclat: {0}',
+    shortcut: 'Drecera de teclat, {0}',
     or: 'o',
   },
   media: {

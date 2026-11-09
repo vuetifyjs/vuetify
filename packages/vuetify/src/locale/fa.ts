@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'فاصله',
     plus: 'بعلاوه',
-    shortcut: 'میانبر صفحه کلید: {0}',
+    shortcut: 'میانبر صفحه کلید، {0}',
     or: 'یا',
   },
   media: {

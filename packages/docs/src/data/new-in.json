@@ -61,12 +61,21 @@
   },
   "VBadge": {
     "props": {
-      "dotSize": "4.0.0"
+      "dotSize": "4.0.0",
+      "iconSize": "4.4.0"
+    },
+    "examples": {
+      "prop-icon-size": "4.4.0"
     }
   },
   "VBanner": {
     "props": {
       "bgColor": "3.4.0"
+    }
+  },
+  "VBottomNavigation": {
+    "examples": {
+      "misc-navigation-buttons": "4.3.3"
     }
   },
   "VBottomSheet": {
@@ -463,8 +472,16 @@
   "VNavigationDrawer": {
     "props": {
       "captureFocus": "3.11.0",
-      "retainFocus": "3.11.0",
-      "persistent": "3.6.0"
+      "expanded": "4.3.0",
+      "modal": "4.3.0",
+      "persistent": "3.6.0",
+      "retainFocus": "3.11.0"
+    },
+    "events": {
+      "update:expanded": "4.3.0"
+    },
+    "examples": {
+      "misc-navigation-rail": "4.3.3"
     }
   },
   "VNumberInput": {
@@ -669,6 +686,7 @@
   "VSlideGroup": {
     "props": {
       "contentClass": "3.9.0",
+      "draggable": "4.4.0",
       "gap": "4.3.0",
       "padding": "4.3.0",
       "scrollDistance": "4.2.0",
@@ -683,7 +701,8 @@
       "slide": "4.2.0"
     },
     "examples": {
-      "misc-image-slider": "4.3.0"
+      "misc-image-slider": "4.3.0",
+      "prop-draggable": "4.4.0"
     }
   },
   "VSnackbar": {

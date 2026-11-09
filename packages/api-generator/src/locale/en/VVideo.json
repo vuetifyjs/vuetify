@@ -8,7 +8,7 @@
     "controlsProps": "Props passed to the [v-video-controls](/api/v-video-controls/#props) component, e.g. `class` or `gap`. Use camelCase keys. Playback state such as `playing`, `progress` or `volume` always comes from the video.",
     "controlsTransition": "The reveal transition applied to the VVideoControls component once the media file is loaded.",
     "controlsVariant": "**Deprecated**, use **actions** or **hide-controls**. Variant passed to the VVideoControls component.",
-    "eager": "Loads the media file without waiting for the user to click.",
+    "eager": "Loads the media file without waiting for the user to click. iOS loads only metadata until the first tap.",
     "error": "Puts the component in the manual error state.",
     "hideBuffer": "Hides how much of the file has been buffered on the progress bar.",
     "hideControls": "Hides the controls bar.",

@@ -21,7 +21,12 @@ export {
 
 export type { IgnoreAccents } from '@vuetify/v0/utilities'
 
-export { createBreakpoints, createLocale as createV0Locale, createRtl as createV0Rtl } from '@vuetify/v0/composables'
+export {
+  createBreakpoints,
+  createLocale as createV0Locale,
+  createRtl as createV0Rtl,
+  useRovingFocus,
+} from '@vuetify/v0/composables'
 
 // Kept under core's existing name — `range` shadows local variables in several
 // components (VPagination, VRating, VSlider).

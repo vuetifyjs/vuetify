@@ -6,14 +6,18 @@ import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { commands, render, screen, showcase } from '@test'
 import { ref } from 'vue'
 
-const peaks = [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4]
+const peaks = Array.from({ length: 15 }).flatMap(() => [0.2, 0.9, 0.35, 0.7, 0.15, 0.6, 0.85, 0.4])
 
 const stories = {
   Default: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } />,
   Mirror: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror />,
   'Mirror 0.5': <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror={ 0.5 } />,
+  'Mirror 0': <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } mirror={ 0 } />,
   Disabled: <VAudioWaveform peaks={ peaks } modelValue={ 40 } max={ 100 } disabled />,
   'No peaks': <VAudioWaveform modelValue={ 40 } max={ 100 } />,
+  Spectrum: (
+    <VAudioWaveform peaks={[0.5, 0.8, 1, 0.5]} bars={ 4 } barWidth={ 2.5 } barGap={ 3 } height={ 20 } live="spectrum" style="width: 24px" />
+  ),
 }
 
 describe('VAudioWaveform', () => {
