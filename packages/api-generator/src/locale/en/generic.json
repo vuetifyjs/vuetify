@@ -37,7 +37,7 @@
     "link": "Designates that the component is a link. This is automatic when using the href or to prop.",
     "mandatory": "Forces at least one item to always be selected (if available).",
     "menu": "Renders with the menu open by default.",
-    "menuIcon": "Sets the the spin icon.",
+    "menuIcon": "Sets the dropdown icon. Rotates while the menu is open.",
     "menuProps": "Pass props through to the `v-menu` component. Accepts an object with anything from [v-menu](/api/v-menu/#props) props, camelCase keys are recommended.",
     "messages": "Displays a list of messages or a single message if using a string.",
     "mode": "Sets the transition mode (does not apply to transition-group). You can find more information on the Vue documentation [for transition modes](https://vuejs.org/api/built-in-components.html#transition).",

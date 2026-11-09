@@ -104,7 +104,7 @@
   })
 
   // Register current, hovered row to activator
-  // Preferrably called before edit()
+  // Preferably called before edit()
   function register (event) {
     activator.value = event.currentTarget
   }

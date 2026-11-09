@@ -129,7 +129,7 @@ In order to restore the customized values, pass them directly to the specific va
 
 ### Restoring MD2 typography
 
-If you want to avoid visual regression entirely, you can restore MD2 typography using configuration snippets bellow.
+If you want to avoid visual regression entirely, you can restore MD2 typography using configuration snippets below.
 
 ```scss { resource="src/typography.scss" }
 @use 'sass:map';
