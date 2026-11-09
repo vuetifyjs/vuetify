@@ -1,11 +1,8 @@
 // Styles
 import './VTimePickerClock.sass'
 
-// Components
-import { VBtn } from '@/components/VBtn'
-
 // Composables
-import { useTextColor } from '@/composables/color'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
@@ -23,10 +20,7 @@ interface Point {
 export const makeVTimePickerClockProps = propsFactory({
   allowedValues: Function as PropType<(value: number) => boolean>,
   ampm: Boolean,
-  color: {
-    type: String,
-    default: 'surface-variant',
-  },
+  color: String,
   disabled: Boolean,
   displayedValue: null,
   double: Boolean,
@@ -82,6 +76,7 @@ export const VTimePickerClock = genericComponent()({
     const emitChangeDebounced = debounce((value: number) => emit('change', value), 750)
 
     const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(() => props.color)
 
     const count = computed(() => props.max - props.min + 1)
     const roundCount = computed(() => props.double ? (count.value / 2) : count.value)
@@ -336,27 +331,25 @@ export const VTimePickerClock = genericComponent()({
             {
               genChildren.value.map(value => {
                 const isActive = value === displayedValue.value
-                const isDisabled = props.disabled || !isAllowed(value)
 
                 return (
-                  <VBtn
-                    _as="VTimePickerClockBtn"
+                  <div
                     aria-hidden="true"
-                    tabindex={ -1 }
                     class={[
-                      'v-time-picker-clock__item',
                       {
+                        'v-time-picker-clock__item': true,
                         'v-time-picker-clock__item--active': isActive,
+                        'v-time-picker-clock__item--disabled': props.disabled || !isAllowed(value),
                       },
+                      isActive && backgroundColorClasses.value,
                     ]}
-                    color={ isActive ? props.color : '' }
-                    disabled={ isDisabled }
-                    style={[getTransform(value)]}
-                    variant={ isActive ? 'flat' : 'text' }
-                    ripple={ false }
+                    style={[
+                      getTransform(value),
+                      isActive && backgroundColorStyles.value,
+                    ]}
                   >
-                    { props.format(value) }
-                  </VBtn>
+                    <span>{ props.format(value) }</span>
+                  </div>
                 )
               })
             }

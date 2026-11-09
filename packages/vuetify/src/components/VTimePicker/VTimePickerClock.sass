@@ -10,6 +10,10 @@
     &:after
       color: rgb(var(--v-theme-primary))
 
+    .v-time-picker-clock__item--active
+      background-color: rgb(var(--v-theme-surface-variant))
+      color: rgb(var(--v-theme-on-surface-variant))
+
   .v-time-picker-clock
     margin: $time-picker-padding
     background: rgb(var(--v-theme-surface-light))
@@ -74,6 +78,9 @@
       outline-color: rgba(var(--v-theme-on-surface), var(--v-focus-opacity))
       background: rgba(var(--v-theme-on-surface), var(--v-focus-opacity))
 
+    .v-time-picker-clock__item--disabled
+      opacity: var(--v-disabled-opacity)
+
   .v-picker--full-width
     .v-time-picker-clock__container
       max-width: $time-picker-clock-max-width
@@ -87,22 +94,41 @@
 
   .v-time-picker-clock__item
     align-items: center
-    border-radius: 50% !important
+    border-radius: 100%
     cursor: default
     display: flex
-    font-size: $time-picker-number-font-size !important
+    font-size: $time-picker-number-font-size
     justify-content: center
-    position: absolute !important
+    height: $time-picker-indicator-size
+    position: absolute
     text-align: center
-    height: $time-picker-indicator-size !important
-    width: $time-picker-indicator-size !important
-    min-width: $time-picker-indicator-size !important
+    width: $time-picker-indicator-size
     user-select: none
     transform: translate(-50%, -50%)
-    z-index: 1
+
+    > span
+      z-index: 1
+
+    &:before, &:after
+      content: ''
+      border-radius: 100%
+      position: absolute
+      top: 50%
+      left: 50%
+      height: 14px
+      width: 14px
+      transform: translate(-50%, -50%)
+
+    &:after, &:before
+      height: $time-picker-indicator-size
+      width: $time-picker-indicator-size
 
     &--active
+      cursor: default
       z-index: 2
+
+    &--disabled
+      pointer-events: none
 
   .v-picker--landscape
     .v-time-picker-clock
@@ -119,6 +145,5 @@
         &:after
           background-color: highlight
 
-      &__item--active.v-btn.v-btn
-        border-width: $time-picker-clock-end-border-width
-        border-color: highlight
+      &__item--active
+        outline: 2px solid highlight
