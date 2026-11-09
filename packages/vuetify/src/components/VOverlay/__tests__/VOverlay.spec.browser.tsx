@@ -6,8 +6,8 @@ import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 
 // Utilities
-import { commands, isClickable, render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { commands, isClickable, render, screen, userEvent, wait } from '@test'
+import { defineComponent, ref, Suspense } from 'vue'
 
 describe('VOverlay', () => {
   describe('CSS zoom', () => {
@@ -198,5 +198,42 @@ describe('VOverlay', () => {
 
     await expect.poll(() => screen.queryAllByTestId('first-content')).toHaveLength(0)
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
+  })
+
+  describe('scroll strategy', () => {
+    afterEach(() => {
+      document.documentElement.style.overflowY = ''
+    })
+
+    it('should block scroll once mounted inside a pending Suspense', async () => {
+      document.documentElement.style.overflowY = 'scroll'
+
+      let resolveChild!: () => void
+      const childReady = new Promise<void>(resolve => resolveChild = resolve)
+      const AsyncChild = defineComponent({
+        name: 'AsyncChild',
+        async setup () {
+          await childReady
+          return () => <div />
+        },
+      })
+
+      render(() => (
+        <Suspense>
+          <div>
+            <AsyncChild />
+            <VOverlay modelValue>
+              <div>Content</div>
+            </VOverlay>
+          </div>
+        </Suspense>
+      ))
+
+      await wait()
+      resolveChild()
+
+      await expect.poll(() => document.documentElement.classList.contains('v-overlay-scroll-blocked')).toBe(true)
+      expect(screen.getByCSS('.v-overlay')).toHaveClass('v-overlay--scroll-blocked')
+    })
   })
 })
