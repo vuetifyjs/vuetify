@@ -62,11 +62,11 @@ Both the expansion-panel and its content can be disabled using the **disabled** 
 
 <ExamplesExample file="v-expansion-panels/prop-disabled" />
 
-<!-- #### Focusable
+#### Focusable
 
-The expansion-panel headers can be made focusable with the prop **focusable**.
+The **focusable** prop highlights the title of each open panel with the activated state overlay, making expanded panels easier to tell apart.
 
-<ExamplesExample file="v-expansion-panels/prop-focusable" /> -->
+<ExamplesExample file="v-expansion-panels/prop-focusable" />
 
 #### Model
 
