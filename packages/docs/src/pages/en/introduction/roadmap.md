@@ -288,7 +288,7 @@ The following are the already released **minor** and **major** version updates. 
   - Global properties that allow you to make large overarching changes to your app
   - Improved SASS variable customization and extensibility with [Built-In Modules](https://sass-lang.com/documentation/modules)
   - New [Vue CLI presets](https://github.com/vuetifyjs/vue-cli-plugins) for generating pre-built starting projects
-  - First party [Vite](https://vitejs.dev/) support for lightning fast development
+  - First party [Vite](https://vite.dev/) support for lightning fast development
   - Greatly improved TypeScript support
   - Better framework coverage with E2E testing using Cypress
 
@@ -361,11 +361,11 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Released:** January 2020
 - **Notes:** [v2.2 Release](/getting-started/release-notes/?version=v2.2.0)
 - **Overview:**
-  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
+  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://m2.material.io/design/material-studies/about-our-material-studies.html).
 - **Objectives:**
   - Add *thousands* of new SASS variables
   - Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
-  - Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
+  - Create presets for the official [Material Design Studies](https://m2.material.io/design/material-studies/about-our-material-studies.html)
   - Add new features and improve code styling of `v-badge`
   - Add new features and improve code styling of `v-expansion-panels`
   - new `v-theme-provider` component

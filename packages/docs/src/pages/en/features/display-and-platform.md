@@ -204,7 +204,7 @@ In the following example, we use a switch statement and the current breakpoint n
 
 ## Using Setup
 
-Use the **useDisplay** composable alongside Vue 3's `setup` function to harness the power of the [Composition API](https://v3.vuejs.org/guide/composition-api-setup.html). In this example we show how to toggle the **fullscreen** property of `v-dialog` when the mobile breakpoint is active.
+Use the **useDisplay** composable alongside Vue 3's `setup` function to harness the power of the [Composition API](https://vuejs.org/api/composition-api-setup.html). In this example we show how to toggle the **fullscreen** property of `v-dialog` when the mobile breakpoint is active.
 
 ```html { resource="Component.vue" }
 <template>

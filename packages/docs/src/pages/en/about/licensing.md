@@ -47,7 +47,7 @@ By adopting the MIT License, Vuetify remains committed to promoting innovation, 
 
 You are free to use Vuetify in your projects, be it personal, commercial, or for educational purposes. The flexibility of the MIT License allows for a wide range of applications. When redistributing Vuetify or derivative works, the only requirement is to include the original copyright and license notice in any copy of the software/source code.
 
-To get inspired or see what's possible with Vuetify, check out [Awesome Vuetify](https://github.com/vuetifyjs/awesome-vuetify), a curated list of awesome Vuetify resources, libraries, and tools. Additionally, explore the [Made With Vuetify](/resources/made-with-vuetify/) page to see a showcase of applications and projects built using Vuetify. These resources can provide you with ideas and examples of how Vuetify can enhance your projects.
+To get inspired or see what's possible with Vuetify, check out [Awesome Vuetify](https://github.com/vuetifyjs/awesome), a curated list of awesome Vuetify resources, libraries, and tools. Additionally, explore the [Made With Vuetify](/resources/made-with-vuetify/) page to see a showcase of applications and projects built using Vuetify. These resources can provide you with ideas and examples of how Vuetify can enhance your projects.
 
 ## Contributions to Vuetify
 

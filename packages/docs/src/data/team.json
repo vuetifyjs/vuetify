@@ -104,7 +104,7 @@
     "discord": "userquin",
     "focus": [
       "[vuetifyjs/create](https://github.com/vuetifyjs/create)",
-      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+      "[Nuxt](https://github.com/vuetifyjs/nuxt-module)"
     ],
     "languages": [
       "Spanish",
@@ -209,7 +209,7 @@
     "discord": "psi#8085",
     "focus": [
       "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[Nuxt](https://github.com/userquin/vuetify-nuxt-module)"
+      "[Nuxt](https://github.com/vuetifyjs/nuxt-module)"
     ],
     "languages": [
       "Tagalog / Filipino",
@@ -257,7 +257,6 @@
     ],
     "funding": [
       "[GitHub Sponsors](https://github.com/sponsors/kieuminhcanh)",
-      "[Patreon](https://patreon.com/kieuminhcanh)",
       "[Open Collective](https://opencollective.com/vuetify)"
     ],
     "languages": [

@@ -221,7 +221,7 @@ Check the [documentation](https://nuxt.vuetifyjs.com/) for more information on h
 
 ## Using Laravel
 
-The `createApp()` setup may differ, especially if your Laravel application uses [inertiajs](https://inertiajs.com/client-side-setup). As long as you chain with`.use()`, Vuetify should be properly registered and available.
+The `createApp()` setup may differ, especially if your Laravel application uses [inertiajs](https://inertiajs.com/docs/v3/installation/client-side-setup). As long as you chain with`.use()`, Vuetify should be properly registered and available.
 
 ```js  { data-resource=resources/js/app.ts }
 import { createApp } from 'vue'
@@ -294,7 +294,7 @@ Remember to include additional script for Vue.js. See full example below:
 
 ## Using as ES Module with CDN
 
-To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
+To import Vuetify (and Vue) using an [import map](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/script/type/importmap) you can use the same CDN but contain it in a ES module without tooling
 
 ::: info
   Unlike regular CDN links, import map expects `.../vuetify.esm.js` (**\*esm.js** instead of **\*.min.js**)

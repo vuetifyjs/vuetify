@@ -13,7 +13,7 @@ This feature was introduced in [v3.6.0 (Nebula)](/getting-started/release-notes/
 
 # CSS Layers
 
-[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`.
+[Cascade layers](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer) are a modern CSS feature that makes it easier to write custom styles without having to deal with specificity issues and `!important`.
 
 Vuetify defines five layers containing all the framework styles:
 

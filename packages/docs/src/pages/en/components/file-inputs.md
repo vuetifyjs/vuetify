@@ -42,7 +42,7 @@ At its core, `v-file-input` is built on the same [VField](/components/text-field
 
 #### Accept
 
-`v-file-input` component can accept only specific media formats/file types if you want. For more information, checkout the documentation on the [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept).
+`v-file-input` component can accept only specific media formats/file types if you want. For more information, checkout the documentation on the [accept attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/file#accept).
 
 <ExamplesExample file="v-file-input/prop-accept" />
 

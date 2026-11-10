@@ -116,7 +116,7 @@ Using the `v-list-group` component you can create sub-groups of items.
 
 #### Three line
 
-For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/-webkit-line-clamp) and is not supported in all browsers.
+For three line lists, the subtitle will clamp vertically at 2 lines and then ellipsis. This feature uses [line-clamp](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/line-clamp) and is not supported in all browsers.
 
 <ExamplesExample file="v-list/prop-three-line" />
 

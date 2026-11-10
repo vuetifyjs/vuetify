@@ -171,7 +171,7 @@ The Vuetify CLI ecosystem consists of three packages that share logic via `@vuet
 
 * `vuetify init` — Same as create-vuetify, scaffolds new projects (supports `--type vuetify0`)
 * `vuetify add eslint` — Adds ESLint + [eslint-config-vuetify](https://github.com/vuetifyjs/eslint-config-vuetify) to existing projects
-* `vuetify add mcp` — Adds [Vuetify MCP](https://github.com/vuetifyjs/mcp) server config for [Cursor](https://cursor.sh/)/[VS Code](https://code.visualstudio.com/)
+* `vuetify add mcp` — Adds [Vuetify MCP](https://github.com/vuetifyjs/mcp) server config for [Cursor](https://cursor.com/)/[VS Code](https://code.visualstudio.com/)
 * `vuetify update` — Smart updates Vuetify + related packages
 * `vuetify docs` — Opens vuetifyjs.com (version-aware)
 * `vuetify upgrade` — Self-upgrades the CLI
@@ -281,8 +281,8 @@ The **create-vuetify** scaffolding tool received **12 commits** and 4 releases i
 **Details:**
 
 * [Vuetify CLI GitHub Repository](https://github.com/vuetifyjs/cli)
-* [create-vuetify Releases](https://github.com/vuetifyjs/create-vuetify/releases)
-* [v2.8.0-beta.1 Release Notes](https://github.com/vuetifyjs/create-vuetify/releases/tag/v2.8.0-beta.1)
+* [create-vuetify Releases](https://github.com/vuetifyjs/create/releases)
+* [v2.8.0-beta.1 Release Notes](https://github.com/vuetifyjs/create/releases/tag/v2.8.0-beta.1)
 
 ---
 
@@ -454,7 +454,7 @@ December brought four releases to the Vuetify MCP server (v0.2.4 through v0.4.1)
 
 **Rate Limiter**: The MCP server now includes rate limiting to ensure fair usage and stability across all consumers.
 
-**[Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI Support**: Native integration with Claude Code for seamless AI-assisted development workflows.
+**[Claude Code](https://code.claude.com/docs/en/overview) CLI Support**: Native integration with Claude Code for seamless AI-assisted development workflows.
 
 **update_vuetify_bin Tool**: A new tool for updating existing Vuetify bins programmatically.
 

@@ -66,11 +66,11 @@ For more information on how to get started, such as using Nuxt or Laravel, check
 
 ### 💖 Supporting Vuetify
 
-Vuetify is a [MIT licensed](https://opensource.org/licenses/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
+Vuetify is a [MIT licensed](https://opensource.org/license/MIT) project that is developed and maintained by the [Core Team](https://vuetifyjs.com/about/meet-the-team/). Sponsor Vuetify and receive some **awesome perks** and support Open Source Software at the same time! 🎉
 
 <ul>
   <li>
-    <a href="https://github.com/users/johnleider/sponsorship">Become a backer or sponsor on GitHub</a>
+    <a href="https://github.com/sponsors/johnleider">Become a backer or sponsor on GitHub</a>
   </li>
   <li>
     <a href="https://opencollective.com/vuetify">Become a backer or sponsor on Open Collective</a>
@@ -290,7 +290,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 ### 📑 License
 
-Vuetify is available under the [MIT](https://opensource.org/licenses/MIT) software license.
+Vuetify is available under the [MIT](https://opensource.org/license/MIT) software license.
 
 Copyright (c) 2016-present Vuetify, LLC
 

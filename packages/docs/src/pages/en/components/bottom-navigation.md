@@ -57,7 +57,7 @@ The **color** prop sets the color of the selected button. Use **bg-color** to co
 
 #### Grow
 
-Using the **grow** property forces [v-btn](/components/buttons/) components to _fill_ all available space. Buttons have a maximum width of **168px** per the [Bottom Navigation MD specification](https://material.io/components/bottom-navigation#specs).
+Using the **grow** property forces [v-btn](/components/buttons/) components to _fill_ all available space. Buttons have a maximum width of **168px** per the [Bottom Navigation MD specification](https://m2.material.io/components/bottom-navigation#specs).
 
 <ExamplesExample file="v-bottom-navigation/prop-grow" />
 

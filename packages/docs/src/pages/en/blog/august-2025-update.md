@@ -173,8 +173,6 @@ This move reflects our commitment to lowering barriers to entry and helping deve
 
 **Details:**
 
-* [Crypto Coin Theme](https://store.vuetifyjs.com/products/crypto-coin-theme)
-* [Flairo Theme Pro](https://store.vuetifyjs.com/products/flairo-theme-pro)
 * [Vuetify 3 Nebula UI Kit](https://store.vuetifyjs.com/products/vuetify-3-nebula-ui-kit)
 * [Zero Theme Pro](https://store.vuetifyjs.com/products/zero-theme-pro)
 * [Made by Vuetify Bundle](https://store.vuetifyjs.com/products/made-by-vuetify-bundle)

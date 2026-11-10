@@ -53,7 +53,7 @@
     { subheader: t('resources') },
     {
       title: 'awesome',
-      href: 'https://github.com/vuetifyjs/awesome-vuetify',
+      href: 'https://github.com/vuetifyjs/awesome',
       appendIcon: 'mdi-creation-outline',
     },
     {

@@ -132,7 +132,7 @@ export default createVuetify({
 })
 ```
 
-`@mdi/js` or [unplugin-icons](https://github.com/antfu/unplugin-icons) are two alternatives to get the rest of the icons that you will need in your application.
+`@mdi/js` or [unplugin-icons](https://github.com/unplugin/unplugin-icons) are two alternatives to get the rest of the icons that you will need in your application.
 
 If you want to stick with `@mdi/js`, use the SVG paths as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js) and
 only import the icons that you need.
