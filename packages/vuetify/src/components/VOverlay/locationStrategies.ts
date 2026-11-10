@@ -554,6 +554,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       props.minHeight,
       props.maxWidth,
       props.maxHeight,
+      props.noFlip,
     ],
     () => updateLocation(),
   )
