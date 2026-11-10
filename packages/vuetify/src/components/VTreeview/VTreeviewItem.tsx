@@ -49,7 +49,11 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
   },
 
   setup (props, { slots, emit }) {
-    const visibleIds = inject(VTreeviewSymbol, { visibleIds: ref() }).visibleIds
+    const { visibleIds, hoverable, hovered } = inject(VTreeviewSymbol, {
+      visibleIds: ref(),
+      hoverable: ref(false),
+      hovered: ref(),
+    })
 
     const vListItemRef = ref<VListItem>()
 
@@ -72,6 +76,10 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
       e.preventDefault()
       e.stopPropagation()
       emit('toggleExpand', e)
+    }
+
+    function onMouseenter () {
+      hovered.value = vListItemRef.value?.id
     }
 
     useRender(() => {
@@ -99,6 +107,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
           aria-busy={ props.loading || undefined }
           ripple={ false }
           onClick={ isActivatable.value ? activateGroupActivator : undefined }
+          onMouseenter={ hoverable.value ? onMouseenter : undefined }
         >
           {{
             ...slots,
