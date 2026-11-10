@@ -284,7 +284,7 @@ The following are the already released **minor** and **major** version updates. 
 - **Released:** October 2022
 - **Notes:** [v3.0 Release](/getting-started/release-notes/?version=v3.0.0)
 - **Overview:**
-  - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
+  - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.app/)
   - Global properties that allow you to make large overarching changes to your app
   - Improved SASS variable customization and extensibility with [Built-In Modules](https://sass-lang.com/documentation/modules)
   - New [Vue CLI presets](https://github.com/vuetifyjs/vue-cli-plugins) for generating pre-built starting projects
