@@ -853,6 +853,11 @@
       "prop-scrollable": "4.3.0"
     }
   },
+  "VTimePickerClock": {
+    "props": {
+      "viewMode": "4.4.0"
+    }
+  },
   "VTreeview": {
     "props": {
       "ignoreAccents": "4.2.0",
