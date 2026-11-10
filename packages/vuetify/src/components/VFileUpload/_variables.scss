@@ -3,6 +3,7 @@
 @use '../../styles/settings';
 
 $file-upload-title-font-size: 1.5rem !default;
+$file-upload-title-font-weight: 600 !default;
 $file-upload-subtitle-font-size: map.get(settings.$typography, 'body-medium', 'size') !default;
 $file-upload-subtitle-margin-top: .5rem !default;
 $file-upload-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
