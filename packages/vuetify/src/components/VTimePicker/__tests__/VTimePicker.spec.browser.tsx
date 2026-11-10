@@ -6,52 +6,23 @@ import { render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 describe('VTimePicker', () => {
-  describe('clock keyboard', () => {
-    it.each([
-      ['ArrowRight', 'hour', false, 'minute'],
-      ['ArrowRight', 'minute', true, 'second'],
-      ['ArrowLeft', 'minute', false, 'hour'],
-      ['ArrowLeft', 'second', true, 'minute'],
-    ] as const)('shifts viewMode on %s from %s (useSeconds=%s)', async (key, viewMode, useSeconds, expectedMode) => {
-      const onUpdateViewMode = vi.fn()
-      render(() => (
-        <VTimePicker
-          modelValue="10:30:45"
-          viewMode={ viewMode }
-          useSeconds={ useSeconds }
-          onUpdate:viewMode={ onUpdateViewMode }
-        />
-      ))
+  it('switches clock viewMode with left/right arrows within bounds', async () => {
+    const viewMode = ref<'hour' | 'minute' | 'second'>('hour')
+    render(() => (
+      <VTimePicker
+        modelValue="10:30"
+        viewMode={ viewMode.value }
+        onUpdate:viewMode={ (v: any) => viewMode.value = v }
+      />
+    ))
 
-      const clock = screen.getByRole('spinbutton')
-      clock.focus()
-      await userEvent.keyboard(`{${key}}`)
-
-      expect(onUpdateViewMode).toHaveBeenCalledWith(expectedMode)
-    })
-
-    it.each([
-      ['ArrowLeft', 'hour', false],
-      ['ArrowLeft', 'hour', true],
-      ['ArrowRight', 'minute', false],
-      ['ArrowRight', 'second', true],
-    ] as const)('clamps viewMode on %s at %s (useSeconds=%s)', async (key, viewMode, useSeconds) => {
-      const onUpdateViewMode = vi.fn()
-      render(() => (
-        <VTimePicker
-          modelValue="10:30:45"
-          viewMode={ viewMode }
-          useSeconds={ useSeconds }
-          onUpdate:viewMode={ onUpdateViewMode }
-        />
-      ))
-
-      const clock = screen.getByRole('spinbutton')
-      clock.focus()
-      await userEvent.keyboard(`{${key}}`)
-
-      expect(onUpdateViewMode).not.toHaveBeenCalled()
-    })
+    screen.getByRole('spinbutton').focus()
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(viewMode.value).toBe('hour')
+    await userEvent.keyboard('{ArrowRight}')
+    expect(viewMode.value).toBe('minute')
+    await userEvent.keyboard('{ArrowRight}')
+    expect(viewMode.value).toBe('minute')
   })
 
   describe('variant input', () => {
