@@ -7,6 +7,7 @@
     "filteredOrder": "Order of the matching items while searching. `none` keeps the order of **items**. `prefix` puts exact matches first, then items with a value starting with the search, then those with a word starting with it, then the rest. Every key in **filter-keys** counts, including ones that are not displayed; within a tier, a match in an earlier key wins. Remaining ties keep their order and items never move past a divider or subheader. Has no effect with **no-filter**.",
     "itemChildren": "This property currently has **no effect**.",
     "items": "Can be an array of objects or strings. By default objects should have **title** and **value** properties, and can optionally have a **props** property containing any [VListItem props](/api/v-list-item/#props). Keys to use for these can be changed with the **item-title**, **item-value**, and **item-props** props.",
+    "mandatory": "Prevents user interactions from removing the last selected item. Does not select an initial item or prevent external model resets.",
     "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side."
   },
   "slots": {
