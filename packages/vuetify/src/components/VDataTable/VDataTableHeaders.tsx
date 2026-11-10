@@ -135,7 +135,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         case 'desc': return props.sortDescIcon
         default: return props.sortIcon ||
           (
-            props.initialSortOrder === 'asc'
+            (column.initialSortOrder ?? props.initialSortOrder) === 'asc'
               ? props.sortAscIcon
               : props.sortDescIcon
           )
