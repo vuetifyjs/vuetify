@@ -90,6 +90,9 @@ export default {
     less: '少ない',
     more: '多い',
   },
+  vPie: {
+    other: 'その他',
+  },
   input: {
     clear: 'クリア {0}',
     prependAction: '{0} の前に追加されたアクション',

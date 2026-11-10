@@ -90,6 +90,9 @@ export default {
     less: '적음',
     more: '많음',
   },
+  vPie: {
+    other: '기타',
+  },
   input: {
     clear: '{0} 지우기',
     prependAction: '{0} 앞에 추가된 동작',

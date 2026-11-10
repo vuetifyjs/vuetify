@@ -90,6 +90,9 @@ export default {
     less: 'Manj',
     more: 'Več',
   },
+  vPie: {
+    other: 'Drugo',
+  },
   input: {
     clear: 'Počisti {0}',
     prependAction: 'Dejanje pred {0}',

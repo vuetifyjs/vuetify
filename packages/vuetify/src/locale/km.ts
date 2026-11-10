@@ -90,6 +90,9 @@ export default {
     less: 'តិច',
     more: 'ច្រើន',
   },
+  vPie: {
+    other: 'ផ្សេងៗ',
+  },
   input: {
     clear: 'សម្អាត {0}',
     prependAction: '{0} សម្អាតសកម្ម',

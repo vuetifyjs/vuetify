@@ -90,6 +90,9 @@ export default {
     less: 'Kurang',
     more: 'Lebih',
   },
+  vPie: {
+    other: 'Lainnya',
+  },
   input: {
     clear: 'Bersihkan {0}',
     prependAction: '{0} aksi diawal',

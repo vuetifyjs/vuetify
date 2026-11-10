@@ -90,6 +90,9 @@ export default {
     less: '少',
     more: '多',
   },
+  vPie: {
+    other: '其他',
+  },
   input: {
     clear: '清除 {0}',
     prependAction: '{0} 前置操作',

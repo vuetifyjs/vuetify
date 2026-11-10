@@ -90,6 +90,9 @@ export default {
     less: 'Menej',
     more: 'Viac',
   },
+  vPie: {
+    other: 'Ostatné',
+  },
   input: {
     clear: 'Vymazať {0}',
     prependAction: 'Akcia pred {0}',
