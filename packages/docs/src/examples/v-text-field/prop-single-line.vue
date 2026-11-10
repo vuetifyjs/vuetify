@@ -18,8 +18,8 @@
         >
           <v-text-field
             label="Solo"
-            variant="solo"
             label-variant="single-line"
+            variant="solo"
           ></v-text-field>
         </v-col>
 
@@ -29,8 +29,8 @@
         >
           <v-text-field
             label="Filled"
-            variant="filled"
             label-variant="single-line"
+            variant="filled"
           ></v-text-field>
         </v-col>
 
@@ -40,8 +40,8 @@
         >
           <v-text-field
             label="Outlined"
-            variant="outlined"
             label-variant="single-line"
+            variant="outlined"
           ></v-text-field>
         </v-col>
       </v-row>

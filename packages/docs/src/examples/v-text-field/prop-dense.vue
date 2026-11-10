@@ -10,9 +10,9 @@
         append-inner-icon="mdi-magnify"
         density="compact"
         label="Search templates"
+        label-variant="single-line"
         variant="solo"
         hide-details
-        label-variant="single-line"
         @click:append-inner="onClick"
       ></v-text-field>
     </v-card-text>
