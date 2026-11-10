@@ -12,7 +12,7 @@ features:
   github: /components/VDivider/
   label: 'C: VDivider'
   report: true
-  spec: https://m3.material.io/components/dividers
+  spec: https://m3.material.io/components/divider
 ---
 
 # Dividers

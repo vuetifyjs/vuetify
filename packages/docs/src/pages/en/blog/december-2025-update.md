@@ -508,11 +508,11 @@ With these additions, v0 now provides production-ready primitives for building a
 
 December added five composables covering pagination, virtualization, and UI utilities:
 
-**[usePagination](https://0.vuetifyjs.com/composables/utilities/use-pagination/)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
+**[usePagination](https://0.vuetifyjs.com/composables/data/create-pagination)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
 
-**[useVirtual](https://0.vuetifyjs.com/composables/utilities/use-virtual/)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
+**[useVirtual](https://0.vuetifyjs.com/composables/data/create-virtual)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
 
-**[useOverflow](https://0.vuetifyjs.com/composables/utilities/use-overflow/)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
+**[useOverflow](https://0.vuetifyjs.com/composables/semantic/create-overflow)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
 
 **[useClickOutside](https://0.vuetifyjs.com/composables/system/use-click-outside/)** — Click outside detection for closing menus, dialogs, and popovers. Handles edge cases like portaled content and nested overlays.
 
@@ -567,10 +567,10 @@ The v0 documentation at [0.vuetifyjs.com](https://0.vuetifyjs.com/) now includes
 **Details:**
 
 * [Vuetify0 Documentation](https://0.vuetifyjs.com/)
-* [useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)
-* [usePagination](https://0.vuetifyjs.com/composables/use-pagination/)
-* [useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)
-* [useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)
+* [useVirtual](https://0.vuetifyjs.com/composables/data/create-virtual)
+* [usePagination](https://0.vuetifyjs.com/composables/data/create-pagination)
+* [useOverflow](https://0.vuetifyjs.com/composables/semantic/create-overflow)
+* [useClickOutside](https://0.vuetifyjs.com/composables/system/use-click-outside)
 * [v0.0.15](https://github.com/vuetifyjs/0/releases/tag/v0.0.15)–[v0.0.18](https://github.com/vuetifyjs/0/releases/tag/v0.0.18), [v0.0.20](https://github.com/vuetifyjs/0/releases/tag/v0.0.20)–[v0.0.21](https://github.com/vuetifyjs/0/releases/tag/v0.0.21)
 
 ---
