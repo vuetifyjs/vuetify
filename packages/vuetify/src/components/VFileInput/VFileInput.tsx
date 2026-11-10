@@ -361,6 +361,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                         onPaste={ onPaste }
                         { ...slotProps }
                         { ...inputAttrs }
+                        required={ props.required }
                       />
 
                       { showPlaceholder

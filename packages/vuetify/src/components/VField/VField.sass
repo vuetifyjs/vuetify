@@ -77,7 +77,8 @@
 
     &--variant-outlined,
     &--single-line,
-    &--no-label
+    &--no-label,
+    &--label-adjacent
       --v-field-padding-top: 0px
       $root: &
 
@@ -282,9 +283,39 @@
     .v-field--error:not(.v-field--disabled) &
       color: rgb(var(--v-theme-error))
 
-    &--floating
+    .v-field-label__asterisk
+      color: rgb(var(--v-theme-error))
+      padding-inline-start: $field-label-asterisk-gap
+
+    &--floating,
+    &--adjacent
       --v-field-label-scale: #{$field-label-floating-scale}em
       font-size: var(--v-field-label-scale)
+
+    &--adjacent
+      bottom: calc(100% + #{$field-label-adjacent-gap})
+      inset-inline: 0
+      margin: 0
+      max-width: 100%
+      pointer-events: auto
+      top: auto
+      width: auto
+
+      .v-field--center-affix &,
+      .v-field--variant-underlined &,
+      .v-field--variant-plain &
+        top: auto
+
+      .v-field--center-affix &
+        transform: none
+
+      .v-field--active &
+        visibility: visible
+
+      .v-field--reverse &
+        text-align: end
+
+    &--floating
       visibility: hidden
 
       .v-field--variant-outlined &
@@ -293,7 +324,8 @@
       .v-field--center-affix &
         transform: none
 
-      .v-field.v-field--active &
+      .v-field.v-field--active &,
+      .v-field.v-field--label-fixed &
         visibility: unset
 
       .v-field--variant-solo &,
@@ -318,6 +350,12 @@
         transform-origin: center
         position: static
         margin: 0 4px
+
+  .v-field--label-adjacent
+    margin-top: $field-label-adjacent-margin
+
+  .v-input--horizontal:has(> .v-input__control > .v-field--label-adjacent)
+    --v-field-label-adjacent-margin: #{$field-label-adjacent-margin}
 
   /* endregion */
   /* region OUTLINE */
@@ -433,6 +471,10 @@
           border-width: 0 0 var(--v-field-border-width)
 
         @at-root #{selector.append('.v-field--active', &)}
+          &::before
+            opacity: 0
+
+        @at-root #{selector.append('.v-field--label-fixed', &)}
           &::before
             opacity: 0
 

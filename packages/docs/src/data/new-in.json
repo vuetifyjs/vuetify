@@ -381,7 +381,9 @@
   "VField": {
     "props": {
       "iconColor": "3.8.0",
-      "glow": "3.8.0"
+      "glow": "3.8.0",
+      "labelVariant": "4.4.0",
+      "required": "4.4.0"
     }
   },
   "VFileInput": {
@@ -825,7 +827,12 @@
   },
   "VTextField": {
     "props": {
-      "autocomplete": "3.10.0"
+      "autocomplete": "3.10.0",
+      "labelVariant": "4.3.0",
+      "required": "4.3.0"
+    },
+    "examples": {
+      "prop-label-variant": "4.3.0"
     }
   },
   "VTimePicker": {

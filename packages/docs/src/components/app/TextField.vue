@@ -6,7 +6,7 @@
     variant="outlined"
     hide-details
     persistent-placeholder
-    single-line
+    label-variant="single-line"
   >
     <template v-if="$slots['append-inner']" #append-inner>
       <slot name="append-inner" />

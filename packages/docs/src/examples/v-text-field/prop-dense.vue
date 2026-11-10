@@ -12,7 +12,7 @@
         label="Search templates"
         variant="solo"
         hide-details
-        single-line
+        label-variant="single-line"
         @click:append-inner="onClick"
       ></v-text-field>
     </v-card-text>

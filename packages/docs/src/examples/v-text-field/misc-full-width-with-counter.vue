@@ -9,7 +9,7 @@
       hide-no-data
       hide-selected
       multiple
-      single-line
+      label-variant="single-line"
     ></v-autocomplete>
 
     <v-divider></v-divider>
@@ -18,7 +18,7 @@
       v-model="subject"
       label="Subject"
       hide-details
-      single-line
+      label-variant="single-line"
     ></v-text-field>
 
     <v-divider></v-divider>
@@ -28,7 +28,7 @@
       label="Message"
       maxlength="120"
       counter
-      single-line
+      label-variant="single-line"
     ></v-textarea>
   </v-form>
 </template>

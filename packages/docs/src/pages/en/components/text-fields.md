@@ -77,6 +77,12 @@ The following code snippet is an example of a simple form for for collecting a u
 
 <ExamplesExample file="v-text-field/prop-label" />
 
+**label-variant** changes where that label sits. `float` matches the usual floating label. `fixed` keeps the label in the floated position. `single-line` and `inline` leave it inside the field until the field is focused or has a value. `adjacent` and `above` place it above the field, where it still follows focus and error. The **single-line** prop is deprecated in favor of `label-variant="single-line"`.
+
+**required** appends an asterisk to the label and sets the native `required` attribute. A custom **label** slot receives `required` and can draw its own indicator.
+
+<ExamplesExample file="v-text-field/prop-label-variant" />
+
 #### Placeholders
 
 Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label](#labeling) or [hint](#hint) properties.

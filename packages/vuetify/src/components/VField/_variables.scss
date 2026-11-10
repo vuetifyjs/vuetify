@@ -3,6 +3,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 @use '../VInput/variables' as *;
+@use '../VLabel/variables' as label;
 
 // INPUT
 $field-border-radius: settings.$border-radius-root !default;
@@ -44,6 +45,9 @@ $field-input-row-gap: 8px !default;
 
 // LABEL
 $field-label-floating-scale: .75 !default;
+$field-label-adjacent-gap: 4px !default;
+$field-label-adjacent-margin: calc(#{label.$label-font-size} * #{$input-line-height} + #{$field-label-adjacent-gap}) !default;
+$field-label-asterisk-gap: 2px !default;
 
 // OUTLINE
 $field-outline-opacity: .38 !default;
