@@ -1,0 +1,41 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-date-time-input input
+    direction: ltr
+
+  // the mask reads its direction off the nearest locale provider, a descendant selector would miss it
+  .v-date-time-input--rtl
+    input
+      padding-inline-end: var(--v-date-time-input-hint-width)
+      text-align: right
+
+    .v-date-time-input__overlay
+      justify-content: flex-end
+
+  .v-date-time-input__overlay
+    align-items: center
+    direction: ltr
+    display: flex
+    inset: 0
+    padding: inherit
+    pointer-events: none
+    position: absolute
+    user-select: none
+    white-space: pre
+
+  .v-date-time-input__segment
+    border-radius: $date-time-input-segment-border-radius
+    color: transparent
+
+    &--active
+      background: $date-time-input-segment-active-background
+      box-shadow: inset 0 calc(-1 * #{$date-time-input-segment-underline-width}) 0 $date-time-input-segment-underline-color
+
+  .v-date-time-input__format-hint
+    opacity: var(--v-disabled-opacity)
+
+  @media (forced-colors: active)
+    .v-date-time-input__segment--active
+      outline: 1px solid highlight

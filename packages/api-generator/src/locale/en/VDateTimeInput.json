@@ -1,0 +1,19 @@
+{
+  "description": "Combines a text field with a date picker and a time picker.",
+  "props": {
+    "allowedDates": "Restricts which dates can be selected or typed.",
+    "datePickerProps": "Props passed to the date picker, such as `first-day-of-week` or `show-week`.",
+    "defaultTime": "Time as a 24-hour `HH:mm` string used when only the date is picked or typed.",
+    "format": "Hour cycle used for typing and display, `ampm` or `24hr`. Falls back to the hour cycle of the current locale.",
+    "hideActions": "Hide the Cancel and OK buttons, and automatically update the value when a date or time is selected.",
+    "inputFormat": "Format of the date part for manual input. Use yyyy, mm, dd with separators '.', '-', '/' (e.g. 'yyyy-mm-dd', 'dd/mm/yyyy').",
+    "location": "Specifies the picker's location. Can combine by using a space separated string.",
+    "max": "Latest selectable date and time as a `YYYY-MM-DDTHH:mm` string. A date without a time means the end of that day. The time picker applies it only on the day of **max**.",
+    "menu": "Controls the picker menu. `date` or `time` opens that picker, `true` opens the date picker.",
+    "min": "Earliest selectable date and time as a `YYYY-MM-DDTHH:mm` string. A date without a time means the start of that day. The time picker applies it only on the day of **min**.",
+    "modelValue": "The selected date and time as a local `YYYY-MM-DDTHH:mm` string, the same as the value of a native `datetime-local` input. It does not depend on the date adapter. Values with a time zone or offset are rejected.",
+    "openOnFocus": "Open the picker menu when the input receives focus.",
+    "timePickerProps": "Props passed to the time picker, such as `scrollable`.",
+    "updateOn": "Specifies when the text input should update the model value. If empty, the text field will go into read-only state."
+  }
+}

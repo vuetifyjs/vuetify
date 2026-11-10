@@ -387,6 +387,7 @@ export function useDateFormat (props: DateFormatProps, locale: Ref<string>, isRt
     maskDate,
     parseDate,
     formatDate,
+    segments,
     separator: toRef(() => currentFormat.value.separator),
     parserFormat: toRef(() => mirrorRtl(hintTokens.value.map(token => token.text).join(''))),
   }

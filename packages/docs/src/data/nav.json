@@ -294,6 +294,10 @@
         "subfolder": "components"
       },
       {
+        "title": "date-time-inputs",
+        "subfolder": "components"
+      },
+      {
         "title": "heatmaps",
         "subfolder": "components"
       },
