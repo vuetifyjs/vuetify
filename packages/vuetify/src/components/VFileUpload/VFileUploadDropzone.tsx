@@ -48,6 +48,7 @@ export type VFileUploadDropzoneSlots = {
   }
   icon: never
   title: never
+  subtitle: never
   divider: never
   single: {
     file: File
@@ -128,7 +129,8 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     const vSheetRef = ref<VSheet>()
     const isDragging = shallowRef(false)
     const hasTitle = toRef(() => !!(slots.title || props.title))
-    const hasContent = toRef(() => hasTitle.value || !!props.subtitle)
+    const hasSubtitle = toRef(() => !!(slots.subtitle || props.subtitle))
+    const hasContent = toRef(() => hasTitle.value || hasSubtitle.value)
     const isDisabled = toRef(() => context?.disabled.value ?? props.disabled)
     const isReadonly = toRef(() => context?.readonly.value ?? props.readonly)
     const isInteractive = toRef(() => !isDisabled.value && !isReadonly.value)
@@ -204,6 +206,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       }
     }
 
+    // eslint-disable-next-line complexity
     useRender(() => {
       const modelValue = context?.files.value ?? props.modelValue
       const disabled = isDisabled.value
@@ -363,9 +366,9 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                     </div>
                   )}
 
-                  { props.subtitle && (
+                  { hasSubtitle.value && (
                     <div key="subtitle" class="v-file-upload-subtitle">
-                      { props.subtitle }
+                      { slots.subtitle?.() ?? props.subtitle }
                     </div>
                   )}
                 </div>

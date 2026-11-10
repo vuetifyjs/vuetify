@@ -402,7 +402,8 @@
       "loading": "4.1.0"
     },
     "slots": {
-      "loader": "4.1.0"
+      "loader": "4.1.0",
+      "subtitle": "4.4.0"
     },
     "examples": {
       "prop-loading": "4.1.0"
