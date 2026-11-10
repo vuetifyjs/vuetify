@@ -180,7 +180,7 @@ export default {
     backspace: '백스페이스',
     space: '스페이스',
     plus: '플러스',
-    shortcut: '키보드 단축키: {0}',
+    shortcut: '키보드 단축키, {0}',
     or: '또는',
   },
   media: {

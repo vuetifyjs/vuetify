@@ -40,7 +40,7 @@ describe('range selection with time zone', () => {
 
   afterEach(() => vi.unstubAllEnvs())
 
-  function renderWithVModel (initialValue: string[]) {
+  function renderWithVModel (initialValue: unknown[]) {
     const update = vi.fn()
     const modelValue = ref<readonly unknown[]>(initialValue)
     update.mockImplementation((v: unknown[]) => { modelValue.value = v })
@@ -72,5 +72,17 @@ describe('range selection with time zone', () => {
     const btn2 = await wrapper.findByText('3') as HTMLElement
     btn2.click()
     expect(update).toHaveBeenNthCalledWith(2, [new Date('2025-10-02T04:00:00.000Z'), new Date('2025-10-04T03:59:59.999Z')])
+  })
+
+  it('should count the days in the header near ST/DST transition', async () => {
+    renderWithVModel(['2025-03-08', '2025-03-10'])
+
+    expect(document.querySelector('.v-date-picker-header__content')?.textContent).toBe('3 selected')
+  })
+
+  it('should count the days in the header near DST/ST transition', async () => {
+    renderWithVModel([new Date(2025, 10, 1), new Date(2025, 10, 2, 23, 59, 59, 999)])
+
+    expect(document.querySelector('.v-date-picker-header__content')?.textContent).toBe('2 selected')
   })
 })

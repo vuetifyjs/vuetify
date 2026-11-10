@@ -30,7 +30,7 @@
         >
           <v-icon class="opacity-60" icon="$loading"></v-icon>
           <div>
-            <div class="font-weight-bold mb-1">Connection timout</div>
+            <div class="font-weight-bold mb-1">Connection timeout</div>
             <div class="text-body-medium">Tap to reload</div>
           </div>
         </div>

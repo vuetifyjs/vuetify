@@ -124,7 +124,7 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
   const hasNullItem = computed(() => items.value.some(item => isNull(item.value)))
 
-  const itemsMap = shallowRef<Map<Primitive, ListItem[]>>(new Map())
+  const itemsMap = shallowRef<Map<Primitive, ListItem>>(new Map())
   const keylessItems = shallowRef<ListItem[]>([])
   watchEffect(() => {
     const _items = items.value
@@ -133,12 +133,7 @@ export function useItems (props: ItemProps) {
     for (let i = 0; i < _items.length; i++) {
       const item = _items[i]
       if (isPrimitive(item.value) || isNull(item.value)) {
-        let values = map.get(item.value)
-        if (!values) {
-          values = []
-          map.set(item.value, values)
-        }
-        values.push(item)
+        if (!map.has(item.value)) map.set(item.value, item)
       } else {
         keyless.push(item)
       }
@@ -175,12 +170,12 @@ export function useItems (props: ItemProps) {
       // Fast path, items with primitive values and no
       // custom valueComparator can use a constant-time
       // map lookup instead of searching the items array
-      const fastItems = _items.get(v)
+      const fastItem = _items.get(v)
 
       // Slow path, always use valueComparator.
       // This is O(n^2) so we really don't want to
       // do it for more than a couple hundred items.
-      if (hasValueComparator || !fastItems) {
+      if (hasValueComparator || !fastItem) {
         for (const item of (hasValueComparator ? _allItems : _keylessItems)) {
           if (valueComparator(v, item.value)) {
             returnValue.push(item)
@@ -192,7 +187,7 @@ export function useItems (props: ItemProps) {
         continue
       }
 
-      returnValue.push(...fastItems)
+      returnValue.push(fastItem)
     }
 
     return returnValue

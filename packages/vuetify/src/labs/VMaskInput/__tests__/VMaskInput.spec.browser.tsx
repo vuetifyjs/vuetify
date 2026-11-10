@@ -32,6 +32,20 @@ describe('VMaskInput', () => {
     expect(inputValue.value).toBe('(456) 7')
   })
 
+  it('keeps selected text when typing a character the mask rejects', async () => {
+    const model = ref('4567')
+    render(() => <VMaskInput v-model={ model.value } mask="(###) #" />)
+    const input = screen.getByCSS('input') as HTMLInputElement
+    await userEvent.click(input)
+    input.select()
+    await userEvent.keyboard('r')
+    expect(input.value).toBe('(456) 7')
+    expect(model.value).toBe('4567')
+
+    await userEvent.keyboard('1')
+    expect(model.value).toBe('1')
+  })
+
   it('should clear the input when clear icon is clicked', async () => {
     const inputValue = ref('(456) 7')
 

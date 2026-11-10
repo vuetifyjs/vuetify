@@ -53,11 +53,11 @@ Masks are created using a combination of special tokens that define the allowed 
 
 | Token | Description |
 |-------|-------------|
-| # | Any digit |
-| A | Any capital letter |
-| a | Any small letter |
-| N | Any capital alphanumeric character |
-| n | Any small alphanumeric character |
+| # | Digit (0-9) |
+| A | Latin letter (A-Z), converted to uppercase |
+| a | Latin letter (a-z), converted to lowercase |
+| N | Digit or Latin letter, converted to uppercase |
+| n | Digit or Latin letter, converted to lowercase |
 | X | Any special symbol (-!$%^&*()_+ &#124;~=`{}[]:";'<>?,./\) or space |
 
 ### Built-in Masks

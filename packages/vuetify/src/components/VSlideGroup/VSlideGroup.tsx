@@ -48,6 +48,9 @@ import type { GoToOptions } from '@/composables/goto'
 import type { GroupProvide } from '@/composables/group'
 import type { GenericProps } from '@/util'
 
+const DRAG_THRESHOLD = 4
+const OVERSCROLL_RESISTANCE = 50
+
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
 interface SlideGroupSlot {
@@ -71,6 +74,7 @@ export type VSlideGroupSlots = {
 
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
+  draggable: Boolean,
   scrollDistance: {
     type: [String, Number],
     default: '100%',
@@ -207,6 +211,8 @@ export const VSlideGroup = genericComponent<new <T>(
     }
 
     const isFocused = shallowRef(false)
+    const isDragging = shallowRef(false)
+    const overscroll = shallowRef(0)
 
     function scrollToChildren (children: HTMLElement, center?: boolean) {
       if (props.scrollSnap) {
@@ -254,7 +260,7 @@ export const VSlideGroup = genericComponent<new <T>(
         const el = containerRef.el
         el.style.scrollSnapType = 'none'
         activeAnimations++
-        scrolling.finally(() => --activeAnimations || (el.style.scrollSnapType = ''))
+        scrolling.finally(() => --activeAnimations || isDragging.value || (el.style.scrollSnapType = ''))
       }
     }
 
@@ -466,6 +472,84 @@ export const VSlideGroup = genericComponent<new <T>(
       scrollToPosition(nextPosition)
     }
 
+    let dragOrigin: { coordinate: number, position: number } | null = null
+    let hasDragged = false
+
+    function getCoordinate (e: PointerEvent) {
+      return isHorizontal.value ? e.clientX : e.clientY
+    }
+
+    function onPointerdown (e: PointerEvent) {
+      hasDragged = false
+      if (!props.draggable || e.pointerType !== 'mouse' || e.button !== 0 || !isOverflowing.value) return
+
+      dragOrigin = {
+        coordinate: getCoordinate(e),
+        position: isHorizontal.value ? containerRef.el!.scrollLeft : containerRef.el!.scrollTop,
+      }
+    }
+
+    function onPointermove (e: PointerEvent) {
+      if (!dragOrigin) return
+      if (!(e.buttons & 1)) return onPointerup(e)
+
+      const delta = getCoordinate(e) - dragOrigin.coordinate
+
+      if (!isDragging.value) {
+        if (Math.abs(delta) < DRAG_THRESHOLD) return
+
+        isDragging.value = true
+        hasDragged = true
+        containerRef.el!.setPointerCapture(e.pointerId)
+        if (props.scrollSnap) containerRef.el!.style.scrollSnapType = 'none'
+      }
+
+      const el = containerRef.el!
+      const property = isHorizontal.value ? 'scrollLeft' : 'scrollTop'
+      const target = dragOrigin.position - delta
+      el[property] = target
+      const overflow = el[property] - target
+      overscroll.value = overflow / (Math.abs(overflow) + OVERSCROLL_RESISTANCE)
+    }
+
+    function onPointerup (e: PointerEvent) {
+      if (isDragging.value && props.scrollSnap && containerRef.el) {
+        const delta = getCoordinate(e) - dragOrigin!.coordinate
+        const step = Math.sign(isHorizontal.value && isRtl.value ? delta : -delta)
+
+        // Snap areas include transforms, so restoring snap mid-overscroll would snap to the shifted items
+        const settling = !!overscroll.value && getComputedStyle(contentRef.el!).translate !== 'none'
+
+        // A 1px step lands on the next snap point in the drag direction
+        if (step) slide({ by: step })
+        if (!settling) restoreSnap()
+      }
+
+      dragOrigin = null
+      isDragging.value = false
+      overscroll.value = 0
+    }
+
+    function onTransitionend (e: TransitionEvent) {
+      if (e.target === e.currentTarget && e.propertyName === 'translate' && !isDragging.value) restoreSnap()
+    }
+
+    function restoreSnap () {
+      if (!activeAnimations && containerRef.el) containerRef.el.style.scrollSnapType = ''
+    }
+
+    function onDragstart (e: DragEvent) {
+      if (dragOrigin) e.preventDefault()
+    }
+
+    function onClickCapture (e: MouseEvent) {
+      if (!hasDragged) return
+
+      hasDragged = false
+      e.preventDefault()
+      e.stopPropagation()
+    }
+
     const slotProps = computed(() => ({
       next: group.next,
       prev: group.prev,
@@ -540,6 +624,8 @@ export const VSlideGroup = genericComponent<new <T>(
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
             'v-slide-group--snap': !!props.scrollSnap,
+            'v-slide-group--draggable': props.draggable && isOverflowing.value,
+            'v-slide-group--dragging': isDragging.value,
           },
           displayClasses.value,
           props.class,
@@ -584,15 +670,23 @@ export const VSlideGroup = genericComponent<new <T>(
             scrollPadding: padding.value.shorthand,
           }}
           onScroll={ onScroll }
+          onPointerdown={ onPointerdown }
+          onPointermove={ onPointermove }
+          onPointerup={ onPointerup }
+          onPointercancel={ onPointerup }
+          onDragstart={ onDragstart }
+          onClickCapture={ onClickCapture }
         >
           <div
             ref={ contentRef }
             class="v-slide-group__content"
             style={{
               gap: convertToUnit(props.gap),
+              '--v-slide-group-overscroll': overscroll.value,
               padding: padding.value.shorthand,
             }}
             onFocusin={ onFocusin }
+            onTransitionend={ onTransitionend }
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
           >

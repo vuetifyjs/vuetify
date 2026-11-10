@@ -310,7 +310,15 @@
         "subfolder": "components"
       },
       {
+        "title": "maps",
+        "subfolder": "components"
+      },
+      {
         "title": "month-pickers",
+        "subfolder": "components"
+      },
+      {
+        "title": "navigation-buttons",
         "subfolder": "components"
       },
       {

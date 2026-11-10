@@ -6,6 +6,7 @@ import { VMain } from '@/components/VMain'
 
 // Utilities
 import { commands, page, render, screen, showcase, userEvent } from '@test'
+import { onTestFinished } from 'vitest'
 import { ref } from 'vue'
 
 const stories = {
@@ -256,6 +257,37 @@ describe('VNavigationDrawer', () => {
 
     await expect.element(screen.getByCSS('.v-navigation-drawer')).toBeInViewport()
     await expect.element(screen.getByCSS('.v-navigation-drawer__scrim')).toBeInViewport()
+  })
+
+  it('should not slide across the screen when switching direction while closed', async () => {
+    await commands.setReduceMotionDisabled()
+    onTestFinished(() => commands.setReduceMotionEnabled())
+
+    const rtl = ref(false)
+
+    render(() => (
+      <VLocaleProvider rtl={ rtl.value }>
+        <VLayout>
+          <VNavigationDrawer temporary />
+        </VLayout>
+      </VLocaleProvider>
+    ))
+
+    const drawer = screen.getByCSS('.v-navigation-drawer')
+    await expect.poll(() => getComputedStyle(drawer).transitionDuration).not.toBe('0s')
+
+    rtl.value = true
+
+    const lefts = await new Promise<number[]>(resolve => {
+      const samples: number[] = []
+      function sample () {
+        samples.push(drawer.getBoundingClientRect().left)
+        samples.length < 20 ? requestAnimationFrame(sample) : resolve(samples)
+      }
+      requestAnimationFrame(sample)
+    })
+
+    expect(lefts.every(left => left >= window.innerWidth)).toBe(true)
   })
 
   showcase({ stories })

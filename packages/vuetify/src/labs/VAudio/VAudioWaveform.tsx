@@ -11,11 +11,12 @@ import { useElementSize } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, inject, onBeforeUnmount, shallowRef, toRef, watch } from 'vue'
-import { decodePeaks, downsamplePeaks, normalizePeaks } from './peaks'
+import { decodePeaks, downsamplePeaks, normalizePeaks, spectrumBands } from './peaks'
 import { VAudioSymbol } from './shared'
 import {
   clamp,
   consoleWarn,
+  convertToUnit,
   easingPatterns,
   genericComponent,
   IN_BROWSER,
@@ -30,6 +31,7 @@ import {
 // Types
 import type { PropType } from 'vue'
 import type { SampleStrategy } from './peaks'
+import type { AudioGraph } from './shared'
 import type { VMediaProgressBarSlots } from '@/labs/VMediaProgressBar/VMediaProgressBar'
 
 export type VAudioWaveformSlots = {
@@ -39,6 +41,12 @@ export type VAudioWaveformSlots = {
 const RISE_DURATION = 400
 const RISE_STAGGER = 400
 const LIVE_INTERVAL = 66
+const SPECTRUM_AVERAGE = 0.05
+const SPECTRUM_SWING = 0.16
+const SPECTRUM_GATE = 0.25
+const SPECTRUM_RISE = 0.3
+const SPECTRUM_FALL = 0.08
+const SPECTRUM_SETTLED = 0.002
 
 export const makeVAudioWaveformProps = propsFactory({
   peaks: Array as PropType<readonly number[]>,
@@ -65,7 +73,7 @@ export const makeVAudioWaveformProps = propsFactory({
     default: 'peak',
   },
   mirror: [Boolean, Number, String],
-  live: Boolean,
+  live: [Boolean, String] as PropType<boolean | 'spectrum'>,
 
   ...omit(makeVMediaProgressBarProps({ height: 32 }), ['variant']),
 }, 'VAudioWaveform')
@@ -85,11 +93,15 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
     const audio = inject(VAudioSymbol, null)
     const model = useProxiedModel(props, 'modelValue')
     const { textColorClasses: bgColorClasses, textColorStyles: bgColorStyles } = useTextColor(() => props.bgColor)
+    const { textColorClasses, textColorStyles } = useTextColor(() => props.color)
     const resizeRef = templateRef()
     const { width } = useElementSize(() => resizeRef.el)
 
     const decoded = shallowRef<number[]>()
     const history = shallowRef<number[]>([])
+    const levels = shallowRef<number[]>([])
+    const spectrum = toRef(() => props.live === 'spectrum')
+    const sampling = toRef(() => !!props.live && !!audio?.playing.value && !(spectrum.value && PREFERS_REDUCED_MOTION()))
 
     const barWidth = toRef(() => Math.max(0.5, Number(props.barWidth) || 1))
     const barGap = toRef(() => Math.max(0, Number(props.barGap) || 0))
@@ -100,8 +112,14 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
       ? Math.max(1, Number(props.bars) || 1)
       : Math.floor((width.value + barGap.value) / (barWidth.value + barGap.value)))
 
+    const resting = computed(() => props.peaks?.length
+      ? downsamplePeaks(props.peaks, barCount.value, props.sampleStrategy).map(v => clamp(v, 0, 1))
+      : Array.from({ length: barCount.value }, () => 0))
+
     const bars = computed(() => {
-      const source = props.live ? history.value : props.peaks ?? decoded.value
+      const source = spectrum.value
+        ? levels.value.length ? levels.value : resting.value
+        : props.live ? history.value : props.peaks ?? decoded.value
       if (!source?.length) return Array.from({ length: barCount.value }, () => 0)
 
       const fitted = source.length <= barCount.value
@@ -164,6 +182,10 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
         const analyser = audioContext.createAnalyser()
         audioContext.createMediaElementSource(el).connect(analyser)
         analyser.connect(audioContext.destination)
+        // only affects frequency data, the scrolling waveform reads the time domain
+        analyser.smoothingTimeConstant = 0.7
+        analyser.minDecibels = -70
+        analyser.maxDecibels = -20
         audio.graph = { audioContext, analyser, buffer: new Float32Array(analyser.fftSize) }
       }
 
@@ -176,10 +198,46 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
 
     let liveFrame = -1
     let lastPush = 0
+    let frequencyData = new Uint8Array(0)
+    let averages: number[] = []
+
+    function spectrumTargets (graph: AudioGraph) {
+      if (frequencyData.length !== graph.analyser.frequencyBinCount) {
+        frequencyData = new Uint8Array(graph.analyser.frequencyBinCount)
+      }
+      graph.analyser.getByteFrequencyData(frequencyData)
+
+      const bands = spectrumBands(frequencyData, barCount.value, graph.audioContext.sampleRate / graph.analyser.fftSize)
+      averages = averages.length === bands.length
+        ? averages.map((average, index) => average + (bands[index] - average) * SPECTRUM_AVERAGE)
+        : bands
+
+      return bands.map((band, index) =>
+        clamp(0.5 + (band - averages[index]) / SPECTRUM_SWING, 0, 1) * clamp(averages[index] / SPECTRUM_GATE, 0, 1)
+      )
+    }
+
+    function sampleSpectrum (graph: AudioGraph) {
+      const targets = sampling.value ? spectrumTargets(graph) : resting.value
+      let settled = true
+
+      levels.value = targets.map((target, index) => {
+        const current = levels.value[index] ?? resting.value[index] ?? 0
+        settled &&= Math.abs(target - current) < SPECTRUM_SETTLED
+        return current + (target - current) * (target > current ? SPECTRUM_RISE : SPECTRUM_FALL)
+      })
+
+      return settled
+    }
 
     function sampleLevel (now: number) {
       const graph = audio?.graph
-      if (graph) {
+      if (graph && spectrum.value) {
+        if (sampleSpectrum(graph) && !sampling.value) {
+          levels.value = []
+          return
+        }
+      } else if (graph) {
         graph.analyser.getFloatTimeDomainData(graph.buffer)
         const level = graph.buffer.reduce((max, value) => Math.max(max, Math.abs(value)), 0)
 
@@ -198,14 +256,15 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
       liveFrame = requestAnimationFrame(sampleLevel)
     }
 
-    watch(() => props.live && !!audio?.playing.value, active => {
+    watch(sampling, active => {
       if (!IN_BROWSER) return
 
       cancelAnimationFrame(liveFrame)
-      if (!active) return
-
-      connectAnalyser()
-      liveFrame = requestAnimationFrame(sampleLevel)
+      if (active) connectAnalyser()
+      // paused spectrum keeps easing toward the resting peaks and stops itself once settled
+      if (active || levels.value.length) {
+        liveFrame = requestAnimationFrame(sampleLevel)
+      }
     }, { immediate: true })
 
     const heights = shallowRef<number[]>([])
@@ -265,14 +324,14 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
       const thickness = barWidth.value
       const scale = width.value ? width.value / viewBox.value.width : 1
       const renderedWidth = thickness * scale
-      // rounded corners on narrow bars are invisible and multiply the path's raster cost
-      const radius = renderedWidth < 4 ? 0 : Math.min(Number(props.barRadius) || 0, renderedWidth / 2)
+      const radius = renderedWidth < 3 ? 0 : Math.min(Number(props.barRadius) || 0, renderedWidth / 2)
+      const anchored = !isNullOrUndefined(props.mirror) && props.mirror !== false
       let d = ''
 
       heights.value.forEach((level, index) => {
         const barHeight = Math.max(1, level * baseline)
         const x = index * (thickness + barGap.value)
-        const y = mirror.value ? baseline - barHeight : (boxHeight - barHeight) / 2
+        const y = anchored ? baseline - barHeight : (boxHeight - barHeight) / 2
         const ry = Math.min(radius, barHeight / 2)
         const rx = ry / scale
 
@@ -285,7 +344,58 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
       return d
     })
 
+    function renderBars (layers: readonly ('track' | 'buffer' | 'progress')[]) {
+      return (
+        <svg
+          class="v-audio-waveform__svg"
+          viewBox={ `0 0 ${viewBox.value.width} ${viewBox.value.height}` }
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          { layers.map(layer => (
+            <g
+              key={ layer }
+              class={[`v-audio-waveform__${layer}`, layer === 'track' && bgColorClasses.value]}
+              style={ layer === 'track' ? bgColorStyles.value : undefined }
+            >
+              <path class="v-audio-waveform__bars" d={ path.value } />
+              { !!mirror.value && (
+                <g
+                  class="v-audio-waveform__mirror"
+                  transform={ `translate(0, ${viewBox.value.height}) scale(1, ${-mirror.value})` }
+                >
+                  <path class="v-audio-waveform__bars" d={ path.value } />
+                </g>
+              )}
+            </g>
+          ))}
+        </svg>
+      )
+    }
+
     useRender(() => {
+      if (spectrum.value) {
+        return (
+          <div
+            ref={ resizeRef }
+            class={[
+              'v-audio-waveform',
+              'v-audio-waveform--spectrum',
+              textColorClasses.value,
+              props.class,
+            ]}
+            style={[
+              { height: convertToUnit(props.height) },
+              textColorStyles.value,
+              props.style,
+            ]}
+            aria-hidden="true"
+          >
+            { renderBars(['progress']) }
+          </div>
+        )
+      }
+
       const progressBarProps = VMediaProgressBar.filterProps(props)
       const layers = props.buffer > 0
         ? ['track', 'buffer', 'progress'] as const
@@ -306,39 +416,15 @@ export const VAudioWaveform = genericComponent<VAudioWaveformSlots>()({
           ]}
           modelValue={ model.value }
           disabled={ props.disabled && !props.live }
-          readonly={ props.readonly || props.live }
+          readonly={ props.readonly || !!props.live }
           tooltip={ !props.live && props.tooltip }
+          thumb={ props.thumb && !props.live }
           onUpdate:modelValue={ (value: number) => model.value = value }
           onDrag:start={ (value: number) => emit('drag:start', value) }
           onDrag:end={ (value: number) => emit('drag:end', value) }
         >
           {{
-            default: () => (
-              <svg
-                class="v-audio-waveform__svg"
-                viewBox={ `0 0 ${viewBox.value.width} ${viewBox.value.height}` }
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                { layers.map(layer => (
-                  <g
-                    key={ layer }
-                    class={[`v-audio-waveform__${layer}`, layer === 'track' && bgColorClasses.value]}
-                    style={ layer === 'track' ? bgColorStyles.value : undefined }
-                  >
-                    <path class="v-audio-waveform__bars" d={ path.value } />
-                    { !!mirror.value && (
-                      <g
-                        class="v-audio-waveform__mirror"
-                        transform={ `translate(0, ${viewBox.value.height}) scale(1, ${-mirror.value})` }
-                      >
-                        <path class="v-audio-waveform__bars" d={ path.value } />
-                      </g>
-                    )}
-                  </g>
-                ))}
-              </svg>
-            ),
+            default: () => renderBars(layers),
             tooltip: slots.tooltip,
           }}
         </VMediaProgressBar>

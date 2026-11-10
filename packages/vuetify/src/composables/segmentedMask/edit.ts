@@ -84,6 +84,7 @@ export function createSegmentedEdit (
   mask: MaskEdit,
   separator: MaybeRefOrGetter<string>,
   isRtl?: MaybeRefOrGetter<boolean>,
+  isKey?: (data: string) => boolean,
 ) {
   const text = shallowRef('')
   let edit: { value: string, start: number, end: number } | undefined
@@ -92,6 +93,15 @@ export function createSegmentedEdit (
 
   function onBeforeinput (e: InputEvent) {
     const inputElement = e.target as HTMLInputElement
+
+    // a non-digit still jumps sections from a caret, over a selection it would only erase it
+    if (
+      e.inputType === 'insertText' && e.data && !/\d/.test(e.data) && !isKey?.(e.data) &&
+      inputElement.selectionStart !== inputElement.selectionEnd
+    ) {
+      e.preventDefault()
+      return
+    }
 
     edit = { value: inputElement.value, start: inputElement.selectionStart ?? 0, end: inputElement.selectionEnd ?? 0 }
   }

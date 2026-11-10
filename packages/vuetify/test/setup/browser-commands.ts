@@ -24,6 +24,15 @@ async function drag (ctx: BrowserCommandContext, start: [number, number], ...mov
   })
 }
 
+async function mouseDrag (ctx: BrowserCommandContext, start: [number, number], ...moves: number[][]) {
+  await ctx.page.mouse.move(...start)
+  await ctx.page.mouse.down()
+  for (const move of moves) {
+    await ctx.page.mouse.move(move[0], move[1])
+  }
+  await ctx.page.mouse.up()
+}
+
 async function click (ctx: BrowserCommandContext, ...args: [string] | [number, number]) {
   if (args.length === 1) {
     const el = await ctx.page.$(args[0])
@@ -135,6 +144,7 @@ function clearAbortTimeout (ctx: BrowserCommandContext) {
 
 export const commands = {
   drag,
+  mouseDrag,
   click,
   waitStable,
   waitForClickable,
