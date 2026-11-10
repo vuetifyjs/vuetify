@@ -85,6 +85,16 @@ The **ignore-accents** prop lets a plain query match names written using native 
 
 <ExamplesExample file="v-autocomplete/prop-ignore-accents" />
 
+#### Mandatory
+
+Emptying the search can clear the selected value even without **clearable**, which controls the clear icon. Set **mandatory** to prevent user interactions from removing the last selection.
+
+Search can still be emptied to filter options and choose a replacement. In single mode, the selected title is restored on blur. With **multiple**, items can be removed until one remains. The field's clear icon is hidden while selected, and the last chip is not closable.
+
+**mandatory** does not select an initial item or prevent parent-driven model resets. The reset button in this example clears the models directly.
+
+<ExamplesExample file="v-autocomplete/prop-mandatory" />
+
 #### Subheaders and dividers
 
 The `items` prop recognizes special type of `divider` and `subheader`. Those items will be excluded when using filter and can be further customized with dedicated slots.
@@ -93,7 +103,7 @@ The `items` prop recognizes special type of `divider` and `subheader`. Those ite
 
 ::: tip
 
-The **v-autocomplete** component updates the search model on focus/blur events. Focus sets search to the current model (if available), and blur clears it.
+The **v-autocomplete** component updates the search model on blur, restoring the selected title in single mode and clearing it in multiple mode.
 
 Unlike **v-combobox**, it doesn't keep unlisted values. To prevent unnecessary API requests when querying, ensure that search is not empty and/or doesn't match the current model.
 

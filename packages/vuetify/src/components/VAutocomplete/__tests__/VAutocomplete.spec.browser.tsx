@@ -11,6 +11,7 @@ import { cloneVNode, ref } from 'vue'
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+type State = typeof items[number]
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VAutocomplete />,
@@ -643,12 +644,14 @@ describe('VAutocomplete', () => {
     ])
 
     const selectedItems = ref(null)
+    const removed = vi.fn()
 
     const { element } = render(() => (
       <VAutocomplete
         v-model={ selectedItems.value }
         items={ items.value }
         returnObject
+        onItem:removed={ removed }
       />
     ))
 
@@ -658,11 +661,333 @@ describe('VAutocomplete', () => {
 
     await userEvent.click(options[0])
 
-    await userEvent.click(element)
-    await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
-    await userEvent.click(document.body)
+    const input = screen.getByCSS('input[type="text"]')
+    expect(input).toHaveValue('Item 1')
+    expect(selectedItems.value).toEqual(items.value[0])
 
-    expect(element).not.toHaveTextContent('Item 1')
+    await userEvent.click(input)
+    await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
+    expect(input).toHaveValue('')
+    expect(selectedItems.value).toBeNull()
+    expect(removed).toHaveBeenCalledTimes(1)
+
+    await userEvent.click(document.body)
+    await expect.poll(() => input).toHaveValue('')
+    expect(selectedItems.value).toBeNull()
+  })
+
+  describe('mandatory', () => {
+    it.each([
+      { name: 'scalar', returnObject: false, key: 'Backspace' },
+      { name: 'return-object', returnObject: true, key: 'Delete' },
+    ])('should preserve a $name selection when search is emptied and blurred', async ({ returnObject, key }) => {
+      const choices = [
+        { title: 'California', value: 'CA' },
+        { title: 'Colorado', value: 'CO' },
+      ]
+      const model = ref<string | typeof choices[number] | null>(returnObject ? choices[0] : 'CA')
+      const updated = vi.fn((value: typeof model.value) => { model.value = value })
+      const removed = vi.fn()
+
+      render(() => (
+        <>
+          <VAutocomplete
+            modelValue={ model.value }
+            onUpdate:modelValue={ updated }
+            onItem:removed={ removed }
+            items={ choices }
+            returnObject={ returnObject }
+            mandatory
+          />
+          <button data-testid="outside">outside</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input[type="text"]')
+      expect(input).toHaveValue('California')
+
+      await userEvent.click(input)
+      await userEvent.keyboard(`{ControlOrMeta>}a{/ControlOrMeta}{${key}}`)
+      expect(input).toHaveValue('')
+      expect(model.value).toEqual(returnObject ? choices[0] : 'CA')
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => input).toHaveValue('California')
+      expect(model.value).toEqual(returnObject ? choices[0] : 'CA')
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+
+      await userEvent.click(input)
+      await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}Colo')
+      await userEvent.click(await screen.findByRole('option'))
+      await expect.poll(() => input).toHaveValue('Colorado')
+      expect(model.value).toEqual(returnObject ? choices[1] : 'CO')
+      expect(updated).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledWith(expect.objectContaining({ value: 'CA' }))
+    })
+
+    it('should preserve the selected value when a null search is blurred', async () => {
+      const search = ref<string | null>('California')
+      const updated = vi.fn()
+      const removed = vi.fn()
+
+      render(() => (
+        <>
+          <VAutocomplete
+            modelValue="California"
+            onUpdate:modelValue={ updated }
+            onItem:removed={ removed }
+            v-model:search={ search.value }
+            items={ items }
+            mandatory
+          />
+          <button data-testid="outside">outside</button>
+        </>
+      ))
+
+      const input = screen.getByCSS('input[type="text"]')
+      await userEvent.click(input)
+      search.value = null
+      await expect.poll(() => input).toHaveValue('')
+      await userEvent.click(screen.getByTestId('outside'))
+
+      await expect.poll(() => input).toHaveValue('California')
+      expect(search.value).toBe('California')
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+    })
+
+    it.each(['chips', 'selection slot'])('should preserve a single selection with %s on keyboard deletion', async selection => {
+      const model = ref<State | null>('California')
+      const updated = vi.fn((value: State | null) => { model.value = value })
+      const removed = vi.fn()
+
+      const { element } = render(() => (
+        <VAutocomplete
+          modelValue={ model.value }
+          onUpdate:modelValue={ updated }
+          onItem:removed={ removed }
+          items={ items }
+          chips={ selection === 'chips' }
+          closableChips
+          mandatory
+        >
+          {{
+            selection: selection === 'selection slot'
+              ? ({ item }) => <span>{ item }</span>
+              : undefined,
+          }}
+        </VAutocomplete>
+      ))
+
+      expect(screen.queryByTestId('close-chip')).toBeNull()
+      const input = screen.getByCSS('input[type="text"]')
+      await userEvent.click(input)
+      expect(input).toHaveValue('')
+      await userEvent.keyboard('{Backspace}{Delete}{Backspace}')
+
+      expect(input).toHaveValue('')
+      expect(model.value).toBe('California')
+      expect(within(element).getByText('California')).toBeVisible()
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+    })
+
+    it('should allow keyboard removal down to one selected item', async () => {
+      const model = ref<readonly State[]>(['California', 'Colorado'])
+      const updated = vi.fn((value: readonly State[]) => { model.value = value })
+      const removed = vi.fn()
+
+      const { element } = render(() => (
+        <VAutocomplete
+          modelValue={ model.value }
+          onUpdate:modelValue={ updated }
+          onItem:removed={ removed }
+          items={ items }
+          multiple
+          chips
+          mandatory
+        />
+      ))
+
+      const input = screen.getByCSS('input[type="text"]')
+      await userEvent.click(input)
+      await userEvent.keyboard('{Backspace}{Delete}')
+      expect(model.value).toEqual(['California'])
+      expect(updated).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledWith(expect.objectContaining({ value: 'Colorado' }))
+      updated.mockClear()
+      removed.mockClear()
+
+      await userEvent.keyboard('{Backspace}{Delete}{Backspace}{Backspace}')
+      expect(input).toHaveValue('')
+      expect(model.value).toEqual(['California'])
+      expect(within(element).getByText('California')).toBeVisible()
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+    })
+
+    it('should allow menu deselection down to one selected item', async () => {
+      const model = ref<readonly State[]>(['California', 'Colorado'])
+      const updated = vi.fn((value: readonly State[]) => { model.value = value })
+      const removed = vi.fn()
+
+      render(() => (
+        <VAutocomplete
+          modelValue={ model.value }
+          onUpdate:modelValue={ updated }
+          onItem:removed={ removed }
+          items={ items }
+          multiple
+          mandatory
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      await userEvent.click(await screen.findByRole('option', { name: 'California', selected: true }))
+      expect(model.value).toEqual(['Colorado'])
+      expect(updated).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledWith(expect.objectContaining({ value: 'California' }))
+      updated.mockClear()
+      removed.mockClear()
+
+      await userEvent.click(screen.getByRole('option', { name: 'Colorado', selected: true }))
+      expect(model.value).toEqual(['Colorado'])
+      expect(screen.getByRole('option', { name: 'Colorado', selected: true })).toBeVisible()
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+    })
+
+    it('should only expose chip close buttons while more than one item is selected', async () => {
+      const model = ref<readonly State[]>(['California', 'Colorado'])
+      const updated = vi.fn((value: readonly State[]) => { model.value = value })
+      const removed = vi.fn()
+
+      const { element } = render(() => (
+        <VAutocomplete
+          modelValue={ model.value }
+          onUpdate:modelValue={ updated }
+          onItem:removed={ removed }
+          items={ items }
+          multiple
+          chips
+          closableChips
+          mandatory
+        />
+      ))
+
+      expect(screen.getAllByTestId('close-chip')).toHaveLength(2)
+      await userEvent.click(screen.getAllByTestId('close-chip')[0])
+      expect(model.value).toEqual(['Colorado'])
+      expect(within(element).getByText('Colorado')).toBeVisible()
+      expect(screen.queryAllByTestId('close-chip')).toHaveLength(0)
+      expect(updated).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledWith(expect.objectContaining({ value: 'California' }))
+    })
+
+    it.each([false, true])('should take precedence over clearable with multiple=%s', async multiple => {
+      const mandatory = ref(true)
+      const model = ref<State | readonly State[] | null>(multiple ? ['California', 'Colorado'] : 'California')
+      const updated = vi.fn((value: typeof model.value) => { model.value = value })
+      const removed = vi.fn()
+
+      render(() => (
+        <VAutocomplete
+          modelValue={ model.value }
+          onUpdate:modelValue={ updated }
+          onItem:removed={ removed }
+          items={ items }
+          label="State"
+          multiple={ multiple }
+          mandatory={ mandatory.value }
+          clearable
+          persistentClear
+        />
+      ))
+
+      await userEvent.click(screen.getByCSS('input[type="text"]'))
+      expect(screen.queryByRole('button', { name: 'Clear State' })).toBeNull()
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+
+      mandatory.value = false
+      const clear = await screen.findByRole('button', { name: 'Clear State' })
+      await userEvent.click(clear)
+      await expect.poll(() => model.value).toEqual(multiple ? [] : null)
+      expect(updated).toHaveBeenCalledTimes(1)
+      expect(removed).toHaveBeenCalledTimes(multiple ? 2 : 1)
+    })
+
+    it.each([false, true])('should allow an initially empty and externally reset model with multiple=%s', async multiple => {
+      const model = ref<State | readonly State[] | null>(multiple ? [] : null)
+      const updated = vi.fn((value: typeof model.value) => { model.value = value })
+      const removed = vi.fn()
+
+      const { element } = render(() => (
+        <div>
+          <VAutocomplete
+            modelValue={ model.value }
+            onUpdate:modelValue={ updated }
+            onItem:removed={ removed }
+            items={ items }
+            multiple={ multiple }
+            mandatory
+          />
+          <button data-testid="outside">outside</button>
+        </div>
+      ))
+
+      const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
+      expect(input).toHaveValue('')
+      await userEvent.click(input)
+      await screen.findByRole('listbox')
+      expect(screen.queryAllByRole('option', { selected: true })).toHaveLength(0)
+      await userEvent.click(screen.getByTestId('outside'))
+      expect(model.value).toEqual(multiple ? [] : null)
+
+      model.value = multiple ? ['California'] : 'California'
+      await expect.poll(() => input.value || within(element).queryByText('California')?.textContent).toBe('California')
+
+      model.value = multiple ? [] : null
+      await expect.poll(() => input).toHaveValue('')
+      await expect.poll(() => within(element).queryByText('California')).toBeNull()
+      expect(model.value).toEqual(multiple ? [] : null)
+      expect(updated).not.toHaveBeenCalled()
+      expect(removed).not.toHaveBeenCalled()
+    })
+  })
+
+  it('should keep editing search when a controlled single model rejects clearing', async () => {
+    const model = ref<State>('California')
+    const updated = vi.fn((value: State | null) => {
+      if (value !== null) model.value = value
+    })
+
+    render(() => (
+      <VAutocomplete
+        modelValue={ model.value }
+        onUpdate:modelValue={ updated }
+        items={ items }
+      />
+    ))
+
+    const input = screen.getByCSS('input[type="text"]') as HTMLInputElement
+    await userEvent.click(input)
+    await userEvent.keyboard('{ControlOrMeta>}a{/ControlOrMeta}{Backspace}')
+    expect(input).toHaveValue('')
+    expect(updated).toHaveBeenCalledWith(null)
+    expect(model.value).toBe('California')
+
+    await userEvent.keyboard('{Backspace}Colo')
+    expect(input).toHaveValue('Colo')
+    expect([input.selectionStart, input.selectionEnd]).toEqual([4, 4])
+    await userEvent.keyboard('{Backspace}')
+    expect(input).toHaveValue('Col')
+    expect([input.selectionStart, input.selectionEnd]).toEqual([3, 3])
+    expect(model.value).toBe('California')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16210
