@@ -416,6 +416,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                         aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
+                        required={ props.required }
                       />
 
                       { props.autoGrow && !fieldSizing.value && (

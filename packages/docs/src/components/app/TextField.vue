@@ -2,11 +2,11 @@
   <v-text-field
     :placeholder="t('search.label')"
     base-color="disabled"
+    label-variant="single-line"
     prepend-inner-icon="mdi-magnify"
     variant="outlined"
     hide-details
     persistent-placeholder
-    single-line
   >
     <template v-if="$slots['append-inner']" #append-inner>
       <slot name="append-inner" />

@@ -4,12 +4,12 @@
       v-model="selected"
       :items="items"
       label="To"
+      label-variant="single-line"
       chips
       hide-details
       hide-no-data
       hide-selected
       multiple
-      single-line
     ></v-autocomplete>
 
     <v-divider></v-divider>
@@ -17,8 +17,8 @@
     <v-text-field
       v-model="subject"
       label="Subject"
+      label-variant="single-line"
       hide-details
-      single-line
     ></v-text-field>
 
     <v-divider></v-divider>
@@ -26,9 +26,9 @@
     <v-textarea
       v-model="title"
       label="Message"
+      label-variant="single-line"
       maxlength="120"
       counter
-      single-line
     ></v-textarea>
   </v-form>
 </template>

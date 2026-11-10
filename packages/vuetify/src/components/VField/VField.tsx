@@ -22,6 +22,7 @@ import { computed, ref, toRef, useId, watch } from 'vue'
 import {
   animate,
   convertToUnit,
+  deprecate,
   EventProp,
   genericComponent,
   getActiveElement,
@@ -42,6 +43,20 @@ import type { GenericProps } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
+
+const allowedLabelVariants = ['default', 'float', 'single-line', 'inline', 'adjacent', 'above', 'fixed'] as const
+type LabelVariant = typeof allowedLabelVariants[number]
+type LabelPlacement = 'float' | 'single-line' | 'adjacent' | 'fixed'
+
+const labelVariantAliases: Record<LabelVariant, LabelPlacement> = {
+  default: 'float',
+  float: 'float',
+  'single-line': 'single-line',
+  inline: 'single-line',
+  adjacent: 'adjacent',
+  above: 'adjacent',
+  fixed: 'fixed',
+}
 
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
@@ -83,9 +98,16 @@ export const makeVFieldProps = propsFactory({
   flat: Boolean,
   iconColor: [Boolean, String],
   label: String,
+  labelVariant: {
+    type: String as PropType<LabelVariant>,
+    default: 'default',
+    validator: (v: any) => allowedLabelVariants.includes(v),
+  },
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
+  required: Boolean,
   reverse: Boolean,
+  /** @deprecated use labelVariant="single-line" instead */
   singleLine: Boolean,
   variant: {
     type: String as PropType<Variant>,
@@ -107,7 +129,7 @@ export type VFieldSlots = {
   clear: DefaultInputSlot & { props: Record<string, any> }
   'prepend-inner': DefaultInputSlot
   'append-inner': DefaultInputSlot
-  label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
+  label: DefaultInputSlot & { label: string | undefined, props: Record<string, any>, required: boolean }
   loader: LoaderSlotProps
   default: VFieldSlot
 }
@@ -145,9 +167,19 @@ export const VField = genericComponent<new <T>(
     const { roundedClasses, roundedStyles } = useRounded(props)
     const { rtlClasses } = useRtl()
 
+    if (props.singleLine) {
+      deprecate('single-line', 'label-variant="single-line"')
+    }
+
     const isActive = toRef(() => props.dirty || props.active)
     const hasLabel = toRef(() => !!(props.label || slots.label))
-    const hasFloatingLabel = toRef(() => !props.singleLine && hasLabel.value)
+    const labelPlacement = toRef((): LabelPlacement => {
+      if (props.singleLine && props.labelVariant === 'default') return 'single-line'
+      return labelVariantAliases[props.labelVariant] ?? 'float'
+    })
+    const hasFloatingLabel = toRef(() => (
+      hasLabel.value && (labelPlacement.value === 'float' || labelPlacement.value === 'fixed')
+    ))
 
     const uid = useId()
     const id = computed(() => props.id || `input-${uid}`)
@@ -173,9 +205,15 @@ export const VField = genericComponent<new <T>(
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     watch(isActive, val => {
-      if (hasFloatingLabel.value && !PREFERS_REDUCED_MOTION()) {
-        const el: HTMLElement = labelRef.value!.$el
-        const targetEl: HTMLElement = floatingLabelRef.value!.$el
+      if (
+        labelPlacement.value === 'float' &&
+        hasFloatingLabel.value &&
+        labelRef.value &&
+        floatingLabelRef.value &&
+        !PREFERS_REDUCED_MOTION()
+      ) {
+        const el: HTMLElement = labelRef.value.$el
+        const targetEl: HTMLElement = floatingLabelRef.value.$el
 
         requestAnimationFrame(() => {
           const rect = nullifyTransforms(el)
@@ -224,15 +262,15 @@ export const VField = genericComponent<new <T>(
     }))
 
     const floatingLabelProps = toRef(() => {
-      const ariaHidden = !isActive.value
+      const visible = labelPlacement.value === 'fixed' || isActive.value
       return {
-        'aria-hidden': ariaHidden,
-        for: ariaHidden ? undefined : id.value,
+        'aria-hidden': !visible,
+        for: visible ? id.value : undefined,
       }
     })
 
     const mainLabelProps = toRef(() => {
-      const ariaHidden = hasFloatingLabel.value && isActive.value
+      const ariaHidden = labelPlacement.value === 'float' && isActive.value
       return {
         'aria-hidden': ariaHidden,
         for: ariaHidden ? undefined : id.value,
@@ -240,7 +278,8 @@ export const VField = genericComponent<new <T>(
     })
 
     function onClick (e: MouseEvent) {
-      if (e.target !== getActiveElement()) {
+      const target = e.target instanceof Element ? e.target : (e.target as Node).parentElement
+      if (e.target !== getActiveElement() && !target?.closest('label')) {
         e.preventDefault()
       }
     }
@@ -250,15 +289,24 @@ export const VField = genericComponent<new <T>(
       const hasPrepend = !!(slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear) && !props.disabled
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
-      const label = () => (
-        slots.label
-          ? slots.label({
-            ...slotProps.value,
-            label: props.label,
-            props: { for: id.value },
-          })
-          : props.label
-      )
+      function renderLabel () {
+        return (
+          <>
+            { slots.label
+              ? slots.label({
+                ...slotProps.value,
+                label: props.label,
+                props: { for: id.value },
+                required: props.required,
+              })
+              : props.label
+            }
+            { props.required && !slots.label && (
+              <span class="v-field-label__asterisk" aria-hidden="true">*</span>
+            )}
+          </>
+        )
+      }
 
       return (
         <div
@@ -277,8 +325,11 @@ export const VField = genericComponent<new <T>(
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
-              'v-field--single-line': props.singleLine,
-              'v-field--no-label': !label(),
+              'v-field--single-line': labelPlacement.value === 'single-line',
+              'v-field--label-float': hasLabel.value && labelPlacement.value === 'float',
+              'v-field--label-adjacent': hasLabel.value && labelPlacement.value === 'adjacent',
+              'v-field--label-fixed': hasLabel.value && labelPlacement.value === 'fixed',
+              'v-field--no-label': !hasLabel.value,
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
@@ -297,6 +348,18 @@ export const VField = genericComponent<new <T>(
           onClick={ onClick }
           { ...attrs }
         >
+          { hasLabel.value && labelPlacement.value === 'adjacent' && (
+            <VFieldLabel
+              key="adjacent-label"
+              id={ props.labelId }
+              class={['v-field-label--adjacent', textColorClasses.value]}
+              style={ textColorStyles.value }
+              { ...mainLabelProps.value }
+            >
+              { renderLabel() }
+            </VFieldLabel>
+          )}
+
           <div class="v-field__overlay" />
 
           <LoaderSlot
@@ -326,23 +389,24 @@ export const VField = genericComponent<new <T>(
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
+                id={ labelPlacement.value === 'fixed' ? props.labelId : undefined }
                 class={[textColorClasses.value]}
                 floating
                 { ...floatingLabelProps.value }
                 style={ textColorStyles.value }
               >
-                { label() }
+                { renderLabel() }
               </VFieldLabel>
             )}
 
-            { hasLabel.value && (
+            { hasLabel.value && labelPlacement.value !== 'adjacent' && labelPlacement.value !== 'fixed' && (
               <VFieldLabel
                 key="label"
                 ref={ labelRef }
                 id={ props.labelId }
                 { ...mainLabelProps.value }
               >
-                { label() }
+                { renderLabel() }
               </VFieldLabel>
             )}
 
@@ -434,10 +498,11 @@ export const VField = genericComponent<new <T>(
                   <div class="v-field__outline__notch">
                     <VFieldLabel
                       ref={ floatingLabelRef }
+                      id={ labelPlacement.value === 'fixed' ? props.labelId : undefined }
                       floating
                       { ...floatingLabelProps.value }
                     >
-                      { label() }
+                      { renderLabel() }
                     </VFieldLabel>
                   </div>
                 )}
@@ -447,8 +512,13 @@ export const VField = genericComponent<new <T>(
             )}
 
             { isPlainOrUnderlined.value && hasFloatingLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating { ...floatingLabelProps.value }>
-                { label() }
+              <VFieldLabel
+                ref={ floatingLabelRef }
+                id={ labelPlacement.value === 'fixed' ? props.labelId : undefined }
+                floating
+                { ...floatingLabelProps.value }
+              >
+                { renderLabel() }
               </VFieldLabel>
             )}
           </div>
