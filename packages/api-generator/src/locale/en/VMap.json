@@ -3,6 +3,7 @@
   "props": {
     "baseColor": "Fill color for shapes without a fill in the SVG. Accepts a theme color or CSS color.",
     "baseStroke": "Stroke color for shapes without a stroke in the SVG. Accepts a theme color or CSS color.",
+    "center": "Point at the middle of the view, in the coordinates of the SVG viewBox, as `{ x, y }`. Defaults to the middle of the viewBox and is kept within the map bounds. Supports `v-model:center`, which follows panning and zooming.",
     "color": "Fill color of selected regions. Accepts a theme color or CSS color.",
     "disablePan": "Disables dragging, `Shift` + arrow key panning, and moving the view to reveal focused regions or regions passed to `reveal`.",
     "disableZoom": "Disables double click, pinch, and wheel zoom, and the exposed zoom methods.",
@@ -30,9 +31,10 @@
     "tooltip": "Custom tooltip content. Receives the `region`, including fields from **regions**, and its selection state."
   },
   "events": {
-    "click:region": "Emitted with the originating mouse or keyboard event and `{ region }` when a region is activated.",
+    "click:region": "Emitted when region is clicked.",
     "error": "Emitted when parsing the SVG fails.",
     "load": "Emitted with the regions found in the SVG after it has been parsed.",
+    "update:center": "Emitted when a navigation action moves the view. Emits `undefined` when **resetZoom** restores the centered view.",
     "update:highlighted": "Emitted with the region identifier under the pointer or keyboard focus, or null when it leaves.",
     "update:modelValue": "Emitted when the selection changes.",
     "update:zoom": "Emitted when a navigation action changes magnification."

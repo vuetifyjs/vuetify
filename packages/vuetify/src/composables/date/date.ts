@@ -3,7 +3,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, reactive, watch } from 'vue'
-import { isFunction, isString, mergeDeep } from '@/util'
+import { isFunction, mergeDeep } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
@@ -95,13 +95,9 @@ export function createDate (options: DateOptions | undefined, locale: LocaleInst
 }
 
 export function daysDiff (adapter: DateInstance, start: unknown, stop?: unknown): number {
-  const iso = [
-    `${adapter.toISO(stop ?? start).split('T')[0]}T00:00:00Z`,
-    `${adapter.toISO(start).split('T')[0]}T00:00:00Z`,
-  ]
-  return isString(adapter.date())
-    ? adapter.getDiff(iso[0], iso[1], 'days') // for StringDateAdapter
-    : adapter.getDiff(adapter.date(iso[0]), adapter.date(iso[1]), 'days')
+  // UTC midnight of each local calendar date, so time of day, time zone and DST drop out
+  const [to, from] = [stop ?? start, start].map(value => Date.UTC(adapter.getYear(value), adapter.getMonth(value), adapter.getDate(value)))
+  return (to - from) / 86400000
 }
 
 function createInstance (options: InternalDateOptions, locale: LocaleInstance) {

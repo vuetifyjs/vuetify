@@ -6,6 +6,25 @@ import { render, screen, userEvent } from '@test'
 import { nextTick, ref } from 'vue'
 
 describe('VTimePicker', () => {
+  it('switches clock viewMode with left/right arrows within bounds', async () => {
+    const viewMode = ref<'hour' | 'minute' | 'second'>('hour')
+    render(() => (
+      <VTimePicker
+        modelValue="10:30"
+        viewMode={ viewMode.value }
+        onUpdate:viewMode={ (v: any) => viewMode.value = v }
+      />
+    ))
+
+    screen.getByRole('spinbutton').focus()
+    await userEvent.keyboard('{ArrowLeft}')
+    expect(viewMode.value).toBe('hour')
+    await userEvent.keyboard('{ArrowRight}')
+    expect(viewMode.value).toBe('minute')
+    await userEvent.keyboard('{ArrowRight}')
+    expect(viewMode.value).toBe('minute')
+  })
+
   describe('variant input', () => {
     it('constrains typing to emit valid time', async () => {
       const model = ref<string | null>(null)

@@ -122,7 +122,7 @@ The `v-treeview` component has several slots that allow you to customize the app
 
 #### Append and prepend
 
-Using the the **prepend** slot we are able to create an intuitive file explorer.
+Using the **prepend** slot we are able to create an intuitive file explorer.
 
 <ExamplesExample file="v-treeview/slot-append-and-label" />
 

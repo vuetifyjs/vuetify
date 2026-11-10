@@ -215,6 +215,9 @@ describe('VMap', () => {
     await expect.poll(() => screen.queryByText('Western: 3 offices')).toBeTruthy()
     expect(west).toHaveAttribute('aria-describedby', screen.getByRole('tooltip').id)
     await userEvent.click(west)
-    expect(onClick).toHaveBeenCalledWith(expect.any(MouseEvent), { region: expect.objectContaining({ id: 'west', offices: 3 }) })
+    expect(onClick).toHaveBeenCalledWith(expect.any(MouseEvent), {
+      region: expect.objectContaining({ id: 'west', offices: 3 }),
+      reveal: expect.any(Function),
+    })
   })
 })

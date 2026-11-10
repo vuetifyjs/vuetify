@@ -165,7 +165,7 @@ export const VDatePicker = genericComponent<new <
     const header = computed(() => {
       if (props.multiple === 'range' && model.value.length === 2) {
         const [startDate, endDate] = model.value
-        const daysBetween = adapter.getDiff(endDate, startDate, 'days') + 1
+        const daysBetween = daysDiff(adapter, startDate, endDate) + 1
 
         return t('$vuetify.datePicker.itemsSelected', daysBetween)
       }

@@ -73,7 +73,7 @@ The **label** prop displays custom text for identifying an input's purpose. The 
 
 Using this baseline makes it easy to put together quick mock implementations of your interface without needing to hook up any functional logic.
 
-The following code snippet is an example of a simple form for for collecting a user's **First** name:
+The following code snippet is an example of a simple form for collecting a user's **First** name:
 
 <ExamplesExample file="v-text-field/prop-label" />
 
@@ -130,7 +130,7 @@ The **clearable** prop appends an inner [v-icon](/components/icons/) that clears
 
 Note that **readonly** will not remove the clear icon, to prevent readonly inputs from being cleared you should also disable **clearable**.
 
-Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
+Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a custom event handler to invoke the **onClear** method:
 
 ```html { resource="Component.vue" }
 <template>

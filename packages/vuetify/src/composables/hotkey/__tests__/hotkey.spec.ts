@@ -66,6 +66,25 @@ describe('hotkey.ts', () => {
   })
 
   it.each([
+    ['k', 'checkbox', 'k', 1],
+    ['space', 'checkbox', ' ', 0],
+    ['k', 'text', 'k', 0],
+  ])('%s with focused %s input', (combo, type, key, expected) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo, cb)
+    const input = Object.assign(document.createElement('input'), { type })
+    document.body.appendChild(input)
+    input.focus()
+
+    window.dispatchEvent(new KeyboardEvent('keydown', { key }))
+
+    expect(cb).toHaveBeenCalledTimes(expected)
+
+    input.remove()
+    stop()
+  })
+
+  it.each([
     ['extra modifiers', 'ctrl+a', { ctrlKey: true, shiftKey: true, key: 'a' }],
     ['modifiers only', 'ctrl+shift+b', { ctrlKey: true, shiftKey: true, key: 'Control' }],
   ])('%s ignored', (_, combo, evtProps) => {

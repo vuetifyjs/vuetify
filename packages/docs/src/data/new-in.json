@@ -73,6 +73,11 @@
       "bgColor": "3.4.0"
     }
   },
+  "VBottomNavigation": {
+    "examples": {
+      "misc-navigation-buttons": "4.3.3"
+    }
+  },
   "VBottomSheet": {
     "props": {
       "contextMenu": "4.3.0"
@@ -347,6 +352,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -453,6 +459,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
@@ -474,6 +481,9 @@
     },
     "events": {
       "update:expanded": "4.3.0"
+    },
+    "examples": {
+      "misc-navigation-rail": "4.3.3"
     }
   },
   "VNumberInput": {
@@ -507,6 +517,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -678,6 +689,7 @@
   "VSlideGroup": {
     "props": {
       "contentClass": "3.9.0",
+      "draggable": "4.4.0",
       "gap": "4.3.0",
       "padding": "4.3.0",
       "scrollDistance": "4.2.0",
@@ -692,7 +704,8 @@
       "slide": "4.2.0"
     },
     "examples": {
-      "misc-image-slider": "4.3.0"
+      "misc-image-slider": "4.3.0",
+      "prop-draggable": "4.4.0"
     }
   },
   "VSnackbar": {
@@ -733,7 +746,8 @@
   },
   "VSpeedDial": {
     "props": {
-      "contextMenu": "4.3.0"
+      "contextMenu": "4.3.0",
+      "noFlip": "4.4.0"
     }
   },
   "VSparkline": {
@@ -839,6 +853,11 @@
       "prop-scrollable": "4.3.0"
     }
   },
+  "VTimePickerClock": {
+    "props": {
+      "viewMode": "4.4.0"
+    }
+  },
   "VTreeview": {
     "props": {
       "ignoreAccents": "4.2.0",
@@ -885,6 +904,7 @@
     "props": {
       "eager": "3.2.0",
       "interactive": "3.8.0",
+      "noFlip": "4.4.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0",
       "persistent": "3.11.3"

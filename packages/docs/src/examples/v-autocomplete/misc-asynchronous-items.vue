@@ -104,7 +104,7 @@
     loading.value = true
     setTimeout(() => {
       if (v !== search.value) {
-        return // drop responce, avoid race condition
+        return // drop response, avoid race condition
       }
       items.value = states.filter(e => {
         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
@@ -201,7 +201,7 @@
         // Simulated ajax query
         setTimeout(() => {
           if (v !== this.search) {
-            return // drop responce, avoid race condition
+            return // drop response, avoid race condition
           }
           this.items = this.states.filter(e => {
             return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1

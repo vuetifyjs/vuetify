@@ -3,6 +3,7 @@
     "locationStrategy": "A function used to specifies how the component should position relative to its activator.",
     "offset": "Increases distance from the target. When passed as a pair of numbers, the second value shifts anchor along the side and away from the target.",
     "stickToTarget": "Enables the overlay content to go off-screen when scrolling.",
-    "viewportMargin": "Sets custom viewport margin for the overlay content"
+    "viewportMargin": "Sets custom viewport margin for the overlay content",
+    "noFlip": "Prevents the **connected** location strategy from flipping to the opposite side. Overflow is resolved by shifting only. When space is limited, the content may cover the activator."
   }
 }

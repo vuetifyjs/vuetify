@@ -40,6 +40,6 @@ Below is a list of styles applied by the reset:
 - Apply `cursor: pointer` to button elements.
 - Apply `tab-size: 4` in `html`.
 - Style `cursor` by aria attributes.
-- Minor consitency improvements for search and number inputs.
+- Minor consistency improvements for search and number inputs.
 
 For a complete list of all applied styles, see the [reset stylesheet](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/styles/generic/_reset.scss).

@@ -31,7 +31,7 @@ import {
 // Types
 import type { PropType, VNode } from 'vue'
 import type { MapDocument, MapNode, MapRegion } from './svg'
-import type { MapViewBox } from './viewport'
+import type { MapPoint, MapViewBox } from './viewport'
 
 export type MapRegionData = { [key: string]: unknown, title?: string, color?: string }
 export type MapRegionItem = MapRegion & MapRegionData
@@ -73,11 +73,12 @@ export const makeVMapProps = propsFactory({
   multiple: Boolean,
   mandatory: Boolean,
   highlighted: { type: [String, Array] as PropType<string | readonly string[] | null>, default: null },
-  zoom: { type: Number, default: 1 },
+  zoom: { type: [Number, String], default: 1 },
+  center: Object as PropType<MapPoint | null>,
   zoomStep: { type: Number, default: 0.2 },
   zoomOnFocus: Boolean,
-  minZoom: { type: Number, default: 1 },
-  maxZoom: { type: Number, default: 8 },
+  minZoom: { type: [Number, String], default: 1 },
+  maxZoom: { type: [Number, String], default: 8 },
   baseColor: String,
   baseStroke: String,
   color: String,
@@ -88,7 +89,7 @@ export const makeVMapProps = propsFactory({
   wheelZoom: Boolean,
   hideTooltip: Boolean,
   disabled: Boolean,
-  'onClick:region': EventProp<[MouseEvent | KeyboardEvent, { region: MapRegionItem }]>(),
+  'onClick:region': EventProp<[MouseEvent | KeyboardEvent, { region: MapRegionItem, reveal: VMapSlots['default']['reveal'] }]>(),
   ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'VMap')
@@ -101,7 +102,8 @@ export const VMap = genericComponent<VMapSlots>()({
   emits: {
     'update:modelValue': (value: string | readonly string[] | null) => true,
     'update:zoom': (value: number) => true,
-    'click:region': (event: MouseEvent | KeyboardEvent, value: { region: MapRegionItem }) => true,
+    'update:center': (value: MapPoint | null | undefined) => true,
+    'click:region': (event: MouseEvent | KeyboardEvent, value: { region: MapRegionItem, reveal: VMapSlots['default']['reveal'] }) => true,
     'update:highlighted': (value: string | readonly string[] | null) => true,
     load: (regions: MapRegion[]) => true,
     error: (value: Error) => true,
@@ -114,6 +116,7 @@ export const VMap = genericComponent<VMapSlots>()({
     // computed, not toRef: read once per SVG node on every render, and pointer moves re-render
     const selection = computed(() => new Set(wrapInArray(selected.value)))
     const zoom = useProxiedModel(props, 'zoom')
+    const center = useProxiedModel(props, 'center')
     const highlight = useProxiedModel(props, 'highlighted')
     const element = shallowRef<SVGSVGElement>()
     const map = shallowRef<MapDocument>()
@@ -123,7 +126,7 @@ export const VMap = genericComponent<VMapSlots>()({
     const target = shallowRef<[number, number]>([0, 0])
     const prefix = `v-map-${useId()}`
     const tooltipId = `${prefix}-tooltip`
-    const navigation = useMapNavigation(props, element, () => map.value?.viewBox, zoom)
+    const navigation = useMapNavigation(props, element, () => map.value?.viewBox, zoom, center)
     const focus = useMapFocus(element, () => map.value?.regions ?? [], navigation.reveal)
     const regions = computed(() => (map.value?.regions ?? []).map(region => ({ ...region, ...props.regions?.[region.id], id: region.id })))
     const regionById = computed(() => new Map(regions.value.map(region => [region.id, region])))
@@ -226,7 +229,7 @@ export const VMap = genericComponent<VMapSlots>()({
           selected.value = [...selection.value, region.id]
         }
       }
-      emit('click:region', event, { region })
+      emit('click:region', event, { region, reveal })
     }
 
     function onKeydown (event: KeyboardEvent) {
