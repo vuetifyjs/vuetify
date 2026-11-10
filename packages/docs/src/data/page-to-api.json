@@ -70,6 +70,7 @@
   "components/date-pickers-month": ["VDatePicker"],
   "components/date-pickers": ["VDatePicker", "VDateInput"],
   "components/date-range-pickers": ["VDateRangePicker"],
+  "components/date-time-inputs": ["VDateTimeInput", "VDatePicker", "VTimePicker"],
   "components/defaults-providers": ["VDefaultsProvider"],
   "components/data-tables": [
     "VDataTable",
