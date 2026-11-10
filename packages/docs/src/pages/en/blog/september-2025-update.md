@@ -322,7 +322,7 @@ See all available composables on the [Vuetify0 documentation site](https://0.vue
 
 * [usePermissions Documentation](https://0.vuetifyjs.com/composables/plugins/use-permissions/)
 * [useFeatures Documentation](https://0.vuetifyjs.com/composables/plugins/use-features/)
-* [useTimeline Documentation](https://0.vuetifyjs.com/composables/registration/use-timeline/)
+* [useTimeline Documentation](https://0.vuetifyjs.com/composables/registration/create-timeline)
 
 ## Framework & Security Updates { #framework-security-updates }
 

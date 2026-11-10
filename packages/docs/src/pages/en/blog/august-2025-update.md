@@ -105,7 +105,7 @@ The initial Vuetify0 release will focus on the foundational pillars of the frame
 * **Foundational** composables are the backbone of Vuetify0 and are the basic building blocks for creating a UI library.
 * **Registration** composables are the foundational pieces for selection and tokenization.
 * **Selection** composables serve as the core logic for managing selectable items, including single and multiple selection modes.
-* **Plugins**: [Breakpoints](https://0.vuetifyjs.com/composables/plugin/use-breakpoints), [Hydration](https://0.vuetifyjs.com/composables/plugin/use-hydration), [Locale](https://0.vuetifyjs.com/composables/plugin/use-locale), [Storage](https://0.vuetifyjs.com/composables/plugin/use-storage), and [Theme](https://0.vuetifyjs.com/composables/plugin/use-theme) plugins to manage global application state.
+* **Plugins**: [Breakpoints](https://0.vuetifyjs.com/composables/plugins/use-breakpoints), [Hydration](https://0.vuetifyjs.com/composables/plugins/use-hydration), [Locale](https://0.vuetifyjs.com/composables/plugins/use-locale), [Storage](https://0.vuetifyjs.com/composables/plugins/use-storage), and [Theme](https://0.vuetifyjs.com/composables/plugins/use-theme) plugins to manage global application state.
 
 ::: info
 
