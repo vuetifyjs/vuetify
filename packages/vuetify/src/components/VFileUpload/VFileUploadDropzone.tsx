@@ -127,6 +127,8 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     const context = inject(VFileUploadKey, null)
     const vSheetRef = ref<VSheet>()
     const isDragging = shallowRef(false)
+    const hasTitle = toRef(() => !!(slots.title || props.title))
+    const hasContent = toRef(() => hasTitle.value || !!props.subtitle)
     const isDisabled = toRef(() => context?.disabled.value ?? props.disabled)
     const isReadonly = toRef(() => context?.readonly.value ?? props.readonly)
     const isInteractive = toRef(() => !isDisabled.value && !isReadonly.value)
@@ -208,7 +210,6 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       const readonly = isReadonly.value
       const interactive = isInteractive.value
       const error = context?.error.value || props.error
-      const hasTitle = !!(slots.title || props.title)
       const hasIcon = !!(slots.icon || props.icon)
       const hasBrowse = !!(!props.hideBrowse && (slots.browse || props.density === 'default'))
       const hasFiles = modelValue.length > 0
@@ -354,52 +355,52 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                 </div>
               )}
 
-              { hasTitle && (
-                <div key="title" class="v-file-upload-title">
-                  { slots.title?.() ?? t(props.title) }
-                </div>
-              )}
-
-              { props.density === 'default' && (
-                <>
-                  { hasBrowse && (
-                    <>
-                      <div key="upload-divider" class="v-file-upload-divider">
-                        { slots.divider?.() ?? (
-                          <VDivider { ...dividerProps }>
-                            { t(props.dividerText) }
-                          </VDivider>
-                        )}
-                      </div>
-                      { !slots.browse ? (
-                        <VBtn
-                          readonly={ !interactive }
-                          size={ browseSize.value }
-                          text={ t(props.browseText) }
-                          variant={ browseVariant.value }
-                          onClick={ onClickBrowse }
-                        />
-                      ) : (
-                        <VDefaultsProvider
-                          defaults={{
-                            VBtn: {
-                              readonly: !interactive,
-                              size: browseSize.value,
-                              text: t(props.browseText),
-                              variant: browseVariant.value,
-                            },
-                          }}
-                        >
-                          { slots.browse({ props: { onClick: onClickBrowse } }) }
-                        </VDefaultsProvider>
-                      )}
-                    </>
+              { hasContent.value && (
+                <div key="content" class="v-file-upload-dropzone__content">
+                  { hasTitle.value && (
+                    <div key="title" class="v-file-upload-title">
+                      { slots.title?.() ?? t(props.title) }
+                    </div>
                   )}
 
                   { props.subtitle && (
-                    <div class="v-file-upload-subtitle">
+                    <div key="subtitle" class="v-file-upload-subtitle">
                       { props.subtitle }
                     </div>
+                  )}
+                </div>
+              )}
+
+              { props.density === 'default' && hasBrowse && (
+                <>
+                  <div key="upload-divider" class="v-file-upload-divider">
+                    { slots.divider?.() ?? (
+                      <VDivider { ...dividerProps }>
+                        { t(props.dividerText) }
+                      </VDivider>
+                    )}
+                  </div>
+                  { !slots.browse ? (
+                    <VBtn
+                      readonly={ !interactive }
+                      size={ browseSize.value }
+                      text={ t(props.browseText) }
+                      variant={ browseVariant.value }
+                      onClick={ onClickBrowse }
+                    />
+                  ) : (
+                    <VDefaultsProvider
+                      defaults={{
+                        VBtn: {
+                          readonly: !interactive,
+                          size: browseSize.value,
+                          text: t(props.browseText),
+                          variant: browseVariant.value,
+                        },
+                      }}
+                    >
+                      { slots.browse({ props: { onClick: onClickBrowse } }) }
+                    </VDefaultsProvider>
                   )}
                 </>
               )}

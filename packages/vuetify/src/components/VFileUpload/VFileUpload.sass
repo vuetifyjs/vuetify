@@ -26,6 +26,9 @@
       flex-direction: row
       gap: 1rem
 
+      .v-file-upload-icon + .v-file-upload-dropzone__content
+        text-align: start
+
     .v-overlay__scrim
       pointer-events: none
 
@@ -61,10 +64,17 @@
       top: 0
       z-index: -1
 
+  .v-file-upload-dropzone__content
+    text-align: center
+
   .v-file-upload-title
     font-size: $file-upload-title-font-size
     font-weight: 600
-    text-align: center
+
+  .v-file-upload-subtitle
+    font-size: $file-upload-subtitle-font-size
+    margin-top: $file-upload-subtitle-margin-top
+    opacity: $file-upload-subtitle-opacity
 
   .v-file-upload-icon
     opacity: var(--v-medium-emphasis-opacity)

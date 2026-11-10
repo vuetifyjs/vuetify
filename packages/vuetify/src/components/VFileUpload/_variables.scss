@@ -1,7 +1,11 @@
+@use 'sass:map';
 @use '../../styles/tools';
 @use '../../styles/settings';
 
 $file-upload-title-font-size: 1.5rem !default;
+$file-upload-subtitle-font-size: map.get(settings.$typography, 'body-medium', 'size') !default;
+$file-upload-subtitle-margin-top: .5rem !default;
+$file-upload-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $file-upload-padding: 64px 16px !default;
 $file-upload-drag-border-opacity: var(--v-medium-emphasis-opacity) !default;
 $file-upload-icon-font-size: 3rem !default;
