@@ -1,9 +1,53 @@
 // Components
 import { VRangeSlider } from '../VRangeSlider'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 // Utilities
-import { render, screen } from '@test'
-import { ref } from 'vue'
+import { render, screen, showcase } from '@test'
+
+const pill = {
+  variant: 'pill',
+  size: 'medium',
+  prependInnerIcon: '$minus',
+  appendInnerIcon: '$plus',
+} as const
+
+const stories = {
+  'Pill with inner icons': <VRangeSlider { ...pill } modelValue={[20, 70]} />,
+  Sizes: (
+    <>
+      <VRangeSlider { ...pill } modelValue={[20, 70]} />
+      <VRangeSlider { ...pill } size="large" modelValue={[20, 70]} />
+      <VRangeSlider { ...pill } size="x-large" modelValue={[20, 70]} />
+    </>
+  ),
+  'Inner icons flipped onto the fill': <VRangeSlider { ...pill } modelValue={[2, 98]} />,
+  'Inner icons hidden in a narrow range': (
+    <>
+      <VRangeSlider { ...pill } modelValue={[2, 5]} />
+      <VRangeSlider { ...pill } modelValue={[95, 98]} />
+    </>
+  ),
+  Reverse: (
+    <>
+      <VRangeSlider { ...pill } reverse modelValue={[20, 70]} />
+      <VRangeSlider { ...pill } reverse modelValue={[2, 70]} />
+    </>
+  ),
+  RTL: (
+    <VLocaleProvider rtl>
+      <VRangeSlider { ...pill } modelValue={[2, 70]} />
+    </VLocaleProvider>
+  ),
+  Vertical: (
+    <>
+      <VRangeSlider { ...pill } direction="vertical" modelValue={[20, 70]} />
+      <VRangeSlider { ...pill } direction="vertical" modelValue={[2, 98]} />
+      <VRangeSlider { ...pill } direction="vertical" modelValue={[2, 5]} />
+      <VRangeSlider { ...pill } direction="vertical" reverse modelValue={[2, 70]} />
+    </>
+  ),
+}
 
 describe('VRangeSlider', () => {
   it('should name each thumb from start/end aria labels', () => {
@@ -58,35 +102,5 @@ describe('VRangeSlider', () => {
     expect(start).toHaveTextContent('9h')
   })
 
-  it('should render inner icons only in the pill variant', async () => {
-    const variant = ref<'default' | 'pill'>('default')
-    render(() => (
-      <VRangeSlider
-        variant={ variant.value }
-        modelValue={[25, 55]}
-        prependInnerIcon="$minus"
-        appendInnerIcon="$plus"
-      />
-    ))
-
-    expect(screen.queryAllByCSS('.v-slider__inner-icon')).toHaveLength(0)
-
-    variant.value = 'pill'
-    await expect.poll(() => screen.queryAllByCSS('.v-slider__inner-icon')).toHaveLength(2)
-  })
-
-  it('should move inner icon past the thumb when the outer segment is too short', async () => {
-    const model = ref([25, 75])
-    render(() => <VRangeSlider v-model={ model.value } variant="pill" prependInnerIcon="$minus" />)
-
-    const icon = screen.getByCSS('.v-slider__inner-icon')
-    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--flipped')
-
-    model.value = [2, 75]
-    await expect.element(icon).toHaveClass('v-slider__inner-icon--flipped')
-    await expect.element(icon).not.toHaveClass('v-slider__inner-icon--hidden')
-
-    model.value = [2, 4]
-    await expect.element(icon).toHaveClass('v-slider__inner-icon--hidden')
-  })
+  showcase({ stories })
 })
