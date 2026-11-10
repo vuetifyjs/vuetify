@@ -121,6 +121,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
     const { t } = useLocale()
     const btnDefaults = injectNestedDefaults<VBtn['$props']>('VBtn')
     const insetBrowseVariant = toRef(() => btnDefaults.value?.variant ?? 'text')
+    const insetBrowseSize = toRef(() => btnDefaults.value?.size)
     const browseSize = toRef(() => btnDefaults.value?.size ?? 'large')
     const browseVariant = toRef(() => btnDefaults.value?.variant ?? 'tonal')
     const { densityClasses } = useDensity(props)
@@ -206,12 +207,27 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
       }
     }
 
-    // eslint-disable-next-line complexity
+    function renderBrowse (variant: VBtn['$props']['variant'], size: VBtn['$props']['size']) {
+      const btnProps = {
+        readonly: !isInteractive.value,
+        size,
+        text: t(props.browseText),
+        variant,
+      }
+
+      return slots.browse ? (
+        <VDefaultsProvider defaults={{ VBtn: btnProps }}>
+          { slots.browse({ props: { onClick: onClickBrowse } }) }
+        </VDefaultsProvider>
+      ) : (
+        <VBtn { ...btnProps } onClick={ onClickBrowse } />
+      )
+    }
+
     useRender(() => {
       const modelValue = context?.files.value ?? props.modelValue
       const disabled = isDisabled.value
       const readonly = isReadonly.value
-      const interactive = isInteractive.value
       const error = context?.error.value || props.error
       const hasIcon = !!(slots.icon || props.icon)
       const hasBrowse = !!(!props.hideBrowse && (slots.browse || props.density === 'default'))
@@ -312,26 +328,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
               <VDivider />
 
               <div class="v-file-upload-inset__action">
-                { !slots.browse ? (
-                  <VBtn
-                    readonly={ !interactive }
-                    text={ t(props.browseText) }
-                    variant={ insetBrowseVariant.value }
-                    onClick={ onClickBrowse }
-                  />
-                ) : (
-                  <VDefaultsProvider
-                    defaults={{
-                      VBtn: {
-                        readonly: !interactive,
-                        text: t(props.browseText),
-                        variant: insetBrowseVariant.value,
-                      },
-                    }}
-                  >
-                    { slots.browse({ props: { onClick: onClickBrowse } }) }
-                  </VDefaultsProvider>
-                )}
+                { renderBrowse(insetBrowseVariant.value, insetBrowseSize.value) }
               </div>
             </div>
           ) : (
@@ -383,28 +380,7 @@ export const VFileUploadDropzone = genericComponent<VFileUploadDropzoneSlots>()(
                       </VDivider>
                     )}
                   </div>
-                  { !slots.browse ? (
-                    <VBtn
-                      readonly={ !interactive }
-                      size={ browseSize.value }
-                      text={ t(props.browseText) }
-                      variant={ browseVariant.value }
-                      onClick={ onClickBrowse }
-                    />
-                  ) : (
-                    <VDefaultsProvider
-                      defaults={{
-                        VBtn: {
-                          readonly: !interactive,
-                          size: browseSize.value,
-                          text: t(props.browseText),
-                          variant: browseVariant.value,
-                        },
-                      }}
-                    >
-                      { slots.browse({ props: { onClick: onClickBrowse } }) }
-                    </VDefaultsProvider>
-                  )}
+                  { renderBrowse(browseVariant.value, browseSize.value) }
                 </>
               )}
             </>
