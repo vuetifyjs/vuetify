@@ -109,6 +109,20 @@ describe('vuetify date adapter', () => {
     })
   })
 
+  describe('getDiff', () => {
+    const dateUtils = new VuetifyDateAdapter({ locale: 'en-us' })
+
+    it.each([
+      [new Date('2024-03-31T00:00'), new Date('2024-01-01T00:00'), 0],
+      [new Date('2024-04-01T00:00'), new Date('2024-01-01T00:00'), 1],
+      [new Date('2024-10-01T00:00'), new Date('2024-01-01T00:00'), 3],
+      [new Date('2025-01-01T00:00'), new Date('2024-01-01T00:00'), 4],
+      [new Date('2024-01-01T00:00'), new Date('2025-01-01T00:00'), -4],
+    ])('counts quarters between %s and %s', (date, comparing, expected) => {
+      expect(dateUtils.getDiff(date, comparing, 'quarters')).toBe(expected)
+    })
+  })
+
   it('returns correct start of week', () => {
     let instance = new VuetifyDateAdapter({ locale: 'en-US' })
 
