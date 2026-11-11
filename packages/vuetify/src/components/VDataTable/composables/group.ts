@@ -147,22 +147,6 @@ export function useGroupBy () {
   return data
 }
 
-function groupItemsByProperty <T extends GroupableItem> (items: readonly T[], groupBy: string) {
-  if (!items.length) return []
-
-  const groups = new Map<any, T[]>()
-  for (const item of items) {
-    const value = getObjectValueByPath(item.raw, groupBy)
-
-    if (!groups.has(value)) {
-      groups.set(value, [])
-    }
-    groups.get(value)!.push(item)
-  }
-
-  return groups
-}
-
 const defaultGroupId = (key: string, value: any, parentKey: string) => `${parentKey}_${key}_${value}`
 
 function groupItems <T extends GroupableItem> (
@@ -174,7 +158,7 @@ function groupItems <T extends GroupableItem> (
 ) {
   if (!groupBy.length) return []
 
-  const groupedItems = groupItemsByProperty(items, groupBy[0])
+  const groupedItems = Map.groupBy(items, ({ raw }) => getObjectValueByPath(raw, groupBy[0]))
   const groups: Group<T>[] = []
 
   const rest = groupBy.slice(1)
