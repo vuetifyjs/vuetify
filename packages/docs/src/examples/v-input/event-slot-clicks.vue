@@ -49,8 +49,9 @@
     border: 1px dashed rgba(0,0,0, .4);
   }
 </style>
+
 <example-meta lang="json">
   {
-    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=2801-143731&t=tC3y53U3XKPv8ZyJ-4"
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14177-39856"
   }
 </example-meta>
