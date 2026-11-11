@@ -3,8 +3,7 @@
 @use "../settings/variables" as *
 
 @mixin variant($contained-background, $contained-color, $contained-elevation, $plain-opacity, $name)
-  > .#{$name}__overlay,
-  > .#{$name}__underlay
+  > .#{$name}__overlay
     opacity: 0
     pointer-events: none
     @include absolute()
@@ -47,6 +46,4 @@
       background: currentColor
 
   &--variant-tonal
-    > .#{$name}__underlay
-      background: currentColor
-      opacity: var(--v-activated-opacity)
+    background: color-mix(currentColor calc(var(--v-activated-opacity) * 100%), transparent)

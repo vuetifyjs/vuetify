@@ -16,7 +16,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { computed } from 'vue'
@@ -138,8 +138,6 @@ export const VAvatar = genericComponent<VAvatarSlots>()({
               { slots.default() }
             </VDefaultsProvider>
           )}
-
-          { genOverlays(false, 'v-avatar') }
         </props.tag>
       )
 
