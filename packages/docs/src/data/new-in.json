@@ -919,6 +919,9 @@
     "props": {
       "itemKey": "3.8.0",
       "overscan": "4.4.0"
+    },
+    "examples": {
+      "prop-overscan": "4.4.0"
     }
   },
   "VWindow": {
