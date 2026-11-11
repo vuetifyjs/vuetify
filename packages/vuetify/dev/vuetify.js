@@ -9,9 +9,11 @@ import defaults from './vuetify/defaults'
 import icons from './vuetify/icons'
 import locale from './vuetify/locale'
 
-export default createVuetify({
+export default () => createVuetify({
   directives,
-  ssr: !!process.env.VITE_SSR,
+  ssr: !!process.env.VITE_SSR
+    ? { clientWidth: 1300, clientHeight: 800 }
+    : false,
   date,
   defaults,
   icons,
