@@ -26,7 +26,7 @@ Welcome to the October update. [v4.3.0 Paladin](/blog/announcing-vuetify-4.3/) s
 
 ![Hero image for October update](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/october-hero.png "October hero image"){ height=112 }
 
-🖊️ John Leider • 📅 November 3rd, 2026
+🖊️ John Leider • 📅 November 11th, 2026
 
 <PromotedEntry />
 

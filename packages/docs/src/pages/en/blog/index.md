@@ -20,7 +20,7 @@ Latest news, updates, and stories about Vuetify.
 
 ## October 2026 Update
 
-🖊️ John Leider • 📅 November 3rd, 2026
+🖊️ John Leider • 📅 November 11th, 2026
 
 v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0... { .text-medium-emphasis }
 
