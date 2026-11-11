@@ -1,19 +1,16 @@
 // Composables
 import { useDisplay } from '@/composables/display'
-import { useElementSize } from '@/composables/resizeObserver'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, nextTick, onScopeDispose, ref, shallowRef, watch } from 'vue'
-import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '@/util'
+import { ref, shallowRef, watch } from 'vue'
+import { createVirtual, getPropertyFromItem, IN_BROWSER, isNumber, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
 import type { SelectItemKey } from '@/util'
 
-const UP = -1
-const DOWN = 1
-
-/** Determines how large each batch of items should be */
+/** Pixel buffer useVirtual used to keep around the viewport. createVirtual counts rows. */
 const BUFFER_PX = 100
 
 type VirtualProps = {
@@ -38,347 +35,140 @@ export const makeVirtualProps = propsFactory({
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
   const display = useDisplay()
-
-  const itemHeight = shallowRef(0)
-  watch(() => parseFloat(props.itemHeight || 0), value => {
-    itemHeight.value = value
-  }, { immediate: true })
-
-  const first = shallowRef(0)
-  const last = shallowRef(Math.ceil(
-    // Assume 16px items filling the entire screen height if
-    // not provided. This is probably incorrect but it minimises
-    // the chance of ending up with empty space at the bottom.
-    // The default value is set here to avoid poisoning getSize()
-    (parseInt(props.height!) || display.height.value) / (itemHeight.value || 16)
-  ) || 1)
-  const paddingTop = shallowRef(0)
-  const paddingBottom = shallowRef(0)
-
-  /** The scrollable element */
-  const containerRef = ref<HTMLElement>()
-  /** An element marking the top of the scrollable area,
-   * used to add an offset if there's padding or other elements above the virtual list */
   const markerRef = ref<HTMLElement>()
-  /** markerRef's offsetTop, lazily evaluated */
-  let markerOffset = 0
 
-  const { height: containerHeight } = useElementSize(containerRef)
-  const viewportHeight = computed(() => {
-    return containerRef.value === document.documentElement
-      ? display.height.value
-      : containerHeight.value || parseInt(props.height!) || 0
+  // push/splice keep the array reference. createVirtual only watches that reference.
+  const list = shallowRef(items.value)
+  watch(items, value => {
+    list.value = value
   })
-  /** All static elements have been rendered and we have an assumed item height */
-  const hasInitialRender = computed(() => {
-    return !!(containerRef.value && markerRef.value && viewportHeight.value && itemHeight.value)
+  watch(() => items.value.length, () => {
+    list.value = items.value.slice()
   })
 
-  let sizes = Array.from<number | null>({ length: items.value.length })
-  let offsets = Array.from<number>({ length: items.value.length })
-  let heights = new Map<number, number>()
-  const updateTime = shallowRef(0)
-  let targetScrollIndex = -1
-  let targetScrollPosition: ScrollToPosition = 'start'
-  let targetScrollHeight = 0
+  const row = Number.parseFloat(String(props.itemHeight || 0))
+  const parsedHeight = Number.parseInt(String(props.height))
+  const fixedHeight = Number.isFinite(parsedHeight) && parsedHeight > 0
+  // A list with no height prop, such as a select menu, still needs a viewport
+  // or the first window stays empty. The screen height is that estimate.
+  const viewport = fixedHeight ? parsedHeight : (display.height.value || 0)
+  const virtual = createVirtual(list, {
+    itemHeight: props.itemHeight,
+    height: viewport || undefined,
+    overscan: Math.ceil(BUFFER_PX / (row || 16)),
+    marker: markerRef,
+    itemKey: props.itemKey
+      ? (item, index) => {
+        const key = getPropertyFromItem(item, props.itemKey, index)
+        return isString(key) || isNumber(key) ? key : index
+      }
+      : undefined,
+    ownElement: false,
+  })
 
-  function getSize (index: number) {
-    return sizes[index] || itemHeight.value
+  // createVirtual places its window from the scroll element, which the render
+  // assigns. A stand-in applies the viewport during setup so the first frame
+  // is already filled, including on the server.
+  if (viewport) {
+    virtual.element.value = { scrollTop: 0, scrollHeight: 0 } as HTMLElement
+    virtual.scrollTo(0)
+    virtual.element.value = undefined
   }
 
-  const updateOffsets = debounce(() => {
-    const start = performance.now()
-    offsets[0] = 0
-    const length = items.value.length
-    for (let i = 1; i <= length; i++) {
-      offsets[i] = (offsets[i - 1] || 0) + getSize(i - 1)
-    }
-    updateTime.value = Math.max(updateTime.value, performance.now() - start)
-    calculateVisibleItems()
-  }, updateTime)
+  // createVirtual keeps the scroll position it computed from the estimate.
+  // A menu opens before the rows or the scrollport have been measured, so the
+  // last request is replayed once both have arrived.
+  let aim: { index: number, block: ScrollToPosition } | undefined
+  let corrected = false
+  let sawRow = row > 0
+  let viewportReady = false
+  let frame = 0
 
-  const unwatch = watch(hasInitialRender, v => {
-    if (!v) return
-    // First render is complete, update offsets and visible
-    // items in case our assumed item height was incorrect
+  function scrollTarget (index: number, block: ScrollToPosition) {
+    virtual.scrollTo(index, { block })
+    // createVirtual adds the marker offset for every block. On a list that
+    // offset is the padding, which leaves a centered row one padding high.
+    if (block === 'end') return
 
-    unwatch()
-    markerOffset = markerRef.value!.offsetTop
-    updateOffsets.immediate()
-    calculateVisibleItems()
+    const node = virtual.element.value
+    const marker = markerRef.value
+    if (!node || !marker) return
 
-    if (!~targetScrollIndex) return
+    node.scrollTop -= marker.offsetTop
+  }
 
-    nextTick(() => {
-      IN_BROWSER && window.requestAnimationFrame(() => {
-        if (~targetScrollIndex) scrollToIndex(targetScrollIndex, targetScrollPosition)
+  function replay () {
+    if (corrected || !aim || !sawRow || !viewportReady) return
+
+    const node = virtual.element.value
+    if (!node || node.clientHeight <= 0) return
+
+    corrected = true
+    const next = aim
+    aim = undefined
+    scrollTarget(next.index, next.block)
+  }
+
+  function arm () {
+    if (!IN_BROWSER || corrected || !aim) return
+
+    const token = ++frame
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (token !== frame) return
+        replay()
       })
     })
-  })
-
-  onScopeDispose(() => {
-    updateOffsets.clear()
-  })
-
-  function estimateItemHeight () {
-    let total = 0
-    for (const count of heights.values()) total += count
-
-    let seen = 0
-    for (const height of [...heights.keys()].sort((a, b) => a - b)) {
-      seen += heights.get(height)!
-      if (seen * 2 >= total) return height
-    }
-    return itemHeight.value
-  }
-
-  function handleItemResize (index: number, height: number) {
-    const prevHeight = sizes[index]
-    const prevItemHeight = itemHeight.value
-
-    if (height > 0) {
-      if (prevHeight) {
-        const count = heights.get(prevHeight)! - 1
-        count ? heights.set(prevHeight, count) : heights.delete(prevHeight)
-      }
-      heights.set(height, (heights.get(height) ?? 0) + 1)
-      itemHeight.value = estimateItemHeight()
-    }
-
-    if (prevHeight !== height || prevItemHeight !== itemHeight.value) {
-      sizes[index] = height
-      updateOffsets()
-    }
-  }
-
-  function calculateOffset (index: number) {
-    index = clamp(index, 0, items.value.length)
-    const whole = Math.floor(index)
-    const fraction = index % 1
-    const next = whole + 1
-    const wholeOffset = offsets[whole] || 0
-    const nextOffset = offsets[next] || wholeOffset
-    return wholeOffset + (nextOffset - wholeOffset) * fraction
-  }
-
-  function calculateIndex (scrollTop: number) {
-    return binaryClosest(offsets, scrollTop)
-  }
-
-  let lastScrollTop = 0
-  let scrollVelocity = 0
-  let lastScrollTime = 0
-
-  watch(viewportHeight, (val, oldVal) => {
-    calculateVisibleItems()
-    if (val < oldVal) {
-      requestAnimationFrame(() => {
-        scrollVelocity = 0
-        calculateVisibleItems()
-      })
-    }
-  })
-
-  let scrollTimeout = -1
-  function handleScroll () {
-    if (!containerRef.value || !markerRef.value) return
-
-    const scrollTop = containerRef.value.scrollTop
-    const scrollTime = performance.now()
-    const scrollDeltaT = scrollTime - lastScrollTime
-
-    if (scrollDeltaT > 500) {
-      scrollVelocity = Math.sign(scrollTop - lastScrollTop)
-
-      // Not super important, only update at the
-      // start of a scroll sequence to avoid reflows
-      markerOffset = markerRef.value.offsetTop
-    } else {
-      scrollVelocity = scrollTop - lastScrollTop
-    }
-
-    lastScrollTop = scrollTop
-    lastScrollTime = scrollTime
-
-    window.clearTimeout(scrollTimeout)
-    scrollTimeout = window.setTimeout(handleScrollend, 500)
-
-    calculateVisibleItems()
-  }
-  function handleScrollend () {
-    if (!containerRef.value || !markerRef.value) return
-
-    scrollVelocity = 0
-    lastScrollTime = 0
-
-    window.clearTimeout(scrollTimeout)
-    calculateVisibleItems()
-  }
-
-  let raf = -1
-  function calculateVisibleItems () {
-    cancelAnimationFrame(raf)
-    raf = requestAnimationFrame(_calculateVisibleItems)
-  }
-  function _calculateVisibleItems () {
-    if (!containerRef.value || !viewportHeight.value || !itemHeight.value) return
-    const scrollTop = lastScrollTop - markerOffset
-    const direction = Math.sign(scrollVelocity)
-
-    const startPx = Math.max(0, scrollTop - BUFFER_PX)
-    const start = clamp(calculateIndex(startPx), 0, items.value.length)
-
-    const endPx = scrollTop + viewportHeight.value + BUFFER_PX
-    const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
-
-    if (
-      // Only update the side we're scrolling towards,
-      // the other side will be updated incidentally
-      (direction !== UP || start < first.value) &&
-      (direction !== DOWN || end > last.value)
-    ) {
-      const topOverflow = calculateOffset(first.value) - calculateOffset(start)
-      const bottomOverflow = calculateOffset(end) - calculateOffset(last.value)
-      const bufferOverflow = Math.max(topOverflow, bottomOverflow)
-
-      if (bufferOverflow > BUFFER_PX) {
-        first.value = start
-        last.value = end
-      } else {
-        // Only update the side that's reached its limit if there's still buffer left
-        if (start <= 0) first.value = start
-        if (end >= items.value.length) {
-          last.value = end
-          first.value = start
-        }
-      }
-    }
-
-    paddingTop.value = calculateOffset(first.value)
-    paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
-  }
-
-  function calculateScrollTop (index: number, position: ScrollToPosition) {
-    const offset = calculateOffset(index)
-    if (position === 'center') return Math.max(0, offset - viewportHeight.value / 2 + getSize(index) / 2)
-    if (position === 'end') {
-      const scrollport = containerRef.value?.clientHeight || viewportHeight.value
-      return Math.max(0, offset + markerOffset - scrollport + getSize(index))
-    }
-    return offset
   }
 
   function scrollToIndex (index: number, position: ScrollToPosition = 'start') {
-    if (targetScrollIndex !== index) targetScrollHeight = 0
+    const last = items.value.length - 1
+    if (last < 0) return
 
-    const offset = calculateOffset(index)
-    if (!containerRef.value || (index && !offset)) {
-      targetScrollIndex = index
-      targetScrollPosition = position
-      return
+    let target = index < 0 ? 0 : index
+    let block = position
+    // An index of `length` is the offset after the last row.
+    if (index >= items.value.length) {
+      target = last
+      block = position === 'start' ? 'end' : position
     }
 
-    // Move the window first so paddingTop/Bottom make scrollHeight large enough
-    // before we assign scrollTop (otherwise the browser clamps the scroll).
-    const itemSize = itemHeight.value || 16
-    const buffer = Math.ceil(BUFFER_PX / itemSize)
-    const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
-
-    // paddingTop comes from first and must not exceed the scrollTop assigned below
-    const lead = position === 'center' ? Math.ceil(viewport / 2) : position === 'end' ? viewport : 0
-    first.value = clamp(index - lead - buffer, 0, Math.max(0, items.value.length - 1))
-    last.value = clamp(index - lead + viewport + buffer, first.value + 1, items.value.length)
-    paddingTop.value = calculateOffset(first.value)
-    paddingBottom.value = calculateOffset(items.value.length) - calculateOffset(last.value)
-
-    scrollVelocity = 0
-    lastScrollTime = 0
-    targetScrollIndex = index
-    targetScrollPosition = position
-
-    nextTick(() => {
-      const el = containerRef.value
-      // Superseded by a later scrollToIndex
-      if (!el || !~targetScrollIndex || targetScrollIndex !== index) return
-
-      const top = calculateScrollTop(index, position)
-      el.scrollTop = top
-      // Resize-driven calculateVisibleItems reads lastScrollTop, not the DOM
-      lastScrollTop = el.scrollTop
-
-      if (index && el.scrollTop < top - 1 && el.scrollHeight > targetScrollHeight) {
-        targetScrollHeight = el.scrollHeight
-        IN_BROWSER && requestAnimationFrame(() => {
-          if (targetScrollIndex === index) scrollToIndex(index, position)
-        })
-      } else {
-        targetScrollIndex = -1
-        targetScrollPosition = 'start'
-        calculateVisibleItems()
-      }
-    })
+    if (!corrected) {
+      aim = { index: target, block }
+      arm()
+    }
+    scrollTarget(target, block)
   }
 
-  const computedItems = computed(() => {
-    return items.value.slice(first.value, last.value).map((item, index) => {
-      const _index = index + first.value
-      return {
-        raw: item,
-        index: _index,
-        key: getPropertyFromItem(item, props.itemKey, _index),
-      }
-    })
+  function handleItemResize (index: number, height: number) {
+    virtual.resize(index, height)
+    if (height <= 0) return
+
+    sawRow = true
+    arm()
+  }
+
+  useResizeObserver(virtual.element, entries => {
+    const height = entries[0]?.contentRect.height ?? 0
+    if (height <= 0) return
+    // The screen-height seed is taller than a menu. A measurement that large
+    // is the unclamped content, and scrolling against it sticks.
+    if (!fixedHeight && viewport > 0 && height >= viewport) return
+
+    viewportReady = true
+    arm()
   })
 
-  watch(items, () => {
-    sizes = Array.from({ length: items.value.length })
-    offsets = Array.from({ length: items.value.length })
-    heights = new Map()
-    updateOffsets.immediate()
-    calculateVisibleItems()
-  }, { deep: 1 })
-
   return {
-    calculateVisibleItems,
-    containerRef,
+    calculateVisibleItems: virtual.scroll,
+    containerRef: virtual.element,
     markerRef,
-    computedItems,
-    paddingTop,
-    paddingBottom,
+    computedItems: virtual.items,
+    paddingTop: virtual.offset,
+    paddingBottom: virtual.size,
     scrollToIndex,
-    handleScroll,
-    handleScrollend,
+    handleScroll: virtual.scroll,
+    handleScrollend: virtual.scrollend,
     handleItemResize,
   }
-}
-
-// https://gist.github.com/robertleeplummerjr/1cc657191d34ecd0a324
-function binaryClosest (arr: ArrayLike<number>, val: number) {
-  let high = arr.length - 1
-  let low = 0
-  let mid = 0
-  let item = null
-  let target = -1
-
-  if (arr[high]! < val) {
-    return high
-  }
-
-  while (low <= high) {
-    mid = (low + high) >> 1
-    item = arr[mid]!
-
-    if (item > val) {
-      high = mid - 1
-    } else if (item < val) {
-      target = mid
-      low = mid + 1
-    } else if (item === val) {
-      return mid
-    } else {
-      return low
-    }
-  }
-
-  return target
 }
