@@ -118,6 +118,7 @@ describe('vuetify date adapter', () => {
       [new Date('2024-10-01T00:00'), new Date('2024-01-01T00:00'), 3],
       [new Date('2025-01-01T00:00'), new Date('2024-01-01T00:00'), 4],
       [new Date('2024-01-01T00:00'), new Date('2025-01-01T00:00'), -4],
+      [new Date('2024-01-01T00:00'), new Date('2024-03-01T00:00'), 0],
     ])('counts quarters between %s and %s', (date, comparing, expected) => {
       expect(dateUtils.getDiff(date, comparing, 'quarters')).toBe(expected)
     })
