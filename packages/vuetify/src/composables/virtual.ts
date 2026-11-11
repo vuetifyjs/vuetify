@@ -4,7 +4,7 @@ import { useElementSize } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, onScopeDispose, ref, shallowRef, watch } from 'vue'
-import { clamp, debounce, getPropertyFromItem, IN_BROWSER, propsFactory } from '@/util'
+import { clamp, debounce, getPropertyFromItem, IN_BROWSER, isNullOrUndefined, isUndefined, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -13,13 +13,14 @@ import type { SelectItemKey } from '@/util'
 const UP = -1
 const DOWN = 1
 
-/** Determines how large each batch of items should be */
+/** Determines how large each batch of items should be, and the rendered margin when overscan is not set */
 const BUFFER_PX = 100
 
 type VirtualProps = {
   itemHeight: number | string | null | undefined
   itemKey: SelectItemKey
   height: number | string | undefined
+  overscan: number | string | null
 }
 
 export type ScrollToPosition = 'start' | 'center' | 'end'
@@ -34,6 +35,10 @@ export const makeVirtualProps = propsFactory({
     default: null,
   },
   height: [Number, String],
+  overscan: {
+    type: [Number, String],
+    default: null, // null for 100px fallback in v4.x, use actual number after switching to v0
+  },
 }, 'virtual')
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
@@ -225,11 +230,19 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     const scrollTop = lastScrollTop - markerOffset
     const direction = Math.sign(scrollVelocity)
 
-    const startPx = Math.max(0, scrollTop - BUFFER_PX)
-    const start = clamp(calculateIndex(startPx), 0, items.value.length)
+    const viewportEnd = scrollTop + viewportHeight.value
+    const overscan = isNullOrUndefined(props.overscan) ? undefined : Number(props.overscan)
 
-    const endPx = scrollTop + viewportHeight.value + BUFFER_PX
-    const end = clamp(calculateIndex(endPx) + 1, start + 1, items.value.length)
+    const start = clamp(
+      isUndefined(overscan) ? calculateIndex(Math.max(0, scrollTop - BUFFER_PX)) : calculateIndex(scrollTop) - overscan,
+      0,
+      items.value.length,
+    )
+    const end = clamp(
+      (isUndefined(overscan) ? calculateIndex(viewportEnd + BUFFER_PX) : calculateIndex(viewportEnd) + overscan) + 1,
+      start + 1,
+      items.value.length,
+    )
 
     if (
       // Only update the side we're scrolling towards,
@@ -281,7 +294,7 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
     // Move the window first so paddingTop/Bottom make scrollHeight large enough
     // before we assign scrollTop (otherwise the browser clamps the scroll).
     const itemSize = itemHeight.value || 16
-    const buffer = Math.ceil(BUFFER_PX / itemSize)
+    const buffer = isNullOrUndefined(props.overscan) ? Math.ceil(BUFFER_PX / itemSize) : Number(props.overscan)
     const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
 
     // paddingTop comes from first and must not exceed the scrollTop assigned below
