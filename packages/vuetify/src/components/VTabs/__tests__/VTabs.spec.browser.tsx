@@ -87,6 +87,59 @@ describe('VTabs', () => {
     expect(screen.getAllByCSS('.v-tab')[1]).toHaveClass('v-tab--selected')
   })
 
+  it('should apply color to the selected tab with href', async () => {
+    const model = ref('foo')
+    render(() => (
+      <VTabs v-model={ model.value } color="primary">
+        <VTab value="foo" href="#foo">foo</VTab>
+        <VTab value="bar" href="#bar">bar</VTab>
+      </VTabs>
+    ))
+
+    const tabs = screen.getAllByCSS('.v-tab')
+    await expect.element(tabs[0]).toHaveClass('text-primary')
+    expect(tabs[1]).not.toHaveClass('text-primary')
+
+    await userEvent.click(tabs[1])
+
+    expect(model.value).toBe('bar')
+    await expect.element(tabs[1]).toHaveClass('text-primary')
+    expect(tabs[0]).not.toHaveClass('text-primary')
+  })
+
+  it('should apply color to the tab matching the current route', async () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        { path: '/', component: { template: 'Home' } },
+        { path: '/about', component: { template: 'About' } },
+      ],
+    })
+
+    await router.replace('/')
+
+    render(() => (
+      <VTabs color="primary">
+        <VTab to="/">foo</VTab>
+        <VTab to="/about">bar</VTab>
+      </VTabs>
+    ), {
+      global: {
+        plugins: [router],
+      },
+    })
+
+    const tabs = screen.getAllByCSS('.v-tab')
+    await expect.element(tabs[0]).toHaveClass('text-primary')
+    expect(tabs[1]).not.toHaveClass('text-primary')
+
+    await userEvent.click(tabs[1])
+
+    await expect.element(tabs[1]).toHaveClass('text-primary')
+    expect(tabs[0]).not.toHaveClass('text-primary')
+    expect(router.currentRoute.value.path).toBe('/about')
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/15237
   it('should not change model value if tab items are hidden with v-show', async () => {
     const model = ref('B')
