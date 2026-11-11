@@ -26,6 +26,30 @@ describe('VVirtualScroll', () => {
     expect(elements.length).toBeLessThan(50)
   })
 
+  it('renders the given number of extra items beyond the viewport', async () => {
+    const items = createRange(1000)
+    const overscan = ref<number>()
+
+    render(() => (
+      <VVirtualScroll height="400" items={ items } itemHeight="24" overscan={ overscan.value }>
+        {{
+          default: ({ index }) => (
+            <div style="height: 24px">{ index }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const scroller = screen.getByCSS('.v-virtual-scroll')
+    await scroll({ top: 2400 }, scroller)
+    await waitIdle()
+    const initial = screen.getAllByCSS('.v-virtual-scroll__item').length
+
+    overscan.value = 25
+    await scroll({ top: 4800 }, scroller)
+    await expect.poll(() => screen.getAllByCSS('.v-virtual-scroll__item').length).toBeGreaterThan(initial + 30)
+  })
+
   it('recalculates visible items when they collapse without scroll', async () => {
     const collapsed = ref(false)
 

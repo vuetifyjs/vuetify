@@ -1,5 +1,6 @@
 {
   "props": {
+    "overscan": "Number of extra items to render beyond each edge of the visible area. Larger values avoid blank space during fast scrolling, at the cost of more items in the DOM. When not set, items within 100px of the visible area are rendered.",
     "itemHeight": "Height in pixels of each item to display."
   },
   "exposed": {
