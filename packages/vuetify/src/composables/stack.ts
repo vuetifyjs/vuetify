@@ -25,12 +25,13 @@ interface StackProvide {
   activeChildren: Set<number>
 }
 
-const globalStack = reactive<[uid: number, zIndex: number][]>([])
+const globalStack = reactive<[uid: number, zIndex: number, passive: boolean][]>([])
 
 export function useStack (
   isActive: Readonly<Ref<boolean>>,
   zIndex: MaybeRefOrGetter<string | number>,
-  disableGlobalStack: boolean
+  disableGlobalStack: boolean,
+  passive = false
 ) {
   const vm = getCurrentInstance('useStack')
   const createStackEntry = !disableGlobalStack
@@ -47,7 +48,7 @@ export function useStack (
     _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
 
     if (createStackEntry) {
-      globalStack.push([vm.uid, _zIndex.value])
+      globalStack.push([vm.uid, _zIndex.value, passive])
     }
 
     parent?.activeChildren.add(vm.uid)
@@ -65,7 +66,8 @@ export function useStack (
   const globalTop = shallowRef(true)
   if (createStackEntry) {
     watchEffect(() => {
-      const _isTop = globalStack.at(-1)?.[0] === vm.uid
+      const top = passive ? globalStack.at(-1) : globalStack.findLast(v => !v[2])
+      const _isTop = top?.[0] === vm.uid
       setTimeout(() => globalTop.value = _isTop)
     })
   }
