@@ -30,7 +30,8 @@ const globalStack = reactive<[uid: number, zIndex: number][]>([])
 export function useStack (
   isActive: Readonly<Ref<boolean>>,
   zIndex: MaybeRefOrGetter<string | number>,
-  disableGlobalStack: boolean
+  disableGlobalStack: boolean,
+  contained: MaybeRefOrGetter<boolean> = false,
 ) {
   const vm = getCurrentInstance('useStack')
   const createStackEntry = !disableGlobalStack
@@ -50,7 +51,10 @@ export function useStack (
       globalStack.push([vm.uid, _zIndex.value])
     }
 
-    parent?.activeChildren.add(vm.uid)
+    // A contained overlay sits inside its parent, so it must not stop the parent from closing on outside clicks
+    if (!toValue(contained)) {
+      parent?.activeChildren.add(vm.uid)
+    }
 
     onScopeDispose(() => {
       if (createStackEntry) {
