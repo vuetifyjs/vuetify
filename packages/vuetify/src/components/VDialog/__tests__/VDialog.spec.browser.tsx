@@ -195,7 +195,6 @@ describe('VDialog', () => {
     await expect.poll(() => document.activeElement).toBe(first)
   })
 
-  // https://github.com/vuetifyjs/vuetify/issues/23392
   it('should close on Escape when a snackbar opens above it', async () => {
     const dialog = ref(true)
     const snackbar = ref(false)
