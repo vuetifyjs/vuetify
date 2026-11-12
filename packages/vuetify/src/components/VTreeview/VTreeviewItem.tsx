@@ -71,6 +71,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
     function onClickAction (e: PointerEvent) {
       e.preventDefault()
       e.stopPropagation()
+      vListItemRef.value?.$el.focus()
       emit('toggleExpand', e)
     }
 
