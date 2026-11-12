@@ -16,6 +16,10 @@ describe('VList', () => {
     })
   }
 
+  afterEach(() => {
+    vi.useRealTimers()
+  })
+
   it('should match a snapshot', () => {
     const wrapper = mountFunction()
 
@@ -57,7 +61,5 @@ describe('VList', () => {
 
     expect(vm.children).toBe(children)
     expect(vm.parents).toBe(parents)
-
-    vi.useRealTimers()
   })
 })
