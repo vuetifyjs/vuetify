@@ -87,17 +87,20 @@ describe('VTreeview a11y', () => {
     expect(treeitem('Other contributors')).not.toHaveAttribute('aria-expanded')
   })
 
-  it('moves focus to the treeitem when the toggle is clicked', async () => {
+  it('moves focus to the treeitem without focusing the toggle when it is clicked', async () => {
     render(() => (
       <VTreeview items={ items } itemValue="id" openAll />
     ))
 
     const toggle = treeitem('Core team').querySelector('.v-btn')!
+    const onFocus = vi.fn()
+    toggle.addEventListener('focus', onFocus)
     await userEvent.click(toggle)
     await waitIdle()
 
     expect(treeitem('Core team')).toHaveAttribute('aria-expanded', 'false')
     expect(document.activeElement).toBe(treeitem('Core team'))
+    expect(onFocus).not.toHaveBeenCalled()
   })
 
   it('exposes aria-multiselectable and aria-label on a selectable tree', async () => {
