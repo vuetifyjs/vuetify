@@ -163,6 +163,17 @@ describe('helpers', () => {
     expect(humanReadableFileSize(2000000000)).toBe('2.0 GB')
   })
 
+  it('humanReadableFileSize should move to the next unit when rounding reaches the base', () => {
+    expect(humanReadableFileSize(999949)).toBe('999.9 kB')
+    expect(humanReadableFileSize(999950)).toBe('1.0 MB')
+    expect(humanReadableFileSize(999999999)).toBe('1.0 GB')
+    expect(humanReadableFileSize(1048575, 1024)).toBe('1.0 MiB')
+    expect(humanReadableFileSize(1073741823, 1024)).toBe('1.0 GiB')
+
+    // there is no unit above giga
+    expect(humanReadableFileSize(999999999999)).toBe('1000.0 GB')
+  })
+
   describe('mergeDeep', () => {
     it('should include all properties from both source and target', () => {
       expect(mergeDeep({ a: 'foo' }, { b: 'bar' })).toEqual({ a: 'foo', b: 'bar' })
