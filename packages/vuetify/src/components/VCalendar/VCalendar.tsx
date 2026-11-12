@@ -320,56 +320,56 @@ export const VCalendar = genericComponent<new (
     }
 
     function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
-      if (!base.noEvents.value) {
-        const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-          else if (typeof category === 'string') map[category] = { index, count: 0 }
-          return map
-        }, {})
-
-        if (!props.categoryHideDynamic || !props.categoryShowAll) {
-          let categoryLength = categories.length
-
-          base.parsedEvents.value.forEach(ev => {
-            let category = ev.category
-
-            if (typeof category !== 'string') {
-              category = props.categoryForInvalid
-            }
-
-            if (!category) {
-              return
-            }
-
-            if (category in categoryMap) {
-              categoryMap[category].count++
-            } else if (!props.categoryHideDynamic) {
-              categoryMap[category] = {
-                index: categoryLength++,
-                count: 1,
-              }
-            }
-          })
+      function getCategoryName (category: CalendarCategory): string | undefined {
+        if (typeof category === 'string') return category
+        if (typeof category === 'object' && category.categoryName) {
+          return category.name
         }
 
-        if (!props.categoryShowAll) {
-          for (const category in categoryMap) {
-            if (categoryMap[category].count === 0) {
-              delete categoryMap[category]
-            }
-          }
-        }
+        return undefined
+      }
 
-        categories = categories.filter((category: CalendarCategory) => {
-          if (typeof category === 'object' && category.categoryName) {
-            return categoryMap.hasOwnProperty(category.categoryName)
-          } else if (typeof category === 'string') {
-            return categoryMap.hasOwnProperty(category)
+      if (base.noEvents.value) return categories
+
+      const categoryMap: Map<string, { index: number, count: number }> = new Map()
+
+      for (const [category, { index }] of categoryMap) {
+        const name = getCategoryName(category)
+
+        if (name) categoryMap.set(name, { index, count: 0 })
+      }
+
+      if (!props.categoryHideDynamic || !props.categoryShowAll) {
+        let categoryLength = categories.length
+
+        base.parsedEvents.value.forEach(ev => {
+          let category = ev.category
+
+          if (typeof category !== 'string') {
+            category = props.categoryForInvalid
           }
-          return false
+
+          if (!category) {
+            return
+          }
+
+          const existing = categoryMap.get(category)
+
+          if (existing) {
+            categoryMap.set(category, { index: existing.index, count: existing.count++ })
+          } else if (!props.categoryHideDynamic) {
+            categoryMap.set(category, { count: 1, index: categoryLength++ })
+          }
         })
       }
-      return categories
+
+      if (props.categoryShowAll) return categories
+
+      return categories.filter((category: CalendarCategory) => {
+        const name = getCategoryName(category)
+
+        return name !== undefined && categoryMap.has(name) && categoryMap.get(name)!.count > 0
+      })
     }
 
     watch(renderProps, checkChange)
