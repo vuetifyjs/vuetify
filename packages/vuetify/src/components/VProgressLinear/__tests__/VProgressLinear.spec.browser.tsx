@@ -60,5 +60,14 @@ describe('VProgressLinear', () => {
     expect(screen.getByCSS('.v-progress-linear__determinate').clientWidth).toBe(50)
   })
 
+  it('should not measure the element on mount', async () => {
+    const spy = vi.spyOn(Element.prototype, 'getBoundingClientRect')
+    render(() => <VProgressLinear active={ false } indeterminate />)
+    await wait()
+
+    expect(spy).not.toHaveBeenCalled()
+    spy.mockRestore()
+  })
+
   showcase({ stories })
 })
