@@ -219,6 +219,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       if (!isHovering.value) startTimeout()
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key !== 'Escape') return
+
+      e.stopPropagation()
+      isActive.value = false
+    }
+
     function onTouchstart (event: TouchEvent) {
       startY.value = event.touches[0].clientY
     }
@@ -339,6 +346,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             onPointerleave,
             onFocusin,
             onFocusout,
+            onKeydown,
           }, overlayProps.contentProps)}
           persistent
           noClickAnimation
