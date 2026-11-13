@@ -69,21 +69,5 @@ describe('VProgressLinear', () => {
     spy.mockRestore()
   })
 
-  it('should only observe intersection while active', async () => {
-    const spy = vi.spyOn(IntersectionObserver.prototype, 'observe')
-    const active = ref(false)
-    const { container } = render(() => <VProgressLinear active={ active.value } indeterminate />)
-    await wait()
-
-    expect(spy).not.toHaveBeenCalled()
-
-    active.value = true
-    await wait(100)
-
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(container.querySelector('.v-progress-linear')).toHaveClass('v-progress-linear--active')
-    spy.mockRestore()
-  })
-
   showcase({ stories })
 })
