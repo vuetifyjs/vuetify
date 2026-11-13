@@ -71,7 +71,12 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
     function onClickAction (e: PointerEvent) {
       e.preventDefault()
       e.stopPropagation()
+      vListItemRef.value?.$el.focus()
       emit('toggleExpand', e)
+    }
+
+    function onMousedownAction (e: MouseEvent) {
+      e.preventDefault()
     }
 
     useRender(() => {
@@ -130,6 +135,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                               variant="text"
                               aria-hidden="true"
                               onClick={ onClickAction }
+                              onMousedown={ onMousedownAction }
                             >
                               {{
                                 loader: () => (
@@ -164,6 +170,7 @@ export const VTreeviewItem = genericComponent<VTreeviewItemSlots>()({
                                 loading: props.loading,
                                 props: {
                                   onClick: onClickAction,
+                                  onMousedown: onMousedownAction,
                                 },
                               })}
                             </VDefaultsProvider>
