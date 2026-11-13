@@ -88,6 +88,8 @@ Gzipped JS of a Vite 8 production build, before → after:
 | VSelect only   | 121 → 97 kB   | 171 → 98 kB   |
 | all components | 244 → 221 kB  | 294 → 222 kB  |
 
+![Chart of gzipped JS before and after @vuetify/v0 v1.2.4 in a Vite 8 build](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/vite-8-bundle-size.png "Vite 8 bundle size, before and after")
+
 The saving is the same either way, because none of that code was needed. Vite 7 builds don't change. If your bundle is measured in megabytes you won't notice, but in a small app it's a fair share.
 
 [v1.3.1](https://0.vuetifyjs.com/releases/?version=v1.3.1) goes after the Vue 3.6 part directly: v0 no longer imports `vue` as a namespace, so VDOM apps stop shipping the Vapor runtime ([#1095](https://github.com/vuetifyjs/0/pull/1095)).
@@ -116,6 +118,10 @@ Stable components follow semver, so nothing there breaks in a minor. Labs compon
 * [VCheckboxGroup](/components/checkbox-groups/) (labs) holds the `v-model` of its child checkboxes, with one shared label and group validation ([#23299](https://github.com/vuetifyjs/vuetify/pull/23299), thanks [morimorimokenpi](https://github.com/morimorimokenpi)).
 * `first-day-of-week` and `weekday-format` now work with date-io adapters ([#23310](https://github.com/vuetifyjs/vuetify/pull/23310)).
 * VSelect and VAutocomplete with `multiple` no longer duplicate items in the model ([17b7887](https://github.com/vuetifyjs/vuetify/commit/17b78872e1)).
+
+![Image of v-alert timer variants: top, bottom and close](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/valert-timeout-timer.png "v-alert timeout timer")
+
+![Image of v-checkbox-group showing a shared label and group validation](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/vcheckbox-group-validation.png "v-checkbox-group validation"){ height=250 }
 
 ---
 
@@ -168,6 +174,8 @@ Support for non-Gregorian calendars in `useDate` is merged but not released yet 
 ### Design systems { #design-systems }
 
 Vuetify0 is headless. Design systems are what give it a look. [Emerald](https://0.vuetifyjs.com/systems/emerald) shipped in August. **Onyx**, the second original system, is still to come, with its own look on the same headless core.
+
+![Image of the Emerald design system demo Kanban board](https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/emerald-kanban-demo.png "Emerald Kanban demo")
 
 We're also planning full recreations of other design systems on Vuetify0:
 
