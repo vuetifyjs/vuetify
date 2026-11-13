@@ -209,7 +209,8 @@
           transform: translateX(calc(#{-$switch-thumb-transform} * var(--v-switch-scale)))
 
     &.v-switch--indeterminate
-      .v-selection-control__input
+      .v-selection-control__input,
+      .v-selection-control--dirty .v-selection-control__input
         transform: scale(.8)
       .v-switch__thumb
         transform: scale(.75)
