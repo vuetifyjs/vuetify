@@ -119,7 +119,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
       textColorStyles: trackColorStyles,
     } = useTextColor(() => props.bgColor)
     const { roundedClasses, roundedStyles } = useRounded(props)
-    const { isIntersecting } = useElementIntersection(root, { immediate: false })
+    const { isIntersecting } = useElementIntersection(() => props.active ? root.value : undefined, { immediate: false })
     const { state: revealState, duration: revealDuration } = useReveal(props)
 
     const max = computed(() => parseFloat(props.max))
