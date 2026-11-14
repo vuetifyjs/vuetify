@@ -147,6 +147,76 @@ describe('VDateInput', () => {
     expect(emitted<Date[]>('update:modelValue')[0][0]).toBeNull()
   })
 
+  it.each([
+    { initial: '2026-06-05' as string | null },
+    { initial: null },
+  ])('should emit update:modelValue once when a day is picked', async ({ initial }) => {
+    const model = ref<unknown>(initial)
+    const updates: unknown[] = []
+    const { element } = render(() => (
+      <>
+        <VDateInput
+          modelValue={ model.value }
+          month={ 5 }
+          year={ 2026 }
+          onUpdate:modelValue={ value => {
+            updates.push(value)
+            model.value = value
+          }}
+        />
+        <button data-testid="outside">outside</button>
+      </>
+    ))
+
+    await userEvent.click(element)
+    await expect.poll(() => screen.getByCSS('[data-v-date="2026-06-08"]')).toBeVisible()
+    await userEvent.click(screen.getByCSS('[data-v-date="2026-06-08"]'))
+    await expect.poll(() => document.querySelector('.v-overlay--active')).toBeNull()
+
+    await userEvent.click(screen.getByTestId('outside'))
+
+    const stamp = (value: unknown) => value instanceof Date ? iso(value) : value
+    expect(updates.map(stamp)).toEqual(['2026-06-08'])
+    expect(stamp(model.value)).toBe('2026-06-08')
+  })
+
+  it('should commit a date typed after a day was picked', async () => {
+    const model = ref<unknown>('2026-06-05')
+    const updates: unknown[] = []
+    const { element } = render(() => (
+      <>
+        <VDateInput
+          modelValue={ model.value }
+          month={ 5 }
+          year={ 2026 }
+          onUpdate:modelValue={ value => {
+            updates.push(value)
+            model.value = value
+          }}
+        />
+        <button data-testid="outside">outside</button>
+      </>
+    ))
+
+    await userEvent.click(element)
+    await expect.poll(() => screen.getByCSS('[data-v-date="2026-06-08"]')).toBeVisible()
+    await userEvent.click(screen.getByCSS('[data-v-date="2026-06-08"]'))
+    await expect.poll(() => document.querySelector('.v-overlay--active')).toBeNull()
+
+    const input = screen.getByCSS('.v-date-input input') as HTMLInputElement
+    const lock = await commands.getLock()
+    input.focus()
+    await userEvent.keyboard('{Control>}a{/Control}{Backspace}07042026')
+    await commands.releaseLock(lock)
+
+    expect(input).toHaveValue('07/04/2026')
+    await userEvent.click(screen.getByTestId('outside'))
+
+    const stamp = (value: unknown) => value instanceof Date ? iso(value) : value
+    expect(updates.map(stamp)).toEqual(['2026-06-08', '2026-07-04'])
+    expect(stamp(model.value)).toBe('2026-07-04')
+  })
+
   describe('range selection with visible actions', () => {
     it('should not ignore the first click', async () => {
       const model = ref(['2026-06-05', '2026-06-15'])

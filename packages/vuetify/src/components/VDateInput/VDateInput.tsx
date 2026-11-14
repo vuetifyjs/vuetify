@@ -155,6 +155,7 @@ export const VDateInput = genericComponent<new <
     const menu = useProxiedModel(props, 'menu')
     const form = useForm(props)
     const isEditingInput = shallowRef(false)
+    let skipBlurCommit = false
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
@@ -273,14 +274,21 @@ export const VDateInput = genericComponent<new <
       model.value = emptyModelValue()
     }
 
+    function onTextInput (e: InputEvent) {
+      skipBlurCommit = false
+      onInput(e)
+    }
+
     function onBlur (e: FocusEvent) {
       if ((e.relatedTarget as HTMLElement | null)?.closest('[data-v-date]')) {
         return // first click on a day
       }
 
-      if (props.updateOn.includes('blur') && !form.isReadonly.value) {
+      if (props.updateOn.includes('blur') && !form.isReadonly.value && !skipBlurCommit) {
         onUserInput(e.target as HTMLInputElement)
       }
+
+      skipBlurCommit = false
 
       text.value = display.value ?? ''
 
@@ -353,7 +361,7 @@ export const VDateInput = genericComponent<new <
           readonly={ isReadonly.value }
           onKeydown={ isInteractive.value ? onKeydown : undefined }
           onBeforeinput={ isInteractive.value ? onBeforeinput : undefined }
-          onInput={ isInteractive.value ? onInput : undefined }
+          onInput={ isInteractive.value ? onTextInput : undefined }
           focused={ menu.value || isFocused.value }
           onBlur={ onBlur }
           validationValue={ model.value }
@@ -401,6 +409,7 @@ export const VDateInput = genericComponent<new <
                             model.value = value
 
                             if (!props.multiple) {
+                              skipBlurCommit = true
                               menu.value = false
                             }
                           }
