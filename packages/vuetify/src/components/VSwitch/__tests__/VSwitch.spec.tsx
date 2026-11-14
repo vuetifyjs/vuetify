@@ -26,7 +26,7 @@ describe('VSwitch', () => {
         return () => (
           <VSwitch
             modelValue={ model.value }
-            onUpdate:modelValue={ (value: boolean) => { model.value = value } }
+            onUpdate:modelValue={ (value: boolean | null) => { if (value != null) model.value = value } }
           />
         )
       },
