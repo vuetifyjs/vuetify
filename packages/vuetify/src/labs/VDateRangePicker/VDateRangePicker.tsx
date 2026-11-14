@@ -2,13 +2,16 @@
 import './VDateRangePicker.sass'
 
 // Components
+import { VDateRangePickerMonths } from './VDateRangePickerMonths'
 import { VBtn } from '@/components/VBtn'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
+import { VDatePickerHeader } from '@/components/VDatePicker/VDatePickerHeader'
 import { VSpacer } from '@/components/VGrid'
 import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
 // Composables
 import { useDate } from '@/composables/date'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -52,6 +55,7 @@ const datePickerForwardedKeys = [
 export const makeVDateRangePickerProps = propsFactory({
   independentMonths: Boolean,
   modelValue: null,
+  scrollable: Boolean,
 
   ...makeVPickerProps({ title: '$vuetify.datePicker.title' }),
   ...pick(makeVDatePickerProps(), datePickerForwardedKeys),
@@ -77,8 +81,15 @@ export const VDateRangePicker = genericComponent<new <
 
   setup (props, { slots }) {
     const adapter = useDate()
+    const { t } = useLocale()
 
     const model = useProxiedModel(props, 'modelValue', [])
+    const header = computed(() => (model.value as unknown[])
+      .map(value => adapter.date(value))
+      .filter(date => adapter.isValid(date))
+      .map(date => adapter.format(date, 'shortDate'))
+      .join(' – ') || t('$vuetify.datePicker.header')
+    )
 
     const today = adapter.date()
     const leftMonth = shallowRef(adapter.getMonth(today))
@@ -201,7 +212,13 @@ export const VDateRangePicker = genericComponent<new <
       syncing = false
     })
 
+    watch(() => props.scrollable, value => {
+      previewValue.value = undefined
+      if (!value) navigateToSelection()
+    })
+
     watch(model, val => {
+      if (props.scrollable) return
       const dates = val as unknown[]
       if (!dates.length) return
 
@@ -277,11 +294,20 @@ export const VDateRangePicker = genericComponent<new <
         <VPicker
           ref={ rootRef }
           { ...pickerProps }
-          class={['v-date-range-picker', props.class]}
+          class={['v-date-range-picker', { 'v-date-range-picker--scrollable': props.scrollable }, props.class]}
           style={ props.style }
-          hideHeader
+          title={ t(props.title) }
+          hideHeader={ !props.scrollable || props.hideHeader }
           v-slots={{
-            default: () => (
+            header: () => <VDatePickerHeader header={ header.value } />,
+            default: () => props.scrollable ? (
+              <VDateRangePickerMonths
+                { ...VDateRangePickerMonths.filterProps(props) }
+                v-model={ model.value }
+                previewValue={ previewValue.value }
+                onUpdate:previewValue={ (value: unknown) => previewValue.value = value }
+              />
+            ) : (
               <>
                 <VDatePicker
                   ref={ leftPickerRef }

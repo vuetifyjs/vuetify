@@ -32,6 +32,51 @@
     &__nav-hidden
       opacity: 0
 
+    &--scrollable.v-picker.v-sheet
+      display: flex
+      flex-direction: column
+      height: $date-range-picker-scrollable-height
+      max-width: 100%
+      width: $date-range-picker-scrollable-width
+
+      > .v-picker__body
+        flex: 1 1 auto
+        flex-direction: column
+        min-height: 0
+
+      > .v-picker__header-wrapper,
+      > .v-picker__actions
+        flex: none
+
+    &__calendar
+      display: flex
+      flex: 1 1 auto
+      flex-direction: column
+      min-height: 0
+      overflow: hidden
+
+    &__weekdays
+      display: flex
+      flex: none
+      padding: $date-range-picker-weekdays-padding
+      border-bottom: thin solid $date-range-picker-divider-color
+
+      > .v-date-picker-month__days-row
+        flex: 1 1 auto
+
+    &__months
+      min-height: 0
+      overflow-anchor: none
+      scrollbar-width: none
+
+      &::-webkit-scrollbar
+        display: none
+
+    &__month-title
+      padding: $date-range-picker-month-title-padding
+      font-size: $date-range-picker-month-title-font-size
+      font-weight: $date-range-picker-month-title-font-weight
+
     .v-date-picker
       box-shadow: none
       border-radius: 0

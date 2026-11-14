@@ -244,6 +244,14 @@
       "slots-controls": "3.11.0"
     }
   },
+  "VDateRangePicker": {
+    "props": {
+      "scrollable": "4.4.0"
+    },
+    "examples": {
+      "prop-scrollable": "4.4.0"
+    }
+  },
   "VDataIterator": {
     "props": {
       "ignoreAccents": "4.2.0",
