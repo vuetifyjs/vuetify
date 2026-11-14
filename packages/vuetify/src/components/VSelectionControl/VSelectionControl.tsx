@@ -244,7 +244,17 @@ export const VSelectionControl = genericComponent<new <T>(
       if (props.readonly && group) {
         nextTick(() => group.forceUpdate())
       }
-      model.value = (e.target as HTMLInputElement).checked
+
+      const checked = (e.target as HTMLInputElement).checked
+      model.value = checked
+
+      // Vue skips the DOM update when the bound checked value did not change.
+      nextTick(() => {
+        if (!input.value || model.value === checked) return
+
+        input.value.checked = model.value
+        input.value.indeterminate = props.indeterminate
+      })
     }
 
     useRender(() => {
