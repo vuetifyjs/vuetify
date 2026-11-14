@@ -1,5 +1,14 @@
 [
   {
+    "title": "October 2026 Update",
+    "image": "https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/october-hero.png",
+    "shortDescription": "v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0...",
+    "date": "November 11, 2026",
+    "author": "John Leider",
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/john.png",
+    "to": "/blog/october-2026-update"
+  },
+  {
     "title": "Announcing Vuetify0 v1.3",
     "shortDescription": "Vuetify0 v1.3 is out. Kanban and Menu are the pages to open first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead...",
     "date": "October 26, 2026",
