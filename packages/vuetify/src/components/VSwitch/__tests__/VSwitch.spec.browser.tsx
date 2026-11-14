@@ -53,6 +53,19 @@ const props = {
 describe('VSwitch', () => {
   showcase({ stories, props, component: VSwitch })
 
+  it('should center the thumb when indeterminate regardless of value', async () => {
+    render(() => (
+      <>
+        <VSwitch modelValue indeterminate />
+        <VSwitch modelValue={ false } indeterminate />
+      </>
+    ))
+    await waitIdle()
+
+    const [on, off] = screen.getAllByCSS('.v-selection-control__input')
+    expect(getComputedStyle(on).transform).toBe(getComputedStyle(off).transform)
+  })
+
   it('should focus and blur from a ref', async () => {
     const cmp = ref<any>()
 
