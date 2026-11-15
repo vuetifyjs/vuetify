@@ -220,10 +220,10 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key !== 'Escape') return
-
-      e.stopPropagation()
-      isActive.value = false
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        isActive.value = false
+      }
     }
 
     function onTouchstart (event: TouchEvent) {
