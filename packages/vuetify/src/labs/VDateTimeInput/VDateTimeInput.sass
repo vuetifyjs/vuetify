@@ -31,7 +31,8 @@
 
     &--active
       background: $date-time-input-segment-active-background
-      box-shadow: inset 0 calc(-1 * #{$date-time-input-segment-underline-width}) 0 $date-time-input-segment-underline-color
+      text-decoration: underline $date-time-input-segment-underline-width $date-time-input-segment-underline-color
+      text-underline-offset: $date-time-input-segment-underline-offset
 
   .v-date-time-input__format-hint
     opacity: var(--v-disabled-opacity)
