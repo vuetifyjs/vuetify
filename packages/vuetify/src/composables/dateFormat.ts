@@ -41,6 +41,7 @@ const nativeName: Record<string, Record<string, string>> = {
   is: { y: 'ár' },
   az: { y: 'il', m: 'ay', d: 'gün' },
   km: { y: 'ឆ្នាំ', m: 'ខែ', d: 'ថ្ងៃ' },
+  uz: { y: 'yil', m: 'oy', d: 'kun' },
 }
 
 // Types
