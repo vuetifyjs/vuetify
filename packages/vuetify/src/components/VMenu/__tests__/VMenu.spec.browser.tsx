@@ -1534,4 +1534,35 @@ describe('VMenu', () => {
       await expect.poll(() => document.activeElement).toBe(screen.getByCSS('[data-testid="search"] input'))
     })
   })
+
+  it('should keep max-height stable when content outgrows the viewport at a fractional devicePixelRatio', async () => {
+    const viewportMargin = 12
+    const viewportHeight = document.documentElement.clientHeight - viewportMargin * 2
+    const fractionalDevicePixels = Math.floor(viewportHeight * 1.5) + 0.25
+    vi.stubGlobal('devicePixelRatio', fractionalDevicePixels / viewportHeight)
+    try {
+      render(() => (
+        <VMenu modelValue location="bottom start" transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props }>Open</VBtn>,
+            default: () => <div style="height: 150vh; width: 300px" />,
+          }}
+        </VMenu>
+      ))
+
+      const content = await screen.findByCSS('.v-overlay__content')
+      await wait(200)
+
+      const maxHeights = new Set<string>()
+      for (let pass = 0; pass < 4; pass++) {
+        window.dispatchEvent(new Event('resize'))
+        await nextTick()
+        maxHeights.add(content.style.maxHeight)
+      }
+
+      expect([...maxHeights]).toHaveLength(1)
+    } finally {
+      vi.unstubAllGlobals()
+    }
+  })
 })
