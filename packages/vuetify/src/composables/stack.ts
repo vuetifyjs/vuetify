@@ -31,7 +31,8 @@ export function useStack (
   isActive: Readonly<Ref<boolean>>,
   zIndex: MaybeRefOrGetter<string | number>,
   disableGlobalStack: boolean,
-  passive = false
+  passive = false,
+  contained = false,
 ) {
   const vm = getCurrentInstance('useStack')
   const createStackEntry = !disableGlobalStack
@@ -51,7 +52,7 @@ export function useStack (
       globalStack.push([vm.uid, _zIndex.value, passive])
     }
 
-    if (!passive) {
+    if (!passive && !contained) {
       parent?.activeChildren.add(vm.uid)
     }
 

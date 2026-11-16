@@ -2,8 +2,10 @@
 import { VMenu } from '../VMenu'
 import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
+import { VCard } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
+import { VOverlay } from '@/components/VOverlay'
 import { VSheet } from '@/components/VSheet'
 import { VTab, VTabs } from '@/components/VTabs'
 import { VTextarea } from '@/components/VTextarea'
@@ -875,6 +877,54 @@ describe('VMenu', () => {
 
       await userEvent.click(screen.getByTestId('outside'))
       await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should close when clicking outside with a contained overlay open inside', async () => {
+      const overlay = ref(true)
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VCard title="Menu" width="200" height="200" data-testid="menu-content">
+                <VOverlay v-model={ overlay.value } contained>
+                  <div data-testid="overlay-content">Overlay</div>
+                </VOverlay>
+              </VCard>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('overlay-content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should close only the contained overlay when clicking its scrim', async () => {
+      const overlay = ref(true)
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VCard title="Menu" width="200" height="200" data-testid="menu-content">
+              <VOverlay v-model={ overlay.value } contained>
+                <div data-testid="overlay-content">Overlay</div>
+              </VOverlay>
+            </VCard>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('overlay-content')).toBeVisible()
+
+      await userEvent.click(screen.getByCSS('.v-overlay--contained .v-overlay__scrim'))
+      await expect.poll(() => overlay.value).toBe(false)
+      expect(screen.getByTestId('menu-content')).toBeVisible()
     })
 
     it('should keep the top menu open when clicking a sibling after opening a deep submenu', async () => {

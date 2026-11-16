@@ -167,7 +167,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const scrimColor = useBackgroundColor(() => {
       return isString(props.scrim) ? props.scrim : null
     })
-    const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack, props._passive)
+    const { globalTop, localTop, stackStyles } = useStack(
+      isActive,
+      () => props.zIndex,
+      props._disableGlobalStack,
+      props._passive,
+      props.contained,
+    )
     const {
       activatorEl, activatorRef,
       target, targetEl, targetRef,
