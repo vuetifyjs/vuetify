@@ -40,6 +40,10 @@
         &--variant-tonal
           background: $snackbar-fallback-background
 
+      // the variant mixin above is scoped to .v-snackbar, but the underlay is a child of the wrapper
+      > .v-snackbar__underlay
+        position: absolute
+
       @media (forced-colors: active)
         border: thick solid
 
