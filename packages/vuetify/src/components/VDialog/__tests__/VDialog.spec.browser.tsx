@@ -1,6 +1,7 @@
 // Components
 import { VDialog } from '../VDialog'
 import { VBtn } from '@/components/VBtn'
+import { VSnackbar } from '@/components/VSnackbar'
 import { VTextField } from '@/components/VTextField'
 
 // Utilities
@@ -192,6 +193,53 @@ describe('VDialog', () => {
 
     await userEvent.tab() // should be pulled back
     await expect.poll(() => document.activeElement).toBe(first)
+  })
+
+  it('should close on Escape when a snackbar opens above it', async () => {
+    const dialog = ref(true)
+    const snackbar = ref(false)
+    render(() => (
+      <div>
+        <VDialog v-model={ dialog.value }>
+          <div>Content</div>
+        </VDialog>
+        <VSnackbar v-model={ snackbar.value } timeout={ -1 }>Saved</VSnackbar>
+      </div>
+    ))
+
+    await expect.poll(() => document.querySelector('.v-dialog .v-overlay__content')).not.toBeNull()
+    snackbar.value = true
+    await expect.poll(() => document.querySelector('.v-snackbar__wrapper')).not.toBeNull()
+    await wait()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => dialog.value).toBeFalsy()
+    expect(snackbar.value).toBe(true)
+  })
+
+  it('should close only the focused snackbar on Escape', async () => {
+    const dialog = ref(true)
+    const snackbar = ref(false)
+    render(() => (
+      <div>
+        <VDialog v-model={ dialog.value }>
+          <div>Content</div>
+        </VDialog>
+        <VSnackbar v-model={ snackbar.value } timeout={ -1 }>
+          {{ actions: () => <VBtn data-testid="undo">Undo</VBtn> }}
+        </VSnackbar>
+      </div>
+    ))
+
+    await expect.poll(() => document.querySelector('.v-dialog .v-overlay__content')).not.toBeNull()
+    snackbar.value = true
+    await expect.poll(() => document.querySelector('.v-snackbar__wrapper')).not.toBeNull()
+    await wait()
+
+    screen.getByTestId('undo').focus()
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => snackbar.value).toBeFalsy()
+    expect(dialog.value).toBe(true)
   })
 
   describe('routing back', () => {

@@ -135,6 +135,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 
   props: {
     _disableGlobalStack: Boolean,
+    _passive: Boolean,
     _submenu: Boolean,
 
     ...omit(makeVOverlayProps(), ['disableInitialFocus']),
@@ -166,7 +167,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
     const scrimColor = useBackgroundColor(() => {
       return isString(props.scrim) ? props.scrim : null
     })
-    const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack)
+    const { globalTop, localTop, stackStyles } = useStack(isActive, () => props.zIndex, props._disableGlobalStack, props._passive)
     const {
       activatorEl, activatorRef,
       target, targetEl, targetRef,
