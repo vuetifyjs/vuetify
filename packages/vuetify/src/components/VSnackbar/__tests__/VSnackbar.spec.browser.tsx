@@ -7,7 +7,7 @@ import { render, screen } from '@test'
 describe('VSnackbar', () => {
   it.each([
     [{}],
-    [{ timer: 'bottom' }],
+    [{ timer: 'bottom' as const }],
   ])('should cover the whole snackbar with the tonal underlay %o', async props => {
     render(() => (
       <VSnackbar
