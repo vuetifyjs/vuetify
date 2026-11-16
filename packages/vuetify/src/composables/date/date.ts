@@ -77,6 +77,7 @@ const defaultLocales: Record<string, string> = {
   tr: 'tr-TR',
   az: 'az-AZ',
   uk: 'uk-UA',
+  uz: 'uz-UZ',
   vi: 'vi-VN',
   zhHans: 'zh-CN',
   zhHant: 'zh-TW',
