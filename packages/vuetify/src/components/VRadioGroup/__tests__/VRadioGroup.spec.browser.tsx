@@ -135,4 +135,24 @@ describe('VRadioGroup', () => {
     expect('isValid' in cmp.value).toBe(true)
     expect(cmp.value.validate()).toBeInstanceOf(Promise)
   })
+
+  it('should restore checked radios when the parent rejects an update', async () => {
+    const onUpdate = vi.fn()
+
+    render(() => (
+      <VRadioGroup modelValue="a" onUpdate:modelValue={ onUpdate }>
+        <VRadio label="A" value="a" />
+        <VRadio label="B" value="b" />
+      </VRadioGroup>
+    ))
+    await waitIdle()
+
+    const radios = screen.getAllByCSS('input[type="radio"]') as HTMLInputElement[]
+    await userEvent.click(radios[1])
+    await waitIdle()
+    expect(radios.map(radio => radio.checked)).toEqual([true, false])
+
+    await userEvent.click(radios[1])
+    expect(onUpdate).toHaveBeenCalledTimes(2)
+  })
 })

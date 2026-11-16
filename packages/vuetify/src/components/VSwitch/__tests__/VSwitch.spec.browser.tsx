@@ -1,7 +1,7 @@
 import { VSwitch } from '../VSwitch'
 
 // Utilities
-import { gridOn, render, screen, showcase, waitIdle } from '@test'
+import { gridOn, render, screen, showcase, userEvent, waitIdle } from '@test'
 import { ref } from 'vue'
 
 const contextColor = 'rgb(0, 0, 255)'
@@ -84,5 +84,26 @@ describe('VSwitch', () => {
 
     expect('isValid' in cmp.value).toBe(true)
     expect(cmp.value.validate()).toBeInstanceOf(Promise)
+  })
+
+  it('should stay indeterminate when the parent rejects an update', async () => {
+    const onUpdateIndeterminate = vi.fn()
+
+    render(() => (
+      <VSwitch
+        modelValue={ null }
+        indeterminate
+        onUpdate:modelValue={ () => {} }
+        onUpdate:indeterminate={ onUpdateIndeterminate }
+      />
+    ))
+    await waitIdle()
+
+    const input = screen.getByCSS('input[type="checkbox"]') as HTMLInputElement
+    await userEvent.click(input)
+    await waitIdle()
+
+    expect(onUpdateIndeterminate).not.toHaveBeenCalled()
+    expect(input.indeterminate).toBe(true)
   })
 })

@@ -204,11 +204,14 @@ export const VSelectionControl = genericComponent<new <T>(
       isChecked: () => model.value,
     })
 
-    group?.onForceUpdate(() => {
+    function syncChecked () {
       if (input.value) {
         input.value.checked = model.value
+        input.value.indeterminate = props.indeterminate
       }
-    })
+    }
+
+    group?.onForceUpdate(syncChecked)
 
     function onFocus (e: FocusEvent) {
       if (props.disabled) return
@@ -241,10 +244,8 @@ export const VSelectionControl = genericComponent<new <T>(
         return
       }
 
-      if (props.readonly && group) {
-        nextTick(() => group.forceUpdate())
-      }
       model.value = (e.target as HTMLInputElement).checked
+      nextTick(group ? group.forceUpdate : syncChecked)
     }
 
     useRender(() => {

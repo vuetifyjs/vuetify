@@ -18,8 +18,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeSizeProps } from '@/composables/size'
 
 // Utilities
-import { shallowRef, toRef, useId } from 'vue'
-import { filterInputAttrs, genericComponent, isString, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
+import { nextTick, shallowRef, toRef, useId } from 'vue'
+import { deepEqual, filterInputAttrs, genericComponent, isString, omit, propsFactory, SUPPORTS_MATCH_MEDIA, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -116,10 +116,12 @@ export const VSwitch = genericComponent<new <T>(
       return isPredefinedSize.value ? iconSizes[props.size as string] : Math.round(16 * Number(props.size) / 32)
     })
 
-    function onChange () {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
+    function onChange (value: any) {
+      nextTick(() => {
+        if (indeterminate.value && deepEqual(model.value, value)) {
+          indeterminate.value = false
+        }
+      })
     }
     function onTrackClick (e: Event) {
       e.stopPropagation()
