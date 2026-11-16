@@ -51,7 +51,9 @@ export function useStack (
       globalStack.push([vm.uid, _zIndex.value, passive])
     }
 
-    parent?.activeChildren.add(vm.uid)
+    if (!passive) {
+      parent?.activeChildren.add(vm.uid)
+    }
 
     onScopeDispose(() => {
       if (createStackEntry) {
