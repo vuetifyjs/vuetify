@@ -3,6 +3,12 @@
 @use "../settings/variables" as *
 
 @mixin variant($contained-background, $contained-color, $contained-elevation, $plain-opacity, $name)
+  > .#{$name}__overlay,
+  > .#{$name}__underlay
+    opacity: 0
+    pointer-events: none
+    @include absolute()
+
   &--variant-plain,
   &--variant-outlined,
   &--variant-text,
@@ -44,11 +50,3 @@
     > .#{$name}__underlay
       background: currentColor
       opacity: var(--v-activated-opacity)
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
-      pointer-events: none
-
-  > .#{$name}__underlay
-    position: absolute

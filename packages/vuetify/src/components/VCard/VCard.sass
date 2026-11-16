@@ -18,8 +18,8 @@
     @include tools.border($card-border...)
     @include tools.position($card-positions)
     @include tools.rounded($card-border-radius)
-    @include tools.states('.v-card__overlay')
     @include tools.variant($card-variants...)
+    @include tools.states('.v-card__overlay')
 
     &--disabled
       pointer-events: none
@@ -189,13 +189,6 @@
 
   .v-card__overlay
     background-color: currentColor
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    pointer-events: none
-    opacity: 0
     transition: opacity 0.2s ease-in-out
 
   @media (forced-colors: active)
