@@ -252,8 +252,9 @@ describe('VDateInput', () => {
       await userEvent.keyboard(TEST_DATE)
 
       await userEvent.keyboard('{Enter}')
-      expect(emitted('update:modelValue')).toBeTruthy()
+      expect(emitted('update:modelValue')).toHaveLength(1)
 
+      await userEvent.keyboard('{Control>}a{/Control}{Backspace}06/01/2025')
       await userEvent.tab()
       expect(emitted('update:modelValue')).toHaveLength(2)
     })
