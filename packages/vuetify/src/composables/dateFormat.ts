@@ -29,6 +29,7 @@ const nativeFormat: Record<string, string> = {
   az: 'dd.MM.yyyy',
   is: 'dd.MM.yyyy',
   km: 'dd/MM/yyyy',
+  uz: 'dd.MM.yyyy',
 }
 
 const nativeName: Record<string, Record<string, string>> = {
