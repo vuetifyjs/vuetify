@@ -331,6 +331,42 @@ describe('VVirtualScroll', () => {
     expect(root.scrollHeight).toBeGreaterThan(5000)
   })
 
+  it('shows the first items when a filtered list shrinks and regrows', async () => {
+    const source = createRange(1000).map(id => ({ id, height: 40 }))
+    const items = ref(source.map(item => ({ ...item })))
+
+    render(() => (
+      <VVirtualScroll height="400" itemHeight="40" itemKey="id" items={ items.value }>
+        {{
+          default: ({ item }) => (
+            <div style={{ height: `${item.height}px` }}>{ item.id }</div>
+          ),
+        }}
+      </VVirtualScroll>
+    ))
+
+    const root = screen.getByCSS('.v-virtual-scroll') as HTMLElement
+    await waitIdle()
+
+    expect(root.scrollTop).toBe(0)
+    expect(itemOffset(root, '0')).toBe(0)
+
+    items.value = source
+      .filter(item => String(item.id).includes('9'))
+      .map(item => ({ ...item }))
+    await settleLayout()
+
+    expect(root.scrollTop).toBe(0)
+    expect(itemOffset(root, '9')).toBe(0)
+
+    items.value = source.map(item => ({ ...item }))
+    await settleLayout()
+
+    expect(root.scrollTop).toBe(0)
+    expect(itemOffset(root, '0')).toBe(0)
+    expect(itemOffset(root, '8')).toBe(320)
+  })
+
   it('keeps the measured item height when defaults change', async () => {
     const defaults = ref({})
     const scroller = ref<VVirtualScroll>()

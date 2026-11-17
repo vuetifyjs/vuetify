@@ -24,6 +24,35 @@ type VirtualProps = {
 
 export type ScrollToPosition = 'start' | 'center' | 'end'
 
+function matchedGaps (source: readonly unknown[], target: readonly unknown[]) {
+  let sourceIndex = 0
+  let gaps = 0
+  let insideGap = false
+  let matched = false
+
+  for (let targetIndex = 0; targetIndex < target.length && sourceIndex < source.length; targetIndex++) {
+    if (Object.is(target[targetIndex], source[sourceIndex])) {
+      sourceIndex++
+      insideGap = false
+      matched = true
+    } else if (matched && !insideGap) {
+      gaps++
+      insideGap = true
+    }
+  }
+
+  return sourceIndex === source.length ? gaps : -1
+}
+
+// One inserted or removed block is a prepend, append, or group toggle. More gaps is a filter.
+function keepsAnchoredScroll (previousKeys: readonly unknown[], nextKeys: readonly unknown[]) {
+  const inserted = matchedGaps(previousKeys, nextKeys)
+  if (inserted >= 0 && inserted <= 1) return true
+
+  const removed = matchedGaps(nextKeys, previousKeys)
+  return removed >= 0 && removed <= 1
+}
+
 export const makeVirtualProps = propsFactory({
   itemHeight: {
     type: [Number, String],
@@ -347,19 +376,20 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
   watch(items, () => {
     const nextItems = items.value
+    const previousKeys = itemKeys
     const sizesByKey = new Map<unknown, number[]>()
     const scrollTop = lastScrollTop - markerOffset
-    const anchorIndex = itemKeys.length
-      ? clamp(calculateIndex(scrollTop), 0, itemKeys.length - 1)
+    const anchorIndex = previousKeys.length
+      ? clamp(calculateIndex(scrollTop), 0, previousKeys.length - 1)
       : -1
-    const anchorKey = ~anchorIndex ? itemKeys[anchorIndex] : undefined
+    const anchorKey = ~anchorIndex ? previousKeys[anchorIndex] : undefined
     const offsetInAnchor = ~anchorIndex ? scrollTop - (offsets[anchorIndex] || 0) : 0
 
-    for (let index = 0; index < itemKeys.length; index++) {
+    for (let index = 0; index < previousKeys.length; index++) {
       const size = sizes[index]
       if (!size) continue
 
-      const key = itemKeys[index]
+      const key = previousKeys[index]
       const matches = sizesByKey.get(key)
       if (matches) matches.push(size)
       else sizesByKey.set(key, [size])
@@ -380,12 +410,14 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
       heights.set(size, (heights.get(size) ?? 0) + 1)
     }
 
+    const anchorScroll = keepsAnchoredScroll(previousKeys, nextKeys)
+
     sizes = nextSizes
     offsets = Array.from({ length: nextItems.length })
     itemKeys = nextKeys
     updateOffsets.immediate()
 
-    if (~anchorIndex && nextItems.length) {
+    if (anchorScroll && ~anchorIndex && nextItems.length) {
       const nextAnchorIndex = nextKeys.indexOf(anchorKey)
       if (~nextAnchorIndex) {
         const indexDelta = nextAnchorIndex - anchorIndex
@@ -405,6 +437,21 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>) {
 
         scrollVelocity = 0
         lastScrollTime = 0
+      }
+    } else if (!anchorScroll) {
+      const itemSize = itemHeight.value || 16
+      const buffer = Math.ceil(BUFFER_PX / itemSize)
+      const viewport = Math.max(1, Math.ceil((viewportHeight.value || 0) / itemSize))
+      first.value = 0
+      last.value = clamp(viewport + buffer, Math.min(1, nextItems.length), nextItems.length)
+      paddingTop.value = calculateOffset(first.value)
+      paddingBottom.value = calculateOffset(nextItems.length) - calculateOffset(last.value)
+      scrollVelocity = 0
+      lastScrollTime = 0
+      lastScrollTop = 0
+      if (containerRef.value) {
+        containerRef.value.scrollTop = 0
+        lastScrollTop = containerRef.value.scrollTop
       }
     }
 
