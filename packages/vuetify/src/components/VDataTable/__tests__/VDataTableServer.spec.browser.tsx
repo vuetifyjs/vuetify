@@ -1,7 +1,7 @@
 import { VDataTableServer } from '..'
 
 // Utilities
-import { commands, render, screen, userEvent, wait } from '@test'
+import { commands, page, render, screen, userEvent, wait } from '@test'
 import { nextTick, ref } from 'vue'
 
 const DESSERT_HEADERS = [
@@ -97,6 +97,26 @@ const DESSERT_ITEMS = [
 ]
 
 describe('VDataTableServer', () => {
+  it('should emit the column initial sort order', async () => {
+    const updateSortBy = vi.fn()
+    render(() => (
+      <VDataTableServer
+        headers={[
+          { title: 'Dessert', key: 'name' },
+          { title: 'Calories', key: 'calories', initialSortOrder: 'desc' },
+        ]}
+        items={ DESSERT_ITEMS }
+        itemsLength={ DESSERT_ITEMS.length }
+        onUpdate:sortBy={ updateSortBy }
+      />
+    ))
+
+    const calories = screen.getByRole('columnheader', { name: 'Calories' })
+    await userEvent.click(page.getByRole('columnheader', { name: 'Calories' }))
+    expect(updateSortBy).toHaveBeenCalledExactlyOnceWith([{ key: 'calories', order: 'desc' }])
+    expect(calories).toHaveAttribute('aria-sort', 'descending')
+  })
+
   it('should render table', () => {
     const itemsLength = 2
 

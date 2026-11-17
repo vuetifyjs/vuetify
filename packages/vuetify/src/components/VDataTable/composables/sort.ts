@@ -96,8 +96,8 @@ export function provideSort (options: {
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === column.key)
 
-    const initialOrder = initialSortOrder.value
-    const secondaryOrder = initialSortOrder.value === 'desc' ? 'asc' : 'desc'
+    const initialOrder = column.initialSortOrder ?? initialSortOrder.value
+    const secondaryOrder = initialOrder === 'desc' ? 'asc' : 'desc'
     if (!item) {
       const { active, mode } = resolveMultiSort(multiSort.value, event)
       if (active) {
@@ -111,7 +111,7 @@ export function provideSort (options: {
       }
     } else if (item.order === secondaryOrder) {
       if (mandatory || (mustSort.value && newSortBy.length === 1)) {
-        item.order = initialSortOrder.value
+        item.order = initialOrder
       } else {
         newSortBy = newSortBy.filter(x => x.key !== column.key)
       }

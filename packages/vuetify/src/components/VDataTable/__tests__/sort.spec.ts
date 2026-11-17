@@ -1,14 +1,15 @@
 // Composables
 import { createHeaders } from '../composables/headers'
 import { transformItems as _transformItems } from '../composables/items'
-import { sortItems as _sortItems } from '../composables/sort'
+import { sortItems as _sortItems, provideSort } from '../composables/sort'
 
 // Utilities
 import { mount } from '@vue/test-utils'
+import { shallowRef } from 'vue'
 
 // Types
-import type { SortItem } from '../composables/sort'
-import type { DataTableCompareFunction, DataTableHeader, DataTableItem } from '@/components/VDataTable/types'
+import type { MultiSortProps, SortItem } from '../composables/sort'
+import type { DataTableCompareFunction, DataTableHeader, DataTableItem, InternalDataTableHeader } from '@/components/VDataTable/types'
 
 function transformItems (items: any[], headers?: DataTableHeader[]) {
   let _items: DataTableItem[]
@@ -28,6 +29,133 @@ function sortItems (items: any[], sortBy: SortItem[], sortFunctions?: Record<str
     transform: item => item.columns,
   })
 }
+
+function createSorting (options: {
+  initialSortOrder?: 'asc' | 'desc'
+  sortBy?: SortItem[]
+  multiSort?: boolean | MultiSortProps
+  mustSort?: boolean
+} = {}) {
+  const initialSortOrder = shallowRef(options.initialSortOrder ?? 'asc')
+  const sortBy = shallowRef<readonly SortItem[]>(options.sortBy ?? [])
+  const page = shallowRef(2)
+  let toggleSort: ReturnType<typeof provideSort>['toggleSort']
+
+  mount({
+    setup () {
+      toggleSort = provideSort({
+        initialSortOrder,
+        sortBy,
+        multiSort: shallowRef(options.multiSort ?? false),
+        mustSort: shallowRef(options.mustSort ?? false),
+        page,
+      }).toggleSort
+      return () => null
+    },
+  })
+
+  return { initialSortOrder, sortBy, page, toggleSort: toggleSort! }
+}
+
+describe('VDataTable - sort state', () => {
+  it.each(['asc', 'desc'] as const)('should cycle from the column initial order %s', initialOrder => {
+    const secondaryOrder = initialOrder === 'asc' ? 'desc' : 'asc'
+    const { sortBy, page, toggleSort } = createSorting({ initialSortOrder: secondaryOrder })
+    const column: InternalDataTableHeader = {
+      key: 'severity', value: 'severity', sortable: true, initialSortOrder: initialOrder,
+    }
+
+    expect(sortBy.value).toEqual([])
+
+    for (const order of [initialOrder, secondaryOrder, undefined, initialOrder]) {
+      toggleSort(column)
+      expect(sortBy.value).toEqual(order ? [{ key: 'severity', order }] : [])
+      expect(page.value).toBe(1)
+    }
+  })
+
+  it.each(['asc', 'desc'] as const)('should fall back to the table initial order %s', initialSortOrder => {
+    const { sortBy, toggleSort } = createSorting({ initialSortOrder })
+    const column: InternalDataTableHeader = { key: 'severity', value: 'severity', sortable: true }
+    const secondaryOrder = initialSortOrder === 'asc' ? 'desc' : 'asc'
+
+    for (const order of [initialSortOrder, secondaryOrder, undefined]) {
+      toggleSort(column)
+      expect(sortBy.value).toEqual(order ? [{ key: 'severity', order }] : [])
+    }
+  })
+
+  it.each(['mustSort', 'mandatory'] as const)('should return to the column initial order with %s', mode => {
+    const { sortBy, toggleSort } = createSorting({ mustSort: mode === 'mustSort' })
+    const column: InternalDataTableHeader = {
+      key: 'severity', value: 'severity', sortable: true, initialSortOrder: 'desc',
+    }
+
+    for (const order of ['desc', 'asc', 'desc']) {
+      toggleSort(column, undefined, mode === 'mandatory')
+      expect(sortBy.value).toEqual([{ key: 'severity', order }])
+    }
+  })
+
+  it('should allow removing a column when must-sort has another sorted column', () => {
+    const { sortBy, toggleSort } = createSorting({
+      mustSort: true,
+      multiSort: true,
+      sortBy: [{ key: 'name', order: 'asc' }],
+    })
+    const column: InternalDataTableHeader = {
+      key: 'severity', value: 'severity', sortable: true, initialSortOrder: 'desc',
+    }
+
+    toggleSort(column)
+    expect(sortBy.value).toEqual([{ key: 'name', order: 'asc' }, { key: 'severity', order: 'desc' }])
+    toggleSort(column)
+    expect(sortBy.value).toEqual([{ key: 'name', order: 'asc' }, { key: 'severity', order: 'asc' }])
+    toggleSort(column)
+    expect(sortBy.value).toEqual([{ key: 'name', order: 'asc' }])
+  })
+
+  it.each([
+    ['append', false, ['name', 'severity']],
+    ['prepend', false, ['severity', 'name']],
+    ['append', true, ['severity', 'name']],
+    ['prepend', true, ['name', 'severity']],
+  ] as const)('should preserve multi-sort priority with %s and shift=%s', (mode, shiftKey, keys) => {
+    const { sortBy, toggleSort } = createSorting({
+      multiSort: { key: 'ctrl', mode, modifier: 'shift' },
+      sortBy: [{ key: 'name', order: 'asc' }],
+    })
+    const column: InternalDataTableHeader = {
+      key: 'severity', value: 'severity', sortable: true, initialSortOrder: 'desc',
+    }
+
+    toggleSort(column, new KeyboardEvent('keydown', { ctrlKey: true, shiftKey }))
+    expect(sortBy.value.map(item => item.key)).toEqual(keys)
+    expect(sortBy.value.find(item => item.key === 'severity')?.order).toBe('desc')
+
+    toggleSort(column, new KeyboardEvent('keydown', { ctrlKey: true }))
+    toggleSort(column, new KeyboardEvent('keydown', { ctrlKey: true }))
+    toggleSort(column)
+    expect(sortBy.value).toEqual([{ key: 'severity', order: 'desc' }])
+  })
+
+  it('should preserve an explicit sort-by order and use updated table defaults', () => {
+    const { initialSortOrder, sortBy, toggleSort } = createSorting({
+      sortBy: [{ key: 'severity', order: 'asc' }],
+    })
+    const column: InternalDataTableHeader = {
+      key: 'severity', value: 'severity', sortable: true, initialSortOrder: 'desc',
+    }
+
+    expect(sortBy.value).toEqual([{ key: 'severity', order: 'asc' }])
+    toggleSort(column)
+    expect(sortBy.value).toEqual([])
+
+    initialSortOrder.value = 'desc'
+    toggleSort({ key: 'name', value: 'name', sortable: true })
+    expect(sortBy.value).toEqual([{ key: 'name', order: 'desc' }])
+  })
+})
 
 describe('VDataTable - sorting', () => {
   it('should sort items by single column', () => {

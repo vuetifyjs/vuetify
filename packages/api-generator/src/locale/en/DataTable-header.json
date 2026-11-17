@@ -1,5 +1,5 @@
 {
   "props": {
-    "headers": "An array of objects that each describe a header column."
+    "headers": "An array of objects that each describe a header column. Set **initialSortOrder** to `'asc'` or `'desc'` on a header to override the table's initial sort order for that column."
   }
 }

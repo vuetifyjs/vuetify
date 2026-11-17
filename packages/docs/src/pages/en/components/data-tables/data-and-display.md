@@ -122,6 +122,14 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 
 <ExamplesExample file="v-data-table/prop-sort-by" />
 
+### Initial sort order
+
+The **initial-sort-order** prop determines the first direction used when an unsorted column is selected. Set **initialSortOrder** on a header to override this direction for that column. Use **sort-by** to apply sorting when the table loads.
+
+In this example, selecting **Severity** first sorts from highest to lowest, while **Issue** first sorts alphabetically. Subsequent clicks reverse the direction and then remove sorting.
+
+<ExamplesExample file="v-data-table/prop-initial-sort-order" />
+
 ### Multi sort
 
 Using the **multi-sort** prop will allow user to sort on multiple columns at the same time. You can specify whether new columns should be added first or last to the **sort-by** array. By specifying optional **modifier** key, you can support both modes.
