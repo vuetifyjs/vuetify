@@ -76,6 +76,14 @@ If your items are not of a uniform size, omit the **item-height** prop to have `
 
 <ExamplesExample file="v-virtual-scroll/prop-dynamic-item-height" />
 
+#### Overscan
+
+By default, items within 100px of the visible area are rendered. Set **overscan** to render a fixed number of extra items on each side instead. This helps with tall items, so the next one is ready before it scrolls into view.
+
+Overscan is meant to mitigate blank space issue but cannot prevent it entirely during very fast scrolling. Keep the value below 30 as each extra item adds render work and will tax the CPU on low-end devices.
+
+<ExamplesExample file="v-virtual-scroll/prop-overscan" />
+
 #### Renderless
 
 Renderless mode does not generate DOM nodes automatically, so you must bind `itemRef` yourself for virtual scrolling to work properly.
