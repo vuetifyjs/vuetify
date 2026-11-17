@@ -331,52 +331,18 @@ export const VCalendar = genericComponent<new (
 
     function getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!base.noEvents.value) {
-        const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (isObject(category) && category.categoryName) map[category.categoryName] = { index, count: 0 }
-          else if (isString(category)) map[category] = { index, count: 0 }
-          return map
-        }, {})
-
-        if (!props.categoryHideDynamic || !props.categoryShowAll) {
-          let categoryLength = categories.length
-
-          base.parsedEvents.value.forEach(ev => {
-            let category = ev.category
-
-            if (!isString(category)) {
-              category = props.categoryForInvalid
-            }
-
-            if (!category) {
-              return
-            }
-
-            if (category in categoryMap) {
-              categoryMap[category].count++
-            } else if (!props.categoryHideDynamic) {
-              categoryMap[category] = {
-                index: categoryLength++,
-                count: 1,
-              }
-            }
-          })
-        }
+        const usedCategories = new Set<string>()
 
         if (!props.categoryShowAll) {
-          for (const category in categoryMap) {
-            if (categoryMap[category].count === 0) {
-              delete categoryMap[category]
-            }
+          for (const event of base.parsedEvents.value) {
+            const category = isString(event.category) ? event.category : props.categoryForInvalid
+            if (category) usedCategories.add(category)
           }
         }
 
         categories = categories.filter((category: CalendarCategory) => {
-          if (isObject(category) && category.categoryName) {
-            return Object.hasOwn(categoryMap, category.categoryName)
-          } else if (isString(category)) {
-            return Object.hasOwn(categoryMap, category)
-          }
-          return false
+          const name = isObject(category) ? category.categoryName : category
+          return isString(name) && !!name && (props.categoryShowAll || usedCategories.has(name))
         })
       }
       return categories
