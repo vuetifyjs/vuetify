@@ -372,9 +372,9 @@ export const VCalendar = genericComponent<new (
 
         categories = categories.filter((category: CalendarCategory) => {
           if (isObject(category) && category.categoryName) {
-            return categoryMap.hasOwnProperty(category.categoryName)
+            return Object.hasOwn(categoryMap, category.categoryName)
           } else if (isString(category)) {
-            return categoryMap.hasOwnProperty(category)
+            return Object.hasOwn(categoryMap, category)
           }
           return false
         })

@@ -193,7 +193,7 @@ export function keys<O extends {}> (o: O) {
 }
 
 export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
-  return key.every(k => obj.hasOwnProperty(k))
+  return key.every(k => Object.hasOwn(obj, k))
 }
 
 type MaybePick<
