@@ -21,7 +21,7 @@ Being a component framework, Vuetify will always grow horizontally. Depending on
 
 ## Automatic treeshaking
 
-Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle. Vuetify comes with plugins for both [Webpack](https://webpack.js.org/) and [vite](https://vitejs.dev/) that enable automatic treeshaking.
+Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle. Vuetify comes with plugins for both [Webpack](https://webpack.js.org/) and [vite](https://vite.dev/) that enable automatic treeshaking.
 
 Install [webpack-plugin-vuetify](https://www.npmjs.com/package/webpack-plugin-vuetify) or [vite-plugin-vuetify](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 

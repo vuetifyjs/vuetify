@@ -67,7 +67,7 @@ The **smooth-mode** prop controls the interpolation algorithm. The default mode 
 
 #### Custom labels
 
-By providing a **label** slot, we are able to modify the displayed content by adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Element/text).
+By providing a **label** slot, we are able to modify the displayed content by adding a dollar sign ($). This slot is **_exclusively_** for text content. For more information on the svg `<text>` element, [navigate here](https://developer.mozilla.org/en-US/docs/Web/SVG/Reference/Element/text).
 
 <ExamplesExample file="v-sparkline/misc-custom-labels" />
 

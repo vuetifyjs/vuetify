@@ -268,6 +268,7 @@ Currently Vuetify provides translations in the following languages:
 - **th** - Thai (ไทย)
 - **tr** - Turkish (Türkçe)
 - **uk** - Ukrainian (Українська)
+- **uz** - Uzbek (Oʻzbekcha)
 - **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
 - **zhHant** - Chinese (正體中文)

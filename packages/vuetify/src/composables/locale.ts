@@ -124,6 +124,7 @@ function genDefaults () {
     tr: false,
     az: false,
     uk: false,
+    uz: false,
     vi: false,
     zhHans: false,
     zhHant: false,

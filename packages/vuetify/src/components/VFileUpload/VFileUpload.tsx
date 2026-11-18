@@ -43,6 +43,7 @@ export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
     props: { 'onClick:remove': () => void }
   }
   title: never
+  subtitle: never
   divider: never
   loader: LoaderSlotProps
 }
@@ -261,6 +262,7 @@ export const VFileUpload = genericComponent<VFileUploadSlots>()({
                         browse: slots.browse,
                         icon: slots.icon,
                         title: slots.title,
+                        subtitle: slots.subtitle,
                         divider: slots.divider,
                         single: slots.single,
                         item: slots.item,

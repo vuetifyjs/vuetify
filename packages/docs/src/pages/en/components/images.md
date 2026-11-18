@@ -114,7 +114,7 @@ This will behave similarly to:
 </picture>
 ```
 
-`srcset` and `media` attributes can also be used for art direction or alternate sizes, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/picture) for more.
+`srcset` and `media` attributes can also be used for art direction or alternate sizes, see [MDN](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/picture) for more.
 
 #### Grid
 

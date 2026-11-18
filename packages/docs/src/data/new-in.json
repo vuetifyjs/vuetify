@@ -352,6 +352,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -401,7 +402,8 @@
       "loading": "4.1.0"
     },
     "slots": {
-      "loader": "4.1.0"
+      "loader": "4.1.0",
+      "subtitle": "4.4.0"
     },
     "examples": {
       "prop-loading": "4.1.0"
@@ -458,6 +460,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "openOnArrow": "4.2.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
@@ -515,6 +518,7 @@
     "props": {
       "captureFocus": "3.11.0",
       "contextMenu": "4.3.0",
+      "noFlip": "4.4.0",
       "retainFocus": "3.11.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0"
@@ -743,7 +747,8 @@
   },
   "VSpeedDial": {
     "props": {
-      "contextMenu": "4.3.0"
+      "contextMenu": "4.3.0",
+      "noFlip": "4.4.0"
     }
   },
   "VSparkline": {
@@ -849,6 +854,11 @@
       "prop-scrollable": "4.3.0"
     }
   },
+  "VTimePickerClock": {
+    "props": {
+      "viewMode": "4.4.0"
+    }
+  },
   "VTreeview": {
     "props": {
       "ignoreAccents": "4.2.0",
@@ -895,6 +905,7 @@
     "props": {
       "eager": "3.2.0",
       "interactive": "3.8.0",
+      "noFlip": "4.4.0",
       "stickToTarget": "3.10.0",
       "viewportMargin": "3.11.0",
       "persistent": "3.11.3"

@@ -260,7 +260,7 @@ November will focus on continuing to build out components based on the v0 compos
 **Details:**
 
 * [Vuetify0 Documentation](https://0.vuetifyjs.com/)
-* [ExpansionPanel](https://0.vuetifyjs.com/components/expansion-panel/)
+* [ExpansionPanel](https://0.vuetifyjs.com/components/disclosure/expansion-panel)
 
 ---
 

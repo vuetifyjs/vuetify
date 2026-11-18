@@ -192,7 +192,7 @@ You can also override the transition per-call by passing a second argument to `c
 
 Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
 
-This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://m2.material.io/design/color/dark-theme.html) page.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'

@@ -294,6 +294,8 @@ export const VDateInput = genericComponent<new <
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
+      if (value === (display.value ?? '')) return
+
       if (!value.trim()) {
         model.value = emptyModelValue()
       } else if (!props.multiple) {

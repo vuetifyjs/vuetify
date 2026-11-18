@@ -27,18 +27,21 @@ export function useProxiedModel<
   const internal = ref(!isUndefined(props[prop]) ? props[prop] : defaultValue) as Ref<Props[Prop]>
   const kebabProp = toKebabCase(prop)
   const checkKebab = kebabProp !== prop
+  function hasProp (key: string) {
+    return Object.hasOwn(vm.vnode.props ?? {}, key)
+  }
 
   const isControlled = checkKebab
     ? computed(() => {
       void props[prop]
-      return !!(
-        (vm.vnode.props?.hasOwnProperty(prop) || vm.vnode.props?.hasOwnProperty(kebabProp)) &&
-        (vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`) || vm.vnode.props?.hasOwnProperty(`onUpdate:${kebabProp}`))
+      return (
+        (hasProp(prop) || hasProp(kebabProp)) &&
+        (hasProp(`onUpdate:${prop}`) || hasProp(`onUpdate:${kebabProp}`))
       )
     })
     : computed(() => {
       void props[prop]
-      return !!(vm.vnode.props?.hasOwnProperty(prop) && vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`))
+      return hasProp(prop) && hasProp(`onUpdate:${prop}`)
     })
 
   useToggleScope(() => !isControlled.value, () => {

@@ -45,3 +45,9 @@
   const users = Array.from({ length: 5 })
     .map((_, i) => `https://cdn.vuetifyjs.com/docs/images/one/snips/avatars/${2 + i}.jpg`)
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14471-192042"
+  }
+</example-meta>

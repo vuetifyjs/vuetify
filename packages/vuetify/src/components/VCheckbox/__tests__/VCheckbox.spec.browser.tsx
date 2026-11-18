@@ -87,3 +87,20 @@ describe('VCheckbox description', () => {
     expect(ids.map(id => document.getElementById(id)?.textContent)).toEqual(['Description', 'Hint'])
   })
 })
+
+describe('VCheckbox controlled', () => {
+  it('should stay in sync when the parent rejects an update', async () => {
+    const onUpdate = vi.fn()
+
+    render(() => <VCheckbox modelValue={ false } onUpdate:modelValue={ onUpdate } />)
+    await waitIdle()
+
+    const input = screen.getByCSS('input[type="checkbox"]') as HTMLInputElement
+    await userEvent.click(input)
+    await waitIdle()
+    expect(input.checked).toBe(false)
+
+    await userEvent.click(input)
+    expect(onUpdate).toHaveBeenCalledTimes(2)
+  })
+})

@@ -18,11 +18,11 @@ export type Hex = string & { __hexBrand: never }
 export type Color = string | number | HSV | RGB | HSL
 
 export function isCssColor (color?: string | null | false): boolean {
-  return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
+  return !!color && /^(#|[a-z-]*[a-z]\()/i.test(color)
 }
 
 export function isParsableColor (color: string): boolean {
-  return isCssColor(color) && !/^((rgb|hsl)a?\()?var\(--/.test(color)
+  return /^(#|(rgb|hsl)a?\((?!var\(--))/.test(color)
 }
 
 const cssColorRe = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/

@@ -25,7 +25,7 @@ Because of this, Vue has its own testing utility called [vue-test-utils](https:/
 
 ## Using Vite
 
-[Vite](https://vitejs.dev/) is a fast, opinionated frontend build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production. It provides a great developer experience and is the recommended build tool for Vuetify applications.
+[Vite](https://vite.dev/) is a fast, opinionated frontend build tool that serves your code via native ES Module imports during dev and bundles it with Rollup for production. It provides a great developer experience and is the recommended build tool for Vuetify applications.
 
 First, update your **vite.config.js** file to inline the `vuetify` dependency:
 
@@ -157,4 +157,4 @@ expect(getByTestId('submit-btn')).toBeInTheDocument()
 
 ### Accessibility Considerations
 
-Tests should respect user accessibility preferences. Configure [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) when testing animations to avoid flakiness and ensure accessibility compliance.
+Tests should respect user accessibility preferences. Configure [prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-reduced-motion) when testing animations to avoid flakiness and ensure accessibility compliance.
