@@ -1,7 +1,8 @@
 {
-  "description": "A dual-month date range picker built on top of `v-date-picker`. Shows two adjacent months side-by-side with a single shared range selection.",
+  "description": "A date range picker built on top of `v-date-picker`. Shows two adjacent months side-by-side or a single column of vertically scrolling months with a shared range selection.",
   "props": {
-    "independentMonths": "Decouples the two calendar panels so each month can be navigated independently."
+    "independentMonths": "Decouples the two calendar panels so each month can be navigated independently. Applies only when **scrollable** is disabled.",
+    "scrollable": "Shows months in a single vertically scrolling column. Month and year labels scroll with their calendars while the weekday row stays visible. Use **min** and **max** to limit the available dates."
   },
   "events": {
     "update:modelValue": "Emitted when the range selection changes."

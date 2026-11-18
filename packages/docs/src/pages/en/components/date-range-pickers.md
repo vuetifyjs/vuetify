@@ -1,7 +1,7 @@
 ---
 meta:
   title: Date range pickers
-  description: The date range picker component lets users select a start and end date across two adjacent months.
+  description: The date range picker component lets users select a start and end date with adjacent calendars or vertically scrolling months.
   keywords: date range picker, vuetify date range picker, vue date range picker
 related:
   - /components/date-pickers/
@@ -15,7 +15,7 @@ features:
 
 # Date range pickers
 
-The `v-date-range-picker` component renders two synchronized `v-date-picker` panels side-by-side, letting users select a contiguous date range across two months at once.
+The `v-date-range-picker` component lets users select a contiguous date range. It renders two synchronized `v-date-picker` panels side-by-side, or a single column of months with the **scrollable** prop.
 
 <page-features />
 
@@ -52,7 +52,17 @@ The model value is an array of two dates. Clicking a date sets the start; the ne
 
 ## Guide
 
-The component is a thin wrapper around two `v-date-picker` instances. It forces `multiple="range"`, hides each panel's header, and keeps the right panel one month ahead of the left.
+The component shares a range selection across its calendars. In the two-panel layout, it forces `multiple="range"`, hides each panel's header, and keeps the right panel one month ahead of the left. Use **independent-months** to navigate the two panels independently.
+
+### Props
+
+#### Scrollable
+
+The **scrollable** prop displays months in a single column that scrolls vertically, following the Material Design 3 mobile date range picker layout. Month and year labels scroll with their calendars, while the weekday row remains visible. The **min** and **max** props limit the available dates. The **independent-months** prop applies only to the two-panel layout.
+
+Use a [v-dialog](/components/dialogs/) to present the picker as a modal. The example below opens from a readonly text field and makes the dialog fullscreen on mobile; **scrollable** controls the calendar layout independently of the dialog's fullscreen presentation.
+
+<ExamplesExample file="v-date-range-picker/prop-scrollable" />
 
 ### Misc
 
