@@ -200,6 +200,41 @@ describe('VOverlay', () => {
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
   })
 
+  it('should respect zIndex of nested overlays above the stack', async () => {
+    render(() => (
+      <VOverlay modelValue zIndex={ 900 } data-testid="first">
+        <VOverlay modelValue data-testid="second">
+          <VOverlay modelValue zIndex={ 100 } data-testid="third">
+            <div data-testid="content">Content</div>
+          </VOverlay>
+        </VOverlay>
+      </VOverlay>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('content')).toHaveLength(1)
+
+    expect(screen.getByTestId('first').style.zIndex).toBe('900')
+    expect(screen.getByTestId('second').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('third').style.zIndex).toBe('2010')
+  })
+
+  it('should not raise zIndex above passive overlays', async () => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <VOverlay modelValue _passive data-testid="snackbar" />
+        <VOverlay v-model={ menu.value } zIndex={ 900 } data-testid="menu" />
+      </>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('snackbar')).toHaveLength(1)
+    menu.value = true
+    await expect.poll(() => screen.queryAllByTestId('menu')).toHaveLength(1)
+
+    expect(screen.getByTestId('snackbar').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('menu').style.zIndex).toBe('900')
+  })
+
   describe('scroll strategy', () => {
     afterEach(() => {
       document.documentElement.style.overflowY = ''
