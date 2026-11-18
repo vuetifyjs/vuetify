@@ -218,6 +218,23 @@ describe('VOverlay', () => {
     expect(screen.getByTestId('third').style.zIndex).toBe('2010')
   })
 
+  it('should not raise zIndex above passive overlays', async () => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <VOverlay modelValue _passive data-testid="snackbar" />
+        <VOverlay v-model={ menu.value } zIndex={ 900 } data-testid="menu" />
+      </>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('snackbar')).toHaveLength(1)
+    menu.value = true
+    await expect.poll(() => screen.queryAllByTestId('menu')).toHaveLength(1)
+
+    expect(screen.getByTestId('snackbar').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('menu').style.zIndex).toBe('900')
+  })
+
   describe('scroll strategy', () => {
     afterEach(() => {
       document.documentElement.style.overflowY = ''
