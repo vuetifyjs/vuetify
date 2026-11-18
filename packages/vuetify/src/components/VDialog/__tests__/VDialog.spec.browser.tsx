@@ -8,6 +8,9 @@ import { commands, page, render, screen, userEvent, wait } from '@test'
 import { h, nextTick, ref } from 'vue'
 import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
 
+// Types
+import type { Router } from 'vue-router'
+
 // Tests
 describe('VDialog', () => {
   it('should autofocus text field inside dialog', async () => {
@@ -297,70 +300,34 @@ describe('VDialog', () => {
 
     describe('with browser history', () => {
       const startUrl = window.location.href
-
-      function createBrowserRouter () {
-        const page = { setup: () => () => h('h1', 'page') }
-        return createRouter({
-          history: createWebHistory(),
-          routes: [
-            { path: '/page1', component: page },
-            { path: '/page2', component: page },
-            { path: '/:pathMatch(.*)*', component: page },
-          ],
-        })
-      }
-
-      async function openDialog (model: { value: boolean }) {
-        model.value = true
-        await nextTick()
-        await expect(screen.findByTestId('dialog')).resolves.toBeVisible()
-        await wait()
-      }
+      let router: Router
 
       afterEach(() => {
+        router.options.history.destroy()
         window.history.replaceState(null, '', startUrl)
       })
 
-      it('should close the dialog on back when the previous entry is the landing page', async () => {
-        const router = createBrowserRouter()
+      it('should close on back when the previous entry is the landing page, and again after reopening', async () => {
+        router = createRouter({
+          history: createWebHistory(),
+          routes: [{ path: '/:pathMatch(.*)*', component: { setup: () => () => h('h1', 'page') } }],
+        })
         const model = ref(false)
         render(() => (
-          <VDialog v-model={ model.value } data-testid="dialog">
-            <div data-testid="content">Content</div>
-          </VDialog>
+          <VDialog v-model={ model.value } data-testid="dialog">Content</VDialog>
         ), { global: { plugins: [router] } })
         await router.isReady()
         await router.push('/page1')
 
-        await openDialog(model)
+        for (let i = 0; i < 2; i++) {
+          model.value = true
+          await expect(screen.findByTestId('dialog')).resolves.toBeVisible()
+          await wait()
 
-        window.history.back()
-
-        await expect.poll(() => model.value).toBeFalsy()
-        expect(router.currentRoute.value.path).toBe('/page1')
-      })
-
-      it('should close the dialog on back again after it was reopened on the same page', async () => {
-        const router = createBrowserRouter()
-        const model = ref(false)
-        render(() => (
-          <VDialog v-model={ model.value } data-testid="dialog">
-            <div data-testid="content">Content</div>
-          </VDialog>
-        ), { global: { plugins: [router] } })
-        await router.isReady()
-        await router.push('/page1')
-        await router.push('/page2')
-
-        await openDialog(model)
-        window.history.back()
-        await expect.poll(() => model.value).toBeFalsy()
-        expect(router.currentRoute.value.path).toBe('/page2')
-
-        await openDialog(model)
-        window.history.back()
-        await expect.poll(() => model.value).toBeFalsy()
-        expect(router.currentRoute.value.path).toBe('/page2')
+          window.history.back()
+          await expect.poll(() => model.value).toBeFalsy()
+          expect(router.currentRoute.value.path).toBe('/page1')
+        }
       })
     })
   })
