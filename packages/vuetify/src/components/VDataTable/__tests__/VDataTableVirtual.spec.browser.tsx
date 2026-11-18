@@ -42,7 +42,8 @@ describe('VDataTableVirtual', () => {
     const rows = screen.getAllByRole('row')
     expect(rows.length).toBeLessThan(items.length)
     await expect.element(rows[0]).not.toHaveStyle({ height: '0px' })
-    await expect.element(rows[rows.length - 1]).toHaveStyle({ height: '0px' })
+    // The last row is the bottom spacer. Its height is the unrendered remainder.
+    expect(Number.parseFloat(rows.at(-1)!.style.height)).toBeGreaterThan(0)
   })
 
   it('should reserve expanded-row height after scrolling out of view', async () => {
