@@ -153,8 +153,10 @@ export const VSlideGroup = genericComponent<new <T>(
       return { x, y, shorthand: x && `${y} ${x}` }
     })
 
+    const rootRef = templateRef()
     const containerRef = templateRef()
     const contentRef = templateRef()
+    const rootRect = useElementSize(() => rootRef.el)
     const containerRect = useElementSize(() => containerRef.el)
     const contentRect = useElementSize(() => contentRef.el)
 
@@ -475,6 +477,14 @@ export const VSlideGroup = genericComponent<new <T>(
 
     const hasOverflowOrScroll = computed(() => isOverflowing.value || Math.abs(scrollOffset.value) > 0)
 
+    // Arrows shown on overflow take room from the container, so compare the content
+    // with the whole group, or they would stay once the content fits again
+    const needsArrows = computed(() => {
+      const groupSize = isHorizontal.value ? rootRect.width.value : rootRect.height.value
+
+      return groupSize + 1 < contentSize.value || Math.abs(scrollOffset.value) > 0
+    })
+
     const hasAffixes = computed(() => {
       switch (props.showArrows) {
         case 'never': return false
@@ -487,12 +497,12 @@ export const VSlideGroup = genericComponent<new <T>(
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
-        case true: return hasOverflowOrScroll.value
+        case true: return needsArrows.value
 
         // Always show on mobile
         case 'mobile': return (
           mobile.value ||
-          hasOverflowOrScroll.value
+          needsArrows.value
         )
 
         // https://material.io/components/tabs#scrollable-tabs
@@ -500,7 +510,7 @@ export const VSlideGroup = genericComponent<new <T>(
         // overflowed on desktop
         default: return (
           !mobile.value &&
-          hasOverflowOrScroll.value
+          needsArrows.value
         )
       }
     })
@@ -533,6 +543,7 @@ export const VSlideGroup = genericComponent<new <T>(
 
     useRender(() => (
       <props.tag
+        ref={ rootRef }
         class={[
           'v-slide-group',
           {
