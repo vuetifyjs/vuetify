@@ -90,6 +90,9 @@ export default {
     less: 'Mai puțin',
     more: 'Mai mult',
   },
+  vPie: {
+    other: 'Altele',
+  },
   input: {
     clear: 'Șterge {0}',
     prependAction: '{0} acțiune de inserare la început',

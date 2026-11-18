@@ -90,6 +90,9 @@ export default {
     less: 'Vähemmän',
     more: 'Enemmän',
   },
+  vPie: {
+    other: 'Muut',
+  },
   input: {
     clear: 'Tyhjennä {0}',
     prependAction: '{0} edeltävä toiminto',

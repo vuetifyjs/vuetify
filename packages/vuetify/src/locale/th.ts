@@ -90,6 +90,9 @@ export default {
     less: 'น้อย',
     more: 'มาก',
   },
+  vPie: {
+    other: 'อื่นๆ',
+  },
   input: {
     clear: 'ล้าง {0}',
     prependAction: 'การกระทำก่อนหน้า {0}',

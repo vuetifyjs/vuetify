@@ -90,6 +90,9 @@ export default {
     less: 'פחות',
     more: 'יותר',
   },
+  vPie: {
+    other: 'אחרים',
+  },
   input: {
     clear: 'נקה {0}',
     prependAction: '{0} פעולה מקדימה',

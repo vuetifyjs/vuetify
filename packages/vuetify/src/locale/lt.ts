@@ -90,6 +90,9 @@ export default {
     less: 'Mažiau',
     more: 'Daugiau',
   },
+  vPie: {
+    other: 'Kita',
+  },
   input: {
     clear: 'Išvalyti {0}',
     prependAction: '{0} pridėtas veiksmas',

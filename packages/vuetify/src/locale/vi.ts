@@ -90,6 +90,9 @@ export default {
     less: 'Ít hơn',
     more: 'Nhiều hơn',
   },
+  vPie: {
+    other: 'Khác',
+  },
   input: {
     clear: 'Xóa {0}',
     prependAction: 'Hành động trước {0}',

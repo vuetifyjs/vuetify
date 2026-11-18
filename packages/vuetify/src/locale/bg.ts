@@ -90,6 +90,9 @@ export default {
     less: 'По-малко',
     more: 'Повече',
   },
+  vPie: {
+    other: 'Други',
+  },
   input: {
     clear: 'Изчисти {0}',
     prependAction: '{0} предшестващо действие',

@@ -90,6 +90,9 @@ export default {
     less: 'Meno',
     more: 'Più',
   },
+  vPie: {
+    other: 'Altro',
+  },
   input: {
     clear: 'Cancella {0}',
     prependAction: 'Azione precedente {0}',
