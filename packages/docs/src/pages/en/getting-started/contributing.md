@@ -69,7 +69,7 @@ git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
 ::: info
-[Which remote URL should I use?](https://docs.github.com/en/free-pro-team@latest/github/using-git/which-remote-url-should-i-use)
+[Which remote URL should I use?](https://docs.github.com/en/get-started/git-basics/about-remote-repositories)
 :::
 
 Then install dependencies and perform an initial build to link all the packages together:
@@ -178,7 +178,7 @@ If you use AI assistants, the repository provides guidance they pick up automati
 
 ### Submitting Changes / Pull Requests
 
-First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
+First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/fork-a-repo).
 
 Then add your fork as a remote in git:
 

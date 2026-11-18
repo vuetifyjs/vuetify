@@ -171,7 +171,7 @@ The Vuetify CLI ecosystem consists of three packages that share logic via `@vuet
 
 * `vuetify init` — Same as create-vuetify, scaffolds new projects (supports `--type vuetify0`)
 * `vuetify add eslint` — Adds ESLint + [eslint-config-vuetify](https://github.com/vuetifyjs/eslint-config-vuetify) to existing projects
-* `vuetify add mcp` — Adds [Vuetify MCP](https://github.com/vuetifyjs/mcp) server config for [Cursor](https://cursor.sh/)/[VS Code](https://code.visualstudio.com/)
+* `vuetify add mcp` — Adds [Vuetify MCP](https://github.com/vuetifyjs/mcp) server config for [Cursor](https://cursor.com/)/[VS Code](https://code.visualstudio.com/)
 * `vuetify update` — Smart updates Vuetify + related packages
 * `vuetify docs` — Opens vuetifyjs.com (version-aware)
 * `vuetify upgrade` — Self-upgrades the CLI
@@ -281,8 +281,8 @@ The **create-vuetify** scaffolding tool received **12 commits** and 4 releases i
 **Details:**
 
 * [Vuetify CLI GitHub Repository](https://github.com/vuetifyjs/cli)
-* [create-vuetify Releases](https://github.com/vuetifyjs/create-vuetify/releases)
-* [v2.8.0-beta.1 Release Notes](https://github.com/vuetifyjs/create-vuetify/releases/tag/v2.8.0-beta.1)
+* [create-vuetify Releases](https://github.com/vuetifyjs/create/releases)
+* [v2.8.0-beta.1 Release Notes](https://github.com/vuetifyjs/create/releases/tag/v2.8.0-beta.1)
 
 ---
 
@@ -454,7 +454,7 @@ December brought four releases to the Vuetify MCP server (v0.2.4 through v0.4.1)
 
 **Rate Limiter**: The MCP server now includes rate limiting to ensure fair usage and stability across all consumers.
 
-**[Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI Support**: Native integration with Claude Code for seamless AI-assisted development workflows.
+**[Claude Code](https://code.claude.com/docs/en/overview) CLI Support**: Native integration with Claude Code for seamless AI-assisted development workflows.
 
 **update_vuetify_bin Tool**: A new tool for updating existing Vuetify bins programmatically.
 
@@ -508,11 +508,11 @@ With these additions, v0 now provides production-ready primitives for building a
 
 December added five composables covering pagination, virtualization, and UI utilities:
 
-**[usePagination](https://0.vuetifyjs.com/composables/utilities/use-pagination/)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
+**[usePagination](https://0.vuetifyjs.com/composables/data/create-pagination)** — Full-featured pagination logic with first/prev/next/last navigation, ellipsis support for large page ranges, and computed `pageStart`/`pageStop` for efficient data slicing. Supports locale-aware formatting and customizable page sizes.
 
-**[useVirtual](https://0.vuetifyjs.com/composables/utilities/use-virtual/)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
+**[useVirtual](https://0.vuetifyjs.com/composables/data/create-virtual)** — High-performance virtual scrolling that renders only visible items plus an overscan buffer. Supports dynamic or fixed item heights, bidirectional scrolling (useful for chat interfaces), scroll anchoring to maintain position across data changes, and iOS momentum scrolling. Handles 100k+ items efficiently.
 
-**[useOverflow](https://0.vuetifyjs.com/composables/utilities/use-overflow/)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
+**[useOverflow](https://0.vuetifyjs.com/composables/semantic/create-overflow)** — Computes how many items fit in a container based on available width. Two modes: variable-width (measures each item individually, ideal for breadcrumbs) and uniform-width (samples one item, ideal for pagination buttons). Tracks container width via ResizeObserver and supports reserved space for navigation controls.
 
 **[useClickOutside](https://0.vuetifyjs.com/composables/system/use-click-outside/)** — Click outside detection for closing menus, dialogs, and popovers. Handles edge cases like portaled content and nested overlays.
 
@@ -567,10 +567,10 @@ The v0 documentation at [0.vuetifyjs.com](https://0.vuetifyjs.com/) now includes
 **Details:**
 
 * [Vuetify0 Documentation](https://0.vuetifyjs.com/)
-* [useVirtual](https://0.vuetifyjs.com/composables/use-virtual/)
-* [usePagination](https://0.vuetifyjs.com/composables/use-pagination/)
-* [useOverflow](https://0.vuetifyjs.com/composables/use-overflow/)
-* [useClickOutside](https://0.vuetifyjs.com/composables/use-click-outside/)
+* [useVirtual](https://0.vuetifyjs.com/composables/data/create-virtual)
+* [usePagination](https://0.vuetifyjs.com/composables/data/create-pagination)
+* [useOverflow](https://0.vuetifyjs.com/composables/semantic/create-overflow)
+* [useClickOutside](https://0.vuetifyjs.com/composables/system/use-click-outside)
 * [v0.0.15](https://github.com/vuetifyjs/0/releases/tag/v0.0.15)–[v0.0.18](https://github.com/vuetifyjs/0/releases/tag/v0.0.18), [v0.0.20](https://github.com/vuetifyjs/0/releases/tag/v0.0.20)–[v0.0.21](https://github.com/vuetifyjs/0/releases/tag/v0.0.21)
 
 ---

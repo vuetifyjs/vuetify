@@ -105,7 +105,7 @@ The initial Vuetify0 release will focus on the foundational pillars of the frame
 * **Foundational** composables are the backbone of Vuetify0 and are the basic building blocks for creating a UI library.
 * **Registration** composables are the foundational pieces for selection and tokenization.
 * **Selection** composables serve as the core logic for managing selectable items, including single and multiple selection modes.
-* **Plugins**: [Breakpoints](https://0.vuetifyjs.com/composables/plugin/use-breakpoints), [Hydration](https://0.vuetifyjs.com/composables/plugin/use-hydration), [Locale](https://0.vuetifyjs.com/composables/plugin/use-locale), [Storage](https://0.vuetifyjs.com/composables/plugin/use-storage), and [Theme](https://0.vuetifyjs.com/composables/plugin/use-theme) plugins to manage global application state.
+* **Plugins**: [Breakpoints](https://0.vuetifyjs.com/composables/plugins/use-breakpoints), [Hydration](https://0.vuetifyjs.com/composables/plugins/use-hydration), [Locale](https://0.vuetifyjs.com/composables/plugins/use-locale), [Storage](https://0.vuetifyjs.com/composables/plugins/use-storage), and [Theme](https://0.vuetifyjs.com/composables/plugins/use-theme) plugins to manage global application state.
 
 ::: info
 
@@ -173,8 +173,6 @@ This move reflects our commitment to lowering barriers to entry and helping deve
 
 **Details:**
 
-* [Crypto Coin Theme](https://store.vuetifyjs.com/products/crypto-coin-theme)
-* [Flairo Theme Pro](https://store.vuetifyjs.com/products/flairo-theme-pro)
 * [Vuetify 3 Nebula UI Kit](https://store.vuetifyjs.com/products/vuetify-3-nebula-ui-kit)
 * [Zero Theme Pro](https://store.vuetifyjs.com/products/zero-theme-pro)
 * [Made by Vuetify Bundle](https://store.vuetifyjs.com/products/made-by-vuetify-bundle)

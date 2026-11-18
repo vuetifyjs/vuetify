@@ -312,7 +312,7 @@ You can display a progress bar instead of the bottom line. You can use the defau
 
 #### Custom validation
 
-While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/monterail/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself.
+While the built in `v-form` or 3rd party plugin such as [vuelidate](https://github.com/vuelidate/vuelidate) or [vee-validation](https://github.com/logaretm/vee-validate) can help streamline your validation process, you can choose to simply control it yourself.
 
 <ExamplesExample file="v-text-field/misc-custom-validation" />
 
@@ -324,7 +324,7 @@ Full width text fields allow you to create boundless inputs. In this example, we
 
 #### Password input
 
-Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
+Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/input/password) can be used with an appended icon and callback to control the visibility.
 
 <ExamplesExample file="v-text-field/misc-password" />
 

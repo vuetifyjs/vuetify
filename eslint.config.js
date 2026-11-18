@@ -62,7 +62,7 @@ export default defineConfig([
       'no-case-declarations': 'off',
       'no-console': 'off',
       'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-      'no-prototype-builtins': 'off', // TODO: replace with hasOwn
+      'no-prototype-builtins': 'error',
       'no-return-assign': 'off',
       'no-unused-vars': 'error',
       'no-void': 'off',

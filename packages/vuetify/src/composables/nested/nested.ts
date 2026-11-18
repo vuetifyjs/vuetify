@@ -293,6 +293,7 @@ export const useNested = (
 
   const itemsUpdatePropagation = throttle(() => {
     nextTick(() => {
+      if (isUnmounted) return
       children.value = new Map(children.value)
       parents.value = new Map(parents.value)
     })

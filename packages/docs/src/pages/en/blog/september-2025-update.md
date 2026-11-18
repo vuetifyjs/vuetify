@@ -150,7 +150,7 @@ Design faster with 1:1 Vuetify components, production-ready variants and style c
 **Details:**
 
 * [Free Figma UI Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* [Go PRO](https://store.vuetifyjs.com/products/official-vuetify-3-ui-kit-for-figma)
+* [Go PRO](https://store.vuetifyjs.com/products/official-vuetify-4-ui-kit-for-figma)
 
 ## September Webinar Recap: Performance Crisis { #september-webinar-recap-performance-crisis }
 
@@ -322,7 +322,7 @@ See all available composables on the [Vuetify0 documentation site](https://0.vue
 
 * [usePermissions Documentation](https://0.vuetifyjs.com/composables/plugins/use-permissions/)
 * [useFeatures Documentation](https://0.vuetifyjs.com/composables/plugins/use-features/)
-* [useTimeline Documentation](https://0.vuetifyjs.com/composables/registration/use-timeline/)
+* [useTimeline Documentation](https://0.vuetifyjs.com/composables/registration/create-timeline)
 
 ## Framework & Security Updates { #framework-security-updates }
 

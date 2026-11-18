@@ -417,7 +417,7 @@ function getDiff (date: Date, comparing: Date | string, unit?: string) {
     case 'years':
       return d.getFullYear() - c.getFullYear()
     case 'quarters':
-      return Math.floor((d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12) / 4)
+      return Math.trunc((d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12) / 3) || 0
     case 'months':
       return d.getMonth() - c.getMonth() + (d.getFullYear() - c.getFullYear()) * 12
     case 'weeks':

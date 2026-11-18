@@ -193,7 +193,7 @@ export function keys<O extends {}> (o: O) {
 }
 
 export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
-  return key.every(k => obj.hasOwnProperty(k))
+  return key.every(k => Object.hasOwn(obj, k))
 }
 
 type MaybePick<
@@ -451,7 +451,8 @@ export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000):
 
   const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
-  while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
+  // compare the rounded value so that 999.95 kB becomes 1.0 MB instead of 1000.0 kB
+  while (Number(Math.abs(bytes).toFixed(1)) >= base && unit < prefix.length - 1) {
     bytes /= base
     ++unit
   }

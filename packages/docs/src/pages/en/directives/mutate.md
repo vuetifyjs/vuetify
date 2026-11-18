@@ -20,14 +20,14 @@ The `v-mutate` directive utilizes the [Mutation Observer API](https://developer.
 
 ## Usage
 
-`v-mutate` is a simple interface for the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) that is implemented with [Vue directives](https://v3.vuejs.org/api/directives.html). There are two main ways to alter `v-mutate`'s options; with directive modifiers using period notation, or with a custom options object. The following table contains information on the available directive modifiers:
+`v-mutate` is a simple interface for the [Mutation Observer API](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) that is implemented with [Vue directives](https://vuejs.org/api/built-in-directives.html). There are two main ways to alter `v-mutate`'s options; with directive modifiers using period notation, or with a custom options object. The following table contains information on the available directive modifiers:
 
 | Modifier     | Default      | Description |
 | ------------ | -----------  | ----------- |
-| `.attr`      | `true`       | The [attr](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/attributes) modifier monitors target node's attribute changes                                                       |
-| `.char`      | `true`       | The [char](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/characterData) modifier monitors changes to target node's character data (and, its descendants if `.sub` is `true`)       |
-| `.child`     | `true`       | The [child](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/childList) modifier monitors for the addition or removal of child nodes (and, its descendants if `.sub` is `true`) |
-| `.sub`       | `true`       | The [sub](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserverInit/subtree) modifier extends all monitoring to the entire subtree of target node                                        |
+| `.attr`      | `true`       | The [attr](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#attributes) modifier monitors target node's attribute changes                                                       |
+| `.char`      | `true`       | The [char](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#characterdata) modifier monitors changes to target node's character data (and, its descendants if `.sub` is `true`)       |
+| `.child`     | `true`       | The [child](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#childlist) modifier monitors for the addition or removal of child nodes (and, its descendants if `.sub` is `true`) |
+| `.sub`       | `true`       | The [sub](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe#subtree) modifier extends all monitoring to the entire subtree of target node                                        |
 | `.once`      | `undefined`  | The [once](#once) modifier invokes the user provided callback one time and disconnects the observer                                                                                                  |
 | `.immediate` | `undefined`  | The [immediate](#immediate) modifier invokes the user provided callback on _mounted_ and does not effect `.once`                                                                                     |
 

@@ -1,12 +1,16 @@
 // Components
 import { VDialog } from '../VDialog'
 import { VBtn } from '@/components/VBtn'
+import { VSnackbar } from '@/components/VSnackbar'
 import { VTextField } from '@/components/VTextField'
 
 // Utilities
 import { commands, page, render, screen, userEvent, wait } from '@test'
 import { h, nextTick, ref } from 'vue'
-import { createMemoryHistory, createRouter } from 'vue-router'
+import { createMemoryHistory, createRouter, createWebHistory } from 'vue-router'
+
+// Types
+import type { Router } from 'vue-router'
 
 // Tests
 describe('VDialog', () => {
@@ -194,6 +198,53 @@ describe('VDialog', () => {
     await expect.poll(() => document.activeElement).toBe(first)
   })
 
+  it('should close on Escape when a snackbar opens above it', async () => {
+    const dialog = ref(true)
+    const snackbar = ref(false)
+    render(() => (
+      <div>
+        <VDialog v-model={ dialog.value }>
+          <div>Content</div>
+        </VDialog>
+        <VSnackbar v-model={ snackbar.value } timeout={ -1 }>Saved</VSnackbar>
+      </div>
+    ))
+
+    await expect.poll(() => document.querySelector('.v-dialog .v-overlay__content')).not.toBeNull()
+    snackbar.value = true
+    await expect.poll(() => document.querySelector('.v-snackbar__wrapper')).not.toBeNull()
+    await wait()
+
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => dialog.value).toBeFalsy()
+    expect(snackbar.value).toBe(true)
+  })
+
+  it('should close only the focused snackbar on Escape', async () => {
+    const dialog = ref(true)
+    const snackbar = ref(false)
+    render(() => (
+      <div>
+        <VDialog v-model={ dialog.value }>
+          <div>Content</div>
+        </VDialog>
+        <VSnackbar v-model={ snackbar.value } timeout={ -1 }>
+          {{ actions: () => <VBtn data-testid="undo">Undo</VBtn> }}
+        </VSnackbar>
+      </div>
+    ))
+
+    await expect.poll(() => document.querySelector('.v-dialog .v-overlay__content')).not.toBeNull()
+    snackbar.value = true
+    await expect.poll(() => document.querySelector('.v-snackbar__wrapper')).not.toBeNull()
+    await wait()
+
+    screen.getByTestId('undo').focus()
+    await userEvent.keyboard('{Escape}')
+    await expect.poll(() => snackbar.value).toBeFalsy()
+    expect(dialog.value).toBe(true)
+  })
+
   describe('routing back', () => {
     function createTestRouter () {
       return createRouter({
@@ -293,6 +344,39 @@ describe('VDialog', () => {
       await simulateBackNavigation(router)
       await expect.poll(() => model.value).toBeFalsy()
       expect(router.currentRoute.value.path).toBe('/page2')
+    })
+
+    describe('with browser history', () => {
+      const startUrl = window.location.href
+      let router: Router
+
+      afterEach(() => {
+        router.options.history.destroy()
+        window.history.replaceState(null, '', startUrl)
+      })
+
+      it('should close on back when the previous entry is the landing page, and again after reopening', async () => {
+        router = createRouter({
+          history: createWebHistory(),
+          routes: [{ path: '/:pathMatch(.*)*', component: { setup: () => () => h('h1', 'page') } }],
+        })
+        const model = ref(false)
+        render(() => (
+          <VDialog v-model={ model.value } data-testid="dialog">Content</VDialog>
+        ), { global: { plugins: [router] } })
+        await router.isReady()
+        await router.push('/page1')
+
+        for (let i = 0; i < 2; i++) {
+          model.value = true
+          await expect(screen.findByTestId('dialog')).resolves.toBeVisible()
+          await wait()
+
+          window.history.back()
+          await expect.poll(() => model.value).toBeFalsy()
+          expect(router.currentRoute.value.path).toBe('/page1')
+        }
+      })
     })
   })
 })
