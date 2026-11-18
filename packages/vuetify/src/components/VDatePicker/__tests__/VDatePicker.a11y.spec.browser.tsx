@@ -58,6 +58,17 @@ describe('VDatePickerMonth — virtual focus', () => {
     expect(new Date(model.value).getDate()).toBe(10)
   })
 
+  it('does not select with keyboard when readonly', async () => {
+    const model = ref(new Date(2026, 0, 10))
+    render(() => <VDatePicker v-model={ model.value } month={ 0 } year={ 2026 } readonly />)
+
+    screen.getByRole('grid').focus()
+    await userEvent.keyboard('{ArrowRight}')
+    await userEvent.keyboard('{Enter}')
+    await userEvent.keyboard(' ')
+    expect(model.value.getDate()).toBe(10)
+  })
+
   it('starts navigation from the clicked day', async () => {
     render(() => <VDatePicker month={ 0 } year={ 2026 } />)
 

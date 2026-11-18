@@ -203,7 +203,7 @@ export const VDatePickerMonth = genericComponent<new <TModel>(
 
     function onDaySelect (isoDate: string) {
       const item = daysInMonth.value.find(d => d.isoDate === isoDate)
-      if (!item || isDayDisabled(item)) return
+      if (!item || props.readonly || isDayDisabled(item)) return
 
       onClick(item.date)
 
