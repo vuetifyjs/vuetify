@@ -200,6 +200,24 @@ describe('VOverlay', () => {
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
   })
 
+  it('should respect zIndex of nested overlays above the stack', async () => {
+    render(() => (
+      <VOverlay modelValue zIndex={ 900 } data-testid="first">
+        <VOverlay modelValue data-testid="second">
+          <VOverlay modelValue zIndex={ 100 } data-testid="third">
+            <div data-testid="content">Content</div>
+          </VOverlay>
+        </VOverlay>
+      </VOverlay>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('content')).toHaveLength(1)
+
+    expect(screen.getByTestId('first').style.zIndex).toBe('900')
+    expect(screen.getByTestId('second').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('third').style.zIndex).toBe('2010')
+  })
+
   describe('scroll strategy', () => {
     afterEach(() => {
       document.documentElement.style.overflowY = ''
