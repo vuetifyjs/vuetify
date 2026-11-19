@@ -198,11 +198,13 @@
       { text: 'Premium documentation features (pinned nav, rail menu, copy page as markdown)' },
       { text: 'Early access to new tools and features' },
       { text: 'Vuetify MCP API (access to your one data anywhere that supports MCP)', new: true },
+      { text: 'Vuetify Snips: Application UI, Marketing & E-commerce snippets', new: true },
       { text: 'Share live updates on Bins and Playgrounds', soon: true },
       { text: 'Embed playgrounds in your own documentation', soon: true },
     ],
     team: [
       { text: 'Everything in Solo, for up to 25 members' },
+      { text: 'Vuetify Snips for every team member', new: true },
       { text: 'Centralized team billing and member management' },
       { text: 'Shared playgrounds and code snippets', new: false },
       { text: 'Team shared Private Bins and Playgrounds', soon: true },

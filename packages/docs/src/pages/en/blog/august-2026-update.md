@@ -297,6 +297,12 @@ Two v3 → v4 migration problems from a production migration are now documented 
 
 [Snips](https://snips.vuetifyjs.com/) prices are cut by half with no end date: category packs $74, all-access $149, team all-access $399.
 
+::: info
+
+**Update (Nov 17, 2026):** Snips is now included with [Vuetify One](/one/) and is no longer sold separately.
+
+:::
+
 ---
 
 ## What's Next { #whats-next .mt-4 }

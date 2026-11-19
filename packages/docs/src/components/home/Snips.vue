@@ -46,6 +46,16 @@
               target="_blank"
               variant="text"
             />
+
+            <v-btn
+              :text="t('home.snips.one')"
+              :to="rpath('/one/')"
+              class="text-none"
+              color="primary"
+              rounded="lg"
+              size="large"
+              variant="tonal"
+            />
           </div>
 
         </v-col>
