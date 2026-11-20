@@ -39,7 +39,7 @@
           @at-root #{selector.append('.v-text-field--suffixed', &)}
             --v-field-padding-start: #{$text-field-input-padding-end}
 
-      &:not(.v-field--no-label, .v-field--active)
+      &:not(.v-field--no-label, .v-field--active, .v-field--label-adjacent)
         input::placeholder
           opacity: 0
 
