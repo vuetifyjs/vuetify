@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify0 v1.4
+
+🖊️ John Leider • 📅 November 20th, 2026
+
+Vuetify0 v1.4 is out. It adds TimePicker and createCalendar, and useDate now works without an adapter and handles non-Gregorian calendars. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1-4/) { .text-end }
+
 ## October 2026 Update
 
 🖊️ John Leider • 📅 November 11th, 2026
