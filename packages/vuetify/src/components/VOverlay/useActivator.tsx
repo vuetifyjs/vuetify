@@ -28,6 +28,7 @@ import {
   IN_BROWSER,
   isString,
   matchesSelector,
+  nullifyTransforms,
   propsFactory,
   templateRef,
   unbindProps,
@@ -281,6 +282,34 @@ export function useActivator (
     }
 
     return events
+  })
+
+  // VDialogTransition sets pointer-events: none while entering, so content hover is hit-tested manually until it lifts
+  watch(isActive, (val, _, onCleanup) => {
+    if (!val || !props.openOnHover) return
+
+    let isInside = false
+    function onMousemove (e: MouseEvent) {
+      if (!contentEl.value) return
+
+      const isLocked = contentEl.value.style.pointerEvents === 'none'
+      if (!isLocked) document.removeEventListener('mousemove', onMousemove)
+      // one more pass after unlocking covers a direct exit the browser never saw as an enter
+      if (!isLocked && !isInside) return
+
+      const box = nullifyTransforms(contentEl.value)
+      const wasInside = isInside
+      isInside = e.clientX >= box.left && e.clientX <= box.right && e.clientY >= box.top && e.clientY <= box.bottom
+
+      if (isInside && !isHovered) {
+        contentEvents.value.onMouseenter?.(e)
+      } else if (!isInside && wasInside && !activatorEl.value?.contains(e.target as Node)) {
+        contentEvents.value.onMouseleave?.(e)
+      }
+    }
+
+    document.addEventListener('mousemove', onMousemove, { passive: true })
+    onCleanup(() => document.removeEventListener('mousemove', onMousemove))
   })
 
   const scrimEvents = computed(() => {

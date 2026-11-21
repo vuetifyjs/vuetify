@@ -15,6 +15,7 @@ import { VTooltip } from '@/components/VTooltip'
 // Utilities
 import { commands, render, screen, touch, userEvent, wait } from '@test'
 import { nextTick, ref } from 'vue'
+import { nullifyTransforms } from '@/util'
 
 describe('VMenu', () => {
   describe('open-on-focus with template activator', () => {
@@ -566,6 +567,36 @@ describe('VMenu', () => {
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
     await userEvent.click(outside, { button: 'middle' })
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+  })
+
+  it('should stay open when the pointer reaches the content during the enter transition', async () => {
+    render(() => (
+      <VMenu openOnHover closeDelay={ 50 } contentProps={{ 'data-testid': 'menu-content' }}>
+        {{
+          activator: ({ props }: any) => <VBtn { ...props } data-testid="btn">Menu</VBtn>,
+          default: () => (
+            <VList>
+              <VListItem title="Item 1" />
+              <VListItem title="Item 2" data-testid="item" />
+            </VList>
+          ),
+        }}
+      </VMenu>
+    ))
+
+    await userEvent.hover(screen.getByTestId('btn'))
+    const content = await screen.findByTestId('menu-content')
+    expect(content.style.pointerEvents).toBe('none')
+
+    const box = nullifyTransforms(screen.getByTestId('item'))
+    screen.getByTestId('btn').dispatchEvent(new MouseEvent('mouseleave'))
+    document.dispatchEvent(new MouseEvent('mousemove', {
+      clientX: box.left + box.width / 2,
+      clientY: box.top + box.height / 2,
+    }))
+
+    await expect.poll(() => content.style.pointerEvents).toBe('')
+    expect(content).toBeVisible()
   })
 
   describe('cascade close', () => {
