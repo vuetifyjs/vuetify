@@ -1,7 +1,7 @@
 // Utilities
 import { render, screen, userEvent } from '@test'
 import { defineComponent } from 'vue'
-import { useGoTo } from '../goto'
+import { scrollTo, useGoTo } from '../goto'
 
 const ComponentA = defineComponent({
   props: {
@@ -80,6 +80,24 @@ describe('goto', () => {
     await userEvent.click(end)
     await expect.poll(() => window.scrollX).toBe(0)
 
+    expect('target is not reachable').not.toHaveBeenTipped()
+  })
+
+  it('settles on the new edge when the scroll range shrinks mid-animation', async () => {
+    render(() => (
+      <div id="container" style="width: 200px; overflow: auto;">
+        <div id="content" style="width: 2000px; height: 10px;" />
+      </div>
+    ))
+
+    const container = screen.getByCSS('#container')
+    const content = screen.getByCSS('#content')
+
+    const scrolling = scrollTo(1800, { container, duration: 100 }, true)
+    requestAnimationFrame(() => { content.style.width = '1000px' })
+
+    await expect(scrolling).resolves.toBe(800)
+    expect(container.scrollLeft).toBe(800)
     expect('target is not reachable').not.toHaveBeenTipped()
   })
 })

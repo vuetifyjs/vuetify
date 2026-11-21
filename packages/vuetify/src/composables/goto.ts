@@ -113,9 +113,10 @@ export async function scrollTo (
   return new Promise(resolve => requestAnimationFrame(function step (currentTime: number) {
     const timeElapsed = currentTime - startTime
     const progress = timeElapsed / options.duration
+    const reachableLocation = clampTarget(container, targetLocation, !!rtl, !!horizontal)
     const location = Math.floor(
       startLocation +
-      (targetLocation - startLocation) *
+      (reachableLocation - startLocation) *
       ease(clamp(progress, 0, 1))
     )
 
@@ -123,7 +124,7 @@ export async function scrollTo (
 
     // Allow for some jitter if target time has elapsed
     if (progress >= 1 && Math.abs(location - container[property]) < 10) {
-      return resolve(targetLocation)
+      return resolve(reachableLocation)
     } else if (progress > 2) {
       // The target might not be reachable
       consoleWarn('Scroll target is not reachable')
