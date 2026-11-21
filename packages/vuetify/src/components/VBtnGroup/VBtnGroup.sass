@@ -112,6 +112,21 @@
     .v-btn-group .v-btn
       border-color: buttontext
 
+    .v-btn-group
+      :where(.v-btn)
+        color: buttontext !important
+
+        &:focus-visible
+          outline: 2px solid currentColor
+          outline-offset: -6px
+
+      :where(.v-btn--disabled)
+        color: graytext !important
+
+        @if ($button-colored-disabled)
+          &:is(.v-btn--variant-elevated, .v-btn--variant-flat) > :not(.v-btn__overlay)
+            filter: opacity($button-disabled-opacity)
+
 @if $btn-group-named-sizes != ()
   @if $button-named-sizes == ()
     @error '$btn-group-named-sizes requires $button-named-sizes'

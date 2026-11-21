@@ -1,3 +1,5 @@
+@use 'sass:math'
+@use '../VBtn/variables' as btn
 @use './variables' as *
 @use '../../styles/tools'
 
@@ -19,21 +21,27 @@
 @include tools.layer('trumps')
   @media (forced-colors: active)
     .v-btn-toggle
-      > .v-btn:not(.v-btn--disabled)
+      > .v-btn:not(.v-btn--disabled, .v-btn--active)
+        &:hover,
         &:focus-visible
-          outline: 0
-
-        &:not(.v-btn--active)
-          &:hover,
-          &:focus-visible
-            color: highlight
-            border-color: currentColor
+          color: highlight !important
+          border-color: currentColor
 
       > .v-btn--active
-        color: highlight
+        color: highlight !important
         forced-color-adjust: preserve-parent-color
 
         &:not(.v-btn--variant-text, .v-btn--variant-plain)
-          background-color: highlight
-          color: highlighttext
+          background-color: highlight !important
+          color: highlighttext !important
           border-color: highlight
+
+        &.v-btn--disabled:not(.v-btn--variant-text, .v-btn--variant-plain)
+          > *
+            filter: none
+
+          > .v-btn__underlay
+            display: none
+
+          > .v-btn__overlay
+            opacity: math.div(btn.$button-disabled-overlay, btn.$button-disabled-opacity)
