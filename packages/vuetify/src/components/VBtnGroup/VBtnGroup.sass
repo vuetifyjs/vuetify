@@ -29,6 +29,27 @@
     .v-btn
       border-color: inherit
 
+    // Outline and dividers are borders on the button, so they cannot sit under its disabled opacity.
+    @if ($button-colored-disabled)
+      .v-btn.v-btn--variant-outlined.v-btn--disabled,
+      &--divided .v-btn.v-btn--disabled:not(.v-btn--variant-elevated, .v-btn--variant-flat, .v-btn--variant-plain)
+        opacity: 1
+
+        &:not(.v-btn--loading) > :is(.v-btn__content, .v-btn__prepend, .v-btn__append),
+        > .v-btn__loader
+          opacity: $button-disabled-opacity
+
+      // Plain already fades the control. Keep that border strength and put the rest of the fade on the content.
+      &--divided .v-btn.v-btn--variant-plain.v-btn--disabled
+        opacity: $button-plain-opacity
+
+        &:not(.v-btn--loading) > :is(.v-btn__content, .v-btn__prepend, .v-btn__append),
+        > .v-btn__loader
+          opacity: calc(#{$button-disabled-opacity} / #{$button-plain-opacity})
+
+      &--divided .v-btn.v-btn--variant-tonal.v-btn--disabled > .v-btn__underlay
+        opacity: calc(var(--v-activated-opacity) * #{$button-disabled-opacity})
+
     #{$legacy} .v-btn
       border-radius: 0
 
