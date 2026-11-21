@@ -1,4 +1,5 @@
 @use 'sass:list'
+@use 'sass:math'
 @use 'sass:map'
 @use 'sass:selector'
 @use '../../styles/settings'
@@ -28,6 +29,19 @@
 
     .v-btn
       border-color: inherit
+
+    @if ($button-colored-disabled)
+      .v-btn.v-btn--disabled:not(.v-btn--variant-elevated, .v-btn--variant-flat)
+        opacity: 1 // for borders
+
+        > *
+          filter: opacity($button-disabled-opacity)
+
+        &.v-btn--variant-plain
+          opacity: $button-plain-opacity
+
+          > *
+            filter: opacity(math.div($button-disabled-opacity, $button-plain-opacity))
 
     #{$legacy} .v-btn
       border-radius: 0
@@ -91,6 +105,12 @@
           border-block-end-width: $btn-group-border-thin-width
           border-block-end-style: $btn-group-border-style
           border-block-end-color: $btn-group-border-color
+
+@include tools.layer('trumps')
+  @media (forced-colors: active)
+    .v-btn-group,
+    .v-btn-group .v-btn
+      border-color: buttontext
 
 @if $btn-group-named-sizes != ()
   @if $button-named-sizes == ()
