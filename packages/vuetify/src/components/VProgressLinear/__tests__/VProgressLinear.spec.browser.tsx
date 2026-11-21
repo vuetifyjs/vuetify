@@ -44,6 +44,53 @@ const stories = {
 }
 
 describe('VProgressLinear', () => {
+  it('keeps the track fill independent of border-opacity', () => {
+    render(() => (
+      <div class="border-opacity-100">
+        <VProgressLinear class="border-opacity-100" modelValue={ 40 } bufferValue={ 70 } style="width: 200px" />
+      </div>
+    ), null, {
+      theme: {
+        themes: {
+          light: {
+            variables: {
+              'border-opacity': 1,
+            },
+          },
+        },
+      },
+    })
+
+    const root = screen.getByCSS('.v-progress-linear')
+    expect(getComputedStyle(root).getPropertyValue('--v-border-opacity').trim()).toBe('1')
+
+    const background = screen.getByCSS('.v-progress-linear__background')
+    const buffer = screen.getByCSS('.v-progress-linear__buffer')
+    expect(Number(getComputedStyle(background).opacity)).toBeCloseTo(0.12)
+    expect(Number(getComputedStyle(buffer).opacity)).toBeCloseTo(0.12)
+  })
+
+  it('uses the progress-linear opacity theme variable for the track', () => {
+    render(() => (
+      <VProgressLinear class="border-opacity-0" modelValue={ 40 } bufferValue={ 70 } style="width: 200px" />
+    ), null, {
+      theme: {
+        themes: {
+          light: {
+            variables: {
+              'progress-linear-opacity': 0.4,
+            },
+          },
+        },
+      },
+    })
+
+    const background = screen.getByCSS('.v-progress-linear__background')
+    const buffer = screen.getByCSS('.v-progress-linear__buffer')
+    expect(Number(getComputedStyle(background).opacity)).toBeCloseTo(0.4)
+    expect(Number(getComputedStyle(buffer).opacity)).toBeCloseTo(0.4)
+  })
+
   it('supports clickable prop', async () => {
     const model = ref(0)
     render(() => (
