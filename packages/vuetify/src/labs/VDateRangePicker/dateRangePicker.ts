@@ -11,15 +11,16 @@ import { clamp, createRange, isFunction } from '@/util'
 // Types
 import type { Ref } from 'vue'
 import type { VDatePickerMonth } from '@/components/VDatePicker/VDatePickerMonth'
-import type { VVirtualScroll } from '@/components/VVirtualScroll'
+import type { VDateRangePickerVirtualScroll } from './VDateRangePickerVirtualScroll'
 import type { CalendarProps } from '@/composables/calendar'
 
 export function useDateRangeMonths (props: CalendarProps, model: Ref<readonly unknown[]>) {
   const adapter = useDate()
   const { isRtl } = useRtl()
   const { minDate, maxDate, clampDate } = useCalendarRange(props)
-  const virtualRef = shallowRef<VVirtualScroll>()
+  const virtualRef = shallowRef<VDateRangePickerVirtualScroll>()
   const monthRefs = new Map<number, VDatePickerMonth>()
+  const monthRefSetters = new Map<number, (month: unknown) => void>()
   let pendingFocus: string | undefined
   let anchorDate: unknown
   let anchoring = true
@@ -81,6 +82,7 @@ export function useDateRangeMonths (props: CalendarProps, model: Ref<readonly un
   function setMonthRef (index: number, month: VDatePickerMonth | null) {
     if (!month) {
       monthRefs.delete(index)
+      monthRefSetters.delete(index)
       return
     }
 
@@ -89,6 +91,13 @@ export function useDateRangeMonths (props: CalendarProps, model: Ref<readonly un
       const iso = pendingFocus
       nextTick(() => focusDate(iso))
     }
+  }
+
+  function monthRef (index: number) {
+    if (!monthRefSetters.has(index)) {
+      monthRefSetters.set(index, month => setMonthRef(index, month as VDatePickerMonth | null))
+    }
+    return monthRefSetters.get(index)!
   }
 
   function isDateDisabled (date: unknown) {
@@ -167,5 +176,5 @@ export function useDateRangeMonths (props: CalendarProps, model: Ref<readonly un
     scrollToDate(anchorDate)
   }, { flush: 'post' })
 
-  return { months, virtualRef, setMonthRef, onBoundaryNavigate, onInteraction, onScroll }
+  return { months, virtualRef, monthRef, onBoundaryNavigate, onInteraction, onScroll }
 }

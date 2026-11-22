@@ -5,7 +5,6 @@ import './VDateRangePicker.sass'
 import { VDateRangePickerMonths } from './VDateRangePickerMonths'
 import { VBtn } from '@/components/VBtn'
 import { makeVDatePickerProps, VDatePicker } from '@/components/VDatePicker/VDatePicker'
-import { VDatePickerHeader } from '@/components/VDatePicker/VDatePickerHeader'
 import { VSpacer } from '@/components/VGrid'
 import { makeVPickerProps, VPicker } from '@/components/VPicker/VPicker'
 
@@ -84,12 +83,16 @@ export const VDateRangePicker = genericComponent<new <
     const { t } = useLocale()
 
     const model = useProxiedModel(props, 'modelValue', [])
-    const header = computed(() => (model.value as unknown[])
-      .map(value => adapter.date(value))
-      .filter(date => adapter.isValid(date))
-      .map(date => adapter.format(date, 'shortDate'))
-      .join(' – ') || t('$vuetify.datePicker.header')
-    )
+    const header = computed(() => {
+      const dates = (model.value as unknown[])
+        .map(value => adapter.date(value))
+        .filter(date => adapter.isValid(date))
+      const format = dates.length > 1 && !adapter.isSameYear(dates[0], dates[dates.length - 1])
+        ? 'fullDate'
+        : 'shortDate'
+
+      return dates.map(date => adapter.format(date, format)).join(' – ') || t('$vuetify.datePicker.header')
+    })
 
     const today = adapter.date()
     const leftMonth = shallowRef(adapter.getMonth(today))
@@ -294,12 +297,13 @@ export const VDateRangePicker = genericComponent<new <
         <VPicker
           ref={ rootRef }
           { ...pickerProps }
+          color={ props.scrollable ? 'transparent' : props.color }
           class={['v-date-range-picker', { 'v-date-range-picker--scrollable': props.scrollable }, props.class]}
           style={ props.style }
           title={ t(props.title) }
           hideHeader={ !props.scrollable || props.hideHeader }
           v-slots={{
-            header: () => <VDatePickerHeader header={ header.value } />,
+            header: () => <div class="v-date-range-picker__header">{ header.value }</div>,
             default: () => props.scrollable ? (
               <VDateRangePickerMonths
                 { ...VDateRangePickerMonths.filterProps(props) }

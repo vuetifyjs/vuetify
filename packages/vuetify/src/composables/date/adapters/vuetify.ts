@@ -146,6 +146,20 @@ function date (value?: any): Date | null {
   return null
 }
 
+const dateFormatters = new Map<string, Intl.DateTimeFormat>()
+const numberFormatters = new Map<string, Intl.NumberFormat>()
+
+function dateFormatter (locale: string, options: Intl.DateTimeFormatOptions) {
+  const key = locale + JSON.stringify(options)
+  if (!dateFormatters.has(key)) dateFormatters.set(key, new Intl.DateTimeFormat(locale, options))
+  return dateFormatters.get(key)!
+}
+
+function numberFormatter (locale: string) {
+  if (!numberFormatters.has(locale)) numberFormatters.set(locale, new Intl.NumberFormat(locale))
+  return numberFormatters.get(locale)!
+}
+
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
 function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: 'long' | 'short' | 'narrow') {
@@ -154,7 +168,7 @@ function getWeekdays (locale: string, firstDayOfWeek?: number, weekdayFormat?: '
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: weekdayFormat ?? 'narrow' }).format(weekday)
+    return dateFormatter(locale, { weekday: weekdayFormat ?? 'narrow' }).format(weekday)
   })
 }
 
@@ -181,7 +195,7 @@ function format (
       break
     case 'normalDate':
       const day = newDate.getDate()
-      const month = new Intl.DateTimeFormat(locale, { month: 'long' }).format(newDate)
+      const month = dateFormatter(locale, { month: 'long' }).format(newDate)
       return `${day} ${month}`
     case 'normalDateWithWeekday':
       options = { weekday: 'short', day: 'numeric', month: 'short' }
@@ -211,7 +225,7 @@ function format (
       options = { weekday: 'short' }
       break
     case 'dayOfMonth':
-      return new Intl.NumberFormat(locale).format(newDate.getDate())
+      return numberFormatter(locale).format(newDate.getDate())
     case 'hours12h':
       options = { hour: 'numeric', hour12: true }
       break
@@ -247,18 +261,18 @@ function format (
       break
     case 'keyboardDateTime':
       options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric' }
-      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
+      return dateFormatter(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime12h':
       options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: true }
-      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
+      return dateFormatter(locale, options).format(newDate).replace(/, /g, ' ')
     case 'keyboardDateTime24h':
       options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: 'numeric', hour12: false }
-      return new Intl.DateTimeFormat(locale, options).format(newDate).replace(/, /g, ' ')
+      return dateFormatter(locale, options).format(newDate).replace(/, /g, ' ')
     default:
       options = customFormat ?? { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(newDate)
+  return dateFormatter(locale, options).format(newDate)
 }
 
 function toISO (adapter: DateAdapter<any>, value: Date) {

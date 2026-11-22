@@ -60,7 +60,11 @@ The component shares a range selection across its calendars. In the two-panel la
 
 The **scrollable** prop displays months in a single column that scrolls vertically, following the Material Design 3 mobile date range picker layout. Month and year labels scroll with their calendars, while the weekday row remains visible. The **min** and **max** props limit the available dates. The **independent-months** prop applies only to the two-panel layout.
 
+Calendar content stays centered at a compact width when the picker is expanded. The compact selection header uses the picker surface and includes years when the range crosses a year boundary.
+
 Use a [v-dialog](/components/dialogs/) to present the picker as a modal. The example below opens from a readonly text field and makes the dialog fullscreen on mobile; **scrollable** controls the calendar layout independently of the dialog's fullscreen presentation.
+
+On short landscape viewports, the example moves the selected range into the toolbar and uses **hide-header** to avoid repeating it. This leaves more room for the calendar without reducing day button sizes.
 
 <ExamplesExample file="v-date-range-picker/prop-scrollable" />
 
