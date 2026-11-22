@@ -15,5 +15,8 @@
     text-overflow: ellipsis
     white-space: nowrap
 
+    @supports (color: oklch(from currentColor l c h / 1))
+      color: oklch(from $label-color l c h / 1)
+
   .v-label--clickable
     cursor: pointer
