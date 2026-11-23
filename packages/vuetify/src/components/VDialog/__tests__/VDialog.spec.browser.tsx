@@ -237,7 +237,7 @@ describe('VDialog', () => {
     await expect.poll(() => document.querySelector('.v-dialog .v-overlay__content')).not.toBeNull()
     snackbar.value = true
     await expect.poll(() => document.querySelector('.v-snackbar__wrapper')).not.toBeNull()
-    await wait()
+    await expect.poll(() => document.activeElement?.matches('.v-dialog .v-overlay__content')).toBe(true)
 
     screen.getByTestId('undo').focus()
     await userEvent.keyboard('{Escape}')
