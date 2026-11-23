@@ -103,7 +103,7 @@ In 2024 I listed One, Bin, Play, Snips, and Issues. The toolbox is much bigger n
 * [**Vuetify Issues**](https://issues.vuetifyjs.com/) was rebuilt on Vuetify 3 in August 2025, as promised.
 * [**Vuetify Link**](https://link.vuetifyjs.com/) and [**pkg-diff**](https://pkg-diff.vuetifyjs.com/) joined [Play](https://play.vuetifyjs.com/) and [Bin](https://bin.vuetifyjs.com/), and Vuetify0 has its own playground, [v0play](https://v0play.vuetifyjs.com/).
 * A free [Material Design 3 Figma UI Kit](/blog/september-2025-update/), and Vuetify-made themes free for personal use.
-* First styled design systems on Vuetify0: [Emerald and Bulma](/blog/august-2026-update/).
+* First styled design systems on Vuetify0: [Emerald](https://0.vuetifyjs.com/systems/emerald) and [Bulma](https://0.vuetifyjs.com/systems/bulma).
 
 We also took the story on the road. I joined the live DejaVue panel at [VueConf Toronto 2024](https://castro.fm/episode/Sk1BNw), talked about [Vuetify MCP at Frontend Nation 2025](https://youtu.be/byDyxCbCk-k), joined GitHub's [Open Source Friday](https://www.youtube.com/watch?v=Q_Ef-JMdAG0) in March 2026, and presented Vuetify0 at several Vue.js Talks meetups, including ["Vuetify goes Headless"](https://luma.com/event/evt-PEyGhXazySEUo16). On the partner side, [Epicmax](https://epicmax.co/blog/epicmax-partners-with-vuetify) became an official Vuetify partner in October 2024, and [HeroDevs](/blog/vuetify-herodevs-partnership/) took on extended support for Vuetify 2 in March 2025.
 
