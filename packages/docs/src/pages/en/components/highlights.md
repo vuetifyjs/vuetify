@@ -49,7 +49,7 @@ Pass a string or array of strings to **query** to be marked. Multiple terms are 
 
 #### Matches
 
-Pass pre-computed `[start, end]` index pairs to **matches** to skip the internal search step entirely. This is useful if you need to bind fuzzy-search algorithm that responds with matching ranges.
+Pass `[start, end]` index pairs to **matches** to skip the built-in search, for example when a fuzzy search library already returns match ranges.
 
 <ExamplesExample file="v-highlight/prop-matches" />
 

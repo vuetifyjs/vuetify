@@ -16,13 +16,13 @@ features:
 
 # Speed Dials
 
-The `v-speed-dial` component can be used as a floating action button that can reveal additional actions when clicked.
+The `v-speed-dial` component reveals a set of related actions from a floating action button.
 
 <PageFeatures />
 
 ## Usage
 
-Speed dials can be attached to material to signify a promoted action in your application. The default size will be used in most cases, whereas the `small` variant can be used to maintain continuity with similar sized elements.
+Place the speed dial inside a [v-fab](/components/floating-action-buttons/) with `activator="parent"`, or bind the **activator** slot props to your own button.
 
 <ExamplesUsage name="v-speed-dial" />
 
@@ -36,6 +36,6 @@ Speed dials can be attached to material to signify a promoted action in your app
 
 <ApiInline hide-links />
 
-### Guide
+## Guide
 
-Coming soon.
+`v-speed-dial` is a [v-menu](/components/menus/) and accepts its props, such as **open-on-hover** and **location**. Buttons inside it default to `size="small"`, set **size** on them to change it.

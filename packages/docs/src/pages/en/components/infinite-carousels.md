@@ -57,8 +57,6 @@ Put anything in the default slot. The content is repeated as many times as it ta
 
 Unlike [v-carousel](/components/carousels/), which moves between discrete slides, `v-infinite-carousel` scrolls its content continuously and treats it as one uninterrupted strip.
 
-It clips with `overflow: clip` rather than a scroll container, so the strip cannot be scrolled out of position by a wheel, a trackpad, or a browser scrolling a focused child into view.
-
 Notable behaviors:
 
 - content is duplicated to fill the container, and the copy count follows a resize
@@ -121,7 +119,7 @@ A common use for an infinite carousel is an endless row of logos or partner name
 
 #### Floating bubbles
 
-Items do not have to sit in a straight row. Here a single tile holds 12 absolutely positioned bubbles drifting in pseudo-random directions.
+Items do not have to sit in a straight row. A single tile with absolutely positioned content loops like any other.
 
 <ExamplesExample file="v-infinite-carousel/misc-bubbles" />
 

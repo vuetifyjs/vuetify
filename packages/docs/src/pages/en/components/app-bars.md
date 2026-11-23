@@ -22,19 +22,17 @@ features:
 
 # App bars
 
-The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation.
+The `v-app-bar` component is a toolbar at the top of the application that holds navigation and actions.
 
 <PageFeatures />
 
 ## Usage
 
-The `v-app-bar` component is used for application-wide actions and information.
-
 <ExamplesUsage name="v-app-bar" />
 
 ::: warning
 
-`v-app-bar` depends on Vuetify's layout system and must be placed inside `v-app`.
+`v-app-bar` depends on Vuetify's [layout system](/features/application-layout/) and must be placed inside `v-app` or `v-layout`.
 
 :::
 
@@ -77,49 +75,43 @@ The recommended placement of elements inside of `v-app-bar` is:
 
 ::: warning
 
-When a `v-btn` with the `icon` prop is used inside of `v-toolbar` and `v-app-bar` they will automatically have their size increased and negative margin applied to ensure proper spacing according to the Material Design Specification. If you choose to wrap your buttons in any container, such as a `div`, you will need to apply negative margin to that container in order to properly align them.
+The first and last `v-btn` directly inside `v-app-bar` get a small margin from the app bar's edges. If you wrap a button in another element, such as a `div`, it loses this margin and touches the edge of the app bar. Place buttons in the **prepend** and **append** slots to keep it.
 
 :::
 
 ## Examples
 
-The following are a collection of examples that demonstrate more advanced and real world use of the `v-app-bar` component.
-
 ### Props
-
-The `v-app-bar` component has a variety of props that allow you to customize its look and feel, density, scroll behavior, and more.
 
 #### Scroll behavior
 
-Available values:
+**scroll-behavior** takes one or more of these values, separated by spaces:
 
 - **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
 - **fully-hide**: The entire app bar will hide as the user scrolls down.
 - **collapse**: Shrink horizontally to a small bar in one corner.
-- **elevate**: Add a drop shadow to the app bar when scrolling. Ignores `scroll-threshold`, will always be applied with any amount of scrolling.
+- **elevate**: Add a drop shadow to the app bar when scrolling. Applies after any amount of scrolling, ignoring **scroll-threshold**.
 - **fade-image**: Fade out the image as the user scrolls down.
-- **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
+- **inverted**: Reverse the other values, applying them at the top of the page and removing them on scroll. Has no effect on its own.
 
-The `scroll-threshold` prop is used to determine how far the user must scroll down (in pixels) before the behavior is applied.
-
-A scroll listener is added to `window` by default, but can be changed to a custom element using the `scroll-target` prop.
+**scroll-threshold** sets how many pixels the user scrolls before the behavior applies. To follow a scrollable element instead of the window, pass its selector to **scroll-target**.
 
 <prop-scroll-behavior />
 
 #### Density
 
-You can make **app-bar** dense. A dense app bar has lower height than regular one.
+Use `density="compact"` for a shorter app bar, for example in dense desktop layouts.
 
 <ExamplesExample file="v-app-bar/prop-density" />
 
 #### Images
 
-`v-app-bar` can contain background images. You can set source via the `image` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **image** slot.
+**image** sets a background image. To change how the image renders, put your own `v-img` in the **image** slot.
 
 <ExamplesExample file="v-app-bar/prop-image" />
 
 #### Prominent
 
-An `v-app-bar` with the `density="prominent"` prop can be used for longer titles, to house imagery, or to provide a stronger presence to the top app bar.
+`density="prominent"` makes the app bar taller, with room for a long title or an image.
 
 <ExamplesExample file="v-app-bar/prop-prominent" />

@@ -15,7 +15,7 @@ features:
 
 # Validation rules
 
-The rules composable provide a multitude of validation rules to be used with form inputs.
+The `useRules` composable provides common validation rules for form inputs.
 
 <PageFeatures />
 
@@ -23,7 +23,7 @@ The rules composable provide a multitude of validation rules to be used with for
 
 ## Installation
 
-To use the Rules plugin, you'll need to import and register it with your Vuetify instance:
+Register the rules plugin with your Vuetify instance:
 
 ```js
 import { createApp } from 'vue'
@@ -35,9 +35,7 @@ const vuetify = createVuetify()
 app.use(createRulesPlugin({ /* options */ }, vuetify.locale))
 ```
 
-This will make the rules system available throughout your application. The plugin accepts options for customizing validation rules and integrates with Vuetify's locale system for internationalization.
-
-Inside of components, you can now import and utilize the rules composable:
+Error messages come from the Vuetify locale. Components can then get the rules from `useRules`:
 
 ```js
 import { useRules } from 'vuetify'
@@ -47,8 +45,7 @@ const rules = useRules()
 
 ## Usage
 
-Within your application, import the useRules function and use it to access the rules composable.
-Existing rules' error messages can also be customized on the fly, to fit specific field cases.
+Each rule is a function that returns the actual validation rule, so call it in the **rules** prop.
 
 ```html { resource="src/views/ValidationForm.vue" }
 <template>
@@ -76,30 +73,27 @@ Existing rules' error messages can also be customized on the fly, to fit specifi
 
 ## API
 
-Below is a table of the available validation rules provided by the rules composable, including their arguments or options:
+Rules other than **required** and **notEmpty** accept an empty value. Combine them with **required** when the field is mandatory.
 
 | Rule Name    | Description                                                                 | Arguments/Options                  |
 |--------------|-----------------------------------------------------------------------------|------------------------------------|
-| required     | Ensures the field is not empty.                                             | `err?: string`                     |
+| required     | Ensures the field is not empty. `0` counts as a value.                      | `err?: string`                     |
 | email        | Validates that the field contains a valid email address.                    | `err?: string`                     |
 | number       | Validates that the field contains a number.                                 | `err?: string`                     |
-| integer      | Validates that the field contains an integer.                               | `err?: string`                     |
-| capital      | Ensures the field contains at least one capital letter.                     | `err?: string`                     |
+| integer      | Validates that the field contains only digits.                              | `err?: string`                     |
+| capital      | Validates that the field contains only capital letters.                     | `err?: string`                     |
 | maxLength    | Validates that the field does not exceed a specified maximum length.        | `len: number, err?: string`        |
 | minLength    | Validates that the field meets a specified minimum length.                  | `len: number, err?: string`        |
 | strictLength | Ensures the field has an exact specified length.                            | `len: number, err?: string`        |
-| exclude      | Ensures the field does not contain any of the specified values.             | `exclude: string[], err?: string`  |
-| notEmpty     | Ensures the field is not empty (similar to required).                       | `err?: string`                     |
+| exclude      | Ensures the field does not contain any of the specified strings.            | `exclude: string[], err?: string`  |
+| notEmpty     | Ensures the value has a length, such as a non-empty array.                  | `err?: string`                     |
 | pattern      | Validates that the field matches a specified regular expression pattern.    | `options: RegExp, err?: string`    |
 
 ## Guide
 
-The `useRules` composable doesn't return rules directly but RuleBuilders that allows to customize
-error messages and to provide options when necessary.
-
 ### Error message
 
-Default error messages can be field-level redefined.
+Pass a message to replace the default one for a single field.
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -112,7 +106,7 @@ Default error messages can be field-level redefined.
 
 ### Options
 
-Some RuleBuilders need options to work. For example `maxLength` needs a number as first parameter:
+Rules with options take them first. For example, `maxLength` takes the length:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -123,7 +117,7 @@ Some RuleBuilders need options to work. For example `maxLength` needs a number a
 </v-form>
 ```
 
-In this case, error message can be redefined as second parameter:
+The custom message then comes after the options:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -136,7 +130,7 @@ In this case, error message can be redefined as second parameter:
 
 ## Aliases
 
-Rather than importing `useRules` and calling builders by hand, any rule can be referenced directly in the `rules` prop by its **alias** — a string prefixed with `$` that resolves to the matching builder. This keeps templates terse and lets you skip a component-level `useRules()` call entirely:
+Any rule can also be named in the **rules** prop as a string prefixed with `$`. This needs no `useRules()` call in the component:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -157,7 +151,7 @@ Aliases are resolved by the rules plugin, so they only take effect when [`create
 
 ### Passing options
 
-For rules that accept options, use an array where the first item is the alias and the remaining items are the builder's arguments. The last argument can still be a custom error message:
+To pass options or a message, use an array with the alias first and the arguments after it:
 
 ```html { resource="src/App.vue" }
 <v-form>
@@ -171,11 +165,9 @@ For rules that accept options, use an array where the first item is the alias an
 </v-form>
 ```
 
-Each array maps to its builder call — `['$maxLength', 10, '…']` resolves to `rules.maxLength(10, '…')`.
-
 ### Custom aliases
 
-Because aliases reference the same builders registered through `createRulesPlugin`, your own [custom rules](#custom-rules) can be used by name too:
+Your own [custom rules](#custom-rules) can be used by name too:
 
 ```html { resource="src/App.vue" }
 <v-text-field
@@ -186,7 +178,7 @@ Because aliases reference the same builders registered through `createRulesPlugi
 
 ## Custom rules
 
-Vuetify comes with an existing set of validation rules but you can overwrite them or add yours.
+Add rules or replace built-in ones through the **aliases** option. A rule takes an optional message and returns the validation function.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
