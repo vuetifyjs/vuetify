@@ -128,7 +128,7 @@ export function useGroupItem (
   }
 
   const value = toRef(() => props.value)
-  const disabled = computed(() => !!(group.disabled.value || props.disabled))
+  const disabled = toRef(() => !!(group.disabled.value || props.disabled))
 
   function register () {
     group?.register({ id, value, disabled }, vm)
