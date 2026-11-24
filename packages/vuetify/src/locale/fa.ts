@@ -92,8 +92,8 @@ export default {
   },
   input: {
     clear: 'پاکسازی {0}',
-    prependAction: '{0} اقدام پیشین',
-    appendAction: '{0} اقدام افزوده‌شده',
+    prependAction: 'عملیات ابتدای {0}',
+    appendAction: 'عملیات انتهای {0}',
     otp: 'کد تأیید را وارد کنید',
   },
   fileInput: {
@@ -116,7 +116,7 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      root: 'جهت یابی صفحه',
+      root: 'پیمایش صفحات',
       next: 'صفحه‌ی بعد',
       previous: 'صفحه‌ی قبلی',
       page: 'رفتن به صفحه‌ی {0}',
