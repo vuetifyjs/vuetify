@@ -2,7 +2,7 @@ export default {
   badge: 'Нишона',
   open: 'Кушодан',
   close: 'Пӯшидан',
-  dismiss: 'Рад кардан',
+  dismiss: 'Пӯшидан',
   confirmEdit: {
     ok: 'ХУБ',
     cancel: 'Бекор кардан',
