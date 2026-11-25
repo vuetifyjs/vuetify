@@ -73,6 +73,7 @@ const defaultLocales: Record<string, string> = {
   srCyrl: 'sr-Cyrl-RS',
   srLatn: 'sr-Latn-RS',
   sv: 'sv-SE',
+  tg: 'tg-TJ',
   th: 'th-TH',
   tr: 'tr-TR',
   az: 'az-AZ',

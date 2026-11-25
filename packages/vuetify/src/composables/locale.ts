@@ -120,6 +120,7 @@ function genDefaults () {
     srCyrl: false,
     srLatn: false,
     sv: false,
+    tg: false,
     th: false,
     tr: false,
     az: false,
