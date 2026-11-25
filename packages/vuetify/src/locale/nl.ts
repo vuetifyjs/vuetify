@@ -8,18 +8,10 @@ export default {
     cancel: 'Annuleren',
   },
   dataIterator: {
-    noResultsText: 'Geen overeenkomende resultaten gevonden',
     loadingText: 'Bezig met laden...',
   },
   dataTable: {
-    itemsPerPageText: 'Rijen per pagina:',
     ariaLabel: {
-      sortDescending: 'Aflopend gesorteerd.',
-      sortAscending: 'Oplopend gesorteerd.',
-      sortNone: 'Niet gesorteerd.',
-      activateNone: 'Activeer om de sortering te verwijderen.',
-      activateDescending: 'Activeer om aflopend te sorteren.',
-      activateAscending: 'Activeer om oplopend te sorteren.',
       selectRow: 'Rij selecteren',
       selectAll: 'Alles selecteren',
       selectGroup: 'Groep selecteren',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Eerste pagina',
     lastPage: 'Laatste pagina',
     pageText: '{0}-{1} van {2}',
-  },
-  dateRangeInput: {
-    divider: 'tot',
   },
   monthPicker: {
     title: 'Selecteer maand',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} geselecteerd',
-    range: {
-      title: 'Selecteer datums',
-      header: 'Voer datums in',
-    },
     title: 'Selecteer datum',
     header: 'Voer datum in',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} meer',
-    today: 'Vandaag',
   },
   heatmap: {
     less: 'Minder',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

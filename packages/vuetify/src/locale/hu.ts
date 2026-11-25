@@ -8,18 +8,10 @@ export default {
     cancel: 'Mégsem',
   },
   dataIterator: {
-    noResultsText: 'Nincs egyező találat',
     loadingText: 'Betöltés...',
   },
   dataTable: {
-    itemsPerPageText: 'Elem oldalanként:',
     ariaLabel: {
-      sortDescending: 'Csökkenő sorrendbe rendezve.',
-      sortAscending: 'Növekvő sorrendbe rendezve.',
-      sortNone: 'Rendezetlen.',
-      activateNone: 'Rendezés törlése.',
-      activateDescending: 'Aktiváld a csökkenő rendezésért.',
-      activateAscending: 'Aktiváld a növekvő rendezésért.',
       selectRow: 'Sor kijelölése',
       selectAll: 'Összes kijelölése',
       selectGroup: 'Csoport kijelölése',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Első oldal',
     lastPage: 'Utolsó oldal',
     pageText: '{0}-{1} / {2}',
-  },
-  dateRangeInput: {
-    divider: '–',
   },
   monthPicker: {
     title: 'Hónap kiválasztása',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} kiválasztva',
-    range: {
-      title: 'Válassza ki a dátumokat',
-      header: 'Adja meg a dátumokat',
-    },
     title: 'Válassza ki a dátumot',
     header: 'Adja meg a dátumot',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} további',
-    today: 'Ma',
   },
   heatmap: {
     less: 'Kevesebb',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

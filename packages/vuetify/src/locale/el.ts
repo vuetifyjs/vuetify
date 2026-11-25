@@ -8,18 +8,10 @@ export default {
     cancel: 'Ακύρωση',
   },
   dataIterator: {
-    noResultsText: 'Δε βρέθηκαν αποτελέσματα',
     loadingText: 'Φόρτωση αντικειμένου...',
   },
   dataTable: {
-    itemsPerPageText: 'Γραμμές ανά σελίδα:',
     ariaLabel: {
-      sortDescending: 'Ταξινομημένο φθίνουσα.',
-      sortAscending: 'Ταξινομημένο αύξουσα.',
-      sortNone: 'Χωρίς ταξινόμηση.',
-      activateNone: 'Ενεργοποιήστε για να καταργήσετε την ταξινόμηση.',
-      activateDescending: 'Ενεργοποιήστε για φθίνουσα ταξινόμηση.',
-      activateAscending: 'Ενεργοποιήστε για αύξουσα ταξινόμηση.',
       selectRow: 'Επιλογή σειράς',
       selectAll: 'Επιλογή όλων',
       selectGroup: 'Επιλογή ομάδας',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Πρώτη σελίδα',
     lastPage: 'Τελευταία σελίδα',
     pageText: '{0}-{1} από {2}',
-  },
-  dateRangeInput: {
-    divider: 'έως',
   },
   monthPicker: {
     title: 'Επιλέξτε μήνα',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} επιλεγμένα',
-    range: {
-      title: 'Επιλέξτε ημερομηνίες',
-      header: 'Εισαγάγετε ημερομηνίες',
-    },
     title: 'Επιλέξτε ημερομηνία',
     header: 'Εισαγάγετε ημερομηνία',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ακόμη',
-    today: 'Σήμερα',
   },
   heatmap: {
     less: 'Λιγότερα',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

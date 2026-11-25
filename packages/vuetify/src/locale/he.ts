@@ -8,18 +8,10 @@ export default {
     cancel: 'ביטול',
   },
   dataIterator: {
-    noResultsText: 'לא נמצאו תוצאות מתאימות',
     loadingText: 'טוען פריט...',
   },
   dataTable: {
-    itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: 'ממוין בסדר יורד. לחץ להסרת המיון.',
-      sortAscending: 'ממוין בסדר עולה. לחץ למיון בסדר יורד.',
-      sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',
-      activateNone: 'הפעל להסרת המיון.',
-      activateDescending: 'הפעל למיון יורד.',
-      activateAscending: 'הפעל למיון עולה.',
       selectRow: 'בחר שורה',
       selectAll: 'בחר הכל',
       selectGroup: 'בחר קבוצה',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
     pageText: '{0}-{1} מתוך {2}',
-  },
-  dateRangeInput: {
-    divider: 'עד',
   },
   monthPicker: {
     title: 'בחר חודש',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} נבחר',
-    range: {
-      title: 'בחר תאריכים',
-      header: 'הזן תאריכים',
-    },
     title: 'בחר תאריך',
     header: 'הזן תאריך',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} נוספים',
-    today: 'היום',
   },
   heatmap: {
     less: 'פחות',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

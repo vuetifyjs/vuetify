@@ -8,18 +8,10 @@ export default {
     cancel: 'İmtina',
   },
   dataIterator: {
-    noResultsText: 'Uyğun məlumat tapılmadı',
     loadingText: 'Yüklənir... Zəhmət olmasa, gözləyin.',
   },
   dataTable: {
-    itemsPerPageText: 'Səhifə başı sətir sayı:',
     ariaLabel: {
-      sortDescending: 'Azalan sıra ilə düzülmüş.',
-      sortAscending: 'Artan sıra ilə düzülmüş.',
-      sortNone: 'Sıralanmamışdır.',
-      activateNone: 'Sıralamanı yığışdır.',
-      activateDescending: 'Azalan sıra ilə düz.',
-      activateAscending: 'Artan sıra ilə düz.',
       selectRow: 'Sıra seç',
       selectAll: 'Hamısını seç',
       selectGroup: 'Qrupu seç',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'İlk səhifə',
     lastPage: 'Son səhifə',
     pageText: '{0} - {1} arası, Cəmi: {2} qeydiyyat',
-  },
-  dateRangeInput: {
-    divider: 'ilə',
   },
   monthPicker: {
     title: 'Ayı seçin',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} seçilib',
-    range: {
-      title: 'Tarixləri seçin',
-      header: 'Tarixləri daxil edin',
-    },
     title: 'Tarixi seçin',
     header: 'Tarixi daxil edin',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ədəd daha',
-    today: 'Bu gün',
   },
   heatmap: {
     less: 'Az',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

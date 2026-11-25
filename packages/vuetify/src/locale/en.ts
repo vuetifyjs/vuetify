@@ -8,18 +8,10 @@ export default {
     cancel: 'Cancel',
   },
   dataIterator: {
-    noResultsText: 'No matching records found',
     loadingText: 'Loading items...',
   },
   dataTable: {
-    itemsPerPageText: 'Rows per page:',
     ariaLabel: {
-      sortDescending: 'Sorted descending.',
-      sortAscending: 'Sorted ascending.',
-      sortNone: 'Not sorted.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
       selectRow: 'Select row',
       selectAll: 'Select all',
       selectGroup: 'Select group',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'First page',
     lastPage: 'Last page',
     pageText: '{0}-{1} of {2}',
-  },
-  dateRangeInput: {
-    divider: 'to',
   },
   monthPicker: {
     title: 'Select month',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selected',
-    range: {
-      title: 'Select dates',
-      header: 'Enter dates',
-    },
     title: 'Select date',
     header: 'Enter date',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} more',
-    today: 'Today',
   },
   heatmap: {
     less: 'Less',
@@ -170,7 +154,6 @@ export default {
     command: 'Command',
     space: 'Space',
     shift: 'Shift',
-    alt: 'Alt',
     enter: 'Enter',
     escape: 'Escape',
     upArrow: 'Up Arrow',

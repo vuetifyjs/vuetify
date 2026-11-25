@@ -8,18 +8,10 @@ export default {
     cancel: '取消',
   },
   dataIterator: {
-    noResultsText: '沒有符合條件的結果',
     loadingText: '讀取中...',
   },
   dataTable: {
-    itemsPerPageText: '每頁列數：',
     ariaLabel: {
-      sortDescending: '：降序排列。',
-      sortAscending: '：升序排列。',
-      sortNone: '無排序方式。點擊以升序排列。',
-      activateNone: '點擊以移除排序方式。',
-      activateDescending: '點擊以降序排列。',
-      activateAscending: '點擊以移除排序方式。',
       selectRow: '選擇行',
       selectAll: '選擇全部',
       selectGroup: '選擇分組',
@@ -34,9 +26,6 @@ export default {
     firstPage: '第一頁',
     lastPage: '最後頁',
     pageText: '{2} 條中的 {0}~{1} 條',
-  },
-  dateRangeInput: {
-    divider: '至',
   },
   monthPicker: {
     title: '選擇月份',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '已選擇 {0} 個日期',
-    range: {
-      title: '選擇日期範圍',
-      header: '輸入日期範圍',
-    },
     title: '選擇日期',
     header: '輸入日期',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '還有其他 {0} 項',
-    today: '今天',
   },
   heatmap: {
     less: '少',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

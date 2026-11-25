@@ -8,18 +8,10 @@ export default {
     cancel: 'キャンセル',
   },
   dataIterator: {
-    noResultsText: '検索結果が見つかりません。',
     loadingText: '項目をロード中です...',
   },
   dataTable: {
-    itemsPerPageText: '1ページあたりの行数：',
     ariaLabel: {
-      sortDescending: '降順の並び替え。',
-      sortAscending: '昇順の並び替え。',
-      sortNone: 'ソートされていません。',
-      activateNone: 'ソートを削除するには有効にしてください。',
-      activateDescending: '降順の並び替えのためには有効にしてください。',
-      activateAscending: '昇順のソートのためには有効にしてください。',
       selectRow: '行を選択',
       selectAll: 'すべて選択',
       selectGroup: 'グループを選択',
@@ -34,9 +26,6 @@ export default {
     firstPage: '最初のページ',
     lastPage: '最後のページ',
     pageText: '{0}-{1} 件目 / {2}件',
-  },
-  dateRangeInput: {
-    divider: 'から',
   },
   monthPicker: {
     title: '月を選択',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} 選択済',
-    range: {
-      title: '日付を選択',
-      header: '日付を入力',
-    },
     title: '日付を選択',
     header: '日付を入力',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'さらに{0}',
-    today: '今日',
   },
   heatmap: {
     less: '少ない',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

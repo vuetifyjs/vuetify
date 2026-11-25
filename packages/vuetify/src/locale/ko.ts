@@ -8,18 +8,10 @@ export default {
     cancel: '취소',
   },
   dataIterator: {
-    noResultsText: '일치하는 항목이 없습니다.',
     loadingText: '불러오는 중...',
   },
   dataTable: {
-    itemsPerPageText: '페이지 당 행 수:',
     ariaLabel: {
-      sortDescending: '내림차순 정렬.',
-      sortAscending: '오름차순 정렬.',
-      sortNone: '정렬하지 않음.',
-      activateNone: '정렬을 취소하려면 활성화하세요.',
-      activateDescending: '내림차순 정렬을 위해 활성화하세요.',
-      activateAscending: '오름차순 정렬을 위해 활성화하세요.',
       selectRow: '행 선택',
       selectAll: '모두 선택',
       selectGroup: '그룹 선택',
@@ -34,9 +26,6 @@ export default {
     firstPage: '첫 페이지',
     lastPage: '마지막 페이지',
     pageText: '{2} 중 {0}-{1}',
-  },
-  dateRangeInput: {
-    divider: '부터',
   },
   monthPicker: {
     title: '월 선택',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0}개 선택됨',
-    range: {
-      title: '날짜 선택',
-      header: '날짜 입력',
-    },
     title: '날짜 선택',
     header: '날짜 입력',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} 더보기',
-    today: '오늘',
   },
   heatmap: {
     less: '적음',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

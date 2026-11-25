@@ -8,18 +8,10 @@ export default {
     cancel: 'Anulează',
   },
   dataIterator: {
-    noResultsText: 'Nu s-au găsit înregistrări corespunzătoare',
     loadingText: 'Se încarcă articolele...',
   },
   dataTable: {
-    itemsPerPageText: 'Rânduri pe pagină:',
     ariaLabel: {
-      sortDescending: 'Sortate descendent.',
-      sortAscending: 'Sortate ascendent.',
-      sortNone: 'Nesortate.',
-      activateNone: 'Activați pentru a elimina sortarea.',
-      activateDescending: 'Activați pentru a sorta descendent.',
-      activateAscending: 'Activați pentru a sorta ascendent.',
       selectRow: 'Selectează rând',
       selectAll: 'Selectează tot',
       selectGroup: 'Selectează grup',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Prima pagină',
     lastPage: 'Ultima pagină',
     pageText: '{0}-{1} din {2}',
-  },
-  dateRangeInput: {
-    divider: 'până la',
   },
   monthPicker: {
     title: 'Selectați luna',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selectate',
-    range: {
-      title: 'Selectați datele',
-      header: 'Introduceți datele',
-    },
     title: 'Selectați data',
     header: 'Introduceți data',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'încă {0}',
-    today: 'Astăzi',
   },
   heatmap: {
     less: 'Mai puțin',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

@@ -8,18 +8,10 @@ export default {
     cancel: 'Zrušit',
   },
   dataIterator: {
-    noResultsText: 'Nenalezeny žádné záznamy',
     loadingText: 'Načítám položky...',
   },
   dataTable: {
-    itemsPerPageText: 'Řádků na stránku:',
     ariaLabel: {
-      sortDescending: 'Řazeno sestupně.',
-      sortAscending: 'Řazeno vzestupně.',
-      sortNone: 'Neseřazeno.',
-      activateNone: 'Aktivováním vypnete řazení.',
-      activateDescending: 'Aktivováním se bude řadit sestupně.',
-      activateAscending: 'Aktivováním se bude řadit vzestupně.',
       selectRow: 'Vybrat řádek',
       selectAll: 'Vybrat vše',
       selectGroup: 'Vybrat skupinu',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'První strana',
     lastPage: 'Poslední strana',
     pageText: '{0}-{1} z {2}',
-  },
-  dateRangeInput: {
-    divider: 'do',
   },
   monthPicker: {
     title: 'Vyberte měsíc',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} vybráno',
-    range: {
-      title: 'Vyberte datumy',
-      header: 'Zadejte datumy',
-    },
     title: 'Vyberte datum',
     header: 'Zadejte datum',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} dalších',
-    today: 'Dnes',
   },
   heatmap: {
     less: 'Méně',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

@@ -8,18 +8,10 @@ export default {
     cancel: 'Prekliči',
   },
   dataIterator: {
-    noResultsText: 'Ni iskanega zapisa',
     loadingText: 'Nalaganje ...',
   },
   dataTable: {
-    itemsPerPageText: 'Vrstic na stran:',
     ariaLabel: {
-      sortDescending: 'Razvrščeno padajoče.',
-      sortAscending: 'Razvrščeno naraščajoče.',
-      sortNone: 'Ni razvrščeno.',
-      activateNone: 'Aktivirajte za odstranitev razvrščanja.',
-      activateDescending: 'Aktivirajte za padajoče razvrščanje.',
-      activateAscending: 'Aktivirajte za naraščajoče razvrščanje.',
       selectRow: 'Izberi vrstico',
       selectAll: 'Izberi vse',
       selectGroup: 'Izberi skupino',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Prva stran',
     lastPage: 'Zadnja stran',
     pageText: '{0}-{1} od {2}',
-  },
-  dateRangeInput: {
-    divider: 'do',
   },
   monthPicker: {
     title: 'Izberite mesec',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izbranih',
-    range: {
-      title: 'Izberite datume',
-      header: 'Vnesite datume',
-    },
     title: 'Izberite datum',
     header: 'Vnesite datum',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Še {0}',
-    today: 'Danes',
   },
   heatmap: {
     less: 'Manj',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

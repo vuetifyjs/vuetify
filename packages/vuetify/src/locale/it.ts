@@ -8,18 +8,10 @@ export default {
     cancel: 'Annulla',
   },
   dataIterator: {
-    noResultsText: 'Nessun risultato trovato',
     loadingText: 'Caricamento in corso...',
   },
   dataTable: {
-    itemsPerPageText: 'Righe per pagina:',
     ariaLabel: {
-      sortDescending: 'Ordinati in ordine decrescente.',
-      sortAscending: 'Ordinati in ordine crescente.',
-      sortNone: 'Non ordinato.',
-      activateNone: `Attiva per rimuovere l'ordinamento.`,
-      activateDescending: 'Attiva per ordinare in ordine decrescente.',
-      activateAscending: 'Attiva per ordinare in ordine crescente.',
       selectRow: 'Seleziona riga',
       selectAll: 'Seleziona tutto',
       selectGroup: 'Seleziona gruppo',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Prima pagina',
     lastPage: 'Ultima pagina',
     pageText: '{0}-{1} di {2}',
-  },
-  dateRangeInput: {
-    divider: 'a',
   },
   monthPicker: {
     title: 'Seleziona mese',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} selezionato/i',
-    range: {
-      title: 'Seleziona date',
-      header: 'Inserisci date',
-    },
     title: 'Seleziona data',
     header: 'Inserisci data',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} di più',
-    today: 'Oggi',
   },
   heatmap: {
     less: 'Meno',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Invio',
     escape: 'Escape',

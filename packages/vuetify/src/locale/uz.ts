@@ -8,18 +8,10 @@ export default {
     cancel: 'Bekor qilish',
   },
   dataIterator: {
-    noResultsText: 'Mos yozuvlar topilmadi',
     loadingText: 'Elementlar yuklanmoqda...',
   },
   dataTable: {
-    itemsPerPageText: 'Sahifadagi qatorlar:',
     ariaLabel: {
-      sortDescending: 'Kamayish tartibida saralangan.',
-      sortAscending: 'Oʻsish tartibida saralangan.',
-      sortNone: 'Saralanmagan.',
-      activateNone: 'Saralashni olib tashlash uchun faollashtiring.',
-      activateDescending: 'Kamayish tartibida saralash uchun faollashtiring.',
-      activateAscending: 'Oʻsish tartibida saralash uchun faollashtiring.',
       selectRow: 'Qatorni tanlash',
       selectAll: 'Barchasini tanlash',
       selectGroup: 'Guruhni tanlash',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Birinchi sahifa',
     lastPage: 'Oxirgi sahifa',
     pageText: '{0}-{1}, jami {2}',
-  },
-  dateRangeInput: {
-    divider: '–',
   },
   monthPicker: {
     title: 'Oyni tanlang',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} ta tanlandi',
-    range: {
-      title: 'Sanalarni tanlang',
-      header: 'Sanalarni kiriting',
-    },
     title: 'Sanani tanlang',
     header: 'Sanani kiriting',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Yana {0} ta',
-    today: 'Bugun',
   },
   heatmap: {
     less: 'Kamroq',
@@ -170,7 +154,6 @@ export default {
     command: 'Command',
     space: 'Probel',
     shift: 'Shift',
-    alt: 'Alt',
     enter: 'Enter',
     escape: 'Escape',
     upArrow: 'Yuqoriga strelka',

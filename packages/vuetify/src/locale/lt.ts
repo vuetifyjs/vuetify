@@ -8,18 +8,10 @@ export default {
     cancel: 'Atšaukti',
   },
   dataIterator: {
-    noResultsText: 'Nerasta atitinkančių įrašų',
     loadingText: 'Kraunama...',
   },
   dataTable: {
-    itemsPerPageText: 'Eilutės per puslapį:',
     ariaLabel: {
-      sortDescending: 'Išrikiuota mažėjimo tvarka.',
-      sortAscending: 'Išrikiuota didėjimo tvarka.',
-      sortNone: 'Nerikiuota.',
-      activateNone: 'Suaktyvinkite, jei norite rikiavimą pašalinti.',
-      activateDescending: 'Suaktyvinkite, jei norite rikiuoti mažėjimo tvarka.',
-      activateAscending: 'Suaktyvinkite, jei norite rikiuoti didėjimo tvarka.',
       selectRow: 'Pasirinkti eilutę',
       selectAll: 'Pasirinkti viską',
       selectGroup: 'Pasirinkti grupę',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Pirmas puslapis',
     lastPage: 'Paskutinis puslapis',
     pageText: '{0}-{1} iš {2}',
-  },
-  dateRangeInput: {
-    divider: 'iki',
   },
   monthPicker: {
     title: 'Pasirinkite mėnesį',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} parinkta',
-    range: {
-      title: 'Pasirinkite datas',
-      header: 'Įveskite datas',
-    },
     title: 'Pasirinkite datą',
     header: 'Įveskite datą',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Daugiau {0}',
-    today: 'Šiandien',
   },
   heatmap: {
     less: 'Mažiau',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

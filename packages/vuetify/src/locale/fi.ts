@@ -8,18 +8,10 @@ export default {
     cancel: 'Peruuta',
   },
   dataIterator: {
-    noResultsText: 'Ei osumia',
     loadingText: 'Ladataan kohteita...',
   },
   dataTable: {
-    itemsPerPageText: 'Rivejä sivulla:',
     ariaLabel: {
-      sortDescending: ': Järjestetty laskevasti. Poista järjestäminen aktivoimalla.',
-      sortAscending: ': Järjestetty nousevasti. Järjestä laskevasti aktivoimalla.',
-      sortNone: ': Ei järjestetty. Järjestä nousevasti aktivoimalla.',
-      activateNone: 'Aktivoi lajittelun poistamiseksi.',
-      activateDescending: 'Aktivoi laskevien laskevien lajittelemiseksi.',
-      activateAscending: 'Aktivoi lajitella nouseva.',
       selectRow: 'Valitse rivi',
       selectAll: 'Valitse kaikki',
       selectGroup: 'Valitse ryhmä',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Ensimmäinen sivu',
     lastPage: 'Viimeinen sivu',
     pageText: '{0}-{1} ({2})',
-  },
-  dateRangeInput: {
-    divider: '–',
   },
   monthPicker: {
     title: 'Valitse kuukausi',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valittu',
-    range: {
-      title: 'Valitse päivämäärät',
-      header: 'Syötä päivämäärät',
-    },
     title: 'Valitse päivämäärä',
     header: 'Syötä päivämäärä',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} lisää',
-    today: 'Tänään',
   },
   heatmap: {
     less: 'Vähemmän',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',
