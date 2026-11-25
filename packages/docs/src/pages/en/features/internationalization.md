@@ -265,6 +265,7 @@ Currently Vuetify provides translations in the following languages:
 - **srCyrl** - Serbian (српски језик)
 - **srLatn** - Serbian (srpski jezik)
 - **sv** - Swedish (svenska)
+- **tg** - Tajik (Тоҷикӣ)
 - **th** - Thai (ไทย)
 - **tr** - Turkish (Türkçe)
 - **uk** - Ukrainian (Українська)
