@@ -118,7 +118,6 @@
           v-model="text"
           color="deep-purple-accent-3"
           rounded="0"
-          group
         >
           <v-btn value="left">
             Left

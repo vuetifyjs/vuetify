@@ -2,7 +2,6 @@
   <v-stepper
     v-model="step"
     :items="items"
-    show-actions
   >
     <template v-slot:item.1>
       <h3 class="text-title-large my-0">Order</h3>

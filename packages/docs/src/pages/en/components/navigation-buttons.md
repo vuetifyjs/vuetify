@@ -81,6 +81,6 @@ Always set **text**, even with `labels="selected"` or `labels="none"`. A hidden 
 
 #### Badge
 
-To mark individual items that require user attention, you can use a dedicated `badge` prop.
+**badge** marks a destination that needs the user's attention.
 
 <ExamplesExample file="v-navigation-btn/prop-badge" />

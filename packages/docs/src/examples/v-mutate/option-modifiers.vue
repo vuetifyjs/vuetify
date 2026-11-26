@@ -16,15 +16,18 @@
             <v-card>
               <v-card-title>Card 1</v-card-title>
 
-              <div class="text-title-large text-center pb-3">
+              <div class="bg-purple-darken-2 text-center py-3">
                 Times Mutated: {{ card1 }}
               </div>
 
-              <v-card-text v-mutate="() => onMutate('card1')">
+              <v-card-text
+                class="pt-1"
+                v-mutate="() => onMutate('card1')"
+              >
                 <p
-                  v-for="n in +content + 2"
+                  v-for="n in +content + 1"
                   :key="n"
-                  :class="n === +content + 2 && 'mb-0'"
+                  :class="n === +content + 1 && 'mb-0'"
                 >
                   Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Fusce fermentum odio nec arcu. Aenean ut eros et nisl sagittis vestibulum. Nunc interdum lacus sit amet orci. Phasellus nec sem in justo pellentesque facilisis.
                 </p>
@@ -39,15 +42,18 @@
             <v-card>
               <v-card-title>Card 2 (w/ once modifier)</v-card-title>
 
-              <div class="text-title-large text-center pb-3">
+              <div class="bg-purple-darken-2 text-center py-3">
                 Times Mutated: {{ card2 }}
               </div>
 
-              <v-card-text v-mutate.once="() => onMutate('card2')">
+              <v-card-text
+                class="pt-1"
+                v-mutate.once="() => onMutate('card2')"
+              >
                 <p
-                  v-for="n in +content + 2"
+                  v-for="n in +content + 1"
                   :key="n"
-                  :class="n === +content + 2 && 'mb-0'"
+                  :class="n === +content + 1 && 'mb-0'"
                 >
                   Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. Fusce fermentum odio nec arcu. Aenean ut eros et nisl sagittis vestibulum. Nunc interdum lacus sit amet orci. Phasellus nec sem in justo pellentesque facilisis.
                 </p>

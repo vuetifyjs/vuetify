@@ -122,12 +122,6 @@ Any arbitrary content could be displayed for labels in **item-label** slot.
 
 ### Misc
 
-<!-- #### Advanced usage
-
-The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
-
-<ExamplesExample file="v-rating/misc-advanced" /> -->
-
 #### Card ratings
 
 The rating component pairs well with products allowing you to gather and display customer feedback.

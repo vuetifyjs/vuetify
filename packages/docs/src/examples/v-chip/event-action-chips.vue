@@ -44,7 +44,7 @@
         Set alarm
       </v-chip>
       <v-chip
-        icon="mdi-blinds"
+        prepend-icon="mdi-blinds"
         @click="blinds"
       >
         Close blinds

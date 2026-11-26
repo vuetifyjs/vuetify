@@ -14,7 +14,6 @@
       color="#12512a"
       height="12"
       max="9"
-      min="0"
       model-value="2"
       rounded
     ></v-progress-linear>

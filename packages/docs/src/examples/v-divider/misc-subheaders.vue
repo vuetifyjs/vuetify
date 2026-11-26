@@ -5,7 +5,6 @@
   >
     <v-toolbar
       color="orange-lighten-1"
-      dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

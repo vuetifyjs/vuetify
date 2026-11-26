@@ -181,6 +181,8 @@ export const VMonthPicker = genericComponent<new <
       isReverse.value = newVal < oldVal
     })
 
+    const yearText = toRef(() => adapter.format(adapter.setYear(adapter.startOfYear(adapter.date()), year.value), 'year'))
+
     const months = computed(() => {
       let date = adapter.startOfYear(adapter.date())
       date = adapter.setYear(date, year.value)
@@ -320,7 +322,7 @@ export const VMonthPicker = genericComponent<new <
                     />
                     <VBtn
                       disabled={ props.disabled }
-                      text={ year.value }
+                      text={ yearText.value }
                       appendIcon={ props.modeIcon }
                       rounded
                       aria-label={ t('$vuetify.monthPicker.ariaLabel.selectYear') }

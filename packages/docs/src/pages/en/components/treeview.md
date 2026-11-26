@@ -65,12 +65,6 @@ When working with large trees it is recommended to include `items-registration="
 
 <ExamplesExample file="v-treeview/prop-items-registration" />
 
-<!-- #### Hoverable
-
-Treeview nodes can have a hover effect.
-
-<ExamplesExample file="v-treeview/prop-hoverable" /> -->
-
 #### Item props
 
 If **item-props** is set to `true` then the whole item will be spread. In the following example, the disabled prop defined in each item will disable the item accordingly.
@@ -82,12 +76,6 @@ If **item-props** is set to `true` then the whole item will be spread. In the fo
 Treeview nodes can be pre-opened on page load.
 
 <ExamplesExample file="v-treeview/prop-open-all" />
-
-<!-- #### Rounded
-
-You can make treeview nodes rounded.
-
-<ExamplesExample file="v-treeview/prop-rounded" /> -->
 
 #### Selected color
 

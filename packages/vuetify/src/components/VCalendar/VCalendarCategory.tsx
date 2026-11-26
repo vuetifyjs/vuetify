@@ -165,6 +165,7 @@ export const VCalendarCategory = defineComponent({
 
     useRender(() => (
       <VCalendarDaily
+        ref={ (vm: any) => { base.scrollAreaRef.value = vm?.$el } }
         class={[
           'v-calendar-daily',
           'v-calendar-category',

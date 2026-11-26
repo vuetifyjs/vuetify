@@ -51,14 +51,6 @@ Using color helpers you can change the color of an icon from the standard dark a
 
 <ExamplesExample file="v-icon/prop-color" />
 
-<!-- ### Events
-
-#### Click
-
-Binding any click event to `v-icon` will automatically change the cursor to a pointer.
-
-<ExamplesExample file="v-icon/event-click" /> -->
-
 ### Misc
 
 #### Buttons

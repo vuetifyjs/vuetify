@@ -23,6 +23,7 @@ const StackSymbol: InjectionKey<StackProvide> = Symbol.for('vuetify:stack')
 
 interface StackProvide {
   activeChildren: Set<number>
+  zIndex: number
 }
 
 const globalStack = reactive<[uid: number, zIndex: number, passive: boolean][]>([])
@@ -37,16 +38,19 @@ export function useStack (
   const vm = getCurrentInstance('useStack')
   const createStackEntry = !disableGlobalStack
 
+  const _zIndex = shallowRef(Number(toValue(zIndex)))
+
   const parent = inject(StackSymbol, undefined)
   const stack: StackProvide = reactive({
     activeChildren: new Set<number>(),
+    zIndex: _zIndex,
   })
   provide(StackSymbol, stack)
 
-  const _zIndex = shallowRef(Number(toValue(zIndex)))
   useToggleScope(isActive, () => {
-    const lastZIndex = globalStack.at(-1)?.[1]
-    _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
+    const last = passive ? globalStack.at(-1) : globalStack.findLast(v => !v[2])
+    const lastZIndex = Math.max(last?.[1] ?? -Infinity, parent?.zIndex ?? -Infinity)
+    _zIndex.value = Math.max(lastZIndex + 10, Number(toValue(zIndex)))
 
     if (createStackEntry) {
       globalStack.push([vm.uid, _zIndex.value, passive])

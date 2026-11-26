@@ -18,12 +18,6 @@ The `v-scroll` directive allows you to provide callbacks when the window, specif
 
 <PromotedEntry />
 
-<!-- ## Usage
-
-The default behavior is to bind to the window. If no additional configuration options are needed, you can simply pass your callback function.
-
-<ExamplesExample file="v-scroll/usage" /> -->
-
 ## API
 
 | Directive                            | Description          |

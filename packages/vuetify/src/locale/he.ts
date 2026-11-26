@@ -14,8 +14,8 @@ export default {
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: 'ממוין לפי סדר עולה. לחץ להספקת המיון.',
-      sortAscending: 'ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
+      sortDescending: 'ממוין בסדר יורד. לחץ להסרת המיון.',
+      sortAscending: 'ממוין בסדר עולה. לחץ למיון בסדר יורד.',
       sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',
       activateNone: 'הפעל להסרת המיון.',
       activateDescending: 'הפעל למיון יורד.',
@@ -76,8 +76,8 @@ export default {
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
-    prev: 'מצג קודם',
-    next: 'מצג הבא',
+    prev: 'השקופית הקודמת',
+    next: 'השקופית הבאה',
     ariaLabel: {
       delimiter: 'שקופית {0} מתוך {1}',
     },

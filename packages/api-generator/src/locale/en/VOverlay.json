@@ -9,7 +9,7 @@
     "opacity": "Sets the opacity of the scrim element. Only applies if `scrim` is enabled.",
     "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
     "scrim": "Accepts true/false to enable background, and string to define color.",
-    "zIndex": "The z-index used for the component."
+    "zIndex": "The z-index used for the component. When opened over other overlays, a lower value is raised to stay above them, so nested menus and tooltips are never hidden behind their parent."
   },
   "events": {
     "click:outside": "Event that fires when clicking outside an active overlay.",

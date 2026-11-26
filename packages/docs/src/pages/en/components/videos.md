@@ -121,14 +121,6 @@ Border radius for the video and controls can be controlled separately if you pas
 
 The `v-video` component has several slots that allow you to customize the appearance and behavior of its items.
 
-<!--
-#### Sources
-
-Using the **sources** slot you can make it possible to select different playback quality.
-
-<ExamplesExample file="v-video/slot-sources" />
--->
-
 #### Error
 
 The `error` prop can be used to manually force the error state. This might be useful if an operation fails and you did not obtain the source URL or Blob yet. By default error state shows only an icon, but you can add more details simply using the `error` slot and trigger retry using the exposed `retry` method.

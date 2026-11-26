@@ -16,7 +16,7 @@
           <template v-for="n in steps" :key="`${n}-step`">
             <v-stepper-item
               :complete="e1 > n"
-              :step="`Step {{ n }}`"
+              :title="`Step ${n}`"
               :value="n"
               editable
             ></v-stepper-item>

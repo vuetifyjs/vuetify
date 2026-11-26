@@ -16,15 +16,13 @@ features:
 
 # Hotkeys
 
-Provides a simple and powerful way to register keyboard shortcuts that work across different platforms and input contexts.
+The `useHotkey` composable calls a function when the user presses a key combination.
 
 <PageFeatures />
 
 <PromotedEntry />
 
 ## Quick start
-
-To get started, import the `useHotkey` composable:
 
 ```html { resource="path/to/Component.vue"}
 <script setup>
@@ -38,7 +36,7 @@ To get started, import the `useHotkey` composable:
 
 ## Usage
 
-The **hotkey** composable takes a key combination string and a callback function. It automatically handles platform differences, key sequences, and provides options for customizing behavior.
+The listener is attached to `window` and removed when the component unmounts.
 
 <ExamplesUsage name="hotkey" />
 
@@ -50,188 +48,70 @@ The **hotkey** composable takes a key combination string and a callback function
 
 ## Guide
 
-The `useHotkey` composable provides a declarative way to handle keyboard shortcuts in your Vue applications. It automatically cleans up event listeners when components are unmounted and supports reactive key combinations.
-
 ### Basic hotkeys
-
-Register simple keyboard shortcuts by passing a key combination string and callback function:
 
 <ExamplesExample file="hotkey/basic" />
 
 ### Key sequences
 
-Create multi-step keyboard shortcuts by separating keys with dashes. Users must press keys in sequence within the timeout period:
+Separate steps with a dash. The user has one second to press each next step, see **sequenceTimeout** below.
 
 <ExamplesExample file="hotkey/sequences" />
 
 ### Platform awareness
 
-The composable automatically handles platform differences. Use `cmd` for cross-platform compatibility or specific modifiers for platform-specific behavior:
+`cmd` and `meta` match <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> elsewhere. Use them for shortcuts that should follow platform conventions, and `ctrl` when you mean the Control key on every platform.
 
 <ExamplesExample file="hotkey/platform" />
 
 ### Reactive hotkeys
 
-Key combinations can be reactive, allowing you to change hotkeys dynamically:
+Pass a ref or a getter to change the combination at runtime. An empty value removes the listener.
 
 <ExamplesExample file="hotkey/reactive" />
 
 ### Options
 
-Customize hotkey behavior with options for event type, input handling, and more:
+The third argument takes options. Each of them also accepts a ref.
+
+| Option | Default | Description |
+| - | - | - |
+| **event** | `'keydown'` | With `'keydown'`, holding the keys calls the function repeatedly. `'keyup'` calls it once, on release |
+| **inputs** | `false` | Hotkeys are ignored while a text field, textarea, select or contenteditable element has focus. Checkboxes, radios, sliders and button inputs only block the keys they act on, such as <v-kbd>Space</v-kbd>, <v-kbd>Enter</v-kbd> and the arrows. Set to `true` for shortcuts such as <v-kbd>Ctrl</v-kbd>+<v-kbd>S</v-kbd> that should work while typing |
+| **preventDefault** | `true` | Set to `false` to keep the browser's own action for the same keys |
+| **sequenceTimeout** | `1000` | Milliseconds allowed between the steps of a sequence |
 
 <ExamplesExample file="hotkey/options" />
 
-## Configuration options
-
-The `useHotkey` composable accepts an optional third parameter of type `HotkeyOptions` to customize its behavior:
-
-```typescript
-interface HotkeyOptions {
-  event?: 'keydown' | 'keyup'
-  inputs?: boolean
-  preventDefault?: boolean
-  sequenceTimeout?: number
-}
-```
-
-### Event type
-
-Control which keyboard event triggers the hotkey:
-
-```js
-// Trigger on key press (default)
-useHotkey('ctrl+s', handleSave, { event: 'keydown' })
-
-// Trigger on key release
-useHotkey('ctrl+s', handleSave, { event: 'keyup' })
-```
-
-**When to use:**
-
-- `keydown`: For actions that should trigger immediately when pressed (most common)
-- `keyup`: For actions that should wait until the key is released, useful for preventing repeated triggers
-
-### Input handling
-
-By default, hotkeys are disabled while a text field, textarea, select, or editable element has focus. Other inputs, such as checkboxes, radio button, range sliders, and buttons, only keep the keys they act on, like Space, Enter, and the arrow keys.
-
-```js
-// Default: hotkeys disabled in input fields
-useHotkey('ctrl+s', handleSave)
-
-// Allow hotkeys even when inputs are focused
-useHotkey('ctrl+s', handleSave, { inputs: true })
-```
-
-**Best practices:**
-
-- Keep `inputs: false` (default) for global shortcuts like save/copy/paste
-- Use `inputs: true` for application-specific shortcuts that should work everywhere
-- Consider using different key combinations for input-specific actions
-
-### Prevent default behavior
-
-Control whether the browser's default behavior for the key combination is prevented:
-
-```js
-// Prevent browser default (recommended for most cases)
-useHotkey('ctrl+s', handleSave, { preventDefault: true })
-
-// Allow browser default behavior
-useHotkey('f5', handleRefresh, { preventDefault: false })
-```
-
-**When to disable:**
-
-- When you want to enhance rather than replace browser behavior
-- For accessibility keys that should maintain their original function
-- When testing or debugging hotkey interactions
-
-### Sequence timeout
-
-For key sequences, control how long users have between keystrokes:
-
-```js
-// Default: 1 second between sequence steps
-useHotkey('ctrl+k-p', openPalette)
-
-// Faster timeout for expert users
-useHotkey('ctrl+k-p', openPalette, { sequenceTimeout: 500 })
-
-// Longer timeout for accessibility
-useHotkey('ctrl+k-p', openPalette, { sequenceTimeout: 2000 })
-```
-
 ## Key combination syntax
 
-The hotkey string supports various modifiers and special keys:
+- `+` or `_` combines keys: `ctrl+s`, `ctrl_s`
+- `/` separates alternatives: `ctrl+k/ctrl+f`, `up/down`
+- `-` separates the steps of a sequence: `ctrl+k-p` is <v-kbd>Ctrl</v-kbd>+<v-kbd>K</v-kbd>, then <v-kbd>P</v-kbd>
+- Alternatives bind tighter than sequences: `ctrl+k/ctrl+f-p` is <v-kbd>Ctrl</v-kbd>+<v-kbd>K</v-kbd> or <v-kbd>Ctrl</v-kbd>+<v-kbd>F</v-kbd>, then <v-kbd>P</v-kbd>
+- Keys are case-insensitive
 
-### Modifiers
+Modifiers are `ctrl`, `shift`, `alt` and `cmd` / `meta`. Any other key is matched by its [KeyboardEvent.key](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values) value, such as `enter`, `arrowup` or `f1`.
 
-- <v-kbd>cmd</v-kbd> / <v-kbd>meta</v-kbd> - Command key (Mac) / Control key (PC) - **recommended over <v-kbd>ctrl</v-kbd> for cross-platform**
-- <v-kbd>ctrl</v-kbd> - Control key (all platforms)
-- <v-kbd>alt</v-kbd> - Alt key (all platforms)
-- <v-kbd>shift</v-kbd> - Shift key (all platforms)
+Aliases cover keys that are long to type or collide with the syntax:
 
-### Special keys
-
-- <v-kbd>enter</v-kbd>, <v-kbd>escape</v-kbd>, <v-kbd>tab</v-kbd>, <v-kbd>space</v-kbd>, <v-kbd>backspace</v-kbd>, <v-kbd>delete</v-kbd>
-- <v-kbd>arrowup</v-kbd>, <v-kbd>arrowdown</v-kbd>, <v-kbd>arrowleft</v-kbd>, <v-kbd>arrowright</v-kbd>
-- <v-kbd>home</v-kbd>, <v-kbd>end</v-kbd>, <v-kbd>pageup</v-kbd>, <v-kbd>pagedown</v-kbd>
-- <v-kbd>f1</v-kbd> through <v-kbd>f12</v-kbd>
-- <v-kbd>plus</v-kbd>, <v-kbd>slash</v-kbd>, <v-kbd>underscore</v-kbd>, and <v-kbd>minus</v-kbd>/<v-kbd>hyphen</v-kbd> for literal <v-kbd>+</v-kbd>, <v-kbd>/</v-kbd>, <v-kbd>_</v-kbd>, and <v-kbd>-</v-kbd>
-
-### Syntax rules
-
-- Parsing is performed left to right, so `ctrl+s-a` will produce "`ctrl+s` and then `a`"
-- Use `+` or `_` to combine modifiers with keys: `ctrl+s`, `ctrl_s`
-- Use `/` to separate alternative keys or combinations: `ctrl+k/ctrl+f`, `up/down`
-- Use `-` to create sequences: `ctrl+k-p` (Ctrl+K, then P) `ctrl+k/ctrl+f-p` (Ctrl+K or Ctrl+F, then P)
-- Keys are case-insensitive: `Ctrl+S` equals `ctrl+s`
-
-Check out [all possible keycodes](https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_code_values).
+| Alias | Key |
+| - | - |
+| `up`, `down`, `left`, `right` | Arrow keys |
+| `esc`, `space`, `return`, `del` | <v-kbd>Escape</v-kbd>, <v-kbd>Space</v-kbd>, <v-kbd>Enter</v-kbd>, <v-kbd>Delete</v-kbd> |
+| `control`, `command`, `option` | `ctrl`, `cmd`, `alt` |
+| `plus`, `slash`, `underscore`, `minus` / `hyphen` | <v-kbd>+</v-kbd>, <v-kbd>/</v-kbd>, <v-kbd>_</v-kbd>, <v-kbd>-</v-kbd> |
 
 ## Manual cleanup
 
-The composable automatically manages cleanup during the Vue component's unmount lifecycle event. If you need to perform manual cleanup, you can save the cleanup function returned by the composable. Executing this function will remove the hotkey listener.
+`useHotkey` returns a function that removes the listener. Call it when you register a hotkey outside of a component's setup, or need to remove it before unmount.
 
 ```js
-const cleanup = useHotkey('ctrl+s', () => {
-  console.log('Save action')
-})
+const cleanup = useHotkey('ctrl+s', save)
 
-// Later, manually cleanup
 cleanup()
 ```
 
-## Avoiding key binding conflicts
+## Key binding conflicts
 
-Prevent conflicts by avoiding reserved shortcuts and organizing hotkeys systematically:
-
-### Common conflicts to avoid
-
-```js
-// ❌ Browser shortcuts
-useHotkey('f5', handleAction)        // Refresh
-useHotkey('ctrl+t', handleAction)    // New tab
-useHotkey('ctrl+w', handleAction)    // Close tab
-
-// ❌ OS shortcuts
-useHotkey('alt+tab', handleAction)   // Window switching
-
-// ✅ Safe alternatives
-useHotkey('cmd+shift+r', handleAction)
-useHotkey('cmd+k-t', handleAction)
-useHotkey('alt+1', handleAction)
-```
-
-## Best practices
-
-::: info
-Hotkeys are a powerful feature, but they utilize APIs that are managed by the browser and the operating system. The reliability of the key bindings you make are subject to factors that can be difficult to control. It's recommended you test your key bindings in the browsers and operating systems you are targeting.
-:::
-
-- **Test cross-platform**: _Verify shortcuts work_ on Windows, macOS, and Linux!
-- **Use modifier combinations**: Prefer `Ctrl+Shift+Key` for custom actions
-- **Document your shortcuts**: Maintain a list of all application hotkeys in your application
+The operating system handles some shortcuts, such as <v-kbd>Alt</v-kbd>+<v-kbd>Tab</v-kbd>, before the page sees them. Browsers also keep a few for themselves, such as <v-kbd>Ctrl</v-kbd>+<v-kbd>T</v-kbd> and <v-kbd>Ctrl</v-kbd>+<v-kbd>W</v-kbd>, and **preventDefault** cannot override them. Test your shortcuts in the browsers and operating systems you target.

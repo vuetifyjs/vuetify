@@ -96,12 +96,6 @@ Tick marks represent predetermined values to which the user can move the slider.
 
 <ExamplesExample file="v-slider/prop-ticks" />
 
-<!-- #### Validation
-
-Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` / `false` or a `string` containing an error message.
-
-<ExamplesExample file="v-slider/prop-validation" /> -->
-
 #### Vertical sliders
 
 You can use the **direction** prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.

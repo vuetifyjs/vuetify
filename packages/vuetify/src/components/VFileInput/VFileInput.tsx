@@ -13,6 +13,7 @@ import { injectNestedDefaults } from '@/composables/defaults'
 import { useFileDrop } from '@/composables/fileDrop'
 import { makeFileFilterProps, useFileFilter } from '@/composables/fileFilter'
 import { useFocus } from '@/composables/focus'
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -118,6 +119,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       val => (!props.multiple && Array.isArray(val)) ? val[0] : val,
     )
     const { isFocused, focus, blur } = useFocus(props)
+    const form = useForm(props)
+    const isInteractive = toRef(() => !form.isDisabled.value && !form.isReadonly.value)
     const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const base = computed(() => !isBoolean(props.showSize) ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
@@ -188,7 +191,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     }
 
     function onDragover (e: DragEvent) {
-      if (props.disabled || props.readonly) return
+      if (!isInteractive.value) return
       e.preventDefault()
       e.stopImmediatePropagation()
       if (isDraggingFiles(e)) isDragging.value = true
@@ -207,14 +210,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       e.stopImmediatePropagation()
       isDragging.value = false
 
-      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
+      if (!inputRef.value || !isInteractive.value || !hasFilesOrFolders(e)) return
 
       const allDroppedFiles = await handleDrop(e)
       selectAccepted(allDroppedFiles)
     }
 
     async function onPaste (e: ClipboardEvent) {
-      if (!inputRef.value || props.disabled || props.readonly || !hasFilesOrFolders(e)) return
+      if (!inputRef.value || !isInteractive.value || !hasFilesOrFolders(e)) return
       e.preventDefault()
 
       const files = await handleDrop(e)
