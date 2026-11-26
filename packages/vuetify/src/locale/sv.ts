@@ -90,6 +90,9 @@ export default {
     less: 'Mindre',
     more: 'Mer',
   },
+  vPie: {
+    other: 'Övrigt',
+  },
   input: {
     clear: 'Rensa {0}',
     prependAction: '{0} föregående åtgärd',

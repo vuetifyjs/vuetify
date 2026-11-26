@@ -90,6 +90,9 @@ export default {
     less: 'Менше',
     more: 'Більше',
   },
+  vPie: {
+    other: 'Інше',
+  },
   input: {
     clear: 'Очистити {0}',
     prependAction: 'Дія перед полем {0}',

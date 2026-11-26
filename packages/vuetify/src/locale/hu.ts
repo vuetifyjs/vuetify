@@ -90,6 +90,9 @@ export default {
     less: 'Kevesebb',
     more: 'Több',
   },
+  vPie: {
+    other: 'Egyéb',
+  },
   input: {
     clear: 'Törlés {0}',
     prependAction: '{0} előrehozott művelet',

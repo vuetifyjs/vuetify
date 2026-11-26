@@ -90,6 +90,9 @@ export default {
     less: 'أقل',
     more: 'أكثر',
   },
+  vPie: {
+    other: 'أخرى',
+  },
   input: {
     clear: 'مسح {0}',
     prependAction: '{0} إجراء مُسبق',

@@ -90,6 +90,9 @@ export default {
     less: 'Menys',
     more: 'Més',
   },
+  vPie: {
+    other: 'Altres',
+  },
   input: {
     clear: 'Esborra {0}',
     prependAction: 'Acció prefixada {0}',

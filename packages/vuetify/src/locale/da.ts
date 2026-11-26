@@ -90,6 +90,9 @@ export default {
     less: 'Mindre',
     more: 'Mere',
   },
+  vPie: {
+    other: 'Andet',
+  },
   input: {
     clear: 'Ryd {0}',
     prependAction: '{0} foranstillet handling',

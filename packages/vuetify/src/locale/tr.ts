@@ -90,6 +90,9 @@ export default {
     less: 'Az',
     more: 'Çok',
   },
+  vPie: {
+    other: 'Diğer',
+  },
   input: {
     clear: '{0} alanını temizle',
     prependAction: '{0} alanının başındaki işlem',

@@ -90,6 +90,9 @@ export default {
     less: 'Λιγότερα',
     more: 'Περισσότερα',
   },
+  vPie: {
+    other: 'Άλλα',
+  },
   input: {
     clear: 'Καθαρισμός {0}',
     prependAction: '{0} προσαρτημένη ενέργεια',

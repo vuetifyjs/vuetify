@@ -90,6 +90,9 @@ export default {
     less: 'کەمتر',
     more: 'زیاتر',
   },
+  vPie: {
+    other: 'ئەوانی تر',
+  },
   input: {
     clear: 'سڕینەوە {0}',
     prependAction: '{0} کرداری پێشەوە',
