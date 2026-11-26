@@ -106,6 +106,14 @@ A single `v-menu` can be reused across multiple activators to create a gliding n
 
 <ExamplesExample file="v-menu/misc-gliding-nav" />
 
+#### Context menus
+
+Right-click menus can have submenus.
+
+To share one menu between many elements, handle `@contextmenu` yourself and pass the cursor position to **target**. iOS does not fire `contextmenu`, so this path has no long-press support there.
+
+<ExamplesExample file="v-menu/misc-context-menu" />
+
 #### Shared menu
 
 A single `v-menu` can be reused to serve multiple items, helping avoid performance issues when rendering long lists. You can set **activator** to the element that was clicked and open the menu programmatically.
@@ -121,8 +129,8 @@ This is an example of image picker attached to a `v-text-field`.
 
 <ExamplesExample file="v-menu/misc-use-in-text-field" />
 
-#### File context menu
+#### File actions
 
-You are not limited to a single card. Here is a context menu separating common actions into separate section.
+Menu content is not limited to a single list. This example puts quick actions in an icon row above the full list of actions.
 
 <ExamplesExample file="v-menu/misc-file-context" />
