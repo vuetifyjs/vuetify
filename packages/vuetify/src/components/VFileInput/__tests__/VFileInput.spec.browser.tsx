@@ -1,13 +1,20 @@
 // Components
 import { VFileInput } from '../VFileInput'
+import { VForm } from '@/components/VForm'
 
 // Utilities
 import { CenteredGrid, render, screen, showcase, userEvent } from '@test'
-import { cloneVNode, defineComponent, ref } from 'vue'
+import { cloneVNode, defineComponent, ref, shallowRef } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
 const textFile = new File(['text'], 'text.txt')
+
+function transferOf (file: File) {
+  const dataTransfer = new DataTransfer()
+  dataTransfer.items.add(file)
+  return dataTransfer
+}
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -134,6 +141,30 @@ describe('VFileInput', () => {
       <VFileInput modelValue={[oneMBFile, twoMBFile]} disabled />
     ))
     expect(screen.getByCSS('input')).toBeDisabled()
+  })
+
+  it.each(['disabled', 'readonly'] as const)('should ignore dropped and pasted files in a %s form', async state => {
+    const isLocked = shallowRef(true)
+    const onUpdate = vi.fn()
+    render(() => (
+      <VForm { ...{ [state]: isLocked.value } }>
+        <VFileInput multiple onUpdate:modelValue={ onUpdate } />
+      </VForm>
+    ))
+
+    const field = screen.getByCSS('.v-field')
+    const input = screen.getByCSS('input[type="file"]')
+    const dragover = new DragEvent('dragover', { dataTransfer: transferOf(oneMBFile), cancelable: true })
+    field.dispatchEvent(dragover)
+    expect(dragover.defaultPrevented).toBe(false)
+    field.dispatchEvent(new DragEvent('drop', { dataTransfer: transferOf(oneMBFile) }))
+    input.dispatchEvent(new ClipboardEvent('paste', { clipboardData: transferOf(twoMBFile) }))
+
+    isLocked.value = false
+    await expect.element(input).not.toHaveAttribute(state)
+    field.dispatchEvent(new DragEvent('drop', { dataTransfer: transferOf(textFile) }))
+
+    await expect.poll(() => onUpdate).toHaveBeenCalledExactlyOnceWith([expect.objectContaining({ name: 'text.txt' })])
   })
 
   it('should support no prepend icon', async () => {

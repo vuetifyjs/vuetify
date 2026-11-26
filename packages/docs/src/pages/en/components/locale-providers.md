@@ -16,7 +16,7 @@ features:
 
 # Locale providers
 
-The locale provider allows you to provide specific default prop values to components in a section of your application
+The `v-locale-provider` component changes the language and text direction for a section of your application.
 
 <PageFeatures />
 
@@ -30,8 +30,22 @@ The locale provider allows you to provide specific default prop values to compon
 
 <ApiInline hide-links />
 
-## Examples
+## Guide
 
-### Locale
+**locale** takes a locale code such as `de`, `ja` or `ar`. Dates and numbers format for it right away. Component text needs messages for that locale, registered in `createVuetify` or passed through **messages**, which replaces the registered messages inside the provider.
 
-The `v-locale-provider` expects a prop **locale** which looks the same as the **locale** object that you can pass to `createVuetify` when creating your application.
+Text direction follows the locale unless **rtl** is set. Media controls are a typical piece you'd rather keep consitent for every user:
+
+```html
+<v-locale-provider :rtl="false">
+  <!-- force LTR for all locales the app supports -->
+  <v-toolbar density="compact">
+    <v-btn icon="mdi-skip-previous"></v-btn>
+    <v-btn icon="mdi-play"></v-btn>
+    <v-btn icon="mdi-skip-next"></v-btn>
+    <v-slider v-model="progress" hide-details></v-slider>
+  </v-toolbar>
+</v-locale-provider>
+```
+
+See [Internationalization](/features/internationalization/#scoped-languages) for more.

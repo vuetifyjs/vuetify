@@ -5,8 +5,6 @@
   >
     <v-toolbar
       color="deep-purple-accent-4"
-      cards
-      dark
       flat
     >
       <v-btn icon>

@@ -21,7 +21,7 @@
       color="success"
       model-value="30"
       reverse
-      streams
+      stream
     ></v-progress-linear>
 
     <br>

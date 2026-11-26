@@ -105,7 +105,6 @@
       >
         <v-slider
           v-model="padding"
-          cols="3"
           max="25"
           min="0"
           thumb-label

@@ -65,7 +65,6 @@
 
     <v-stepper
       class="mt-12"
-      value="3"
       non-linear
     >
       <v-stepper-header>

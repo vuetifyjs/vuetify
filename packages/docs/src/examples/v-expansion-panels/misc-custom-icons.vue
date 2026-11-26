@@ -35,7 +35,7 @@
       </v-expansion-panel>
 
       <v-expansion-panel>
-        <v-expansion-panel-title disable-icon-rotate>
+        <v-expansion-panel-title>
           Item
           <template v-slot:actions>
             <v-icon color="error" icon="mdi-alert-circle">

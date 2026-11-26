@@ -188,15 +188,3 @@ The `v-col` component can override the row's **size** using a fraction syntax li
 The `v-spacer` component is useful when you want to fill available space or make space between two components.
 
 <ExamplesExample file="grid/misc-spacer" />
-
-<!-- #### Unique layouts
-
-The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.
-
-<ExamplesExample file="grid/misc-unique-layouts" /> -->
-
-<!-- #### Variable content width
-
-Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content.
-
-<ExamplesExample file="grid/misc-variable-content" /> -->

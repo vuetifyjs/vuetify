@@ -12,7 +12,6 @@
             <v-card
               :class="['d-flex align-center', selectedClass]"
               height="200"
-              dark
               @click="toggle"
             >
               <div

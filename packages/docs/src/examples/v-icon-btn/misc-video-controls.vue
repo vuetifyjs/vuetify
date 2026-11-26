@@ -11,7 +11,6 @@
         color="surface"
         height="48"
         width="88"
-        flat
       >
         <v-icon-btn
           v-model:active="micOptions"
@@ -46,7 +45,6 @@
         color="surface"
         height="48"
         width="88"
-        flat
       >
         <v-icon-btn
           v-model:active="videoOptions"
