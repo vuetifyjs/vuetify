@@ -270,6 +270,7 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
                         aria-labelledby={ `${id.value}-label` }
                         { ...slotProps }
                         { ...inputAttrs }
+                        required={ props.required }
                       />
                     )
 

@@ -99,11 +99,11 @@
   .v-input__append
     display: flex
     align-items: flex-start
-    padding-top: var(--v-input-padding-top)
+    padding-top: calc(var(--v-input-padding-top) + var(--v-field-label-adjacent-margin, 0px))
 
     .v-input--center-affix &
       align-items: center
-      padding-top: 0
+      padding-top: var(--v-field-label-adjacent-margin, 0px)
 
   .v-input__prepend
     grid-area: prepend
@@ -134,4 +134,4 @@
         @at-root
           @include tools.density('v-input', $input-density) using ($modifier)
             @at-root #{selector.append(&, $this)}
-              padding-top: calc(var(--v-input-padding-top) + #{math.max(0px, 4px + $modifier * .25)})
+              padding-top: calc(var(--v-input-padding-top) + var(--v-field-label-adjacent-margin, 0px) + #{math.max(0px, 4px + $modifier * .25)})

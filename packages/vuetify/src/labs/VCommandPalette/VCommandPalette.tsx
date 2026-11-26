@@ -324,7 +324,7 @@ export const VCommandPalette = genericComponent<VCommandPaletteSlots>()({
                       placeholder={ t(props.placeholder) }
                       prependInnerIcon={ props.inputIcon }
                       autocomplete="off"
-                      singleLine
+                      labelVariant="single-line"
                       hideDetails
                       variant="solo"
                       flat
