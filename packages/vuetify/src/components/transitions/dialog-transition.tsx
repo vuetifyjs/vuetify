@@ -29,7 +29,7 @@ export const VDialogTransition = genericComponent()({
   setup (props, { slots }) {
     const functions = {
       onBeforeEnter (el: Element) {
-        (el as HTMLElement).style.pointerEvents = 'none'
+        (el as HTMLElement).style.removeProperty('pointer-events')
         ;(el as HTMLElement).style.visibility = 'hidden'
       },
       async onEnter (el: Element, done: () => void) {
@@ -69,9 +69,6 @@ export const VDialogTransition = genericComponent()({
           })
           animation.finished.then(() => done())
         }
-      },
-      onAfterEnter (el: Element) {
-        (el as HTMLElement).style.removeProperty('pointer-events')
       },
       onBeforeLeave (el: Element) {
         (el as HTMLElement).style.pointerEvents = 'none'
