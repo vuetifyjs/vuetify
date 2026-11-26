@@ -1,0 +1,23 @@
+{
+  "description": "Records a keyboard shortcut from a focused element into a string that `useHotkey` and `v-hotkey` accept. Bind `onKeydown` and `onKeyup` to the element, then call `start`. `Enter` commits the recording.",
+  "props": {
+    "options": "Recording mode, step limit, and callbacks."
+  },
+  "options": {
+    "recordBy": "`'code'` records the key's position, such as `ctrl+[KeyS]`, which matches on any layout. `'key'` records the typed character, such as `shift+plus`.",
+    "maxSteps": "Maximum number of chords. Above one, the result can be a sequence. A chord past the limit starts the recording over.",
+    "idleTimeout": "Milliseconds of inactivity after which the recording commits. Without it, only `Enter` or `commit` does.",
+    "onRecord": "Called with the recorded hotkey string.",
+    "onCancel": "Called when `Escape` cancels the recording.",
+    "onClear": "Called when `Backspace` or `Delete` is pressed with no recorded steps."
+  },
+  "returns": {
+    "recording": "Whether recording is active.",
+    "steps": "Chords recorded so far in a multi-step recording.",
+    "start": "Starts recording.",
+    "cancel": "Stops recording without calling `onRecord`.",
+    "commit": "Finishes the recording with the steps so far.",
+    "onKeydown": "Keydown handler for the recording element. Stops the event from reaching hotkeys while recording.",
+    "onKeyup": "Keyup handler for the recording element. Keeps keyups of recorded keys from reaching `keyup` hotkeys."
+  }
+}

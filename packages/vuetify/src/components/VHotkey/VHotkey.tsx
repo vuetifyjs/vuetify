@@ -40,6 +40,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { APPLE_PLATFORM } from '@/composables/hotkey/hotkey'
 import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
+import { physicalCode, physicalKeyName } from '@/composables/hotkey/key-aliases'
 import { useLocale, useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -260,7 +261,9 @@ export const VHotkey = genericComponent()({
         function visit (node: KeyCombination) {
           if (isString(node)) {
             if (node !== '') {
-              result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, node, isMac.value))
+              const code = physicalCode(node)
+              const key = code ? physicalKeyName(code) : node
+              result.push(applyDisplayModeToKey(props.keyMap, props.displayMode, key, isMac.value))
             }
           } else {
             for (let i = 0; i < node.parts.length; i++) {

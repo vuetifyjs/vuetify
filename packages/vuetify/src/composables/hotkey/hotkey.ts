@@ -1,5 +1,6 @@
 // Composables
 import { parseKeyCombination } from '@/composables/hotkey/hotkey-parsing'
+import { codeToKey, physicalCode } from '@/composables/hotkey/key-aliases'
 
 // Utilities
 import { onScopeDispose, toValue, watch } from 'vue'
@@ -24,6 +25,8 @@ const TEXT_INPUT_TYPES = new Set([
 ])
 const CONTROL_KEYS = new Set([' ', 'Enter', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'])
 
+type KeyGroup = Exclude<KeyCombination, Sequence>
+
 function isTextField (element: HTMLElement) {
   if (element.tagName === 'INPUT') return TEXT_INPUT_TYPES.has((element as HTMLInputElement).type)
 
@@ -34,6 +37,20 @@ function isTextField (element: HTMLElement) {
     element.contentEditable === 'true' ||
     ['textbox', 'searchbox', 'combobox'].includes(element.getAttribute('role') ?? '')
   )
+}
+
+// Windows and Linux report AltGr, which types characters such as @ or ś, as Ctrl+Alt
+export function isAltGraph (e: KeyboardEvent, isMac: boolean) {
+  return !isMac && !!e.getModifierState?.('AltGraph')
+}
+
+export function isModifierKey (key: string) {
+  return ['Control', 'Shift', 'Alt', 'AltGraph', 'Meta'].includes(key)
+}
+
+// Safari sends the Enter that commits a composition after compositionend, with keyCode 229
+export function isComposing (e: KeyboardEvent) {
+  return e.isComposing || e.keyCode === 229 || e.key === 'Process'
 }
 
 interface HotkeyOptions {
@@ -59,7 +76,7 @@ export function useHotkey (
 
   const isMac = APPLE_PLATFORM.test(navigator?.userAgent ?? '')
   let timeout = 0
-  let keyGroups: (Exclude<KeyCombination, Sequence>)[]
+  let keyGroups: KeyGroup[]
   let isSequence = false
   let groupIndex = 0
 
@@ -82,17 +99,19 @@ export function useHotkey (
   }
 
   function handler (e: KeyboardEvent) {
-    // a modifier press must not reset a sequence; Safari sends the IME commit Enter with keyCode 229
-    if (e.isComposing || e.keyCode === 229 || ['Control', 'Shift', 'Alt', 'AltGraph', 'Meta'].includes(e.key)) return
+    if (isComposing(e) || isModifierKey(e.key)) return
     if (e.repeat && isSequence) return
 
     const group = keyGroups[groupIndex]
 
     if (!group || isInputFocused(e)) return
 
-    if (!matchesKeyGroup(e, group, isMac)) {
+    const activeElement = getActiveElement() as HTMLElement | null
+    const typing = !!activeElement && isTextField(activeElement)
+
+    if (!matchesKeyGroup(e, group, isMac, typing)) {
       if (!isSequence) return
-      const restart = groupIndex > 0 && matchesKeyGroup(e, keyGroups[0], isMac)
+      const restart = groupIndex > 0 && matchesKeyGroup(e, keyGroups[0], isMac, typing)
       resetSequence()
       if (!restart) return
     }
@@ -151,9 +170,9 @@ export function useHotkey (
   return cleanup
 }
 
-function matchesKeyGroup (e: KeyboardEvent, group: Exclude<KeyCombination, Sequence>, isMac: boolean): boolean {
+function matchesKeyGroup (e: KeyboardEvent, group: KeyGroup, isMac: boolean, typing: boolean): boolean {
   if (!isString(group) && group.type === 'alternate') {
-    return group.parts.some(part => matchesKeyGroup(e, part, isMac))
+    return group.parts.some(part => matchesKeyGroup(e, part, isMac, typing))
   }
 
   const { modifiers, actualKey } = parseKeyGroup(group)
@@ -161,13 +180,47 @@ function matchesKeyGroup (e: KeyboardEvent, group: Exclude<KeyCombination, Seque
   const expectCtrl = modifiers.ctrl || (!isMac && (modifiers.cmd || modifiers.meta))
   const expectMeta = isMac && (modifiers.cmd || modifiers.meta)
 
-  return (
-    e.ctrlKey === expectCtrl &&
-    e.metaKey === expectMeta &&
-    e.shiftKey === modifiers.shift &&
-    e.altKey === modifiers.alt &&
-    e.key.toLowerCase() === actualKey?.toLowerCase()
-  )
+  if (
+    !actualKey ||
+    e.ctrlKey !== expectCtrl ||
+    e.metaKey !== expectMeta ||
+    e.shiftKey !== modifiers.shift ||
+    e.altKey !== modifiers.alt
+  ) return false
+
+  if (isAltGraph(e, isMac) && (expectCtrl || modifiers.alt)) return false
+
+  const code = physicalCode(actualKey)
+  if (code) return !isAltGraph(e, isMac) && e.code.toLowerCase() === code
+
+  if (e.key.toLowerCase() === actualKey) return true
+
+  // without a command modifier, a text field gets the typed character, not a shortcut
+  if (typing && !e.ctrlKey && !e.metaKey && !e.altKey) return false
+  return positionKey(e, isMac) === actualKey
+}
+
+// The key's US QWERTY meaning, used only when the typed character can't name a shortcut:
+// non-Latin layouts, macOS Option characters, dead keys, the AZERTY digit row, and Shift+digit symbols
+function positionKey (e: KeyboardEvent, isMac: boolean) {
+  const { key, code } = e
+  if (!code) return
+  if (isAltGraph(e, isMac)) return
+
+  if (key === 'Unidentified') {
+    if (code.startsWith('Key')) return
+  } else if (key !== 'Dead' && Array.from(key).length !== 1) {
+    return
+  } else if (!code.startsWith('Digit')) {
+    if (/^[a-z]$/i.test(key)) return
+    if (/^[!-~]$/.test(key)) {
+      if (!e.shiftKey) return
+    } else if (/^\p{Script_Extensions=Latin}$/u.test(key) && !e.altKey && !((e.ctrlKey || e.metaKey) && !code.startsWith('Key'))) {
+      return
+    }
+  }
+
+  return codeToKey(code)
 }
 
 function parseKeyGroup (group: Combo | Key): {

@@ -66,6 +66,48 @@ describe('hotkey.ts', () => {
   })
 
   it.each([
+    ['macOS Option character', 'alt+k', [{ altKey: true, key: '˚', code: 'KeyK' }], 1],
+    ['non-Latin layout', 'ctrl+k', [{ ctrlKey: true, key: 'л', code: 'KeyK' }], 1],
+    ['AZERTY digit row', 'ctrl+1', [{ ctrlKey: true, key: '&', code: 'Digit1' }], 1],
+    ['Shift+digit symbol', 'shift+1', [{ shiftKey: true, key: '!', code: 'Digit1' }], 1],
+    ['ASCII letter on another position', 'q', [{ key: 'a', code: 'KeyQ' }], 0],
+    ['ASCII symbol on another position', 'ctrl+/', [{ ctrlKey: true, key: '+', code: 'Slash' }], 0],
+    ['IME composition', 'enter', [{ key: 'Enter', isComposing: true }], 0],
+    ['Safari composition commit', 'enter', [{ key: 'Enter', keyCode: 229 }], 0],
+    ['modifier pressed between steps', 'ctrl+x-ctrl+c', [
+      { ctrlKey: true, key: 'x' },
+      { ctrlKey: true, key: 'Control' },
+      { ctrlKey: true, key: 'c' },
+    ], 1],
+    ['auto-repeat in a sequence', 'g-g', [{ key: 'g' }, { key: 'g', repeat: true }], 0],
+    ['wrong key restarting a sequence', 'g-g', [{ key: 'g' }, { key: 'x' }, { key: 'g' }, { key: 'g' }], 1],
+    ['physical key', 'ctrl+[KeyS]', [{ ctrlKey: true, key: 'ы', code: 'KeyS' }], 1],
+    ['physical key on another character', '[KeyS]', [{ key: 's', code: 'KeyA' }], 0],
+  ])('%s', (_, combo, events, expected) => {
+    const cb = vi.fn()
+    const stop = useHotkey(combo, cb)
+
+    for (const props of events) window.dispatchEvent(new KeyboardEvent('keydown', props))
+
+    expect(cb).toHaveBeenCalledTimes(expected)
+
+    stop()
+  })
+
+  it('ignores AltGr characters for ctrl+alt bindings', () => {
+    const cb = vi.fn()
+    const stop = useHotkey('ctrl+alt+s', cb)
+    const event = new KeyboardEvent('keydown', { ctrlKey: true, altKey: true, key: 'ś', code: 'KeyS' })
+    Object.defineProperty(event, 'getModifierState', { value: (key: string) => key === 'AltGraph' })
+
+    window.dispatchEvent(event)
+
+    expect(cb).not.toHaveBeenCalled()
+
+    stop()
+  })
+
+  it.each([
     ['k', 'checkbox', 'k', 1],
     ['space', 'checkbox', ' ', 0],
     ['k', 'text', 'k', 0],
