@@ -135,7 +135,7 @@ export declare const VSelect: VuetifyComponent<
   {
     'update:focused': (focused: boolean) => true
     'update:modelValue': (value: any) => true
-    'update:menu': (ue: boolean) => true
+    'update:menu': (value: boolean) => true
     'update:search': (value: string) => true
     'item:added': (item: ListItem) => true
     'item:removed': (item: ListItem) => true
