@@ -34,12 +34,16 @@
 
         <v-divider></v-divider>
 
-        <v-list>
+        <v-list density="compact">
           <v-list-item>
             <v-switch
               v-model="message"
+              class="pl-1"
               color="purple"
+              density="compact"
+              inset="material"
               label="Enable messages"
+              size="small"
               hide-details
             ></v-switch>
           </v-list-item>
@@ -47,8 +51,12 @@
           <v-list-item>
             <v-switch
               v-model="hints"
+              class="pl-1"
               color="purple"
+              density="compact"
+              inset="material"
               label="Enable hints"
+              size="small"
               hide-details
             ></v-switch>
           </v-list-item>

@@ -50,36 +50,6 @@ The third one is to supply a CSS selector string to **activator** prop. This all
 
 ### Props
 
-<!-- #### Absolute
-
-Menus can also be placed absolutely on top of the activator element using the **absolute** prop. Try clicking anywhere on the image.
-
-<ExamplesExample file="v-menu/prop-absolute" />
-
-#### Absolute without activator
-
-Menus can also be used without an activator by using **absolute** together with the props **position-x** and **position-y**. Try right-clicking anywhere on the image.
-
-<ExamplesExample file="v-menu/prop-absolute-without-activator" /> -->
-
-<!-- #### Close on click
-
-Menu can be closed when lost focus.
-
-<ExamplesExample file="v-menu/prop-close-on-click" />
-
-#### Close on content click
-
-You can configure whether `v-menu` should be closed when its content is clicked.
-
-<ExamplesExample file="v-menu/prop-close-on-content-click" /> -->
-
-<!-- #### Disabled
-
-You can disable the menu. Disabled menus can't be opened.
-
-<ExamplesExample file="v-menu/prop-disabled" /> -->
-
 #### Location
 
 Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location-strategies).
@@ -126,7 +96,7 @@ Vuetify comes with [several standard transitions](/styles/transitions#api) that 
 
 #### Popover menu
 
-A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there are multiple interactive items within the menu contents.
+Set **close-on-content-click** to `false` to keep the menu open while users interact with its content, such as a popover with several controls.
 
 <ExamplesExample file="v-menu/misc-popover" />
 
