@@ -235,6 +235,27 @@ describe('VOverlay', () => {
     expect(screen.getByTestId('menu').style.zIndex).toBe('900')
   })
 
+  it('should stack overlays above their passive parent', async () => {
+    const dialog = ref(true)
+    const tooltip = ref(false)
+    render(() => (
+      <>
+        <VOverlay v-model={ dialog.value } zIndex={ 2400 } data-testid="dialog" />
+        <VOverlay modelValue _passive data-testid="snackbar">
+          <VOverlay v-model={ tooltip.value } data-testid="tooltip" />
+        </VOverlay>
+      </>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('snackbar')).toHaveLength(1)
+    dialog.value = false
+    tooltip.value = true
+    await expect.poll(() => screen.queryAllByTestId('tooltip')).toHaveLength(1)
+
+    expect(screen.getByTestId('snackbar').style.zIndex).toBe('2410')
+    expect(screen.getByTestId('tooltip').style.zIndex).toBe('2420')
+  })
+
   describe('scroll strategy', () => {
     afterEach(() => {
       document.documentElement.style.overflowY = ''
