@@ -128,6 +128,10 @@
         border-bottom: none
         contain: layout
 
+    .v-data-table__tr:not([data-expanded]):has(+ .v-data-table__tr--expanded:last-child)
+      > td
+        border-bottom-color: transparent
+
   .v-data-table--loading
     &:not(.v-table--fixed-header) > .v-table__wrapper > table > thead,
     &:not(.v-table--fixed-footer) > .v-table__wrapper > table > tfoot,

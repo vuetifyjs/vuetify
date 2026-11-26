@@ -3,10 +3,7 @@
     class="mx-auto"
     max-width="600"
   >
-    <v-toolbar
-      dense
-      flat
-    >
+    <v-toolbar flat>
       <v-toolbar-title>
         <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>
@@ -157,3 +154,9 @@
     animation-direction: alternate;
   }
 </style>
+
+<example-meta lang="json">
+{
+  "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14324-18316"
+}
+</example-meta>

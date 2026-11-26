@@ -103,7 +103,7 @@ You can also use the following SASS variables to customize the generated height 
 );
 ```
 
-Disable height/width class generation by setting the the `fill-height`, `height` and `width` variables to **false**.
+Disable height/width class generation by setting the `fill-height`, `height` and `width` variables to **false**.
 
 ```scss { resource="src/styles/settings.scss" }
 @use 'vuetify/settings' with (

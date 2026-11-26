@@ -18,6 +18,30 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## Announcing Vuetify0 v1.4
+
+🖊️ John Leider • 📅 November 20th, 2026
+
+Vuetify0 v1.4 is out. It adds TimePicker and createCalendar, and useDate now works without an adapter and handles non-Gregorian calendars. { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1-4/) { .text-end }
+
+## October 2026 Update
+
+🖊️ John Leider • 📅 November 11th, 2026
+
+v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0... { .text-medium-emphasis }
+
+[Read More](/blog/october-2026-update/) { .text-end }
+
+## Announcing Vuetify0 v1.3
+
+🖊️ John Leider • 📅 October 26th, 2026
+
+Vuetify0 v1.3 is out. Kanban and Menu are the two pages to open in the docs first. Tour, Otp, and Virtualizer shipped as compound components, along with a focus trap, a combobox that commits typed text, and select typeahead... { .text-medium-emphasis }
+
+[Read More](/blog/announcing-vuetify0-v1-3/) { .text-end }
+
 ## Announcing Vuetify v4.3
 
 🖊️ John Leider • 📅 October 20th, 2026

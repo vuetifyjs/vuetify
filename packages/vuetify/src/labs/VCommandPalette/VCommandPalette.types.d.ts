@@ -65,6 +65,7 @@ export interface VCommandPaletteProps {
   noClickAnimation?: boolean
   noDataText?: string
   noFilter?: boolean
+  noFlip?: boolean
   offset?: string | number | number[]
   offsetTop?: string | number
   opacity?: string | number
@@ -113,6 +114,7 @@ type VCommandPaletteDefaultKeys =
   | 'noClickAnimation'
   | 'noDataText'
   | 'noFilter'
+  | 'noFlip'
   | 'offsetTop'
   | 'openOnClick'
   | 'openOnFocus'

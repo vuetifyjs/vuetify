@@ -9,6 +9,7 @@ export interface LocationStrategyProps {
   maxWidth?: number | string
   minHeight?: number | string
   minWidth?: number | string
+  noFlip?: boolean
   offset?: number | string | number[]
   origin: Anchor | 'auto' | 'overlap'
   stickToTarget?: boolean

@@ -34,6 +34,7 @@ export interface VOverlayBaseProps {
   minWidth?: string | number
   modelValue?: boolean
   noClickAnimation?: boolean
+  noFlip?: boolean
   offset?: string | number | number[]
   opacity?: string | number
   openDelay?: string | number
@@ -69,6 +70,7 @@ type VOverlayBaseDefaultKeys =
   | 'locationStrategy'
   | 'modelValue'
   | 'noClickAnimation'
+  | 'noFlip'
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'
@@ -84,12 +86,14 @@ type VOverlayBaseDefaultKeys =
 
 export interface VOverlayProps extends Omit<VOverlayBaseProps, 'disableInitialFocus'> {
   _disableGlobalStack?: boolean
+  _passive?: boolean
   _submenu?: boolean
 }
 
 type VOverlayDefaultKeys =
   | Exclude<VOverlayBaseDefaultKeys, 'disableInitialFocus'>
   | '_disableGlobalStack'
+  | '_passive'
   | '_submenu'
 
 export type OverlaySlots = {

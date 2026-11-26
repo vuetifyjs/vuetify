@@ -146,7 +146,6 @@ declare module 'vue' {
     IconsChevronDown: typeof import('./src/components/icons/ChevronDown.vue')['default']
     IntroductionConsultingServices: typeof import('./src/components/introduction/ConsultingServices.vue')['default']
     IntroductionDirectSupport: typeof import('./src/components/introduction/DirectSupport.vue')['default']
-    IntroductionDiscordDeck: typeof import('./src/components/introduction/DiscordDeck.vue')['default']
     IntroductionEnterpriseDeck: typeof import('./src/components/introduction/EnterpriseDeck.vue')['default']
     IntroductionEnterpriseForm: typeof import('./src/components/introduction/EnterpriseForm.vue')['default']
     IntroductionSlaDeck: typeof import('./src/components/introduction/SlaDeck.vue')['default']

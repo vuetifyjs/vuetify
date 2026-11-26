@@ -16,7 +16,7 @@
           <template v-for="n in steps" :key="`${n}-step`">
             <v-stepper-item
               :complete="e1 > n"
-              :step="`Step {{ n }}`"
+              :title="`Step ${n}`"
               :value="n"
               editable
             ></v-stepper-item>
@@ -78,3 +78,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14404-154127"
+  }
+</example-meta>

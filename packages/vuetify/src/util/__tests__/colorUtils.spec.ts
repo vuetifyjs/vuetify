@@ -26,11 +26,16 @@ describe('isCssColor', () => {
     expect(isCssColor('rgb(255, 255, 255)')).toBe(true)
     expect(isCssColor('rgba(255, 0, 0, 0.8)')).toBe(true)
     expect(isCssColor('var(--my-color)')).toBe(true)
+    expect(isCssColor('oklch(70% 0.2 150)')).toBe(true)
+    expect(isCssColor('color-mix(in srgb, red 50%, blue)')).toBe(true)
+    expect(isCssColor('linear-gradient(90deg, #000, #fff)')).toBe(true)
   })
 
   it('should return false if non-css color is passed', () => {
     expect(isCssColor('red')).toBe(false)
     expect(isCssColor('primary')).toBe(false)
+    expect(isCssColor('bg-(--my-color)')).toBe(false)
+    expect(isCssColor('bg-[rgb(0,0,0)]')).toBe(false)
   })
 })
 

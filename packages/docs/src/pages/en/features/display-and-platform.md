@@ -15,7 +15,7 @@ features:
 
 # Display & Platform
 
-The display composable provides a multitude of information about the current device
+The `useDisplay` composable reports the viewport size, the active breakpoint and the user's platform.
 
 <PageFeatures />
 
@@ -23,11 +23,7 @@ The display composable provides a multitude of information about the current dev
 
 ## Usage
 
-The **useDisplay** composable provides information on multiple aspects of the current device.
-
-This enables you to control various aspects of your application based upon the window size, device type, and SSR state. This composable works in conjunction with [grids](/components/grids/) and other responsive utility classes (e.g. [display](/styles/display/)).
-
-The following shows how to access the application's display information:
+Use it when a breakpoint must change a prop or script logic. For layout alone, the [grid](/components/grids/) and [display classes](/styles/display/) use the same breakpoints without any script.
 
 ```html { resource="Composition.vue" }
 <script setup>
@@ -42,7 +38,7 @@ The following shows how to access the application's display information:
 </script>
 ```
 
-If you are still using the Options API, you can access the display information on the global **$vuetify** variable. Note that refs are unwrapped here, so you don't need `.value`.
+With the Options API, the same values are on `this.$vuetify.display`, without `.value`.
 
 ```html { resource="Options.vue" }
 <script>
@@ -62,30 +58,15 @@ If you are still using the Options API, you can access the display information o
 
 ## Breakpoints and Thresholds
 
-Threshold values generate the ranges used for various breakpoints seen throughout vuetify and the `useDisplay` composable. The system uses an "and up" mentality starting from `xs` at 0px. The default threshold values are displayed below.
+Each threshold is the width where its breakpoint starts. The defaults are:
 
 <FeaturesBreakpointsTable />
 
-These ranges power the various additional `AndUp` / `AndDown` properties accessible in `useDisplay`
-
-```ts
-{
-  smAndDown: boolean // < 960px
-  smAndUp: boolean // > 600px
-  mdAndDown: boolean // < 1280px
-  mdAndUp: boolean // > 960px
-  lgAndDown: boolean // < 1919px
-  lgAndUp: boolean // > 1280px
-  xlAndDown: boolean // < 2559px
-  xlAndUp: boolean // > 1920px
-}
-```
+`AndUp` and `AndDown` properties, such as **mdAndUp**, combine neighbouring breakpoints. See the [interface](#interface) for their ranges.
 
 ## Options
 
-The **useDisplay** composable has several configuration options, such as the ability to define custom values for breakpoints.
-
-For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg* and sets **mobileBreakpoint** to `sm`.
+Change the breakpoints with the **display** option of `createVuetify`. **mobileBreakpoint** takes a breakpoint name or a width in pixels.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify} from 'vuetify'
@@ -104,13 +85,9 @@ export default createVuetify({
 })
 ```
 
-::: info
-  The **mobileBreakpoint** option accepts numbers and breakpoint keys.
-:::
-
 ## Examples
 
-In the following example, we use a switch statement and the current breakpoint name to modify the **height** property of the [v-card](/components/cards/) component:
+**name** holds the current breakpoint, which helps when every breakpoint needs its own value:
 
 ```html { resource="Component.vue" }
 <template>
@@ -126,8 +103,6 @@ In the following example, we use a switch statement and the current breakpoint n
   const { name } = useDisplay()
 
   const height = computed(() => {
-    // name is reactive and
-    // must use .value
     switch (name.value) {
       case 'xs': return 220
       case 'sm': return 400
@@ -204,7 +179,7 @@ In the following example, we use a switch statement and the current breakpoint n
 
 ## Using Setup
 
-Use the **useDisplay** composable alongside Vue 3's `setup` function to harness the power of the [Composition API](https://v3.vuejs.org/guide/composition-api-setup.html). In this example we show how to toggle the **fullscreen** property of `v-dialog` when the mobile breakpoint is active.
+**mobile** is `true` below the mobile breakpoint, which is `lg` (1145px) by default. Here it makes a dialog fullscreen on small screens:
 
 ```html { resource="Component.vue" }
 <template>
@@ -222,7 +197,7 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 
 ### Breakpoint conditionals
 
-Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xs**, **smAndUp**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the *xs* and *mdAndUp* values to our template:
+The breakpoint properties are booleans named after the [grid](/components/grids/) breakpoints. This sheet is taller from **md** up and rounded only on **xs**:
 
 ```html { resource="Component.vue" }
 <template>
@@ -237,60 +212,33 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 <script setup>
   import { useDisplay } from 'vuetify'
 
-  // Destructure only the keys you want to use
   const { xs, mdAndUp } = useDisplay()
 </script>
 ```
 
-Using the *dynamic* display values, we are able to adjust the minimum height of [v-sheet](/components/sheets/) to `300` when on the *medium* breakpoint or greater and only show rounded corners on *extra small* screens:
-
 ## Component Mobile Breakpoints
 
-Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file.
+Components with a mobile layout follow the global **mobile** value. Set **mobile-breakpoint** on one of them to switch it at a different width, or **mobile** to force the layout. These components support it:
 
-The following components have built in support for the **mobile-breakpoint** property:
-
-| Component |
-| - |
-| [v-banner](/components/banners/) |
-| [v-navigation-drawer](/components/navigation-drawers/) |
-| [v-slide-group](/components/slide-groups/) |
-
-By default, **mobileBreakpoint** is set to **lg**, which means that if the window is less than *1280* pixels in width (which is the default value for the **lg** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
-
-For example, the [v-banner](/components/banners/) component implements different styling when its mobile versus desktop. In the following example, The first banner uses the global **mobile-breakpoint** value of **lg** while the second overrides this default with **580**:
+- [v-banner](/components/banners/)
+- [v-data-table](/components/data-tables/basics/)
+- [v-date-input](/components/date-inputs/)
+- [v-navigation-drawer](/components/navigation-drawers/)
+- [v-slide-group](/components/slide-groups/) and [v-tabs](/components/tabs/)
+- [v-stepper](/components/steppers/)
+- [v-time-input](/components/time-inputs/)
 
 ```html { resource="Component.vue" }
 <template>
-  <div>
-    <v-banner>
-      ...
-    </v-banner>
-
-    <v-banner mobile-breakpoint="580">
-      ...
-    </v-banner>
-  </div>
+  <v-banner mobile-breakpoint="580">
+    ...
+  </v-banner>
 </template>
-
-<script setup>
-  import { onMounted } from 'vue'
-  import { useDisplay } from 'vuetify'
-
-  const { width, mobile } = useDisplay()
-
-  onMounted(() => {
-    console.log(width.value) // 960
-    console.log(mobile.value) // true
-  })
-</script>
 ```
-
-If the screen width is 1024 pixels, the second banner would not convert into its mobile state.
 
 ### useDisplay overrides
 
-Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/use-display/) composable and override the global value. In the following example we use a custom mobileBreakpoint value of **580**:
+Pass **mobileBreakpoint** to `useDisplay` to compute **mobile** against a different width:
 
 ```html { resource="Component.vue" }
 <script setup>
@@ -306,44 +254,19 @@ Specify a custom **mobileBreakpoint** value directly to the [useDisplay](/api/us
 </script>
 ```
 
-If you supply a value for the **name** argument, utilize the **displayClasses** property to apply the appropriate classes to your component. In the next example, the following classes would be applied to the root element of the component:
-
-```html { resource="Component.vue" }
-<template>
-  <div
-    :class="[
-      'v-component',
-      displayClasses,
-    ]"
-  >
-    <!-- v-component--mobile -->
-  </div>
-</template>
-
-<script setup>
-  import { defineName } from 'vue'
-  import { useDisplay } from 'vuetify'
-
-  const { displayClasses } = useDisplay({ mobileBreakpoint }, 'v-component')
-</script>
-```
-
-If you leave out the name argument, displayClasses will use the default name set by Vue. The following example uses the default name of the local component:
+`displayClasses` holds a `<name>--mobile` class while **mobile** is `true`. The name is the second argument, and defaults to the component's name:
 
 ```html { resource="AppDrawer.vue" }
 <template>
-  <v-navigation-drawer
-    :class="[
-      displayClasses, // 'app-drawer--mobile'
-    ]"
-  >
-    ...
+  <v-navigation-drawer :class="displayClasses">
+    <!-- app-drawer--mobile -->
   </v-navigation-drawer>
 </template>
 
 <script setup>
   import { useDisplay } from 'vuetify'
 
-  const { displayClasses } = useDisplay({ mobileBreakpoint })
+  const { displayClasses } = useDisplay({ mobileBreakpoint: 'md' })
+  // const { displayClasses } = useDisplay({ }, 'app-drawer') // optional explicit name
 </script>
 ```

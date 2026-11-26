@@ -27,6 +27,7 @@ export type VFileUploadSlots = Omit<VInputSlots, 'default'> & {
     props: { 'onClick:remove': () => void }
   }
   title: never
+  subtitle: never
   divider: never
   loader: LoaderSlotProps
 }

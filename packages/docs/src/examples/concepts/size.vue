@@ -78,7 +78,6 @@
 
         <v-rating
           :size="size"
-          label="Customer Satisfaction"
           length="3"
         ></v-rating>
 
@@ -86,7 +85,6 @@
 
         <v-rating
           :size="size"
-          label="Ease of Use"
           length="4"
         ></v-rating>
 
@@ -94,7 +92,6 @@
 
         <v-rating
           :size="size"
-          label="Quality"
         ></v-rating>
       </v-col>
 

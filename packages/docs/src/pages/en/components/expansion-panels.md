@@ -36,7 +36,7 @@ Expansion panels in their simplest form display a list of expandable items. You 
 | [v-expansion-panels](/api/v-expansion-panels/) | Primary component |
 | [v-expansion-panel](/api/v-expansion-panel/) | Sub-component that wraps `v-expansion-panel-text` and `v-expansion-panel-title` |
 | [v-expansion-panel-title](/api/v-expansion-panel-title/) | Sub-component used to display the Expansion Panel's title. Wraps the `#title` slot |
-| [v-expansion-panel-text](/api/v-expansion-panel-text/) | Sub-component used to display the Expanion Panel's text. Wraps the `#text` slot |
+| [v-expansion-panel-text](/api/v-expansion-panel-text/) | Sub-component used to display the Expansion Panel's text. Wraps the `#text` slot |
 
 <ApiInline hide-links />
 
@@ -46,7 +46,7 @@ Expansion panels in their simplest form display a list of expandable items. You 
 
 #### Variant
 
-There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while poput expansion-panels become larger.
+There are four different variants of the expansion-panel. Accordion expansion-panels have no margins around the currently active panel. Inset expansion-panels become smaller when activated, while popout expansion-panels become larger.
 
 <ExamplesExample file="v-expansion-panels/prop-variant" />
 

@@ -180,7 +180,7 @@ export default {
     backspace: '退格',
     space: '空格',
     plus: '加',
-    shortcut: '鍵盤快捷鍵：{0}',
+    shortcut: '鍵盤快捷鍵，{0}',
     or: '或',
   },
   media: {

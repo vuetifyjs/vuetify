@@ -20,6 +20,7 @@ export interface VBadgeProps {
   floating?: boolean
   height?: string | number
   icon?: IconValue
+  iconSize?: string | number
   inline?: boolean
   label?: string
   location?: Anchor | null
@@ -45,6 +46,7 @@ type VBadgeDefaultKeys =
   | 'bordered'
   | 'dot'
   | 'floating'
+  | 'iconSize'
   | 'inline'
   | 'label'
   | 'location'

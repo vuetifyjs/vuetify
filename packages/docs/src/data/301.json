@@ -116,7 +116,7 @@
   "about/sponsors-and-backers": "/introduction/sponsors-and-backers",
   "components/simple-tables": "/components/tables",
   "components/data-tables": "/components/data-tables/basics",
-  "components/date-pickers-month": "/introduction/roadmap",
+  "components/date-pickers-month": "/components/month-pickers",
   "components/server-side-data-tables": "/components/data-tables/server-side-tables",
   "components/virtual-data-tables": "/components/data-tables/virtual-tables",
   "api/v-click-outside": "/api/v-click-outside-directive",

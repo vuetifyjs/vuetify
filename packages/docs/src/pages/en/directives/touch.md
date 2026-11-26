@@ -28,7 +28,7 @@ On a mobile device, try swiping in various directions.
 
 ::: tip
 
-`v-touch` attaches **passive** listeners and never calls `preventDefault`, so it cannot stop the browser from scrolling during a swipe. Set the CSS [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/touch-action) property on the element to reserve the gesture—`touch-action: none` for vertical (up/down) swipes, or `touch-action: pan-y` to keep vertical page scrolling while capturing horizontal (left/right) swipes.
+`v-touch` attaches **passive** listeners and never calls `preventDefault`, so it cannot stop the browser from scrolling during a swipe. Set the CSS [touch-action](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/touch-action) property on the element to reserve the gesture—`touch-action: none` for vertical (up/down) swipes, or `touch-action: pan-y` to keep vertical page scrolling while capturing horizontal (left/right) swipes.
 
 Alternatively, pass `options: { passive: false }` **and** call `originalEvent.preventDefault()` inside your `start` or `move` handler. `touch-action` is preferred, since non-passive listeners come at a scrolling performance cost.
 

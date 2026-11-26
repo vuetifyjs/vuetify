@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { ref, shallowRef, toRef, watch } from 'vue'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
 import { consoleError, createV0Locale, isString } from '@/util'
 
 // Locales
@@ -41,15 +41,23 @@ const createTranslateFunction = (
   fallback: Ref<string>,
   messages: Ref<LocaleMessages>,
 ) => {
-  const bundle = shallowRef(createBundle(current.value, fallback.value, messages.value))
-
-  watch(current, value => selectLocale(bundle.value, value), { flush: 'sync' })
-
-  // Fallback is fixed inside createLocale, and the catalogs are copied in at
-  // construction. Rebuild when either changes so t() keeps reading them.
-  watch([fallback, messages], () => {
-    bundle.value = createBundle(current.value, fallback.value, messages.value)
-  }, { deep: true, flush: 'sync' })
+  // keep computed instead of watch to avoid server-side memory leak
+  // since createBundle writes reactive state it reads, we caching + hacks for computed to act like watch
+  let lastEditCount = 0
+  const snapshot = computed(() => ({
+    key: ++lastEditCount,
+    current: current.value,
+    fallback: fallback.value,
+    messages: JSON.parse(JSON.stringify(messages.value)) as LocaleMessages, // hack for deep tracking
+  }))
+  let cache: { key: number, bundle: Bundle } | undefined
+  const bundle = computed(() => {
+    const { key, current, fallback, messages } = snapshot.value
+    if (cache?.key !== key) {
+      cache = { key, bundle: createBundle(current, fallback, messages) }
+    }
+    return cache.bundle
+  })
 
   return (key: string, ...params: unknown[]) => {
     if (!key.startsWith(LANG_PREFIX)) {

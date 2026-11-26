@@ -24,7 +24,7 @@ export interface VAudioWaveformProps {
   elevation?: string | number
   height?: string | number
   hoverElevation?: string | number
-  live?: boolean
+  live?: boolean | 'spectrum'
   max?: number
   mirror?: string | number | boolean
   modelValue?: number
@@ -53,7 +53,6 @@ type VAudioWaveformDefaultKeys =
   | 'disabled'
   | 'elevation'
   | 'height'
-  | 'live'
   | 'max'
   | 'modelValue'
   | 'normalize'

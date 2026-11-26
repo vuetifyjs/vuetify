@@ -50,36 +50,6 @@ The third one is to supply a CSS selector string to **activator** prop. This all
 
 ### Props
 
-<!-- #### Absolute
-
-Menus can also be placed absolutely on top of the activator element using the **absolute** prop. Try clicking anywhere on the image.
-
-<ExamplesExample file="v-menu/prop-absolute" />
-
-#### Absolute without activator
-
-Menus can also be used without an activator by using **absolute** together with the props **position-x** and **position-y**. Try right-clicking anywhere on the image.
-
-<ExamplesExample file="v-menu/prop-absolute-without-activator" /> -->
-
-<!-- #### Close on click
-
-Menu can be closed when lost focus.
-
-<ExamplesExample file="v-menu/prop-close-on-click" />
-
-#### Close on content click
-
-You can configure whether `v-menu` should be closed when its content is clicked.
-
-<ExamplesExample file="v-menu/prop-close-on-content-click" /> -->
-
-<!-- #### Disabled
-
-You can disable the menu. Disabled menus can't be opened.
-
-<ExamplesExample file="v-menu/prop-disabled" /> -->
-
 #### Location
 
 Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location-strategies).
@@ -126,7 +96,7 @@ Vuetify comes with [several standard transitions](/styles/transitions#api) that 
 
 #### Popover menu
 
-A menu can be configured to be static when opened, allowing it to function as a popover. This can be useful when there are multiple interactive items within the menu contents.
+Set **close-on-content-click** to `false` to keep the menu open while users interact with its content, such as a popover with several controls.
 
 <ExamplesExample file="v-menu/misc-popover" />
 
@@ -135,6 +105,14 @@ A menu can be configured to be static when opened, allowing it to function as a 
 A single `v-menu` can be reused across multiple activators to create a gliding navigation bar. As the user hovers between buttons, the menu smoothly transitions to the new activator using a CSS transition on its position.
 
 <ExamplesExample file="v-menu/misc-gliding-nav" />
+
+#### Context menus
+
+Right-click menus can have submenus.
+
+To share one menu between many elements, handle `@contextmenu` yourself and pass the cursor position to **target**. iOS does not fire `contextmenu`, so this path has no long-press support there.
+
+<ExamplesExample file="v-menu/misc-context-menu" />
 
 #### Shared menu
 
@@ -151,8 +129,8 @@ This is an example of image picker attached to a `v-text-field`.
 
 <ExamplesExample file="v-menu/misc-use-in-text-field" />
 
-#### File context menu
+#### File actions
 
-You are not limited to a single card. Here is a context menu separating common actions into separate section.
+Menu content is not limited to a single list. This example puts quick actions in an icon row above the full list of actions.
 
 <ExamplesExample file="v-menu/misc-file-context" />

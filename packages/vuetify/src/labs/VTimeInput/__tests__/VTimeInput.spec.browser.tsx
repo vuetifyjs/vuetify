@@ -47,6 +47,23 @@ describe('VTimeInput', () => {
     await expect.poll(() => model.value).toBe('14:45')
   })
 
+  it('should switch the period when typed over a selection', async () => {
+    const model = ref<string | null>('14:30')
+    render(() => <VTimeInput v-model={ model.value } format="ampm" />)
+
+    await userEvent.click(getInput())
+    getInput().setSelectionRange(6, 8)
+    await userEvent.keyboard('a')
+    expect(getInput().value).toBe('02:30 AM')
+
+    getInput().select()
+    await userEvent.keyboard('r')
+    expect(getInput().value).toBe('02:30 AM')
+
+    await userEvent.keyboard('{Enter}')
+    await expect.poll(() => model.value).toBe('02:30')
+  })
+
   it('should not commit a 12-hour time without its period', async () => {
     const model = ref<string | null>(null)
     render(() => <VTimeInput v-model={ model.value } format="ampm" />)

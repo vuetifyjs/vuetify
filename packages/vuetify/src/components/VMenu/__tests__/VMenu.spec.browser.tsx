@@ -2,8 +2,10 @@
 import { VMenu } from '../VMenu'
 import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
+import { VCard } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
+import { VOverlay } from '@/components/VOverlay'
 import { VSheet } from '@/components/VSheet'
 import { VTab, VTabs } from '@/components/VTabs'
 import { VTextarea } from '@/components/VTextarea'
@@ -877,6 +879,54 @@ describe('VMenu', () => {
       await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
     })
 
+    it('should close when clicking outside with a contained overlay open inside', async () => {
+      const overlay = ref(true)
+      render(() => (
+        <div>
+          <VBtn data-testid="opener">
+            Open
+            <VMenu activator="parent" closeOnContentClick={ false }>
+              <VCard title="Menu" width="200" height="200" data-testid="menu-content">
+                <VOverlay v-model={ overlay.value } contained>
+                  <div data-testid="overlay-content">Overlay</div>
+                </VOverlay>
+              </VCard>
+            </VMenu>
+          </VBtn>
+          <div data-testid="outside" style="position: fixed; bottom: 0; right: 0; width: 120px; height: 120px;">out</div>
+        </div>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('overlay-content')).toBeVisible()
+
+      await userEvent.click(screen.getByTestId('outside'))
+      await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
+    })
+
+    it('should close only the contained overlay when clicking its scrim', async () => {
+      const overlay = ref(true)
+      render(() => (
+        <VBtn data-testid="opener">
+          Open
+          <VMenu activator="parent" closeOnContentClick={ false }>
+            <VCard title="Menu" width="200" height="200" data-testid="menu-content">
+              <VOverlay v-model={ overlay.value } contained>
+                <div data-testid="overlay-content">Overlay</div>
+              </VOverlay>
+            </VCard>
+          </VMenu>
+        </VBtn>
+      ))
+
+      await userEvent.click(screen.getByTestId('opener'))
+      await expect.poll(() => screen.queryByTestId('overlay-content')).toBeVisible()
+
+      await userEvent.click(screen.getByCSS('.v-overlay--contained .v-overlay__scrim'))
+      await expect.poll(() => overlay.value).toBe(false)
+      expect(screen.getByTestId('menu-content')).toBeVisible()
+    })
+
     it('should keep the top menu open when clicking a sibling after opening a deep submenu', async () => {
       render(() => (
         <VBtn data-testid="opener">
@@ -1373,9 +1423,8 @@ describe('VMenu', () => {
       activator.value = screen.getByTestId('second')
       await wait(50) // for ~25% of 0.2s glide transition
       activator.value = screen.getByTestId('first')
-      await commands.waitStable('.v-overlay__content')
 
-      expect(screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
+      await expect.poll(() => screen.getByCSS('.glide').getBoundingClientRect().x).toBeCloseTo(settled, 0)
     })
   })
 
@@ -1484,5 +1533,36 @@ describe('VMenu', () => {
 
       await expect.poll(() => document.activeElement).toBe(screen.getByCSS('[data-testid="search"] input'))
     })
+  })
+
+  it('should keep max-height stable when content outgrows the viewport at a fractional devicePixelRatio', async () => {
+    const viewportMargin = 12
+    const viewportHeight = document.documentElement.clientHeight - viewportMargin * 2
+    const fractionalDevicePixels = Math.floor(viewportHeight * 1.5) + 0.25
+    vi.stubGlobal('devicePixelRatio', fractionalDevicePixels / viewportHeight)
+    try {
+      render(() => (
+        <VMenu modelValue location="bottom start" transition={ false }>
+          {{
+            activator: ({ props }: any) => <VBtn { ...props }>Open</VBtn>,
+            default: () => <div style="height: 150vh; width: 300px" />,
+          }}
+        </VMenu>
+      ))
+
+      const content = await screen.findByCSS('.v-overlay__content')
+      await wait(200)
+
+      const maxHeights = new Set<string>()
+      for (let pass = 0; pass < 4; pass++) {
+        window.dispatchEvent(new Event('resize'))
+        await nextTick()
+        maxHeights.add(content.style.maxHeight)
+      }
+
+      expect([...maxHeights]).toHaveLength(1)
+    } finally {
+      vi.unstubAllGlobals()
+    }
   })
 })

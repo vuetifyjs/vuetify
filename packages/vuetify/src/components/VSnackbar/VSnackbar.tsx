@@ -44,8 +44,7 @@ function useCountdown (milliseconds: () => number) {
 
   function reset () {
     clear()
-
-    nextTick(() => time.value = milliseconds())
+    time.value = milliseconds()
   }
 
   function start (el?: HTMLElement) {
@@ -211,6 +210,13 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
       if (!isHovering.value) startTimeout()
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        e.stopPropagation()
+        isActive.value = false
+      }
+    }
+
     function onTouchstart (event: TouchEvent) {
       startY.value = event.touches[0].clientY
     }
@@ -331,10 +337,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             onPointerleave,
             onFocusin,
             onFocusout,
+            onKeydown,
           }, overlayProps.contentProps)}
           persistent
           noClickAnimation
           scrim={ false }
+          _passive
           scrollStrategy="none"
           onTouchstartPassive={ onTouchstart }
           onTouchend={ onTouchend }

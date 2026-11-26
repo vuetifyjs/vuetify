@@ -22,7 +22,7 @@ The `v-parallax` component creates a 3d effect that makes an image appear to scr
 
 ## Usage
 
-A parallax causes a shift in a background image when the user scrolls the page.
+`v-parallax` renders a [v-img](/components/images/) and moves it as the page scrolls. **scale** sets how much slower the image moves than the page. The image stays still for users who prefer reduced motion.
 
 <ExamplesExample file="v-parallax/usage" />
 
@@ -42,7 +42,7 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 #### Content
 
-You can also place any content inside of the parallax. This allows you to use the parallax as a hero image.
+Content in the default slot scrolls with the page, on top of the image.
 
 <ExamplesExample file="v-parallax/misc-content" />
 
@@ -54,6 +54,6 @@ You can use it as a welcome section or as a portfolio hero section.
 
 #### Custom height
 
-You can specify a custom height on a parallax. Keep in mind this can break the parallax if your image is not sized properly
+**height** works the same as on `v-img`. The image is enlarged to cover the distance it moves, so use one large enough to keep it sharp.
 
 <ExamplesExample file="v-parallax/misc-custom-height" />

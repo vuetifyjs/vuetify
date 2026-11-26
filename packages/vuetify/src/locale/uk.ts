@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Пробіл',
     plus: 'плюс',
-    shortcut: 'Комбінація клавіш: {0}',
+    shortcut: 'Комбінація клавіш, {0}',
     or: 'або',
   },
   media: {

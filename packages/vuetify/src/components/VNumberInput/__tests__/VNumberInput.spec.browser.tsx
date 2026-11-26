@@ -25,6 +25,26 @@ describe('VNumberInput', () => {
   })
 
   it.each([
+    { grouping: undefined, typing: 'r' },
+    { grouping: undefined, typing: '-' },
+    { grouping: undefined, typing: '.' },
+    { grouping: 'auto' as const, typing: 'r' },
+    { grouping: 'auto' as const, typing: '-' },
+    { grouping: 'auto' as const, typing: '.' },
+  ])('keeps selected text when typing rejected "$typing" (grouping: $grouping)', async ({ grouping, typing }) => {
+    const model = ref(1234.56)
+    render(() => <VNumberInput v-model={ model.value } grouping={ grouping } precision={ 2 } />)
+    const input = screen.getByCSS('input') as HTMLInputElement
+    const text = grouping ? '1,234.56' : '1234.56'
+    await userEvent.click(input)
+    input.setSelectionRange(text.length - 2, text.length)
+    await userEvent.keyboard(typing)
+    expect(input.value).toBe(text)
+    expect([input.selectionStart, input.selectionEnd]).toEqual([text.length - 2, text.length])
+    expect(model.value).toBe(1234.56)
+  })
+
+  it.each([
     ['VNumberInput > VBtn defaults should style the controls', { VNumberInput: { VBtn: { variant: 'tonal' } } }, 'v-btn--variant-tonal'],
     ['unscoped VBtn defaults should not apply', { VBtn: { variant: 'tonal' } }, 'v-btn--variant-text'],
   ])('%s', async (_, defaults, expected) => {

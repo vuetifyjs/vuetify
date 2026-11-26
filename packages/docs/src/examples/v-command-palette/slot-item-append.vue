@@ -4,7 +4,6 @@
     <v-command-palette
       v-model="model"
       :items="items"
-      :search-props="{ autocomplete: 'off' }"
       hotkey="ctrl+slash"
       max-width="500"
       placeholder="Remind me..."

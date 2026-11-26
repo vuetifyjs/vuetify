@@ -23,34 +23,42 @@ const StackSymbol: InjectionKey<StackProvide> = Symbol.for('vuetify:stack')
 
 interface StackProvide {
   activeChildren: Set<number>
+  zIndex: number
 }
 
-const globalStack = reactive<[uid: number, zIndex: number][]>([])
+const globalStack = reactive<[uid: number, zIndex: number, passive: boolean][]>([])
 
 export function useStack (
   isActive: Readonly<Ref<boolean>>,
   zIndex: MaybeRefOrGetter<string | number>,
-  disableGlobalStack: boolean
+  disableGlobalStack: boolean,
+  passive = false,
+  contained = false,
 ) {
   const vm = getCurrentInstance('useStack')
   const createStackEntry = !disableGlobalStack
 
+  const _zIndex = shallowRef(Number(toValue(zIndex)))
+
   const parent = inject(StackSymbol, undefined)
   const stack: StackProvide = reactive({
     activeChildren: new Set<number>(),
+    zIndex: _zIndex,
   })
   provide(StackSymbol, stack)
 
-  const _zIndex = shallowRef(Number(toValue(zIndex)))
   useToggleScope(isActive, () => {
-    const lastZIndex = globalStack.at(-1)?.[1]
-    _zIndex.value = lastZIndex ? lastZIndex + 10 : Number(toValue(zIndex))
+    const last = passive ? globalStack.at(-1) : globalStack.findLast(v => !v[2])
+    const lastZIndex = Math.max(last?.[1] ?? -Infinity, parent?.zIndex ?? -Infinity)
+    _zIndex.value = Math.max(lastZIndex + 10, Number(toValue(zIndex)))
 
     if (createStackEntry) {
-      globalStack.push([vm.uid, _zIndex.value])
+      globalStack.push([vm.uid, _zIndex.value, passive])
     }
 
-    parent?.activeChildren.add(vm.uid)
+    if (!passive && !contained) {
+      parent?.activeChildren.add(vm.uid)
+    }
 
     onScopeDispose(() => {
       if (createStackEntry) {
@@ -65,7 +73,8 @@ export function useStack (
   const globalTop = shallowRef(true)
   if (createStackEntry) {
     watchEffect(() => {
-      const _isTop = globalStack.at(-1)?.[0] === vm.uid
+      const top = passive ? globalStack.at(-1) : globalStack.findLast(v => !v[2])
+      const _isTop = top?.[0] === vm.uid
       setTimeout(() => globalTop.value = _isTop)
     })
   }

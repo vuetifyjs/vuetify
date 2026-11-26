@@ -364,6 +364,8 @@ import type { VAudioControls as VAudioControlsSource } from '@/labs/VAudio/VAudi
 import type { VAudioControls as VAudioControlsTypes } from '@/labs/VAudio/VAudioControls.types'
 import type { VAudioWaveform as VAudioWaveformSource } from '@/labs/VAudio/VAudioWaveform'
 import type { VAudioWaveform as VAudioWaveformTypes } from '@/labs/VAudio/VAudioWaveform.types'
+import type { VCheckboxGroup as VCheckboxGroupSource } from '@/labs/VCheckboxGroup/VCheckboxGroup'
+import type { VCheckboxGroup as VCheckboxGroupTypes } from '@/labs/VCheckboxGroup/VCheckboxGroup.types'
 import type { VCommandPalette as VCommandPaletteSource } from '@/labs/VCommandPalette/VCommandPalette'
 import type { VCommandPalette as VCommandPaletteTypes } from '@/labs/VCommandPalette/VCommandPalette.types'
 import type { VCommandPaletteItem as VCommandPaletteItemSource } from '@/labs/VCommandPalette/VCommandPaletteItem'
@@ -382,6 +384,8 @@ import type { VInfiniteCarousel as VInfiniteCarouselSource } from '@/labs/VInfin
 import type { VInfiniteCarousel as VInfiniteCarouselTypes } from '@/labs/VInfiniteCarousel/VInfiniteCarousel.types'
 import type { VLoadingIndicator as VLoadingIndicatorSource } from '@/labs/VLoadingIndicator/VLoadingIndicator'
 import type { VLoadingIndicator as VLoadingIndicatorTypes } from '@/labs/VLoadingIndicator/VLoadingIndicator.types'
+import type { VMap as VMapSource } from '@/labs/VMap/VMap'
+import type { VMap as VMapTypes } from '@/labs/VMap/VMap.types'
 import type { VMaskInput as VMaskInputSource } from '@/labs/VMaskInput/VMaskInput'
 import type { VMaskInput as VMaskInputTypes } from '@/labs/VMaskInput/VMaskInput.types'
 import type { VMediaProgressBar as VMediaProgressBarSource } from '@/labs/VMediaProgressBar/VMediaProgressBar'
@@ -390,6 +394,8 @@ import type { VMediaVolume as VMediaVolumeSource } from '@/labs/VMediaVolume/VMe
 import type { VMediaVolume as VMediaVolumeTypes } from '@/labs/VMediaVolume/VMediaVolume.types'
 import type { VMonthPicker as VMonthPickerSource } from '@/labs/VMonthPicker/VMonthPicker'
 import type { VMonthPicker as VMonthPickerTypes } from '@/labs/VMonthPicker/VMonthPicker.types'
+import type { VNavigationBtn as VNavigationBtnSource } from '@/labs/VNavigationBtn/VNavigationBtn'
+import type { VNavigationBtn as VNavigationBtnTypes } from '@/labs/VNavigationBtn/VNavigationBtn.types'
 import type { VPie as VPieSource } from '@/labs/VPie/VPie'
 import type { VPie as VPieTypes } from '@/labs/VPie/VPie.types'
 import type { VPieSegment as VPieSegmentSource } from '@/labs/VPie/VPieSegment'
@@ -457,6 +463,7 @@ type Checks = {
   VCarouselItem: Check<typeof VCarouselItemSource, typeof VCarouselItemTypes>
   VCheckbox: Check<typeof VCheckboxSource, typeof VCheckboxTypes>
   VCheckboxBtn: Check<typeof VCheckboxBtnSource, typeof VCheckboxBtnTypes>
+  VCheckboxGroup: Check<typeof VCheckboxGroupSource, typeof VCheckboxGroupTypes>
   VChip: Check<typeof VChipSource, typeof VChipTypes>
   VChipGroup: Check<typeof VChipGroupSource, typeof VChipGroupTypes>
   VClassIcon: Check<typeof VClassIconSource, typeof VClassIconTypes>
@@ -546,12 +553,14 @@ type Checks = {
   VLoadingIndicator: Check<typeof VLoadingIndicatorSource, typeof VLoadingIndicatorTypes>
   VLocaleProvider: Check<typeof VLocaleProviderSource, typeof VLocaleProviderTypes>
   VMain: Check<typeof VMainSource, typeof VMainTypes>
+  VMap: Check<typeof VMapSource, typeof VMapTypes>
   VMaskInput: Check<typeof VMaskInputSource, typeof VMaskInputTypes>
   VMediaProgressBar: Check<typeof VMediaProgressBarSource, typeof VMediaProgressBarTypes>
   VMediaVolume: Check<typeof VMediaVolumeSource, typeof VMediaVolumeTypes>
   VMenu: Check<typeof VMenuSource, typeof VMenuTypes>
   VMessages: Check<typeof VMessagesSource, typeof VMessagesTypes>
   VMonthPicker: Check<typeof VMonthPickerSource, typeof VMonthPickerTypes>
+  VNavigationBtn: Check<typeof VNavigationBtnSource, typeof VNavigationBtnTypes>
   VNavigationDrawer: Check<typeof VNavigationDrawerSource, typeof VNavigationDrawerTypes>
   VNoSsr: Check<typeof VNoSsrSource, typeof VNoSsrTypes>
   VNumberInput: Check<typeof VNumberInputSource, typeof VNumberInputTypes>

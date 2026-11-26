@@ -180,7 +180,7 @@ export default {
     backspace: 'Backsteg',
     space: 'Mellanslag',
     plus: 'plus',
-    shortcut: 'Tangentbordsgenväg: {0}',
+    shortcut: 'Tangentbordsgenväg, {0}',
     or: 'eller',
   },
   media: {

@@ -6,8 +6,8 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { shallowRef } from 'vue'
-import { genericComponent, omit, propsFactory, useRender } from '@/util'
+import { nextTick, shallowRef } from 'vue'
+import { deepEqual, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
@@ -42,10 +42,12 @@ export const VCheckboxBtn = genericComponent<new <T>(
     const model = useProxiedModel(props, 'modelValue')
     const controlRef = shallowRef<VSelectionControl>()
 
-    function onChange (v: any) {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
+    function onChange (value: any) {
+      nextTick(() => {
+        if (indeterminate.value && deepEqual(model.value, value)) {
+          indeterminate.value = false
+        }
+      })
     }
 
     useRender(() => {

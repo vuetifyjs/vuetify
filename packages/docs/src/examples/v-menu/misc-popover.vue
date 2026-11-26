@@ -34,12 +34,16 @@
 
         <v-divider></v-divider>
 
-        <v-list>
+        <v-list density="compact">
           <v-list-item>
             <v-switch
               v-model="message"
+              class="pl-1"
               color="purple"
+              density="compact"
+              inset="material"
               label="Enable messages"
+              size="small"
               hide-details
             ></v-switch>
           </v-list-item>
@@ -47,8 +51,12 @@
           <v-list-item>
             <v-switch
               v-model="hints"
+              class="pl-1"
               color="purple"
+              density="compact"
+              inset="material"
               label="Enable hints"
+              size="small"
               hide-details
             ></v-switch>
           </v-list-item>
@@ -97,6 +105,6 @@
 </script>
 <example-meta lang="json">
   {
-    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1632-127381&t=tC3y53U3XKPv8ZyJ-4"
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=13876-78500"
   }
 </example-meta>

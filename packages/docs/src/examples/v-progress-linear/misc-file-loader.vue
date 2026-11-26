@@ -8,19 +8,6 @@
 
       <v-toolbar-title>My Files</v-toolbar-title>
 
-      <v-btn
-        color="white"
-        location="bottom left"
-        absolute
-        icon
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
-
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
@@ -50,3 +37,9 @@
     </v-container>
   </v-card>
 </template>
+
+<example-meta lang="json">
+{
+  "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14461-96452"
+}
+</example-meta>

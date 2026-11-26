@@ -2,7 +2,7 @@
   <v-container class="d-flex flex-wrap justify-center align-start ga-6" fluid>
 
     <div>
-      <v-sheet class="pa-3" rounded="xl" variant="outlined">
+      <v-sheet class="pa-3" rounded="xl" border>
         <v-pie :items="items" hover-scale=".2" size="150"></v-pie>
       </v-sheet>
       <ul class="mt-3 pl-6">
@@ -14,7 +14,7 @@
     <v-divider class="hidden-sm-and-down" vertical></v-divider>
 
     <div>
-      <v-sheet class="pa-3" rounded="xl" variant="outlined">
+      <v-sheet class="pa-3" rounded="xl" border>
         <v-pie :items="items" hover-scale=".1" size="200"></v-pie>
       </v-sheet>
       <ul class="mt-3 pl-6">
@@ -26,7 +26,7 @@
     <v-divider class="hidden-sm-and-down" vertical></v-divider>
 
     <div>
-      <v-sheet class="pa-3" rounded="xl" variant="outlined">
+      <v-sheet class="pa-3" rounded="xl" border>
         <v-pie :items="items" hover-scale="0" size="250"></v-pie>
       </v-sheet>
       <ul class="mt-3 pl-6">

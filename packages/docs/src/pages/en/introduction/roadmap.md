@@ -105,7 +105,7 @@ The following are the already released **minor** and **major** version updates. 
   - VDialog/VCommandPalette - `location` and `origin` to enforce specific viewport placement
   - VNumberInput - support for grouping (typically for thousands separators)
   - VDatePicker - improved range selection, keyboard navigation
-  - VDataTable - programatic control over groups state with `v-model:opened`
+  - VDataTable - programmatic control over groups state with `v-model:opened`
   - VSparkline - hover interactivity, markers and tooltips
   - VOtpInputs - grouping fields into segments, a11y and emojis
   - Introduced 7 new components to the main framework from Labs:
@@ -284,11 +284,11 @@ The following are the already released **minor** and **major** version updates. 
 - **Released:** October 2022
 - **Notes:** [v3.0 Release](/getting-started/release-notes/?version=v3.0.0)
 - **Overview:**
-  - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
+  - Rebuilt for Vue 3 using the new [composition api](https://vuejs.org/guide/extras/composition-api-faq)
   - Global properties that allow you to make large overarching changes to your app
   - Improved SASS variable customization and extensibility with [Built-In Modules](https://sass-lang.com/documentation/modules)
   - New [Vue CLI presets](https://github.com/vuetifyjs/vue-cli-plugins) for generating pre-built starting projects
-  - First party [Vite](https://vitejs.dev/) support for lightning fast development
+  - First party [Vite](https://vite.dev/) support for lightning fast development
   - Greatly improved TypeScript support
   - Better framework coverage with E2E testing using Cypress
 
@@ -361,11 +361,11 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Released:** January 2020
 - **Notes:** [v2.2 Release](/getting-started/release-notes/?version=v2.2.0)
 - **Overview:**
-  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
+  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://m2.material.io/design/material-studies/about-our-material-studies.html).
 - **Objectives:**
   - Add *thousands* of new SASS variables
   - Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
-  - Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
+  - Create presets for the official [Material Design Studies](https://m2.material.io/design/material-studies/about-our-material-studies.html)
   - Add new features and improve code styling of `v-badge`
   - Add new features and improve code styling of `v-expansion-panels`
   - new `v-theme-provider` component
@@ -442,7 +442,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Released:** October 2018
 - **Notes:** [v1.2 Release](/getting-started/release-notes/?version=v1.2.0)
 - **Overview:**
-  Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Als added numerous new locales.
+  Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Also added numerous new locales.
 
 ----
 

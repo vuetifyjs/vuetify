@@ -1,0 +1,18 @@
+{
+  "description": "A navigation destination with an icon, a label and an active indicator. Adapts to the navigation drawer rail and bottom navigation.",
+  "props": {
+    "active": "Controls the active state. Takes precedence over the router and the parent group.",
+    "activeIcon": "Icon shown instead of **icon** while the button is active.",
+    "baseColor": "Text, icon and indicator color while the button is not active. Also used while active when **color** is not set.",
+    "badge": "Badge on the icon. `true` renders a dot, any other value is the content. Accepts an object of [VBadge](/api/v-badge/) props.",
+    "color": "Text, icon and indicator color while the button is active.",
+    "icon": "Icon of the destination.",
+    "labels": "Label visibility while stacked. With `selected`, only the active button shows its label.",
+    "rounded": "Border radius of the active indicator and the hover/focus overlay.",
+    "stacked": "Places the label under the icon. Set by v-navigation-drawer while in rail mode and by v-bottom-navigation unless `mode=\"horizontal\"`."
+  },
+  "slots": {
+    "badge": "Custom badge content. Requires **badge** to be set.",
+    "icon": "Replaces the icon. Receives `isActive`."
+  }
+}

@@ -103,7 +103,7 @@ export class StringDateAdapter implements DateAdapter<string> {
   }
 
   getDiff (date: string, comparing: string, unit?: string): number {
-    return this.base.getDiff(this.base.date(date)!, comparing, unit)
+    return this.base.getDiff(this.base.date(date)!, this.base.date(comparing)!, unit)
   }
 
   getHours (date: string): number {

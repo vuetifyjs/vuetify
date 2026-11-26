@@ -14,6 +14,7 @@ import { useDate } from '@/composables/date'
 import { makeDateFormatProps, useDateFormat } from '@/composables/dateFormat'
 import { makeDisplayProps, useDisplay } from '@/composables/display'
 import { makeFocusProps } from '@/composables/focus'
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { closeWhenFocusLeaves, useOpenOnFocus } from '@/composables/openOnFocus'
@@ -65,6 +66,7 @@ export const makeVDateInputProps = propsFactory({
     hideHeader: true,
     showAdjacentMonths: true,
   }), [
+    'readonly',
     'location',
     'rounded',
     'height',
@@ -139,13 +141,14 @@ export const VDateInput = genericComponent<new <
     )
 
     const menu = useProxiedModel(props, 'menu')
+    const form = useForm(props)
     const isEditingInput = shallowRef(false)
     const isFocused = shallowRef(props.focused)
     const vTextFieldRef = ref<VTextField>()
     const vMenuRef = ref<VMenu>()
     const disabledActions = ref<typeof VConfirmEdit['props']['disabled']>(['save'])
 
-    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !props.disabled)
+    useOpenOnFocus(menu, isFocused, () => props.openOnFocus && !form.isDisabled.value)
 
     function format (date: unknown) {
       if (isFunction(props.displayFormat)) {
@@ -199,12 +202,12 @@ export const VDateInput = genericComponent<new <
       return 'none'
     })
 
-    const isInteractive = computed(() => !props.disabled && !props.readonly)
+    const isInteractive = computed(() => !form.isDisabled.value && !form.isReadonly.value)
 
     const isReadonly = computed(() => {
       if (!props.updateOn.length) return true
 
-      return !(mobile.value && isEditingInput.value) && props.readonly
+      return !(mobile.value && isEditingInput.value) && form.isReadonly.value
     })
 
     watch(menu, val => {
@@ -223,19 +226,19 @@ export const VDateInput = genericComponent<new <
         menu.value = true
       }
 
-      if (props.updateOn.includes('enter') && !props.readonly) {
+      if (props.updateOn.includes('enter') && !form.isReadonly.value) {
         onUserInput(e.target as HTMLInputElement)
       }
     }
 
     function onClick (e: MouseEvent) {
-      if (props.disabled) return
+      if (form.isDisabled.value) return
 
       e.preventDefault()
       e.stopPropagation()
 
       if (menu.value && mobile.value) {
-        isEditingInput.value = !props.readonly
+        isEditingInput.value = !form.isReadonly.value
       } else {
         menu.value = true
       }
@@ -263,7 +266,7 @@ export const VDateInput = genericComponent<new <
         return // first click on a day
       }
 
-      if (props.updateOn.includes('blur') && !props.readonly) {
+      if (props.updateOn.includes('blur') && !form.isReadonly.value) {
         onUserInput(e.target as HTMLInputElement)
       }
 
@@ -279,6 +282,8 @@ export const VDateInput = genericComponent<new <
     }
 
     function onUserInput ({ value }: HTMLInputElement) {
+      if (value === (display.value ?? '')) return
+
       if (!value.trim()) {
         model.value = emptyModelValue()
       } else if (!props.multiple) {
@@ -308,6 +313,8 @@ export const VDateInput = genericComponent<new <
       const confirmEditProps = VConfirmEdit.filterProps(props)
       const datePickerProps = {
         ...VDatePicker.filterProps(omit(props, [
+          'disabled',
+          'readonly',
           'active',
           'bgColor',
           'color',
@@ -317,6 +324,8 @@ export const VDateInput = genericComponent<new <
           'minWidth',
           'width',
         ])),
+        disabled: form.isDisabled.value,
+        readonly: form.isReadonly.value,
         ...props.pickerProps,
       }
       const datePickerSlots = pick(slots, ['title', 'header', 'day', 'month', 'year'])

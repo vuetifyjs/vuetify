@@ -14,7 +14,7 @@ function wheel (element: Element, options: WheelEventInit) {
 
 const stories = {
   'Without arrows': (
-    <VWindow>
+    <VWindow style="width: 300px">
       <VWindowItem>
         <div class="bg-grey d-flex justify-center align-center">
           <h1>1. foo</h1>
@@ -28,7 +28,7 @@ const stories = {
     </VWindow>
   ),
   'With arrows': (
-    <VWindow showArrows>
+    <VWindow showArrows style="width: 300px">
       <VWindowItem>
         <div class="bg-grey d-flex justify-center align-center">
           <h1>1. foo</h1>
@@ -42,7 +42,7 @@ const stories = {
     </VWindow>
   ),
   Vertical: (
-    <VWindow direction="vertical" verticalArrows="right" continuous showArrows>
+    <VWindow direction="vertical" verticalArrows="right" continuous showArrows style="width: 300px">
       <VWindowItem value="one">
         <div class="bg-grey d-flex justify-center align-center py-16">
           <h1>1. foo</h1>

@@ -33,11 +33,13 @@
       height: var(--v-media-progress-bar-height)
       width: 1px
 
-    &--live
-      mask-image: $audio-waveform-live-mask
-
+    &--live,
+    &--spectrum
       .v-audio-waveform__progress
         clip-path: none
+
+    &--live
+      mask-image: $audio-waveform-live-mask
 
       .v-audio-waveform__bars
         transform: translateX(calc(var(--v-audio-waveform-shift, 0) * var(--v-audio-waveform-step) * -1px))

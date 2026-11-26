@@ -1,4 +1,5 @@
 {
+  "description": "Displays values as a grid of colored cells, e.g. activity over days and weeks.",
   "props": {
     "cellSize": "Sets size of each cell. A single value sets both width and height. Accepts `[width, height]` tuple.",
     "columns": "Explicit list of column keys. When omitted, columns are derived from the items.",
@@ -22,6 +23,7 @@
   },
   "slots": {
     "cell": "Slot used to render custom content inside each cell.",
+    "column-header": "Slot used to customize the column labels shown above the grid. Receives `{ column, index, items }`.",
     "group-header": "Slot used to customize the group label shown above each column group.",
     "legend": "Slot used to fully override the legend.",
     "row-header": "Slot used to customize the row label shown on the left."

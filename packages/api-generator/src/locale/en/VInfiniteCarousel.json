@@ -1,4 +1,5 @@
 {
+  "description": "Continuously scrolls a row or column of content in a seamless loop.",
   "props": {
     "direction": "Switch between horizontal and vertical modes.",
     "paused": "Stops the content from scrolling on its own.",

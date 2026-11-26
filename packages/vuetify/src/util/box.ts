@@ -37,14 +37,16 @@ export class Box {
 }
 
 export function getOverflow (a: Box, b: Box) {
+  const subpixel = 1 / devicePixelRatio
+  const overflow = (value: number) => value > subpixel ? value : 0
   return {
     x: {
-      before: Math.max(0, b.left - a.left),
-      after: Math.max(0, a.right - b.right),
+      before: overflow(b.left - a.left),
+      after: overflow(a.right - b.right),
     },
     y: {
-      before: Math.max(0, b.top - a.top),
-      after: Math.max(0, a.bottom - b.bottom),
+      before: overflow(b.top - a.top),
+      after: overflow(a.bottom - b.bottom),
     },
   }
 }

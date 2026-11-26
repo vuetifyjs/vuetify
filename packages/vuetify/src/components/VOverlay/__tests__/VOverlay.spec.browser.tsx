@@ -6,8 +6,8 @@ import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 
 // Utilities
-import { commands, isClickable, render, screen, userEvent } from '@test'
-import { ref } from 'vue'
+import { commands, isClickable, render, screen, userEvent, wait } from '@test'
+import { defineComponent, ref, Suspense } from 'vue'
 
 describe('VOverlay', () => {
   describe('CSS zoom', () => {
@@ -198,5 +198,98 @@ describe('VOverlay', () => {
 
     await expect.poll(() => screen.queryAllByTestId('first-content')).toHaveLength(0)
     await expect(isClickable(screen.getByTestId('first-activator'))).resolves.toBe(true)
+  })
+
+  it('should respect zIndex of nested overlays above the stack', async () => {
+    render(() => (
+      <VOverlay modelValue zIndex={ 900 } data-testid="first">
+        <VOverlay modelValue data-testid="second">
+          <VOverlay modelValue zIndex={ 100 } data-testid="third">
+            <div data-testid="content">Content</div>
+          </VOverlay>
+        </VOverlay>
+      </VOverlay>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('content')).toHaveLength(1)
+
+    expect(screen.getByTestId('first').style.zIndex).toBe('900')
+    expect(screen.getByTestId('second').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('third').style.zIndex).toBe('2010')
+  })
+
+  it('should not raise zIndex above passive overlays', async () => {
+    const menu = ref(false)
+    render(() => (
+      <>
+        <VOverlay modelValue _passive data-testid="snackbar" />
+        <VOverlay v-model={ menu.value } zIndex={ 900 } data-testid="menu" />
+      </>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('snackbar')).toHaveLength(1)
+    menu.value = true
+    await expect.poll(() => screen.queryAllByTestId('menu')).toHaveLength(1)
+
+    expect(screen.getByTestId('snackbar').style.zIndex).toBe('2000')
+    expect(screen.getByTestId('menu').style.zIndex).toBe('900')
+  })
+
+  it('should stack overlays above their passive parent', async () => {
+    const dialog = ref(true)
+    const tooltip = ref(false)
+    render(() => (
+      <>
+        <VOverlay v-model={ dialog.value } zIndex={ 2400 } data-testid="dialog" />
+        <VOverlay modelValue _passive data-testid="snackbar">
+          <VOverlay v-model={ tooltip.value } data-testid="tooltip" />
+        </VOverlay>
+      </>
+    ))
+
+    await expect.poll(() => screen.queryAllByTestId('snackbar')).toHaveLength(1)
+    dialog.value = false
+    tooltip.value = true
+    await expect.poll(() => screen.queryAllByTestId('tooltip')).toHaveLength(1)
+
+    expect(screen.getByTestId('snackbar').style.zIndex).toBe('2410')
+    expect(screen.getByTestId('tooltip').style.zIndex).toBe('2420')
+  })
+
+  describe('scroll strategy', () => {
+    afterEach(() => {
+      document.documentElement.style.overflowY = ''
+    })
+
+    it('should block scroll once mounted inside a pending Suspense', async () => {
+      document.documentElement.style.overflowY = 'scroll'
+
+      let resolveChild!: () => void
+      const childReady = new Promise<void>(resolve => resolveChild = resolve)
+      const AsyncChild = defineComponent({
+        name: 'AsyncChild',
+        async setup () {
+          await childReady
+          return () => <div />
+        },
+      })
+
+      render(() => (
+        <Suspense>
+          <div>
+            <AsyncChild />
+            <VOverlay modelValue>
+              <div>Content</div>
+            </VOverlay>
+          </div>
+        </Suspense>
+      ))
+
+      await wait()
+      resolveChild()
+
+      await expect.poll(() => document.documentElement.classList.contains('v-overlay-scroll-blocked')).toBe(true)
+      expect(screen.getByCSS('.v-overlay')).toHaveClass('v-overlay--scroll-blocked')
+    })
   })
 })

@@ -104,7 +104,7 @@ export interface VColorInputProps {
   prefix?: string
   prependIcon?: IconValue
   prependInnerIcon?: IconValue
-  readonly?: boolean
+  readonly?: boolean | null
   reverse?: boolean
   role?: string
   rounded?: string | number | boolean

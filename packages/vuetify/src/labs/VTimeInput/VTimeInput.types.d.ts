@@ -19,7 +19,7 @@ export type VTimeInputSlots = Omit<VTextFieldSlots, 'default'> & {
   default: never
 }
 
-type OmittedPickerKeys = 'format' | 'location' | 'rounded' | 'height' | 'minHeight' | 'maxHeight' | 'period' | 'variant' | 'viewMode'
+type OmittedPickerKeys = 'format' | 'disabled' | 'readonly' | 'location' | 'rounded' | 'height' | 'minHeight' | 'maxHeight' | 'period' | 'variant' | 'viewMode'
 type PickerProps = Omit<VTimePickerProps, OmittedPickerKeys>
 type TextFieldProps = Omit<VTextFieldProps, keyof PickerProps>
 type ConfirmEditProps = Omit<VConfirmEditProps, keyof PickerProps | keyof TextFieldProps>

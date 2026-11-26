@@ -58,6 +58,7 @@ interface LayoutProvide {
       layoutSize: Ref<number | string>
       elementSize: Ref<number | string | undefined>
       active: Ref<boolean>
+      isMounted: Readonly<Ref<boolean>>
       disableTransitions?: Ref<boolean>
       absolute: Ref<boolean | undefined>
     }
@@ -135,12 +136,16 @@ export function useLayoutItem (options: {
   onDeactivated(() => isKeptAlive.value = true)
   onActivated(() => isKeptAlive.value = false)
 
+  const isMounted = shallowRef(false)
+  onMounted(() => isMounted.value = true)
+
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
   } = layout.register(vm, {
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
+    isMounted,
     id,
   })
 
@@ -205,8 +210,15 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     layoutRect.value = new Box({ x: left, y: top, width, height }) as DOMRectReadOnly
   })
 
+  function isHorizontal (position: Position) {
+    return position === 'left' || position === 'right'
+  }
+
+  // layoutRect follows content height, so only percentage sizes may depend on it
   function sizeOf (value: number | string | undefined, position: Position) {
-    const span = position === 'left' || position === 'right'
+    if (!isPercentage(value)) return resolveSize(value)
+
+    const span = isHorizontal(position)
       ? layoutRect.value?.width
       : layoutRect.value?.height
 
@@ -214,7 +226,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   }
 
   function percentOf (value: number | string | undefined) {
-    return !layoutRect.value && isPercentage(value) ? parseFloat(value) : 0
+    return isPercentage(value) && !layoutRect.value ? parseFloat(value) : 0
   }
 
   function toOffset (px: number, percent: number) {
@@ -223,7 +235,17 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const isResizing = shallowRef(false)
   let resizeTimeout = -1
-  watch(() => [layoutRect.value?.width, layoutRect.value?.height], () => {
+  const percentageAxes = computed(() => {
+    const sized = registered.value.filter(id => isPercentage(layoutSizes.get(id)?.value))
+    return {
+      x: sized.some(id => isHorizontal(positions.get(id)!.value)),
+      y: sized.some(id => !isHorizontal(positions.get(id)!.value)),
+    }
+  })
+  watch([
+    () => percentageAxes.value.x && layoutRect.value?.width,
+    () => percentageAxes.value.y && layoutRect.value?.height,
+  ], () => {
     isResizing.value = true
     window.clearTimeout(resizeTimeout)
     resizeTimeout = window.setTimeout(() => (isResizing.value = false), 100)
@@ -301,9 +323,9 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const rootVm = getCurrentInstance('createLayout')
 
-  const isMounted = shallowRef(false)
+  const isBooted = shallowRef(false)
   onMounted(() => {
-    isMounted.value = true
+    isBooted.value = true
   })
 
   provide(VuetifyLayoutKey, {
@@ -316,6 +338,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         layoutSize,
         elementSize,
         active,
+        isMounted,
         disableTransitions,
         absolute,
       }
@@ -323,8 +346,19 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       priorities.set(id, order)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
-      activeItems.set(id, active)
-      disableTransitions && disabledTransitions.set(id, disableTransitions)
+      // post-boot registrations may sit in an offscreen pending Suspense branch, so they only
+      // count once mounted; boot state is read once — hydrating items are on screen, not pending
+      const isEarly = !isBooted.value
+      activeItems.set(id, toRef(() => active.value && (isEarly || isMounted.value)))
+
+      const isRelocating = shallowRef(false)
+      watch(position, () => {
+        isRelocating.value = true
+        // two frames so the browser commits the new edge with transitions off
+        requestAnimationFrame(() => requestAnimationFrame(() => isRelocating.value = false))
+      })
+
+      disabledTransitions.set(id, toRef(() => isRelocating.value || !!disableTransitions?.value))
 
       const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
       const instanceIndex = instances.indexOf(vm)
@@ -333,7 +367,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       else registered.value.push(id)
 
       const index = computed(() => items.value.findIndex(i => i.id === id))
-      const zIndex = computed(() => rootZIndex.value + (isMounted.value ? layers.value.length * 2 : 0) - (index.value * 2))
+      const zIndex = computed(() => rootZIndex.value + (isBooted.value ? layers.value.length * 2 : 0) - (index.value * 2))
 
       const layoutItemStyles = computed<CSSProperties>(() => {
         const isHorizontal = position.value === 'left' || position.value === 'right'

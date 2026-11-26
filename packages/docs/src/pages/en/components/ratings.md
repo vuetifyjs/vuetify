@@ -84,7 +84,7 @@ You can use custom icons.
 
 #### Length
 
-Change the number of items by modifying the the **length** prop.
+Change the number of items by modifying the **length** prop.
 
 <ExamplesExample file="v-rating/prop-length" />
 
@@ -121,12 +121,6 @@ Any arbitrary content could be displayed for labels in **item-label** slot.
 <ExamplesExample file="v-rating/slot-item-label" />
 
 ### Misc
-
-<!-- #### Advanced usage
-
-The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
-
-<ExamplesExample file="v-rating/misc-advanced" /> -->
 
 #### Card ratings
 

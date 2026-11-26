@@ -3,7 +3,7 @@
     :headers="headers"
     :items="plants"
     density="compact"
-    item-key="name"
+    item-value="name"
   ></v-data-table>
 </template>
 

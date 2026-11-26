@@ -33,6 +33,7 @@ export interface VBottomSheetProps {
   minWidth?: string | number
   modelValue?: boolean
   noClickAnimation?: boolean
+  noFlip?: boolean
   offset?: string | number | number[]
   opacity?: string | number
   openDelay?: string | number
@@ -71,6 +72,7 @@ type VBottomSheetDefaultKeys =
   | 'locationStrategy'
   | 'modelValue'
   | 'noClickAnimation'
+  | 'noFlip'
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'

@@ -1,4 +1,5 @@
 {
+  "description": "Highlights the parts of a text that match a search query.",
   "props": {
     "query": "The search string or array of strings to highlight within the text.",
     "matches": "Pre-computed match ranges as `[start, end]` pairs. Takes priority over **query** when provided and non-empty.",

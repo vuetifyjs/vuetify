@@ -14,8 +14,10 @@ import {
   inject,
   mergeProps,
   nextTick,
+  onMounted,
   onScopeDispose,
   ref,
+  shallowRef,
   watch,
   watchEffect,
 } from 'vue'
@@ -347,7 +349,10 @@ export function useActivator (
   })
 
   const targetRef = templateRef()
+  const isMounted = shallowRef(false)
+  onMounted(() => isMounted.value = true)
   const target = computed(() => {
+    void isMounted.value
     if ((props.target === 'cursor' || (props.contextMenu && !props.target)) && cursorTarget.value) return cursorTarget.value
     if (targetRef.value) return targetRef.el
     return getTarget(props.target, vm) || activatorEl.value

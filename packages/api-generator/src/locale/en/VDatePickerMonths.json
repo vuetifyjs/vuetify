@@ -9,5 +9,8 @@
   },
   "slots": {
     "month": "Slot for the month."
+  },
+  "events": {
+    "escape": "Emitted when **Escape** is pressed within the months grid."
   }
 }

@@ -347,7 +347,7 @@ export const VSelect = genericComponent<VSelectGeneric>()({
 
     /** @param set - null means toggle */
     function select (item: ListItem, set: boolean | null = true, closeMenu = true) {
-      if (item.props.disabled) return
+      if (form.isDisabled.value || item.props.disabled) return
 
       const comparator = props.valueComparator || deepEqual
 

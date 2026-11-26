@@ -309,4 +309,39 @@ describe('VSlideGroup', () => {
     expect(fullyVisibleItems()).not.toContain(1)
     expect(fullyVisibleItems()).toContain(7)
   })
+
+  it.each([false, true])('should snap to the next item on mouse drag without clicking it (rtl: %s)', async rtl => {
+    const onClick = vi.fn()
+    renderGroup({ draggable: true, scrollSnap: 'start', onClick }, rtl)
+    await ready()
+
+    const { top, left, right } = container().getBoundingClientRect()
+    const [from, to] = rtl ? [left + 20, left + 50] : [right - 20, right - 50]
+    await commands.mouseDrag([from, top + 20], [(from + to) / 2, top + 20], [to, top + 20])
+
+    expect(Math.abs(await settled())).toBe(items()[0].offsetWidth)
+    expect(onClick).not.toHaveBeenCalled()
+  })
+
+  it.each(['start', 'end'] as const)('should stay at the edge after dragging past it (scroll-snap: %s)', async scrollSnap => {
+    renderGroup({ draggable: true, scrollSnap })
+    await ready()
+
+    const edge = scrollSnap === 'start' ? 0 : container().scrollWidth - CONTAINER_SIZE
+    container().scrollLeft = edge
+    await settled()
+
+    const { top, left, right } = container().getBoundingClientRect()
+    const [from, to] = scrollSnap === 'start' ? [left + 20, left + 80] : [right - 20, right - 80]
+    await commands.mouseDrag([from, top + 20], [(from + to) / 2, top + 20], [to, top + 20])
+
+    const positions = new Set<number>()
+    await expect.poll(() => {
+      positions.add(container().scrollLeft)
+      return container().style.scrollSnapType
+    }, { interval: 10 }).toBe('')
+    positions.add(await settled())
+
+    expect([...positions]).toEqual([edge])
+  })
 })

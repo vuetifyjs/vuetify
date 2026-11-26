@@ -1,4 +1,5 @@
 {
+  "description": "Subcomponent of `v-heatmap-legend` that renders a single threshold cell.",
   "props": {
     "bucketIndex": "Index of the threshold bucket whose color fills the cell.",
     "color": "Explicit fill color. Used when `bucketIndex` is not set.",

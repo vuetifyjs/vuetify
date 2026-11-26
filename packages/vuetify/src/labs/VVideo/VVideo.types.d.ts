@@ -35,6 +35,7 @@ export interface VVideoProps {
   chapters?: readonly VMediaProgressBarChapter[]
   class?: any
   color?: string
+  controlsHideDelay?: number
   controlsProps?: VVideoControls['$props']
   controlsTransition?: string | boolean | (TransitionProps & { component?: any }) | null
   controlsVariant?: 'default' | 'hidden' | 'tube' | 'mini'
@@ -88,6 +89,7 @@ export interface VVideoProps {
 type VVideoDefaultKeys =
   | 'autoplay'
   | 'chapters'
+  | 'controlsHideDelay'
   | 'controlsVariant'
   | 'density'
   | 'detached'

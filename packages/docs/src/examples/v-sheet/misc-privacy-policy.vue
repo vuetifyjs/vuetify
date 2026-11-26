@@ -39,6 +39,6 @@
 </template>
 <example-meta lang="json">
   {
-    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v3.0---Official-Vuetify-3-UI-Kit?node-id=1646-137533&t=tC3y53U3XKPv8ZyJ-4"
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=13963-45518"
   }
 </example-meta>

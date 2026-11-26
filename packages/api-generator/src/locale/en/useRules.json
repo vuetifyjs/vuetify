@@ -1,0 +1,17 @@
+{
+  "description": "Returns the validation rule builders registered with the rules plugin, or resolves rule aliases when called with a getter of a rules array. Each builder accepts an optional custom error message as its last argument.",
+  "exposed": {
+    "[string]": "Custom rule builder registered in the **aliases** option of the rules plugin.",
+    "capital": "Creates a rule that only allows uppercase Latin letters.",
+    "email": "Creates a rule that requires a valid email address. Empty values pass.",
+    "exclude": "Creates a rule that fails when the value contains any of the given characters.",
+    "integer": "Creates a rule that only allows digits.",
+    "maxLength": "Creates a rule that fails when the value is longer than the given length. Empty values pass.",
+    "minLength": "Creates a rule that fails when the value is shorter than the given length. Empty values pass.",
+    "notEmpty": "Creates a rule that requires a non-empty string or array.",
+    "number": "Creates a rule that requires a numeric value. Empty values pass.",
+    "pattern": "Creates a rule that requires the value to match the given regular expression. Empty values pass.",
+    "required": "Creates a rule that requires a value. `0` is treated as a valid value.",
+    "strictLength": "Creates a rule that requires the value to have exactly the given length. Empty values pass."
+  }
+}

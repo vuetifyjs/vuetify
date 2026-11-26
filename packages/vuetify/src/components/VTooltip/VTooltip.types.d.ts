@@ -32,6 +32,7 @@ export interface VTooltipProps {
   minWidth?: string | number
   modelValue?: boolean
   noClickAnimation?: boolean
+  noFlip?: boolean
   offset?: string | number | number[]
   opacity?: string | number
   openDelay?: string | number
@@ -66,6 +67,7 @@ type VTooltipDefaultKeys =
   | 'minWidth'
   | 'modelValue'
   | 'noClickAnimation'
+  | 'noFlip'
   | 'offset'
   | 'openOnClick'
   | 'openOnFocus'

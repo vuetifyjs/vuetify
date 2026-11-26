@@ -65,6 +65,7 @@ export function useExample () {
 - `useToggleScope(source, fn)` for effects that should only exist while something is active
 - Remove listeners and observers in `onScopeDispose`
 - Guard browser APIs with `IN_BROWSER` / `SUPPORTS_*` from `@/util/globals`
+- Keep `computed` / `toRef` getters side-effect-free: no v0 `create*` calls, no writes to reactive state. A getter that writes what it read marks itself dirty and re-runs on every access — correct output, silent CPU burn
 
 ## Public API
 

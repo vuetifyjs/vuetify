@@ -2,6 +2,7 @@
 import './VBadge.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VThemeProvider } from '@/components/VThemeProvider'
 
@@ -34,6 +35,10 @@ export const makeVBadgeProps = propsFactory({
   dotSize: [Number, String],
   floating: Boolean,
   icon: IconValue,
+  iconSize: {
+    type: [Number, String],
+    default: 'x-small',
+  },
   inline: Boolean,
   label: {
     type: String,
@@ -147,14 +152,16 @@ export const VBadge = genericComponent<VBadgeSlots>()({
                 role="status"
                 { ...badgeAttrs }
               >
-                <VThemeProvider theme={ props.theme }>
-                  {
-                    props.dot ? undefined
-                    : ctx.slots.badge ? ctx.slots.badge?.()
-                    : props.icon ? <VIcon icon={ props.icon } />
-                    : content
-                  }
-                </VThemeProvider>
+                <VDefaultsProvider defaults={{ VIcon: { size: props.iconSize } }}>
+                  <VThemeProvider theme={ props.theme }>
+                    {
+                      props.dot ? undefined
+                      : ctx.slots.badge ? ctx.slots.badge?.()
+                      : props.icon ? <VIcon icon={ props.icon } />
+                      : content
+                    }
+                  </VThemeProvider>
+                </VDefaultsProvider>
               </span>
             </MaybeTransition>
           </div>

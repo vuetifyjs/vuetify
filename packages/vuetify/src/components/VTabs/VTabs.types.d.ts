@@ -34,6 +34,7 @@ export interface VTabsProps {
   density?: Density
   direction?: 'horizontal' | 'vertical'
   disabled?: boolean
+  draggable?: boolean
   fixedTabs?: boolean
   gap?: string | number
   grow?: boolean
@@ -74,6 +75,7 @@ type VTabsDefaultKeys =
   | 'density'
   | 'direction'
   | 'disabled'
+  | 'draggable'
   | 'fixedTabs'
   | 'grow'
   | 'height'

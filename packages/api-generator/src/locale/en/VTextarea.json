@@ -14,6 +14,7 @@
     "placeholder": "Sets the input’s placeholder text."
   },
   "events": {
+    "click:control": "Emitted when the main control area is clicked.",
     "mousedown:control": "Event that is emitted when using mousedown on the main control area.",
     "update:rows": "Emitted when the number of rows changes."
   },

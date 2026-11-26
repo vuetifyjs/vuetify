@@ -20,7 +20,7 @@ export interface VBottomNavigationProps {
   hoverElevation?: string | number
   mandatory?: boolean | 'force'
   max?: number
-  mode?: string
+  mode?: 'horizontal' | 'shift'
   modelValue?: any
   multiple?: boolean
   name?: string

@@ -43,6 +43,7 @@ export interface VSnackbarProps {
   minHeight?: string | number
   minWidth?: string | number
   modelValue?: boolean
+  noFlip?: boolean
   opacity?: string | number
   openDelay?: string | number
   openOnClick?: boolean
@@ -84,6 +85,7 @@ type VSnackbarDefaultKeys =
   | 'location'
   | 'locationStrategy'
   | 'modelValue'
+  | 'noFlip'
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'

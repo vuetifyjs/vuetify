@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Khoảng trắng',
     plus: 'cộng',
-    shortcut: 'Phím tắt: {0}',
+    shortcut: 'Phím tắt, {0}',
     or: 'hoặc',
   },
   media: {

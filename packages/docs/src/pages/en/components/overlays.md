@@ -138,7 +138,7 @@ No scroll strategy is used.
 A **contained** overlay is positioned absolutely and contained inside its parent element.
 
 ::: info
-  Note: The parent element must have position: relative.
+  The parent element must have `position: relative`.
 :::
 
 <ExamplesExample file="v-overlay/prop-contained" />
@@ -147,12 +147,12 @@ A **contained** overlay is positioned absolutely and contained inside its parent
 
 #### Advanced
 
-Using the [v-hover](/components/hover), we are able to add a nice scrim over the information card with additional actions the user can take.
+Combined with [v-hover](/components/hover), a **contained** overlay reveals extra actions over a card.
 
 <ExamplesExample file="v-overlay/misc-advanced" />
 
 #### Loader
 
-Using the `v-overlay` as a background, add a progress component to easily create a custom loader.
+An overlay with a progress indicator blocks the page while something loads.
 
 <ExamplesExample file="v-overlay/misc-loader" />

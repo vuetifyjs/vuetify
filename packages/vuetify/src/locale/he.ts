@@ -14,8 +14,8 @@ export default {
   dataTable: {
     itemsPerPageText: 'שורות לעמוד:',
     ariaLabel: {
-      sortDescending: 'ממוין לפי סדר עולה. לחץ להספקת המיון.',
-      sortAscending: 'ממוין לפי סדר יורד. לחץ למיון לפי סדר עולה.',
+      sortDescending: 'ממוין בסדר יורד. לחץ להסרת המיון.',
+      sortAscending: 'ממוין בסדר עולה. לחץ למיון בסדר יורד.',
       sortNone: 'לא ממוין. לחץ למיון לפי סדר עולה.',
       activateNone: 'הפעל להסרת המיון.',
       activateDescending: 'הפעל למיון יורד.',
@@ -29,8 +29,8 @@ export default {
   dataFooter: {
     itemsPerPageText: 'פריטים לדף:',
     itemsPerPageAll: 'הכל',
-    nextPage: 'עמוד הבא',
-    prevPage: 'עמוד הקודם',
+    nextPage: 'העמוד הבא',
+    prevPage: 'העמוד הקודם',
     firstPage: 'עמוד ראשון',
     lastPage: 'עמוד אחרון',
     pageText: '{0}-{1} מתוך {2}',
@@ -76,8 +76,8 @@ export default {
   },
   noDataText: 'אין נתונים זמינים',
   carousel: {
-    prev: 'מצג קודם',
-    next: 'מצג הבא',
+    prev: 'השקופית הקודמת',
+    next: 'השקופית הבאה',
     ariaLabel: {
       delimiter: 'שקופית {0} מתוך {1}',
     },
@@ -117,12 +117,12 @@ export default {
   pagination: {
     ariaLabel: {
       root: 'ניווט עימוד',
-      next: 'עמוד הבא',
-      previous: 'עמוד הקודם',
-      page: '{0} לך לעמוד',
-      currentPage: '{0} עמוד נוכחי, עמוד',
-      first: 'First page',
-      last: 'Last page',
+      next: 'העמוד הבא',
+      previous: 'העמוד הקודם',
+      page: 'מעבר לעמוד {0}',
+      currentPage: 'עמוד {0}, עמוד נוכחי',
+      first: 'עמוד ראשון',
+      last: 'עמוד אחרון',
     },
   },
   stepper: {
@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'רווח',
     plus: 'פלוס',
-    shortcut: 'קיצור דרך במקלדת: {0}',
+    shortcut: 'קיצור דרך במקלדת, {0}',
     or: 'או',
   },
   media: {

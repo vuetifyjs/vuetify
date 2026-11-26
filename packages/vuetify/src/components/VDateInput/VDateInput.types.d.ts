@@ -124,7 +124,7 @@ export interface VDateInputProps {
   prependInnerIcon?: IconValue
   prevIcon?: IconValue
   previewValue?: unknown
-  readonly?: boolean
+  readonly?: boolean | null
   reverse?: boolean
   reverseTransition?: string
   role?: string

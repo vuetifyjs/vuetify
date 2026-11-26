@@ -104,7 +104,7 @@
     loading.value = true
     setTimeout(() => {
       if (v !== search.value) {
-        return // drop responce, avoid race condition
+        return // drop response, avoid race condition
       }
       items.value = states.filter(e => {
         return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
@@ -201,7 +201,7 @@
         // Simulated ajax query
         setTimeout(() => {
           if (v !== this.search) {
-            return // drop responce, avoid race condition
+            return // drop response, avoid race condition
           }
           this.items = this.states.filter(e => {
             return (e || '').toLowerCase().indexOf((v || '').toLowerCase()) > -1
@@ -212,3 +212,9 @@
     },
   }
 </script>
+
+<example-meta lang="json">
+{
+  "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=14083-171422"
+}
+</example-meta>

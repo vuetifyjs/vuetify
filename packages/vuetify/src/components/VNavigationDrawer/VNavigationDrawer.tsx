@@ -217,6 +217,9 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       VList: {
         bgColor: 'transparent',
       },
+      VNavigationBtn: {
+        stacked: toRef(() => !!props.rail && !isExpanded.value),
+      },
     })
 
     useRender(() => {

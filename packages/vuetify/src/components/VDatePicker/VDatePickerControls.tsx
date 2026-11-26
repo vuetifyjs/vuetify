@@ -185,7 +185,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.monthText }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectMonth') }
+          aria-label={ `${props.monthText}, ${t('$vuetify.datePicker.ariaLabel.selectMonth')}` }
           onClick={ onClickMonth }
         />
       )
@@ -199,7 +199,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.yearText }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
+          aria-label={ `${props.yearText}, ${t('$vuetify.datePicker.ariaLabel.selectYear')}` }
           onClick={ onClickYear }
         />
       )
@@ -213,7 +213,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
           text={ props.text }
           appendIcon={ props.modeIcon }
           rounded
-          aria-label={ t('$vuetify.datePicker.ariaLabel.selectYear') }
+          aria-label={ `${props.text}, ${t('$vuetify.datePicker.ariaLabel.selectYear')}` }
           onClick={ onClickYear }
         />
       )
@@ -227,7 +227,7 @@ export const VDatePickerControls = genericComponent<VDatePickerControlsSlots>()(
             disabled={ disableMonth.value }
             text={ props.text }
             rounded
-            aria-label={ t('$vuetify.datePicker.ariaLabel.selectMonth') }
+            aria-label={ `${props.text}, ${t('$vuetify.datePicker.ariaLabel.selectMonth')}` }
             onClick={ onClickMonth }
           />
           <VBtn

@@ -10,5 +10,8 @@
   },
   "slots": {
     "default": "Custom content for the tooltip. Receives `{ index: number, value: number }`."
+  },
+  "events": {
+    "afterLeave": "Emitted after the tooltip has finished hiding transition."
   }
 }

@@ -31,6 +31,7 @@ export interface VSlideGroupProps {
   contentClass?: any
   direction?: 'horizontal' | 'vertical'
   disabled?: boolean
+  draggable?: boolean
   gap?: string | number
   mandatory?: boolean | 'force'
   max?: number
@@ -55,6 +56,7 @@ type VSlideGroupDefaultKeys =
   | 'centerActive'
   | 'direction'
   | 'disabled'
+  | 'draggable'
   | 'mobile'
   | 'modelValue'
   | 'multiple'

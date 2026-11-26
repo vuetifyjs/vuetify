@@ -1,15 +1,17 @@
 {
+  "description": "Provides translation and number formatting functions for the current locale, along with the RTL state.",
   "exposed": {
     "current": "Current locale.",
+    "decimalSeparator": "The decimal separator character for the current locale (e.g. `.` for en, `,` for de).",
     "fallback": "Fallback locale.",
     "isRtl": "Indicates if RTL is currently active or not.",
     "messages": "Locale messages.",
     "n": "Function to localize numbers.",
     "name": "Name of the locale adapter used.",
+    "numericGroupSeparator": "The digit grouping separator for the current locale (e.g. `,` for en, `.` for de).",
     "provide": "**FOR INTERNAL USE ONLY**",
     "rtl": "**FOR INTERNAL USE ONLY**",
     "rtlClasses": "**FOR INTERNAL USE ONLY**",
-    "t": "Function to localize strings.",
-    "decimalSeparator": "The decimal separator character for the current locale (e.g. `.` for en, `,` for de)."
+    "t": "Function to localize strings."
   }
 }

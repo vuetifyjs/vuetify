@@ -180,7 +180,7 @@ export default {
     backspace: 'Hapus',
     space: 'Spasi',
     plus: 'plus',
-    shortcut: 'Pintasan keyboard: {0}',
+    shortcut: 'Pintasan keyboard, {0}',
     or: 'atau',
   },
   media: {

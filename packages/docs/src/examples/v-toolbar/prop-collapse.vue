@@ -20,7 +20,7 @@
         @click="collapse = !collapse"
       ></v-btn>
       <span class="mt-4">Collapse position:</span>
-      <v-chip-group v-model="collapsePosition" variant="outlined" border mandatory>
+      <v-chip-group v-model="collapsePosition" variant="outlined" mandatory>
         <v-chip
           class="px-6"
           prepend-icon="mdi-arrow-collapse-left"
@@ -57,3 +57,9 @@
     }),
   }
 </script>
+
+<example-meta lang="json">
+  {
+    "figma": "https://www.figma.com/design/5f4g4pbbBsk9TTWX4Xvlx1/PRO-v4---Official-Vuetify-4---UI-Kit---Snips?node-id=13970-47721"
+  }
+</example-meta>

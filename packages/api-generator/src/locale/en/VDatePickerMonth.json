@@ -20,10 +20,16 @@
     "previewValue": "Hovered date while picking the end of a range, used to preview the range."
   },
   "events": {
+    "boundary-navigate": "Emitted when keyboard navigation moves past the displayed month while **no-auto-navigation** is set. Receives `{ direction, targetIsoDate }`.",
     "update:month": "Emitted when the month changes.",
+    "update:previewValue": "Emitted when the hovered date changes while picking the end of a range.",
     "update:year": "Emitted when the year changes."
   },
   "slots": {
     "day": "Slot for a day in the month."
+  },
+  "exposed": {
+    "focusGrid": "Moves focus to the days grid.",
+    "focusItem": "Moves focus to the given date (ISO string)."
   }
 }

@@ -378,7 +378,7 @@ export interface DateAdapter<TDate> {
 
 ## Inheritance
 
-You can also extend and override build-in DateAdapter using class inheritance:
+You can also extend and override built-in DateAdapter using class inheritance:
 
 ```ts
 import { VuetifyDateAdapter } from 'vuetify/date/adapters/vuetify'

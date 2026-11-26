@@ -118,3 +118,9 @@ Navigation drawers can be customized to fit any application's design. Here we ap
 In this example we define two navigation-drawers, one using **rail** and one without.
 
 <ExamplesExample file="v-navigation-drawer/misc-combined" />
+
+#### Navigation rail
+
+A **rail** drawer with [v-navigation-btn](/components/navigation-buttons/) destinations works as a Material Design 3 navigation rail. It can expand into a drawer, or stay collapsed next to a second drawer with the section pages.
+
+<ExamplesExample file="v-navigation-drawer/misc-navigation-rail" />

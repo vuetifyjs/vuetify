@@ -20,6 +20,7 @@ export type VFileUploadDropzoneSlots = {
   }
   icon: never
   title: never
+  subtitle: never
   divider: never
   single: {
     file: File

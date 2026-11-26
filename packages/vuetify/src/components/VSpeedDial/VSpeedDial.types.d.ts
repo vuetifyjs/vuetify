@@ -33,6 +33,7 @@ export interface VSpeedDialProps {
   minWidth?: string | number
   modelValue?: boolean
   noClickAnimation?: boolean
+  noFlip?: boolean
   offset?: string | number | number[]
   opacity?: string | number
   openDelay?: string | number
@@ -73,6 +74,7 @@ type VSpeedDialDefaultKeys =
   | 'minWidth'
   | 'modelValue'
   | 'noClickAnimation'
+  | 'noFlip'
   | 'offset'
   | 'openDelay'
   | 'openOnArrow'

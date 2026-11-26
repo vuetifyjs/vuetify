@@ -1,0 +1,90 @@
+@use '../../styles/tools'
+@use './variables' as *
+
+@include tools.layer('components')
+  .v-map
+    height: $map-container-height
+    isolation: isolate
+    overflow: hidden
+    position: relative
+    width: 100%
+
+    &__svg
+      display: block
+      fill: var(--v-map-base-color, #{$map-base-color})
+      height: 100%
+      stroke: var(--v-map-base-stroke, #{$map-base-stroke})
+      stroke-width: var(--v-map-base-stroke-width, #{$map-base-stroke-width})
+      width: 100%
+
+    &--interactive
+      .v-map__svg
+        cursor: grab
+        touch-action: none
+        user-select: none
+
+    &--dragging
+      .v-map__svg, .v-map__region
+        cursor: grabbing
+
+    &__region
+      cursor: pointer
+
+      &:focus
+        outline: none
+
+    &:not(&--disabled)
+      .v-map__svg:focus-visible
+        outline: $map-container-outline-width solid currentColor
+        outline-offset: -$map-container-outline-offset
+
+    &__selected-fill
+      fill: var(--v-map-selected-color, #{$map-selected-color})
+
+    &__selected-stroke
+      stroke: var(--v-map-selected-color, #{$map-selected-color})
+
+    &__region-outline, &__region-focus, &__region-overlay
+      pointer-events: none
+
+    &__region-outline *
+      stroke: var(--v-map-selected-stroke, #{$map-selected-stroke})
+      stroke-width: var(--v-map-selected-stroke-width, var(--v-map-base-stroke-width, #{$map-selected-stroke-width}))
+
+    &__region-focus *
+      stroke: var(--v-map-focus-stroke, #{$map-focus-stroke})
+      stroke-width: var(--v-map-focus-stroke-width, var(--v-map-base-stroke-width, #{$map-focus-stroke-width}))
+      vector-effect: non-scaling-stroke
+
+    &__region-overlay
+      color: var(--v-map-hover-color, #{$map-hover-color})
+      opacity: var(--v-map-hover-opacity, #{$map-hover-opacity})
+
+    &--disabled
+      .v-map__region
+        cursor: default
+
+    &__status
+      align-items: center
+      display: flex
+      inset: 0
+      justify-content: center
+      position: absolute
+
+  @media (forced-colors: active)
+    .v-map
+      border: thin solid
+
+      &__region, &__region :is(path, rect, circle, ellipse, line, polygon, polyline, use)
+        fill: Canvas
+        stroke: CanvasText
+
+      &__region--selected, &__region--selected :is(path, rect, circle, ellipse, line, polygon, polyline, use)
+        fill: Highlight
+        stroke: HighlightText
+
+      &__region-outline *
+        stroke: HighlightText
+
+      &__region-focus *
+        stroke: Highlight

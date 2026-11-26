@@ -49,6 +49,32 @@ describe('locale.ts', () => {
     scope.stop()
   })
 
+  it('should not rebuild the locale bundle on every translation', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({ locale: 'en' }))!
+    const ownKeys = vi.spyOn(Reflect, 'ownKeys')
+
+    locale.t('$vuetify.close')
+    ownKeys.mockClear()
+    for (let i = 0; i < 10; i++) locale.t('$vuetify.close')
+    expect(ownKeys).not.toHaveBeenCalled()
+
+    ownKeys.mockRestore()
+    scope.stop()
+  })
+
+  it('should pick up nested message changes', () => {
+    const scope = effectScope()
+    const locale = scope.run(() => createLocale({ locale: 'fr', messages: { fr: { close: 'Fermer' } } }))!
+
+    expect(locale.t('$vuetify.close')).toBe('Fermer')
+
+    ;(locale.messages.value.fr as Record<string, string>).close = 'Clore'
+    expect(locale.t('$vuetify.close')).toBe('Clore')
+
+    scope.stop()
+  })
+
   it('should fall back to the fallback locale and keep the key when nothing matches', () => {
     const scope = effectScope()
     const locale = scope.run(() => createLocale({

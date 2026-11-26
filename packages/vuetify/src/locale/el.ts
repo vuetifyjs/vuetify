@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Διάστημα',
     plus: 'συν',
-    shortcut: 'Συντόμευση πληκτρολογίου: {0}',
+    shortcut: 'Συντόμευση πληκτρολογίου, {0}',
     or: 'ή',
   },
   media: {

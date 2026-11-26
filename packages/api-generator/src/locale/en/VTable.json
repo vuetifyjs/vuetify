@@ -10,7 +10,7 @@
   },
   "slots": {
     "bottom": "Slot to add content below the table.",
-    "caption": "First slot inside `<table>` element epected to hold `<caption>` element within.",
+    "caption": "First slot inside `<table>` element expected to hold `<caption>` element within.",
     "top": "Slot to add content above the table.",
     "wrapper": "Slots for custom rendering of the table wrapper."
   }

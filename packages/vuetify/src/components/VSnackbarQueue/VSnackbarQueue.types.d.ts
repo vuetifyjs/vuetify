@@ -85,6 +85,7 @@ export interface VSnackbarQueueProps {
   minHeight?: string | number
   minWidth?: string | number
   modelValue?: readonly SnackbarMessage[]
+  noFlip?: boolean
   opacity?: string | number
   openDelay?: string | number
   openOnClick?: boolean
@@ -129,6 +130,7 @@ type VSnackbarQueueDefaultKeys =
   | 'location'
   | 'locationStrategy'
   | 'modelValue'
+  | 'noFlip'
   | 'openOnClick'
   | 'openOnFocus'
   | 'openOnHover'

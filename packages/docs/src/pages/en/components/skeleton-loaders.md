@@ -116,7 +116,7 @@ The **types** property registers additional variants on top of the built-in ones
 
 <ExamplesExample file="v-skeleton-loader/prop-types" />
 
-Redefine built-in types to apply for quick customization. The **table** type is 6 × 6 by default and it is fairy staightforward to change it into 3 × 4.
+Redefine built-in types to apply for quick customization. The **table** type is 6 × 6 by default and it is fairly straightforward to change it into 3 × 4.
 
 <ExamplesExample file="v-skeleton-loader/prop-types-table" />
 

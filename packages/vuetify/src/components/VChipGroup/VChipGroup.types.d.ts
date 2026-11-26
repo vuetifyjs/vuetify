@@ -25,6 +25,7 @@ export interface VChipGroupProps {
   contentClass?: any
   direction?: 'horizontal' | 'vertical'
   disabled?: boolean
+  draggable?: boolean
   filter?: boolean
   gap?: string | number
   mandatory?: boolean | 'force'
@@ -54,6 +55,7 @@ type VChipGroupDefaultKeys =
   | 'column'
   | 'direction'
   | 'disabled'
+  | 'draggable'
   | 'filter'
   | 'mobile'
   | 'modelValue'

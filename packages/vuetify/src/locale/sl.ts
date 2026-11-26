@@ -180,7 +180,7 @@ export default {
     backspace: 'Backspace',
     space: 'Presledek',
     plus: 'plus',
-    shortcut: 'Tipkovnična bližnjica: {0}',
+    shortcut: 'Tipkovnična bližnjica, {0}',
     or: 'ali',
   },
   media: {

@@ -1,4 +1,5 @@
 // Types
+import type { VTimePickerViewMode } from '@/components/VTimePicker/shared.types'
 import type { VuetifyComponent } from '@/util/defineComponent.types'
 
 export interface VTimePickerClockProps {
@@ -16,6 +17,7 @@ export interface VTimePickerClockProps {
   rotate?: number
   scrollable?: boolean
   step?: number
+  viewMode?: VTimePickerViewMode
 }
 
 type VTimePickerClockDefaultKeys =
@@ -27,6 +29,7 @@ type VTimePickerClockDefaultKeys =
   | 'rotate'
   | 'scrollable'
   | 'step'
+  | 'viewMode'
 
 export declare const VTimePickerClock: VuetifyComponent<
   VTimePickerClockProps,

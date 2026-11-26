@@ -152,12 +152,6 @@ Using the **density** prop you are able to give your data tables an alternate st
 
 <ExamplesExample file="v-data-table/prop-dense" />
 
-<!-- #### Footer props
-
-The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using **footer-props**.
-
-<ExamplesExample file="v-data-table/prop-footer-props" /> -->
-
 #### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
@@ -278,7 +272,7 @@ Just like selection, row items require a unique property on each item for expans
 
 ::: tip
 
-The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside inside it, so you can split the expanded area into multiple columns. If you intend to use `colspand="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
+The `expanded-row` slot is a full row override – `<tr>` and `<td>` are expected to be placed inside it, so you can split the expanded area into multiple columns. If you intend to use `colspan="columns.length"` the simpler [expanded](#expanded-slot) will be a better pick.
 
 :::
 

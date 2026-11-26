@@ -12,4 +12,11 @@ describe('VFileUpload', () => {
 
     await expect(renderToString(app)).resolves.toContain('v-file-upload')
   })
+
+  it('should pass id to the file input', async () => {
+    const app = createSSRApp(() => <VFileUpload id="upload" />)
+    app.use(createVuetify())
+
+    await expect(renderToString(app)).resolves.toMatch(/<input[^>]* id="upload"/)
+  })
 })

@@ -4,6 +4,7 @@
     "centerActive": "Forces the selected component to be centered.",
     "contentClass": "Adds classes to the slide group item.",
     "direction": "Switch between horizontal and vertical modes.",
+    "draggable": "Allows scrolling the content by dragging it with a mouse. Touch devices scroll natively regardless. With **scroll-snap**, releasing moves to the next item in the drag direction. Dragging past either end stretches the content up to `$slide-group-overscroll-max`, set it to `0` to disable.",
     "gap": "Space between items.",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",
     "nextIcon": "The appended slot when arrows are shown.",

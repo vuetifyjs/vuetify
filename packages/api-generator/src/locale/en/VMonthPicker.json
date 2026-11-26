@@ -1,4 +1,5 @@
 {
+  "description": "Used for selecting a single month, multiple months or a range of months.",
   "props": {
     "allowedMonths": "Restricts which months can be selected. Accepts an array of month numbers (0-11) or a function that receives a month number and returns a boolean.",
     "allowedYears": "Restricts which years can be selected in years view.",

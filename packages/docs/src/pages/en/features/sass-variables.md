@@ -52,7 +52,7 @@ To begin modifying Vuetify's internal variables, install the [sass](https://sass
 
 :::
 
-For additional details about css-pre-processors, please refer to the official vite page at: <https://vitejs.dev/guide/features.html#css-pre-processors> or official vue-cli-page at: <https://cli.vuejs.org/guide/css.html#pre-processors>
+For additional details about css-pre-processors, please refer to the official vite page at: <https://vite.dev/guide/features.html#css-pre-processors> or official vue-cli-page at: <https://cli.vuejs.org/guide/css.html#pre-processors>
 
 ## Usage
 
@@ -127,7 +127,7 @@ Keep in mind that to obtain settings from Vuetify, you must forward its variable
 
 ## Disabling utility classes
 
-Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selecively keeping only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
+Utility classes are a powerful feature of Vuetify, but they can also be unnecessary for some projects. You can either disable them all at once or selectively keep only what you plan to use. To disable all utility classes, set the entire `$utilities` variable to `false`:
 
 ```scss { resource="src/styles/main.scss" }
 @use 'vuetify' with (
@@ -268,7 +268,7 @@ Only put variables, mixins, and functions in the settings file, styles should be
 Vuetify loads precompiled CSS by default, enabling variable customization will switch to the base SASS files instead which must be recompiled with your project.
 This can be a performance hit if you're using more than a few vuetify components, and also forces you to use the same SASS compiler version as us.
 
-Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vitejs.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
+Performance can be improved with Vite by using the modern sass compiler. Replace your `sass` dependency with `sass-embedded`, update vite to 5.4 or later, and set [`css.preprocessorOptions.sass.api`](https://vite.dev/config/shared-options#css-preprocessoroptions) to `'modern-compiler'` in the vite config.
 
 ### Symlinks
 

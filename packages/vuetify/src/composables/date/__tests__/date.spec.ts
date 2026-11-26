@@ -8,7 +8,7 @@ import { assertType } from 'vitest'
 import { shallowRef } from 'vue'
 import { StringDateAdapter } from '../adapters/string'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
-import { createDate } from '../date'
+import { createDate, daysDiff } from '../date'
 
 // Types
 import type { IUtils } from '@date-io/core/IUtils'
@@ -210,6 +210,31 @@ describe('StringDateAdapter', () => {
     expect(adapter2.getWeek('2025-01-05')).toBe(1) // sunday
     expect(adapter2.getWeek('2025-01-06')).toBe(2) // monday
   })
+
+  describe.each(['Europe/Warsaw', 'America/New_York'])('diff in %s', timeZone => {
+    beforeAll(() => vi.stubEnv('TZ', timeZone))
+    afterAll(() => vi.unstubAllEnvs())
+
+    it.each([
+      ['2025-06-12', '2025-06-10', 'days', 2],
+      ['2025-03-10', '2025-03-08', 'days', 2], // US spring forward
+      ['2025-11-03', '2025-11-01', 'days', 2], // US fall back
+      ['2025-03-31', '2025-03-29', 'days', 2], // EU spring forward
+      ['2025-10-27', '2025-10-25', 'days', 2], // EU fall back
+      ['2025-06-17', '2025-06-10', 'weeks', 1],
+      ['2025-03-15', '2025-03-08', 'weeks', 1],
+      ['2025-11-08', '2025-11-01', 'weeks', 1],
+      ['2025-04-05', '2025-03-29', 'weeks', 1],
+      ['2025-11-01', '2025-10-25', 'weeks', 1],
+      ['2025-07-01', '2025-06-01', 'months', 1],
+      ['2025-04-01', '2025-03-01', 'months', 1],
+      ['2025-12-01', '2025-11-01', 'months', 1],
+      ['2026-01-01', '2025-12-01', 'months', 1],
+    ])('%s - %s in %s', (date, comparing, unit, expected) => {
+      const adapter = new StringDateAdapter({ locale: 'en-US' })
+      expect(adapter.getDiff(date, comparing, unit as string)).toBe(expected)
+    })
+  })
 })
 
 describe('createDate', () => {
@@ -255,5 +280,28 @@ describe('createDate', () => {
 
     expect(instance.toISO(instance.startOfWeek(inKiritimati('2026-10-26T00:00:00+14:00'), 1))).toMatch(/^2026-10-26/)
     expect(instance.getWeek(inKiritimati('2029-01-01T00:00:00+14:00'), 1)).toBe(1)
+  })
+})
+
+describe('daysDiff', () => {
+  beforeAll(() => vi.stubEnv('TZ', 'America/New_York'))
+  afterAll(() => vi.unstubAllEnvs())
+
+  it.each([
+    VuetifyDateAdapter,
+    StringDateAdapter,
+    DateFnsAdapter,
+    DayjsAdapter,
+    LuxonAdapter,
+    MomentAdapter,
+  ])('should count calendar days with %o', adapter => {
+    const { instance } = createDate({ adapter } as DateOptions, { current: shallowRef('en') } as LocaleInstance)
+    const range = (from: string, to: string) => {
+      return daysDiff(instance, instance.startOfDay(instance.date(from)), instance.endOfDay(instance.date(to)))
+    }
+
+    expect(range('2025-06-10', '2025-06-10')).toBe(0)
+    expect(range('2025-03-08', '2025-03-10')).toBe(2)
+    expect(range('2025-11-01', '2025-11-03')).toBe(2)
   })
 })

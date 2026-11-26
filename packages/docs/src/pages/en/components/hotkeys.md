@@ -16,13 +16,13 @@ features:
 
 # Hotkeys
 
-The `v-hotkey` component renders keyboard shortcuts in a visually consistent and accessible way. It handles complex key combination parsing, platform-specific differences (Mac vs PC), and provides multiple display modes for different design needs.
+The `v-hotkey` component displays a keyboard shortcut, such as in a menu, a tooltip or a command palette.
 
 <PageFeatures />
 
 ## Usage
 
-Hotkeys display keyboard shortcuts with proper styling and platform awareness. The component automatically handles platform differences like showing <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> on PC.
+Modifiers follow the user's platform, so `cmd` shows <v-kbd>⌘</v-kbd> on Mac and <v-kbd>Ctrl</v-kbd> elsewhere.
 
 <ExamplesUsage name="v-hotkey" />
 
@@ -38,95 +38,42 @@ Hotkeys display keyboard shortcuts with proper styling and platform awareness. T
 
 ## Guide
 
-The `v-hotkey` component is designed to display keyboard shortcuts consistently across your application. It's commonly used in command palettes, help documentation, tooltips, and anywhere you need to show keyboard shortcuts to users.
-
 ::: info
-The `v-hotkey` component serves solely as a visual tool for displaying keyboard shortcuts. It does not generate or manage keyboard shortcuts itself. To implement functional keyboard shortcuts, utilize the [useHotkey](/features/hotkey/) composable.
+`v-hotkey` only displays a shortcut. To make the shortcut work, register it with the [useHotkey](/features/hotkey/) composable.
 :::
 
 ### Props
 
-The component provides several props to customize how keyboard shortcuts are displayed and parsed. This component is designed to work seamlessly across different platforms, automatically adjusting key representations based on the user's operating system.
-
 #### Keys
 
-The **keys** prop accepts a string representing keyboard shortcuts in various formats. See [Hotkeys](/features/hotkey/#key-combination-syntax) for detailed parsing rules.
+**keys** uses the same syntax as `useHotkey`. See [Key combination syntax](/features/hotkey/#key-combination-syntax).
 
 <ExamplesExample file="v-hotkey/prop-keys" />
 
 #### Display modes
 
-The **display-mode** prop controls how keys are visually represented. Choose from **icon** (default), **symbol**, or **text** modes:
+**display-mode** chooses between icons, symbols and text for keys that have them.
 
 <ExamplesExample file="v-hotkey/prop-display-mode" />
 
-#### Platform awareness
+#### Platform
 
-The component automatically detects the user's platform and adjusts key representations accordingly:
+The platform is detected from the user agent. Set **platform** to `mac` or `pc` to show one platform's keys to everyone, for example in documentation written for one operating system.
 
 <ExamplesExample file="v-hotkey/prop-platform-aware" />
 
 #### Custom key mapping
 
-::: info
-It is recommended to set the **key-map** prop at the application level via global component defaults rather than per-instance for consistency.
-:::
-
-Use the **key-map** prop to customize how specific keys are displayed. You can import and modify the exported `hotkeyMap` to create custom configurations:
-
-```typescript
-import { hotkeyMap } from 'vuetify/labs/VHotkey'
-
-const customKeyMap = {
-  ...hotkeyMap,
-  ctrl: {
-    default: { text: 'Control', icon: '$ctrl' },
-    mac: { symbol: '⌃', icon: '$ctrl', text: 'Control' }
-  }
-}
-```
+**key-map** changes how keys are labeled. It replaces the built-in map rather than extending it, so include every key you display. Keys missing from the map are shown as uppercase text. Set it once through [global defaults](/features/global-configuration/) to keep shortcuts consistent across the application.
 
 <ExamplesExample file="v-hotkey/prop-key-map" />
 
-#### Inline display
+#### Inline
 
-The **inline** prop optimizes the component for integration within text content, documentation, and flowing paragraphs. This mode applies specialized styling for seamless text flow and improved readability:
+Use **inline** for shortcuts within a paragraph. When several of them can wrap onto separate lines, increase the paragraph's `line-height` so they don't overlap.
 
 <ExamplesExample file="v-hotkey/prop-inline" />
 
-**Layout considerations:** When using multiple inline hotkeys within the same paragraph, consider increasing the `line-height` of the containing text to provide adequate vertical spacing. This prevents visual overlap when hotkey components wrap to new lines, ensuring clean separation and improved readability.
-
 ## Accessibility
 
-The `v-hotkey` component is designed with accessibility in mind. It uses semantic HTML elements and ARIA attributes to ensure that screen readers can interpret the displayed keyboard shortcuts correctly.
-
-### ARIA attributes
-
-The component uses the `aria-label` attribute to provide a clear description of the keyboard shortcut. This is automatically generated based on the current keys.
-
-```html
-<v-hotkey keys="ctrl+s" />
-```
-
-will generate the following HTML:
-
-```html
-<div class="v-hotkey" role="img" aria-label="Keyboard shortcut: Ctrl plus S">
-  <span class="v-hotkey__combination">
-    <div class="v-kbd v-hotkey__key" aria-hidden="true">Ctrl</div>
-    <span class="v-hotkey__divider" aria-hidden="true">+</span>
-    <div class="v-kbd v-hotkey__key" aria-hidden="true">S</div>
-  </span>
-</div>
-```
-
-::: info
-The HTML structure varies by variant. Standard variants use individual `VKbd` components, while the `contained` variant uses nested `<kbd>` elements within a single wrapper.
-:::
-
-Key accessibility features:
-
-- **Screen reader support**: Uses `role="img"` with descriptive `aria-label`
-- **Visual elements hidden**: Individual keys and separators use `aria-hidden="true"`
-- **Sequence notation**: Dash separators display as "then" for screen readers (e.g., `ctrl+k-p` becomes "Ctrl plus K then P")
-- **Tooltips**: Icon and symbol modes include `title` attributes for enhanced usability
+Screen readers announce the whole shortcut as one image with a label such as "Keyboard shortcut, Ctrl plus S". Sequences read with "then", so `ctrl+k-p` becomes "Ctrl plus K then P". In icon and symbol modes, each key also has a `title` with its name.

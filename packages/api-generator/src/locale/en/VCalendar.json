@@ -75,5 +75,22 @@
     "[`${string}:time`]": "Any event at a specific time in the `day` view. The second argument is the day & time object.",
     "change": "The range of days displayed on the calendar changed. This is triggered on initialization. The event passed is an object with start and end date objects.",
     "moved": "One of the functions `next`, `prev`, and `move` was called. The event passed is the day object calculated for the movement."
+  },
+  "exposed": {
+    "checkChange": "Emits `change` when the displayed range of days differs from the last emitted one.",
+    "getEndOfWeek": "Returns the last day of the week containing the given timestamp, based on **weekdays**.",
+    "getStartOfWeek": "Returns the first day of the week containing the given timestamp, based on **weekdays**.",
+    "getTimestampAtEvent": "Returns the timestamp at the pointer position of a mouse or touch event within the given day. Useful for creating or dragging events. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "getVisibleEvents": "Returns the parsed events that overlap the displayed range of days.",
+    "getWeekNumber": "Returns the week number of the given timestamp.",
+    "minutesToPixels": "Converts a duration in minutes to a height in pixels. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "move": "Moves the calendar by the given number of periods of the current **type**. Negative values move backwards. Emits `update:modelValue` and `moved`.",
+    "next": "Moves the calendar forward by the given number of periods of the current **type**.",
+    "prev": "Moves the calendar backward by the given number of periods of the current **type**.",
+    "scrollToTime": "Scrolls the interval area to the given time. Accepts minutes since midnight, `HH:mm` string or `{ hour, minute }` object. Returns `false` when the time is invalid or the view has no interval area.",
+    "timeDelta": "Returns the position of the given time as a fraction of the interval area height, or `false` when the time is invalid. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "timeToY": "Returns the vertical offset in pixels of the given time within the interval area, or `false` when the time is invalid. Pass `true` or a target date as the second argument to clamp the result to the visible range. Only available in the `day`, `week`, `4day`, `custom-daily` and `category` views.",
+    "title": "Text describing the displayed range, e.g. `March 2026` or `Mar - Apr 2026`.",
+    "updateTimes": "Refreshes the current date and time used for **now** highlighting. Call it periodically to keep the current time indicator moving."
   }
 }

@@ -180,7 +180,7 @@ export default {
     backspace: 'Slett',
     space: 'Mellomrom',
     plus: 'pluss',
-    shortcut: 'Tastatursnarveier: {0}',
+    shortcut: 'Tastatursnarveier, {0}',
     or: 'eller',
   },
   media: {

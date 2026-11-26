@@ -1,0 +1,62 @@
+@use 'sass:map';
+@use '../../styles/settings';
+
+// VNavigationBtn
+$navigation-btn-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$navigation-btn-active-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$navigation-btn-disabled-opacity: var(--v-disabled-opacity) !default;
+$navigation-btn-focus-outline: 2px solid currentColor !default;
+$navigation-btn-focus-outline-offset: 2px !default;
+$navigation-btn-icon-size: 24px !default;
+$navigation-btn-badge-height: 16px !default;
+$navigation-btn-badge-padding-inline: 4px !default;
+$navigation-btn-badge-typography: (
+  map.get(settings.$typography, 'label-small', 'size'),
+  map.get(settings.$typography, 'label-small', 'weight'),
+  map.get(settings.$typography, 'label-small', 'letter-spacing'),
+  map.get(settings.$typography, 'label-small', 'line-height'),
+  none
+) !default;
+$navigation-btn-indicator-border-radius: map.get(settings.$rounded, 'pill') !default;
+$navigation-btn-indicator-opacity: var(--v-activated-opacity) !default;
+$navigation-btn-inset: 20px !default;
+$navigation-btn-transition-duration: .22s !default;
+$navigation-btn-transition-timing-function: cubic-bezier(.2, .1, .4, 1) !default;
+$navigation-btn-text-transition-duration: .1s !default;
+$navigation-btn-text-transition-timing-function: cubic-bezier(0, 0, .2, 1) !default;
+$navigation-btn-text-slide-distance: 10px !default;
+$navigation-btn-text-slide-duration: .15s !default;
+$navigation-btn-text-slide-timing-function: cubic-bezier(.2, 0, 0, 1) !default;
+
+// horizontal: icon beside text, indicator hugs both
+$navigation-btn-height: 56px !default;
+$navigation-btn-padding-inline: 16px !default;
+$navigation-btn-icon-text-gap: 8px !default;
+$navigation-btn-text-typography: (
+  map.get(settings.$typography, 'label-large', 'size'),
+  map.get(settings.$typography, 'label-large', 'weight'),
+  map.get(settings.$typography, 'label-large', 'letter-spacing'),
+  map.get(settings.$typography, 'label-large', 'line-height'),
+  none
+) !default;
+
+// stacked: icon in a pill, text below
+$navigation-btn-stacked-gap: 4px !default;
+$navigation-btn-stacked-padding-block: 6px !default;
+$navigation-btn-stacked-indicator-width: 56px !default;
+$navigation-btn-stacked-indicator-height: 32px !default;
+$navigation-btn-stacked-unlabeled-indicator-height: 56px !default;
+$navigation-btn-stacked-icon-text-gap: 4px !default;
+$navigation-btn-stacked-text-width: 88px !default;
+$navigation-btn-stacked-text-typography: (
+  map.get(settings.$typography, 'label-medium', 'size'),
+  map.get(settings.$typography, 'label-medium', 'weight'),
+  map.get(settings.$typography, 'label-medium', 'letter-spacing'),
+  map.get(settings.$typography, 'label-medium', 'line-height'),
+  none
+) !default;
+
+// inside VBottomNavigation
+$navigation-btn-bar-indicator-height: 40px !default;
+$navigation-btn-bar-icon-text-gap: 4px !default;
+$navigation-btn-bar-max-width: 168px !default;

@@ -60,6 +60,7 @@ export const makeLocationStrategyProps = propsFactory({
     type: [Number, String],
     default: 12,
   },
+  noFlip: Boolean,
 }, 'VOverlay-location-strategies')
 
 export function useLocationStrategies (
@@ -434,7 +435,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       contentBox.y += _y
 
       // flip
-      {
+      if (!props.noFlip) {
         const axis = getAxis(placement.anchor)
         const hasOverflowX = overflows.x.before || overflows.x.after
         const hasOverflowY = overflows.y.before || overflows.y.after
@@ -533,6 +534,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       props.minHeight,
       props.maxWidth,
       props.maxHeight,
+      props.noFlip,
     ],
     () => updateLocation(),
   )
