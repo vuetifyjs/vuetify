@@ -2,7 +2,6 @@
   <v-treeview
     v-model:activated="activated"
     :items="items"
-    item-key="id"
     item-value="id"
     activatable
     open-all

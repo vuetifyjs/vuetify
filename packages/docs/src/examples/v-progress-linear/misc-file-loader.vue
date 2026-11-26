@@ -8,19 +8,6 @@
 
       <v-toolbar-title>My Files</v-toolbar-title>
 
-      <v-btn
-        color="white"
-        location="bottom left"
-        absolute
-        icon
-      >
-        <v-icon>mdi-plus</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
-
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>

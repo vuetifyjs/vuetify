@@ -2,7 +2,6 @@
   <v-switch v-model="clickOutsideEnabled" :label="`Click outside ${clickOutsideEnabled ? 'enabled' : 'disabled'}`"></v-switch>
   <v-card
     :color="active ? 'primary' : undefined"
-    :dark="active"
     class="mx-auto"
     height="256"
     rounded="xl"

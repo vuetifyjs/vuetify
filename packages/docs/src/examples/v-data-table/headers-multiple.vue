@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="items"
-    item-key="name"
+    item-value="name"
     hide-default-footer
   ></v-data-table>
 </template>

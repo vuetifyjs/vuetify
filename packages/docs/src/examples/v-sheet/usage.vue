@@ -8,7 +8,6 @@
     <div class="py-8 bg-surface-bright">
       <v-sheet
         v-if="sheet"
-        v-model="sheet"
         v-bind="props"
         class="mx-auto"
       >

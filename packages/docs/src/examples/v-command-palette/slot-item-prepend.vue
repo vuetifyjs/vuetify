@@ -8,8 +8,6 @@
       :items="items"
       class="pa-2"
       hotkey="alt+g"
-      item-title="name"
-      item-value="name"
       max-height="800"
       placeholder="Search by name"
     >

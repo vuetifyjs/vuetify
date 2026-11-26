@@ -17,7 +17,6 @@
         text="Reset category"
         variant="text"
         border
-        open-all
         @click="search = ''"
       ></v-btn>
     </template>

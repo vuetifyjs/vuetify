@@ -13,7 +13,6 @@
               :color="isSelected ? 'primary' : ''"
               class="d-flex align-center"
               height="200"
-              dark
               @click="toggle"
             >
               <v-scroll-y-transition>
