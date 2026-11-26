@@ -568,6 +568,30 @@ describe('VMenu', () => {
     await expect.poll(() => screen.queryByTestId('menu-content')).toBeNull()
   })
 
+  it('should stay open when the pointer moves onto the content during the enter transition', async () => {
+    let entered = false
+    render(() => (
+      <VMenu openOnHover openDelay={ 100 } closeDelay={ 50 } onAfterEnter={ () => entered = true }>
+        {{
+          activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Menu</VBtn>,
+          default: () => (
+            <VList>
+              <VListItem title="Item 1" />
+              <VListItem title="Item 2" data-testid="item" />
+            </VList>
+          ),
+        }}
+      </VMenu>
+    ))
+
+    await userEvent.hover(screen.getByTestId('activator'))
+    await userEvent.hover(await screen.findByTestId('item'), { force: true })
+    await expect.poll(() => entered).toBe(true)
+    await wait(100)
+
+    expect(screen.getByTestId('item')).toBeVisible()
+  })
+
   describe('cascade close', () => {
     beforeEach(() => commands.setReduceMotionDisabled())
 
