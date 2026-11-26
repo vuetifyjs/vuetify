@@ -4,7 +4,6 @@
     color="deep-purple-lighten-5"
     max-width="400"
     rounded="xl"
-    variant="flat"
   >
 
     <div class="d-flex align-baseline ga-2">

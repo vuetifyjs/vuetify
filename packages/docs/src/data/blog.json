@@ -1,5 +1,13 @@
 [
   {
+    "title": "Announcing Vuetify0 v1.4",
+    "shortDescription": "Vuetify0 v1.4 is out. It adds TimePicker and createCalendar, and useDate now works without an adapter and handles non-Gregorian calendars.",
+    "date": "November 20, 2026",
+    "author": "John Leider",
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/john.png",
+    "to": "/blog/announcing-vuetify0-v1-4"
+  },
+  {
     "title": "October 2026 Update",
     "image": "https://cdn.vuetifyjs.com/docs/images/blog/october-2026-update/october-hero.png",
     "shortDescription": "v4.3.0 and Vuetify0 v1.3.0 shipped. What to check before you update, how Vuetify apps built with Vite 8 can ship less JavaScript, SSR layouts that no longer shift, and the design systems on the way for Vuetify0...",

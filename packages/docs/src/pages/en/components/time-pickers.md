@@ -17,13 +17,11 @@ features:
 
 # Time pickers
 
-The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.
+The `v-time-picker` component lets users type a time or pick it on a clock dial. Set `variant="input"` to hide the dial and keep only the fields.
 
 <PageFeatures />
 
 ## Usage
-
-Time pickers have the light theme enabled by default.
 
 <ExamplesUsage name="v-time-picker" />
 
@@ -43,19 +41,19 @@ Time pickers have the light theme enabled by default.
 
 #### Allowed times
 
-You can specify allowed times using arrays, objects, and functions. You can also specify time step/precision/interval - e.g. 10 minutes.
+**allowed-hours**, **allowed-minutes** and **allowed-seconds** take an array of values or a function. Use a function for steps, such as every 10 minutes.
 
 <ExamplesExample file="v-time-picker/prop-allowed-times" />
 
 #### Scrollable
 
-You can edit time picker's value using mouse wheel.
+**scrollable** lets users change the value with the mouse wheel over the clock. Set it to `"controls"` to scroll the fields above the clock instead.
 
 <ExamplesExample file="v-time-picker/prop-scrollable" />
 
 #### Use seconds
 
-Time picker can have seconds input.
+**use-seconds** adds seconds to the picker and to the model.
 
 <ExamplesExample file="v-time-picker/prop-use-seconds" />
 
@@ -63,6 +61,6 @@ Time picker can have seconds input.
 
 #### Dialog and menu
 
-Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.
+For an input, open the picker from a **readonly** text field with [v-menu](/components/menus/) or [v-dialog](/components/dialogs/). [v-time-input](/components/time-inputs/) covers the common case in one component with the field user can type or paste into.
 
 <ExamplesExample file="v-time-picker/misc-dialog-and-menu" />

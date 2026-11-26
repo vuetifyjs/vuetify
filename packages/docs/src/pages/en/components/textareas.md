@@ -61,7 +61,7 @@ The `autocomplete` prop gives you the option to enable the browser to predict us
 
 #### Clearable
 
-You can clear the text from a `v-textarea` by using the `clearable` prop, and customize the icon used with the `clearable-icon` prop.
+You can clear the text from a `v-textarea` by using the `clearable` prop, and customize the icon used with the `clear-icon` prop.
 
 <ExamplesExample file="v-textarea/prop-clearable" />
 
@@ -85,7 +85,7 @@ The `append-icon` and `prepend-icon` props help add context to `v-textarea`.
 
 #### Rows
 
-The `rows` prop allows you to define how many rows the textarea has, when combined with the `row-height` prop you can further customize your rows by defining their height.
+Use `rows` to set the height of the textarea in lines. With `auto-grow`, it becomes the minimum height.
 
 <ExamplesExample file="v-textarea/prop-rows" />
 

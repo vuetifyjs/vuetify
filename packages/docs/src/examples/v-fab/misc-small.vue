@@ -3,7 +3,6 @@
     <v-toolbar
       color="light-blue"
       extended
-      light
     >
       <v-app-bar-nav-icon color="grey-darken-4"></v-app-bar-nav-icon>
 

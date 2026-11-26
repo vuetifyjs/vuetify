@@ -152,12 +152,6 @@ Using the **density** prop you are able to give your data tables an alternate st
 
 <ExamplesExample file="v-data-table/prop-dense" />
 
-<!-- #### Footer props
-
-The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using **footer-props**.
-
-<ExamplesExample file="v-data-table/prop-footer-props" /> -->
-
 #### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.

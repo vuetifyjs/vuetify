@@ -119,7 +119,7 @@ With **live**, the waveform skips decoding and draws bars from the audio as it p
 
 #### Custom actions
 
-Each custom action name in **actions** becomes an `action.<name>` slot that receives the player state and methods: `playing`, `progress`, `currentTime`, `duration`, `play`, `pause`, `seek`, `setPlaybackRate` and more. `seek({ to })` and `seek({ by })` take seconds, or a string such as `'50%'` relative to the duration. The **play** slot also receives `props` for the built-in button, so `v-bind="props"` keeps the icon and label in sync. To only restyle the built-in button, pass **play-props** instead. Buttons rendered in slots follow `VAudioControls` defaults, and **gap** sets the spacing between actions and around the seek bar.
+Each custom action name in **actions** becomes an `action.<name>` slot that receives the player state and methods. `seek({ to })` and `seek({ by })` take seconds, or a string such as `'50%'` relative to the duration. The **play** slot also receives `props` for the built-in button, so `v-bind="props"` keeps the icon and label in sync. To only restyle the built-in button, pass **play-props** instead. Buttons rendered in slots follow `VAudioControls` defaults.
 
 <ExamplesExample file="v-audio/slot-actions" />
 

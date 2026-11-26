@@ -13,8 +13,8 @@
         <v-progress
           :model-value="40"
           color="warning"
+          details-position="bottom"
           label="Operation in progress..."
-          label-position="bottom"
           hide-value
           indeterminate
         ></v-progress>

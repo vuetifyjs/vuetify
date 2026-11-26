@@ -55,6 +55,12 @@ Additionally, you may apply customize the filtering on a per column basis by set
 
 Pagination is used to split up large amounts of data into smaller chunks.
 
+### Footer props
+
+To customize the default footer, use its props directly on `v-data-table`.
+
+<ExamplesExample file="v-data-table/prop-footer-props" />
+
 ### External pagination
 
 Pagination can be controlled externally by using the individual props, or by using the **options** prop. Remember to use **v-model**, so you fully control the state.

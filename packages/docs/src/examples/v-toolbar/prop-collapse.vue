@@ -20,7 +20,7 @@
         @click="collapse = !collapse"
       ></v-btn>
       <span class="mt-4">Collapse position:</span>
-      <v-chip-group v-model="collapsePosition" variant="outlined" border mandatory>
+      <v-chip-group v-model="collapsePosition" variant="outlined" mandatory>
         <v-chip
           class="px-6"
           prepend-icon="mdi-arrow-collapse-left"

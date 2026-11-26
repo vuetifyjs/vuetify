@@ -3,10 +3,7 @@
     class="mx-auto"
     max-width="600"
   >
-    <v-toolbar
-      dense
-      flat
-    >
+    <v-toolbar flat>
       <v-toolbar-title>
         <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>

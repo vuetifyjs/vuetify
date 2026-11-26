@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-chip-group v-model="selectedSize" class="mb-4" mandatory row>
+    <v-chip-group v-model="selectedSize" class="mb-4" mandatory>
       <v-chip
         v-for="size in sizes"
         :key="size"

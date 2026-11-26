@@ -1,7 +1,6 @@
 <template>
   <v-card
     :color="active ? 'primary' : undefined"
-    :dark="active"
     class="mx-auto"
     height="256"
     rounded="xl"

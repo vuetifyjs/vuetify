@@ -16,13 +16,11 @@ features:
 
 # Color inputs
 
-The `v-color-input` component combines a text field with a color picker..
+The `v-color-input` component combines a text field with a color picker.
 
 <PageFeatures />
 
 ## Usage
-
-At its core, the `v-color-input` component is a basic container that extends [v-text-field](/components/text-fields).
 
 <ExamplesUsage name="v-color-input" />
 
@@ -40,26 +38,24 @@ At its core, the `v-color-input` component is a basic container that extends [v-
 
 ## Guide
 
-The `v-color-input` component provides a clean interface for selecting colors.
-
 ### Props
 
-The `v-color-input` component extends the [v-text-field](/components/text-fields/) and [v-color-picker](/components/color-pickers/) component; and supports all of their props.
+The `v-color-input` component extends [v-text-field](/components/text-fields/) and [v-color-picker](/components/color-pickers/), and supports their props. Props that would conflict, such as **disabled**, go to the picker through **picker-props**.
 
 #### Pip location
 
-You can move the pip icon within the input by utilizing the `pip-location` or hide it entirely with `hide-pip`.
+The pip is the color icon in the field. **pip-location** moves it to another side of the field, and **hide-pip** hides it entirely.
 
 <ExamplesExample file="v-color-input/prop-pip-location" />
 
 #### Color Pip
 
-The `color-pip` is a boolean that determines whether the pip icon color matches the selected color.
+**color-pip** paints the pip with the selected color.
 
 <ExamplesExample file="v-color-input/prop-color-pip" />
 
 #### Pip variant
 
-The `pip-variant` lets you further customize the pip icon.
+**pip-variant** gives the pip a background, using the same variants as [v-avatar](/components/avatars/).
 
 <ExamplesExample file="v-color-input/prop-pip-variant" />

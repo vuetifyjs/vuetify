@@ -5,7 +5,6 @@
         v-for="(c, i) in cards"
         :key="i"
         elevation="6"
-        mode="out-in"
         rounded="pill"
         width="330"
       >
