@@ -48,7 +48,7 @@ The `v-progress` component combines `v-progress-linear` and `v-progress-circular
 
 #### Label
 
-The **label** prop displays text alongside the progress indicator. Use the **label-position** prop to control placement.
+The **label** prop displays text alongside the progress indicator. Use **details-position** to place the label and value above or below the indicator.
 
 <ExamplesExample file="v-progress/prop-label" />
 
