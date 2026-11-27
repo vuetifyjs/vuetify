@@ -12,6 +12,24 @@
     top: 0
     display: contents
 
+  .v-overlay,
+  .v-list-item,
+  .v-chip,
+  .v-btn,
+  .v-field
+    will-change: transform
+
+  .v-overlay,
+  .v-list-item,
+  .v-chip,
+  .v-btn,
+  .v-field
+    .v-btn__overlay,
+    .v-list-item__overlay,
+    .v-chip__overlay,
+    .v-field__overlay
+      will-change: opacity
+
   .v-overlay
     --v-overlay-opacity: #{$overlay-opacity}
     border-radius: inherit
