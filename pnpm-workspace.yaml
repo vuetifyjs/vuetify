@@ -223,6 +223,7 @@ overrides:
   vite-ssr>react-ssr-prepass: '-'
 
 patchedDependencies:
+  '@vitejs/plugin-vue@6.0.3': patches/@vitejs__plugin-vue@6.0.3.patch
   '@mdi/js@7.4.47': patches/@mdi__js@7.4.47.patch
   '@testing-library/vue': patches/@testing-library__vue.patch
   '@vitest/browser': patches/@vitest__browser.patch

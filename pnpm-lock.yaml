@@ -503,6 +503,9 @@ patchedDependencies:
   '@testing-library/vue':
     hash: 15ba1e1b9f291286e3951cdf39b2e27f55b6727bc0315792f3e4558c0a3a7db8
     path: patches/@testing-library__vue.patch
+  '@vitejs/plugin-vue@6.0.3':
+    hash: 51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd
+    path: patches/@vitejs__plugin-vue@6.0.3.patch
   '@vitest/browser':
     hash: a7ba41a2021e8c621a7a998c318e418f34e240b1ecce2b01ae39b1b93c411b7a
     path: patches/@vitest__browser.patch
@@ -567,7 +570,7 @@ importers:
         version: 2.0.19(vue@3.5.25(typescript@6.0.2))
       '@vitejs/plugin-vue':
         specifier: 'catalog:'
-        version: 6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
+        version: 6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
       '@vue/compiler-sfc':
         specifier: 'catalog:'
         version: 3.5.44
@@ -836,7 +839,7 @@ importers:
         version: link:../api-generator
       '@yankeeinlondon/builder-api':
         specifier: 'catalog:'
-        version: 1.4.1(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
+        version: 1.4.1(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
       ajv:
         specifier: 'catalog:'
         version: 8.17.1
@@ -902,7 +905,7 @@ importers:
         version: 8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
       vite-plugin-md:
         specifier: 'catalog:'
-        version: 0.22.5(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
+        version: 0.22.5(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
       vite-plugin-pages:
         specifier: 'catalog:'
         version: 0.33.1(@vue/compiler-sfc@3.5.44)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))
@@ -1074,7 +1077,7 @@ importers:
         version: 0.4.0(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
       vite-ssr:
         specifier: 'catalog:'
-        version: 0.17.2(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(@vueuse/head@1.3.1(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(rollup@4.55.1)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
+        version: 0.17.2(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(@vueuse/head@1.3.1(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(rollup@4.55.1)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2))
       vitest:
         specifier: 'catalog:'
         version: 4.1.11(@types/node@24.10.1)(@vitest/browser-playwright@4.1.11)(@vitest/coverage-istanbul@4.1.11)(@vitest/ui@4.1.11)(happy-dom@8.9.0(encoding@0.1.13))(jsdom@27.2.0)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
@@ -11255,7 +11258,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))':
+  '@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.0-beta.53
       vite: 8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
@@ -11761,14 +11764,14 @@ snapshots:
       '@unhead/vue': 1.11.20(vue@3.5.25(typescript@6.0.2))
       vue: 3.5.25(typescript@6.0.2)
 
-  '@yankeeinlondon/builder-api@1.4.1(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))':
+  '@yankeeinlondon/builder-api@1.4.1(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))':
     dependencies:
       '@types/markdown-it': 12.2.3
       '@yankeeinlondon/happy-wrapper': 2.10.1(encoding@0.1.13)
       fp-ts: 2.16.9
       inferred-types: 0.37.6
       markdown-it: 13.0.2
-      vite-plugin-md: 0.22.5(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
+      vite-plugin-md: 0.22.5(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
     transitivePeerDependencies:
       - '@vitejs/plugin-vue'
       - encoding
@@ -16032,10 +16035,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-md@0.22.5(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)):
+  vite-plugin-md@0.22.5(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)):
     dependencies:
-      '@vitejs/plugin-vue': 6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
-      '@yankeeinlondon/builder-api': 1.4.1(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
+      '@vitejs/plugin-vue': 6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
+      '@yankeeinlondon/builder-api': 1.4.1(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))
       '@yankeeinlondon/gray-matter': 6.2.1
       '@yankeeinlondon/happy-wrapper': 2.10.1(encoding@0.1.13)
       markdown-it: 13.0.2
@@ -16096,7 +16099,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-ssr@0.17.2(@vitejs/plugin-vue@6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(@vueuse/head@1.3.1(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(rollup@4.55.1)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2)):
+  vite-ssr@0.17.2(@vitejs/plugin-vue@6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2)))(@vueuse/head@1.3.1(vue@3.5.25(typescript@6.0.2)))(encoding@0.1.13)(rollup@4.55.1)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue-router@4.6.3(vue@3.5.25(typescript@6.0.2)))(vue@3.5.25(typescript@6.0.2)):
     dependencies:
       '@rollup/plugin-replace': 3.0.0(rollup@4.55.1)
       '@vue/server-renderer': 3.5.25(vue@3.5.25(typescript@6.0.2))
@@ -16105,7 +16108,7 @@ snapshots:
       node-fetch: 2.7.0(encoding@0.1.13)
       vite: 8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1)
     optionalDependencies:
-      '@vitejs/plugin-vue': 6.0.3(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
+      '@vitejs/plugin-vue': 6.0.3(patch_hash=51790e5f313fd25859cb0c07fec5a88c06cf061ddfe4c1f531e38426031102fd)(vite@8.3.5(@types/node@24.10.1)(sass-embedded@1.93.3)(sass@1.93.3)(terser@5.44.0)(yaml@2.8.1))(vue@3.5.25(typescript@6.0.2))
       '@vueuse/head': 1.3.1(vue@3.5.25(typescript@6.0.2))
       vue: 3.5.25(typescript@6.0.2)
       vue-router: 4.6.3(vue@3.5.25(typescript@6.0.2))

@@ -1,0 +1,34 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 09d3418..3fbb8c5 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -1313,6 +1313,20 @@ export default (sfc, props) => {
+ 
+ //#endregion
+ //#region src/main.ts
++function releaseCompiledState(descriptor, options, ssr) {
++	if (descriptor.template && !descriptor.template.src) {
++		descriptor.template.ast = void 0;
++		descriptor.template.map = void 0;
++	}
++	if (descriptor.script) descriptor.script.map = void 0;
++	if (descriptor.scriptSetup) descriptor.scriptSetup.map = void 0;
++	const resolved = getResolvedScript(descriptor, ssr);
++	if (resolved) {
++		resolved.scriptAst = void 0;
++		resolved.scriptSetupAst = void 0;
++		if (canInlineMain(descriptor, options)) resolved.map = void 0;
++	}
++}
+ async function transformMain(code, filename, options, pluginContext, ssr, customElement) {
+ 	const { devServer, isProduction, devToolsEnabled } = options;
+ 	const prevDescriptor = getPrevDescriptor(filename);
+@@ -1408,6 +1422,8 @@ async function transformMain(code, filename, options, pluginContext, ssr, custom
+ 			resolvedMap = resolvedMap ? map : resolvedMap;
+ 		}
+ 	}
++	// The descriptor stays cached for sub-requests (styles, custom blocks), which never read these
++	if (!devServer) releaseCompiledState(descriptor, options, ssr);
+ 	return {
+ 		code: resolvedCode,
+ 		map: resolvedMap || { mappings: "" },

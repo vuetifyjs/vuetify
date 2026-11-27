@@ -52,11 +52,16 @@ const validate = ajv.compile({
   },
 })
 
+type OriginalPage = {
+  frontmatter: Record<string, any>
+  setup?: string
+}
+
 async function setupPages<T extends Pipeline<any>> (
   payload: T,
   options: {
-    files?: Map<string, T>
-    awaiting?: Map<string, ((v: T) => void)[]>
+    files?: Map<string, OriginalPage>
+    awaiting?: Map<string, ((v: OriginalPage) => void)[]>
     pages?: ReadonlyArray<Record<'name' | 'path' | 'component', string>>
   }
 ) {
@@ -72,35 +77,34 @@ async function setupPages<T extends Pipeline<any>> (
 
   const locale = page.path.split('/').at(1)!
 
-  const html = 'html' in payload && typeof payload.html !== 'string'
-    ? payload.html.cloneNode(true)
-    : undefined
-  options.files ??= new Map()
-  options.files.set(page.path, {
-    ...payload,
-    html,
-  })
+  // Cached for the whole build, so it must not hold the payload: that keeps every page's DOM alive
+  const current: OriginalPage = {
+    frontmatter: payload.frontmatter ?? {},
+    setup: 'html' in payload && typeof payload.html !== 'string'
+      ? payload.html.querySelector('script[setup]')?.innerHTML
+      : undefined,
+  }
 
-  let original: T | undefined
+  let original: OriginalPage
   if (locale !== 'en') {
     const originalPath = page.path.replace(`/${locale}/`, '/en/')
-    original = options.files.get(originalPath)
-    if (!original) {
+    const cached = options.files?.get(originalPath)
+    if (cached) {
+      original = cached
+    } else {
       options.awaiting ??= new Map()
       const awaiting = options.awaiting.get(originalPath) ?? []
-      const { promise, resolve } = Promise.withResolvers<T>()
+      const { promise, resolve } = Promise.withResolvers<OriginalPage>()
       awaiting.push(resolve)
       options.awaiting.set(originalPath, awaiting)
       original = await promise
     }
   } else {
-    original = payload
-    if (options.awaiting?.has(page.path)) {
-      options.awaiting.get(page.path)!.forEach(fn => fn({
-        ...payload,
-        html,
-      }))
-    }
+    original = current
+    options.files ??= new Map()
+    options.files.set(page.path, current)
+    options.awaiting?.get(page.path)?.forEach(fn => fn(current))
+    options.awaiting?.delete(page.path)
   }
 
   return { page, locale, original }
@@ -215,12 +219,11 @@ export const scriptFixer = createBuilder('scriptFixer', 'dom')
 
     if (locale !== 'en') {
       const setup = payload.html.querySelector('script[setup]')
-      const origSetup = original.html.querySelector('script[setup]')
       if (setup) {
-        if (!origSetup) {
+        if (original.setup == null) {
           throw new Error(`Extra setup in ${payload.fileName}`)
         }
-        setup.innerHTML = origSetup.innerHTML
+        setup.innerHTML = original.setup
       }
     }
 
