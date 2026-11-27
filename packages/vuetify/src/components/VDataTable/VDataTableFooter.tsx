@@ -128,7 +128,11 @@ export const VDataTableFooter = genericComponent<{ prepend: never }>()({
             />
           </div>
 
-          <div class="v-data-table-footer__info">
+          <div
+            class="v-data-table-footer__info"
+            role="status"
+            aria-live="polite"
+          >
             <div>
               { t(props.pageText, !itemsLength.value ? 0 : startIndex.value + 1, stopIndex.value, itemsLength.value) }
             </div>
