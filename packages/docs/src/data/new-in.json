@@ -28,6 +28,7 @@
       "filteredOrder": "4.3.0",
       "form": "4.2.0",
       "listProps": "3.5.0",
+      "mandatory": "4.4.0",
       "menuElevation": "4.0.0",
       "openOnFocus": "4.2.0"
     },
@@ -43,7 +44,8 @@
       "slot-menu-footer": "3.12.0",
       "misc-new-tab": "3.3.0",
       "prop-filtered-order": "4.3.0",
-      "prop-ignore-accents": "4.2.0"
+      "prop-ignore-accents": "4.2.0",
+      "prop-mandatory": "4.4.0"
     }
   },
   "VAvatar": {

@@ -81,6 +81,7 @@ export const makeVAutocompleteProps = propsFactory({
   clearOnSelect: Boolean,
   search: String,
   closeOnInputClick: Boolean,
+  mandatory: Boolean,
 
   filteredOrder: {
     type: String as PropType<FilteredOrder>,
@@ -189,7 +190,12 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
-    const closableChips = toRef(() => props.closableChips && !form.isReadonly.value && !form.isDisabled.value)
+    const closableChips = toRef(() => (
+      props.closableChips &&
+      !form.isReadonly.value &&
+      !form.isDisabled.value &&
+      (!props.mandatory || model.value.length > 1)
+    ))
     const chipDefaults = injectNestedDefaults<VChip['$props']>('VChip')
     const hasChips = computed(() => !!(props.chips || slots.chip))
     const hasSelectionSlot = computed(() => hasChips.value || !!slots.selection)
@@ -326,17 +332,19 @@ export const VAutocomplete = genericComponent<new <
     function onSelectionKeydown (e: KeyboardEvent) {
       const length = model.value.length
 
-      if (['Backspace', 'Delete'].includes(e.key)) {
+      if (!props.multiple) {
         if (
-          !props.multiple &&
+          ['Backspace', 'Delete'].includes(e.key) &&
           hasSelectionSlot.value &&
           length > 0 &&
           !search.value
         ) {
           select(model.value[0], false)
-          return
         }
+        return
+      }
 
+      if (['Backspace', 'Delete'].includes(e.key)) {
         if (~selectionIndex.value) {
           e.preventDefault()
           const originalSelectionIndex = selectionIndex.value
@@ -349,8 +357,6 @@ export const VAutocomplete = genericComponent<new <
 
         return
       }
-
-      if (!props.multiple) return
 
       if (e.key === 'ArrowLeft') {
         if (selectionIndex.value < 0 && (vTextFieldRef.value?.selectionStart ?? 0) > 0) return
@@ -425,6 +431,8 @@ export const VAutocomplete = genericComponent<new <
       }
     }
     function onUpdateModelValue (v: any) {
+      if (props.mandatory) return
+
       if (v == null || (v === '' && !props.multiple && !hasSelectionSlot.value)) {
         for (const item of model.value) emit('item:removed', item)
         model.value = []
@@ -456,6 +464,7 @@ export const VAutocomplete = genericComponent<new <
       if (props.multiple) {
         const index = model.value.findIndex(selection => comparator(selection.value, item.value))
         const add = set == null ? !~index : set
+        if (props.mandatory && !add && model.value.length <= 1) return
 
         if (~index) {
           const value = add ? [...model.value, item] : [...model.value]
@@ -472,6 +481,7 @@ export const VAutocomplete = genericComponent<new <
         }
       } else {
         const add = set !== false
+        if (props.mandatory && !add) return
         const old = model.value[0]
 
         if (add) {
@@ -505,7 +515,7 @@ export const VAutocomplete = genericComponent<new <
         resetAutofill()
         isPristine.value = true
       } else {
-        if (!props.multiple && search.value == null) {
+        if (!props.mandatory && !props.multiple && search.value == null) {
           for (const item of model.value) emit('item:removed', item)
           model.value = []
         }
@@ -588,6 +598,7 @@ export const VAutocomplete = genericComponent<new <
           validationValue={ model.externalValue }
           counterValue={ counterValue.value }
           dirty={ isDirty }
+          clearable={ props.clearable && (!props.mandatory || !isDirty) }
           onChange={ onChange }
           class={[
             'v-autocomplete',
@@ -660,6 +671,7 @@ export const VAutocomplete = genericComponent<new <
                         class="v-list--navigable"
                         filterable
                         selected={ selectedValues.value }
+                        mandatory={ props.mandatory }
                         selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                         onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onFocusout={ onFocusout }
