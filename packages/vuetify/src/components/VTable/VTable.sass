@@ -3,6 +3,9 @@
 @use './variables' as *
 @use './mixins' as *
 
+// Rows that belong to the item above them and stay out of the stripe count
+$expansion-row: '.v-data-table__tr--expanded'
+
 @include tools.layer('components')
   // Theme
   .v-table
@@ -74,12 +77,32 @@
             > tr:nth-child(even)
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
+          // only tables that render expansion rows are restriped
+          @supports selector(:nth-child(1 of a)) and selector(:has(a))
+            > tbody:has(> #{$expansion-row})
+              > tr
+                background-image: none
+
+              > tr:nth-child(even of :not(#{$expansion-row})),
+              > tr:nth-child(even of :not(#{$expansion-row})) + #{$expansion-row}:not(.v-data-table__tr)
+                background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
+
     &.v-table--striped-odd
       > .v-table__wrapper
         > table
           > tbody
             > tr:nth-child(odd)
               background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
+
+          // only tables that render expansion rows are restriped
+          @supports selector(:nth-child(1 of a)) and selector(:has(a))
+            > tbody:has(> #{$expansion-row})
+              > tr
+                background-image: none
+
+              > tr:nth-child(odd of :not(#{$expansion-row})),
+              > tr:nth-child(odd of :not(#{$expansion-row})) + #{$expansion-row}:not(.v-data-table__tr)
+                background-image: linear-gradient(0deg, $table-stripe-color, $table-stripe-color)
 
     &.v-table--fixed-header
       > .v-table__wrapper
