@@ -1730,6 +1730,54 @@ describe('VSelect', () => {
     await expect.poll(() => select).not.toHaveClass('v-select--active-menu')
   })
 
+  it('should resize its menu with the field without a ResizeObserver loop error', async () => {
+    const errors: string[] = []
+    function onError (e: ErrorEvent) {
+      errors.push(e.message)
+    }
+    window.addEventListener('error', onError)
+
+    render(() => (
+      <div class="d-flex">
+        <VSelect items={ items } multiple chips />
+        <VSelect items={ items } multiple chips />
+      </div>
+    ))
+
+    const field = screen.getAllByCSS('.v-field')[0]
+    await userEvent.click(field)
+    const content = await screen.findByCSS('.v-overlay__content')
+    await expect.poll(() => content.offsetWidth).toBe(field.offsetWidth)
+    const initialWidth = field.offsetWidth
+    const initialLeft = content.offsetLeft
+
+    await userEvent.click(await screen.findByText('California'))
+    await expect.poll(() => field.offsetWidth).toBeGreaterThan(initialWidth)
+    await expect.poll(() => content.offsetWidth).toBe(field.offsetWidth)
+    await expect.poll(() => content.offsetLeft).toBe(initialLeft)
+
+    window.removeEventListener('error', onError)
+    expect(errors).toEqual([])
+  })
+
+  it('should keep its menu as wide as the field while it resizes next to the viewport edge', async () => {
+    const width = ref(300)
+
+    render(() => (
+      <div style={{ position: 'absolute', right: '4px', width: `${width.value}px`, transition: 'width 150ms linear' }}>
+        <VSelect items={ items } menu />
+      </div>
+    ))
+
+    const field = screen.getByCSS('.v-field')
+    const content = await screen.findByCSS('.v-overlay__content')
+    await expect.poll(() => content.offsetWidth).toBe(field.offsetWidth)
+
+    width.value = 460
+    await expect.poll(() => field.offsetWidth).toBe(460)
+    await expect.poll(() => content.offsetWidth).toBe(460)
+  })
+
   describe('item:added / item:removed', () => {
     it('should emit when selecting and deselecting multiple items', async () => {
       const added = vi.fn()
