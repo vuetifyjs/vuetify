@@ -5,6 +5,7 @@
 // VSelectionControl
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;
 $selection-control-size: 40px !default;
+$selection-control-themed-color: tools.theme-color('on-surface', var(--v-high-emphasis-opacity)) !default;
 $selection-control-description-opacity: var(--v-medium-emphasis-opacity) !default;
 $selection-control-description-typography: (
   map.get(settings.$typography, 'body-medium', 'size'),

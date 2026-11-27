@@ -72,4 +72,68 @@ describe('VRadio', () => {
     cmp.value.blur()
     expect(document.activeElement).not.toBe(screen.getByCSS('input[type="radio"]'))
   })
+
+  describe('theme', () => {
+    const inheritedColor = 'rgb(255, 0, 0)'
+
+    function getColors (label: string) {
+      const labelEl = screen.getByText(label)
+      const iconEl = labelEl.closest('.v-selection-control')!.querySelector('.v-icon')!
+
+      return {
+        label: getComputedStyle(labelEl).color,
+        icon: getComputedStyle(iconEl).color,
+      }
+    }
+
+    it('should inherit text color when theme is not set', async () => {
+      render(() => (
+        <div style={{ color: inheritedColor }}>
+          <VRadio label="Inherit" value="a" />
+        </div>
+      ))
+
+      expect(getColors('Inherit')).toEqual({ label: inheritedColor, icon: inheritedColor })
+    })
+
+    it('should use colors of the theme set on the radio', async () => {
+      render(() => (
+        <div style={{ color: inheritedColor }}>
+          <VRadio label="Light" value="a" theme="light" />
+          <VRadio label="Dark" value="b" theme="dark" />
+        </div>
+      ))
+
+      const light = getColors('Light')
+      const dark = getColors('Dark')
+
+      expect(light.label).not.toBe(inheritedColor)
+      expect(light.icon).not.toBe(inheritedColor)
+      expect(dark.label).not.toBe(inheritedColor)
+      expect(dark.icon).not.toBe(inheritedColor)
+      expect(dark.label).not.toBe(light.label)
+    })
+
+    it('should use colors of the theme set on VRadioGroup', async () => {
+      render(() => (
+        <div style={{ color: inheritedColor }}>
+          <VRadioGroup theme="dark">
+            <VRadio label="Grouped" value="a" />
+          </VRadioGroup>
+          <VRadio label="Standalone" value="b" theme="dark" />
+        </div>
+      ))
+
+      expect(getColors('Grouped').label).not.toBe(inheritedColor)
+      expect(getColors('Grouped')).toEqual(getColors('Standalone'))
+    })
+
+    it('should keep the color prop on the selected icon', async () => {
+      render(() => (
+        <VRadio label="Dark" value="a" modelValue="a" theme="dark" color="#008000" />
+      ))
+
+      expect(getColors('Dark').icon).toBe('rgb(0, 128, 0)')
+    })
+  })
 })

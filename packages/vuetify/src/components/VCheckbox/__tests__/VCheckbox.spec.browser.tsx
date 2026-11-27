@@ -104,3 +104,19 @@ describe('VCheckbox controlled', () => {
     expect(onUpdate).toHaveBeenCalledTimes(2)
   })
 })
+
+describe('VCheckbox theme', () => {
+  it('should use colors of the theme instead of inheriting them', async () => {
+    const inheritedColor = 'rgb(255, 0, 0)'
+
+    render(() => (
+      <div style={{ color: inheritedColor }}>
+        <VCheckbox label="Inherit" />
+        <VCheckbox label="Dark" theme="dark" />
+      </div>
+    ))
+
+    expect(getComputedStyle(screen.getByText('Inherit')).color).toBe(inheritedColor)
+    expect(getComputedStyle(screen.getByText('Dark')).color).not.toBe(inheritedColor)
+  })
+})

@@ -11,6 +11,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideTheme } from '@/composables/theme'
 
 // Directives
 import vRipple from '@/directives/ripple'
@@ -179,6 +180,7 @@ export const VSelectionControl = genericComponent<new <T>(
       backgroundColorStyles,
       trueValue,
     } = useSelectionControl(props)
+    const { themeClasses } = provideTheme(props)
 
     const uid = useId()
     const isFocused = shallowRef(false)
@@ -300,7 +302,9 @@ export const VSelectionControl = genericComponent<new <T>(
               'v-selection-control--focus-visible': isFocusVisible.value,
               'v-selection-control--inline': props.inline,
               'v-selection-control--has-description': hasDescription,
+              'v-selection-control--themed': !!props.theme,
             },
+            themeClasses.value,
             densityClasses.value,
             props.class,
           ]}
