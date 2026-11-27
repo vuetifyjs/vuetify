@@ -4,7 +4,9 @@ import { VAutocomplete } from '@/components/VAutocomplete'
 import { VBtn } from '@/components/VBtn'
 import { VCard } from '@/components/VCard'
 import { VDialog } from '@/components/VDialog'
+import { VLayout } from '@/components/VLayout'
 import { VList, VListItem, VListItemTitle } from '@/components/VList'
+import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 import { VOverlay } from '@/components/VOverlay'
 import { VSheet } from '@/components/VSheet'
 import { VTab, VTabs } from '@/components/VTabs'
@@ -1564,5 +1566,41 @@ describe('VMenu', () => {
     } finally {
       vi.unstubAllGlobals()
     }
+  })
+
+  it('should keep lists scrollable inside card or sheet content when attached to a navigation drawer', async () => {
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer id="drawer" modelValue permanent>
+          <VList data-testid="drawer-list">
+            <VListItem title="Nav Item" />
+          </VList>
+          <VMenu attach="#drawer" maxHeight={ 150 } transition={ false }>
+            {{
+              activator: ({ props }: any) => <VBtn { ...props } data-testid="activator">Open</VBtn>,
+              default: () => (
+                <VCard class="d-flex flex-column">
+                  <VList data-testid="menu-list">
+                    { Array.from({ length: 20 }, (_, index) => (
+                      <VListItem key={ index } title={ `Item ${index + 1}` } />
+                    ))}
+                  </VList>
+                </VCard>
+              ),
+            }}
+          </VMenu>
+        </VNavigationDrawer>
+      </VLayout>
+    ))
+
+    await userEvent.click(screen.getByTestId('activator'))
+    await commands.waitStable('[data-testid="menu-list"]')
+
+    const drawerList = screen.getByTestId('drawer-list')
+    const menuList = screen.getByTestId('menu-list')
+
+    expect(getComputedStyle(drawerList).overflowY).toBe('hidden')
+    expect(getComputedStyle(menuList).overflowY).toBe('auto')
+    expect(menuList.scrollHeight).toBeGreaterThan(menuList.clientHeight)
   })
 })

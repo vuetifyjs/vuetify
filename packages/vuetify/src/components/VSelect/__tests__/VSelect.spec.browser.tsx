@@ -3,7 +3,9 @@ import { VSelect } from '../VSelect'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
+import { VLayout } from '@/components/VLayout'
 import { VListItem } from '@/components/VList'
+import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 import { VTextField } from '@/components/VTextField'
 
 // Utilities
@@ -1782,6 +1784,38 @@ describe('VSelect', () => {
       await userEvent.click(screen.getByCSS('.v-field__clearable'))
       expect(removed).toHaveBeenCalledTimes(2)
     })
+  })
+
+  it('should scroll its menu list when attached to a navigation drawer', async () => {
+    const model = ref<string>()
+    const drawerItems = Array.from({ length: 30 }, (_, index) => `Item ${index + 1}`)
+
+    render(() => (
+      <VLayout>
+        <VNavigationDrawer id="drawer" modelValue permanent>
+          <VSelect
+            items={ drawerItems }
+            menuProps={{ attach: '#drawer' }}
+            modelValue={ model.value }
+            onUpdate:modelValue={ val => model.value = val as string }
+          />
+        </VNavigationDrawer>
+      </VLayout>
+    ))
+
+    await userEvent.click(screen.getByCSS('.v-select'))
+    await commands.waitStable('.v-select__content .v-list')
+
+    const list = screen.getByCSS('.v-select__content .v-list')
+    expect(getComputedStyle(list).overflowY).toBe('auto')
+
+    list.scrollTop = list.scrollHeight
+    list.dispatchEvent(new Event('scroll'))
+
+    const lastOption = await screen.findByRole('option', { name: 'Item 30' })
+    await userEvent.click(lastOption)
+
+    expect(model.value).toBe('Item 30')
   })
 
   showcase({ stories })
