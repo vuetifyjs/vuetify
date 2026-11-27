@@ -8,18 +8,10 @@ export default {
     cancel: '取消',
   },
   dataIterator: {
-    noResultsText: '没有符合条件的结果',
     loadingText: '加载中……',
   },
   dataTable: {
-    itemsPerPageText: '每页数目：',
     ariaLabel: {
-      sortDescending: '：降序排列。',
-      sortAscending: '：升序排列。',
-      sortNone: '：未排序。',
-      activateNone: '点击以移除排序。',
-      activateDescending: '点击以降序排列。',
-      activateAscending: '点击以升序排列。',
       selectRow: '选择行',
       selectAll: '选择全部',
       selectGroup: '选择分组',
@@ -34,9 +26,6 @@ export default {
     firstPage: '首页',
     lastPage: '尾页',
     pageText: '{0}-{1} 共 {2}',
-  },
-  dateRangeInput: {
-    divider: '至',
   },
   monthPicker: {
     title: '选择月份',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '已选择 {0} 项',
-    range: {
-      title: '选择日期',
-      header: '输入日期',
-    },
     title: '选择日期',
     header: '输入日期',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '还有 {0} 项',
-    today: '今天',
   },
   heatmap: {
     less: '少',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

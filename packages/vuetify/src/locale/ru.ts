@@ -8,18 +8,10 @@ export default {
     cancel: 'Отмена',
   },
   dataIterator: {
-    noResultsText: 'Не найдено подходящих записей',
     loadingText: 'Запись загружается...',
   },
   dataTable: {
-    itemsPerPageText: 'Строк на странице:',
     ariaLabel: {
-      sortDescending: 'Упорядочено по убыванию.',
-      sortAscending: 'Упорядочено по возрастанию.',
-      sortNone: 'Не упорядочено.',
-      activateNone: 'Активируйте, чтобы убрать сортировку.',
-      activateDescending: 'Активируйте для упорядочивания убыванию.',
-      activateAscending: 'Активируйте для упорядочивания по возрастанию.',
       selectRow: 'Выбрать строку',
       selectAll: 'Выбрать всё',
       selectGroup: 'Выбрать группу',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Первая страница',
     lastPage: 'Последняя страница',
     pageText: '{0}-{1} из {2}',
-  },
-  dateRangeInput: {
-    divider: 'до',
   },
   monthPicker: {
     title: 'Выбрать месяц',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} выбрано',
-    range: {
-      title: 'Выбранные даты',
-      header: 'Ввод дат',
-    },
     title: 'Выбор даты',
     header: 'Ввод даты',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Еще {0}',
-    today: 'Сегодня',
   },
   heatmap: {
     less: 'Меньше',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

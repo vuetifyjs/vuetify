@@ -8,18 +8,10 @@ export default {
     cancel: 'ยกเลิก',
   },
   dataIterator: {
-    noResultsText: 'ไม่พบข้อมูลที่ค้นหา',
     loadingText: 'กำลังโหลดข้อมูล...',
   },
   dataTable: {
-    itemsPerPageText: 'แถวต่อหน้า:',
     ariaLabel: {
-      sortDescending: 'เรียงจากมากไปน้อยอยู่',
-      sortAscending: 'เรียงจากน้อยไปมากอยู่',
-      sortNone: 'ไม่ได้เรียงลำดับ',
-      activateNone: 'กดเพื่อปิดการเรียงลำดับ',
-      activateDescending: 'กดเพื่อเรียงจากมากไปน้อย',
-      activateAscending: 'กดเพื่อเรียงจากน้อยไปมาก',
       selectRow: 'เลือกแถว',
       selectAll: 'เลือกทั้งหมด',
       selectGroup: 'เลือกกลุ่ม',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'หน้าแรก',
     lastPage: 'หน้าสุดท้าย',
     pageText: '{0}-{1} จาก {2}',
-  },
-  dateRangeInput: {
-    divider: 'ถึง',
   },
   monthPicker: {
     title: 'เลือกเดือน',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: 'เลือกแล้ว {0} รายการ',
-    range: {
-      title: 'เลือกวันที่',
-      header: 'ป้อนวันที่',
-    },
     title: 'เลือกวันที่',
     header: 'ป้อนวันที่',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'มีอีก {0}',
-    today: 'วันนี้',
   },
   heatmap: {
     less: 'น้อย',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

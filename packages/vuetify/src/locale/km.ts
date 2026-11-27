@@ -8,18 +8,10 @@ export default {
     cancel: 'បោះបង់',
   },
   dataIterator: {
-    noResultsText: 'មិនមានទិន្នន័យដែលត្រូវគ្នាទេ',
     loadingText: 'កំពុងដំណើរការ...',
   },
   dataTable: {
-    itemsPerPageText: 'ជ្រើសរើសពត៌មានក្នុងមួយទំព័រ:',
     ariaLabel: {
-      sortDescending: 'តំណទំហំចុះរួម។',
-      sortAscending: 'តំណទំហំឡើងរួម។',
-      sortNone: 'មិនចុះរួម។',
-      activateNone: 'ចុចដើម្បីដកតំណទំហំ។',
-      activateDescending: 'ចុចដើម្បីតំណទំហំចុះរួម។',
-      activateAscending: 'ចុចដើម្បីតំណទំហំឡើងរួម។',
       selectRow: 'ជ្រើសរើសជួរ',
       selectAll: 'ជ្រើសរើសទាំងអស់',
       selectGroup: 'ជ្រើសរើសក្រុម',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'ទំព័រដំបូង',
     lastPage: 'ទំព័រចុងក្រោយ',
     pageText: '{0}-{1} នៃ {2}',
-  },
-  dateRangeInput: {
-    divider: 'ដល់',
   },
   monthPicker: {
     title: 'ជ្រើសរើសខែ',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} ត្រូវបានជ្រើសរើស',
-    range: {
-      title: 'ជ្រើសរើសកាលបរិច្ឆេទ',
-      header: 'បញ្ចូលកាលបរិច្ឆេទ',
-    },
     title: 'ជ្រើសរើសកាលបរិច្ឆេទ',
     header: 'បញ្ចូលកាលបរិច្ឆេទ',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} ទៀត',
-    today: 'ថ្ងៃនេះ',
   },
   heatmap: {
     less: 'តិច',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

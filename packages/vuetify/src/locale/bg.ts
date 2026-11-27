@@ -8,18 +8,10 @@ export default {
     cancel: 'Отмяна',
   },
   dataIterator: {
-    noResultsText: 'Не са намерени записи',
     loadingText: 'Зареждане на елементи...',
   },
   dataTable: {
-    itemsPerPageText: 'Редове на страница:',
     ariaLabel: {
-      sortDescending: 'Подреди в намаляващ ред.',
-      sortAscending: 'Подреди в нарастващ ред.',
-      sortNone: 'Без подредба.',
-      activateNone: 'Активирай за премахване на подредбата.',
-      activateDescending: 'Активирай за подредба в намаляващ ред.',
-      activateAscending: 'Активирай за подредба в нарастващ ред.',
       selectRow: 'Избор на ред',
       selectAll: 'Избор на всички',
       selectGroup: 'Избор на група',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Първа страница',
     lastPage: 'Последна страница',
     pageText: '{0}-{1} от {2}',
-  },
-  dateRangeInput: {
-    divider: 'до',
   },
   monthPicker: {
     title: 'Изберете месец',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} избрани',
-    range: {
-      title: 'Избор на дати',
-      header: 'Въвеждане на дати',
-    },
     title: 'Избор на дата',
     header: 'Въвеждане на дата',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Още {0}',
-    today: 'Днес',
   },
   heatmap: {
     less: 'По-малко',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

@@ -8,18 +8,10 @@ export default {
     cancel: 'İptal',
   },
   dataIterator: {
-    noResultsText: 'Eşleşen veri bulunamadı',
     loadingText: 'Yükleniyor... Lütfen bekleyin.',
   },
   dataTable: {
-    itemsPerPageText: 'Sayfa başına satır:',
     ariaLabel: {
-      sortDescending: 'Z\'den A\'ya sıralı.',
-      sortAscending: 'A\'dan Z\'ye sıralı.',
-      sortNone: 'Sıralı değil.',
-      activateNone: 'Sıralamayı kaldırmak için etkinleştir.',
-      activateDescending: 'Z\'den A\'ya sıralamak için etkinleştir.',
-      activateAscending: 'A\'dan Z\'ye sıralamak için etkinleştir.',
       selectRow: 'Satırı seç',
       selectAll: 'Tümünü seç',
       selectGroup: 'Grubu seç',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'İlk sayfa',
     lastPage: 'Son sayfa',
     pageText: '{0} - {1} arası, Toplam: {2} kayıt',
-  },
-  dateRangeInput: {
-    divider: 'ile',
   },
   monthPicker: {
     title: 'Ay seçin',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} seçildi',
-    range: {
-      title: 'Tarihleri seçin',
-      header: 'Tarihleri girin',
-    },
     title: 'Tarih seçin',
     header: 'Tarih girin',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} tane daha',
-    today: 'Bugün',
   },
   heatmap: {
     less: 'Az',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

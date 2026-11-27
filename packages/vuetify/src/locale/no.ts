@@ -8,18 +8,10 @@ export default {
     cancel: 'Avbryt',
   },
   dataIterator: {
-    noResultsText: 'Fant ingen matchende elementer.',
     loadingText: 'Laster...',
   },
   dataTable: {
-    itemsPerPageText: 'Rader per side:',
     ariaLabel: {
-      sortDescending: 'Sortert synkende.',
-      sortAscending: 'Sortert stigende.',
-      sortNone: 'Ikke sortert.',
-      activateNone: 'Aktiver for å fjerne sortering.',
-      activateDescending: 'Aktiver for å sortere synkende.',
-      activateAscending: 'Aktiver for å sortere stigende.',
       selectRow: 'Velg rad',
       selectAll: 'Velg alle',
       selectGroup: 'Velg gruppe',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Første side',
     lastPage: 'Siste side',
     pageText: '{0}-{1} av {2}',
-  },
-  dateRangeInput: {
-    divider: 'til',
   },
   monthPicker: {
     title: 'Velg måned',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valgt',
-    range: {
-      title: 'Velg datoer',
-      header: 'Velg datoer',
-    },
     title: 'Velg dato',
     header: 'Velg dato',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} flere',
-    today: 'I dag',
   },
   heatmap: {
     less: 'Mindre',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

@@ -8,18 +8,10 @@ export default {
     cancel: 'هەڵوەشاندنەوە',
   },
   dataIterator: {
-    noResultsText: 'هیچ تۆمارێکی هاوتا نەدۆزرایەوە',
     loadingText: 'بارکردنی ئایتمەکان...',
   },
   dataTable: {
-    itemsPerPageText: 'ڕیزەکان بۆ هەر پەڕەیەک:',
     ariaLabel: {
-      sortDescending: '.سەر بەرەو خوار ڕیزکراوە',
-      sortAscending: '.سەر بەرەو ژوور ڕیزکراوە',
-      sortNone: 'ڕیزنەکراوە.',
-      activateNone: 'چالاککردن بۆ لابردنی ڕیزکردن.',
-      activateDescending: 'چالاککردن بۆ ڕیزکردنی سەربەرەوخوار.',
-      activateAscending: 'چالاککردن بۆ ڕیزکردنی سەر بەرەو ژوور.',
       selectRow: 'ڕیز هەڵبژێرە',
       selectAll: 'هەمووی هەڵبژێرە',
       selectGroup: 'گرووپ هەڵبژێرە',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'پەڕەی یەکەم',
     lastPage: 'پەڕەی کۆتایی',
     pageText: '{0}-{1} لە {2}',
-  },
-  dateRangeInput: {
-    divider: 'بۆ',
   },
   monthPicker: {
     title: 'مانگ هەڵبژێرە',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} هەڵبژێردراوە',
-    range: {
-      title: 'بژاردنی بەروارەکان',
-      header: 'بەروارەکان بنووسە',
-    },
     title: 'بژاردنی بەروار',
     header: 'بەروار بنووسە',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} زیاتر',
-    today: 'ئەمڕو',
   },
   heatmap: {
     less: 'کەمتر',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

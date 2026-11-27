@@ -8,18 +8,10 @@ export default {
     cancel: 'Anuluj',
   },
   dataIterator: {
-    noResultsText: 'Nie znaleziono danych odpowiadających wyszukiwaniu',
     loadingText: 'Wczytywanie danych...',
   },
   dataTable: {
-    itemsPerPageText: 'Wierszy na stronie:',
     ariaLabel: {
-      sortDescending: 'Sortowanie malejąco. Kliknij aby zmienić.',
-      sortAscending: 'Sortowanie rosnąco. Kliknij aby zmienić.',
-      sortNone: 'Bez sortowania. Kliknij aby posortować rosnąco.',
-      activateNone: 'Kliknij aby usunąć sortowanie.',
-      activateDescending: 'Kliknij aby posortować malejąco.',
-      activateAscending: 'Kliknij aby posortować rosnąco.',
       selectRow: 'Wybierz wiersz',
       selectAll: 'Wybierz wszystkie',
       selectGroup: 'Wybierz grupę',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Pierwsza strona',
     lastPage: 'Ostatnia strona',
     pageText: '{0}-{1} z {2}',
-  },
-  dateRangeInput: {
-    divider: 'do',
   },
   monthPicker: {
     title: 'Wybierz miesiąc',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} wybrano',
-    range: {
-      title: 'Wybór zakresu dat',
-      header: 'Wprowadź zakres dat',
-    },
     title: 'Wybór daty',
     header: 'Wprowadź datę',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} więcej',
-    today: 'Dzisiaj',
   },
   heatmap: {
     less: 'Mniej',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

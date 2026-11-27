@@ -8,18 +8,10 @@ export default {
     cancel: 'Скасувати',
   },
   dataIterator: {
-    noResultsText: 'В результаті пошуку нічого не знайдено',
     loadingText: 'Завантаження...',
   },
   dataTable: {
-    itemsPerPageText: 'Рядків на сторінці:',
     ariaLabel: {
-      sortDescending: 'Відсортовано за спаданням.',
-      sortAscending: 'Відсортовано за зростанням.',
-      sortNone: 'Не відсортовано.',
-      activateNone: 'Активуйте, щоб прибрати сортування.',
-      activateDescending: 'Активуйте, щоб відсортувати за спаданням.',
-      activateAscending: 'Активуйте, щоб відсортувати за зростанням.',
       selectRow: 'Вибрати рядок',
       selectAll: 'Вибрати всі',
       selectGroup: 'Вибрати групу',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Перша сторінка',
     lastPage: 'Остання сторінка',
     pageText: '{0}-{1} з {2}',
-  },
-  dateRangeInput: {
-    divider: 'до',
   },
   monthPicker: {
     title: 'Виберіть місяць',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: 'Вибрано {0}',
-    range: {
-      title: 'Виберіть дати',
-      header: 'Введіть дати',
-    },
     title: 'Виберіть дату',
     header: 'Введіть дату',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Ще {0}',
-    today: 'Сьогодні',
   },
   heatmap: {
     less: 'Менше',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

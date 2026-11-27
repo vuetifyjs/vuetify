@@ -8,18 +8,10 @@ export default {
     cancel: 'Tühista',
   },
   dataIterator: {
-    noResultsText: 'Vastavaid kirjeid ei leitud',
     loadingText: 'Andmeid laaditakse...',
   },
   dataTable: {
-    itemsPerPageText: 'Ridu leheküljel:',
     ariaLabel: {
-      sortDescending: 'Kahanevalt sorteeritud.',
-      sortAscending: 'Kasvavalt sorteeritud.',
-      sortNone: 'Ei ole sorteeritud.',
-      activateNone: 'Vajuta uuesti sorteerimise eemaldamiseks.',
-      activateDescending: 'Vajuta uuesti, et sorteerida kahanevalt.',
-      activateAscending: 'Vajuta kasvavalt sorteerimiseks.',
       selectRow: 'Vali rida',
       selectAll: 'Vali kõik',
       selectGroup: 'Vali rühm',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Esimene lehekülg',
     lastPage: 'Viimane lehekülg',
     pageText: '{0}-{1} {2}st',
-  },
-  dateRangeInput: {
-    divider: 'kuni',
   },
   monthPicker: {
     title: 'Valige kuu',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valitud',
-    range: {
-      title: 'Vali kuupäevad',
-      header: 'Sisesta kuupäevad',
-    },
     title: 'Vali kuupäev',
     header: 'Sisesta kuupäev',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} veel',
-    today: 'Täna',
   },
   heatmap: {
     less: 'Vähem',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

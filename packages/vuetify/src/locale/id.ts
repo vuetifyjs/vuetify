@@ -8,18 +8,10 @@ export default {
     cancel: 'Batal',
   },
   dataIterator: {
-    noResultsText: 'Tidak ditemukan catatan yang cocok',
     loadingText: 'Memuat data...',
   },
   dataTable: {
-    itemsPerPageText: 'Baris per halaman:',
     ariaLabel: {
-      sortDescending: 'Diurutkan kebawah.',
-      sortAscending: 'Diurutkan keatas.',
-      sortNone: 'Tidak diurutkan.',
-      activateNone: 'Aktifkan untuk menghapus penyortiran.',
-      activateDescending: 'Aktifkan untuk mengurutkan kebawah.',
-      activateAscending: 'Aktifkan untuk mengurutkan keatas.',
       selectRow: 'Pilih baris',
       selectAll: 'Pilih semua',
       selectGroup: 'Pilih grup',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Halaman pertama',
     lastPage: 'Halaman terakhir',
     pageText: '{0}-{1} dari {2}',
-  },
-  dateRangeInput: {
-    divider: 'hingga',
   },
   monthPicker: {
     title: 'Pilih bulan',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} dipilih',
-    range: {
-      title: 'Pilih tanggal',
-      header: 'Masukkan tanggal',
-    },
     title: 'Pilih tanggal',
     header: 'Masukkan tanggal',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} lagi',
-    today: 'Hari ini',
   },
   heatmap: {
     less: 'Kurang',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

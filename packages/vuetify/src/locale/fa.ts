@@ -8,18 +8,10 @@ export default {
     cancel: 'لغو',
   },
   dataIterator: {
-    noResultsText: 'نتیجه‌ای یافت نشد',
     loadingText: 'در حال بارگذاری...',
   },
   dataTable: {
-    itemsPerPageText: 'ردیف در صفحه:',
     ariaLabel: {
-      sortDescending: 'مرتب‌سازی نزولی',
-      sortAscending: 'مرتب‌سازی صعودی',
-      sortNone: 'بدون مرتب‌سازی',
-      activateNone: 'برای حذف مرتب‌سازی فعال کنید',
-      activateDescending: 'برای مرتب‌سازی نزولی فعال کنید',
-      activateAscending: 'برای مرتب‌سازی صعودی فعال کنید',
       selectRow: 'انتخاب ردیف',
       selectAll: 'انتخاب همه',
       selectGroup: 'انتخاب گروه',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'صفحه‌ی یکم',
     lastPage: 'صفحه‌ی آخر',
     pageText: '{0} تا {1} از {2}',
-  },
-  dateRangeInput: {
-    divider: 'تا',
   },
   monthPicker: {
     title: 'انتخاب ماه',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} انتخاب‌شده',
-    range: {
-      title: 'انتخاب تاریخ‌ها',
-      header: 'تاریخ‌ها را وارد کنید',
-    },
     title: 'انتخاب تاریخ',
     header: 'تاریخ را وارد کنید',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} مورد دیگر',
-    today: 'امروز',
   },
   heatmap: {
     less: 'کمتر',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

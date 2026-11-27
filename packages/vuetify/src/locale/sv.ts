@@ -8,18 +8,10 @@ export default {
     cancel: 'Avbryt',
   },
   dataIterator: {
-    noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
   },
   dataTable: {
-    itemsPerPageText: 'Rader per sida:',
     ariaLabel: {
-      sortDescending: 'Fallande sortering.',
-      sortAscending: 'Stigande sortering.',
-      sortNone: 'Osorterat.',
-      activateNone: 'Aktivera för att ta bort sortering.',
-      activateDescending: 'Aktivera för att sortera fallande.',
-      activateAscending: 'Aktivera för att sortera stigande.',
       selectRow: 'Välj rad',
       selectAll: 'Välj alla',
       selectGroup: 'Välj grupp',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Första sidan',
     lastPage: 'Sista sidan',
     pageText: '{0}-{1} av {2}',
-  },
-  dateRangeInput: {
-    divider: 'till',
   },
   monthPicker: {
     title: 'Välj månad',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} valda',
-    range: {
-      title: 'Välj datum',
-      header: 'Välj datum',
-    },
     title: 'Välj datum',
     header: 'Välj datum',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} fler',
-    today: 'Idag',
   },
   heatmap: {
     less: 'Mindre',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

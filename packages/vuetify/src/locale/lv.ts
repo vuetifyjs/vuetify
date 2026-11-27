@@ -8,18 +8,10 @@ export default {
     cancel: 'Atcelt',
   },
   dataIterator: {
-    noResultsText: 'Nekas netika atrasts',
     loadingText: 'Ielādē...',
   },
   dataTable: {
-    itemsPerPageText: 'Rādīt lapā:',
     ariaLabel: {
-      sortDescending: 'Sakārtots dilstošā secībā.',
-      sortAscending: 'Sakārtots augošā secībā.',
-      sortNone: 'Nav sakārtots.',
-      activateNone: 'Aktivizēt, lai noņemtu kārtošanu.',
-      activateDescending: 'Aktivizēt, lai sakārtotu dilstošā secībā.',
-      activateAscending: 'Aktivizēt, lai sakārtotu augošā secībā.',
       selectRow: 'Atlasīt rindu',
       selectAll: 'Atlasīt visu',
       selectGroup: 'Atlasīt grupu',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Pirmā lapa',
     lastPage: 'Pēdējā lapa',
     pageText: '{0}-{1} no {2}',
-  },
-  dateRangeInput: {
-    divider: 'līdz',
   },
   monthPicker: {
     title: 'Izvēlieties mēnesi',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} izvēlēts',
-    range: {
-      title: 'Izvēlieties datumus',
-      header: 'Ievadiet datumus',
-    },
     title: 'Izvēlieties datumu',
     header: 'Ievadiet datumu',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Vēl {0}',
-    today: 'Šodien',
   },
   heatmap: {
     less: 'Mazāk',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',

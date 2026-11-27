@@ -8,18 +8,10 @@ export default {
     cancel: 'Бекор кардан',
   },
   dataIterator: {
-    noResultsText: 'Сабтҳои мувофиқ ёфт нашуданд',
     loadingText: 'Маълумот бор шуда истодааст...',
   },
   dataTable: {
-    itemsPerPageText: 'Сатрҳо дар саҳифа:',
     ariaLabel: {
-      sortDescending: 'Бо тартиби камшавӣ мураттаб шудааст.',
-      sortAscending: 'Бо тартиби афзоиш мураттаб шудааст.',
-      sortNone: 'Мураттаб нашудааст.',
-      activateNone: 'Барои бекор кардани мураттабсозӣ пахш кунед.',
-      activateDescending: 'Барои мураттабсозӣ бо тартиби камшавӣ пахш кунед.',
-      activateAscending: 'Барои мураттабсозӣ бо тартиби афзоиш пахш кунед.',
       selectRow: 'Интихоб кардани сатр',
       selectAll: 'Ҳамаро интихоб кардан',
       selectGroup: 'Интихоб кардани гурӯҳ',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Саҳифаи аввал',
     lastPage: 'Саҳифаи охирин',
     pageText: '{0}-{1} аз {2}',
-  },
-  dateRangeInput: {
-    divider: 'то',
   },
   monthPicker: {
     title: 'Моҳро интихоб кунед',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} интихоб шуд',
-    range: {
-      title: 'Санаҳоро интихоб кунед',
-      header: 'Санаҳоро ворид кунед',
-    },
     title: 'Санаро интихоб кунед',
     header: 'Санаро ворид кунед',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: 'Боз {0}',
-    today: 'Имрӯз',
   },
   heatmap: {
     less: 'Камтар',
@@ -170,7 +154,6 @@ export default {
     command: 'Command',
     space: 'Фосила',
     shift: 'Shift',
-    alt: 'Alt',
     enter: 'Enter',
     escape: 'Escape',
     upArrow: 'Тирча ба боло',

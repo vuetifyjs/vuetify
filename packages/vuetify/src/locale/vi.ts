@@ -8,18 +8,10 @@ export default {
     cancel: 'Hủy',
   },
   dataIterator: {
-    noResultsText: 'Không tìm thấy kết quả nào',
     loadingText: 'Đang tải...',
   },
   dataTable: {
-    itemsPerPageText: 'Số hàng mỗi trang:',
     ariaLabel: {
-      sortDescending: 'Sắp xếp giảm dần.',
-      sortAscending: 'Sắp xếp tăng dần.',
-      sortNone: 'Không sắp xếp.',
-      activateNone: 'Kích hoạt để bỏ sắp xếp.',
-      activateDescending: 'Kích hoạt để sắp xếp giảm dần.',
-      activateAscending: 'Kích hoạt để sắp xếp tăng dần.',
       selectRow: 'Chọn hàng',
       selectAll: 'Chọn tất cả',
       selectGroup: 'Chọn nhóm',
@@ -34,9 +26,6 @@ export default {
     firstPage: 'Trang đầu',
     lastPage: 'Trang cuối',
     pageText: '{0}-{1} trên {2}',
-  },
-  dateRangeInput: {
-    divider: 'đến',
   },
   monthPicker: {
     title: 'Chọn tháng',
@@ -54,10 +43,6 @@ export default {
   },
   datePicker: {
     itemsSelected: '{0} mục đã chọn',
-    range: {
-      title: 'Chọn ngày',
-      header: 'Nhập ngày',
-    },
     title: 'Chọn ngày',
     header: 'Nhập ngày',
     input: {
@@ -84,7 +69,6 @@ export default {
   },
   calendar: {
     moreEvents: '{0} nữa',
-    today: 'Hôm nay',
   },
   heatmap: {
     less: 'Ít hơn',
@@ -169,7 +153,6 @@ export default {
     ctrl: 'Ctrl',
     command: 'Command',
     shift: 'Shift',
-    alt: 'Alt',
     option: 'Option',
     enter: 'Enter',
     escape: 'Escape',
