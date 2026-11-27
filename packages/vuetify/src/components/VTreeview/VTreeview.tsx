@@ -40,6 +40,8 @@ export const makeVTreeviewProps = propsFactory({
     type: String,
     default: '$vuetify.noDataText',
   },
+  hoverable: Boolean,
+  hovered: null,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...omit(makeVTreeviewChildrenProps(), [
@@ -58,17 +60,19 @@ export const makeVTreeviewProps = propsFactory({
   modelValue: Array,
 }, 'VTreeview')
 
-export const VTreeview = genericComponent<new <T, O, A, S, M>(
+export const VTreeview = genericComponent<new <T, O, A, S, M, H>(
   props: {
     items?: T[]
     opened?: O
     activated?: A
     selected?: S
     modelValue?: M
+    hovered?: H
     'onUpdate:opened'?: (value: O) => void
     'onUpdate:activated'?: (value: A) => void
     'onUpdate:selected'?: (value: S) => void
     'onUpdate:modelValue'?: (value: M) => void
+    'onUpdate:hovered'?: (value: H) => void
   },
   slots: VTreeviewChildrenSlots<T> & {
     'no-data': never
@@ -83,6 +87,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
     'update:activated': (val: unknown) => true,
     'update:selected': (val: unknown) => true,
     'update:modelValue': (val: unknown) => true,
+    'update:hovered': (val: unknown) => true,
     'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
     'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
@@ -95,6 +100,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
     const color = toRef(() => props.color)
     const activated = useProxiedModel(props, 'activated')
     const _selected = useProxiedModel(props, 'selected')
+    const hovered = useProxiedModel(props, 'hovered')
 
     const selected = computed({
       get: () => props.modelValue ?? _selected.value,
@@ -136,7 +142,15 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
       return arr
     }
 
-    provide(VTreeviewSymbol, { visibleIds })
+    function onMouseleave () {
+      hovered.value = null
+    }
+
+    provide(VTreeviewSymbol, {
+      visibleIds,
+      hoverable: toRef(() => props.hoverable),
+      hovered,
+    })
 
     provideDefaults({
       VTreeviewGroup: {
@@ -183,6 +197,7 @@ export const VTreeview = genericComponent<new <T, O, A, S, M>(
             },
             props.style,
           ]}
+          onMouseleave={ props.hoverable ? onMouseleave : undefined }
           v-model:opened={ opened.value }
           v-model:activated={ activated.value }
           v-model:selected={ selected.value }
