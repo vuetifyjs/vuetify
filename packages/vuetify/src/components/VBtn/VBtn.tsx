@@ -131,7 +131,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     const color = toRef(() => isActive.value ? props.activeColor ?? props.color : props.color)
     const variantProps = computed(() => {
       const showColor = (
-        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (group?.isSelected.value && (!link.isRouterLink.value || link.isActive?.value)) ||
         (!group || link.isActive?.value)
       )
       return ({
