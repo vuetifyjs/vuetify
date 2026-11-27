@@ -25,6 +25,7 @@ export {
   createBreakpoints,
   createLocale as createV0Locale,
   createRtl as createV0Rtl,
+  createVirtual,
   useRovingFocus,
 } from '@vuetify/v0/composables'
 
