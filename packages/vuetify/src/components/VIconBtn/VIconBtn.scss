@@ -100,8 +100,7 @@
   $keys: height, width, narrow-width, wide-width, icon-size, border-radius, border-radius-pressed;
 
   @if btn.$icon-btn-named-sizes != () {
-    .v-icon-btn__overlay,
-    .v-icon-btn__underlay {
+    .v-icon-btn__overlay {
       will-change: opacity;
     }
   }
@@ -194,7 +193,6 @@
       }
 
       &__overlay,
-      &__underlay,
       .v-icon {
         forced-color-adjust: preserve-parent-color;
       }
