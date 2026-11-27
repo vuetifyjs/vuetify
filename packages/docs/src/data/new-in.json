@@ -292,6 +292,7 @@
     },
     "examples": {
       "prop-grouping": "4.1.0",
+      "prop-initial-sort-order": "4.4.0",
       "prop-sort-icon": "3.12.0",
       "slot-expanded": "4.1.0",
       "slot-group-summary": "3.10.0"

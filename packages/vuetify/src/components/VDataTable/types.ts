@@ -31,6 +31,7 @@ export type DataTableHeader<T = Record<string, any>> = {
   cellProps?: HeaderCellProps
 
   sortable?: boolean
+  initialSortOrder?: 'asc' | 'desc'
   sort?: DataTableCompareFunction
   sortRaw?: DataTableCompareFunction
   filter?: FilterFunction
