@@ -35,7 +35,7 @@ export const makeVCheckboxGroupProps = propsFactory({
   ...omit(makeSelectionControlGroupProps({
     multiple: true,
     type: 'checkbox',
-  }), ['indeterminateIcon', 'defaultsTarget', 'type']),
+  }), ['indeterminateIcon', 'defaultsTarget', 'type', 'theme']),
 }, 'VCheckboxGroup')
 
 export const VCheckboxGroup = genericComponent<new <T>(

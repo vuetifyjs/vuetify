@@ -2,6 +2,7 @@
   "description": "A single radio button, meant to be used within `v-radio-group`.",
   "props": {
     "falseIcon": "The icon used when inactive.",
+    "theme": "Deprecated, has no effect. Use [v-theme-provider](/api/v-theme-provider/) or **theme** on a parent component.",
     "trueIcon": "The icon used when active."
   }
 }

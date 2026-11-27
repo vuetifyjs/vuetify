@@ -1,3 +1,6 @@
 {
-  "description": "Groups multiple selection controls (checkboxes or radios) with shared validation and layout."
+  "description": "Groups multiple selection controls (checkboxes or radios) with shared validation and layout.",
+  "props": {
+    "theme": "Deprecated, has no effect. Use [v-theme-provider](/api/v-theme-provider/) or **theme** on a parent component."
+  }
 }

@@ -57,7 +57,7 @@ export const makeVSwitchProps = propsFactory({
   },
 
   ...omit(makeVInputProps(), ['glow']),
-  ...makeVSelectionControlProps(),
+  ...omit(makeVSelectionControlProps(), ['theme']),
   ...makeSizeProps(),
 }, 'VSwitch')
 

@@ -5,6 +5,7 @@
     "description": "Supporting text displayed below the label. Linked to the input with `aria-describedby`.",
     "indeterminate": "Styles the control as an intermediate 'partially selected' state.",
     "indeterminateIcon": "The icon used when the control is in the indeterminate state.",
+    "theme": "Deprecated, has no effect. Use [v-theme-provider](/api/v-theme-provider/) or **theme** on a parent component.",
     "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
   },
   "slots": {

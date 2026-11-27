@@ -1,6 +1,7 @@
 {
   "description": "A wrapper for `v-radio` components. It manages the selection state.",
   "props": {
-    "inline": "Displays radio buttons in row."
+    "inline": "Displays radio buttons in row.",
+    "theme": "Specify a theme for this component and all of its children. Label and unselected icons keep the parent's text color."
   }
 }

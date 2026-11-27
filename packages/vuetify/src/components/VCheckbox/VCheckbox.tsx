@@ -27,7 +27,7 @@ export const VCheckboxGroupSymbol: InjectionKey<boolean> = Symbol.for('vuetify:v
 
 export const makeVCheckboxProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),
-  ...omit(makeVCheckboxBtnProps(), ['inline']),
+  ...omit(makeVCheckboxBtnProps(), ['inline', 'theme']),
 }, 'VCheckbox')
 
 export const VCheckbox = genericComponent<new <T>(

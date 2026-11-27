@@ -2,7 +2,8 @@
   "description": "A lightweight alternative to the `v-checkbox` component that is designed to be used inside of data tables, tree views and lists.",
   "props": {
     "indeterminate": "Puts the control in an indeterminate state. Used with the [indeterminate-icon](#props-indeterminate-icon) property.",
-    "indeterminateIcon": "Icon used when the component is in an indeterminate state."
+    "indeterminateIcon": "Icon used when the component is in an indeterminate state.",
+    "theme": "Deprecated, has no effect. Use [v-theme-provider](/api/v-theme-provider/) or **theme** on a parent component."
   },
   "events": {
     "update:indeterminate": "Event that is emitted when the component's indeterminate state changes."

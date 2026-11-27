@@ -7,7 +7,6 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { onScopeDispose, provide, toRef, useId } from 'vue'
@@ -68,7 +67,8 @@ export const makeSelectionControlGroupProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-  ...makeThemeProps(),
+  /** @deprecated has no effect, use theme on a parent component or v-theme-provider */
+  theme: String,
 }, 'SelectionControlGroup')
 
 export const makeVSelectionControlGroupProps = propsFactory({
