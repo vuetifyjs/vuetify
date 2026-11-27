@@ -248,8 +248,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
       mergeProps({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
-        'aria-controls': id.value,
-        'aria-owns': id.value,
+        ...(isActive.value
+          ? { 'aria-controls': id.value, 'aria-owns': id.value }
+          : {}),
         onKeydown: onActivatorKeydown,
       }, props.activatorProps)
     )
