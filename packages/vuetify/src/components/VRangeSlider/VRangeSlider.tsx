@@ -2,6 +2,7 @@
 import '../VSlider/VSlider.sass'
 
 // Components
+import { VIcon } from '@/components/VIcon'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
@@ -9,13 +10,16 @@ import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { IconValue } from '@/composables/icons'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useElementSize } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { convertToUnit, filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
@@ -27,6 +31,8 @@ export const makeVRangeSliderProps = propsFactory({
   ...makeVInputProps(),
   ...makeSliderProps(),
 
+  appendInnerIcon: IconValue,
+  prependInnerIcon: IconValue,
   strict: Boolean,
   startThumbAriaLabel: {
     type: String,
@@ -59,6 +65,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
   setup (props, { slots, emit, attrs }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
+    const containerRef = ref<HTMLElement>()
+    const prependInnerRef = ref<HTMLElement>()
+    const appendInnerRef = ref<HTMLElement>()
     const inputRef = ref<VInput>()
     const { rtlClasses } = useRtl()
     const { t } = useLocale()
@@ -101,6 +110,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       trackSize,
       disabled,
       readonly,
+      isReversed,
+      trackFillColor,
+      vertical,
       getThumbState,
     } = useSlider({
       props,
@@ -154,6 +166,62 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const { isFocused, focus, blur } = useFocus(props)
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
+    const visualStart = toRef(() => isReversed.value ? 100 - trackStop.value : trackStart.value)
+    const visualStop = toRef(() => isReversed.value ? 100 - trackStart.value : trackStop.value)
+
+    const isPill = toRef(() => props.variant === 'pill')
+    const hasPrependInner = toRef(() => isPill.value && !!(props.prependInnerIcon || slots['prepend-inner']))
+    const hasAppendInner = toRef(() => isPill.value && !!(props.appendInnerIcon || slots['append-inner']))
+    const hasInner = toRef(() => hasPrependInner.value || hasAppendInner.value)
+
+    const containerSize = useElementSize(toRef(() => hasInner.value ? containerRef.value : undefined))
+    const prependInnerSize = useElementSize(prependInnerRef)
+    const appendInnerSize = useElementSize(appendInnerRef)
+
+    function getLength (size: ReturnType<typeof useElementSize>) {
+      return (vertical.value ? size.height : size.width).value
+    }
+
+    const containerLength = toRef(() => getLength(containerSize))
+    const isPrependFlipped = toRef(() => visualStart.value / 100 * containerLength.value < getLength(prependInnerSize))
+    const isAppendFlipped = toRef(() => (100 - visualStop.value) / 100 * containerLength.value < getLength(appendInnerSize))
+    const isFlippedOverflow = toRef(() => {
+      const flippedLength =
+        (isPrependFlipped.value ? getLength(prependInnerSize) : 0) +
+        (isAppendFlipped.value ? getLength(appendInnerSize) : 0)
+
+      return (visualStop.value - visualStart.value) / 100 * containerLength.value < flippedLength
+    })
+
+    const { textColorClasses: innerIconColorClasses, textColorStyles: innerIconColorStyles } = useTextColor(trackFillColor)
+
+    function innerIcon (side: 'prepend' | 'append') {
+      const isPrepend = side === 'prepend'
+      const isFlipped = isPrepend ? isPrependFlipped.value : isAppendFlipped.value
+
+      return (
+        <div
+          key={ `${side}-inner` }
+          ref={ isPrepend ? prependInnerRef : appendInnerRef }
+          class={[
+            'v-slider__inner-icon',
+            `v-slider__inner-icon--${side}`,
+            {
+              'v-slider__inner-icon--flipped': isFlipped,
+              'v-slider__inner-icon--filled': isFlipped,
+              'v-slider__inner-icon--hidden': isFlipped && isFlippedOverflow.value,
+            },
+            innerIconColorClasses.value,
+          ]}
+          style={[
+            innerIconColorStyles.value,
+            { '--v-slider-inner-icon-position': convertToUnit(isPrepend ? visualStart.value : visualStop.value, '%') },
+          ]}
+        >
+          { slots[`${side}-inner`]?.() ?? <VIcon icon={ isPrepend ? props.prependInnerIcon : props.appendInnerIcon } /> }
+        </div>
+      )
+    }
 
     useRender(() => {
       const inputProps = VInput.filterProps(props)
@@ -174,7 +242,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': disabled.value,
               [`v-slider--variant-${props.variant}`]: props.variant !== 'default',
-              [`v-slider--size-${props.size}`]: props.variant === 'pill',
+              [`v-slider--size-${props.size}`]: isPill.value,
+              'v-slider--has-prepend-inner': hasPrependInner.value,
+              'v-slider--has-append-inner': hasAppendInner.value,
             },
             rtlClasses.value,
             props.class,
@@ -205,6 +275,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
             ) : undefined,
             default: ({ id, messagesId }) => (
               <div
+                ref={ containerRef }
                 class="v-slider__container"
                 style={{
                   '--v-slider-track-size': convertToUnit(trackSize.value),
@@ -243,6 +314,9 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 >
                   {{ 'tick-label': slots['tick-label'] }}
                 </VSliderTrack>
+
+                { hasPrependInner.value && innerIcon('prepend') }
+                { hasAppendInner.value && innerIcon('append') }
 
                 <VSliderThumb
                   ref={ startThumbRef }
