@@ -23,7 +23,7 @@ import { Examples } from './build/examples-plugin.ts'
 import { renderOgImages, writeOgImages } from './build/generate-og-images.ts'
 import { genAppMetaInfo } from './src/utils/metadata.ts'
 import { MdiJs } from './build/mdi-js.ts'
-import { frontmatterBuilder, getRouteMeta, scriptFixer } from './build/markdownBuilders.ts'
+import { frontmatterBuilder, getRouteMeta, resolveComponent, scriptFixer } from './build/markdownBuilders.ts'
 
 const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
@@ -166,6 +166,7 @@ export default defineConfig(({ command, mode, isSsrBuild }) => {
 
           return {
             ...route,
+            component: resolveComponent(route.component, locale),
             path: '/' + [locale, category, ...rest].filter(Boolean).join('/') + '/',
             meta: {
               ...meta,

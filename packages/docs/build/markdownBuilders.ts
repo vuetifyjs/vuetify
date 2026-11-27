@@ -71,7 +71,10 @@ async function setupPages<T extends Pipeline<any>> (
     options.pages = await pagesPlugin.api.getResolvedRoutes() as []
   }
 
-  const page = options.pages.find(p => payload.fileName.endsWith(p.component))
+  // en components are shared with untranslated locale routes
+  const page = options.pages.find(p => (
+    payload.fileName.endsWith(p.component) && p.component.includes(`/${p.path.split('/')[1]}/`)
+  ))
 
   if (!page) throw new Error('Unable to find page')
 
@@ -171,6 +174,16 @@ export function getRouteMeta (componentPath: string, locale: string) {
     layout: a.layout,
     ...a.meta,
   }
+}
+
+// Crowdin exports untranslated pages as copies of en, building them again only costs memory
+export function resolveComponent (componentPath: string, locale: string) {
+  if (locale === 'en' || !componentPath.endsWith('.md')) return componentPath
+
+  const original = componentPath.replace(`/${locale}/`, '/en/')
+  const read = (file: string) => fs.readFileSync(path.resolve(file.slice(1)), 'utf-8').replace(/\s+/g, '')
+
+  return read(componentPath) === read(original) ? original : componentPath
 }
 
 function generateToc (content: string) {
