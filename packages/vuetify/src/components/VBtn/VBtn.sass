@@ -45,8 +45,8 @@
 
     @include tools.border($button-border...)
     @include tools.position($button-positions)
-    @include tools.states('.v-btn__overlay')
     @include tools.variant($button-variants...)
+    @include tools.states('.v-btn__overlay')
 
     @supports selector(:focus-visible)
       &::after
@@ -230,16 +230,10 @@
 
   .v-btn__overlay
     background-color: currentColor
-    opacity: 0
     transition: opacity .2s ease-in-out
 
   .v-btn > .v-ripple__container
     border-radius: 0
-
-  .v-btn__overlay,
-  .v-btn__underlay
-    pointer-events: none
-    @include tools.absolute()
 
   // VPagination
   .v-pagination
