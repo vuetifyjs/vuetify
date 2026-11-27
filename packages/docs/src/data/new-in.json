@@ -325,6 +325,7 @@
   },
   "VDataTableVirtual": {
     "props": {
+      "overscan": "4.4.0",
       "ignoreAccents": "4.2.0",
       "collapseIcon": "3.10.0",
       "expandIcon": "3.10.0",
@@ -916,7 +917,11 @@
   },
   "VVirtualScroll": {
     "props": {
-      "itemKey": "3.8.0"
+      "itemKey": "3.8.0",
+      "overscan": "4.4.0"
+    },
+    "examples": {
+      "prop-overscan": "4.4.0"
     }
   },
   "VWindow": {
