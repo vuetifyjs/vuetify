@@ -56,7 +56,7 @@
       height: auto
       transition: box-shadow, transform, visibility, width, height, left, right
 
-    .v-list
+    .v-list:where(:not(.v-navigation-drawer .v-overlay .v-list))
       overflow: hidden
 
   .v-navigation-drawer__content
