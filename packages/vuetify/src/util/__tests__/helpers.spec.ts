@@ -7,6 +7,7 @@ import {
   defer,
   destructComputed,
   extractNumber,
+  getDecimals,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -287,6 +288,23 @@ describe('helpers', () => {
       vi.advanceTimersByTime(1000)
 
       expect(mockCallback).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('getDecimals', () => {
+    it('should count the digits after the decimal point', () => {
+      expect(getDecimals(5)).toBe(0)
+      expect(getDecimals(0.5)).toBe(1)
+      expect(getDecimals(1.25)).toBe(2)
+      expect(getDecimals(-0.001)).toBe(3)
+    })
+
+    it('should count the decimals of numbers written with an exponent', () => {
+      expect(getDecimals(1e-7)).toBe(7)
+      expect(getDecimals(1.5e-7)).toBe(8)
+      expect(getDecimals(2.5e-10)).toBe(11)
+      expect(getDecimals(1e21)).toBe(0)
+      expect(getDecimals(1.5e21)).toBe(0)
     })
   })
 

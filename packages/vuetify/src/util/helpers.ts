@@ -414,10 +414,12 @@ export function formatValue (format: ValueFormat, value: number, max: number, pe
 }
 
 export function getDecimals (value: number) {
-  const trimmedStr = value.toString().trim()
-  return trimmedStr.includes('.')
-    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+  // small and large numbers are written with an exponent, e.g. 1.5e-7
+  const [coefficient, exponent = '0'] = value.toString().trim().split('e')
+  const decimals = coefficient.includes('.')
+    ? (coefficient.length - coefficient.indexOf('.') - 1)
     : 0
+  return Math.max(0, decimals - Number(exponent))
 }
 
 export function padEnd (str: string, length: number, char = '0') {
