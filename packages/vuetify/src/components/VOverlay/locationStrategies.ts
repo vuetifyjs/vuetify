@@ -288,7 +288,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   let observe = false
   let lastFrame = -1
-  const flipped = new CircularBuffer<{ x: boolean, y: boolean }>(4)
+  let resizeFrame = -1
+  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
+  const flipped = new CircularBuffer<{ flipped: { x: boolean, y: boolean }, width: number, height: number }>(4)
   const observer = new ResizeObserver(() => {
     if (!observe) return
 
@@ -304,18 +306,25 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       const values = flipped.values()
       if (
         deepEqual(values.at(-1), values.at(-3)) &&
-        !deepEqual(values.at(-1), values.at(-2))
+        !deepEqual(values.at(-1)?.flipped, values.at(-2)?.flipped)
       ) {
         // Flipping is causing a container resize loop
         return
       }
     }
 
-    const result = updateLocation()
-    if (result) flipped.push(result.flipped)
-  })
+    const result = updateLocation(true)
+    if (!result) return
 
-  let targetBox = new Box({ x: 0, y: 0, width: 0, height: 0 })
+    flipped.push({ flipped: result.flipped, width: targetBox.width, height: targetBox.height })
+
+    if (result.deferred) {
+      resizeFrame = requestAnimationFrame(() => {
+        updateLocation()
+        observe = true
+      })
+    }
+  })
 
   watch(data.target, (newTarget, oldTarget) => {
     if (oldTarget && !Array.isArray(oldTarget)) observer.unobserve(oldTarget)
@@ -333,9 +342,10 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
 
   onScopeDispose(() => {
     observer.disconnect()
+    cancelAnimationFrame(resizeFrame)
   })
 
-  function updateLocation () {
+  function updateLocation (deferResize = false) {
     observe = false
     requestAnimationFrame(() => observe = true)
 
@@ -523,6 +533,14 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       ? parseAnchor(props.origin, data.isRtl.value)
       : placement.origin
 
+    const size = {
+      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth, targetBox.width) : minWidth),
+      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth === Infinity ? 0 : minWidth, maxWidth))),
+      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight === Infinity ? 0 : minHeight, maxHeight))),
+    }
+
+    const deferred = deferResize && Object.entries(size).some(([key, value]) => value !== contentStyles.value[key])
+
     Object.assign(contentStyles.value, {
       '--v-overlay-anchor-origin': `${placement.anchor.side} ${placement.anchor.align}`,
       transformOrigin: `${transformOrigin.side} ${transformOrigin.align}`,
@@ -530,15 +548,15 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       top: convertToUnit(pixelRound(y)),
       left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
       right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
-      minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth, targetBox.width) : minWidth),
-      maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth === Infinity ? 0 : minWidth, maxWidth))),
-      maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight === Infinity ? 0 : minHeight, maxHeight))),
     })
+
+    if (!deferred) Object.assign(contentStyles.value, size)
 
     return {
       available,
       contentBox,
       flipped,
+      deferred,
     }
   }
 
@@ -573,7 +591,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     }
   })
 
-  return { updateLocation }
+  return { updateLocation: () => updateLocation() }
 }
 
 function pixelRound (val: number) {
