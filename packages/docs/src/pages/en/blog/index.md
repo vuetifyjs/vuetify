@@ -18,6 +18,14 @@ Latest news, updates, and stories about Vuetify.
 
 <br>
 
+## State of the Union 2026
+
+🖊️ John Leider • 📅 November 23rd, 2026
+
+Two years after the last State of the Union. Vuetify 4 and Vuetify0 1.0 shipped, weekly downloads more than doubled, the tooling learned to talk to AI agents, and an honest look at the promises we kept, the ones we missed, and where Vuetify goes next... { .text-medium-emphasis }
+
+[Read More](/blog/state-of-the-union-2026/) { .text-end }
+
 ## Announcing Vuetify0 v1.4
 
 🖊️ John Leider • 📅 November 20th, 2026

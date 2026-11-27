@@ -1,5 +1,14 @@
 [
   {
+    "title": "State of the Union 2026",
+    "image": "https://cdn.vuetifyjs.com/docs/images/blog/state-of-the-union-2026/state-of-the-union-2026-hero.png",
+    "shortDescription": "Two years after the last State of the Union. Vuetify 4 and Vuetify0 1.0 shipped, weekly downloads more than doubled, the tooling learned to talk to AI agents, and an honest look at the promises we kept, the ones we missed, and where Vuetify goes next...",
+    "date": "November 23, 2026",
+    "author": "John Leider",
+    "avatar": "https://cdn.vuetifyjs.com/docs/images/team/john.png",
+    "to": "/blog/state-of-the-union-2026"
+  },
+  {
     "title": "Announcing Vuetify0 v1.4",
     "shortDescription": "Vuetify0 v1.4 is out. It adds TimePicker and createCalendar, and useDate now works without an adapter and handles non-Gregorian calendars.",
     "date": "November 20, 2026",
