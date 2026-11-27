@@ -120,5 +120,13 @@
       description: 'The official Vuetify documentation with enhanced navigation.',
       features: ['Ad-free', 'Pinned pages', 'Rail nav'],
     },
+    {
+      name: 'Vuetify Snips',
+      icon: '$vuetify-snips',
+      color: 'teal',
+      url: 'https://snips.vuetifyjs.com',
+      description: '560+ premium UI snippets for Application UI, Marketing and E-commerce — included with One.',
+      features: ['Application UI', 'Marketing', 'E-commerce'],
+    },
   ]
 </script>

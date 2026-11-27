@@ -79,11 +79,12 @@
       }
     },
     "snips": {
-      "subtitle": "Premium Examples",
+      "subtitle": "Included with Vuetify One",
       "title-line1": "Beautiful UI snippets,",
       "title-line2": "built with Vuetify",
       "description": "Vuetify Snips is a collection of over 560 beautifully crafted UI snippets, built with Vuetify, aimed at making your development process easier and faster.",
-      "browse": "Browse Vuetify Snips"
+      "browse": "Browse Vuetify Snips",
+      "one": "Get Vuetify One"
     },
     "store": {
       "title": "Vuetify Store",
