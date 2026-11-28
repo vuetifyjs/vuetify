@@ -27,7 +27,7 @@ import type { PropType } from 'vue'
 
 export const makeVAvatarProps = propsFactory({
   badge: {
-    type: [Boolean, Object] as PropType<boolean | VBadge['$props']>,
+    type: [Boolean, String, Object] as PropType<boolean | string | VBadge['$props']>,
     default: false,
   },
   start: Boolean,
