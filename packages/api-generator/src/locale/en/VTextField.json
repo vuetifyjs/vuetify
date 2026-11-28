@@ -4,7 +4,7 @@
     "autofocus": "Enables autofocus.",
     "clearIcon": "Applied when using **clearable** and the input is dirty.",
     "counterValue": "Function returns the counter display text.",
-    "flat": "Removes elevation (shadow) added to element when using the **solo** or **solo-inverted** props.",
+    "flat": "Removes box shadow when using a variant with elevation.",
     "persistentPlaceholder": "Forces placeholder to always be visible.",
     "placeholder": "Sets the input’s placeholder text.",
     "prefix": "Displays prefix text.",

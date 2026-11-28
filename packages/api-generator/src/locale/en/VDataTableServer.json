@@ -1,6 +1,7 @@
 {
   "description": "Specialized `v-data-table` to be combined with backend API that responds with single rows page to display.",
   "props": {
+    "fixedHeader": "Makes the header stick to the top of the table while scrolling. Requires the **height** prop.",
     "itemsLength": "Number of all items.",
     "headerProps": "Pass props to the default header. See [`v-data-table-server` API](/api/v-data-table-server) for more information."
   },

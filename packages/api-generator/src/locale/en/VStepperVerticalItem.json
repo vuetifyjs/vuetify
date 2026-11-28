@@ -1,5 +1,9 @@
 {
   "description": "Subcomponent for `v-stepper-vertical` that represents an individual step item.",
+  "props": {
+    "disabled": "Disables the step.",
+    "focusable": "Highlights the header when the step is active."
+  },
   "events": {
     "click:finish": "Event emitted when clicking the finish button",
     "click:next": "Event emitted when clicking the next button",

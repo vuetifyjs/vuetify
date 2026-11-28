@@ -9,6 +9,7 @@
     "color": "General color applied to icons and sliders.",
     "detached": "Moves the container below so it won't obstruct the video.",
     "duration": "Duration of the video, in seconds.",
+    "elevation": "Elevation of each pill, or of the container when **detached**.",
     "floating": "Introduces visual spacing from the video boundaries.",
     "fullscreen": "Shows the exit icon on the fullscreen button.",
     "gap": "Space between actions. Pass `[controls, pills]` to set the gap between **pills** and the gap inside them separately.",

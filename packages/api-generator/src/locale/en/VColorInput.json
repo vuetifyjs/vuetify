@@ -1,11 +1,14 @@
 {
   "description": "Combines a text field with a color picker.",
   "props": {
+    "disabled": "Removes the ability to click or target the input.",
     "hidePip": "Hide pip icon",
     "colorPip": "Synchronize pip color with current value",
     "openOnFocus": "Open the color picker menu when the input receives focus.",
     "pipIcon": "The icon used for pip",
     "pipLocation": "Move pip icon to a different slot",
-    "pipVariant": "Variant of the pip control"
+    "pipVariant": "Variant of the pip control",
+    "readonly": "Puts input in readonly state.",
+    "width": "Sets the width for the component."
   }
 }
