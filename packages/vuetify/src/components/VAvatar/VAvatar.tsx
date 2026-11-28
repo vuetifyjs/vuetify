@@ -25,12 +25,13 @@ import { genericComponent, isObject, isString, propsFactory, useRender } from '@
 // Types
 import type { PropType } from 'vue'
 import type { VAvatarSlots } from './VAvatar.types'
+import type { VBadgeProps } from '@/components/VBadge/VBadge.types'
 
 export type { VAvatarSlots }
 
 export const makeVAvatarProps = propsFactory({
   badge: {
-    type: [Boolean, Object] as PropType<boolean | VBadge['$props']>,
+    type: [Boolean, String, Object] as PropType<boolean | string | VBadgeProps>,
     default: false,
   },
   start: Boolean,

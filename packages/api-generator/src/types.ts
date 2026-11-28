@@ -1,4 +1,4 @@
-import type { Node, Type } from 'ts-morph'
+import type { Node, Symbol, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import { prettifyType, stripLinks } from './utils.ts'
 import { kebabCase } from './helpers/text.ts'
@@ -352,6 +352,7 @@ const allowedRefs = [
   'CalendarEventParsed',
   'CalendarEventVisual',
   'VVideoAction',
+  'VSkeletonLoaderType',
 ]
 
 // Types that displayed without their generic arguments
@@ -563,7 +564,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
     for (const property of type.getProperties()) {
       const propertyName = property.getEscapedName()
-      const propertyType = tc.getTypeOfSymbolAtLocation(property, node)
+      const propertyType = declaredAlias(property, tc.getTypeOfSymbolAtLocation(property, node))
 
       definition.properties[propertyName] = generateDefinition(node, getRecursiveTypes(recursed, propertyType), project, propertyType)
 
@@ -588,6 +589,15 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   formatDefinition(definition)
 
   return definition
+}
+
+// Required<> in VuetifyComponent strips `undefined` from defaulted props and drops the alias with it
+function declaredAlias (property: Symbol, type: Type<ts.Type>): Type<ts.Type> {
+  if (type.getAliasSymbol() || !type.isUnion()) return type
+  const declared = (property.getDeclarations()[0] as any)?.getTypeNode?.()?.getType() as Type<ts.Type> | undefined
+  if (!declared?.getAliasSymbol() || !declared.isUnion()) return type
+  const ids = (t: Type<ts.Type>) => t.getUnionTypes().filter(u => !u.isUndefined()).map(u => (u.compilerType as any).id).sort().join()
+  return ids(declared) === ids(type) ? declared : type
 }
 
 /** type.getUnionTypes() but without unwrapping named string unions */

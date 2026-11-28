@@ -46,7 +46,6 @@ export interface VStepperVerticalItemProps {
   maxWidth?: string | number
   minHeight?: string | number
   minWidth?: string | number
-  readonly?: boolean
   ripple?: boolean | { class?: string | undefined, keys?: string[] | undefined }
   rounded?: string | number | boolean
   rules?: readonly ValidationRule[]
@@ -76,7 +75,6 @@ type VStepperVerticalItemDefaultKeys =
   | 'focusable'
   | 'hideActions'
   | 'hover'
-  | 'readonly'
   | 'ripple'
   | 'rounded'
   | 'rules'

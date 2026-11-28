@@ -26,7 +26,7 @@ export const makeVStepperVerticalItemProps = propsFactory({
   ...omit(makeVExpansionPanelProps({
     expandIcon: '',
     collapseIcon: '',
-  }), ['hideActions']),
+  }), ['hideActions', 'readonly']),
 }, 'VStepperVerticalItem')
 
 export const VStepperVerticalItem = genericComponent<VStepperVerticalItemSlots>()({

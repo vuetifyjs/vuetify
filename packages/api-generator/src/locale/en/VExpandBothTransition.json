@@ -1,3 +1,6 @@
 {
-  "description": "Expand/collapse transition in both vertical directions."
+  "description": "Expand/collapse transition on both width and height.",
+  "props": {
+    "disabled": "Disables the transition."
+  }
 }

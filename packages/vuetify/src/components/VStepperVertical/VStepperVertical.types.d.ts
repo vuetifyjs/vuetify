@@ -54,7 +54,6 @@ export interface VStepperVerticalProps {
   noDivider?: boolean
   nonLinear?: boolean
   prevText?: string
-  readonly?: boolean
   ripple?: boolean | { class?: string | undefined, keys?: string[] | undefined }
   rounded?: string | number | boolean | (string | number)[]
   selectedClass?: string
@@ -88,7 +87,6 @@ type VStepperVerticalDefaultKeys =
   | 'noDivider'
   | 'nonLinear'
   | 'prevText'
-  | 'readonly'
   | 'ripple'
   | 'rounded'
   | 'style'

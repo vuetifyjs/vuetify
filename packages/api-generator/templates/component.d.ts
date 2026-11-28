@@ -11,9 +11,10 @@ type StripProps =
   | `on${Capitalize<string>}Once`
 type Event = `on${string}`
 
+// Filtering with `as` keeps property declarations, which types.ts reads to restore aliases
 type Props<T> = T extends { $props: infer P extends object }
   ? {
-    [K in Exclude<keyof P, StripProps | Event>]: Exclude<P[K], undefined> extends VNodeProps
+    [K in keyof P as K extends StripProps | Event ? never : K]: Exclude<P[K], undefined> extends VNodeProps
       ? unknown
       : P[K]
   }

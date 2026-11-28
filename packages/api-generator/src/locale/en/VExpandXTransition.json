@@ -1,3 +1,6 @@
 {
-  "description": "Horizontal expand/collapse transition for revealing content."
+  "description": "Horizontal expand/collapse transition for revealing content.",
+  "props": {
+    "disabled": "Disables the transition."
+  }
 }

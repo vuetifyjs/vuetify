@@ -31,7 +31,7 @@ export const makeVStepperVerticalProps = propsFactory({
   ...omit(makeVExpansionPanelsProps({
     mandatory: 'force' as const,
     variant: 'accordion' as const,
-  }), ['static']),
+  }), ['readonly', 'static']),
 }, 'VStepperVertical')
 
 export const VStepperVertical = genericComponent<new <T = number>(

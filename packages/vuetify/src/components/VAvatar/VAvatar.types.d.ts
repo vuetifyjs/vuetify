@@ -1,6 +1,6 @@
 // Types
 import type { StyleValue } from 'vue'
-import type { VBadge } from '@/components/VBadge/VBadge.types'
+import type { VBadgeProps } from '@/components/VBadge/VBadge.types'
 import type { Density } from '@/composables/density.types'
 import type { IconValue } from '@/composables/icons.types'
 import type { Variant } from '@/composables/variant.types'
@@ -13,7 +13,7 @@ export type VAvatarSlots = {
 }
 
 export interface VAvatarProps {
-  badge?: boolean | VBadge['$props']
+  badge?: boolean | string | VBadgeProps
   border?: string | number | boolean
   class?: any
   color?: string
