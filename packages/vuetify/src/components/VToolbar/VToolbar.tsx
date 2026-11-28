@@ -26,10 +26,11 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
+import type { Density, VToolbarSlots } from './VToolbar.types'
+
+export type { Density, VToolbarSlots }
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
-
-export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
@@ -69,15 +70,6 @@ export const makeVToolbarProps = propsFactory({
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
 }, 'VToolbar')
-
-export type VToolbarSlots = {
-  default: never
-  image: never
-  prepend: never
-  append: never
-  title: never
-  extension: never
-}
 
 export const VToolbar = genericComponent<VToolbarSlots>()({
   name: 'VToolbar',

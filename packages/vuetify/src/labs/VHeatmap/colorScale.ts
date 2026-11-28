@@ -1,33 +1,10 @@
 // Utilities
 import { clamp } from '@/util'
 
-export interface ColorScaleStop {
-  min: number
-  color: string
-}
+// Types
+import type { ColorMixSpace, ColorScale, ColorScaleStop, HueInterpolation, LinearColorScale } from './colorScale.types'
 
-export type ColorMixSpace =
-  | 'srgb'
-  | 'srgb-linear'
-  | 'hsl'
-  | 'hwb'
-  | 'lab'
-  | 'lch'
-  | 'oklab'
-  | 'oklch'
-
-// `increasing` / `decreasing` intentionally omitted
-// linear-gradient disagrees with the color-mix
-export type HueInterpolation = 'shorter' | 'longer'
-
-export interface LinearColorScale {
-  from: ColorScaleStop
-  to: ColorScaleStop
-  colorSpace?: ColorMixSpace
-  hueInterpolation?: HueInterpolation
-}
-
-export type ColorScale = ColorScaleStop[] | LinearColorScale
+export type { ColorMixSpace, ColorScale, ColorScaleStop, HueInterpolation, LinearColorScale }
 
 export function isLinearColorScale (scale: ColorScale | undefined): scale is LinearColorScale {
   return !!scale && !Array.isArray(scale) && 'from' in scale && 'to' in scale

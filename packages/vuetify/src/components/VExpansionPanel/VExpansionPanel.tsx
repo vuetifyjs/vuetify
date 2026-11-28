@@ -15,6 +15,11 @@ import { makeTagProps } from '@/composables/tag'
 import { computed, provide, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+// Types
+import type { VExpansionPanelSlots } from './VExpansionPanel.types'
+
+export type { VExpansionPanelSlots }
+
 export const makeVExpansionPanelProps = propsFactory({
   title: String,
   text: String,
@@ -27,12 +32,6 @@ export const makeVExpansionPanelProps = propsFactory({
   ...makeVExpansionPanelTitleProps(),
   ...makeVExpansionPanelTextProps(),
 }, 'VExpansionPanel')
-
-export type VExpansionPanelSlots = {
-  default: never
-  title: never
-  text: never
-}
 
 export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',

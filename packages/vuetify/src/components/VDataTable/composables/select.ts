@@ -8,12 +8,10 @@ import { deepEqual, isObject, isPrimitive, propsFactory, wrapInArray } from '@/u
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType, Ref } from 'vue'
 import type { DataTableItemProps } from './items'
+import type { SelectableItem } from './select.types'
 import type { EventProp, ValueComparator } from '@/util'
 
-export interface SelectableItem {
-  value: any
-  selectable: boolean
-}
+export type { SelectableItem }
 
 export interface DataTableSelectStrategy {
   showSelectAll: boolean

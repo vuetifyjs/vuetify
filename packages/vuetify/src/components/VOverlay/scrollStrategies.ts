@@ -4,29 +4,20 @@ import { requestNewFrame } from './requestNewFrame'
 import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, isFunction, propsFactory } from '@/util'
 
 // Types
-import type { EffectScope, PropType, Ref } from 'vue'
+import type { EffectScope, PropType } from 'vue'
+import type {
+  ScrollStrategyData,
+  ScrollStrategyFunction,
+  ScrollStrategyProps as StrategyProps,
+} from '@/components/VOverlay/scrollStrategies.types'
 
-export interface ScrollStrategyData {
-  root: Ref<HTMLElement | undefined>
-  contentEl: Ref<HTMLElement | undefined>
-  targetEl: Ref<HTMLElement | undefined>
-  target: Ref<HTMLElement | [x: number, y: number] | undefined>
-  isActive: Ref<boolean>
-  updateLocation: Ref<((e: Event) => void) | undefined>
-}
-
-export type ScrollStrategyFunction = (data: ScrollStrategyData, props: StrategyProps, scope: EffectScope) => void
+export type { ScrollStrategyData, ScrollStrategyFunction, StrategyProps }
 
 const scrollStrategies = {
   none: null,
   close: closeScrollStrategy,
   block: blockScrollStrategy,
   reposition: repositionScrollStrategy,
-}
-
-export interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ScrollStrategyFunction
-  contained: boolean | undefined
 }
 
 export const makeScrollStrategyProps = propsFactory({

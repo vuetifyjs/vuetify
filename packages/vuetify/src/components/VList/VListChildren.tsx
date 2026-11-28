@@ -11,19 +11,10 @@ import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalListItem } from './VList'
-import type { VListItemSlots } from './VListItem'
+import type { InternalListItem, VListChildrenSlots } from './VList.types'
 import type { GenericProps } from '@/util'
 
-export type VListChildrenSlots<T> = {
-  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }
-} & {
-  default: never
-  item: { props: InternalListItem['props'] & { index: number } }
-  divider: { props: InternalListItem['props'] }
-  subheader: { props: InternalListItem['props'] }
-  header: { props: InternalListItem['props'] }
-}
+export type { VListChildrenSlots }
 
 export const makeVListChildrenProps = propsFactory({
   items: Array as PropType<readonly InternalListItem[]>,

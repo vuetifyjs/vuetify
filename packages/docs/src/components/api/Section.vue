@@ -107,9 +107,6 @@
     .extra-row td
       padding: 8px 0 !important
 
-    .v-markdown :deep(p)
-      margin-bottom: 0
-
     .token.operator
       background: none
 

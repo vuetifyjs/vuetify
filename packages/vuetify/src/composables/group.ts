@@ -16,15 +16,14 @@ import {
 } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
+import type { ComponentInternalInstance, ExtractPropTypes, InjectionKey, PropType, UnwrapRef } from 'vue'
+import type { GroupItemProvide } from './group.types'
+import type { GroupItem, GroupProvide } from '@/composables/group.types'
 import type { EventProp } from '@/util'
 
-export interface GroupItem {
-  id: string
-  value: Ref<unknown>
-  disabled: Ref<boolean | undefined>
-  useIndexAsValue?: boolean
-}
+export type { GroupItemProvide }
+
+export type { GroupItem, GroupProvide }
 
 export interface GroupProps {
   disabled: boolean
@@ -34,39 +33,6 @@ export interface GroupProps {
   max?: number | undefined
   selectedClass: string | undefined
   'onUpdate:modelValue': EventProp<[unknown]> | undefined
-}
-
-export interface GroupProvide {
-  register: (item: GroupItem, cmp: ComponentInternalInstance) => void
-  unregister: (id: string) => void
-  select: (id: string, value: boolean) => void
-  selected: Ref<Readonly<string[]>>
-  isSelected: (id: string) => boolean
-  prev: () => void
-  next: () => void
-  selectedClass: Ref<string | undefined>
-  items: Readonly<Ref<{
-    id: string
-    value: unknown
-    disabled: boolean | undefined
-  }[]>>
-  disabled: Ref<boolean | undefined>
-  getItemIndex: (value: unknown) => number
-}
-
-export interface GroupItemProvide {
-  id: string
-  isSelected: Ref<boolean>
-  isFirst: Ref<boolean>
-  isLast: Ref<boolean>
-  toggle: () => void
-  select: (value: boolean) => void
-  selectedClass: Ref<(string | undefined)[] | false>
-  value: Ref<unknown>
-  disabled: Ref<boolean | undefined>
-  group: GroupProvide
-  register: () => void
-  unregister: () => void
 }
 
 export const makeGroupProps = propsFactory({

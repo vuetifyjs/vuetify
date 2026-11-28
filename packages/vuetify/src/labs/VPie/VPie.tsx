@@ -24,25 +24,9 @@ import { convertToUnit, genericComponent, isFunction, isObject, pick, propsFacto
 // Types
 import type { PropType, TransitionProps } from 'vue'
 import type { PieItem, TextTemplate } from './types'
+import type { VPieSlots } from './VPie.types'
 
-export type VPieSlots = {
-  center: { total: number }
-  legend: {
-    isActive: (item: PieItem) => boolean
-    toggle: (item: PieItem) => void
-    items: PieItem[]
-    total: number
-  }
-  'legend-text': {
-    item: PieItem
-    total: number
-  }
-  title: never
-  tooltip: {
-    item: PieItem
-    total: number
-  }
-}
+export type { VPieSlots }
 
 export const makeVPieProps = propsFactory({
   title: String,

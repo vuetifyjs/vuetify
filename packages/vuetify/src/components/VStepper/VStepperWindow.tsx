@@ -10,7 +10,7 @@ import { computed, inject } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { VWindowSlots } from '@/components/VWindow/VWindow.types'
 import type { GenericProps } from '@/util'
 
 export const makeVStepperWindowProps = propsFactory({

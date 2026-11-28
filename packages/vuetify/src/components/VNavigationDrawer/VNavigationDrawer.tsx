@@ -33,17 +33,9 @@ import { genericComponent, isString, omit, propsFactory, resolveSize, toPhysical
 
 // Types
 import type { PropType } from 'vue'
+import type { VNavigationDrawerImageSlot, VNavigationDrawerSlots } from './VNavigationDrawer.types'
 
-export type VNavigationDrawerImageSlot = {
-  image: string | undefined
-}
-
-export type VNavigationDrawerSlots = {
-  default: never
-  prepend: never
-  append: never
-  image: VNavigationDrawerImageSlot
-}
+export type { VNavigationDrawerImageSlot, VNavigationDrawerSlots }
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 

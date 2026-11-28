@@ -37,15 +37,13 @@ import { Box } from '@/util/box'
 // Types
 import type { VueHeadClient } from '@unhead/vue/client'
 import type { HeadClient } from '@vueuse/head'
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
+import type { App, InjectionKey } from 'vue'
+import type { Colors, InternalThemeDefinition, OnColors, ThemeInstance, ThemeTransitionOptions } from './theme.types'
 import type { Color } from '@/util'
 
-type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
+export type { Colors, ThemeInstance, ThemeTransitionOptions }
 
-export interface ThemeTransitionOptions {
-  origin?: string
-  duration?: string
-}
+type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 export type ThemeOptions = false | {
   cspNonce?: string
@@ -77,62 +75,6 @@ interface VariationsOptions {
   colors: string[]
   lighten: number
   darken: number
-}
-
-interface InternalThemeDefinition {
-  dark: boolean
-  colors: Colors
-  variables: Record<string, string | number>
-}
-
-export interface Colors extends BaseColors, OnColors {
-  [key: string]: Color
-}
-
-interface BaseColors {
-  background: Color
-  surface: Color
-  primary: Color
-  secondary: Color
-  success: Color
-  warning: Color
-  error: Color
-  info: Color
-}
-
-interface OnColors {
-  'on-background': Color
-  'on-surface': Color
-  'on-primary': Color
-  'on-secondary': Color
-  'on-success': Color
-  'on-warning': Color
-  'on-error': Color
-  'on-info': Color
-}
-
-export interface ThemeInstance {
-  change: (themeName: string, transition?: boolean | ThemeTransitionOptions) => Promise<void>
-  cycle: (themeArray?: string[], transition?: boolean | ThemeTransitionOptions) => Promise<void>
-  toggle: (themeArray?: [string, string], transition?: boolean | ThemeTransitionOptions) => Promise<void>
-  setTransitionOrigin: (e: PointerEvent | Element | null) => void
-
-  readonly isDisabled: boolean
-  readonly isSystem: Readonly<Ref<boolean>>
-  readonly themes: Ref<Record<string, InternalThemeDefinition>>
-
-  readonly name: Readonly<Ref<string>>
-  readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
-  readonly computedThemes: DeepReadonly<Ref<Record<string, InternalThemeDefinition>>>
-  readonly prefix: string
-
-  readonly themeClasses: Readonly<Ref<string | undefined>>
-  readonly styles: Readonly<Ref<string>>
-
-  readonly global: {
-    readonly name: Ref<string>
-    readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
-  }
 }
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')

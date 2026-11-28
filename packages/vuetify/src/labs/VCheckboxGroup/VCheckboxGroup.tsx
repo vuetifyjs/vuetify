@@ -19,16 +19,10 @@ import { provide, shallowRef, toRef, useId } from 'vue'
 import { filterInputAttrs, genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VCheckboxGroupSlots } from './VCheckboxGroup.types'
 import type { GenericProps } from '@/util'
 
-export type VCheckboxGroupSlots = Omit<VInputSlots, 'default'> & {
-  default: never
-  label: {
-    label: string | undefined
-    props: Record<string, any>
-  }
-}
+export type { VCheckboxGroupSlots }
 
 export const makeVCheckboxGroupProps = propsFactory({
   ...omit(makeVInputProps(), ['direction', 'glow']),

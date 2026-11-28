@@ -13,11 +13,9 @@ import { genericComponent, isFunction, pick, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { PieItem, TextTemplate } from './types'
+import type { VPieTooltipSlots } from './VPieTooltip.types'
 
-export type VPieTooltipSlots = {
-  default: { item: PieItem }
-  prepend: { item: PieItem }
-}
+export type { VPieTooltipSlots }
 
 export const makeVPieTooltipProps = propsFactory({
   modelValue: Boolean,

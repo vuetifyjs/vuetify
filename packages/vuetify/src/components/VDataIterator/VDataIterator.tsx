@@ -33,42 +33,10 @@ import { genericComponent, isEmpty, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Component } from 'vue'
-import type { DataIteratorItem } from './composables/items'
-import type { Group, GroupSummary } from '@/components/VDataTable/composables/group'
-import type { SortItem } from '@/components/VDataTable/composables/sort'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { VDataIteratorSlotProps, VDataIteratorSlots } from './VDataIterator.types'
 import type { GenericProps } from '@/util'
 
-type VDataIteratorSlotProps<T> = {
-  page: number
-  itemsPerPage: number
-  sortBy: readonly SortItem[]
-  pageCount: number
-  toggleSort: ReturnType<typeof provideSort>['toggleSort']
-  prevPage: ReturnType<typeof providePagination>['prevPage']
-  nextPage: ReturnType<typeof providePagination>['nextPage']
-  setPage: ReturnType<typeof providePagination>['setPage']
-  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage']
-  isSelected: ReturnType<typeof provideSelection>['isSelected']
-  select: ReturnType<typeof provideSelection>['select']
-  selectAll: ReturnType<typeof provideSelection>['selectAll']
-  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
-  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
-  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
-  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
-  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: readonly DataIteratorItem<T>[]
-  itemsCount: number
-  groupedItems: readonly (DataIteratorItem<T> | Group<DataIteratorItem<T>> | GroupSummary<DataIteratorItem<T>>)[]
-}
-
-export type VDataIteratorSlots<T> = {
-  default: VDataIteratorSlotProps<T>
-  header: VDataIteratorSlotProps<T>
-  footer: VDataIteratorSlotProps<T>
-  loader: LoaderSlotProps
-  'no-data': never
-}
+export type { VDataIteratorSlotProps, VDataIteratorSlots }
 
 export const makeVDataIteratorProps = propsFactory({
   search: String,

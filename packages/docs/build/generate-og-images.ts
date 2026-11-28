@@ -3,7 +3,7 @@ import { glob, mkdir, writeFile } from 'node:fs/promises'
 import { dirname, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { Resvg } from '@resvg/resvg-js'
+import { renderAsync } from '@resvg/resvg-js'
 import satori from 'satori'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
@@ -231,16 +231,17 @@ async function render (title: string, description: string, category?: string): P
     fonts,
   })
 
-  const resvg = new Resvg(svg, {
+  // resvg is ~97% of the cost; renderAsync runs it on the libuv pool instead of the main thread
+  const image = await renderAsync(svg, {
     fitTo: { mode: 'width', value: 1200 },
   })
 
-  return resvg.render().asPng()
+  return image.asPng()
 }
 
-export async function generateOgImages (): Promise<void> {
+// Rendered into memory: Vite empties dist/ before writing the bundle, so files written earlier would be lost
+export async function renderOgImages (): Promise<Array<{ file: string, png: Buffer }>> {
   const start = performance.now()
-  let count = 0
 
   const files: Array<{ path: string, title: string, description: string, category?: string }> = [{
     path: '/',
@@ -264,20 +265,23 @@ export async function generateOgImages (): Promise<void> {
     })
   }
 
-  // Render in batches
-  const batch = 20
-  for (let i = 0; i < files.length; i += batch) {
-    const chunk = files.slice(i, i + batch)
-    await Promise.all(chunk.map(async ({ path, title, description, category }) => {
-      const png = await render(title, description, category)
-      const outPath = path === '' || path === '/' ? '/index' : path
-      const outFile = resolve(DIST_DIR, `og${outPath}.png`)
-      await mkdir(dirname(outFile), { recursive: true })
-      await writeFile(outFile, png)
-      count++
-    }))
-  }
+  const images = await Promise.all(files.map(async ({ path, title, description, category }) => {
+    const outPath = path === '' || path === '/' ? '/index' : path
+    return {
+      file: resolve(DIST_DIR, `og${outPath}.png`),
+      png: await render(title, description, category),
+    }
+  }))
 
   const elapsed = ((performance.now() - start) / 1000).toFixed(1)
-  console.log(`[og-images] Generated ${count} images in ${elapsed}s`)
+  console.log(`[og-images] Rendered ${images.length} images in ${elapsed}s`)
+
+  return images
+}
+
+export async function writeOgImages (images: Array<{ file: string, png: Buffer }>): Promise<void> {
+  await Promise.all(images.map(async ({ file, png }) => {
+    await mkdir(dirname(file), { recursive: true })
+    await writeFile(file, png)
+  }))
 }

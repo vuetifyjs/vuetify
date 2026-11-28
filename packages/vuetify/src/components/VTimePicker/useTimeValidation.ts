@@ -6,8 +6,9 @@ import { isFunction, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { VTimePickerViewMode } from './shared'
+import type { AllowFunction } from './useTimeValidation.types'
 
-export type AllowFunction = (val: number) => boolean
+export type { AllowFunction }
 
 export const makeTimeValidationProps = propsFactory({
   allowedHours: [Function, Array] as PropType<AllowFunction | number[]>,

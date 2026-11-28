@@ -37,29 +37,18 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { CalendarDay, CalendarWeekdays } from '@/composables/calendar'
+import type {
+  DatePickerDay,
+  DatePickerEventColors,
+  DatePickerEventColorValue,
+  DatePickerEvents,
+  VDatePickerMonthSlots,
+} from './VDatePickerMonth.types'
+import type { CalendarWeekdays } from '@/composables/calendar'
 import type { TouchValue } from '@/directives/touch'
 import type { GenericProps } from '@/util'
 
-export type DatePickerEventColorValue = boolean | string | string[]
-
-export type DatePickerEventColors = DatePickerEventColorValue |
-Record<string, DatePickerEventColorValue> | ((date: string) => DatePickerEventColorValue)
-
-export type DatePickerEvents = string[] |
-((date: string) => DatePickerEventColorValue) | Record<string, DatePickerEventColorValue>
-
-export type DatePickerDay = Pick<CalendarDay, 'date' | 'isoDate' | 'isAdjacent' | 'isToday'>
-
-export type VDatePickerMonthSlots = {
-  day: {
-    props: {
-      onClick: () => void
-    }
-    item: any
-    i: number
-  }
-}
+export type { DatePickerDay, DatePickerEventColorValue, DatePickerEventColors, DatePickerEvents, VDatePickerMonthSlots }
 
 export const makeVDatePickerMonthProps = propsFactory({
   color: String,

@@ -2,6 +2,7 @@ import fs from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 
 import dts from 'rollup-plugin-dts'
+import ts from 'typescript'
 import fg from 'fast-glob'
 import mm from 'micromatch'
 import MagicString from 'magic-string'
@@ -30,7 +31,12 @@ function createTypesConfig (input, output, renderChunk, filter) {
       input: file,
       output: [{ file: outputFile, format: 'es', sourcemap: false }],
       plugins: [
-        dts(),
+        dts({
+          compilerOptions: {
+            module: ts.ModuleKind.NodeNext,
+            moduleResolution: ts.ModuleResolutionKind.NodeNext,
+          },
+        }),
         {
           async renderChunk (code) {
             code = new MagicString(code)

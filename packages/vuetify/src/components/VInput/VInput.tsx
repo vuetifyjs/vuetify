@@ -19,24 +19,9 @@ import { computed, toRef, useId } from 'vue'
 import { EventProp, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
-import type { VMessageSlot } from '@/components/VMessages/VMessages'
+import type { PropType } from 'vue'
+import type { VInputSlot, VInputSlots } from './VInput.types'
 import type { GenericProps } from '@/util'
-
-export interface VInputSlot {
-  id: ComputedRef<string>
-  messagesId: ComputedRef<string | undefined>
-  isDirty: ComputedRef<boolean>
-  isDisabled: ComputedRef<boolean>
-  isReadonly: ComputedRef<boolean>
-  isPristine: Ref<boolean>
-  isValid: ComputedRef<boolean | null>
-  isValidating: Ref<boolean>
-  hasDetails: Ref<boolean>
-  reset: () => void
-  resetValidation: () => void
-  validate: () => void
-}
 
 export const makeVInputProps = propsFactory({
   id: String,
@@ -86,13 +71,7 @@ export const makeVInputProps = propsFactory({
   ...makeValidationProps(),
 }, 'VInput')
 
-export type VInputSlots = {
-  default: VInputSlot
-  prepend: VInputSlot
-  append: VInputSlot
-  details: VInputSlot
-  message: VMessageSlot
-}
+export type { VInputSlot, VInputSlots }
 
 export const VInput = genericComponent<new <T>(
   props: {

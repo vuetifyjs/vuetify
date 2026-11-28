@@ -33,6 +33,7 @@
   "include": [
     "build",
     "src",
+    "vite.config.mts",
     "./auto-imports.d.ts",
     "./components.d.ts",
     "../api-generator/src/shims.d.ts"

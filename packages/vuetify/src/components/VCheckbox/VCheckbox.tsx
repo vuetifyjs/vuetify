@@ -17,11 +17,10 @@ import { filterInputAttrs, genericComponent, noop, omit, propsFactory, useRender
 
 // Types
 import type { InjectionKey } from 'vue'
-import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VCheckboxSlots } from './VCheckbox.types'
 import type { GenericProps } from '@/util'
 
-export type VCheckboxSlots = Omit<VInputSlots, 'default'> & VSelectionControlSlots
+export type { VCheckboxSlots }
 
 export const VCheckboxGroupSymbol: InjectionKey<boolean> = Symbol.for('vuetify:v-checkbox-group')
 

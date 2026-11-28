@@ -24,6 +24,7 @@ import { getPrefixedEventHandlers, isFunction, isObject, isString, propsFactory 
 // Types
 import type { PropType, VNode } from 'vue'
 import type { CalendarBaseProps } from './calendarBase'
+import type { VDailyEventsMap, VEventScopeInput } from './calendarWithEvents.types'
 import type {
   CalendarCategory,
   CalendarDayBodySlotScope,
@@ -39,6 +40,8 @@ import type {
   CalendarTimestamp,
 } from '../types'
 
+export type { VEventScopeInput }
+
 // Constants
 const WIDTH_FULL = 100
 const WIDTH_START = 95
@@ -51,22 +54,6 @@ type VEventsToNodes = <D extends CalendarDaySlotScope>(
   getter: VEventGetter<D>,
   mapper: VEventVisualToNode<D>,
   timed: boolean) => VNode[] | undefined
-
-type VDailyEventsMap = {
-  [date: string]: {
-    parent: HTMLElement
-    more: HTMLElement | null
-    events: HTMLElement[]
-  }
-}
-
-export interface VEventScopeInput {
-  eventParsed: CalendarEventParsed
-  day: CalendarDaySlotScope
-  start: boolean
-  end: boolean
-  timed: boolean
-}
 
 // Prevent import from being erased
 void vRipple

@@ -60,15 +60,18 @@ export function addPropData (
   componentData: ComponentData,
   componentProps: any
 ) {
-  const sources = new Set<string>()
-  for (const [propName, propObj] of Object.entries(componentData.props ?? {})) {
+  const props = componentData.props ?? {}
+  for (const [propName, propObj] of Object.entries(props)) {
     const instancePropObj = componentProps[propName]
 
     ;(propObj as any).default = instancePropObj?.default
     ;(propObj as any).source = instancePropObj?.source
-
-    sources.add(instancePropObj?.source ?? name)
   }
+
+  // The first source with a matching key wins, so follow declaration order rather than the sorted type members
+  const declared = Object.keys(componentProps).filter(propName => propName in props)
+  const rest = Object.keys(props).filter(propName => !(propName in componentProps))
+  const sources = new Set([...declared, ...rest].map(propName => componentProps[propName]?.source ?? name))
 
   return [...sources.values()]
 }

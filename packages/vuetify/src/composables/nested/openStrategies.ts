@@ -1,29 +1,10 @@
 // Utilities
 import { isNullOrUndefined } from '@/util'
 
-type OpenStrategyFunction = (data: {
-  id: unknown
-  value: boolean
-  opened: Set<unknown>
-  children: Map<unknown, unknown[]>
-  parents: Map<unknown, unknown>
-  event?: Event
-}) => Set<unknown>
+// Types
+import type { OpenStrategy } from '@/composables/nested/openStrategies.types'
 
-type OpenSelectStrategyFunction = (data: {
-  id: unknown
-  value: boolean
-  opened: Set<unknown>
-  selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
-  children: Map<unknown, unknown[]>
-  parents: Map<unknown, unknown>
-  event?: Event
-}) => Set<unknown> | null
-
-export type OpenStrategy = {
-  open: OpenStrategyFunction
-  select: OpenSelectStrategyFunction
-}
+export type { OpenStrategy }
 
 export const singleOpenStrategy: OpenStrategy = {
   open: ({ id, value, opened, parents }) => {

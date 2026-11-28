@@ -13,8 +13,11 @@ export { userEvent, page, commands } from 'vitest/browser'
 export { screen } from '@testing-library/vue'
 export * from './templates'
 
-export function touch (element: Element) {
-  const createTrigger = (type: string, active = true) => (clientX: number, clientY: number) => {
+type TouchTrigger = (clientX: number, clientY: number) => TouchActions
+type TouchActions = { start: TouchTrigger, move: TouchTrigger, end: TouchTrigger }
+
+export function touch (element: Element): TouchActions {
+  const createTrigger = (type: string, active = true): TouchTrigger => (clientX, clientY) => {
     const touches = [new Touch({ identifier: 0, target: element, clientX, clientY })]
     element.dispatchEvent(new TouchEvent(type, {
       bubbles: true,
@@ -96,3 +99,7 @@ export function unfill (o: Record<string, any>) {
     return result
   }, {} as Record<string, any>)
 }
+
+type Flat<T> = { [K in keyof T]: T[K] }
+// expectTypeOf().toEqualTypeOf() gives false negatives on component props
+export type Equal<A, B> = (<T>() => T extends Flat<A> ? 1 : 2) extends (<T>() => T extends Flat<B> ? 1 : 2) ? true : false

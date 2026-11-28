@@ -23,18 +23,7 @@ import { clamp, consoleWarn, genericComponent, normalizeMinusSign, omit, propsFa
 
 // Types
 import type { PropType } from 'vue'
-import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
-
-type ControlSlot = {
-  props: Record<string, unknown>
-}
-
-type VNumberInputSlots = Omit<VTextFieldSlots, 'default'> & {
-  increment: ControlSlot
-  decrement: ControlSlot
-}
-
-type ControlVariant = 'default' | 'stacked' | 'split' | 'hidden'
+import type { ControlVariant, VNumberInputSlots } from './VNumberInput.types'
 
 const makeVNumberInputProps = propsFactory({
   controlVariant: {

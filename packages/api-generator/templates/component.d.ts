@@ -1,6 +1,6 @@
 import type { AllowedComponentProps, ComponentOptionsBase, VNodeChild, VNodeProps, UnwrapRef } from 'vue'
-import type { UnionToIntersection } from '@/util'
-import type { __component__ } from '@/__name__'
+import type { UnionToIntersection } from '../../../vuetify/lib/util/shared.types.d.ts'
+import type { __component__ } from '../../../vuetify/lib/__name__/index.d.ts'
 
 type StripProps =
   | keyof VNodeProps
@@ -11,9 +11,10 @@ type StripProps =
   | `on${Capitalize<string>}Once`
 type Event = `on${string}`
 
+// Filtering with `as` keeps property declarations, which types.ts reads to restore aliases
 type Props<T> = T extends { $props: infer P extends object }
   ? {
-    [K in Exclude<keyof P, StripProps | Event>]: Exclude<P[K], undefined> extends VNodeProps
+    [K in keyof P as K extends StripProps | Event ? never : K]: Exclude<P[K], undefined> extends VNodeProps
       ? unknown
       : P[K]
   }

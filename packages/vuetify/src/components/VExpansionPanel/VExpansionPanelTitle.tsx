@@ -18,20 +18,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VExpansionPanelTitleSlots } from './VExpansionPanelTitle.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-interface ExpansionPanelTitleSlot {
-  collapseIcon: IconValue
-  disabled: boolean | undefined
-  expanded: boolean
-  expandIcon: IconValue
-  readonly: boolean
-}
-
-export type VExpansionPanelTitleSlots = {
-  default: ExpansionPanelTitleSlot
-  actions: ExpansionPanelTitleSlot
-}
+export type { VExpansionPanelTitleSlots }
 
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,

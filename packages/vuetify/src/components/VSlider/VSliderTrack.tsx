@@ -16,11 +16,10 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { SliderThumbState, Tick } from './slider'
+import type { SliderThumbState } from './slider'
+import type { VSliderTrackSlots } from './VSliderTrack.types'
 
-export type VSliderTrackSlots = {
-  'tick-label': { tick: Tick, index: number }
-}
+export type { VSliderTrackSlots }
 
 export const makeVSliderTrackProps = propsFactory({
   start: {

@@ -20,6 +20,7 @@ import { clamp, convertToUnit, genericComponent, isObject, PREFERS_REDUCED_MOTIO
 
 // Types
 import type { PropType } from 'vue'
+import type { VProgressCircularSlots } from './VProgressCircular.types'
 
 // in px, scaled to the viewBox
 const WAVE_AMPLITUDE = 1.6
@@ -64,10 +65,6 @@ export const makeVProgressCircularProps = propsFactory({
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
 }, 'VProgressCircular')
-
-type VProgressCircularSlots = {
-  default: { value: number }
-}
 
 export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',

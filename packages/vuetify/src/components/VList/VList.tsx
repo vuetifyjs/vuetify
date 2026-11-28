@@ -39,11 +39,11 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { VListChildrenSlots } from './VListChildren'
+import type { InternalListItem, VListChildrenSlots } from './VList.types'
 import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { GenericProps, SelectItemKey } from '@/util'
 
-export interface InternalListItem<T = any> extends ListItem<T> {}
+export type { InternalListItem }
 
 const itemTypes = new Set(['item', 'divider', 'subheader'])
 

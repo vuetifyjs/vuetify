@@ -4,12 +4,10 @@ import { consoleWarn, defineComponent, genericComponent, isString, propsFactory 
 
 // Types
 import type { InjectionKey, MaybeRefOrGetter, PropType } from 'vue'
-import type { JSXComponent } from '@/util'
+import type { IconValue as IconValueType } from '@/composables/icons.types'
+import type { JSXComponent } from '@/util/shared.types'
 
-export type IconValue =
-  | string
-  | (string | [path: string, opacity: number])[]
-  | JSXComponent
+export type IconValue = IconValueType
 export const IconValue = [String, Function, Object, Array] as PropType<IconValue>
 
 export interface IconAliases {

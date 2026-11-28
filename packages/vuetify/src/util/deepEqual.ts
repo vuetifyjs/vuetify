@@ -1,6 +1,11 @@
 import { isPrimitive } from './helpers'
 import { isBoolean } from './v0'
 
+// Types
+import type { ValueComparator } from '@/util/shared.types'
+
+export type { ValueComparator }
+
 function updateRecursionCache (a: any, b: any, cache: WeakMap<any, any>, result: boolean) {
   if (!cache || isPrimitive(a) || isPrimitive(b)) return
 
@@ -23,8 +28,6 @@ function findCachedComparison (a: any, b: any, cache: WeakMap<any, any>): boolea
   if (isBoolean(r2)) return r2
   return null
 }
-
-export type ValueComparator = (a: any, b: any) => boolean
 
 export function deepEqual (a: any, b: any, recursionCache = new WeakMap()): boolean {
   if (a === b) return true

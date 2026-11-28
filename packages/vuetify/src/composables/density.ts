@@ -4,12 +4,11 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { Density } from '@/composables/density.types'
 
 const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
-// typeof allowedDensities[number] evaluates to any
-// when generating api types for whatever reason.
-export type Density = null | 'default' | 'comfortable' | 'compact'
+export type { Density }
 
 export interface DensityProps {
   density?: Density

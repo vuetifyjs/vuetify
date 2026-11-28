@@ -14,57 +14,11 @@ import { computed, mergeProps, ref, shallowRef, toRef, triggerRef, watch } from 
 import { genericComponent, isString, omit, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, VNodeProps } from 'vue'
+import type { PropType } from 'vue'
+import type { SnackbarMessage, SnackbarMessageDismissType, VSnackbarQueueSlots } from './VSnackbarQueue.types'
 import type { GenericProps } from '@/util'
 
-export type VSnackbarQueueSlots<T extends string | SnackbarMessage> = {
-  header: { item: T }
-  item: { item: T }
-  text: { item: T }
-  actions: {
-    item: T
-    props: {
-      onClick: () => void
-    }
-  }
-}
-
-export type SnackbarMessageDismissType =
-  | 'dismissed'
-  | 'cleared'
-  | 'overflow'
-  | 'auto'
-
-type SingleSnackbarProps = Omit<
-  VSnackbar['$props'],
-  | 'modelValue'
-  | 'onUpdate:modelValue'
-  | 'activator'
-  | 'activatorProps'
-  | 'closeDelay'
-  | 'openDelay'
-  | 'openOnClick'
-  | 'openOnFocus'
-  | 'openOnHover'
-  | 'collapsed'
-  | 'style'
-  | '$children'
-  | 'v-slots'
-  | `v-slot:${string}`
-  | keyof VNodeProps
-> & {
-  style?: any
-}
-
-export type SnackbarMessage =
-  | string
-  | (SingleSnackbarProps & {
-    collapsed?: { width: number, height: number }
-    promise?: Promise<unknown>
-    success?: (val?: unknown) => SingleSnackbarProps
-    error?: (val?: Error) => SingleSnackbarProps
-    onDismiss?: (reason: SnackbarMessageDismissType) => void
-  })
+export type { SnackbarMessage, SnackbarMessageDismissType, VSnackbarQueueSlots }
 
 export type SnackbarQueueItem = {
   id: number

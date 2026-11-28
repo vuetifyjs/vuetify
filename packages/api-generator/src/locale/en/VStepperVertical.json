@@ -2,7 +2,10 @@
   "description": "Guides users through a sequence of steps. Same as `v-stepper`, but for vertical orientation.",
   "props": {
     "completeIcon": "Icon to display when step is marked as completed.",
+    "disabled": "Disables all steps.",
     "editIcon": "Icon to display when step is editable.",
-    "errorIcon": "Icon to display when step has an error."
+    "errorIcon": "Icon to display when step has an error.",
+    "flat": "Removes the elevation and borders.",
+    "focusable": "Highlights the header of the active step."
   }
 }

@@ -13,12 +13,9 @@ import { useBackgroundColor } from '@/composables/color'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-export type VPickerSlots = {
-  header: never
-  default: never
-  actions: never
-  title: never
-}
+import type { VPickerSlots } from './VPicker.types'
+
+export type { VPickerSlots }
 
 export const makeVPickerProps = propsFactory({
   bgColor: String,

@@ -18,25 +18,9 @@ import { convertToUnit, createRange, genericComponent, isFunction, propsFactory,
 
 // Types
 import type { PropType } from 'vue'
+import type { VDatePickerYearsSlots } from './VDatePickerYears.types'
 
-// Types
-export type VDatePickerYearsSlots = {
-  year: {
-    year: {
-      text: string
-      value: number
-    }
-    i: number
-    props: {
-      active: boolean
-      color?: string
-      rounded: boolean
-      text: string
-      variant: 'flat' | 'text'
-      onClick: () => void
-    }
-  }
-}
+export type { VDatePickerYearsSlots }
 
 export const makeVDatePickerYearsProps = propsFactory({
   color: String,

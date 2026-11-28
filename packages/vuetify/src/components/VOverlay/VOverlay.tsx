@@ -57,9 +57,9 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type { OverlaySlots } from './VOverlay.types'
 import type { BackgroundColorData } from '@/composables/color'
-import type { TemplateRef } from '@/util'
 
 const overlayActivators = new WeakMap<Element, HTMLElement>()
 
@@ -86,10 +86,7 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export type OverlaySlots = {
-  default: { isActive: Ref<boolean> }
-  activator: { isActive: boolean, props: Record<string, any>, targetRef: TemplateRef }
-}
+export type { OverlaySlots }
 
 export const makeVOverlayProps = propsFactory({
   absolute: Boolean,

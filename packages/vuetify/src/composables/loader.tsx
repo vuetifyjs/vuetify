@@ -7,12 +7,10 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
 import type { ExtractPropTypes, SetupContext } from 'vue'
+import type { LoaderSlotProps } from '@/composables/loader.types'
 import type { SlotsToProps } from '@/util'
 
-export interface LoaderSlotProps {
-  color: string | undefined
-  isActive: boolean
-}
+export type { LoaderSlotProps }
 
 export interface LoaderProps {
   loading?: boolean | string

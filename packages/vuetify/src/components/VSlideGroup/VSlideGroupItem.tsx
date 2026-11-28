@@ -6,17 +6,7 @@ import { VSlideGroupSymbol } from './VSlideGroup'
 import { genericComponent } from '@/util'
 
 // Types
-import type { UnwrapRef } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
-
-type VSlideGroupItemSlots = {
-  default: {
-    isSelected: UnwrapRef<GroupItemProvide['isSelected']>
-    select: GroupItemProvide['select']
-    toggle: GroupItemProvide['toggle']
-    selectedClass: UnwrapRef<GroupItemProvide['selectedClass']>
-  }
-}
+import type { VSlideGroupItemSlots } from './VSlideGroupItem.types'
 
 export const VSlideGroupItem = genericComponent<VSlideGroupItemSlots>()({
   name: 'VSlideGroupItem',

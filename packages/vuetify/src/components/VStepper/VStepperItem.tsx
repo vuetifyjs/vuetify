@@ -20,27 +20,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { StepperItem, StepperItemSlot, ValidationRule, VStepperItemSlots } from './VStepperItem.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type StepperItem = string | Record<string, any>
-
-export type StepperItemSlot<T = any> = {
-  canEdit: boolean
-  hasError: boolean
-  hasCompleted: boolean
-  title?: string | number
-  subtitle?: string | number
-  step: T
-}
-
-export type VStepperItemSlots<T = any> = {
-  default: StepperItemSlot<T>
-  icon: StepperItemSlot<T>
-  title: StepperItemSlot<T>
-  subtitle: StepperItemSlot<T>
-}
-
-export type ValidationRule = () => string | boolean
+export type { StepperItem, StepperItemSlot, VStepperItemSlots, ValidationRule }
 
 export const makeStepperItemProps = propsFactory({
   color: String,

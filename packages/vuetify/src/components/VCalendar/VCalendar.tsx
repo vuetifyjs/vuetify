@@ -45,49 +45,17 @@ import type { PropType } from 'vue'
 import type {
   CalendarCategory, CalendarCategoryTextFunction,
   CalendarDayBodySlotScope,
-  CalendarDaySlotScope, CalendarEvent, CalendarEventParsed,
+  CalendarDaySlotScope,
   CalendarTimestamp,
 } from './types'
-import type { EventProp, GenericProps, JSXComponent } from '@/util'
-
-// Types
-interface VCalendarRenderProps {
-  start: CalendarTimestamp
-  end: CalendarTimestamp
-  component: JSXComponent & { filterProps: <T>(props: T) => Partial<T> }
-  maxDays: number
-  categories: CalendarCategory[]
-}
-
-interface EventSlotScope {
-  event: CalendarEvent
-  outside: boolean
-  singline: boolean
-  overlapsNoon: boolean
-  formatTime: (withTime: CalendarTimestamp, ampm: boolean) => string
-  timeSummary: () => string
-  eventSummary: () => JSX.Element
-  eventParsed: CalendarEventParsed
-  day: CalendarDaySlotScope
-  start: boolean
-  end: boolean
-  timed: boolean
-}
-
-interface DaySlotScope extends CalendarTimestamp {
-  outside: boolean
-  index: number
-  week: CalendarTimestamp[]
-}
-
-interface DayHeaderSlotScope extends CalendarTimestamp {
-  index: number
-  week: CalendarTimestamp[]
-}
-
-interface CalendarDayCategorySlotScope extends CalendarDayBodySlotScope {
-  category: CalendarCategory
-}
+import type {
+  CalendarDayCategorySlotScope,
+  DayHeaderSlotScope,
+  DaySlotScope,
+  EventSlotScope,
+  VCalendarRenderProps,
+} from './VCalendar.types'
+import type { EventProp, GenericProps } from '@/util'
 
 export const VCalendar = genericComponent<new (
   props: {

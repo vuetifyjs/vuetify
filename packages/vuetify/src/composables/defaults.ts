@@ -7,14 +7,10 @@ import { injectSelf } from '@/util/injectSelf'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
+import type { DefaultsInstance, DefaultsOptions } from './defaults.types'
 import type { MaybeRef } from '@/util'
 
-export type DefaultsInstance = undefined | {
-  [key: string]: undefined | Record<string, unknown>
-  global?: Record<string, unknown>
-}
-
-export type DefaultsOptions = Partial<DefaultsInstance>
+export type { DefaultsInstance, DefaultsOptions }
 
 export const DefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults')
 export const RootDefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults:root')

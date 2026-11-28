@@ -15,17 +15,10 @@ import { convertToUnit, genericComponent, getPropertyFromItem, isObject, propsFa
 
 // Types
 import type { PropType } from 'vue'
+import type { AvatarGroupItem, VAvatarGroupSlots } from './VAvatarGroup.types'
 import type { SelectItemKey } from '@/util'
 
-export type AvatarGroupItem = string | Record<string, any>
-
-export type VAvatarGroupSlots = {
-  default: never
-  prepend: never
-  append: never
-  item: { props: any, index: number }
-  overflow: { overflow: number }
-}
+export type { AvatarGroupItem, VAvatarGroupSlots }
 
 export const makeVAvatarGroupProps = propsFactory({
   border: [Boolean, Number, String],

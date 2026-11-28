@@ -2,10 +2,10 @@
   "description": "Subcomponent of `v-heatmap-legend` that renders a single threshold cell.",
   "props": {
     "bucketIndex": "Index of the threshold bucket whose color fills the cell.",
-    "color": "Explicit fill color. Used when `bucketIndex` is not set.",
-    "disabled": "Renders the cell in a disabled when toggled off.",
+    "color": "Fill color. Ignored when **bucket-index** is set.",
+    "disabled": "Fills the cell with the empty color.",
     "height": "Cell height in pixels.",
-    "rounded": "Cell corner radius. Accepts a number or string with `px` or `%` units only — the value is passed directly to the SVG `<rect>` `rx`/`ry` attributes.",
+    "rounded": "Cell corner radius.",
     "width": "Cell width in pixels."
   },
   "slots": {

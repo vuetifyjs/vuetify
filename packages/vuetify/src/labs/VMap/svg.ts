@@ -1,20 +1,7 @@
 // Types
-import type { MapViewBox } from './viewport'
+import type { MapDocument, MapNode, MapRegion } from './svg.types'
 
-export type MapRegion = { id: string, title: string }
-export type MapNode = {
-  tag: string
-  attributes: Record<string, string>
-  region?: MapRegion
-  reference?: MapNode
-  children: (MapNode | string)[]
-}
-export type MapDocument = {
-  viewBox: MapViewBox
-  attributes: Record<string, string>
-  children: (MapNode | string)[]
-  regions: MapRegion[]
-}
+export type { MapDocument, MapNode, MapRegion }
 
 type MapSvgContext = {
   identifiers: Map<string, string>

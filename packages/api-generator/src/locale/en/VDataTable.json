@@ -5,7 +5,7 @@
     "customFilter": "Function to filter items.",
     "density": "Adjusts the vertical height of the table rows.",
     "expandIcon": "Icon to display when the expandable row is collapsed.",
-    "fixedHeader": "Fixed header to top of table.",
+    "fixedHeader": "Makes the header stick to the top of the table while scrolling. Requires the **height** prop.",
     "groupBy": "Configures attributes (and sort order) to group items together. Can be customized further with `group-header` and `group-summary` slots.",
     "groupCollapseIcon": "Icon to display when the row group is expanded.",
     "groupExpandIcon": "Icon to display when the row group is collapsed.",

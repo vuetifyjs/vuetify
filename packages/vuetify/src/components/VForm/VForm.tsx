@@ -8,26 +8,13 @@ import { ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { FieldValidationResult, FormField, FormValidationResult, SubmitEventPromise } from '@/composables/form'
+import type { VFormSlots } from './VForm.types'
+import type { SubmitEventPromise } from '@/composables/form'
 
 export const makeVFormProps = propsFactory({
   ...makeComponentProps(),
   ...makeFormProps(),
 }, 'VForm')
-
-type VFormSlots = {
-  default: {
-    errors: FieldValidationResult[]
-    isDisabled: boolean
-    isReadonly: boolean
-    isValidating: boolean
-    isValid: boolean | null
-    items: FormField[]
-    validate: () => Promise<FormValidationResult>
-    reset: () => void
-    resetValidation: () => void
-  }
-}
 
 export const VForm = genericComponent<VFormSlots>()({
   name: 'VForm',

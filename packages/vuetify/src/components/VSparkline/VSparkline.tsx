@@ -11,6 +11,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VSparklineSlots } from './VSparkline.types'
+
+export type { VSparklineSlots }
 
 export const makeVSparklineProps = propsFactory({
   type: {
@@ -21,12 +24,6 @@ export const makeVSparklineProps = propsFactory({
   ...makeVBarlineProps(),
   ...makeVTrendlineProps(),
 }, 'VSparkline')
-
-export type VSparklineSlots = {
-  default: void
-  label: { index: number, value: string }
-  tooltip: { index: number, value: number }
-}
 
 export const VSparkline = genericComponent<VSparklineSlots>()({
   name: 'VSparkline',

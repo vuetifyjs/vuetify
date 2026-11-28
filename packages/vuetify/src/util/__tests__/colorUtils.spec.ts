@@ -119,8 +119,7 @@ describe('parseColor', () => {
     // @ts-expect-error
     expect(() => parseColor(() => {}))
       .toThrowErrorMatchingInlineSnapshot(`
-        [TypeError: Invalid color: () => {
-            }
+        [TypeError: Invalid color: () => {}
         Expected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number]
       `)
 

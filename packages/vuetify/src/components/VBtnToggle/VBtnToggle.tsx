@@ -12,17 +12,13 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey } from 'vue'
+import type { BtnToggleSlotProps, DefaultBtnToggleSlot, VBtnToggleSlots } from './VBtnToggle.types'
 import type { GroupProvide } from '@/composables/group'
 import type { GenericProps } from '@/util'
 
-export type BtnToggleSlotProps = 'isSelected' | 'select' | 'selected' | 'next' | 'prev'
-export interface DefaultBtnToggleSlot extends Pick<GroupProvide, BtnToggleSlotProps> {}
+export type { BtnToggleSlotProps, DefaultBtnToggleSlot }
 
 export const VBtnToggleSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-btn-toggle')
-
-type VBtnToggleSlots = {
-  default: DefaultBtnToggleSlot
-}
 
 export const makeVBtnToggleProps = propsFactory({
   ...makeVBtnGroupProps(),

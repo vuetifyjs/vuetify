@@ -2,32 +2,10 @@
 import { toRaw } from 'vue'
 import { isNullOrUndefined, wrapInArray } from '@/util'
 
-type ActiveStrategyFunction = (data: {
-  id: unknown
-  value: boolean
-  activated: Set<unknown>
-  children: Map<unknown, unknown[]>
-  parents: Map<unknown, unknown>
-  event?: Event
-}) => Set<unknown>
+// Types
+import type { ActiveStrategy } from '@/composables/nested/activeStrategies.types'
 
-type ActiveStrategyTransformInFunction = (
-  v: unknown | undefined,
-  children: Map<unknown, unknown[]>,
-  parents: Map<unknown, unknown>,
-) => Set<unknown>
-
-type ActiveStrategyTransformOutFunction = (
-  v: Set<unknown>,
-  children: Map<unknown, unknown[]>,
-  parents: Map<unknown, unknown>,
-) => unknown
-
-export type ActiveStrategy = {
-  activate: ActiveStrategyFunction
-  in: ActiveStrategyTransformInFunction
-  out: ActiveStrategyTransformOutFunction
-}
+export type { ActiveStrategy }
 
 export const independentActiveStrategy = (mandatory?: boolean): ActiveStrategy => {
   const strategy: ActiveStrategy = {

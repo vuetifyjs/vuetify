@@ -39,21 +39,9 @@ import {
 
 // Types
 import type { PropType } from 'vue'
+import type { srcObject, VImgSlots } from './VImg.types'
 
-// not intended for public use, this is passed in by vuetify-loader
-export interface srcObject {
-  src?: string
-  srcset?: string
-  lazySrc?: string
-  aspect: number
-}
-
-export type VImgSlots = {
-  default: never
-  placeholder: never
-  error: never
-  sources: never
-}
+export type { VImgSlots, srcObject }
 
 export const makeVImgProps = propsFactory({
   absolute: Boolean,

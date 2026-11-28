@@ -10,18 +10,11 @@ import { clamp, createRange, formatValue, getDecimals, IN_BROWSER, isBoolean, pr
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
+import type { SliderSize, SliderThumbState, SliderVariant, Tick } from './slider.types'
 import type { VSliderTrack } from './VSliderTrack'
 import type { ValueFormat } from '@/util'
 
-export type Tick = {
-  value: number
-  position: number
-  label?: string
-}
-
-export type SliderVariant = 'default' | 'pill'
-export type SliderThumbState = 'idle' | 'active'
-export type SliderSize = 'x-small' | 'small' | 'medium' | 'large' | 'x-large'
+export type { SliderSize, SliderThumbState, SliderVariant, Tick }
 
 type SliderProvide = {
   activeThumbRef: Ref<HTMLElement | undefined>

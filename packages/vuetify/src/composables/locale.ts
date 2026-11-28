@@ -2,33 +2,12 @@
 import { computed, inject, provide, readonly, ref, toRef, watch } from 'vue'
 import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 import { createV0Rtl } from '@/util'
+
 // Types
-import type { InjectionKey, Ref, ShallowRef } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
+import type { LocaleInstance, LocaleMessages, LocaleOptions } from './locale.types'
 
-export interface LocaleMessages {
-  [key: string]: LocaleMessages | string
-}
-
-export interface LocaleOptions {
-  decimalSeparator?: string
-  numericGroupSeparator?: string
-  messages?: LocaleMessages
-  locale?: string
-  fallback?: string
-  adapter?: LocaleInstance
-}
-
-export interface LocaleInstance {
-  name: string
-  decimalSeparator: ShallowRef<string>
-  numericGroupSeparator: ShallowRef<string>
-  messages: Ref<LocaleMessages>
-  current: Ref<string>
-  fallback: Ref<string>
-  t: (key: string, ...params: unknown[]) => string
-  n: (value: number) => string
-  provide: (props: LocaleOptions) => LocaleInstance
-}
+export type { LocaleInstance, LocaleMessages, LocaleOptions }
 
 export const LocaleSymbol: InjectionKey<LocaleInstance & RtlInstance> = Symbol.for('vuetify:locale')
 

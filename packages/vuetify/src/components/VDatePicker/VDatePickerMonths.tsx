@@ -15,19 +15,9 @@ import { convertToUnit, createRange, genericComponent, isFunction, propsFactory,
 
 // Types
 import type { PropType } from 'vue'
+import type { VDatePickerMonthsSlots } from './VDatePickerMonths.types'
 
-export type VDatePickerMonthsSlots = {
-  month: {
-    month: {
-      text: string
-      value: number
-    }
-    i: number
-    props: {
-      onClick: () => void
-    }
-  }
-}
+export type { VDatePickerMonthsSlots }
 
 export const makeVDatePickerMonthsProps = propsFactory({
   color: String,

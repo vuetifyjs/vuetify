@@ -20,11 +20,10 @@ import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } f
 
 // Types
 import type { PropType } from 'vue'
+import type { VSliderThumbSlots } from './VSliderThumb.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type VSliderThumbSlots = {
-  'thumb-label': { modelValue: number }
-}
+export type { VSliderThumbSlots }
 
 export const makeVSliderThumbProps = propsFactory({
   focused: Boolean,

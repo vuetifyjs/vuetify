@@ -22,51 +22,19 @@ import { computed, Fragment, shallowRef, toRef } from 'vue'
 import { clamp, convertToUnit, formatTime, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type {
+  VAudioAction,
+  VAudioControlsActionsSlot,
+  VAudioControlsPropsSlot,
+  VAudioControlsSlots,
+  VAudioControlsTime,
+} from './VAudioControls.types'
 import type { VSlider } from '@/components/VSlider'
 import type { MediaSeekStep, MediaSeekTarget } from '@/labs/composables/media'
 import type { VMediaVolumeOptions, VMediaVolumeSlider } from '@/labs/VMediaVolume/VMediaVolume'
 
-export type VAudioAction = 'play' | 'progress' | 'time' | 'elapsed' | 'remaining' | 'volume' | '-' | (string & {})
-
-export type VAudioControlsTime = {
-  elapsed: string
-  remaining: string
-  total: string
-}
-
-export type VAudioControlsActionsSlot = {
-  play: () => void
-  pause: () => void
-  stop: () => void
-  seek: (target: MediaSeekTarget) => void
-  playing: boolean
-  progress: number
-  currentTime: VAudioControlsTime
-  duration: number
-  volume: Ref<number>
-  toggleMuted: () => void
-  playbackRate: number
-  setPlaybackRate: (value: number) => void
-  labels: Record<string, string>
-}
-
-export type VAudioControlsPropsSlot = VAudioControlsActionsSlot & {
-  props: Record<string, unknown>
-}
-
-export type VAudioControlsSlots = {
-  [key: `action.${string}`]: VAudioControlsActionsSlot
-  default: VAudioControlsActionsSlot
-  play: VAudioControlsPropsSlot
-  progress: VAudioControlsPropsSlot
-  time: VAudioControlsActionsSlot
-  'time.elapsed': VAudioControlsActionsSlot
-  'time.remaining': VAudioControlsActionsSlot
-  'time.total': VAudioControlsActionsSlot
-  prepend: VAudioControlsActionsSlot
-  append: VAudioControlsActionsSlot
-}
+export type { VAudioAction, VAudioControlsActionsSlot, VAudioControlsPropsSlot, VAudioControlsSlots, VAudioControlsTime }
 
 export const makeVAudioControlsProps = propsFactory({
   playing: Boolean,

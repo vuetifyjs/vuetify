@@ -17,11 +17,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VSplitBtnSlots } from './VSplitBtn.types'
 
-export type VSplitBtnSlots = {
-  default: never
-  menu: never
-}
+export type { VSplitBtnSlots }
 
 export const makeVSplitBtnProps = propsFactory({
   disabled: Boolean,

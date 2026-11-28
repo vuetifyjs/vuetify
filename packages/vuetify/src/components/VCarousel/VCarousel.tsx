@@ -19,7 +19,7 @@ import { convertToUnit, genericComponent, isString, propsFactory, useRender } fr
 
 // Types
 import type { PropType } from 'vue'
-import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { VCarouselSlots } from './VCarousel.types'
 import type { GroupProvide } from '@/composables/group'
 import type { GenericProps } from '@/util'
 
@@ -51,17 +51,6 @@ export const makeVCarouselProps = propsFactory({
     showArrows: true,
   }),
 }, 'VCarousel')
-
-type VCarouselSlots = Omit<VWindowSlots, 'additional'> & {
-  item: {
-    props: Record<string, any>
-    item: {
-      id: string
-      value: unknown
-      disabled: boolean | undefined
-    }
-  }
-}
 
 export const VCarousel = genericComponent<new <T>(
   props: {

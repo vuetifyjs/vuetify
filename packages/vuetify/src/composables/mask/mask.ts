@@ -4,29 +4,17 @@ import { isObject, isString, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MaskItem, MaskOptions } from './mask.types'
+
+export type { MaskItem, MaskOptions }
 
 export interface MaskProps {
   mask: string | MaskOptions | undefined
 }
 
-export interface MaskOptions {
-  mask: string
-  tokens: Record<string, MaskItem>
-}
-
 export const makeMaskProps = propsFactory({
   mask: [String, Object] as PropType<string | MaskOptions>,
 }, 'mask')
-
-export type MaskItem = {
-  convert?: (char: string) => string
-} & ({
-  pattern?: never
-  test: (char: string) => boolean
-} | {
-  pattern: RegExp
-  test?: never
-})
 
 export const defaultDelimiters = /[-!$%^&*()_+|~=`{}[\]:";'<>?,./\\ ]/
 

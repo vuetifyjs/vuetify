@@ -30,18 +30,9 @@ import { computed, inject, mergeProps, nextTick, onMounted, onScopeDispose, ref,
 import { convertToUnit, genericComponent, isString, noop, omit, propsFactory, refElement, useRender } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
+import type { VSnackbarSlots } from './VSnackbar.types'
 import type { LocationStrategyFunction } from '@/types'
-
-type VSnackbarSlots = {
-  activator: { isActive: boolean, props: Record<string, any> }
-  default: never
-  prepend: never
-  actions: { isActive: Ref<boolean> }
-  header: never
-  title: never
-  text: never
-}
 
 function useCountdown (milliseconds: () => number) {
   const time = shallowRef(milliseconds())

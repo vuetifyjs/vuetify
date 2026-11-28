@@ -34,37 +34,10 @@ import { convertToUnit, deprecate, EventProp, genericComponent, propsFactory, us
 
 // Types
 import type { PropType } from 'vue'
+import type { ListItemSlot, ListItemSubtitleSlot, ListItemTitleSlot, VListItemSlots } from './VListItem.types'
 import type { RippleDirectiveBinding } from '@/directives/ripple'
 
-export type ListItemSlot = {
-  index?: number
-  depth?: number
-  path?: number[]
-  isFirst?: boolean
-  isLast?: boolean
-  isActive: boolean
-  isOpen: boolean
-  isSelected: boolean
-  isIndeterminate: boolean
-  isDisabled: boolean
-  select: (value: boolean) => void
-}
-
-export type ListItemTitleSlot = {
-  title?: string | number | boolean
-}
-
-export type ListItemSubtitleSlot = {
-  subtitle?: string | number | boolean
-}
-
-export type VListItemSlots = {
-  prepend: ListItemSlot
-  append: ListItemSlot
-  default: ListItemSlot
-  title: ListItemTitleSlot
-  subtitle: ListItemSubtitleSlot
-}
+export type { ListItemSlot, ListItemSubtitleSlot, ListItemTitleSlot, VListItemSlots }
 
 export const makeVListItemProps = propsFactory({
   active: {

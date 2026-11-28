@@ -22,15 +22,10 @@ import { genericComponent, isString, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { LinkProps } from '@/composables/router'
+import type { BreadcrumbItem, InternalBreadcrumbItem } from './VBreadcrumbs.types'
 import type { GenericProps } from '@/util'
 
-export type InternalBreadcrumbItem = Partial<LinkProps> & {
-  title: string
-  disabled?: boolean
-}
-
-export type BreadcrumbItem = string | InternalBreadcrumbItem
+export type { BreadcrumbItem, InternalBreadcrumbItem }
 
 export const makeVBreadcrumbsProps = propsFactory({
   activeClass: String,

@@ -5,9 +5,9 @@ import { isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { ClassValue } from '@/composables/component'
+import type { SparklineAnimationConfig, SparklineItem, SparklineTooltipConfig } from './line.types'
 
-export type SparklineItem = number | { value: number }
+export type { SparklineAnimationConfig, SparklineItem, SparklineTooltipConfig }
 
 export type SparklineText = {
   x: number
@@ -25,18 +25,6 @@ export interface Point {
   x: number
   y: number
   value: number
-}
-
-export type SparklineAnimationConfig = {
-  duration?: number
-  easing?: string
-}
-
-export type SparklineTooltipConfig = {
-  titleFormat?: (item: { index: number, value: number }) => string
-  offset?: number
-  class?: ClassValue
-  showCrosshair?: boolean
 }
 
 export const makeLineProps = propsFactory({

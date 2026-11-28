@@ -8,8 +8,11 @@ import { getObjectValueByPath, isEmpty, isObject, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { MultiSortMode, MultiSortProps, SortItem } from './sort.types'
 import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
 import type { InternalItem } from '@/composables/filter'
+
+export type { MultiSortMode, MultiSortProps, SortItem }
 
 export const makeDataTableSortProps = propsFactory({
   initialSortOrder: {
@@ -34,15 +37,6 @@ const VDataTableSortSymbol: InjectionKey<{
   toggleSort: (column: InternalDataTableHeader, event?: KeyboardEvent | PointerEvent, mandatory?: boolean) => void
   isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
-
-export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
-export type MultiSortProps = {
-  key?: 'ctrl'
-  mode?: MultiSortMode
-  modifier?: 'alt' | 'shift'
-}
-
-export type MultiSortMode = 'append' | 'prepend'
 
 type SortProps = {
   initialSortOrder: 'asc' | 'desc'

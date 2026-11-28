@@ -6,12 +6,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory } from '@/util'
 
-type VHoverSlots = {
-  default: {
-    isHovering: boolean | null
-    props: Record<string, unknown>
-  }
-}
+// Types
+import type { VHoverSlots } from './VHover.types'
 
 export const makeVHoverProps = propsFactory({
   disabled: Boolean,

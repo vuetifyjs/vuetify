@@ -23,12 +23,9 @@ import { genericComponent, isObject, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VNavigationBtnSlots } from './VNavigationBtn.types'
 
-export type VNavigationBtnSlots = {
-  default: never
-  badge: never
-  icon: { isActive: boolean }
-}
+export type { VNavigationBtnSlots }
 
 const arrowSteps: Record<string, number> = {
   ArrowDown: 1,

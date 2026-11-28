@@ -1,12 +1,7 @@
-export interface PieItem {
-  key: string | number | symbol
-  color: string
-  value: number
-  title: string
-  pattern?: string
-  isActive: boolean
-  raw?: Record<string, any>
-}
+// Types
+import type { PieItem, TextTemplate } from './types.types'
+
+export type { PieItem, TextTemplate }
 
 export interface PieSegmentProps {
   gap?: number | string
@@ -15,5 +10,3 @@ export interface PieSegmentProps {
   rounded?: number | string
   value: number
 }
-
-export type TextTemplate = string | ((v: PieItem) => string)

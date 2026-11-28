@@ -1,6 +1,7 @@
 // Types
-export type IndentLinesVariant = 'default' | 'simple'
-export type IndentLineType = 'leaf' | 'last-leaf' | 'line' | 'leaf-link' | 'none'
+import type { IndentLinesVariant, IndentLineType } from './indentLines.types'
+
+export type { IndentLineType, IndentLinesVariant }
 
 export type IndentLinesOptions = {
   depth: number

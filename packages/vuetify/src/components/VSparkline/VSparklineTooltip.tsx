@@ -6,12 +6,11 @@ import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VSparklineTooltipSlots } from './VSparklineTooltip.types'
 import type { ClassValue } from '@/composables/component'
 import type { Anchor } from '@/util'
 
-export type VSparklineTooltipSlots = {
-  default: { index: number, value: number }
-}
+export type { VSparklineTooltipSlots }
 
 export const makeVSparklineTooltipProps = propsFactory({
   modelValue: Boolean,

@@ -14,11 +14,12 @@ import { consoleWarn, genericComponent, propsFactory, useRender, wrapInArray } f
 
 // Types
 import type { PropType, VNode } from 'vue'
+import type { VSkeletonLoaderType } from './VSkeletonLoader.types'
 
 type VSkeletonBone<T> = T | VSkeletonBone<T>[]
 
 export type VSkeletonBones = VSkeletonBone<VNode>
-export type VSkeletonLoaderType = keyof typeof rootTypes
+export type { VSkeletonLoaderType }
 
 export const rootTypes = {
   actions: 'button@2',
@@ -54,7 +55,7 @@ export const rootTypes = {
   'table-cell': 'text',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
-} as const
+} as const satisfies Record<VSkeletonLoaderType, string>
 
 function genBone (type: string, children: VSkeletonBones = []) {
   return (

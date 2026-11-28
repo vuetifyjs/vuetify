@@ -14,11 +14,9 @@ import { MaybeTransition } from '@/composables/transition'
 import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-export type VDatePickerHeaderSlots = {
-  prepend: never
-  default: never
-  append: never
-}
+import type { VDatePickerHeaderSlots } from './VDatePickerHeader.types'
+
+export type { VDatePickerHeaderSlots }
 
 export const makeVDatePickerHeaderProps = propsFactory({
   appendIcon: IconValue,

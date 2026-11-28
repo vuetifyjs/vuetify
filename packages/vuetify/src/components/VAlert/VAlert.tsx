@@ -35,6 +35,9 @@ import { genericComponent, isBoolean, propsFactory } from '@/util'
 
 // Types
 import type { Component, PropType } from 'vue'
+import type { VAlertSlots } from './VAlert.types'
+
+export type { VAlertSlots }
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -98,15 +101,6 @@ export const makeVAlertProps = propsFactory({
   }),
   ...makeVariantProps({ variant: 'flat' } as const),
 }, 'VAlert')
-
-export type VAlertSlots = {
-  default: never
-  prepend: never
-  title: never
-  text: never
-  append: never
-  close: { props: Record<string, any>, timerProgress: number }
-}
 
 export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',

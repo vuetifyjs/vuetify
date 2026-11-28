@@ -32,10 +32,8 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
-import type { VCounterSlot } from '@/components/VCounter/VCounter'
-import type { VFieldSlots } from '@/components/VField/VField'
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { PropType } from 'vue'
+import type { VTextFieldSlots } from './VTextField.types'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
@@ -63,10 +61,7 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'VTextField')
 
-export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: { id: Readonly<Ref<string>> }
-  counter: VCounterSlot
-}
+export type { VTextFieldSlots }
 
 export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',

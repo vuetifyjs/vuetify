@@ -9,14 +9,10 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 import { clamp, convertToUnit, genericComponent, getScrollParents, useRender } from '@/util'
 
-export type VPullToRefreshSlots = {
-  default: never
-  pullDownPanel: {
-    canRefresh: boolean
-    goingUp: boolean
-    refreshing: boolean
-  }
-}
+// Types
+import type { VPullToRefreshSlots } from './VPullToRefresh.types'
+
+export type { VPullToRefreshSlots }
 
 export const VPullToRefresh = genericComponent<VPullToRefreshSlots>()({
   name: 'VPullToRefresh',

@@ -1,6 +1,7 @@
 {
   "description": "Specialized `v-data-table` with built-in row virtualization to handle thousands of rows with minimal performance impact.",
   "props": {
+    "fixedHeader": "Makes the header stick to the top of the table while scrolling. Requires the **height** prop.",
     "headerProps": "Pass props to the default header.",
     "itemKey": "The property on each item that is used as a unique key."
   },

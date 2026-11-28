@@ -22,22 +22,11 @@ import { EventProp, genericComponent, getObjectValueByPath, isFunction, propsFac
 import type { PropType } from 'vue'
 import type { CellProps, DataTableItem, ItemKeySlot } from './types'
 import type { VDataTableHeaderCellColumnSlotProps } from './VDataTableHeaders'
+import type { VDataTableItemCellColumnSlotProps, VDataTableRowSlots } from './VDataTableRow.types'
 import type { FilterMatchArrayMultiple } from '@/composables/filter'
 import type { GenericProps } from '@/util'
 
-export type VDataTableItemCellColumnSlotProps<T> = Omit<ItemKeySlot<T>, 'value'> & {
-  props: Record<string, unknown>
-}
-
-export type VDataTableRowSlots<T> = {
-  'item.data-table-select': VDataTableItemCellColumnSlotProps<T>
-  'item.data-table-expand': VDataTableItemCellColumnSlotProps<T>
-  'header.data-table-select': VDataTableHeaderCellColumnSlotProps
-  'header.data-table-expand': VDataTableHeaderCellColumnSlotProps
-} & {
-  [key: `item.${string}`]: ItemKeySlot<T>
-  [key: `header.${string}`]: VDataTableHeaderCellColumnSlotProps
-}
+export type { VDataTableItemCellColumnSlotProps, VDataTableRowSlots }
 
 export const makeVDataTableRowProps = propsFactory({
   color: String,

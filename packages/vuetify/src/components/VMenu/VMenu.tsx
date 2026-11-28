@@ -40,7 +40,7 @@ import {
 
 // Types
 import type { Component } from 'vue'
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay.types'
 
 export const makeVMenuProps = propsFactory({
   _disableKeys: Boolean,

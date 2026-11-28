@@ -80,6 +80,7 @@
     "unplugin-auto-import": "catalog:",
     "unplugin-fonts": "catalog:",
     "unplugin-vue-components": "catalog:",
+    "vite": "catalog:",
     "vite-plugin-md": "catalog:",
     "vite-plugin-pages": "catalog:",
     "vite-plugin-pwa": "catalog:",

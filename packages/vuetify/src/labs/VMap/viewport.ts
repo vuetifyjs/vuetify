@@ -1,8 +1,10 @@
 // Utilities
 import { clamp } from '@/util'
 
-export type MapPoint = { x: number, y: number }
-export type MapViewBox = MapPoint & { width: number, height: number }
+// Types
+import type { MapPoint, MapViewBox } from './viewport.types'
+
+export type { MapPoint, MapViewBox }
 
 export function constrainViewBox (view: MapViewBox, bounds: MapViewBox): MapViewBox {
   return {

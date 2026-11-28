@@ -28,14 +28,10 @@ import {
 
 // Types
 import type { PropType } from 'vue'
+import type { VInfiniteCarouselSlots } from './VInfiniteCarousel.types'
 import type { IconValue } from '@/composables/icons'
 
-export type VInfiniteCarouselSlots = {
-  default: never
-  separator: never
-  prev: { props: Record<string, any> }
-  next: { props: Record<string, any> }
-}
+export type { VInfiniteCarouselSlots }
 
 const STEP_DECAY = 120
 const DRAG_THRESHOLD = 4

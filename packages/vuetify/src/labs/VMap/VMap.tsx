@@ -31,28 +31,10 @@ import {
 // Types
 import type { PropType, VNode } from 'vue'
 import type { MapDocument, MapNode, MapRegion } from './svg'
-import type { MapPoint, MapViewBox } from './viewport'
+import type { MapPoint } from './viewport'
+import type { MapRegionData, MapRegionItem, VMapSlots } from './VMap.types'
 
-export type MapRegionData = { [key: string]: unknown, title?: string, color?: string }
-export type MapRegionItem = MapRegion & MapRegionData
-
-export type VMapSlots = {
-  default: {
-    regions: MapRegionItem[]
-    selected: string | readonly string[] | null
-    zoom: number
-    minZoom: number
-    maxZoom: number
-    setZoom: (value: number) => void
-    zoomIn: () => void
-    zoomOut: () => void
-    resetZoom: () => void
-    reveal: (ids: string | readonly string[], options?: { zoom?: boolean }) => void
-  }
-  map: { regions: MapRegionItem[], selected: string | readonly string[] | null, viewBox: MapViewBox }
-  tooltip: { region: MapRegionItem, selected: boolean }
-  error: { error: Error }
-}
+export type { MapRegionData, MapRegionItem, VMapSlots }
 
 const panOffsets: Record<string, [number, number]> = {
   ArrowLeft: [-1, 0],

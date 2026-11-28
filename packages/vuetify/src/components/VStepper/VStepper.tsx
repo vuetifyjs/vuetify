@@ -23,29 +23,11 @@ import { genericComponent, getPropertyFromItem, pick, propsFactory, useRender } 
 
 // Types
 import type { PropType } from 'vue'
-import type { StepperItem, StepperItemSlot } from './VStepperItem'
+import type { VStepperSlot, VStepperSlots } from './VStepper.types'
+import type { StepperItem } from './VStepperItem'
 import type { GenericProps, SelectItemKey } from '@/util'
 
-export type VStepperSlot = {
-  prev: () => void
-  next: () => void
-}
-
-export type VStepperSlots = {
-  actions: VStepperSlot
-  default: VStepperSlot
-  header: StepperItem
-  'header-item': StepperItemSlot
-  icon: StepperItemSlot
-  title: StepperItemSlot
-  subtitle: StepperItemSlot
-  item: StepperItem
-  prev: never
-  next: never
-} & {
-  [key: `header-item.${string}`]: StepperItemSlot
-  [key: `item.${string}`]: StepperItem
-}
+export type { VStepperSlot, VStepperSlots }
 
 export const makeStepperProps = propsFactory({
   altLabels: Boolean,

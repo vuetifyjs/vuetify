@@ -46,7 +46,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        scopes: ['--filter vuetify --filter @vuetify/api-generator', '--filter vuetifyjs.com']
+        scripts: ['--filter vuetify --filter @vuetify/api-generator lint', '--filter vuetifyjs.com lint', '--filter vuetify lint:declarations']
     steps:
       - uses: actions/checkout@v6
       - uses: actions/download-artifact@v7
@@ -54,9 +54,9 @@ jobs:
           name: vuetify-dist
           path: packages/vuetify
       - uses: vuetifyjs/setup-action@cb5ac088588387e65433a762de90c0b06d878677 # master
-      - run: pnpm run $SCOPES lint
+      - run: pnpm run $SCRIPTS
         env:
-          SCOPES: ${{ matrix.scopes }}
+          SCRIPTS: ${{ matrix.scripts }}
 
   test:
     name: Test
@@ -130,7 +130,7 @@ jobs:
       - run: pnpm build api
       - run: pnpm build docs
         env:
-          NODE_OPTIONS: --max-old-space-size=12288
+          NODE_OPTIONS: --max-old-space-size=5120
           VITE_COSMIC_2_BUCKET_SLUG: ${{ secrets.COSMIC_2_BUCKET_SLUG }}
           VITE_COSMIC_2_BUCKET_READ_KEY: ${{ secrets.COSMIC_2_BUCKET_READ_KEY }}
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}

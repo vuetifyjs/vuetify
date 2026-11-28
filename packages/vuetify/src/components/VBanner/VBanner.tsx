@@ -29,13 +29,9 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VBannerSlots } from './VBanner.types'
 
-export type VBannerSlots = {
-  default: never
-  prepend: never
-  text: never
-  actions: never
-}
+export type { VBannerSlots }
 
 export const makeVBannerProps = propsFactory({
   avatar: String,

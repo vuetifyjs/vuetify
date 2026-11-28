@@ -35,28 +35,12 @@ import {
 import { Box } from '@/util/box'
 
 // Types
-import type { ComputedRef, PropType, Ref } from 'vue'
-import type { ClassValue } from '@/composables/component'
-import type { LoaderSlotProps } from '@/composables/loader'
+import type { PropType } from 'vue'
+import type { DefaultInputSlot, VFieldSlot, VFieldSlots } from './VField.types'
 import type { GenericProps } from '@/util'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
-
-export interface DefaultInputSlot {
-  isActive: Ref<boolean>
-  isFocused: Ref<boolean>
-  iconColor: ComputedRef<string | undefined>
-  controlRef: Ref<HTMLElement | undefined>
-  focus: () => void
-  blur: () => void
-}
-
-export interface VFieldSlot extends DefaultInputSlot {
-  props: Record<string, unknown> & {
-    class?: ClassValue
-  }
-}
 
 export const makeVFieldProps = propsFactory({
   appendInnerIcon: IconValue,
@@ -103,14 +87,7 @@ export const makeVFieldProps = propsFactory({
   ...makeThemeProps(),
 }, 'VField')
 
-export type VFieldSlots = {
-  clear: DefaultInputSlot & { props: Record<string, any> }
-  'prepend-inner': DefaultInputSlot
-  'append-inner': DefaultInputSlot
-  label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
-  loader: LoaderSlotProps
-  default: VFieldSlot
-}
+export type { DefaultInputSlot, VFieldSlot, VFieldSlots }
 
 export const VField = genericComponent<new <T>(
   props: {

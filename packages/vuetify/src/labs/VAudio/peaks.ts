@@ -1,7 +1,10 @@
 // Utilities
 import { clamp } from '@/util'
 
-export type SampleStrategy = 'peak' | 'rms'
+// Types
+import type { SampleStrategy } from './peaks.types'
+
+export type { SampleStrategy }
 
 export function downsamplePeaks (
   data: ArrayLike<number>,
