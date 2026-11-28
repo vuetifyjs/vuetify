@@ -872,7 +872,7 @@ describe('VMenu', () => {
 
       await userEvent.click(screen.getByTestId('opener'))
       await expect.poll(() => screen.queryByTestId('menu-content')).toBeVisible()
-      await userEvent.click(screen.getByCSS('[role="combobox"] input'))
+      await userEvent.click(screen.getByRole('combobox', { name: 'Autocomplete' }))
       await expect.poll(() => screen.queryByText('California')).toBeVisible()
 
       await userEvent.click(screen.getByTestId('outside'))
