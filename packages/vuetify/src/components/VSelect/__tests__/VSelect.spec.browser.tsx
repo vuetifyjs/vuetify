@@ -1,5 +1,7 @@
 // Components
 import { VSelect } from '../VSelect'
+import { VAutocomplete } from '@/components/VAutocomplete'
+import { VCombobox } from '@/components/VCombobox'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VForm } from '@/components/VForm'
@@ -49,6 +51,25 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VSelect', () => {
+  it.each([
+    ['VSelect', <VSelect label="Select" items={ items } modelValue="Colorado" />],
+    ['VAutocomplete', <VAutocomplete label="Select" items={ items } modelValue="Colorado" />],
+    ['VCombobox', <VCombobox label="Select" items={ items } modelValue="Colorado" />],
+  ] as const)('should expose one named combobox for %s with a selection', async (_name, component) => {
+    const { getByRole, getAllByRole } = render(() => component)
+    const input = getByRole('combobox', { name: 'Select' })
+
+    const lock = await commands.getLock()
+    try {
+      input.focus()
+      expect(input).toHaveFocus()
+      expect(input).toHaveAccessibleName('Select')
+      expect(getAllByRole('combobox')).toEqual([input])
+    } finally {
+      await commands.releaseLock(lock)
+    }
+  })
+
   it.each(['field', 'form'])('should keep its value when disabling the %s with a controlled menu open', async disabledSource => {
     const disabled = ref(false)
     const value = ref('Apple')
