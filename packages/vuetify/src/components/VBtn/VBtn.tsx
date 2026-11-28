@@ -141,7 +141,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
     })
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
-    const isDisabled = computed(() => group?.disabled.value || props.disabled)
+    const isDisabled = toRef(() => group?.disabled.value || props.disabled)
     const isElevated = toRef(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })

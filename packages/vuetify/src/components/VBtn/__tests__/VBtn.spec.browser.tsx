@@ -4,7 +4,7 @@ import { VBtnToggle } from '@/components/VBtnToggle'
 
 // Utilities
 import { gridOn, render, screen, showcase, userEvent } from '@test'
-import { ref } from 'vue'
+import { nextTick, ref, shallowRef } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Types
@@ -89,6 +89,46 @@ describe('VBtn', () => {
       render(<VBtn elevation={ 5 } />)
       const button = screen.getByCSS('button')
       expect(button).toHaveClass('elevation-5')
+    })
+  })
+
+  describe('disabled', () => {
+    it('can override and restore an inherited default on standalone and grouped buttons', async () => {
+      const buttonProps = shallowRef<{ disabled?: boolean }>({})
+      const groupDisabled = shallowRef(false)
+      const selected = shallowRef<string>()
+      render(() => (
+        <>
+          <VBtn { ...buttonProps.value }>Standalone</VBtn>
+          <VBtnToggle v-model={ selected.value } disabled={ groupDisabled.value }>
+            <VBtn { ...buttonProps.value } value="edit">Grouped</VBtn>
+          </VBtnToggle>
+        </>
+      ), null, { defaults: { VBtn: { disabled: true } } })
+
+      const standalone = screen.getByRole('button', { name: 'Standalone' })
+      const grouped = screen.getByRole('button', { name: 'Grouped' })
+      expect(standalone).toBeDisabled()
+      expect(grouped).toBeDisabled()
+
+      buttonProps.value = { disabled: false }
+      await nextTick()
+      expect(standalone).toBeEnabled()
+      expect(grouped).toBeEnabled()
+      await userEvent.click(grouped)
+      expect(selected.value).toBe('edit')
+
+      groupDisabled.value = true
+      await nextTick()
+      expect(grouped).toBeDisabled()
+      groupDisabled.value = false
+      await nextTick()
+      expect(grouped).toBeEnabled()
+
+      buttonProps.value = {}
+      await nextTick()
+      expect(standalone).toBeDisabled()
+      expect(grouped).toBeDisabled()
     })
   })
 
