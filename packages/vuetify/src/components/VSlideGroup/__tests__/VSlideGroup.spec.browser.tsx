@@ -292,6 +292,31 @@ describe('VSlideGroup', () => {
     await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).not.toBeNull()
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/21340
+  it('should hide arrows when the content fits again without them', async () => {
+    await page.viewport(420, 200)
+    const count = ref(5)
+
+    render(() => (
+      <VSlideGroup showArrows>
+        { Array.from({ length: count.value }, (_, i) => (
+          <VSlideGroupItem key={ i }>
+            <div style="width: 70px; height: 40px">{ i }</div>
+          </VSlideGroupItem>
+        ))}
+      </VSlideGroup>
+    ))
+
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).toBeNull()
+
+    count.value = 8
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).not.toBeNull()
+
+    // 350px fit in the group, but not in what is left of it next to both arrows
+    count.value = 5
+    await expect.poll(() => screen.queryByCSS('.v-slide-group__prev')).toBeNull()
+  })
+
   it('should scroll the initially selected item into view', async () => {
     renderGroup({ modelValue: 7 })
     await ready()
